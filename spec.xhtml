@@ -61,7 +61,7 @@
 <p><code>fast-auto-new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写的加，小写的不加。</p>
 <p><code>slow-auto-new</code>是指创建类的实例不用加<code>new</code>，编译时也不会自动加进去，而是在运行时自动判断，依据它是不是es6的class或Lemo的类，是的加，不是的不加。因为运行时判断比较慢（尤其是判断是否是es6的class时只能先尝试不加然后看是不是出错，用到了try-catch，更慢），所以谨慎使用。而且它无法照顾到用普通函数写的类。</p>
 <p><code>manual-new</code>就是传统办法，创建类的实例需要加<code>new</code>。</p>
-<p><code>common-js</code>是指激活<code>%</code>字符的功能。</p>
+<p><code>common-js</code>是指激活<code>exports</code>在某些情况下可简写为<code>\</code>的功能。</p>
 <p>编译后的代码是strict mode。</p>
 <h3>语句</h3>
 <p>Lemo代码由语句组成。有两种语句：表达式语句和命令语句。类似CoffeeScript，在Lemo中，缩进是很重要的。分散在多行的并列语句集可以通过分号<code>;</code>合并成1行。类似CoffeeScript，单行还可以通过<code>\</code>拆分成多行。</p>
@@ -89,7 +89,7 @@
 ]]></code></pre>
 <p>参数可以有默认值：</p>
 <pre><code><![CDATA[
-    a: (x ifvoid: 0, y ifvoid: 0) -> x * y
+    a: (x'ifvoid: 0, y'ifvoid: 0) -> x * y
 ]]></code></pre>
 <p>有默认值的话，参数必须有括号。</p>
 <p>函数的调用有4种表示法：空格、小括号、中括号、大括号。</p>
@@ -262,7 +262,7 @@ chessBoard: (pos) -> match [pos.x, pos.y]
     |        "empty"
 piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
-<p>这个称为数组模式。它不是简单地比较两个数组是否相等（那样会始终不相等，因为不是同一个引用），而是检查数组中每个元素是否相等。当模式以<code>[</code>开头时，适用数组模式。注意一定要直接写出<code>[</code>，绝不能用变量替代，像这样是没用的：</p>
+<p>这个称为数组模式。它不是简单地比较两个数组是否相等（那样会始终不相等，因为不是同一个引用），而是检查数组（直接，非嵌套）中每个元素是否相等。当模式以<code>[</code>开头时，适用数组模式。注意一定要直接写出<code>[</code>，绝不能用变量替代，像这样是没用的：</p>
 <pre><code><![CDATA[
 a: [0, 0]
 b: [0, 1]
@@ -308,7 +308,7 @@ message: match statusCode <
 <p>不但可以用比较运算符，还可以自定义比较函数，例如：</p>
 <pre><code><![CDATA[
 text: "This is a dog."
-speak: match <> text.includes(arg)
+speak: match <> text.includes(@)
     "cat" ? "meow"
     "dog" ? "woof"
     |       "unknown"
@@ -325,7 +325,7 @@ action: match day
 <p>and模式则不常用，但也有例子：</p>
 <pre><code><![CDATA[
 array: ["a", "c", "b", "d"]
-message: match <> array.includes(arg)
+message: match <> array.includes(@)
     "a" and "b" and "c" ? "The array includes all of the first 3 letters."
     "a"                 ? "The array includes a."
     "b"                 ? "The array includes b."
@@ -344,13 +344,13 @@ message: match <> array.includes(arg)
         i: i + 1
 ]]></code></pre>
 <h3>类</h3>
-<p>和类有关的关键字有<code>class</code>、<code>super</code>。例子：</p>
+<p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>static</code>、<code>new</code>。例子：</p>
 <pre><code><![CDATA[
     Animal: class
-        @@: @name ->
+        new: me.name ->
 
         move: meters ->
-            alert @name + " moved \{meters}m."
+            alert me.name + " moved \{meters}m."
 
     Snake: class Animal
         move: <>
@@ -369,16 +369,16 @@ message: match <> array.includes(arg)
     tom.move()
 ]]></code></pre>
 <p>JS和CoffeeScript的extends纯属多余，我们使用更美丽的办法：直接在class后写出你要继承的类，使用表达式而非语句，类名用赋值来设定。</p>
-<p>类的声明方式和CoffeeScript几乎完全相同，除了两点：多了getter and setter功能，以及<code>constructor:</code>简写成<code>@@:</code>。</p>
+<p>类的声明方式和CoffeeScript几乎完全相同，除了两点：多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。</p>
 <p>getter和setter的例子：</p>
 <pre><code><![CDATA[
     Animal: class
-        @@: @_name ->
+        new: me._name ->
 
         name get: <>
             _name.toUpperCase()
         name set: <>
-            _name: arg
+            _name: @
 ]]></code></pre>
 <p>我们无需使用new，因为其实JS中的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由头行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>始终被识别为不是类，无论编译选项如何。</p>
@@ -388,22 +388,22 @@ message: match <> array.includes(arg)
     Website: class
         static: <>
             result: longTimeTask()
-            that.part1: result[0]
-            that.part2: result[1]
+            Class.part1: result[0]
+            Class.part2: result[1]
 ]]></code></pre>
 <h3>上下文</h3>
 <p>JavaScript表示上下文的只有this和arguments，我们有7个，分别是：</p>
 <ul>
-    <li>当前对象：<code>@</code>。</li>
-    <li>当前对象的类：<code>@@</code></li>
-    <li>闭包中的当前类：<code>that</code></li>
-    <li>闭包中的当前函数：<code>this</code></li>
-    <li>当前参数：<code>arg</code></li>
+    <li>当前对象：<code>me</code></li>
+    <li>当前对象的类：<code>Me</code></li>
+    <li>闭包中的当前类：<code>Class</code></li>
+    <li>闭包中的当前函数：<code>fun</code></li>
+    <li>当前参数：<code>@</code></li>
     <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
-    <li>当前模块的exports：<code>%</code></li>
+    <li>当前模块的exports：<code>\</code></li>
 </ul>
-<p><code>@</code>相当于JS的<code>this</code>。<code>arg</code>相当于JS的<code>arguments</code>。</p>
-<p><code>@</code>、<code>@@</code>、<code>%</code>后面的点号可以省略。</p>
+<p><code>me</code>相当于JS的<code>this</code>。<code>@</code>相当于JS的<code>arguments</code>。</p>
+<p><code>@</code>、<code>\</code>后面的点号可以省略，除非点号后面跟<code>(</code>或<code>"</code>。</p>
 <h3>异常</h3>
 <p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript完全相同。例如：</p>
 <pre><code><![CDATA[
@@ -509,7 +509,7 @@ message: match <> array.includes(arg)
             fff()'wait
 ]]></code></pre>
 <h3>存在</h3>
-<p>这几个关键字或操作符和“存在性”有关<code>'void</code>、<code>'null</code>、<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
+<p>这几个关键字或操作符和“存在性”有关<code>'void</code>、<code>'null</code>、<code>'ok</code>、<code>'ifvoid</code>、<code>'ifnull</code>。</p>
 <p>首先我们经常碰到这样的要求：要检查某个变量名是否是已定义，但又不能引发异常。JS中只能用<code>typeof a === "undefined"</code>。在Lemo中我们可以用更紧凑的<code>a'void</code>。</p>
 <p><code>a'null</code>，就相当于<code>typeof a === "object" &amp;&amp; a === null</code>，也不会引发异常。如果直接写<code>a = null</code>的话是有点问题的，如果它既不是null又没定义，就会引发异常。</p>
 <p><code>a'ok</code>，意思就是a既不是void，也不是null。</p>
@@ -529,10 +529,10 @@ message: match <> array.includes(arg)
 <pre><code><![CDATA[
     zip = lottery.drawWinner'ok().address'ok.zipcode
 ]]></code></pre>
-<p><code>ifnull</code>和<code>ifvoid</code>必须后面跟冒号。例如：</p>
+<p><code>'ifnull</code>和<code>'ifvoid</code>必须后面跟冒号。例如：</p>
 <pre><code><![CDATA[
-    a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
-    a ifvoid: 8 # if (a === undefined) {a = 8;}
+    a'ifnull: 8 # if (a === null || a === undefined) {a = 8;}
+    a'ifvoid: 8 # if (a === undefined) {a = 8;}
 ]]></code></pre>
 <h3>'</h3>
 <p><code>'</code>的形式有两种，一种是一元<code>'</code>，一种是二元<code>'</code>。一元<code>'</code>即函数的单参数变体，兼容模式专用。其他的都是二元<code>'</code>。</p>
@@ -559,12 +559,8 @@ message: match <> array.includes(arg)
     a is Number # typeof a === "number"
 ]]></code></pre>
 <p>与<code>in</code>相似，<code>is</code>表示否定时也是可以用<code>not is</code>，不过也可以使用更顺眼的<code>isnt</code>，但切记，绝不能用<code>is not</code>。</p>
-<h3>..</h3>
-<p><code>..</code>是<code>.prototype.</code>或<code>.prototype</code>的简写。当后面可以作为标识符的一部分时，是<code>.prototype.</code>，否则就是<code>.prototype</code>。用法和CoffeeScript的<code>::</code>完全相同。</p>
 <h3>delete</h3>
 <p><code>delete</code>和JavaScript中的稍有不同。它不再是一个表达式。这是因为在JavaScript strict mode中并没有值为false的情况，而是抛出异常。既然我们都是用strict mode，所以没必要弄成表达式。</p>
-<h3>.@@</h3>
-<p><code>.@@</code>是<code>.constructor</code>的简写。</p>
 <h3>rem和mod</h3>
 <p><code>rem</code>即是JavaScript的<code>%</code>。<code>mod</code>是另一种求余，正负号和除数相同，只要除数是正数，结果就不为负，所以这种求余适用范围可能更广一些。<code>a mod b</code>相当于JavaScript的<code>(a % b + b) % b</code>。</p>
 <h3>do</h3>
@@ -607,20 +603,19 @@ message: match <> array.includes(arg)
 <p>关键字不能作为变量名。</p>
 <ul style="font-family: monospace;">
     <li>and</li>
-    <li>arg</li>
     <li>as</li>
     <li>break</li>
     <li>catch</li>
     <li>class</li>
+    <li>Class</li>
     <li>delete</li>
     <li>do</li>
     <li>else</li>
     <li>false</li>
     <li>finally</li>
+    <li>fun</li>
     <li>get</li>
     <li>if</li>
-    <li>ifnull</li>
-    <li>ifvoid</li>
     <li>is</li>
     <li>isnt</li>
     <li>loop</li>
@@ -637,9 +632,7 @@ message: match <> array.includes(arg)
     <li>set</li>
     <li>static</li>
     <li>super</li>
-    <li>that</li>
     <li>then</li>
-    <li>this</li>
     <li>throw</li>
     <li>true</li>
     <li>try</li>
@@ -672,8 +665,6 @@ message: match <> array.includes(arg)
     <li>`</li>
     <li>,</li>
     <li>@</li>
-    <li>@@</li>
-    <li>%</li>
     <li>+</li>
     <li>-</li>
     <li>*</li>
@@ -690,8 +681,6 @@ message: match <> array.includes(arg)
     <li>?</li>
     <li>;</li>
     <li>::</li>
-    <li>..</li>
-    <li>.@@</li>
     <li>|</li>
     <li>'</li>
     <li>\</li>
@@ -714,7 +703,7 @@ message: match <> array.includes(arg)
     <tr>
         <td rowspan="4">13 left-to-right</td>
         <td>Member Access</td>
-        <td><code>a.x<br/>a."x"<br/>a.(b)<br/>a..x<br/>a.."x"<br/>a..(b)<br/>a.@@</code></td>
+        <td><code>a.x<br/>a."x"<br/>a.(b)</code></td>
     </tr>
     <tr>
         <td>new</td>
@@ -868,7 +857,7 @@ message: match <> array.includes(arg)
     number: -42 if opposite
 
     # Functions:
-    square: <> arg * arg
+    square: <> @ * @
 
     # Arrays:
     list: [1, 2, 3, 4, 5]
@@ -877,14 +866,14 @@ message: match <> array.includes(arg)
     math: {
         root:   Math.sqrt
         square: square
-        cube:   <> arg * square arg
+        cube:   <> @ * square @
     }
 
     # Existence:
     alert "I knew it!" if elvis exists
 
     # Array comprehensions:
-    cubes: list.map <> math.cube arg
+    cubes: list.map <> math.cube @
 ]]></code></pre>
 <h2>常见问题</h2>
 <p>问：为啥没有正则表达式符号？</p>
@@ -901,7 +890,7 @@ message: match <> array.includes(arg)
 <p>这就有歧义了，到底是看成“原义复杂字符串”呢，还是看成原义字符串内开头是一个双引号（因为原义字符串的双引号是用两个双引号表示的）？</p>
 <p>问：为啥函数除了箭头符号以外还要弄个菱形符号？</p>
 <p>答：我的目标是消除CoffeeScript中参数两边的括号。但是如果没有括号的话会产生歧义。所以我就想出了这个办法，如果不加括号，那就必须为1个参数。那零个参数怎么办？就再造一个符号呗。至于多个参数，就必须加括号，不过多参数并不在我的理想化（即激进模式）的构想当中，所以这也可以接受。再有一个原因，就是CoffeeScript用箭头表示零参数的话看上去既别扭又误导，箭头嘛，感觉应该左右都有东西才对。</p>
-<p>问：既然如此，那为啥激进模式不废除箭头符号？反正有<code>arg</code>可以用。</p>
+<p>问：既然如此，那为啥激进模式不废除箭头符号？反正有<code>@</code>可以用。</p>
 <p>答：激进模式中，大多数情况下确实没必要给参数取名，但当你有多层函数，内层调用外层参数的时候，取名就有必要了。</p>
 <p>问：为啥保留字那么少？</p>
 <p>答：很多语言都有很多保留字，但我觉得你设计语言的时候预先定义好未来的功能，那未来有可能是你没料到的。我们在头行使用版本号，也达到了“安全”的目的，因为可以保证只要你不修改版本号，就不会出现兼容性问题。</p>
