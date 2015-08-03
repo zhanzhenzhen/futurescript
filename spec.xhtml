@@ -62,6 +62,7 @@
 <p><code>slow-auto-new</code>是指创建类的实例不用加<code>new</code>，编译时也不会自动加进去，而是在运行时自动判断，依据它是不是es6的class或Lemo的类，是的加，不是的不加。因为运行时判断比较慢（尤其是判断是否是es6的class时只能先尝试不加然后看是不是出错，用到了try-catch，更慢），所以谨慎使用。而且它无法照顾到用普通函数写的类。</p>
 <p><code>manual-new</code>就是传统办法，创建类的实例需要加<code>new</code>。</p>
 <p><code>common-js</code>是指激活<code>%</code>字符的功能。</p>
+<p>编译后的代码是strict mode。</p>
 <h3>语句</h3>
 <p>Lemo代码由语句组成。有两种语句：表达式语句和命令语句。类似CoffeeScript，在Lemo中，缩进是很重要的。分散在多行的并列语句集可以通过分号<code>;</code>合并成1行。类似CoffeeScript，单行还可以通过<code>\</code>拆分成多行。</p>
 <h3>函数</h3>
@@ -134,7 +135,7 @@
 ]]></code></pre>
 <p>执行<code>abc()</code>返回的值是<code>1</code>。</p>
 <p>变量不用声明也不能声明，这是因为我们为变量赋值的机制和CoffeeScript相同，如果前面还未出现过则会编译成声明并赋值，如果已出现过则会编译成单纯赋值。</p>
-<p><code>:</code>也支持解构赋值，例如：</p>
+<p><code>:</code>也支持数组解构赋值（不包括嵌套），例如：</p>
 <pre><code><![CDATA[
     [a, b]: [b, a] # swap a and b
 ]]></code></pre>
@@ -435,7 +436,7 @@ message: match <> array.includes(arg)
 ]]></code></pre>
 <p>所以胖点基本就是点号，只不过它的优先级比较低，和管道运算符相同。而且看起来比较“胖”，和管道运算符比较接近，所以比较舒服。</p>
 <h3>异步</h3>
-<p><code>!</code>类似C#的await，<code>async</code>类似C#的async，它们使promise变得更好看。考虑这样一个JS：</p>
+<p><code>'wait</code>类似C#的await，使异步变得更好看，超越了promise。考虑这样一个JS：</p>
 <pre><code><![CDATA[
     abc().then(function(x){
         return x.def();
@@ -449,64 +450,63 @@ message: match <> array.includes(arg)
 ]]></code></pre>
 <p>我们现在可以写成：</p>
 <pre><code><![CDATA[
-    console.log abc()!.def()!.ghi()!
+    console.log abc()'wait.def()'wait.ghi()'wait
 ]]></code></pre>
-<p>一旦代码有<code>!</code>，那么代码所在的函数（直接所在，非嵌套）就被编译成异步函数。我们不用async关键字声明异步函数，这个关键字根本多余。</p>
-<p><code>!</code>针对的要么是promise，要么是别的异步函数的返回值。异步函数的返回值是被编译成一种特殊的生成器对象，我们将其称为任务。注意，生成器对象不是生成器函数。</p>
-<p>在异步函数内部，每执行到<code>!</code>，会进入等待，直到该promise或任务有了结果，才继续往下执行。</p>
+<p>一旦代码有<code>'wait</code>，那么代码所在的函数（直接所在，非嵌套）就被编译成异步函数。我们不用async关键字声明异步函数，这个关键字根本多余。</p>
+<p><code>'wait</code>针对的要么是promise，要么是别的异步函数的返回值。异步函数的返回值是被编译成一种特殊的生成器对象，我们将其称为任务。注意，生成器对象不是生成器函数。</p>
+<p>在异步函数内部，每执行到<code>'wait</code>，会进入等待，直到该promise或任务有了结果，才继续往下执行。</p>
 <p>网上已有文章介绍如何用yield来实现异步，那我们为什么不直接用yield，要发明一个新的符号？因为：</p>
 <ul>
-    <li>yield的意思用来表示异步显得不直观。</li>
-    <li>yield毕竟也有5个字母。</li>
-    <li>yield是前置的，但这里其实应该后置。试想，前面的例子翻译成yield会是什么样？<code>var result = yield (yield (yield abc()).def()).ghi();</code>前置的话就必须加上多层括号，前面则是3个yield，多难看？而且从时间顺序来说也应该后置。其实C#的await也应该是后置，它也弄得不好。wait，是什么时候wait？是promise函数执行完后wait，而不是wait之后再执行。注意promise函数执行完不表示promise有了结果，promise函数本身的执行是同步的。</li>
+    <li>yield的本来意思是“产出”，用来表示异步显得怪怪的。</li>
+    <li>yield是前置的，但这里其实应该后置。试想，前面的例子翻译成yield会是什么样？<code>var result = yield (yield (yield abc()).def()).ghi();</code>多层括号，前面3个yield，多难看？而且从时间顺序来说也应该后置。其实C#的await也应该是后置，它也弄得不好。是什么时候wait？是promise函数或异步函数执行完后wait，而不是wait之后再执行。注意promise函数执行完不表示promise有了结果，promise函数本身的执行是同步的。</li>
 </ul>
 <p>异步和管道结合的例子：</p>
 <pre><code><![CDATA[
-    x: data |> lib.process1! |> lib.process2!
-    y: data |> lib.remoteCombine(anotherData1)! |> lib.remoteCombine(anotherData2)!
+    x: data |> lib.process1'wait |> lib.process2'wait
+    y: data |> lib.remoteCombine(anotherData1)'wait |> lib.remoteCombine(anotherData2)'wait
     console.log x, y
 ]]></code></pre>
-<p>调用异步函数也可以不加<code>!</code>，当调用方不需要等待promise或任务出结果的时候。</p>
-<p>用<code>!</code>调用异步函数的例子：</p>
+<p>调用异步函数也可以不加<code>'wait</code>，当调用方不需要等待promise或任务出结果的时候。</p>
+<p>用<code>'wait</code>调用异步函数的例子：</p>
 <pre><code><![CDATA[
     task: <>
-        aaa()!
-        bbb()!
-    task()!
+        aaa()'wait
+        bbb()'wait
+    task()'wait
     console.log "success"
 ]]></code></pre>
-<p>不用<code>!</code>，也可以调用异步函数并达到相同的目的：</p>
+<p>不用<code>'wait</code>，也可以调用异步函数并达到相同的目的：</p>
 <pre><code><![CDATA[
     task: <>
-        aaa()!
-        bbb()!
+        aaa()'wait
+        bbb()'wait
         console.log "success"
     task()
 ]]></code></pre>
-<p>注意，不用<code>!</code>调用异步函数的时候，异步函数执行到第一个<code>!</code>的位置之前返回调用方。下面的例子说明了先后顺序：</p>
+<p>注意，不用<code>'wait</code>调用异步函数的时候，异步函数执行到第一个<code>'wait</code>的位置之前返回调用方。下面的例子说明了先后顺序：</p>
 <pre><code><![CDATA[
     task: <>
         console.log "stage 1"
-        aaa()!
+        aaa()'wait
         console.log "stage 3"
-        bbb()!
+        bbb()'wait
         console.log "stage 4"
     task()
     console.log "stage 2"
 ]]></code></pre>
-<p>其实用<code>!</code>调用异步函数的时候也是异步函数执行到第一个<code>!</code>的位置之前返回调用方，只不过调用方也在等待，看起来就像没有返回一样。</p>
+<p>其实用<code>'wait</code>调用异步函数的时候也是异步函数执行到第一个<code>'wait</code>的位置之前返回调用方，只不过调用方也在等待，看起来就像没有返回一样。</p>
 <p>异步和<code>do</code>结合的例子：</p>
 <pre><code><![CDATA[
     largeTask: <>
-        do! <>
-            aaa()!
-            bbb()!
-        do! <>
-            ccc()!
-            ddd()!
-        do! <>
-            eee()!
-            fff()!
+        do'wait <>
+            aaa()'wait
+            bbb()'wait
+        do'wait <>
+            ccc()'wait
+            ddd()'wait
+        do'wait <>
+            eee()'wait
+            fff()'wait
 ]]></code></pre>
 <h3>存在</h3>
 <p>这几个关键字或操作符和“存在性”有关<code>'void</code>、<code>'null</code>、<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
@@ -686,7 +686,7 @@ message: match <> array.includes(arg)
     <li>&lt;=</li>
     <li>&gt;=</li>
     <li>|&gt;</li>
-    <li>!</li>
+    <li>'wait</li>
     <li>?</li>
     <li>;</li>
     <li>::</li>
@@ -712,7 +712,7 @@ message: match <> array.includes(arg)
         <th>Examples</th>
     </tr>
     <tr>
-        <td rowspan="5">13 left-to-right</td>
+        <td rowspan="4">13 left-to-right</td>
         <td>Member Access</td>
         <td><code>a.x<br/>a."x"<br/>a.(b)<br/>a..x<br/>a.."x"<br/>a..(b)<br/>a.@@</code></td>
     </tr>
@@ -727,10 +727,6 @@ message: match <> array.includes(arg)
     <tr>
         <td>Function Variant</td>
         <td><code>a'</code></td>
-    </tr>
-    <tr>
-        <td>Await</td>
-        <td><code>a!</code></td>
     </tr>
     <tr>
         <td>12 left-to-right</td>
@@ -911,5 +907,7 @@ message: match <> array.includes(arg)
 <p>答：很多语言都有很多保留字，但我觉得你设计语言的时候预先定义好未来的功能，那未来有可能是你没料到的。我们在头行使用版本号，也达到了“安全”的目的，因为可以保证只要你不修改版本号，就不会出现兼容性问题。</p>
 <p>问：不支持<code>var</code>是受CoffeeScript启发，但为啥不支持ES6的<code>let</code>和<code>const</code>？</p>
 <p>答：我的理念是，一名程序员也许不熟悉正在开发的文件之外的其他文件，但是一般都会熟悉这个文件当中的其他区域。<code>let</code>提供块级的保护，但是只要你熟悉的不是只是这个块，你完全可以使用一个不同的变量名。块级保护太小了，函数级保护已经足够坚固。否则的话语言本身的复杂度也会增加。<code>let</code>和CoffeeScript风格之间也有矛盾。至于<code>const</code>，我觉得理念有问题，<code>const</code>只是针对常量而已，而我们让某个东西不可变，不是防自己改，是防别人改。通常是自己做了个库，别人使用时，在运行时可能会乱改内部逻辑。变量仅自己可见，别人改不了，又何必成为常量？真正要保护的其实是对象的属性或方法，这个<code>const</code>无法做到。可以通过<code>Object.defineProperty</code>来做到。但要动就得动包括原生对象在内的所有的对象，让方法都变得坚固（即变成类似静态语言的样子），这工作量太大了，可行性也值得怀疑，所以目前暂不做。</p>
+<p>问：为何不支持对象解构赋值和复杂数组的解构赋值？</p>
+<p>答：对象解构赋值过于复杂。它符合了人类一部分直觉，但违反了人类另一部分直觉，导致一开始根本就看不懂。复杂数组的解构赋值是中等复杂，以后也许会支持。至于对象解构赋值，以后即使支持，语法也要改得更自然。</p>
 </body>
 </html>
