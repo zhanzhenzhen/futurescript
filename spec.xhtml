@@ -163,6 +163,10 @@
     [a, b]: [b, a] # swap a and b
 ]]></code></pre>
 <p>冒号的作用就是让左边的拥有右边的值。无论是对象中的冒号还是赋值中的冒号，含义相似。</p>
+<p><code>:</code>支持对多标识符同时赋值，例如：</p>
+<pre><code><![CDATA[
+    a, b: 1 # both a and b are 1
+]]></code></pre>
 <h3>字符串</h3>
 <p>字符串受CoffeeScript启发，不同之处在于不支持单引号、增加了支持原义字符串、不支持简单字符串的多行自动连接。</p>
 <p>简单字符串：</p>
@@ -255,11 +259,12 @@
     b: a = 3 ? "three" | "other"
 ]]></code></pre>
 <p><code>?</code>和<code>then</code>是等价的，<code>|</code>和<code>else</code>是等价的。</p>
-<p>条件前置时，<code>if</code>可写可不写，而<code>?</code>（<code>then</code>）则当分行时可写可不写（并成一行时必须写）。分行的意思是then-block这个区块的第一个字符不在该行内。有的时候为了紧凑，把开头部分留在这一行，那么就要算成是并成一行。</p>
+<p>条件前置时，<code>if</code>可写可不写，而<code>?</code>（<code>then</code>）则当分行时可写可不写（并成一行时必须写，除非下面是命令语句）。分行的意思是then-block这个区块的第一个字符不在该行内。有的时候为了紧凑，把开头部分留在这一行，那么就要算成是并成一行。</p>
 <p>当then-block这个区块的第一个语句是命令语句时，<code>?</code>（<code>then</code>）也可省略（这也适用于模式匹配）。例如：</p>
 <pre><code><![CDATA[
     if a > 100 throw new Error()
 ]]></code></pre>
+<p>但是要注意，条件前置时无论怎样省略，<code>if</code>和<code>?</code>（<code>then</code>）必须至少出现一个。</p>
 <p>条件还可以后置，这时就只能用<code>if</code>，例如：</p>
 <pre><code><![CDATA[
     alert("a is true!") if a # if (a) {alert("a is true!");}
