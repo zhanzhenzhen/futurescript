@@ -65,7 +65,14 @@
 <p>编译后的代码是strict mode。</p>
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
 <h3>语句</h3>
-<p>Lemo代码由语句组成。有两种语句：表达式语句和命令语句。类似CoffeeScript，在Lemo中，缩进是很重要的。分散在多行的并列语句集可以通过分号<code>;</code>合并成1行。类似CoffeeScript，单行还可以通过<code>\</code>拆分成多行。</p>
+<p>Lemo代码由语句和注释组成。语句中可以含有子语句。有两种语句：表达式语句和命令语句。类似CoffeeScript，在Lemo中，缩进是很重要的。多个并列语句可以通过分号<code>;</code>合并成1行。类似CoffeeScript，单行还可以通过<code>\</code>拆分成多行。</p>
+<p>大多数语句都是表达式语句，但用到这些的是命令语句：</p>
+<ul style="font-family: monospace;">
+    <li>:（表示赋值时）</li>
+    <li>delete</li>
+    <li>return</li>
+    <li>throw</li>
+</ul>
 <h3>函数</h3>
 <p>函数的声明有2种方式：<code>-></code>和<code>&lt;&gt;</code>。<code>&lt;&gt;</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
 <pre><code><![CDATA[
@@ -249,6 +256,10 @@
 ]]></code></pre>
 <p><code>?</code>和<code>then</code>是等价的，<code>|</code>和<code>else</code>是等价的。</p>
 <p>条件前置时，<code>if</code>可写可不写，而<code>?</code>（<code>then</code>）则当分行时可写可不写（并成一行时必须写）。分行的意思是then-block这个区块的第一个字符不在该行内。有的时候为了紧凑，把开头部分留在这一行，那么就要算成是并成一行。</p>
+<p>当then-block这个区块的第一个语句是命令语句时，<code>?</code>（<code>then</code>）也可省略（这也适用于模式匹配）。例如：</p>
+<pre><code><![CDATA[
+    if a > 100 throw new Error()
+]]></code></pre>
 <p>条件还可以后置，这时就只能用<code>if</code>，例如：</p>
 <pre><code><![CDATA[
     alert("a is true!") if a # if (a) {alert("a is true!");}
@@ -398,7 +409,7 @@ message: match <> array.includes(@)
     tom.move()
 ]]></code></pre>
 <p>JS和CoffeeScript的extends纯属多余，我们使用更美丽的办法：直接在class后写出你要继承的类，使用表达式而非语句，类名用赋值来设定。</p>
-<p>类的声明方式和CoffeeScript几乎完全相同，除了两点：多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。</p>
+<p>类的声明方式比较像CoffeeScript。但我们的更严格。我们多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。在Lemo中，类的所有声明的子项都必须是以冒号的形式。</p>
 <p>getter和setter的例子：</p>
 <pre><code><![CDATA[
     Animal: class
@@ -410,7 +421,7 @@ message: match <> array.includes(@)
         name set: <>
             _name: @0
 ]]></code></pre>
-<p>我们无需使用new，因为其实JS中的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由头行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
+<p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由头行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>始终被识别为不是类，无论编译选项如何。</p>
 <p>CoffeeScript对于静态类是使用<code>@property: value</code>，我们使用的是<code>static</code>关键字，即<code>static property: value</code>。</p>
 <p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
