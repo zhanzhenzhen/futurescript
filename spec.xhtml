@@ -179,9 +179,9 @@
 ]]></code></pre>
 <p>简单字符串和复杂字符串的区别仅在于复杂字符串中包含双引号字符更容易。</p>
 <p>我们不用单引号，因为我觉得你要想用单引号，有两种可能：一种是字符串很长，但这时可以用<code>"""</code>；一种是字符串很短，像<code>'"'</code>，这其实只增加了微小的可读性，我宁愿写成<code>"\""</code>。无论哪一种用单引号都没有明显优势，所以，还是别占用宝贵的符号资源为好。而且双引号是和JSON一致的。</p>
-<p>也支持字符串插值，就像CoffeeScript，，不过我们使用<code>\{...}</code>。</p>
+<p>也支持字符串插值，就像CoffeeScript，，不过我们使用<code>\(...)</code>。</p>
 <pre><code><![CDATA[
-    str: "Today is \{year}-\{month}-\{day}."
+    str: "Today is \(year)-\(month)-\(day)."
 ]]></code></pre>
 <p>原义字符串是受C#启发，我们使用<code>\"..."</code>来表示。这很适合表示正则表达式，例如：</p>
 <pre><code><![CDATA[
@@ -366,14 +366,14 @@ message: match <> array.includes(@)
 <p>循环其实并不符合函数式编程的理念，我们没有循环。但提供了内置函数repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。例子：</p>
 <pre><code><![CDATA[
     repeat[10, i ->
-        console.log "This is \{i} time"
+        console.log "This is \(i) time"
     ]
 ]]></code></pre>
 <p>迭代器返回<code>false</code>则表示跳出循环，相当于JS的<code>break</code>：</p>
 <pre><code><![CDATA[
     repeat[10, i ->
         if i > 5 then return false
-        console.log "This is \{i} time"
+        console.log "This is \(i) time"
     ]
 ]]></code></pre>
 <p>不设次数则表示永远，相当于JS的<code>while (true)</code>：</p>
@@ -390,7 +390,7 @@ message: match <> array.includes(@)
             me.name: @0
 
         move: meters ->
-            alert me.name + " moved \{meters}m."
+            alert me.name + " moved \(meters)m."
 
     Snake: class Animal
         move: <>
@@ -728,7 +728,7 @@ message: match <> array.includes(@)
     <li>'</li>
     <li>\</li>
     <li>\"</li>
-    <li>\{</li>
+    <li>\(</li>
     <li>'void</li>
     <li>'null</li>
     <li>'ok</li>
