@@ -449,9 +449,9 @@ message: match <> array.includes(@)
         new: <>
             me._name: @0
 
-        name get: <>
+        name'get: <>
             me._name.toUpperCase()
-        name set: <>
+        name'set: <>
             _name: @0
 ]]></code></pre>
 <p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由头行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
@@ -462,8 +462,8 @@ message: match <> array.includes(@)
     Website: class
         static: <>
             result: longTimeTask()
-            cls.part1: result[0]
-            cls.part2: result[1]
+            Class.part1: result[0]
+            Class.part2: result[1]
 ]]></code></pre>
 <p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
 <pre><code><![CDATA[
@@ -472,13 +472,14 @@ message: match <> array.includes(@)
             Abc.prototype.def: <>
                 doSomething()
 ]]></code></pre>
-<p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类还是扁平为好。</p>
+<p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类的关系还是扁平为好。</p>
+<p>只要类有实例化需求，就要避免取非大写开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
 <h3>上下文</h3>
 <p>JavaScript表示上下文的只有this和arguments，我们有7个，分别是：</p>
 <ul>
     <li>当前对象：<code>me</code></li>
     <li>当前对象的类：<code>Me</code></li>
-    <li>闭包中的当前类：<code>cls</code></li>
+    <li>闭包中的当前类：<code>Class</code></li>
     <li>闭包中的当前函数：<code>fun</code></li>
     <li>当前参数：<code>@</code></li>
     <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
@@ -689,14 +690,13 @@ message: match <> array.includes(@)
     <li>as</li>
     <li>catch</li>
     <li>class</li>
-    <li>cls</li>
+    <li>Class</li>
     <li>delete</li>
     <li>do</li>
     <li>else</li>
     <li>false</li>
     <li>finally</li>
     <li>fun</li>
-    <li>get</li>
     <li>if</li>
     <li>in</li>
     <li>is</li>
@@ -713,7 +713,6 @@ message: match <> array.includes(@)
     <li>rem</li>
     <li>return</li>
     <li>self</li>
-    <li>set</li>
     <li>static</li>
     <li>super</li>
     <li>then</li>
@@ -778,6 +777,8 @@ message: match <> array.includes(@)
     <li>'ok</li>
     <li>'ifvoid</li>
     <li>'ifnull</li>
+    <li>'get</li>
+    <li>'set</li>
     <li>&lt;&lt;</li>
     <li>&gt;&gt;</li>
 </ul>
