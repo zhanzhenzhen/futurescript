@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>Lemo</string>
+    <key>ordering</key>
+    <array>
+        <string>A9F44CBB-014C-42C2-A275-4E53162D69D4</string>
+    </array>
+    <key>uuid</key>
+    <string>98CFBED6-C867-4CC9-8B8B-1F05031E25F1</string>
+</dict>
+</plist>
