@@ -58,7 +58,11 @@
 <p>激进模式中，管道操作符把数组单参数分隔为两部分，而兼容模式中管道操作符把所有参数分隔为两部分。</p>
 <p>激进模式中，<code>'</code>只能是二元的，而兼容模式中<code>'</code>还可以是一元的。</p>
 <p>下文中，为求简便，如果写道“无参数”，也可指激进模式中的参数为<code>void</code>的情形。</p>
-<p><code>fast-auto-new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写的加，小写的不加。</p>
+<p><code>fast-auto-new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写的加，小写的不加。但只能识别普通的表示法，像引号内的就不能识别，例如：</p>
+<pre><code><![CDATA[
+    aaa."bbb".Ccc() # new can be omitted
+    new aaa.bbb."Ccc"() # new can't be omitted
+]]></code></pre>
 <p><code>slow-auto-new</code>是指创建类的实例不用加<code>new</code>，编译时也不会自动加进去，而是在运行时自动判断，依据它是不是es6的class或Lemo的类，是的加，不是的不加。因为运行时判断比较慢（尤其是判断是否是es6的class时只能先尝试不加然后看是不是出错，用到了try-catch，更慢），所以谨慎使用。而且它无法照顾到用普通函数写的类。</p>
 <p><code>manual-new</code>就是传统办法，创建类的实例需要加<code>new</code>。</p>
 <p><code>common-js</code>是指激活<code>exports</code>在某些情况下可简写为<code>\</code>的功能。</p>
@@ -74,7 +78,7 @@
     <li>throw</li>
 </ul>
 <h3>函数</h3>
-<p>函数的声明有2种方式：<code>-></code>和<code>&lt;&gt;</code>。<code>&lt;&gt;</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
+<p>函数的声明有2种方式：<code>-&gt;</code>和<code>&lt;&gt;</code>。<code>&lt;&gt;</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
 <pre><code><![CDATA[
     # both are valid
     a: x -> x + 1
@@ -93,7 +97,7 @@
 <pre><code><![CDATA[
     a: [x, y] -> x * y
 ]]></code></pre>
-<p>兼容模式中，<code>@</code>表示JS的<code>arguments</code>。激进模式中，<code>@</code>表示JS的<code>arguments[0]</code>。它是如此简单利落，在许多情况下，你会喜欢不带参数名。例如，兼容模式中我们可以写：</p>
+<p>兼容模式中，<code>@</code>表示JS的<code>arguments</code>。激进模式中，<code>@</code>表示JS的<code>arguments[0]</code>。它是如此简便，在许多情况下，你会喜欢不带参数名。例如，兼容模式中我们可以写：</p>
 <pre><code><![CDATA[
     add: <> @0 + @1
     console.log add(2, 3) # output 5
@@ -124,7 +128,7 @@
     a(3, 4, 5) # only valid in compatible mode
 ]]></code></pre>
 <p>多参数调用一定要加括号，这个CoffeeScript不同。只有单参数调用是可以不加括号的，零参数要加<code>()</code>。</p>
-<p>CoffeeScript里面如果函数调用要传递的参数本身也是函数的话，如果它没有参数，那么可写成<code>abc -> Math.random()</code>，但Lemo中绝对不能这么写，否则编译器会误以为这是一个参数为abc的函数。必须采用如下一种：</p>
+<p>CoffeeScript里面如果函数调用要传递的参数本身也是函数的话，如果它没有参数，那么可写成<code>abc -&gt; Math.random()</code>，但Lemo中绝对不能这么写，否则编译器会误以为这是一个参数为abc的函数。必须采用如下一种：</p>
 <pre><code><![CDATA[
     # pass a function as argument to abc
     abc <> Math.random()
@@ -141,7 +145,12 @@
     a {prop: true}.b # a({prop: true}.b)
 ]]></code></pre>
 <p>凡是函数都有一个返回值。最后一个语句如果是表达式，那么返回该表达式的值。最后一个语句如果不是表达式，那么返回<code>void</code>。在函数中间也可用<code>return</code>来返回。</p>
-<p>不像CoffeeScript，我们没有胖箭头<code>=></code>，因为我认为使JavaScript的<code>this</code>的含义可自定义是一种错误的设计，它应该始终指向当前对象。所以，我们的瘦箭头在大多数场合就等于CoffeeScript的胖箭头，而在少数场合（例如类的方法和构造器）等于CoffeeScript的瘦箭头。</p>
+<p>不像CoffeeScript，我们没有胖箭头<code>=&gt;</code>。我认为JavaScript使<code>this</code>的含义可自定义是一种错误的设计，它应该始终指向当前对象。我们的函数和CoffeeScript的函数的对应关系如下：</p>
+<ul>
+    <li>类的方法和构造器（包括嵌套的类的方法和构造器）：CoffeeScript瘦箭头</li>
+    <li>类的方法和构造器内部（不包括嵌套的类的方法和构造器，但包括嵌套的类的方法和构造器内部）：CoffeeScript胖箭头</li>
+    <li>其余地方：CoffeeScript瘦箭头</li>
+</ul>
 <h3>赋值与声明</h3>
 <p>用<code>:</code>、<code>as</code>。例如：</p>
 <pre><code><![CDATA[
@@ -187,11 +196,31 @@
 <pre><code><![CDATA[
     str: "Today is \(year)-\(month)-\(day)."
 ]]></code></pre>
-<p>原义字符串是受C#启发，我们使用<code>\"..."</code>来表示。这很适合表示正则表达式，例如：</p>
+<p>正则表达式我们用<code>r"..."</code>来表示。例如：</p>
 <pre><code><![CDATA[
-    RegExp(\"^\d{3}-\d{3}-\d{4}$")
+    str.search(r"^\d{3}-\d{3}-\d{4}$")
 ]]></code></pre>
-<p>原义字符串废除了<code>\</code>的转义功能。另外在原义字符串中表示双引号字符是用<code>""</code>而不是用<code>\"</code>。</p>
+<p>正则表达式废除了<code>\</code>的大部分功能，除了一样，就是和普通字符串一样可以用<code>\</code>在行尾连接。在正则表达式中表示双引号字符是用<code>""</code>而不是用<code>\"</code>。正则表达式不支持字符串插值。</p>
+<p>这是简单正则表达式。我们还支持复杂正则表达式，例如：</p>
+<pre><code><![CDATA[
+    str.search(r"""
+        ^
+        \d{3} # first
+        -
+        \d{3} # second
+        -
+        \d{4} # third
+        $
+    """)
+]]></code></pre>
+<p>复杂正则表达式的不同点是：空格和换行无意义，支持注释，支持字符串插值，表示双引号字符更简单，表示<code>#</code>需要用<code>\#</code>。字符串插值是用<code>#(...)</code>。</p>
+<p>原义字符串是受C#启发，我们使用<code>v"..."</code>来表示。这很适合表示正则表达式，例如：</p>
+<pre><code><![CDATA[
+    path: v"C:\Windows\System"
+]]></code></pre>
+<p>原义字符串完全废除了<code>\</code>的功能，所以行末不能用<code>\</code>来连接。在原义字符串中表示双引号字符是用<code>""</code>而不是用<code>\"</code>。</p>
+<p>所以总结一下，凡是字符串起始符号<code>"</code>左边紧接着字母的，可以是表示字符串，也可以表示字符串经转换后的值。</p>
+<p>正则表达式引号中间的内容本质上是字符串，这和JS和CoffeeScript都不同。就算是复杂正则表达式中的注释，本质上是属于字符串的，只是转换时去掉了而已。注意，转换是编译时而不是运行时，所以不影响效率。</p>
 <p>还有一点和CoffeeScript不同，就是CoffeeScript中：</p>
 <pre><code><![CDATA[
     mobyDick = "Call me Ishmael. Some years ago --
@@ -201,8 +230,7 @@
         about a little and see the watery part of the
         world..."
 ]]></code></pre>
-<p>这会编译成多行自动连接，连接符是一个空格。但是我们不支持，因为我觉得这只适合西方语言。如果是中文，那加上空格可就错了。所以这个功能不好，应该老老实实用<code>\</code>来连接，是英文的话，前面加个空格。所以，在Lemo中，简单字符串、复杂字符串、原义字符串都是原样呈现多行的。</p>
-<p>原义字符串虽然废除了<code>\</code>的转义功能，但是行末仍可以用<code>\</code>来连接，因为这时它不是作为转义符。</p>
+<p>这会编译成多行自动连接，连接符是一个空格。但是我们不支持，因为我觉得这只适合西方语言。如果是中文，那加上空格可就错了。所以这个功能不好，应该老老实实用<code>\</code>来连接，是英文的话，前面加个空格。所以，在Lemo中，简单字符串、复杂字符串、原义字符串、正则表达式都是原样呈现多行的。</p>
 <h3>数组</h3>
 <p>方括号的作用就是表示数组，没有其他用途。</p>
 <p>点号的作用就是表示对象的字段。由于数组也是对象，所以JS中<code>arr[3]</code>我们改为<code>arr.3</code>，更一致。其实数组就是属性名为索引值的对象，刚知道时可能会惊讶，但确实是这样，可以用<code>Object.keys(arr)</code>验证这一论断。JS这点和别的语言不同，但不是糟粕，只要形式上变得一致就可以了。</p>
@@ -434,22 +462,30 @@ message: match <> array.includes(@)
     Website: class
         static: <>
             result: longTimeTask()
-            Class.part1: result[0]
-            Class.part2: result[1]
+            cls.part1: result[0]
+            cls.part2: result[1]
 ]]></code></pre>
+<p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
+<pre><code><![CDATA[
+    Website: class
+        static: <>
+            Abc.prototype.def: <>
+                doSomething()
+]]></code></pre>
+<p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类还是扁平为好。</p>
 <h3>上下文</h3>
 <p>JavaScript表示上下文的只有this和arguments，我们有7个，分别是：</p>
 <ul>
     <li>当前对象：<code>me</code></li>
     <li>当前对象的类：<code>Me</code></li>
-    <li>闭包中的当前类：<code>Class</code></li>
+    <li>闭包中的当前类：<code>cls</code></li>
     <li>闭包中的当前函数：<code>fun</code></li>
     <li>当前参数：<code>@</code></li>
     <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
     <li>当前模块的exports：<code>\</code></li>
 </ul>
 <p><code>me</code>相当于JS的<code>this</code>。<code>@</code>相当于JS的<code>arguments</code>。</p>
-<p><code>@</code>、<code>\</code>后面的点号可以省略，除非点号后面跟<code>(</code>或<code>"</code>。</p>
+<p><code>@</code>、<code>\</code>后面的点号可以省略，除非点号后面跟<code>(</code>或<code>"</code>或<code>v"</code>。</p>
 <h3>异常</h3>
 <p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript完全相同。例如：</p>
 <pre><code><![CDATA[
@@ -653,7 +689,7 @@ message: match <> array.includes(@)
     <li>as</li>
     <li>catch</li>
     <li>class</li>
-    <li>Class</li>
+    <li>cls</li>
     <li>delete</li>
     <li>do</li>
     <li>else</li>
@@ -662,9 +698,12 @@ message: match <> array.includes(@)
     <li>fun</li>
     <li>get</li>
     <li>if</li>
+    <li>in</li>
     <li>is</li>
     <li>isnt</li>
     <li>match</li>
+    <li>me</li>
+    <li>Me</li>
     <li>mod</li>
     <li>new</li>
     <li>nonew</li>
@@ -710,6 +749,7 @@ message: match <> array.includes(@)
     <li>###</li>
     <li>"</li>
     <li>"""</li>
+    <li>v"</li>
     <li>`</li>
     <li>,</li>
     <li>@</li>
@@ -731,7 +771,6 @@ message: match <> array.includes(@)
     <li>|</li>
     <li>'</li>
     <li>\</li>
-    <li>\"</li>
     <li>\(</li>
     <li>'wait</li>
     <li>'void</li>
@@ -935,7 +974,7 @@ message: match <> array.includes(@)
 <p>问：为啥没有“原义复杂字符串”？</p>
 <p>答：乍看之下似乎应该可以有，但是考虑这个：</p>
 <pre><code><![CDATA[
-    \"""C:\Windows"""
+    v"""C:\Windows"""
 ]]></code></pre>
 <p>这就有歧义了，到底是看成“原义复杂字符串”呢，还是看成原义字符串内开头是一个双引号（因为原义字符串的双引号是用两个双引号表示的）？</p>
 <p>问：为啥函数除了箭头符号以外还要弄个菱形符号？</p>
