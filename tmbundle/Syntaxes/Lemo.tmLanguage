@@ -79,32 +79,16 @@
             <string>comment.block.lemo</string>
 			<key>begin</key>
 			<string>(?&lt;!#)###(?!#)</string>
-			<key>captures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.comment.lemo</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>###(?:[ \t]*\n)</string>
+            <key>end</key>
+            <string>###(?:[ \t]*\n)</string>
 		</dict>
 		<dict>
             <key>name</key>
             <string>comment.line.number-sign.lemo</string>
 			<key>begin</key>
-			<string>(#)(?!\{)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.comment.lemo</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>\n</string>
+			<string>#</string>
+            <key>end</key>
+            <string>\n</string>
 		</dict>
 		<dict>
             <key>name</key>
@@ -123,8 +107,8 @@
             <string>keyword.operator.lemo</string>
 			<key>match</key>
 			<string>(?x)
-				\*|\/|\-|\+|=|&lt;|&gt;|
-				\?|\||\:|
+                -&gt; | &lt;&gt; | \+ | - | \* | / | \*\* | = | /= | &lt; | &gt; |
+                &lt;= | &gt;= | |&gt; | \? | :: | \| |
                 '[\w]*
 			</string>
 		</dict>
@@ -140,6 +124,8 @@
                     <string>source.lemo.embedded.source</string>
 					<key>begin</key>
 					<string>\\\(</string>
+                    <key>end</key>
+                    <string>\)</string>
 					<key>captures</key>
 					<dict>
 						<key>0</key>
@@ -148,8 +134,6 @@
 							<string>punctuation.section.embedded.lemo</string>
 						</dict>
 					</dict>
-					<key>end</key>
-					<string>\)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
