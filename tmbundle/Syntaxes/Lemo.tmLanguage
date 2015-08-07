@@ -108,7 +108,7 @@
 			<key>match</key>
 			<string>(?x)
                 -&gt; | &lt;&gt; | \+ | - | \* | / | \*\* | = | /= | &lt; | &gt; |
-                &lt;= | &gt;= | |&gt; | \? | :: | \| |
+                &lt;= | &gt;= | \|&gt; | \? | :: | \| |
                 '[\w]*
 			</string>
 		</dict>
