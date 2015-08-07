@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>name</key>
+    <string>Lemo</string>
+    <key>scopeName</key>
+    <string>source.lemo</string>
+    <key>uuid</key>
+    <string>A9F44CBB-014C-42C2-A275-4E53162D69D4</string>
 	<key>comment</key>
 	<string>Lemo</string>
 	<key>fileTypes</key>
@@ -16,33 +22,15 @@
 	<string>^\s*$|^\s*[}\]]\s*$</string>
 	<key>keyEquivalent</key>
 	<string>^~L</string>
-	<key>name</key>
-	<string>Lemo</string>
 	<key>patterns</key>
 	<array>
 		<dict>
+            <key>contentName</key>
+            <string>string.quoted.double.lemo</string>
 			<key>begin</key>
 			<string>"""</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.begin.lemo</string>
-				</dict>
-			</dict>
 			<key>end</key>
 			<string>"""</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.end.lemo</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>string.quoted.double.heredoc.lemo</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -58,28 +46,12 @@
 			</array>
 		</dict>
         <dict>
+            <key>contentName</key>
+            <string>string.quoted.double.lemo</string>
             <key>begin</key>
             <string>"</string>
-            <key>beginCaptures</key>
-            <dict>
-                <key>0</key>
-                <dict>
-                    <key>name</key>
-                    <string>punctuation.definition.string.begin.lemo</string>
-                </dict>
-            </dict>
             <key>end</key>
             <string>"</string>
-            <key>endCaptures</key>
-            <dict>
-                <key>0</key>
-                <dict>
-                    <key>name</key>
-                    <string>punctuation.definition.string.end.lemo</string>
-                </dict>
-            </dict>
-            <key>name</key>
-            <string>string.quoted.double.lemo</string>
             <key>patterns</key>
             <array>
                 <dict>
@@ -95,14 +67,16 @@
             </array>
         </dict>
 		<dict>
+            <key>name</key>
+            <string>meta.normal.lemo</string>
 			<key>begin</key>
 			<string>`</string>
 			<key>end</key>
 			<string>`</string>
-			<key>name</key>
-			<string>meta.normal.lemo</string>
 		</dict>
 		<dict>
+            <key>name</key>
+            <string>comment.block.lemo</string>
 			<key>begin</key>
 			<string>(?&lt;!#)###(?!#)</string>
 			<key>captures</key>
@@ -115,10 +89,10 @@
 			</dict>
 			<key>end</key>
 			<string>###(?:[ \t]*\n)</string>
-			<key>name</key>
-			<string>comment.block.lemo</string>
 		</dict>
 		<dict>
+            <key>name</key>
+            <string>comment.line.number-sign.lemo</string>
 			<key>begin</key>
 			<string>(#)(?!\{)</string>
 			<key>beginCaptures</key>
@@ -131,30 +105,28 @@
 			</dict>
 			<key>end</key>
 			<string>\n</string>
-			<key>name</key>
-			<string>comment.line.number-sign.lemo</string>
 		</dict>
 		<dict>
+            <key>name</key>
+            <string>keyword.control.lemo</string>
 			<key>match</key>
 			<string>(?x)
 				\b(?&lt;![\.\$])(
-                    and|as|catch|class|cls|delete|do|else|false|finally|fun|get|
-                    if|in|is|isnt|match|me|Me|mod|new|nonew|not|null|or|rem|return|self|set|
+                    and|as|catch|class|delete|do|else|false|finally|fun|
+                    if|in|is|isnt|match|me|Me|mod|new|nonew|not|null|or|rem|return|self|
                     static|super|then|throw|true|try|void
 				)(?!\s*:)\b
 			</string>
-			<key>name</key>
-			<string>keyword.control.lemo</string>
 		</dict>
 		<dict>
+            <key>name</key>
+            <string>keyword.operator.lemo</string>
 			<key>match</key>
 			<string>(?x)
 				\*|\/|\-|\+|=|&lt;|&gt;|
 				\?|\||\:|
                 '[\w]*
 			</string>
-			<key>name</key>
-			<string>keyword.operator.lemo</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -164,6 +136,8 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+                    <key>name</key>
+                    <string>source.lemo.embedded.source</string>
 					<key>begin</key>
 					<string>\\\(</string>
 					<key>captures</key>
@@ -176,8 +150,6 @@
 					</dict>
 					<key>end</key>
 					<string>\)</string>
-					<key>name</key>
-					<string>source.lemo.embedded.source</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -189,9 +161,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>scopeName</key>
-	<string>source.lemo</string>
-	<key>uuid</key>
-	<string>A9F44CBB-014C-42C2-A275-4E53162D69D4</string>
 </dict>
 </plist>
