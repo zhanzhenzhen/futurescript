@@ -96,7 +96,7 @@
 			<key>match</key>
 			<string>(?x)
 				\b(?&lt;![\.\$])(
-                    and|as|catch|class|delete|do|else|false|finally|fun|
+                    and|as|catch|delete|do|else|false|finally|fun|
                     if|in|is|isnt|match|me|Me|mod|new|nonew|not|null|or|rem|return|self|
                     static|super|then|throw|true|try|void
 				)(?!\s*:)\b
@@ -107,11 +107,23 @@
             <string>keyword.operator.lemo</string>
 			<key>match</key>
 			<string>(?x)
-                -&gt; | &lt;&gt; | \+ | - | \* | / | \*\* | = | /= | &lt; | &gt; |
+                \+ | -(?!&gt;) | \* | / | \*\* | = | /= | &lt;(?!&gt;) | (?&lt;!&lt;)&gt; |
                 &lt;= | &gt;= | \|&gt; | \? | :: | \| |
                 '[\w]*
 			</string>
 		</dict>
+        <dict>
+            <key>name</key>
+            <string>storage.type.function.lemo</string>
+            <key>match</key>
+            <string>-&gt;|&lt;&gt;</string>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>storage.type.class.lemo</string>
+            <key>match</key>
+            <string>\b(?&lt;![\.\$])class(?!\s*:)\b</string>
+        </dict>
 	</array>
 	<key>repository</key>
 	<dict>
