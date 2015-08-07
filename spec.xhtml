@@ -416,7 +416,7 @@ message: match <> array.includes(@)
         doSomething()
 ]]></code></pre>
 <h3>类</h3>
-<p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>static</code>、<code>new</code>。例子：</p>
+<p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>static</code>、<code>new</code>、<code>me</code>、<code>Me</code>。例子：</p>
 <pre><code><![CDATA[
     Animal: class
         new: <>
@@ -443,6 +443,7 @@ message: match <> array.includes(@)
 ]]></code></pre>
 <p>JS和CoffeeScript的extends纯属多余，我们使用更美丽的办法：直接在class后写出你要继承的类，使用表达式而非语句，类名用赋值来设定。</p>
 <p>类的声明方式比较像CoffeeScript。但我们的更严格。我们多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。在Lemo中，类的所有声明的子项都必须是以冒号的形式。</p>
+<p>JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
 <p>getter和setter的例子：</p>
 <pre><code><![CDATA[
     Animal: class
@@ -462,8 +463,8 @@ message: match <> array.includes(@)
     Website: class
         static: <>
             result: longTimeTask()
-            Class.part1: result[0]
-            Class.part2: result[1]
+            Me.part1: result[0]
+            Me.part2: result[1]
 ]]></code></pre>
 <p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
 <pre><code><![CDATA[
@@ -475,17 +476,15 @@ message: match <> array.includes(@)
 <p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类的关系还是扁平为好。</p>
 <p>只要类有实例化需求，就要避免取非大写开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
 <h3>上下文</h3>
-<p>JavaScript表示上下文的只有this和arguments，我们有7个，分别是：</p>
+<p>JavaScript表示上下文的只有this和arguments，我们有6个，分别是：</p>
 <ul>
     <li>当前对象：<code>me</code></li>
     <li>当前对象的类：<code>Me</code></li>
-    <li>闭包中的当前类：<code>Class</code></li>
     <li>闭包中的当前函数：<code>fun</code></li>
     <li>当前参数：<code>@</code></li>
     <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
     <li>当前模块的exports：<code>\</code></li>
 </ul>
-<p><code>me</code>相当于JS的<code>this</code>。<code>@</code>相当于JS的<code>arguments</code>。</p>
 <p><code>@</code>、<code>\</code>后面的点号可以省略，除非点号后面跟<code>(</code>或<code>"</code>或<code>v"</code>。</p>
 <h3>异常</h3>
 <p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript完全相同。例如：</p>
@@ -690,7 +689,6 @@ message: match <> array.includes(@)
     <li>as</li>
     <li>catch</li>
     <li>class</li>
-    <li>Class</li>
     <li>delete</li>
     <li>do</li>
     <li>else</li>
