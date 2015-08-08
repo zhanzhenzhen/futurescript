@@ -453,11 +453,20 @@ message: match <> array.includes(@)
         name'get: <>
             me._name.toUpperCase()
         name'set: <>
-            _name: @0
+            me._name: @0
 ]]></code></pre>
+<p><code>'get</code>和<code>'set</code>一看就明白。这里的亮点是<code>me._name</code>，它编译成的JS不是像你猜测的那样是<code>this._name</code>，而是<code>this[_name]</code>，其中<code>_name</code>是Symbol。编译器一碰到<code>me.</code>，并且后面是以<code>_</code>开头的话，即这样编译。</p>
+<p>这被称作“防冲突字段”，可以把它近似看成是私有字段。防冲突字段的好处不是外部无法访问，外部虽然无法通过对象的属性直接访问，但可以间接访问，最大的好处是继承类可以放心地使用同名的防冲突字段，而不用担心会覆盖，这在类关系很复杂的大型项目中尤其重要。因为这些字段不属于API，通常别的开发者是不会告诉你是怎样用的，如果你继承别人写的类，有可能你的私有字段正好重名，类的行为就被破坏了。</p>
+<p>以<code>_</code>开头的字段名还可以出现在字段的声明中，例如：</p>
+<pre><code><![CDATA[
+    Animal: class
+        _name: "My Name"
+]]></code></pre>
+<p>字段的声明中只要是以<code>_</code>开头的，便自动成为防冲突字段。</p>
 <p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由头行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>始终被识别为不是类，无论编译选项如何。</p>
 <p>CoffeeScript对于静态类是使用<code>@property: value</code>，我们使用的是<code>static</code>关键字，即<code>static property: value</code>。</p>
+<p>防冲突字段也适用于静态类，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
 <p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
 <pre><code><![CDATA[
     Website: class
@@ -965,7 +974,7 @@ message: match <> array.includes(@)
 ]]></code></pre>
 <h2>常见问题</h2>
 <p>问：为啥没有正则表达式符号？</p>
-<p>答：正则表达式完全可以用原义字符串表示。</p>
+<p>答：正则表达式完全可以用<code>r"</code>来表示。</p>
 <p>问：为啥没有位操作符？</p>
 <p>答：首先，Lemo作为高级语言，没必要支持。其次，JavaScript的位操作是专门针对32位数字的，这本身就不合理。</p>
 <p>问：为啥没有生成器？</p>
@@ -990,5 +999,7 @@ message: match <> array.includes(@)
 <p>答：首先，<code>@</code>形状也像个a。其次，<code>@</code>是符号中看上去最不像符号的，我们经常会使用孤立的<code>@</code>作为一个表达式，这时如果用其他符号，会显得不像个表达式，就不舒服了。</p>
 <p>问：为什么以多参数调用函数一定要加括号？CoffeeScript不是可以不加吗？</p>
 <p>答：多参数要用到逗号，不加括号的话，逗号到底分隔什么，不容易看清楚，大多数时候违反人类直觉。而且因为我觉得激进模式更完美，如果多参数可以不加括号，就有些鼓励人们采用兼容模式了。</p>
+<p>问：<code>@</code>很好用，如果catch的上下文也能用一个符号表示就好了。</p>
+<p>答：本来我考虑再用个新的符号来指代子语句内的上下文，不仅限于catch，但想想，不宜。用<code>@</code>时你很容易看清某个<code>@</code>所对应的是哪个函数，因为函数符号很好辨认。但子语句仅有的特征是缩进，而缩进我们是用得非常多的，很容易这个新符号的意思会变来变去，导致你搞混。如果这个新符号仅限于catch，又适用面太小。</p>
 </body>
 </html>
