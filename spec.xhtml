@@ -40,17 +40,17 @@
 <h3>文件格式</h3>
 <p>后缀名为.lemo。第一行必须符合如下语法：</p>
 <pre><code><![CDATA[
-    v0.1.0[, (radical | compatible) | (slow-auto-new | fast-auto-new | manual-new) | common-js]...
+    v0.1.0[, (radical | compatible) | (slow new | fast new | manual new) | common]...
 ]]></code></pre>
 <p>默认值为：</p>
 <pre><code><![CDATA[
-    compatible, fast-auto-new
+    compatible, fast new
 ]]></code></pre>
 <p>版本号后面的以逗号分隔的项不可重复。头行的例子：</p>
 <pre><code><![CDATA[
-    v0.1.0, compatible, fast-auto-new
-    v0.1.0, compatible, fast-auto-new, common-js
-    v0.1.0, radical, slow-auto-new
+    v0.1.0, compatible, fast new
+    v0.1.0, compatible, fast new, common
+    v0.1.0, radical, slow new
 ]]></code></pre>
 <p>激进模式和兼容模式的差异是：激进模式只允许单参数的函数（多参数和零参数都不允许），兼容模式没有这个限制。因此：</p>
 <p>激进模式中，定义或调用零参数的函数会实际使用单参数<code>void</code>（即JavaScript的<code>undefined</code>）。但兼容模式中，定义或调用零参数的函数会实际使用零参数。例如：激进模式中，<code>a()</code>会被编译成<code>a(undefined)</code>。兼容模式中，<code>a()</code>会被编译成<code>a()</code>。</p>
@@ -58,14 +58,14 @@
 <p>激进模式中，管道操作符把数组单参数分隔为两部分，而兼容模式中管道操作符把所有参数分隔为两部分。</p>
 <p>激进模式中，<code>'</code>只能是二元的，而兼容模式中<code>'</code>还可以是一元的。</p>
 <p>下文中，为求简便，如果写道“无参数”，也可指激进模式中的参数为<code>void</code>的情形。</p>
-<p><code>fast-auto-new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写的加，小写的不加。但只能识别普通的表示法，像引号内的就不能识别，例如：</p>
+<p><code>fast new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写的加，小写的不加。但只能识别普通的表示法，像引号内的就不能识别，例如：</p>
 <pre><code><![CDATA[
     aaa."bbb".Ccc() # new can be omitted
     new aaa.bbb."Ccc"() # new can't be omitted
 ]]></code></pre>
-<p><code>slow-auto-new</code>是指创建类的实例不用加<code>new</code>，编译时也不会自动加进去，而是在运行时自动判断，依据它是不是es6的class或Lemo的类，是的加，不是的不加。因为运行时判断比较慢（尤其是判断是否是es6的class时只能先尝试不加然后看是不是出错，用到了try-catch，更慢），所以谨慎使用。而且它无法照顾到用普通函数写的类。</p>
-<p><code>manual-new</code>就是传统办法，创建类的实例需要加<code>new</code>。</p>
-<p><code>common-js</code>是指激活<code>exports</code>在某些情况下可简写为<code>\</code>的功能。</p>
+<p><code>slow new</code>是指创建类的实例不用加<code>new</code>，编译时也不会自动加进去，而是在运行时自动判断，依据它是不是es6的class或Lemo的类，是的加，不是的不加。因为运行时判断比较慢（尤其是判断是否是es6的class时只能先尝试不加然后看是不是出错，用到了try-catch，更慢），所以谨慎使用。而且它无法照顾到用普通函数写的类。</p>
+<p><code>manual new</code>就是传统办法，创建类的实例需要加<code>new</code>。</p>
+<p><code>common</code>是指激活<code>exports</code>在某些情况下可简写为<code>\</code>的功能（这属于CommonJS规范）。</p>
 <p>编译后的代码是strict mode。</p>
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
 <h3>语句</h3>
