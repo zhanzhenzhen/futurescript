@@ -210,6 +210,7 @@
     ]
 ]]></code></pre>
 <p><code>above</code>对机器来说没有任何意义，不加也是合法的，但对人来说有意义。不过我的看法是，空行更直观些，打起来也更方便。</p>
+<p>要注意，上面两个例子中<code>as</code>和上面的函数并不是两个并列的语句，而是一个语句。语句不能以<code>as</code>或<code>above as</code>开头。</p>
 <h2>模块</h2>
 <p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
 <p><code>import</code>后面只能跟简单字符串（可以包含转义符，但不可以是经计算的）。这些都是正确的语法：</p>
@@ -337,6 +338,16 @@
     <li>not</li>
 </ul>
 <p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
+<p>和CoffeeScript一样，我们也支持这种链式比较：</p>
+<pre><code><![CDATA[
+    if 200 <= statusCode < 300
+        console.log "success"
+]]></code></pre>
+<p>但是我们的限制比CoffeeScript多，只有同一个方向的才可以链式比较。像这种就不支持：</p>
+<pre><code><![CDATA[
+    if a < b > c
+        console.log "success"
+]]></code></pre>
 <h2>条件</h2>
 <p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
 <pre><code><![CDATA[
