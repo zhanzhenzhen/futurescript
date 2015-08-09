@@ -74,6 +74,7 @@
 <ul style="font-family: monospace;">
     <li>:（表示赋值时）</li>
     <li>delete</li>
+    <li>export（仅限于语句开头是export，所以不包括export as，但包括export...as）</li>
     <li>return</li>
     <li>throw</li>
 </ul>
@@ -176,6 +177,44 @@
 <pre><code><![CDATA[
     a, b: 1 # both a and b are 1
 ]]></code></pre>
+<h3>模块</h3>
+<p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
+<p><code>import</code>后面只能跟简单字符串（可以包含转义符，但不可以是经计算的）。这些都是正确的语法：</p>
+<pre><code><![CDATA[
+    import "./abc" as abc
+    abc: import "./abc"
+    import "abc"
+    aaa: import "./abc.js".aaa()
+    aaa: import("abc").aaa()
+    import("\u0041")
+]]></code></pre>
+<p>这些是错误的语法：</p>
+<pre><code><![CDATA[
+    import "./a" + "bc"
+    import("./a" + "bc")
+    import "./\(filename)"
+    import """abc"""
+    import v"abc"
+]]></code></pre>
+<p>导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些是正确的语法：</p>
+<pre><code><![CDATA[
+    multiply'export: <> @0 * @1
+    mp: (<> @0 * @1) export as multiply
+    mp: (<> @0 * @1) as multiply'export
+    abc export as def
+    export abc as def
+    export abc
+    export <> @0 * @1
+]]></code></pre>
+<p>这些是错误的语法：</p>
+<pre><code><![CDATA[
+    abc export def
+    export: abc
+    export multiply: <> @0 * @1
+    obj.multiply'export: <> @0 * @1
+]]></code></pre>
+<p>当语句以<code>export</code>开头，且<code>export</code>后除了一个表达式再无其他时，表示总的导出，类似于node中的<code>module.exports = ...</code>。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则必须产生编译错误。</p>
+<p>不同于ES6，Lemo中的导入和导出不是必须出现在顶层。在任何地方出现，编译器会自动把导入编译到代码顶端，把导出编译到代码底端。但从内部原理来看，我们的模块导入导出还是基于ES6的，例如我们是静态导入，无法动态导入，这比Node要严格。</p>
 <h3>字符串</h3>
 <p>字符串受CoffeeScript启发，不同之处在于不支持单引号、增加了支持原义字符串、不支持简单字符串的多行自动连接。</p>
 <p>简单字符串：</p>
@@ -701,10 +740,12 @@ message: match <> array.includes(@)
     <li>delete</li>
     <li>do</li>
     <li>else</li>
+    <li>export</li>
     <li>false</li>
     <li>finally</li>
     <li>fun</li>
     <li>if</li>
+    <li>import</li>
     <li>in</li>
     <li>is</li>
     <li>isnt</li>
@@ -732,8 +773,6 @@ message: match <> array.includes(@)
 <ul style="font-family: monospace;">
     <li>con</li>
     <li>elif</li>
-    <li>export</li>
-    <li>import</li>
 </ul>
 <h2>内置函数</h2>
 <ul style="font-family: monospace;">
@@ -786,6 +825,7 @@ message: match <> array.includes(@)
     <li>'ifnull</li>
     <li>'get</li>
     <li>'set</li>
+    <li>'export</li>
     <li>&lt;&lt;</li>
     <li>&gt;&gt;</li>
 </ul>
@@ -798,7 +838,7 @@ message: match <> array.includes(@)
         <th>Examples</th>
     </tr>
     <tr>
-        <td rowspan="4">13 left-to-right</td>
+        <td rowspan="5">13 left-to-right</td>
         <td>Member Access</td>
         <td><code>a.x<br/>a."x"<br/>a.(b)</code></td>
     </tr>
@@ -815,9 +855,17 @@ message: match <> array.includes(@)
         <td><code>a'</code></td>
     </tr>
     <tr>
-        <td>12 left-to-right</td>
+        <td>import</td>
+        <td><code>import "x"<br/>import("x")</code></td>
+    </tr>
+    <tr>
+        <td rowspan="2">12 left-to-right</td>
         <td>as</td>
         <td><code>a as x</code></td>
+    </tr>
+    <tr>
+        <td>export as</td>
+        <td><code>a export as x</code></td>
     </tr>
     <tr>
         <td>11 left-to-right</td>
@@ -1001,5 +1049,7 @@ message: match <> array.includes(@)
 <p>答：多参数要用到逗号，不加括号的话，逗号到底分隔什么，不容易看清楚，大多数时候违反人类直觉。而且因为我觉得激进模式更完美，如果多参数可以不加括号，就有些鼓励人们采用兼容模式了。</p>
 <p>问：<code>@</code>很好用，如果catch的上下文也能用一个符号表示就好了。</p>
 <p>答：本来我考虑再用个新的符号来指代子语句内的上下文，不仅限于catch，但想想，不宜。用<code>@</code>时你很容易看清某个<code>@</code>所对应的是哪个函数，因为函数符号很好辨认。但子语句仅有的特征是缩进，而缩进我们是用得非常多的，很容易这个新符号的意思会变来变去，导致你搞混。如果这个新符号仅限于catch，又适用面太小。</p>
+<p>问：<code>as</code>为何不能用逗号同时赋值？</p>
+<p>答：若支持，像这个表达式<code>[aaa as a, bbb]</code>就容易产生歧义。</p>
 </body>
 </html>
