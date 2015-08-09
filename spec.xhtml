@@ -40,16 +40,18 @@
 <h3>文件格式</h3>
 <p>后缀名为.lemo。第一行必须符合如下语法：</p>
 <pre><code><![CDATA[
-    v0.1.0[, (radical | compatible) | (slow new | fast new | manual new) | common]...
+    v0.1.0[, (radical | compatible) | (slow new | fast new | manual new) | (node import | node export | node module | es module)]...
 ]]></code></pre>
 <p>默认值为：</p>
 <pre><code><![CDATA[
-    compatible, fast new
+    compatible, fast new, es module
 ]]></code></pre>
 <p>版本号后面的以逗号分隔的项不可重复。头行的例子：</p>
 <pre><code><![CDATA[
+    v0.1.0
+    v0.1.0, node module
     v0.1.0, compatible, fast new
-    v0.1.0, compatible, fast new, common
+    v0.1.0, compatible, fast new, node import
     v0.1.0, radical, slow new
 ]]></code></pre>
 <p>激进模式和兼容模式的差异是：激进模式只允许单参数的函数（多参数和零参数都不允许），兼容模式没有这个限制。因此：</p>
@@ -65,7 +67,7 @@
 ]]></code></pre>
 <p><code>slow new</code>是指创建类的实例不用加<code>new</code>，编译时也不会自动加进去，而是在运行时自动判断，依据它是不是es6的class或Lemo的类，是的加，不是的不加。因为运行时判断比较慢（尤其是判断是否是es6的class时只能先尝试不加然后看是不是出错，用到了try-catch，更慢），所以谨慎使用。而且它无法照顾到用普通函数写的类。</p>
 <p><code>manual new</code>就是传统办法，创建类的实例需要加<code>new</code>。</p>
-<p><code>common</code>是指激活<code>exports</code>在某些情况下可简写为<code>\</code>的功能（这属于CommonJS规范）。</p>
+<p><code>node import</code>是指导入被编译成node的导入（即require）。<code>node export</code>是指导出被编译成node的导出（即exports和module.exports）。<code>node module</code>是两者都做。<code>es module</code>是两者都不做（即按照ES6的规范）。</p>
 <p>编译后的代码是strict mode。</p>
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
 <h3>语句</h3>
@@ -524,16 +526,15 @@ message: match <> array.includes(@)
 <p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类的关系还是扁平为好。</p>
 <p>只要类有实例化需求，就要避免取非大写开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
 <h3>上下文</h3>
-<p>JavaScript表示上下文的只有this和arguments，我们有6个，分别是：</p>
+<p>JavaScript表示上下文的只有this和arguments，我们有5个，分别是：</p>
 <ul>
     <li>当前对象：<code>me</code></li>
     <li>当前对象的类：<code>Me</code></li>
     <li>闭包中的当前函数：<code>fun</code></li>
     <li>当前参数：<code>@</code></li>
     <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
-    <li>当前模块的exports：<code>\</code></li>
 </ul>
-<p><code>@</code>、<code>\</code>后面的点号可以省略，除非点号后面跟<code>(</code>或<code>"</code>或<code>v"</code>。</p>
+<p><code>@</code>后面的点号可以省略，除非点号后面跟<code>(</code>或<code>"</code>或<code>v"</code>。</p>
 <h3>异常</h3>
 <p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript完全相同。例如：</p>
 <pre><code><![CDATA[
