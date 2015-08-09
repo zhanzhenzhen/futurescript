@@ -607,7 +607,7 @@ message: match <> array.includes(@)
 </ul>
 <p><code>@</code>后面的点号可以省略，除非点号后面跟<code>(</code>或<code>"</code>或<code>v"</code>。</p>
 <h2>异常</h2>
-<p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript完全相同。例如：</p>
+<p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript几乎完全相同。例如：</p>
 <pre><code><![CDATA[
     try
         allHellBreaksLoose()
@@ -617,6 +617,7 @@ message: match <> array.includes(@)
     finally
         cleanUp()
 ]]></code></pre>
+<p>唯一的不同是：若<code>throw</code>后面啥都没有，不是语法错误，而是：若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw new Error()</code>。</p>
 <h2>管道</h2>
 <p>管道操作符是<code>|></code>。例子：</p>
 <pre><code><![CDATA[
