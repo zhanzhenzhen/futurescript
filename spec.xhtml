@@ -70,7 +70,7 @@
 <p>编译后的代码是strict mode。</p>
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
 <h2>语句</h2>
-<p>Lemo代码由语句和注释组成。语句中可以含有子语句。有两种语句：表达式语句和命令语句。类似CoffeeScript，在Lemo中，缩进是很重要的。多个并列语句可以通过分号<code>;</code>合并成1行。类似CoffeeScript，单行还可以通过<code>\</code>拆分成多行。</p>
+<p>Lemo代码由语句、注释和空白行组成。语句中可以含有子语句。有两种语句：表达式语句和命令语句。类似CoffeeScript，在Lemo中，缩进是很重要的。多个并列语句可以通过分号<code>;</code>合并成1行。类似CoffeeScript，单行还可以通过<code>\</code>拆分成多行。</p>
 <p>大多数语句都是表达式语句，但用到这些的是命令语句：</p>
 <ul style="font-family: monospace;">
     <li>:（表示赋值时）</li>
@@ -178,6 +178,38 @@
 <pre><code><![CDATA[
     a, b: 1 # both a and b are 1
 ]]></code></pre>
+<p>还可以对包含子语句的语句用<code>as</code>，例如：</p>
+<pre><code><![CDATA[
+    [
+        x ->
+            aaa(x)
+            bbb(x)
+            ccc(x)
+        as f1
+
+        x ->
+            ddd(x)
+            eee(x)
+            fff(x)
+        as f2
+    ]
+]]></code></pre>
+<p>如上例显示，这种<code>as</code>和下一语句之间最好要有空行，不然不容易看清这个<code>as</code>是属于谁的。但我们也提供了你不空行时的好办法，就是加个<code>above</code>。</p>
+<pre><code><![CDATA[
+    [
+        x ->
+            aaa(x)
+            bbb(x)
+            ccc(x)
+        above as f1
+        x ->
+            ddd(x)
+            eee(x)
+            fff(x)
+        above as f2
+    ]
+]]></code></pre>
+<p><code>above</code>对机器来说没有任何意义，不加也是合法的，但对人来说有意义。不过我的看法是，空行更直观些，打起来也更方便。</p>
 <h2>模块</h2>
 <p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
 <p><code>import</code>后面只能跟简单字符串（可以包含转义符，但不可以是经计算的）。这些都是正确的语法：</p>
@@ -197,16 +229,24 @@
     import """abc"""
     import v"abc"
 ]]></code></pre>
-<p>导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些是正确的语法：</p>
+<p>导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些都是正确的语法：</p>
 <pre><code><![CDATA[
     multiply'export: <> @0 * @1
     mp: (<> @0 * @1) export as multiply
+    mp: <>
+        @0 * @1
+    above export as multiply
+    mp: <> @0 * @1
+    above export as multiply
+    <> @0 * @1
+    above export as multiply
     mp: (<> @0 * @1) as multiply'export
     abc export as def
     export abc as def
     export abc
     export <> @0 * @1
 ]]></code></pre>
+<p>和赋值一样，这里的<code>above</code>也是可略的。</p>
 <p>这些是错误的语法：</p>
 <pre><code><![CDATA[
     abc export def
@@ -215,7 +255,7 @@
     obj.multiply'export: <> @0 * @1
 ]]></code></pre>
 <p>当语句以<code>export</code>开头，且<code>export</code>后除了一个表达式再无其他时，表示总的导出，类似于node中的<code>module.exports = ...</code>。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则必须产生编译错误。</p>
-<p>不同于ES6，Lemo中的导入和导出不是必须出现在顶层。在任何地方出现，编译器会自动把导入编译到代码顶端，把导出编译到代码底端。但从内部原理来看，我们的模块导入导出还是基于ES6的，例如我们是静态导入，无法动态导入，这比Node要严格。</p>
+<p>不同于ES6，Lemo中的导入和导出不是必须出现在顶层。在任何地方出现，编译器会自动把导入编译到代码顶端，把导出编译到代码底端。但从内部原理来看，我们的模块导入导出还是基于ES6的，例如我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃Lemo的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
 <h2>字符串</h2>
 <p>字符串受CoffeeScript启发，不同之处在于不支持单引号、增加了支持原义字符串、不支持简单字符串的多行自动连接。</p>
 <p>简单字符串：</p>
@@ -285,7 +325,7 @@
 <h2>对象</h2>
 <p>对象的表示法和CoffeeScript基本相同，除了它必须加上大括号，不能省略。</p>
 <h2>逻辑运算</h2>
-<ul>
+<ul style="font-family: monospace;">
     <li>=</li>
     <li>/=</li>
     <li>&lt;</li>
@@ -296,7 +336,7 @@
     <li>or</li>
     <li>not</li>
 </ul>
-<p>等号的作用就是判断相等，没有烦人的<code>=</code>、<code>==</code>、<code>===</code>。</p>
+<p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
 <h2>条件</h2>
 <p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
 <pre><code><![CDATA[
@@ -415,6 +455,18 @@ speak: match <> text.includes(@)
 # speak is "woof"
 ]]></code></pre>
 <p>当<code>match</code>后紧接的是函数时，则被识别成自定义比较函数。要直接写出<code>-&gt;</code>或<code>&lt;&gt;</code>，绝不能用变量替代，这一点和数组模式相似。</p>
+<p>多行函数要加括号，例如：</p>
+<pre><code><![CDATA[
+text: "This is a dog."
+speak: match (<>
+    s = @toLowerCase()
+    text.includes(s)
+)
+    "cat" ? "meow"
+    "dog" ? "woof"
+    |       "unknown"
+# speak is "woof"
+]]></code></pre>
 <p>还有or模式和and模式。or模式我们会经常用到，例如：</p>
 <pre><code><![CDATA[
 day: "Tue"
@@ -733,6 +785,7 @@ message: match <> array.includes(@)
 <h2>关键字</h2>
 <p>关键字不能作为变量名。</p>
 <ul style="font-family: monospace;">
+    <li>above</li>
     <li>and</li>
     <li>as</li>
     <li>catch</li>
