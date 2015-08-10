@@ -77,7 +77,8 @@
     v0.1.0, compatible, fast new, node import
     v0.1.0, radical, slow new
 ]]></code></pre>
-<p>版本号必须写上。这是和其他语言的不同之处。只要你写的版本号不大于安装的Lemo的版本号，代码就会按照该版本的规范来运行。你安装的某一个版本的Lemo是包括了（至少我们会尽量包括）所有历史版本的编译器。写上版本号还有个好处，就是你的代码交给别人时，他就知道代码是什么版本的，从而可以更好地修改代码。</p>
+<p>版本号必须写上。只要你写的版本号不大于安装的Lemo的版本号，代码就会按照该版本的规范来运行，这是因为你安装的任何一个版本的Lemo都包括了（至少我们会尽量包括）所有历史版本的编译器。而这，是Lemo和其他语言的不同之处。</p>
+<p>写上版本号还有个好处，就是你的代码交给别人时，他就知道代码是什么版本的，从而可以更好地修改代码。</p>
 <p>本文只描述一个版本。</p>
 <p>激进模式和兼容模式的差异是：激进模式只允许单参数的函数（多参数和零参数都不允许），兼容模式没有这个限制。因此：</p>
 <p>激进模式中，定义或调用零参数的函数会实际使用单参数<code>void</code>（即JavaScript的<code>undefined</code>）。但兼容模式中，定义或调用零参数的函数会实际使用零参数。例如：激进模式中，<code>a()</code>会被编译成<code>a(undefined)</code>。兼容模式中，<code>a()</code>会被编译成<code>a()</code>。</p>
@@ -333,11 +334,11 @@
 <p>还有一点和CoffeeScript不同，就是CoffeeScript中：</p>
 <pre><code><![CDATA[
     mobyDick = "Call me Ishmael. Some years ago --
-        never mind how long precisely -- having little
-        or no money in my purse, and nothing particular
-        to interest me on shore, I thought I would sail
-        about a little and see the watery part of the
-        world..."
+    never mind how long precisely -- having little
+    or no money in my purse, and nothing particular
+    to interest me on shore, I thought I would sail
+    about a little and see the watery part of the
+    world..."
 ]]></code></pre>
 <p>这会编译成多行自动连接，连接符是一个空格。但是我们不支持，因为我觉得这只适合西方语言。如果是中文，那加上空格可就错了。所以这个功能不好，应该老老实实用<code>\</code>来连接，是英文的话，前面加个空格。所以，在Lemo中，简单字符串、复杂字符串、原义字符串、正则表达式都是原样呈现多行的（除了首行和末行有些区别）。</p>
 <h2>数组</h2>
@@ -633,7 +634,7 @@ message: match <> array.includes(@)
     <li>当前参数：<code>@</code></li>
     <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
 </ul>
-<p><code>@</code>后面的点号可以省略，除非点号后面跟<code>(</code>或<code>"</code>或<code>v"</code>。</p>
+<p><code>@</code>后面的点号可以省略，除非点号后面跟<code>(</code>，或者<code>"</code>、<code>v"</code>、<code>r"</code>之类的字符串或字符串扩展。</p>
 <h2>异常</h2>
 <p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript几乎完全相同。例如：</p>
 <pre><code><![CDATA[
