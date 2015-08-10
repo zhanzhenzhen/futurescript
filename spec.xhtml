@@ -416,6 +416,15 @@
     mood: "happy" if singing # if (singing) {mood = "happy";}
 ]]></code></pre>
 <p>当条件后置时，<code>if</code>并不作为操作符，整体上并不是个表达式。所以如果有条件后置的语句在函数的末尾，则函数返回的将是void。</p>
+<p>还有一点和CoffeeScript不同，就是当碰到分号时：</p>
+<pre><code><![CDATA[
+    if x > 100 then aaa(); bbb()
+]]></code></pre>
+<p>CoffeeScript是把<code>aaa(); bbb()</code>全作为子语句，这看上去似乎是硬插入一条规则，很不统一，而且我们已有了专门的符号，可以写成：</p>
+<pre><code><![CDATA[
+    if x > 100 << aaa(); bbb() >>
+]]></code></pre>
+<p>所以这条规则在我们这里作废。Lemo里，分号能穿越一切障碍物，除非超过了括号或<code>&lt;&lt;</code>、<code>&gt;&gt;</code>限定的范围。</p>
 <h2>模式匹配</h2>
 <p><code>match</code>可以看成是一个增强版<code>switch</code>，它称为模式匹配。例如：</p>
 <pre><code><![CDATA[
