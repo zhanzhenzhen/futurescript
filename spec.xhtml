@@ -606,8 +606,8 @@ message: match <> array.includes(@)
 <p>字段的声明中只要是以<code>_</code>开头的，便自动成为防冲突字段。</p>
 <p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>始终被识别为不是类，无论编译选项如何。</p>
-<p>CoffeeScript对于静态类是使用<code>@property: value</code>，我们使用的是<code>static</code>关键字，即<code>static property: value</code>。</p>
-<p>防冲突字段也适用于静态类，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
+<p>CoffeeScript对于静态字段是使用<code>@property: value</code>，我们使用的是<code>static</code>关键字，即<code>static property: value</code>。</p>
+<p>防冲突字段也适用于静态字段，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
 <p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
 <pre><code><![CDATA[
     Website: class
@@ -616,6 +616,7 @@ message: match <> array.includes(@)
             Me.part1: result[0]
             Me.part2: result[1]
 ]]></code></pre>
+<p>静态构造函数内的<code>me.</code>和<code>Me.</code>都指向当前闭包所在的类，即这个类本身，而不是当前对象的类。</p>
 <p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
 <pre><code><![CDATA[
     Website: class
