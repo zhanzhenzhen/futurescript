@@ -566,12 +566,12 @@ message: match <> array.includes(@)
         move: meters ->
             alert me.name + " moved \(meters)m."
 
-    Snake: class Animal
+    Snake: class from Animal
         move: <>
             alert "Slithering..."
             super 5
 
-    Horse: class Animal
+    Horse: class from Animal
         move: <>
             alert "Galloping..."
             super 45
@@ -582,7 +582,7 @@ message: match <> array.includes(@)
     sam.move()
     tom.move()
 ]]></code></pre>
-<p>JS和CoffeeScript的extends纯属多余，我们使用更美丽的办法：直接在class后写出你要继承的类，使用表达式而非语句，类名用赋值来设定。</p>
+<p>我们使用比传统更纯粹的形式：让赋值功能从class剥离出来，使用表达式而非语句。</p>
 <p>类的声明方式比较像CoffeeScript。但我们的更严格。我们多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。在Lemo中，类的所有声明的子项都必须是以冒号的形式。</p>
 <p>JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
 <p>getter和setter的例子：</p>
