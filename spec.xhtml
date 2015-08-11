@@ -91,6 +91,16 @@
 ]]></code></pre>
 <p>仍然符合语法。</p>
 <p>除顶级块外所有自由块都有值，若最后一个子语句是表达式，则为该表达式的值，若不是，则为<code>void</code>。</p>
+<p>某行如果属于一条语句，若：</p>
+<ul>
+    <li>该行的结尾部分不能被解析为该语句的结尾部分，或下一行的起始部分不能被解析为另一条语句的起始部分；且</li>
+    <li>下一行的缩进不小于该行的缩进</li>
+</ul>
+<p>则下一行也属于这条语句。例如：</p>
+<pre><code><![CDATA[
+    if x = 5 and
+    y = 5 then aaa()
+]]></code></pre>
 <h2>版本行</h2>
 <p>版本行必须符合如下语法：</p>
 <pre><code><![CDATA[
@@ -108,7 +118,7 @@
     0.1.0, compatible, fast new, node import
     0.1.0, radical, slow new
 ]]></code></pre>
-<p>版本号必须写上。只要你写的版本号不大于安装的Lemo的版本号，代码就会按照该版本的规范来运行，这是因为你安装的任何一个版本的Lemo都包括了（至少我们会尽量包括）所有历史版本的编译器。而这，是Lemo和其他语言的不同之处。</p>
+<p>版本号必须写上。只要你写的版本号不大于安装的Lemo的版本号，该文件就会按照该版本的规范来运行，这是因为你安装的任何一个版本的Lemo都包括了（至少我们会尽量包括）所有历史版本的编译器。而这，是Lemo和其他语言的不同之处。你甚至可以在一个项目中，不同文件使用不同版本。</p>
 <p>写上版本号还有个好处，就是你的代码交给别人时，他就知道代码是什么版本的，从而可以更好地修改代码。</p>
 <p>本文只描述一个版本。</p>
 <p>激进模式和兼容模式的差异是：激进模式只允许单参数的函数（多参数和零参数都不允许），兼容模式没有这个限制。因此：</p>
@@ -582,7 +592,7 @@ message: match <> array.includes(@)
 ]]></code></pre>
 <p>可以看出，即便是模拟传统的<code>switch</code>，依然比<code>switch</code>简洁。</p>
 <h2>循环</h2>
-<p>循环其实并不符合函数式编程的理念，我们没有循环。但提供了内置函数repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。例子：</p>
+<p>循环其实并不符合函数式编程的理念，我们没有循环。但我的mate库提供了全局函数repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。例子：</p>
 <pre><code><![CDATA[
     repeat[10, i ->
         console.log "This is \(i) time"
@@ -601,6 +611,7 @@ message: match <> array.includes(@)
         if abc() then return false
         doSomething()
 ]]></code></pre>
+<p>Mate的地址：https://www.npmjs.com/package/mate</p>
 <h2>类</h2>
 <p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>static</code>、<code>new</code>、<code>me</code>、<code>Me</code>。例子：</p>
 <pre><code><![CDATA[
