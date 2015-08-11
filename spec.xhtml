@@ -60,10 +60,11 @@
     <li>return</li>
     <li>throw</li>
 </ul>
+<p>上面列出的任何一个，都不能在一句语句（不包括子语句）中出现超过一次或相互出现。</p>
 <h2>版本行</h2>
 <p>版本行必须符合如下语法：</p>
 <pre><code><![CDATA[
-    v0.1.0[, (radical | compatible) | (slow new | fast new | manual new) | (node import | node export | node module | es module)]...
+    0.1.0[, (radical | compatible) | (slow new | fast new | manual new) | (node import | node export | node module | es module)]...
 ]]></code></pre>
 <p>默认值为：</p>
 <pre><code><![CDATA[
@@ -71,11 +72,11 @@
 ]]></code></pre>
 <p>版本号后面的以逗号分隔的项不可重复。版本行的例子：</p>
 <pre><code><![CDATA[
-    v0.1.0
-    v0.1.0, node module
-    v0.1.0, compatible, fast new
-    v0.1.0, compatible, fast new, node import
-    v0.1.0, radical, slow new
+    0.1.0
+    0.1.0, node module
+    0.1.0, compatible, fast new
+    0.1.0, compatible, fast new, node import
+    0.1.0, radical, slow new
 ]]></code></pre>
 <p>版本号必须写上。只要你写的版本号不大于安装的Lemo的版本号，代码就会按照该版本的规范来运行，这是因为你安装的任何一个版本的Lemo都包括了（至少我们会尽量包括）所有历史版本的编译器。而这，是Lemo和其他语言的不同之处。</p>
 <p>写上版本号还有个好处，就是你的代码交给别人时，他就知道代码是什么版本的，从而可以更好地修改代码。</p>

@@ -1,4 +1,4 @@
-v0.1.0, node module
+0.1.0, node module
 
 move: <>
     console.log "\(@0) --> \(@1)"
