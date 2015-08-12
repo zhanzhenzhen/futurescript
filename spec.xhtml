@@ -47,7 +47,7 @@
 ]]></code></pre>
 <h2>文件格式与外观</h2>
 <p>后缀名为.lemo。</p>
-<p>Lemo文件的外观：由版本行、语句、注释和无语义空白组成。语句是可以嵌套的，即语句中可以含有语句、注释和无语义空白作为它的“子块”。版本行和语句是有语义的，注释和无语义空白都是无语义的。版本行只能是一行，而且之前不能有语句。</p>
+<p>Lemo文件的外观：由版本行、语句、注释和无语义空白组成。语句是可以嵌套的，即语句中可以含有语句、注释和无语义空白作为它的“子块”。版本行和语句是有语义的，注释和无语义空白都是无语义的。</p>
 <p>有两种语句：表达式语句和命令语句。类似CoffeeScript，在Lemo中，缩进是很重要的，它构成了嵌套。多个并列语句可以通过分号<code>;</code>合并成1行。类似CoffeeScript，单行还可以通过<code>\</code>拆分成多行。</p>
 <p>空行，是指不含有字符的行。</p>
 <p>空白行，是指不含有字符或只含有空白字符的行。</p>
@@ -102,9 +102,9 @@
     y = 5 then aaa()
 ]]></code></pre>
 <h2>版本行</h2>
-<p>版本行必须符合如下语法：</p>
+<p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <pre><code><![CDATA[
-    0.1.0[, (radical | compatible) | (slow new | fast new | manual new) | (node import | node export | node module | es module)]...
+    ... 0.1.0[, (radical | compatible) | (slow new | fast new | manual new) | (node import | node export | node module | es module)]...
 ]]></code></pre>
 <p>默认值为：</p>
 <pre><code><![CDATA[
@@ -113,14 +113,35 @@
 <p>版本号后面的以逗号分隔的项不可重复。版本行的例子：</p>
 <pre><code><![CDATA[
     0.1.0
+    lemo 0.1.0
+    lemo -0.1.0
     0.1.0, node module
     0.1.0, compatible, fast new
     0.1.0, compatible, fast new, node import
     0.1.0, radical, slow new
 ]]></code></pre>
 <p>版本号必须写上。只要你写的版本号不大于安装的Lemo的版本号，该文件就会按照该版本的规范来运行，这是因为你安装的任何一个版本的Lemo都包括了（至少我们会尽量包括）所有历史版本的编译器。而这，是Lemo和其他语言的不同之处。你甚至可以在一个项目中，不同文件使用不同版本。</p>
-<p>写上版本号还有个好处，就是你的代码交给别人时，他就知道代码是什么版本的，从而可以更好地修改代码。</p>
+<p>写上版本号还有个好处，就是你把某个文件交给别人时，他就知道文件是什么版本的，从而可以更好地修改。</p>
 <p>本文只描述一个版本。</p>
+<p>当你想把版本行写成多行时，版本号后面要加上括号，版本号和括号之间可以有逗号，也可以没有逗号。括号之前还可以有<code>\</code>，也可以没有<code>\</code>。逗号的位置在<code>\</code>之前。例如：</p>
+<pre><code><![CDATA[
+    0.1.0 (
+        radical
+        node module
+    )
+]]></code></pre>
+<p>多行应用于Shebang的例子（在Shebang中要加选项的话多行是必须的）：</p>
+<pre><code><![CDATA[
+    #!node lemo -0.1.0 \(
+        radical
+        node module
+    )
+]]></code></pre>
+<p>单行应用于Shebang的例子：</p>
+<pre><code><![CDATA[
+    #!node lemo -0.1.0
+]]></code></pre>
+<p>版本号前面不加任何字符是合法的，然而我们推荐加上<code>lemo</code>和一个空格。这对编译器没有任何作用，但对你的文本编辑器就有作用了，因为这样它就能正确判断应该使用哪个语法包，使代码呈现彩色。</p>
 <p>激进模式和兼容模式的差异是：激进模式只允许单参数的函数（多参数和零参数都不允许），兼容模式没有这个限制。因此：</p>
 <p>激进模式中，定义或调用零参数的函数会实际使用单参数<code>void</code>（即JavaScript的<code>undefined</code>）。但兼容模式中，定义或调用零参数的函数会实际使用零参数。例如：激进模式中，<code>a()</code>会被编译成<code>a(undefined)</code>。兼容模式中，<code>a()</code>会被编译成<code>a()</code>。</p>
 <p>激进模式中，定义或调用多参数的函数会出错。但兼容模式中，不会出错。</p>

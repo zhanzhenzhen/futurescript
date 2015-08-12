@@ -3,19 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>name</key>
-    <string>Lemo</string>
+    <string>Lemo h1</string>
     <key>scopeName</key>
-    <string>source.lemo</string>
+    <string>source.lemo.h1</string>
     <key>uuid</key>
     <string>A9F44CBB-014C-42C2-A275-4E53162D69D4</string>
-	<key>comment</key>
-	<string>Lemo</string>
-	<key>fileTypes</key>
-	<array>
-		<string>lemo</string>
-	</array>
 	<key>firstLineMatch</key>
-	<string>^#!.*\blemo</string>
+	<string>\blemo\b.*\b((0|1|2)\.\d*\.\d*)\b</string>
 	<key>foldingStartMarker</key>
 	<string>^\s*class\s+\S.*$|.*(-&gt;|&lt;&gt;)\s*$|.*[\[{]\s*$</string>
 	<key>foldingStopMarker</key>
@@ -24,20 +18,34 @@
 	<string>^~L</string>
 	<key>patterns</key>
 	<array>
+        <dict>
+            <key>name</key>
+            <string>meta.lemo.h1</string>
+            <key>match</key>
+            <string>^.*\blemo\b.*\b(\d*\.\d*\.\d*)\b[^\(]*$</string>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>meta.lemo.h1</string>
+            <key>begin</key>
+            <string>^.*\blemo\b.*\b(\d*\.\d*\.\d*)\b\s*\,?\s*\\?\(\s</string>
+            <key>end</key>
+            <string>\).*$</string>
+        </dict>
 		<dict>
             <key>contentName</key>
-            <string>string.quoted.double.lemo</string>
+            <string>string.quoted.double.lemo.h1</string>
 			<key>begin</key>
-			<string>"""</string>
+			<string>\w*"""</string>
 			<key>end</key>
-			<string>"""</string>
+			<string>"""\w*</string>
 			<key>patterns</key>
 			<array>
 				<dict>
                     <key>match</key>
                     <string>\\(x..|u....|[^xu(])</string>
                     <key>name</key>
-                    <string>constant.character.escape.lemo</string>
+                    <string>constant.character.escape.lemo.h1</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -47,18 +55,18 @@
 		</dict>
         <dict>
             <key>contentName</key>
-            <string>string.quoted.double.lemo</string>
+            <string>string.quoted.double.lemo.h1</string>
             <key>begin</key>
-            <string>"</string>
+            <string>\w*"</string>
             <key>end</key>
-            <string>"</string>
+            <string>"\w*</string>
             <key>patterns</key>
             <array>
                 <dict>
                     <key>match</key>
                     <string>\\(x..|u....|[^xu(])</string>
                     <key>name</key>
-                    <string>constant.character.escape.lemo</string>
+                    <string>constant.character.escape.lemo.h1</string>
                 </dict>
                 <dict>
                     <key>include</key>
@@ -68,15 +76,7 @@
         </dict>
 		<dict>
             <key>name</key>
-            <string>meta.normal.lemo</string>
-			<key>begin</key>
-			<string>`</string>
-			<key>end</key>
-			<string>`</string>
-		</dict>
-		<dict>
-            <key>name</key>
-            <string>comment.block.lemo</string>
+            <string>comment.block.lemo.h1</string>
 			<key>begin</key>
 			<string>(?&lt;!#)###(?!#)</string>
             <key>end</key>
@@ -84,7 +84,7 @@
 		</dict>
 		<dict>
             <key>name</key>
-            <string>comment.line.number-sign.lemo</string>
+            <string>comment.line.number-sign.lemo.h1</string>
 			<key>begin</key>
 			<string>#</string>
             <key>end</key>
@@ -92,7 +92,7 @@
 		</dict>
 		<dict>
             <key>name</key>
-            <string>keyword.control.lemo</string>
+            <string>keyword.control.lemo.h1</string>
 			<key>match</key>
 			<string>(?x)
 				\b(?&lt;![\.\$])(
@@ -104,7 +104,7 @@
 		</dict>
 		<dict>
             <key>name</key>
-            <string>keyword.operator.lemo</string>
+            <string>keyword.operator.lemo.h1</string>
 			<key>match</key>
 			<string>(?x)
                 \+ | -(?!&gt;) | \* | / | \*\* | = | /= | &lt;(?!&gt;) | (?&lt;!&lt;)&gt; |
@@ -114,13 +114,13 @@
 		</dict>
         <dict>
             <key>name</key>
-            <string>storage.type.function.lemo</string>
+            <string>storage.type.function.lemo.h1</string>
             <key>match</key>
             <string>-&gt;|&lt;&gt;</string>
         </dict>
         <dict>
             <key>name</key>
-            <string>storage.type.class.lemo</string>
+            <string>storage.type.class.lemo.h1</string>
             <key>match</key>
             <string>\b(?&lt;![\.\$])class(?!\s*:)\b</string>
         </dict>
@@ -133,7 +133,7 @@
 			<array>
 				<dict>
                     <key>name</key>
-                    <string>source.lemo.embedded.source</string>
+                    <string>source.lemo.h1.embedded.source</string>
 					<key>begin</key>
 					<string>\\\(</string>
                     <key>end</key>
@@ -143,7 +143,7 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.embedded.lemo</string>
+							<string>punctuation.section.embedded.lemo.h1</string>
 						</dict>
 					</dict>
 					<key>patterns</key>
