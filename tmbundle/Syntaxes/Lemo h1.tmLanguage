@@ -101,6 +101,8 @@
                     static|super|then|throw|try
 				)(?!\s*:)\b
 			</string>
+            <key>comment</key>
+            <string>"from" should only be bound with "class". This implementation is not accurate. But it's hard to make it accurate.</string>
 		</dict>
 		<dict>
             <key>name</key>
