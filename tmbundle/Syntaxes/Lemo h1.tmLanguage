@@ -28,7 +28,7 @@
             <key>name</key>
             <string>meta.lemo.h1</string>
             <key>begin</key>
-            <string>^.*\blemo\b.*\b(\d+\.\d+\.\d+)\b\s*\,?\s*\\?\(\s</string>
+            <string>^.*\blemo\b.*\b(\d+\.\d+\.\d+)\b\s*\,?\s*\\?\(</string>
             <key>end</key>
             <string>\).*$</string>
         </dict>
