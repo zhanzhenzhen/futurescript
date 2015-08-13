@@ -96,7 +96,7 @@
 			<key>match</key>
 			<string>(?x)
 				\b(?&lt;![\.\$])(
-                    above|and|as|catch|delete|do|else|export|finally|
+                    above|and|as|catch|delete|do|else|export|finally|from|
                     if|import|in|is|isnt|match|mod|new|nonew|not|or|rem|return|
                     static|super|then|throw|try
 				)(?!\s*:)\b
