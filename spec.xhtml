@@ -622,14 +622,14 @@ message: match <> array.includes(@)
 <p>迭代器返回<code>false</code>则表示跳出循环，相当于JS的<code>break</code>：</p>
 <pre><code><![CDATA[
     repeat[10, i ->
-        if i > 5 then return false
+        if i > 5 return false
         console.log "This is \(i) time"
     ]
 ]]></code></pre>
 <p>不设次数则表示永远，相当于JS的<code>while (true)</code>：</p>
 <pre><code><![CDATA[
     repeat ->
-        if abc() then return false
+        if abc() return false
         doSomething()
 ]]></code></pre>
 <p>Mate的地址：https://www.npmjs.com/package/mate</p>
