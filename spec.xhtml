@@ -132,16 +132,16 @@
 ]]></code></pre>
 <p>多行应用于Shebang的例子（在Shebang中要加选项的话多行是必须的）：</p>
 <pre><code><![CDATA[
-    #!node lemo -0.1.0 \(
+    #!/usr/bin/env node node_modules/lemo/bin/lemo -0.1.0 \(
         radical
         node module
     )
 ]]></code></pre>
 <p>单行应用于Shebang的例子：</p>
 <pre><code><![CDATA[
-    #!node lemo -0.1.0
+    #!/usr/bin/env node node_modules/lemo/bin/lemo -0.1.0
 ]]></code></pre>
-<p>版本号前面不加任何字符是合法的，然而我们推荐加上<code>lemo</code>和一个空格。这对编译器没有任何作用，但对你的文本编辑器就有作用了，因为这样它就能正确判断应该使用哪个语法包，使代码呈现彩色。</p>
+<p>版本号前面不加任何字符是合法的，然而我们推荐加上<code>lemo</code>。这对编译器没有任何作用，但对你的文本编辑器就有作用了，因为这样它就能判断应该使用哪个语法包，使代码呈现正确的彩色。</p>
 <p>激进模式和兼容模式的差异是：激进模式只允许单参数的函数（多参数和零参数都不允许），兼容模式没有这个限制。因此：</p>
 <p>激进模式中，定义或调用零参数的函数会实际使用单参数<code>void</code>（即JavaScript的<code>undefined</code>）。但兼容模式中，定义或调用零参数的函数会实际使用零参数。例如：激进模式中，<code>a()</code>会被编译成<code>a(undefined)</code>。兼容模式中，<code>a()</code>会被编译成<code>a()</code>。</p>
 <p>激进模式中，定义或调用多参数的函数会出错。但兼容模式中，不会出错。</p>
