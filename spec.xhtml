@@ -145,8 +145,9 @@
 ]]></code></pre>
 <p>当文件的后缀名不是.lemo或没有后缀名时，版本号前必须有<code>lemo</code>。当文件的后缀名是.lemo时，不必须，然而我们推荐加上<code>lemo</code>，因为对你的文本编辑器有用，方便它判断应该使用哪个语法包，使代码呈现正确的彩色。</p>
 <p>激进模式和兼容模式的差异是：激进模式只允许单参数的函数（多参数和零参数都不允许），兼容模式没有这个限制。因此：</p>
+<p>激进模式中，<code>@</code>表示JS的<code>arguments[0]</code>。兼容模式中，<code>@</code>表示JS的<code>arguments</code>。</p>
 <p>激进模式中，定义或调用零参数的函数会实际使用单参数<code>void</code>（即JavaScript的<code>undefined</code>）。但兼容模式中，定义或调用零参数的函数会实际使用零参数。例如：激进模式中，<code>a()</code>会被编译成<code>a(undefined)</code>。兼容模式中，<code>a()</code>会被编译成<code>a()</code>。</p>
-<p>激进模式中，定义或调用多参数的函数会出错。但兼容模式中，不会出错。</p>
+<p>激进模式中，定义或调用多参数的函数会产生编译错误。但兼容模式中，不会出错。</p>
 <p>激进模式中，管道操作符把数组单参数分隔为两部分，而兼容模式中管道操作符把所有参数分隔为两部分。</p>
 <p>激进模式中，<code>'</code>只能是二元的，而兼容模式中<code>'</code>还可以是一元的。</p>
 <p>下文中，为求简便，如果写道“无参数”，也可指激进模式中的参数为<code>void</code>的情形。</p>
@@ -180,7 +181,7 @@
 <pre><code><![CDATA[
     a: [x, y] -> x * y
 ]]></code></pre>
-<p>兼容模式中，<code>@</code>表示JS的<code>arguments</code>。激进模式中，<code>@</code>表示JS的<code>arguments[0]</code>。它是如此简便，在许多情况下，你会喜欢不带参数名。例如，兼容模式中我们可以写：</p>
+<p><code>@</code>取代了JS的<code>arguments</code>（兼容模式下），它是如此简便，在许多情况下，你会喜欢不带参数名。例如，我们可以写：</p>
 <pre><code><![CDATA[
     add: <> @0 + @1
     console.log add(2, 3) # output 5
