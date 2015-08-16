@@ -131,28 +131,38 @@
 <p>6. 解析失败并退出。</p>
 <p>缩进的规则很适合用来表示一些复杂的语句。例如，你既可以这样写：</p>
 <pre><code><![CDATA[
-text: "This is a dog."
-speak: match (<>
-    s = @toLowerCase()
-    text.includes(s)
-)
-    "cat" ? "meow"
-    "dog" ? "woof"
-    |       "unknown"
-# speak is "woof"
+    text: "This is a dog."
+    speak: match (<>
+        s = @toLowerCase()
+        text.includes(s)
+    )
+        "cat" ? "meow"
+        "dog" ? "woof"
+        |       "unknown"
+    # speak is "woof"
 ]]></code></pre>
 <p>又可以这样写：</p>
 <pre><code><![CDATA[
-text: "This is a dog."
-speak: match <>
-        s = @toLowerCase()
-        text.includes(s)
-    "cat" ? "meow"
-    "dog" ? "woof"
-    |       "unknown"
-# speak is "woof"
+    text: "This is a dog."
+    speak: match <>
+            s = @toLowerCase()
+            text.includes(s)
+        "cat" ? "meow"
+        "dog" ? "woof"
+        |       "unknown"
+    # speak is "woof"
 ]]></code></pre>
 <p>它们是等价的。<code>match</code>下面的两个块不互相隶属，但都属于<code>match</code>。</p>
+<p>和CoffeeScript有一点不同，如下代码：</p>
+<pre><code><![CDATA[
+    a.b aaa
+    .c()
+]]></code></pre>
+<p>CoffeeScript编译成<code>a.b(aaa).c()</code>，但我们还是按常规编译成<code>a.b(aaa.c())</code>。如果你想要达到CoffeeScript的效果，要加上括号：</p>
+<pre><code><![CDATA[
+    a.b(aaa)
+    .c()
+]]></code></pre>
 <h2>版本行</h2>
 <p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <pre><code><![CDATA[
@@ -570,73 +580,73 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>这个称为数组模式。它不是简单地比较两个数组是否相等（那样会始终不相等，因为不是同一个引用），而是检查数组（直接，非嵌套）中每个元素是否相等。当模式以<code>[</code>开头时，适用数组模式。注意一定要直接写出<code>[</code>，绝不能用变量替代，像这样是没用的：</p>
 <pre><code><![CDATA[
-a: [0, 0]
-b: [0, 1]
-c: [4, 5]
-chessBoard: (pos) -> match [pos.x, pos.y]
-    a ? "king"
-    b ? "pawn"
-    c ? "queen"
-    |   "empty"
-piece: chessBoard {x: 4, y: 5} # will be "empty"
+    a: [0, 0]
+    b: [0, 1]
+    c: [4, 5]
+    chessBoard: (pos) -> match [pos.x, pos.y]
+        a ? "king"
+        b ? "pawn"
+        c ? "queen"
+        |   "empty"
+    piece: chessBoard {x: 4, y: 5} # will be "empty"
 ]]></code></pre>
 <p>模式匹配中的“比较”默认是用<code>=</code>，还可以用其他比较运算符，例如：</p>
 <pre><code><![CDATA[
-message: match statusCode <
-    100 ? "unsupported"
-    200 ? "informational"
-    300 ? "success"
-    400 ? "redirect"
-    500 ? "client error"
-    600 ? "server error"
-    |     "unsupported"
+    message: match statusCode <
+        100 ? "unsupported"
+        200 ? "informational"
+        300 ? "success"
+        400 ? "redirect"
+        500 ? "client error"
+        600 ? "server error"
+        |     "unsupported"
 ]]></code></pre>
 <p><code>else</code>可以跟前面的并在一起，此时用<code>or else</code>，但该项不能有<code>then</code>。在模式中，<code>or</code>这个关键字若不作为运算符使用，可以简写为逗号<code>,</code>，所以上面的例子可以写成：</p>
 <pre><code><![CDATA[
-message: match statusCode <
-    100, | "unsupported"
-    200  ? "informational"
-    300  ? "success"
-    400  ? "redirect"
-    500  ? "client error"
-    600  ? "server error"
+    message: match statusCode <
+        100, | "unsupported"
+        200  ? "informational"
+        300  ? "success"
+        400  ? "redirect"
+        500  ? "client error"
+        600  ? "server error"
 ]]></code></pre>
 <p>用<code>or else</code>的时候<code>or</code>还可以省略，所以还可以写成：</p>
 <pre><code><![CDATA[
-message: match statusCode <
-    100 | "unsupported"
-    200 ? "informational"
-    300 ? "success"
-    400 ? "redirect"
-    500 ? "client error"
-    600 ? "server error"
+    message: match statusCode <
+        100 | "unsupported"
+        200 ? "informational"
+        300 ? "success"
+        400 ? "redirect"
+        500 ? "client error"
+        600 ? "server error"
 ]]></code></pre>
 <p>不但可以用比较运算符，还可以自定义比较函数，例如：</p>
 <pre><code><![CDATA[
-text: "This is a dog."
-speak: match <> text.includes(@)
-    "cat" ? "meow"
-    "dog" ? "woof"
-    |       "unknown"
-# speak is "woof"
+    text: "This is a dog."
+    speak: match <> text.includes(@)
+        "cat" ? "meow"
+        "dog" ? "woof"
+        |       "unknown"
+    # speak is "woof"
 ]]></code></pre>
 <p>当<code>match</code>后紧接的是函数时，则被识别成自定义比较函数。要直接写出<code>-&gt;</code>或<code>&lt;&gt;</code>，绝不能用变量替代，这一点和数组模式相似。</p>
 <p>还有or模式和and模式。or模式我们会经常用到，例如：</p>
 <pre><code><![CDATA[
-day: "Tue"
-action: match day
-    "Sat", "Sun" ? "have a rest"
-    |              "work"
+    day: "Tue"
+    action: match day
+        "Sat", "Sun" ? "have a rest"
+        |              "work"
 ]]></code></pre>
 <p>and模式则不常用，但也有例子：</p>
 <pre><code><![CDATA[
-array: ["a", "c", "b", "d"]
-message: match <> array.includes(@)
-    "a" and "b" and "c" ? "The array includes all of the first 3 letters."
-    "a"                 ? "The array includes a."
-    "b"                 ? "The array includes b."
-    "c"                 ? "The array includes c."
-    |                     "The array doesn't include any of the first 3 letters."
+    array: ["a", "c", "b", "d"]
+    message: match <> array.includes(@)
+        "a" and "b" and "c" ? "The array includes all of the first 3 letters."
+        "a"                 ? "The array includes a."
+        "b"                 ? "The array includes b."
+        "c"                 ? "The array includes c."
+        |                     "The array doesn't include any of the first 3 letters."
 ]]></code></pre>
 <p>由此可知，or和and作为运算符在模式中使用是有限制的，它作为运算符时必须出现在括号内，否则会被认为是模式。所以真的有这个需求的话，要用个括号包起来。不过这两个运算符出现在模式中好像也没有什么用。</p>
 <p>作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
@@ -1279,5 +1289,7 @@ message: match <> array.includes(@)
 <p>答：其实也没那么恐怖，我们在做Lemo的时候会采取一些手段，使增量不那么大。</p>
 <p>问：真的所有旧版本的编译器都包括吗？</p>
 <p>答：我们尽量包括。但如果我们发现某个旧版本有安全漏洞，那么我们则会删掉。若不存在与代码相同版本的编译器，编译的时候会出现警告，同时会自动用新版本的编译器编译。</p>
+<p>问：CoffeeScript链式调用不用加括号，这里为啥要加括号？</p>
+<p>答：CoffeeScript其实是硬生生加了条规则，这会破坏语法的统一，而且虽然在一部分需求中更简洁了，但当有另一部分需求的时候却更复杂了。所以我决定不用这套方法。</p>
 </body>
 </html>
