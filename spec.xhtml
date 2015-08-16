@@ -93,16 +93,66 @@
 ]]></code></pre>
 <p>仍然符合语法。<code>aaa()</code>是<code>if</code>语句的子语句，没有“块”这一层。</p>
 <p>语句块都是从上往下执行。除顶级块外所有语句块都有值，若最后一个子语句是表达式，则为该表达式的值，若不是，则为<code>void</code>。</p>
-<p>某行如果属于一条语句，若：</p>
-<ul>
-    <li>该行的结尾部分不能被解析为该语句的结尾部分，或下一行的起始部分不能被解析为另一条语句的起始部分；且</li>
-    <li>下一行的缩进不小于该行的缩进</li>
-</ul>
-<p>则下一行也属于这条语句。例如：</p>
+<h2>缩进</h2>
+<p>对于某一行B，它的缩进的效果是什么？依顺序做下面的步骤：</p>
+<p>1. 相邻强制连接：若上一行A以<code>\</code>结尾，则执行：无论缩进如何，该行被解析为犹如连接到上一行末尾并跳到5，若无法解析则跳到6。</p>
+<p>2. 并列：若上面存在一行A，满足B的缩进等于A的缩进，且A和B之间无其他行或A和B之间的所有行的缩进都大于B的缩进，则执行：A和B的起始部分被解析为并列关系并跳到5，若无法解析则跳到3。</p>
+<p>3. 层级：若上面存在一行A，满足B的缩进大于A的缩进，且A和B之间无其他行或A和B之间的所有行的缩进都大于B的缩进，则执行：A和B的起始部分被解析为层级关系并跳到5，若无法解析则跳到4。</p>
+<p>4. 连接：若上面存在一行A，满足B的缩进不小于A的缩进，且A和B之间无其他行或A和B之间的所有行的缩进都大于B的缩进，则执行：B被解析为犹如连到A的末尾所属语句的末尾并跳到5，若无法解析则跳到6。例如：</p>
 <pre><code><![CDATA[
     if x = 5 and
     y = 5 then aaa()
 ]]></code></pre>
+<p>或：</p>
+<pre><code><![CDATA[
+    if x = 5
+    and y = 5 then aaa()
+]]></code></pre>
+<p>或：</p>
+<pre><code><![CDATA[
+    if x = 5 and
+        y = 5 then aaa()
+]]></code></pre>
+<p>都等价于：</p>
+<pre><code><![CDATA[
+    if x = 5 and y = 5 then aaa()
+]]></code></pre>
+<p>又例如：</p>
+<pre><code><![CDATA[
+    a.b <>
+        aaa()
+    .c()
+]]></code></pre>
+<p>等价于：</p>
+<pre><code><![CDATA[
+    a.b(<> aaa()).c()
+]]></code></pre>
+<p>5. 成功解析。</p>
+<p>6. 无法解析。</p>
+<p>缩进的规则很适合用来表示一些复杂的语句。例如，这种“标准”形式是用括号的，你可能觉得不太好看：</p>
+<pre><code><![CDATA[
+text: "This is a dog."
+speak: match (<>
+    s = @toLowerCase()
+    text.includes(s)
+)
+    "cat" ? "meow"
+    "dog" ? "woof"
+    |       "unknown"
+# speak is "woof"
+]]></code></pre>
+<p>我们可以改写成：</p>
+<pre><code><![CDATA[
+text: "This is a dog."
+speak: match <>
+        s = @toLowerCase()
+        text.includes(s)
+    "cat" ? "meow"
+    "dog" ? "woof"
+    |       "unknown"
+# speak is "woof"
+]]></code></pre>
+<p><code>match</code>下面的两个块不互相隶属，但都属于<code>match</code>。</p>
 <h2>版本行</h2>
 <p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <pre><code><![CDATA[
@@ -571,18 +621,6 @@ speak: match <> text.includes(@)
 # speak is "woof"
 ]]></code></pre>
 <p>当<code>match</code>后紧接的是函数时，则被识别成自定义比较函数。要直接写出<code>-&gt;</code>或<code>&lt;&gt;</code>，绝不能用变量替代，这一点和数组模式相似。</p>
-<p>多行函数要加括号，例如：</p>
-<pre><code><![CDATA[
-text: "This is a dog."
-speak: match (<>
-    s = @toLowerCase()
-    text.includes(s)
-)
-    "cat" ? "meow"
-    "dog" ? "woof"
-    |       "unknown"
-# speak is "woof"
-]]></code></pre>
 <p>还有or模式和and模式。or模式我们会经常用到，例如：</p>
 <pre><code><![CDATA[
 day: "Tue"
