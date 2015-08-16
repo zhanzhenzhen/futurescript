@@ -129,7 +129,7 @@
 ]]></code></pre>
 <p>5. 成功解析。</p>
 <p>6. 无法解析。</p>
-<p>缩进的规则很适合用来表示一些复杂的语句。例如，这种“标准”形式是用括号的，你可能觉得不太好看：</p>
+<p>缩进的规则很适合用来表示一些复杂的语句。例如，你既可以这样写：</p>
 <pre><code><![CDATA[
 text: "This is a dog."
 speak: match (<>
@@ -141,7 +141,7 @@ speak: match (<>
     |       "unknown"
 # speak is "woof"
 ]]></code></pre>
-<p>我们可以改写成：</p>
+<p>又可以这样写：</p>
 <pre><code><![CDATA[
 text: "This is a dog."
 speak: match <>
@@ -152,7 +152,7 @@ speak: match <>
     |       "unknown"
 # speak is "woof"
 ]]></code></pre>
-<p><code>match</code>下面的两个块不互相隶属，但都属于<code>match</code>。</p>
+<p>它们是等价的。<code>match</code>下面的两个块不互相隶属，但都属于<code>match</code>。</p>
 <h2>版本行</h2>
 <p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <pre><code><![CDATA[
