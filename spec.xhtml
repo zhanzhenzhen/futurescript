@@ -962,27 +962,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         eee: 1
 ]]></code></pre>
 <p>这时<code>&lt;&lt;</code>和<code>&gt;&gt;</code>的威力就体现出来了。<code>&lt;&lt;</code>表示接下去的代码缩进一级，<code>&gt;&gt;</code>表示还原。</p>
-<p>再举一例：</p>
-<pre><code><![CDATA[
-    if a << if b << if c
-        aaa()
-        bbb()
-    >> >>
-]]></code></pre>
-<p>就等价于：</p>
-<pre><code><![CDATA[
-    if a
-        if b
-            if c
-                aaa()
-                bbb()
-]]></code></pre>
-<p>我们甚至可以把尾部的<code>&gt;&gt;</code>省略掉，同样是合法的：</p>
-<pre><code><![CDATA[
-    if a << if b << if c
-        aaa()
-        bbb()
-]]></code></pre>
+<p><code>&lt;&lt;</code>和<code>&gt;&gt;</code>必须在1行内结束。也就是说，只能把多行合并成1行，无法把多行合并成2行。</p>
 <p>这两个符号和分号结合使用很方便，各司其职，分号用来合并并列的语句，这两个符号用来合并有层级的语句。</p>
 <h2>关键字</h2>
 <p>关键字不能作为变量名。</p>
