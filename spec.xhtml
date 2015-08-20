@@ -927,6 +927,21 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p><code>delete</code>和JavaScript中的稍有不同。它不再是一个表达式。这是因为在JavaScript strict mode中并没有值为false的情况，而是抛出异常。既然我们都是用strict mode，所以没必要弄成表达式。</p>
 <h2>rem和mod</h2>
 <p><code>rem</code>即是JavaScript的<code>%</code>。<code>mod</code>是另一种求余，正负号和除数相同，只要除数是正数，结果就不为负，所以这种求余适用范围可能更广一些。<code>a mod b</code>相当于JavaScript的<code>(a % b + b) % b</code>。</p>
+<h2>+和-（正负号）</h2>
+<p>一元的<code>+</code>、<code>-</code>（正负号）的用法和CoffeeScript相似但有微小区别，我们规定它只能是紧接着算元，如果有空格则被当作加号和减号。例如：</p>
+<pre><code><![CDATA[
+    # a is 5. `-2` can't be connected because it is a valid statement.
+    # To connect, either add a space or move the `-` to the first line
+    a: 5
+    -2
+
+    # a is 5-2=3
+    a: 5
+    - 2
+
+    a: -1 # valid
+    a: - 1 # invalid
+]]></code></pre>
 <h2>do</h2>
 <p><code>do</code>关键字的用法和CoffeeScript完全相同。</p>
 <h2>注释</h2>
