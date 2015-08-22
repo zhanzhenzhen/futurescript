@@ -356,13 +356,52 @@
 <p>要注意，上面两个例子中<code>as</code>和上面的函数并不是两个并列的语句，而是一个语句。语句不能以<code>as</code>或<code>above as</code>开头。</p>
 <h2>模块</h2>
 <p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
+<pre><code><![CDATA[
+    main: import "lib"
+]]></code></pre>
+<p>或</p>
+<pre><code><![CDATA[
+    import "lib" as main
+]]></code></pre>
+<p>都是指导入ES6中的“默认导出”，等同于JS的</p>
+<pre><code><![CDATA[
+    import main from "lib";
+]]></code></pre>
+<p>还可以导入所有的“命名导出”：</p>
+<pre><code><![CDATA[
+    lib: import "lib" all
+]]></code></pre>
+<p>或</p>
+<pre><code><![CDATA[
+    import "lib" all as lib
+]]></code></pre>
+<p>相当于JS的</p>
+<pre><code><![CDATA[
+    import * as lib from "lib";
+]]></code></pre>
+<p>还可以导入指定的“命名导出”：</p>
+<pre><code><![CDATA[
+    {fun1, fun2 as f2}: import "lib"
+]]></code></pre>
+<p>或</p>
+<pre><code><![CDATA[
+    import "lib" as {fun1, fun2 as f2}
+]]></code></pre>
+<p>相当于JS的</p>
+<pre><code><![CDATA[
+    import {fun1, fun2 as f2} from "lib";
+]]></code></pre>
+<p>不支持在一个语句里同时导入“默认导出”和“命名导出”，有此需求请分两个语句。我认为一个模块既有“默认导出”又有“命名导出”并不好。</p>
+<p>注意，其实上面的一些例子利用了<code>all</code>在用大括号的情况下可省略的特性。如果要写全，应该是：</p>
+<pre><code><![CDATA[
+    {fun1, fun2 as f2}: import "lib" all
+    import "lib" all as {fun1, fun2 as f2}
+]]></code></pre>
 <p><code>import</code>后面只能跟简单字符串（可以包含转义符，但不可以是经计算的）。这些都是正确的语法：</p>
 <pre><code><![CDATA[
     import "./abc" as abc
     abc: import "./abc"
     import "abc"
-    aaa: import "./abc.js".aaa()
-    aaa: import("abc").aaa()
     import("\u0041")
 ]]></code></pre>
 <p>这些是错误的语法：</p>
@@ -398,8 +437,8 @@
     export multiply: <> @0 * @1
     obj.multiply'export: <> @0 * @1
 ]]></code></pre>
-<p>当语句以<code>export</code>开头，且<code>export</code>后除了一个表达式再无其他时，表示总的导出，类似于node中的<code>module.exports = ...</code>。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则必须产生编译错误。</p>
-<p>不同于ES6，Lemo中的导入和导出不是必须出现在顶层。在任何地方出现，编译器会自动把导入编译到代码顶端，把导出编译到代码底端。但从内部原理来看，我们的模块导入导出还是基于ES6的，例如我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃Lemo的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
+<p>当语句以<code>export</code>开头，且<code>export</code>后除了一个表达式再无其他时，表示ES6中的“默认导出”。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则必须产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，Lemo支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
+<p>导入和导出必须出现在顶层，因为这是基于ES6的。我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃Lemo的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
 <h2>字符串、正则表达式</h2>
 <p>字符串受CoffeeScript启发，不同之处在于不用单引号、增加了支持原义字符串、不支持简单字符串的多行自动连接。</p>
 <p>简单字符串：</p>
@@ -1309,7 +1348,9 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>答：其实也没那么恐怖，我们在做Lemo的时候会采取一些手段，使增量不那么大。</p>
 <p>问：真的所有旧版本的编译器都包括吗？</p>
 <p>答：我们尽量包括。但如果我们发现某个旧版本有安全漏洞，那么我们则会删掉。若不存在与代码相同版本的编译器，编译的时候会出现警告，同时会自动用新版本的编译器编译。</p>
-<p>问：CoffeeScript链式调用不用加括号，这里为啥要加括号？</p>
+<p>问：CoffeeScript多行链式（chaining）方法调用不用加括号，这里为啥要加括号？</p>
 <p>答：CoffeeScript其实是硬生生加了条规则，这会破坏语法的统一，而且虽然在一部分需求中更简洁了，但当有另一部分需求的时候却更复杂了。所以我决定不用这套方法。</p>
+<p>问：为啥一个模块既有“默认导出”又有“命名导出”不好？</p>
+<p>答：你完全可以分两个模块，或者给“默认导出”取个非default的名字（事实上“默认导出”的确是“命名导出”的一部分，名字是default）。</p>
 </body>
 </html>
