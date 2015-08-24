@@ -412,6 +412,7 @@
     import """abc"""
     import v"abc"
 ]]></code></pre>
+<p><code>import</code>的赋值不是普通的赋值，它是“绑定”的，和ES6一样。所以，语法上有限制，它只能是赋给变量，不能赋给对象属性，也不能用<code>'</code>。</p>
 <p>导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些都是正确的语法：</p>
 <pre><code><![CDATA[
     multiply'export: <> @0 * @1
