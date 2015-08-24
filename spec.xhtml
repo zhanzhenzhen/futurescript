@@ -223,7 +223,7 @@
 <p>编译后的代码是strict mode。</p>
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
 <h2>函数</h2>
-<p>函数的声明有2种方式：<code>-&gt;</code>和<code>&lt;&gt;</code>。<code>&lt;&gt;</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
+<p>函数的声明有3种方式：<code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>。<code>&lt;&gt;</code>和<code>--</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
 <pre><code><![CDATA[
     # both are valid
     a: x -> x + 1
@@ -232,6 +232,7 @@
 <p>如果没有参数，那么必须使用如下一种：</p>
 <pre><code><![CDATA[
     a: <> Math.random()
+    a: -- Math.random()
     a: () -> Math.random()
 ]]></code></pre>
 <p>兼容模式允许多参数，但必须要有括号：</p>
@@ -242,7 +243,8 @@
 <pre><code><![CDATA[
     a: [x, y] -> x * y
 ]]></code></pre>
-<p><code>@</code>取代了JS的<code>arguments</code>（兼容模式下），它是如此简便，在许多情况下，你会喜欢不带参数名。例如，我们可以写：</p>
+<p>激进模式不支持多参数，如果你想达到多参数的效果怎么办？就可以采用上面例子的方式。注意，当传递的参数不是数组时（例如是<code>void</code>），或者传递的参数个数为零时，它不会出错，而是将x和y都设为<code>void</code>。</p>
+<p>在<code>&lt;&gt;</code>函数内部，可以使用<code>@</code>。<code>@</code>取代了JS的<code>arguments</code>（兼容模式下）或<code>arguments[0]</code>（激进模式下），它是如此简便，在许多情况下，你会喜欢不带参数名。例如，我们可以写：</p>
 <pre><code><![CDATA[
     add: <> @0 + @1
     console.log add(2, 3) # output 5
@@ -256,14 +258,39 @@
 <pre><code><![CDATA[
     a: (x: 0, y: 0) -> x * y
 ]]></code></pre>
-<p>甚至冒号前面的变量名也可以省略，所以上面的例子也等同于：</p>
-<pre><code><![CDATA[
-    a: (:0, :0) -> @0 * @1
-]]></code></pre>
-<p>也等同于：</p>
-<pre><code><![CDATA[
-    a: ('ifvoid: 0, 'ifvoid: 0) -> @0 * @1
-]]></code></pre>
+<p><code>&lt;&gt;</code>和<code>--</code>的区别是：<code>&lt;&gt;</code>只是没有形参，<code>--</code>是既没形参也没实参，当然严格来讲可以传递实参，但不会有任何效果，因为<code>--</code>没有定义<code>@</code>。<code>--</code>里面可以出现<code>@</code>，但是是指外层<code>&lt;&gt;</code>函数的<code>@</code>。</p>
+<table>
+    <tr>
+        <th></th>
+        <th>-&gt;</th>
+        <th>&lt;&gt;</th>
+        <th>--</th>
+    </tr>
+    <tr>
+        <td>形参</td>
+        <td>有</td>
+        <td>无</td>
+        <td>无</td>
+    </tr>
+    <tr>
+        <td>@</td>
+        <td>无</td>
+        <td>有</td>
+        <td>无</td>
+    </tr>
+    <tr>
+        <td>功能</td>
+        <td>较多</td>
+        <td>最多，可以模拟其他两个</td>
+        <td>少</td>
+    </tr>
+    <tr>
+        <td>简洁</td>
+        <td>较简洁</td>
+        <td>通常很简洁，但有时不简洁</td>
+        <td>很简洁</td>
+    </tr>
+</table>
 <p>函数的调用有4种表示法：空格、小括号、中括号、大括号。</p>
 <pre><code><![CDATA[
     a(2)
@@ -721,7 +748,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>不设次数则表示永远，相当于JS的<code>while (true)</code>：</p>
 <pre><code><![CDATA[
-    repeat ->
+    repeat --
         if abc() return false
         doSomething()
 ]]></code></pre>
@@ -932,10 +959,11 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <pre><code><![CDATA[
     zip = lottery.drawWinner'ok().address'ok.zipcode
 ]]></code></pre>
-<p><code>'ifnull</code>和<code>'ifvoid</code>必须后面跟冒号。例如：</p>
+<p><code>'ifnull</code>和<code>'ifvoid</code>有两种形式，一种是后面跟冒号，一种是后面不跟冒号。例如：</p>
 <pre><code><![CDATA[
     a'ifnull: 8 # if (a === null || a === undefined) {a = 8;}
     a'ifvoid: 8 # if (a === undefined) {a = 8;}
+    b: a'ifvoid 8 # b = a !== undefined ? a : 8;
 ]]></code></pre>
 <h2>'</h2>
 <p><code>'</code>的形式有两种，一种是一元<code>'</code>，一种是二元<code>'</code>。一元<code>'</code>即函数的单参数变体，兼容模式专用。其他的都是二元<code>'</code>。</p>
@@ -1072,6 +1100,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <ul style="font-family: monospace;">
     <li>-&gt;</li>
     <li>&lt;&gt;</li>
+    <li>--</li>
     <li>:</li>
     <li>(</li>
     <li>)</li>
@@ -1340,7 +1369,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>问：为什么arguments用<code>@</code>表示？</p>
 <p>答：首先，<code>@</code>形状也像个a。其次，<code>@</code>是符号中看上去最不像符号的，我们经常会使用孤立的<code>@</code>作为一个表达式，这时如果用其他符号，会显得不像个表达式，就不舒服了。</p>
 <p>问：为什么以多参数调用函数一定要加括号？CoffeeScript不是可以不加吗？</p>
-<p>答：多参数要用到逗号，不加括号的话，逗号到底分隔什么，不容易看清楚，大多数时候违反人类直觉。而且因为我觉得激进模式更完美，如果多参数可以不加括号，就有些鼓励人们采用兼容模式了。</p>
+<p>答：多参数要用到逗号，不加括号的话，逗号到底分隔什么，不容易看清楚，大多数时候违反人类直觉。而且，现在默认是兼容模式，但因为我觉得激进模式更完美，如果多参数可以不加括号，就显得更加鼓励人们采用兼容模式了。</p>
 <p>问：<code>@</code>很好用，如果catch的上下文也能用一个符号表示就好了。</p>
 <p>答：本来我考虑再用个新的符号来指代子语句内的上下文，不仅限于catch，但想想，不宜。用<code>@</code>时你很容易看清某个<code>@</code>所对应的是哪个函数，因为函数符号很好辨认。但子语句仅有的特征是缩进，而缩进我们是用得非常多的，很容易这个新符号的意思会变来变去，导致你搞混。如果这个新符号仅限于catch，又适用面太小。</p>
 <p>问：<code>as</code>为何不能用逗号同时赋值？</p>
@@ -1353,5 +1382,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>答：CoffeeScript其实是硬生生加了条规则，这会破坏语法的统一，而且虽然在一部分需求中更简洁了，但当有另一部分需求的时候却更复杂了。所以我决定不用这套方法。</p>
 <p>问：为啥一个模块既有“默认导出”又有“命名导出”不好？</p>
 <p>答：你完全可以分两个模块，或者给“默认导出”取个非default的名字（事实上“默认导出”的确是“命名导出”的一部分，名字是default）。</p>
+<p>问：为啥<code>-&gt;</code>函数没有定义<code>@</code>？</p>
+<p>答：当你参数有名称时，再用<code>@</code>就显得多余。这时用<code>@</code>唯一的作用就是当函数的参数数量可变时。但是如果你的函数参数数量可变，更好的做法是不设任何形参。也有一种情况是希望后半部分参数数量可变，但是我不太喜欢这样做，我建议把这部分参数弄成一个数组。</p>
 </body>
 </html>
