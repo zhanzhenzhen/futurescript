@@ -61,7 +61,6 @@
     <li>delete</li>
     <li>export（仅限于语句开头是export，所以不包括export as，但包括export...as）</li>
     <li>后置的if</li>
-    <li>return</li>
     <li>throw</li>
 </ul>
 <p>给定一条语句，该语句所在级别的最大范围连续内容称作该语句所在的块，块不包括版本行。我们说某语句的子块，是指该语句的一级下属。我们说某块的子语句，也是指该块的一级下属。若某类语句的子块的子项可以是语句或注释，我们称这类子块是语句块。否则，称这类子块是非语句块。</p>
@@ -316,7 +315,7 @@
     a{prop: true}.b # a({prop: true}).b
     a {prop: true}.b # a({prop: true}.b)
 ]]></code></pre>
-<p>凡是函数都有一个返回值，值即为函数块的值，所以一般不需用<code>return</code>。但在函数中间要返回则需要用<code>return</code>。</p>
+<p>凡是函数都有一个返回值，值即为函数块的值，所以我们无需使用<code>return</code>。</p>
 <p>不像CoffeeScript，我们没有胖箭头<code>=&gt;</code>。我认为JavaScript使<code>this</code>的含义可自定义是一种错误的设计，它应该始终指向当前对象。我们的函数和CoffeeScript的函数的对应关系如下：</p>
 <ul>
     <li>类的方法和构造器（包括嵌套的类的方法和构造器）：CoffeeScript瘦箭头</li>
@@ -739,18 +738,22 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log "This is \(i) time"
     ]
 ]]></code></pre>
-<p>迭代器返回<code>false</code>则表示跳出循环，相当于JS的<code>break</code>：</p>
+<p>迭代器返回<code>break</code>则表示跳出循环，类似于JS的<code>break</code>，不过本质上不同，这里的<code>break</code>是表达式，只能使余下的循环不做，并不能使函数内剩下的部分不执行。跳出循环时repeat函数返回<code>break</code>。例子：</p>
 <pre><code><![CDATA[
     repeat[10, i ->
-        if i > 5 return false
-        console.log "This is \(i) time"
+        if i < 5
+            console.log "This is \(i) time"
+        else
+            break
     ]
 ]]></code></pre>
 <p>不设次数则表示永远，相当于JS的<code>while (true)</code>：</p>
 <pre><code><![CDATA[
     repeat --
-        if abc() return false
-        doSomething()
+        if abc()
+            break
+        else
+            doSomething()
 ]]></code></pre>
 <p>Mate的地址：https://www.npmjs.com/package/mate</p>
 <h2>类</h2>
@@ -1077,7 +1080,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>null</li>
     <li>or</li>
     <li>rem</li>
-    <li>return</li>
     <li>self</li>
     <li>static</li>
     <li>super</li>
@@ -1391,5 +1393,27 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>答：当你参数有名称时，再用<code>@</code>就显得多余。这时用<code>@</code>唯一的作用就是当函数的参数数量可变时。但是如果你的函数参数数量可变，更好的做法是不设任何形参。也有一种情况是希望后半部分参数数量可变，但是我不太喜欢这样做，我建议把这部分参数弄成一个数组。</p>
 <p>问：JS中可以用<code>typeof a === "undefined"</code>检查变量是否已定义又不引发异常，这里为啥做不到？</p>
 <p>答：这好像并没有什么用。Lemo的变量统统编译成在函数顶部声明，所以变量的定义与否不是动态的，所以检查这个不应该是程序运行时做的事情。</p>
+<p>问：CoffeeScript也有<code>return</code>，Lemo居然没有？</p>
+<p>答：<code>return</code>是一种跳跃式语句，函数式风格应该尽量避免这种语句，很多函数式语言，像微软的F#，是没有<code>return</code>的，F#有循环，但是也没有能跳出循环的<code>break</code>命令。就好比现在人们都认为C语言的<code>goto</code>命令是很邪恶的，就是因为<code>goto</code>是跳跃性的。当然<code>return</code>只是跳出而已，不能自由跳跃，远没有<code>goto</code>那么邪恶，但我想，至少在Lemo语言的初创阶段，还是彻底一些好。其实你很容易就可以达到相同的目的。比如你想这样写：</p>
+<pre><code><![CDATA[
+    x ->
+        if x isnt Number return
+        x * 2
+]]></code></pre>
+<p>现在你可以这样写：</p>
+<pre><code><![CDATA[
+    x ->
+        if x isnt Number
+            void
+        else
+            x * 2
+]]></code></pre>
+<p>如果你嫌行多，可以这样写，也是2行：</p>
+<pre><code><![CDATA[
+    x ->
+        x isnt Number ? void |
+            x * 2
+]]></code></pre>
+<p>这种方式的好处就是结构更清晰，只要不抛出异常，函数的出口永远只有一个，永远在底部。</p>
 </body>
 </html>
