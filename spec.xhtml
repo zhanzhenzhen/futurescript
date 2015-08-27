@@ -1151,7 +1151,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>&gt;&gt;</li>
 </ul>
 <h2>运算符优先级</h2>
-<p>运算符必须至少有一个算元（凡是算元都是表达式），并且运算结果是表达式。不过也不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。下面表格中，a、b、c表示算元，x、y、z表示其他组成部分。</p>
+<p>运算符必须至少有一个算元（凡是算元都是表达式），并且运算结果是表达式。不过也不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。下面表格中，优先级从低到高，a、b、c表示算元，x、y、z表示其他组成部分。</p>
 <table>
     <tr>
         <th>Precedence</th>
@@ -1159,113 +1159,37 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <th>Examples</th>
     </tr>
     <tr>
-        <td rowspan="6">14 left-to-right</td>
-        <td>Member Access</td>
-        <td><code>a.x<br/>a."x"<br/>a.(b)</code></td>
+        <td rowspan="2">0 left-to-right</td>
+        <td>Pipe</td>
+        <td><code>a |&gt; x</code></td>
     </tr>
     <tr>
-        <td>new</td>
-        <td><code>new a(b)</code></td>
+        <td>Fat Dot Member Access</td>
+        <td><code>a :: x</code></td>
     </tr>
     <tr>
-        <td>nonew</td>
-        <td><code>nonew a(b)</code></td>
+        <td>1 right-to-left</td>
+        <td>Conditional</td>
+        <td><code>if a then b else c<br/>a ? b | c</code></td>
     </tr>
     <tr>
-        <td>Variant</td>
-        <td><code>a'x</code></td>
+        <td rowspan="2">2 right-to-left</td>
+        <td>Space Function Call</td>
+        <td><code>a b</code></td>
     </tr>
     <tr>
-        <td>Function Variant</td>
-        <td><code>a'</code></td>
+        <td>Space new</td>
+        <td><code>new a b</code></td>
     </tr>
     <tr>
-        <td>import</td>
-        <td><code>import "x"<br/>import("x")</code></td>
+        <td>3 left-to-right</td>
+        <td>or</td>
+        <td><code>a or b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">13 left-to-right</td>
-        <td>as</td>
-        <td><code>a as x</code></td>
-    </tr>
-    <tr>
-        <td>export as</td>
-        <td><code>a export as x</code></td>
-    </tr>
-    <tr>
-        <td>12 left-to-right</td>
-        <td>Function Call</td>
-        <td><code>a(b)</code></td>
-    </tr>
-    <tr>
-        <td rowspan="2">11 left-to-right</td>
-        <td>ifvoid</td>
-        <td><code>a ifvoid b</code></td>
-    </tr>
-    <tr>
-        <td>ifnull</td>
-        <td><code>a ifnull b</code></td>
-    </tr>
-    <tr>
-        <td rowspan="3">10 right-to-left</td>
-        <td>not</td>
-        <td><code>not a</code></td>
-    </tr>
-    <tr>
-        <td>Unary Plus</td>
-        <td><code>+a</code></td>
-    </tr>
-    <tr>
-        <td>Unary Negation</td>
-        <td><code>-a</code></td>
-    </tr>
-    <tr>
-        <td>9 right-to-left</td>
-        <td>Exponentiation</td>
-        <td><code>a ** b</code></td>
-    </tr>
-    <tr>
-        <td rowspan="4">8 left-to-right</td>
-        <td>Multiplication</td>
-        <td><code>a * b</code></td>
-    </tr>
-    <tr>
-        <td>Division</td>
-        <td><code>a / b</code></td>
-    </tr>
-    <tr>
-        <td>Remainder</td>
-        <td><code>a rem b</code></td>
-    </tr>
-    <tr>
-        <td>Modulo</td>
-        <td><code>a mod b</code></td>
-    </tr>
-    <tr>
-        <td rowspan="2">7 left-to-right</td>
-        <td>Addition</td>
-        <td><code>a + b</code></td>
-    </tr>
-    <tr>
-        <td>Subtraction</td>
-        <td><code>a - b</code></td>
-    </tr>
-    <tr>
-        <td rowspan="4">6 left-to-right</td>
-        <td>in</td>
-        <td><code>a in b</code></td>
-    </tr>
-    <tr>
-        <td>Negative in</td>
-        <td><code>a not in b</code></td>
-    </tr>
-    <tr>
-        <td>is</td>
-        <td><code>a is b</code></td>
-    </tr>
-    <tr>
-        <td>Negative is</td>
-        <td><code>a isnt b</code></td>
+        <td>4 left-to-right</td>
+        <td>and</td>
+        <td><code>a and b</code></td>
     </tr>
     <tr>
         <td rowspan="6">5 left-to-right</td>
@@ -1293,37 +1217,113 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a &gt;= b</code></td>
     </tr>
     <tr>
-        <td>4 left-to-right</td>
-        <td>and</td>
-        <td><code>a and b</code></td>
+        <td rowspan="4">6 left-to-right</td>
+        <td>in</td>
+        <td><code>a in b</code></td>
     </tr>
     <tr>
-        <td>3 left-to-right</td>
-        <td>or</td>
-        <td><code>a or b</code></td>
+        <td>Negative in</td>
+        <td><code>a not in b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">2 right-to-left</td>
-        <td>Space Function Call</td>
-        <td><code>a b</code></td>
+        <td>is</td>
+        <td><code>a is b</code></td>
     </tr>
     <tr>
-        <td>Space new</td>
-        <td><code>new a b</code></td>
+        <td>Negative is</td>
+        <td><code>a isnt b</code></td>
     </tr>
     <tr>
-        <td>1 right-to-left</td>
-        <td>Conditional</td>
-        <td><code>if a then b else c<br/>a ? b | c</code></td>
+        <td rowspan="2">7 left-to-right</td>
+        <td>Addition</td>
+        <td><code>a + b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">0 left-to-right</td>
-        <td>Pipe</td>
-        <td><code>a |&gt; x</code></td>
+        <td>Subtraction</td>
+        <td><code>a - b</code></td>
     </tr>
     <tr>
-        <td>Fat Dot Member Access</td>
-        <td><code>a :: x</code></td>
+        <td rowspan="4">8 left-to-right</td>
+        <td>Multiplication</td>
+        <td><code>a * b</code></td>
+    </tr>
+    <tr>
+        <td>Division</td>
+        <td><code>a / b</code></td>
+    </tr>
+    <tr>
+        <td>Remainder</td>
+        <td><code>a rem b</code></td>
+    </tr>
+    <tr>
+        <td>Modulo</td>
+        <td><code>a mod b</code></td>
+    </tr>
+    <tr>
+        <td>9 right-to-left</td>
+        <td>Exponentiation</td>
+        <td><code>a ** b</code></td>
+    </tr>
+    <tr>
+        <td rowspan="3">10 right-to-left</td>
+        <td>not</td>
+        <td><code>not a</code></td>
+    </tr>
+    <tr>
+        <td>Unary Plus</td>
+        <td><code>+a</code></td>
+    </tr>
+    <tr>
+        <td>Unary Negation</td>
+        <td><code>-a</code></td>
+    </tr>
+    <tr>
+        <td rowspan="2">11 left-to-right</td>
+        <td>ifvoid</td>
+        <td><code>a ifvoid b</code></td>
+    </tr>
+    <tr>
+        <td>ifnull</td>
+        <td><code>a ifnull b</code></td>
+    </tr>
+    <tr>
+        <td>12 left-to-right</td>
+        <td>Function Call</td>
+        <td><code>a(b)</code></td>
+    </tr>
+    <tr>
+        <td rowspan="2">13 left-to-right</td>
+        <td>as</td>
+        <td><code>a as x</code></td>
+    </tr>
+    <tr>
+        <td>export as</td>
+        <td><code>a export as x</code></td>
+    </tr>
+    <tr>
+        <td rowspan="6">14 left-to-right</td>
+        <td>Member Access</td>
+        <td><code>a.x<br/>a."x"<br/>a.(b)</code></td>
+    </tr>
+    <tr>
+        <td>new</td>
+        <td><code>new a(b)</code></td>
+    </tr>
+    <tr>
+        <td>nonew</td>
+        <td><code>nonew a(b)</code></td>
+    </tr>
+    <tr>
+        <td>Variant</td>
+        <td><code>a'x</code></td>
+    </tr>
+    <tr>
+        <td>Function Variant</td>
+        <td><code>a'</code></td>
+    </tr>
+    <tr>
+        <td>import</td>
+        <td><code>import "x"<br/>import("x")</code></td>
     </tr>
 </table>
 <h2>例子</h2>
