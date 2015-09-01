@@ -1151,7 +1151,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>&gt;&gt;</li>
 </ul>
 <h2>运算符优先级</h2>
-<p>运算符必须至少有一个算元（凡是算元都是表达式），并且运算结果是表达式。不过也不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。下面表格中，优先级从低到高，a、b、c表示算元，x、y、z表示其他组成部分。</p>
+<p>运算符必须至少有一个算元（凡是算元都是表达式），并且运算结果是表达式。不过也不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。下面表格中，优先级从低到高，a、b、c表示算元，x、y、z表示其他组成部分。别的语言的参考都是优先级从高到低，但我觉得不妥，因为用函数式思维来看，应该从“大”（低）到“小”（高）。</p>
 <table>
     <tr>
         <th>Precedence</th>
@@ -1428,5 +1428,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             x * 2
 ]]></code></pre>
 <p>这种方式的好处就是结构更清晰，只要不抛出异常，函数的出口永远只有一个，永远在底部。</p>
+<p>问：为啥幂运算符<code>**</code>的优先级和CoffeeScript不一样？</p>
+<p>答：虽然和CoffeeScript不一样，但是和大多数其他语言一样，比如F#，比如未来的ES7草案。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但我想想，似乎应该遵从大多数语言，即为9。而且另一个原因是，CoffeeScript这样做弄得不大协调，难道就<code>**</code>显得那么特殊？其实<code>*</code>理应和它一样，只不过<code>-a * b</code>等于<code>-(a * b)</code>，所以觉得无所谓就不调整了而已。</p>
 </body>
 </html>
