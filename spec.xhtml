@@ -1429,6 +1429,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>这种方式的好处就是结构更清晰，只要不抛出异常，函数的出口永远只有一个，永远在底部。</p>
 <p>问：为啥幂运算符<code>**</code>的优先级和CoffeeScript不一样？</p>
-<p>答：虽然和CoffeeScript不一样，但是和大多数其他语言一样，比如F#，比如未来的ES7草案。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但我想想，似乎应该遵从大多数语言，即为9。而且另一个原因是，CoffeeScript这样做弄得不大协调，难道就<code>**</code>显得那么特殊？其实<code>*</code>理应和它一样，只不过<code>-a * b</code>等于<code>-(a * b)</code>，所以觉得无所谓就不调整了而已。</p>
+<p>答：虽然和CoffeeScript不一样，但是和大多数有这个运算符的语言一样，比如F#，比如未来的ES7草案。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但我想想，似乎应该遵从大多数语言，即为9。而且另一个原因是，CoffeeScript这样做弄得不大协调，难道就<code>**</code>那么特殊？其实<code>*</code>的优先级理应只比<code>**</code>低一级，只不过<code>(-a) * b</code>恒等于<code>-(a * b)</code>，所以可能他们觉得无所谓就不调整了而已。</p>
 </body>
 </html>
