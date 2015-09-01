@@ -129,7 +129,7 @@
 ]]></code></pre>
 <p>5. 解析成功并退出。</p>
 <p>6. 解析失败并退出。</p>
-<p>缩进的规则很适合用来表示一些复杂的语句。例如，你既可以这样写：</p>
+<p>缩进的规则很适合用来表示一些复杂的语句。例如，你可以这样写：</p>
 <pre><code><![CDATA[
     text: "This is a dog."
     speak: match (<>
@@ -141,18 +141,6 @@
         |       "unknown"
     # speak is "woof"
 ]]></code></pre>
-<p>又可以这样写：</p>
-<pre><code><![CDATA[
-    text: "This is a dog."
-    speak: match <>
-            s = @toLowerCase()
-            text.includes(s)
-        "cat" ? "meow"
-        "dog" ? "woof"
-        |       "unknown"
-    # speak is "woof"
-]]></code></pre>
-<p>它们是等价的。<code>match</code>下面的两个块不互相隶属，但都属于<code>match</code>。</p>
 <p>和CoffeeScript有一点不同，如下代码：</p>
 <pre><code><![CDATA[
     a.b aaa
