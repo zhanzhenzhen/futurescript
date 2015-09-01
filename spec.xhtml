@@ -1445,7 +1445,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>这种方式的好处就是结构更清晰，只要不抛出异常，函数的出口永远只有一个，永远在底部。</p>
 <p>问：为啥幂运算符<code>**</code>的优先级和CoffeeScript不一样？</p>
 <p>答：虽然和CoffeeScript不一样，但是和大多数有这个运算符的语言一样，比如F#，比如未来的ES7草案。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但这看上去非常别扭，除非你加个空格，成为<code>- 3 ** 2</code>，或者干脆都不用空格，成为<code>-3**2</code>，但很少有人会这么写，前者还和多行连接有冲突。另一个原因是，CoffeeScript这样做弄得不大协调，就<code>**</code>显得那么特殊，其实<code>*</code>的优先级理应只比<code>**</code>低一级，只不过<code>(-a) * b</code>恒等于<code>-(a * b)</code>，所以可能他们觉得无所谓就不调整了而已。</p>
-<p>问：<code>not</code>优先级被调整，这合理吗？</p>
+<p>问：<code>not</code>优先级被大幅降低，这合理吗？</p>
 <p>答：这看上去更自然，更符合人类阅读方式。我承认，这个改变从来没有人做过，具有冒险性。为了看看有没有反例，支持<code>not</code>应该维持目前通用的优先级，我看了GitHub的Atom编辑器的源代码（它是用CoffeeScript编写的），还看了我自己的代码。我发现，几乎没有一处<code>not</code>在目前通用的优先级下更简单的，这给了我信心。因为我的想法是，算术运算符，像加法、乘法，对它们的算元使用<code>not</code>是非常不好的，也许有人会利用这种方式来取巧，但可读性非常差，所以好的代码中是不会出现<code>not a + not b</code>的，这种反例不应该使用。引申到<code>=</code>、<code>&lt;</code>、<code>&gt;</code>也是一样。</p>
 </body>
 </html>
