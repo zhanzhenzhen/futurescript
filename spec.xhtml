@@ -570,6 +570,20 @@
     if a < b > c
         console.log "success"
 ]]></code></pre>
+<p>Lemo和其他语言在逻辑运算方面最大的区别就是<code>not</code>的优先级。<code>not</code>的优先级被降低，仅高于<code>and</code>和<code>or</code>。这意味着我们可以少加很多括号。你肯定抱怨过在JS中不得不这样写：</p>
+<pre><code><![CDATA[
+    if !(abc instanceof Abc) doTask();
+]]></code></pre>
+<p>但现在我们可以：</p>
+<pre><code><![CDATA[
+    if not abc instanceof Abc
+        doTask()
+]]></code></pre>
+<p>像这种也不用加上括号：</p>
+<pre><code><![CDATA[
+    if not 200 <= statusCode < 300
+        console.log "failure"
+]]></code></pre>
 <h2>条件</h2>
 <p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
 <pre><code><![CDATA[
@@ -1192,7 +1206,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a and b</code></td>
     </tr>
     <tr>
-        <td rowspan="6">5 left-to-right</td>
+        <td>5 right-to-left</td>
+        <td>not</td>
+        <td><code>not a</code></td>
+    </tr>
+    <tr>
+        <td rowspan="6">6 left-to-right</td>
         <td>Equality</td>
         <td><code>a = b</code></td>
     </tr>
@@ -1217,7 +1236,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a &gt;= b</code></td>
     </tr>
     <tr>
-        <td rowspan="4">6 left-to-right</td>
+        <td rowspan="4">7 left-to-right</td>
         <td>in</td>
         <td><code>a in b</code></td>
     </tr>
@@ -1234,7 +1253,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a isnt b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">7 left-to-right</td>
+        <td rowspan="2">8 left-to-right</td>
         <td>Addition</td>
         <td><code>a + b</code></td>
     </tr>
@@ -1243,7 +1262,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a - b</code></td>
     </tr>
     <tr>
-        <td rowspan="4">8 left-to-right</td>
+        <td rowspan="4">9 left-to-right</td>
         <td>Multiplication</td>
         <td><code>a * b</code></td>
     </tr>
@@ -1260,16 +1279,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a mod b</code></td>
     </tr>
     <tr>
-        <td>9 right-to-left</td>
+        <td>10 right-to-left</td>
         <td>Exponentiation</td>
         <td><code>a ** b</code></td>
     </tr>
     <tr>
-        <td rowspan="3">10 right-to-left</td>
-        <td>not</td>
-        <td><code>not a</code></td>
-    </tr>
-    <tr>
+        <td rowspan="2">11 right-to-left</td>
         <td>Unary Plus</td>
         <td><code>+a</code></td>
     </tr>
@@ -1278,7 +1293,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>-a</code></td>
     </tr>
     <tr>
-        <td rowspan="2">11 left-to-right</td>
+        <td rowspan="2">12 left-to-right</td>
         <td>ifvoid</td>
         <td><code>a ifvoid b</code></td>
     </tr>
@@ -1287,12 +1302,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a ifnull b</code></td>
     </tr>
     <tr>
-        <td>12 left-to-right</td>
+        <td>13 left-to-right</td>
         <td>Function Call</td>
         <td><code>a(b)</code></td>
     </tr>
     <tr>
-        <td rowspan="2">13 left-to-right</td>
+        <td rowspan="2">14 left-to-right</td>
         <td>as</td>
         <td><code>a as x</code></td>
     </tr>
@@ -1301,7 +1316,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a export as x</code></td>
     </tr>
     <tr>
-        <td rowspan="6">14 left-to-right</td>
+        <td rowspan="6">15 left-to-right</td>
         <td>Member Access</td>
         <td><code>a.x<br/>a."x"<br/>a.(b)</code></td>
     </tr>
@@ -1429,6 +1444,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>这种方式的好处就是结构更清晰，只要不抛出异常，函数的出口永远只有一个，永远在底部。</p>
 <p>问：为啥幂运算符<code>**</code>的优先级和CoffeeScript不一样？</p>
-<p>答：虽然和CoffeeScript不一样，但是和大多数有这个运算符的语言一样，比如F#，比如未来的ES7草案。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但我想想，似乎应该遵从大多数语言，即为9。而且另一个原因是，CoffeeScript这样做弄得不大协调，难道就<code>**</code>那么特殊？其实<code>*</code>的优先级理应只比<code>**</code>低一级，只不过<code>(-a) * b</code>恒等于<code>-(a * b)</code>，所以可能他们觉得无所谓就不调整了而已。</p>
+<p>答：虽然和CoffeeScript不一样，但是和大多数有这个运算符的语言一样，比如F#，比如未来的ES7草案。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但这看上去非常别扭，除非你加个空格，成为<code>- 3 ** 2</code>，或者干脆都不用空格，成为<code>-3**2</code>，但很少有人会这么写，前者还和多行连接有冲突。另一个原因是，CoffeeScript这样做弄得不大协调，就<code>**</code>显得那么特殊，其实<code>*</code>的优先级理应只比<code>**</code>低一级，只不过<code>(-a) * b</code>恒等于<code>-(a * b)</code>，所以可能他们觉得无所谓就不调整了而已。</p>
+<p>问：<code>not</code>优先级被调整，这合理吗？</p>
+<p>答：这看上去更自然，更符合人类阅读方式。我承认，这个改变从来没有人做过，具有冒险性。为了看看有没有反例，支持<code>not</code>应该维持目前通用的优先级，我看了GitHub的Atom编辑器的源代码（它是用CoffeeScript编写的），还看了我自己的代码。我发现，几乎没有一处<code>not</code>在目前通用的优先级下更简单的，这给了我信心。因为我的想法是，算术运算符，像加法、乘法，对它们的算元使用<code>not</code>是非常不好的，也许有人会利用这种方式来取巧，但可读性非常差，所以好的代码中是不会出现<code>not a + not b</code>的，这种反例不应该使用。引申到<code>=</code>、<code>&lt;</code>、<code>&gt;</code>也是一样。</p>
 </body>
 </html>
