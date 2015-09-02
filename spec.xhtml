@@ -50,7 +50,7 @@
 <p>Lemo文件的外观：由版本行、语句、注释和无语义空白组成。语句是可以嵌套的。版本行和语句是有语义的，注释和无语义空白都是无语义的。</p>
 <p>语句不是表达式，也不可以作为表达式。表达式不是语句，但可以作为语句，作为语句时称作表达式语句。有两种语句：表达式语句和命令语句。</p>
 <p>类似CoffeeScript，在Lemo中，缩进是很重要的，它构成了嵌套。缩进可以用<code>&lt;&lt;</code>与<code>&gt;&gt;</code>代替。</p>
-<p>类似CoffeeScript，多个并列的语句或类属性可以通过分号<code>;</code>合并，单行可以通过<code>\</code>拆分成多行。</p>
+<p>类似CoffeeScript，多个并列的语句可以通过分号<code>;</code>合并，单行可以通过<code>\</code>拆分成多行。</p>
 <p>空行，是指不含有字符的行。</p>
 <p>空白行，是指不含有字符或只含有空白字符的行。</p>
 <p>无语义空白，是指空白行，或者行右侧无意义的空白。</p>
@@ -1060,16 +1060,14 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>这时<code>&lt;&lt;</code>和<code>&gt;&gt;</code>的威力就体现出来了。<code>&lt;&lt;</code>表示接下去的代码缩进一级，<code>&gt;&gt;</code>表示还原。</p>
 <p><code>&lt;&lt;</code>和<code>&gt;&gt;</code>必须在1行内结束。也就是说，只能把多行合并成1行，无法把多行合并成2行。</p>
-<p>这两个符号和分号结合使用很方便，各司其职，分号用来合并并列的语句或类属性，这两个符号用来合并有层级的行。</p>
-<p>在<code>&gt;&gt;</code>后可加分号，也可不加分号，例如：</p>
+<p>这两个符号和分号、逗号结合使用，可以达到最大程度的合并效果。分号合并语句，逗号合并对象属性、数组元素、类属性。</p>
+<p>在<code>&gt;&gt;</code>后可加分号或逗号，也可不加分号或逗号，例如：</p>
 <pre><code><![CDATA[
-    A: class << aaa: x -> << x + 1 >>; bbb: 3 >>
+    A: class << aaa: x -> << x + 1 >>, bbb: 3 >>
+    if aaa << task1() >> else << task2() >>; commonTask()
 ]]></code></pre>
-<p>这里的分号是可略的。</p>
-<p>但是对于语句内的部分，像<code>&gt;&gt;</code>和<code>else</code>之间，则不能加分号，因为它们不是两个语句。例如：</p>
-<pre><code><![CDATA[
-    if aaa << task1() >> else << task2() >>
-]]></code></pre>
+<p>这里的分号和逗号都是可略的。</p>
+<p>但是对于语句内的两个部分，像<code>&gt;&gt;</code>和<code>else</code>之间，则不能加分号，因为它们不是两个语句。</p>
 <h2>关键字</h2>
 <p>关键字不能作为变量名。</p>
 <ul style="font-family: monospace;">
