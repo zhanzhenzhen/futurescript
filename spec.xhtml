@@ -60,7 +60,6 @@
     <li>:（冒号，表示赋值时）</li>
     <li>delete</li>
     <li>export（仅限于语句开头是export，所以不包括export as，但包括export...as）</li>
-    <li>后置的if</li>
     <li>throw</li>
 </ul>
 <p>给定一条语句，该语句所在级别的最大范围连续内容称作该语句所在的块，块不包括版本行。我们说某语句的子块，是指该语句的一级下属。我们说某块的子语句，也是指该块的一级下属。若某类语句的子块的子项可以是语句或注释，我们称这类子块是语句块。否则，称这类子块是非语句块。</p>
@@ -618,7 +617,7 @@
     alert("a is true!") if a # if (a) {alert("a is true!");}
     mood: "happy" if singing # if (singing) {mood = "happy";}
 ]]></code></pre>
-<p>当条件后置时，<code>if</code>并不作为操作符，整体上并不是个表达式。所以如果有条件后置的语句在函数的末尾，则函数返回的将是void。</p>
+<p>一条语句中只可以含有一个后置的<code>if</code>。</p>
 <p>还有一点和CoffeeScript不同，就是当碰到分号时：</p>
 <pre><code><![CDATA[
     if x > 100 then aaa(); bbb()
@@ -1054,6 +1053,15 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>这时<code>&lt;&lt;</code>和<code>&gt;&gt;</code>的威力就体现出来了。<code>&lt;&lt;</code>表示接下去的代码缩进一级，<code>&gt;&gt;</code>表示还原。</p>
 <p><code>&lt;&lt;</code>和<code>&gt;&gt;</code>必须在1行内结束。也就是说，只能把多行合并成1行，无法把多行合并成2行。</p>
 <p>这两个符号和分号结合使用很方便，各司其职，分号用来合并并列的行，这两个符号用来合并有层级的行。</p>
+<p>在<code>&gt;&gt;</code>后可加分号，也可不加分号，例如：</p>
+<pre><code><![CDATA[
+    A: class << aaa: x -> << x + 1 >>; bbb: 3 >>
+]]></code></pre>
+<p>这里的分号是可略的。</p>
+<p>但是对于语句内的部分，像<code>&gt;&gt;</code>和<code>else</code>之间，则不能加分号，因为它们不是两个语句。例如：</p>
+<pre><code><![CDATA[
+    if aaa << task1() >> else << task2() >>
+]]></code></pre>
 <h2>关键字</h2>
 <p>关键字不能作为变量名。</p>
 <ul style="font-family: monospace;">
@@ -1176,7 +1184,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <tr>
         <td>1 right-to-left</td>
         <td>Conditional</td>
-        <td><code>if a then b else c<br/>a ? b | c</code></td>
+        <td><code>if a then b else c<br/>a ? b | c<br/>a if b</code></td>
     </tr>
     <tr>
         <td rowspan="2">2 right-to-left</td>
