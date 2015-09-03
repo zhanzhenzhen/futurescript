@@ -857,12 +857,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>管道</h2>
 <p>管道操作符是<code>|></code>。例子：</p>
 <pre><code><![CDATA[
-    u = require("underscore")
+    u: require("underscore")
     [3, 4, 5] |> u.map(x -> x * 2) |> u.max
 ]]></code></pre>
 <p>管道使我们使用underscore函数库可以一种人类习惯的顺序来书写，我们再也不用这样写了：</p>
 <pre><code><![CDATA[
-    u = require("underscore")
+    u: require("underscore")
     u.max(u.map([3, 4, 5], x -> x * 2))
 ]]></code></pre>
 <p>还有一种运算符<code>::</code>，称之为“胖点”，专门应用于含有管道运算符的表达式，如果你想让管道和点号混合，胖点能提供更强的可读性。例如：</p>
