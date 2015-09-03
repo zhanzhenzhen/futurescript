@@ -1189,13 +1189,17 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>if a then b else c<br/>a ? b | c<br/>a if b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">2 right-to-left</td>
+        <td rowspan="3">2 right-to-left</td>
         <td>Space Function Call</td>
         <td><code>a b</code></td>
     </tr>
     <tr>
         <td>Space new</td>
         <td><code>new a b</code></td>
+    </tr>
+    <tr>
+        <td>Space nonew</td>
+        <td><code>nonew a(b)</code></td>
     </tr>
     <tr>
         <td>3 left-to-right</td>
@@ -1304,12 +1308,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a ifnull b</code></td>
     </tr>
     <tr>
-        <td>13 left-to-right</td>
-        <td>Function Call</td>
-        <td><code>a(b)</code></td>
-    </tr>
-    <tr>
-        <td rowspan="2">14 left-to-right</td>
+        <td rowspan="2">13 left-to-right</td>
         <td>as</td>
         <td><code>a as x</code></td>
     </tr>
@@ -1318,7 +1317,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a export as x</code></td>
     </tr>
     <tr>
-        <td rowspan="2">15 left-to-right</td>
+        <td rowspan="2">14 left-to-right</td>
         <td>Pipe</td>
         <td><code>a |&gt; x</code></td>
     </tr>
@@ -1327,9 +1326,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a :: x</code></td>
     </tr>
     <tr>
-        <td rowspan="6">16 left-to-right</td>
+        <td rowspan="7">15 left-to-right</td>
         <td>Member Access</td>
         <td><code>a.x<br/>a."x"<br/>a.(b)</code></td>
+    </tr>
+    <tr>
+        <td>Function Call</td>
+        <td><code>a(b)<br/>a[b]<br/>a{b}</code></td>
     </tr>
     <tr>
         <td>new</td>
