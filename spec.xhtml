@@ -858,7 +858,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>管道操作符是<code>|></code>。例子：</p>
 <pre><code><![CDATA[
     u = require("underscore")
-    [3, 4, 5] |> u.map x -> x * 2 |> u.max
+    [3, 4, 5] |> u.map(x -> x * 2) |> u.max
 ]]></code></pre>
 <p>管道使我们使用underscore函数库可以一种人类习惯的顺序来书写，我们再也不用这样写了：</p>
 <pre><code><![CDATA[
@@ -867,13 +867,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>还有一种运算符<code>::</code>，称之为“胖点”，专门应用于含有管道运算符的表达式，如果你想让管道和点号混合，胖点能提供更强的可读性。例如：</p>
 <pre><code><![CDATA[
-    [3, 4, 5] |> u.map x -> x * 2 :: map x -> x + 1 |> u.max
+    [3, 4, 5] |> u.map(x -> x * 2) :: map(x -> x + 1) |> u.max
 ]]></code></pre>
 <p>相当于：</p>
 <pre><code><![CDATA[
-    (([3, 4, 5] |> u.map x -> x * 2).map x -> x + 1) |> u.max
+    (([3, 4, 5] |> u.map(x -> x * 2)).map(x -> x + 1)) |> u.max
 ]]></code></pre>
-<p>所以胖点基本就是点号，只不过它的优先级比较低，和管道运算符相同。而且看起来比较“胖”，和管道运算符比较接近，所以比较舒服。</p>
+<p>所以胖点基本就是点号，只不过它的优先级略低，和管道运算符相同。而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
 <h2>异步</h2>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
 <pre><code><![CDATA[
