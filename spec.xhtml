@@ -1184,21 +1184,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>-- x</code></td>
     </tr>
     <tr>
-        <td rowspan="2">1 left-to-right</td>
-        <td>Pipe</td>
-        <td><code>a |&gt; x</code></td>
-    </tr>
-    <tr>
-        <td>Fat Dot Member Access</td>
-        <td><code>a :: x</code></td>
-    </tr>
-    <tr>
-        <td>2 right-to-left</td>
+        <td>1 right-to-left</td>
         <td>Conditional</td>
         <td><code>if a then b else c<br/>a ? b | c<br/>a if b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">3 right-to-left</td>
+        <td rowspan="2">2 right-to-left</td>
         <td>Space Function Call</td>
         <td><code>a b</code></td>
     </tr>
@@ -1207,22 +1198,22 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>new a b</code></td>
     </tr>
     <tr>
-        <td>4 left-to-right</td>
+        <td>3 left-to-right</td>
         <td>or</td>
         <td><code>a or b</code></td>
     </tr>
     <tr>
-        <td>5 left-to-right</td>
+        <td>4 left-to-right</td>
         <td>and</td>
         <td><code>a and b</code></td>
     </tr>
     <tr>
-        <td>6 right-to-left</td>
+        <td>5 right-to-left</td>
         <td>not</td>
         <td><code>not a</code></td>
     </tr>
     <tr>
-        <td rowspan="6">7 left-to-right</td>
+        <td rowspan="6">6 left-to-right</td>
         <td>Equality</td>
         <td><code>a = b</code></td>
     </tr>
@@ -1247,7 +1238,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a &gt;= b</code></td>
     </tr>
     <tr>
-        <td rowspan="4">8 left-to-right</td>
+        <td rowspan="4">7 left-to-right</td>
         <td>in</td>
         <td><code>a in b</code></td>
     </tr>
@@ -1264,7 +1255,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a isnt b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">9 left-to-right</td>
+        <td rowspan="2">8 left-to-right</td>
         <td>Addition</td>
         <td><code>a + b</code></td>
     </tr>
@@ -1273,7 +1264,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a - b</code></td>
     </tr>
     <tr>
-        <td rowspan="4">10 left-to-right</td>
+        <td rowspan="4">9 left-to-right</td>
         <td>Multiplication</td>
         <td><code>a * b</code></td>
     </tr>
@@ -1290,12 +1281,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a mod b</code></td>
     </tr>
     <tr>
-        <td>11 right-to-left</td>
+        <td>10 right-to-left</td>
         <td>Exponentiation</td>
         <td><code>a ** b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">12 right-to-left</td>
+        <td rowspan="2">11 right-to-left</td>
         <td>Unary Plus</td>
         <td><code>+a</code></td>
     </tr>
@@ -1304,7 +1295,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>-a</code></td>
     </tr>
     <tr>
-        <td rowspan="2">13 left-to-right</td>
+        <td rowspan="2">12 left-to-right</td>
         <td>ifvoid</td>
         <td><code>a ifvoid b</code></td>
     </tr>
@@ -1313,18 +1304,27 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a ifnull b</code></td>
     </tr>
     <tr>
-        <td>14 left-to-right</td>
+        <td>13 left-to-right</td>
         <td>Function Call</td>
         <td><code>a(b)</code></td>
     </tr>
     <tr>
-        <td rowspan="2">15 left-to-right</td>
+        <td rowspan="2">14 left-to-right</td>
         <td>as</td>
         <td><code>a as x</code></td>
     </tr>
     <tr>
         <td>export as</td>
         <td><code>a export as x</code></td>
+    </tr>
+    <tr>
+        <td rowspan="2">15 left-to-right</td>
+        <td>Pipe</td>
+        <td><code>a |&gt; x</code></td>
+    </tr>
+    <tr>
+        <td>Fat Dot Member Access</td>
+        <td><code>a :: x</code></td>
     </tr>
     <tr>
         <td rowspan="6">16 left-to-right</td>
