@@ -996,7 +996,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>就可以写成：</p>
 <pre><code><![CDATA[
-    zip = lottery.winner'ok.address'ok.zipcode
+    zip: lottery.winner'ok.address'ok.zipcode
 ]]></code></pre>
 <p><code>'ok</code>还可以和函数调用结合起来使用，和CoffeeScript的<code>?(...)</code>一样。例如这段CoffeeScript</p>
 <pre><code><![CDATA[
@@ -1004,7 +1004,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>就可以写成：</p>
 <pre><code><![CDATA[
-    zip = lottery.drawWinner'ok().address'ok.zipcode
+    zip: lottery.drawWinner'ok().address'ok.zipcode
 ]]></code></pre>
 <p><code>ifnull</code>和<code>ifvoid</code>有两种形式，一种是后面跟冒号，一种是后面不跟冒号。例如：</p>
 <pre><code><![CDATA[
