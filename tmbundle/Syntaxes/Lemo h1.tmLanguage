@@ -120,19 +120,19 @@
 			<string>(?x)
 				\b(?&lt;![\.\$])(
                     above|and|as|catch|delete|do|else|export|finally|from|
-                    if|import|in|is|isnt|match|mod|new|nonew|not|or|rem|return|
+                    if|ifnull|ifvoid|import|in|is|isnt|match|mod|new|nonew|not|or|rem|
                     static|super|then|throw|try
 				)(?!\s*:)\b
 			</string>
             <key>comment</key>
-            <string>"from" should only be bound with "class". This implementation is not accurate. But it's hard to make it accurate.</string>
+            <string>"from" should only be bound with "class". This implementation is not accurate. But it's hard to make it accurate. Also, "ifvoid: " is not hightlighted well.</string>
 		</dict>
 		<dict>
             <key>name</key>
             <string>keyword.operator.lemo.h1</string>
 			<key>match</key>
 			<string>(?x)
-                \+ | -(?!&gt;) | \* | / | \*\* | = | /= | &lt;(?!&gt;) | (?&lt;!&lt;)&gt; |
+                \+ | (?&lt;!-)-(?!&gt;|-) | \* | / | \*\* | = | /= | &lt;(?!&gt;) | (?&lt;!&lt;)&gt; |
                 &lt;= | &gt;= | \|&gt; | \? | :: | \| |
                 '[\w]*
 			</string>
@@ -161,7 +161,7 @@
             <key>name</key>
             <string>storage.type.function.lemo.h1</string>
             <key>match</key>
-            <string>-&gt;|&lt;&gt;</string>
+            <string>-&gt;|&lt;&gt;|--</string>
         </dict>
         <dict>
             <key>name</key>
