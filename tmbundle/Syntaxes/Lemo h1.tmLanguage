@@ -22,15 +22,15 @@
             <key>name</key>
             <string>meta.lemo.h1</string>
             <key>match</key>
-            <string>^.*\blemo\b.*\b(\d+\.\d+\.\d+)\b[^\(]*$</string>
+            <string>^.*\blemo\b.*\b(\d+\.\d+\.\d+)\b[^\{]*$</string>
         </dict>
         <dict>
             <key>name</key>
             <string>meta.lemo.h1</string>
             <key>begin</key>
-            <string>^.*\blemo\b.*\b(\d+\.\d+\.\d+)\b\s*\,?\s*\\?\(</string>
+            <string>^.*\blemo\b.*\b(\d+\.\d+\.\d+)\b\s*\,?\s*\{</string>
             <key>end</key>
-            <string>\).*$</string>
+            <string>\}.*$</string>
         </dict>
 		<dict>
             <key>contentName</key>
