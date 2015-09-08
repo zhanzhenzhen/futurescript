@@ -36,9 +36,16 @@
             <key>contentName</key>
             <string>string.quoted.double.lemo.h1</string>
 			<key>begin</key>
-			<string>\w*"""</string>
+			<string>^(\s*)[^"]*?\w*"$</string>
 			<key>end</key>
-			<string>"""\w*</string>
+			<string>^\1"\w*</string>
+            <key>comment</key>
+            <string>To correctly hightlight it, please do not write any other " in the same line of the multiline string start/end position. This is due to the impossibility of a regular expression. If the regular expression allows it, then consider this example:
+            "a"
+            a
+            "a"
+            The middle a may be mistakenly highlighted as a multiline string.
+            </string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -57,9 +64,9 @@
             <key>contentName</key>
             <string>string.quoted.double.lemo.h1</string>
             <key>begin</key>
-            <string>\w*"</string>
+            <string>(?&lt;!\w)"(?=.)</string>
             <key>end</key>
-            <string>"\w*</string>
+            <string>"</string>
             <key>patterns</key>
             <array>
                 <dict>
@@ -73,6 +80,14 @@
                     <string>#interpolated_lemo</string>
                 </dict>
             </array>
+        </dict>
+        <dict>
+            <key>contentName</key>
+            <string>string.quoted.double.lemo.h1</string>
+            <key>begin</key>
+            <string>\b(v|r|js)"(?=.)</string>
+            <key>end</key>
+            <string>"\w*</string>
         </dict>
 		<dict>
             <key>name</key>
