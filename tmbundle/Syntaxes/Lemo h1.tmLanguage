@@ -8,16 +8,16 @@
     <string>source.lemo.h1</string>
     <key>uuid</key>
     <string>A9F44CBB-014C-42C2-A275-4E53162D69D4</string>
-	<key>firstLineMatch</key>
-	<string>\blemo\b.*\b((0|1|2)\.\d+\.\d+)\b</string>
-	<key>foldingStartMarker</key>
-	<string>^\s*class\s+\S.*$|.*(-&gt;|&lt;&gt;)\s*$|.*[\[{]\s*$</string>
-	<key>foldingStopMarker</key>
-	<string>^\s*$|^\s*[}\]]\s*$</string>
-	<key>keyEquivalent</key>
-	<string>^~L</string>
-	<key>patterns</key>
-	<array>
+    <key>firstLineMatch</key>
+    <string>\blemo\b.*\b((0|1|2)\.\d+\.\d+)\b</string>
+    <key>foldingStartMarker</key>
+    <string>^\s*class\s+\S.*$|.*(-&gt;|&lt;&gt;)\s*$|.*[\[{]\s*$</string>
+    <key>foldingStopMarker</key>
+    <string>^\s*$|^\s*[}\]]\s*$</string>
+    <key>keyEquivalent</key>
+    <string>^~L</string>
+    <key>patterns</key>
+    <array>
         <dict>
             <key>name</key>
             <string>meta.lemo.h1</string>
@@ -32,13 +32,13 @@
             <key>end</key>
             <string>\}.*$</string>
         </dict>
-		<dict>
+        <dict>
             <key>contentName</key>
             <string>string.quoted.double.lemo.h1</string>
-			<key>begin</key>
-			<string>^(\s*)[^"]*(?&lt;!\w)"$</string>
-			<key>end</key>
-			<string>^\1"</string>
+            <key>begin</key>
+            <string>^(\s*)[^"]*(?&lt;!\w)"$</string>
+            <key>end</key>
+            <string>^\1"</string>
             <key>comment</key>
             <string>To correctly hightlight it, please do not write any other " in the same line of the multiline string start/end position. This is due to the impossibility of a regular expression. If the regular expression allows it, then consider this example:
             "a"
@@ -46,28 +46,28 @@
             "a"
             The middle a may be mistakenly highlighted as a multiline string.
             </string>
-			<key>patterns</key>
-			<array>
-				<dict>
+            <key>patterns</key>
+            <array>
+                <dict>
                     <key>match</key>
                     <string>\\(x..|u....|[^xu(])</string>
                     <key>name</key>
                     <string>constant.character.escape.lemo.h1</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#interpolated_lemo</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#interpolated_lemo</string>
+                </dict>
+            </array>
+        </dict>
+        <dict>
             <key>contentName</key>
             <string>string.quoted.double.lemo.h1</string>
-			<key>begin</key>
-			<string>^(\s*)[^"]*\b(v|r|js)"$</string>
-			<key>end</key>
-			<string>^\1"\w*</string>
-		</dict>
+            <key>begin</key>
+            <string>^(\s*)[^"]*\b(v|r|js)"$</string>
+            <key>end</key>
+            <string>^\1"\w*</string>
+        </dict>
         <dict>
             <key>contentName</key>
             <string>string.quoted.double.lemo.h1</string>
@@ -97,46 +97,46 @@
             <key>end</key>
             <string>"\w*</string>
         </dict>
-		<dict>
+        <dict>
             <key>name</key>
             <string>comment.block.lemo.h1</string>
-			<key>begin</key>
-			<string>(?&lt;!#)###(?!#)</string>
+            <key>begin</key>
+            <string>(?&lt;!#)###(?!#)</string>
             <key>end</key>
             <string>###(?:[ \t]*\n)</string>
-		</dict>
-		<dict>
+        </dict>
+        <dict>
             <key>name</key>
             <string>comment.line.number-sign.lemo.h1</string>
-			<key>begin</key>
-			<string>#</string>
+            <key>begin</key>
+            <string>#</string>
             <key>end</key>
             <string>\n</string>
-		</dict>
-		<dict>
+        </dict>
+        <dict>
             <key>name</key>
             <string>keyword.control.lemo.h1</string>
-			<key>match</key>
-			<string>(?x)
-				\b(?&lt;![\.\$])(
+            <key>match</key>
+            <string>(?x)
+                \b(?&lt;![\.\$])(
                     above|and|as|catch|delete|do|else|export|finally|from|
                     if|ifnull|ifvoid|import|in|is|isnt|match|mod|new|nonew|not|or|rem|
                     static|super|then|throw|try
-				)(?!\s*:)\b
-			</string>
+                )(?!\s*:)\b
+            </string>
             <key>comment</key>
             <string>"from" should only be bound with "class". This implementation is not accurate. But it's hard to make it accurate. Also, "ifvoid: " is not hightlighted well.</string>
-		</dict>
-		<dict>
+        </dict>
+        <dict>
             <key>name</key>
             <string>keyword.operator.lemo.h1</string>
-			<key>match</key>
-			<string>(?x)
+            <key>match</key>
+            <string>(?x)
                 \+ | (?&lt;!-)-(?!&gt;|-) | \* | / | \*\* | = | /= | &lt;(?!&gt;) | (?&lt;!&lt;)&gt; |
                 &lt;= | &gt;= | \|&gt; | \? | :: | \| |
                 '[\w]*
-			</string>
-		</dict>
+            </string>
+        </dict>
         <dict>
             <key>name</key>
             <string>constant.language.lemo.h1</string>
@@ -169,38 +169,38 @@
             <key>match</key>
             <string>\b(?&lt;![\.\$])class(?!\s*:)\b</string>
         </dict>
-	</array>
-	<key>repository</key>
-	<dict>
-		<key>interpolated_lemo</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
+    </array>
+    <key>repository</key>
+    <dict>
+        <key>interpolated_lemo</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
                     <key>name</key>
                     <string>source.lemo.h1.embedded.source</string>
-					<key>begin</key>
-					<string>\\\(</string>
+                    <key>begin</key>
+                    <string>\\\(</string>
                     <key>end</key>
                     <string>\)</string>
-					<key>captures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.section.embedded.lemo.h1</string>
-						</dict>
-					</dict>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>$self</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
-	</dict>
+                    <key>captures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.section.embedded.lemo.h1</string>
+                        </dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>$self</string>
+                        </dict>
+                    </array>
+                </dict>
+            </array>
+        </dict>
+    </dict>
 </dict>
 </plist>
