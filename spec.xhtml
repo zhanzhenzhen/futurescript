@@ -504,7 +504,14 @@
 <pre><code><![CDATA[
     str.search(r"^\d{3}-\d{3}-\d{4}$")
 ]]></code></pre>
-<p>单行正则表达式废除了<code>\</code>的大部分功能，除了两个：表示双引号字符仍然是用<code>\"</code>，在行尾连接仍然是用<code>\</code>。注意，JS中表示双引号可以直接用<code>"</code>，但在这儿必须用<code>\"</code>。</p>
+<p>单行正则表达式废除了<code>\</code>的大部分功能，除了3个：<code>\"</code>、<code>\#</code>、用于行尾连接的<code>\</code>。注意，JS的正则表达式里的<code>"</code>和<code>#</code>可以直接表示，但在这儿必须用<code>\"</code>和<code>\#</code>，因为这两个字符有特殊含义。</p>
+<p>正则表达式可以有插值，插入的是字符串：</p>
+<pre><code><![CDATA[
+    first: "hello"
+    second: "world"
+    r"#(first)-#(second)"
+]]></code></pre>
+<p>和CoffeeScript相同，正则表达式的插值如果是普通字符串的话，如果想用字面量表示<code>\</code>字符，会比较繁琐，所以建议仅把插值用于动态插入非符号字符。</p>
 <p>还可以表示带有标志的正则表达式：</p>
 <pre><code><![CDATA[
     r"\d{3}-\d{3}-\d{4}"gim
@@ -521,7 +528,7 @@
         $
     ")
 ]]></code></pre>
-<p>多行正则表达式的不同点是：空格和换行无意义，支持注释，支持字符串插值，表示双引号字符更简单，表示<code>#</code>需要用<code>\#</code>。字符串插值是用<code>#(...)</code>。</p>
+<p>多行正则表达式的不同点是：空格和换行无意义，支持注释，表示双引号字符更简单。</p>
 <p>原义字符串是受C#启发。原义字符串用<code>v"..."</code>来表示，例如：</p>
 <pre><code><![CDATA[
     path: v"C:\Windows\System"
@@ -557,7 +564,7 @@
         <td>有</td>
         <td>无</td>
         <td>无</td>
-        <td>仅\"、连接</td>
+        <td>仅\"、\#、连接</td>
         <td>仅\#、连接</td>
         <td>无</td>
         <td>无</td>
@@ -568,7 +575,7 @@
         <td>\(...)</td>
         <td>无</td>
         <td>无</td>
-        <td>无</td>
+        <td>#(...)</td>
         <td>#(...)</td>
         <td>无</td>
         <td>无</td>
