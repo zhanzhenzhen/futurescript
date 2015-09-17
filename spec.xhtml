@@ -834,7 +834,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>Mate的地址：https://www.npmjs.com/package/mate</p>
 <h2>类</h2>
-<p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>static</code>、<code>new</code>、<code>me</code>、<code>Me</code>。例子：</p>
+<p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>new</code>、<code>nonew</code>、<code>me</code>、<code>Me</code>。例子：</p>
 <pre><code><![CDATA[
     Animal: class
         new: <>
@@ -883,7 +883,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>字段的声明中只要是以<code>_</code>开头的，便自动成为防冲突字段。</p>
 <p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>始终被识别为不是类，无论编译选项如何。</p>
-<p>CoffeeScript对于静态字段是使用<code>@property: value</code>，我们使用的是<code>static</code>关键字，即<code>static property: value</code>。</p>
+<p>CoffeeScript对于静态字段是使用<code>@property: value</code>，我们使用的是<code>static</code>，即<code>static property: value</code>。</p>
 <p>防冲突字段也适用于静态字段，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
 <p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
 <pre><code><![CDATA[
@@ -1132,7 +1132,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>这里的分号和逗号都是可略的。</p>
 <h2>关键字</h2>
-<p>关键字不能作为变量名。</p>
 <ul style="font-family: monospace;">
     <li>above</li>
     <li>and</li>
@@ -1164,7 +1163,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>or</li>
     <li>rem</li>
     <li>self</li>
-    <li>static</li>
     <li>super</li>
     <li>then</li>
     <li>throw</li>
@@ -1172,15 +1170,11 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>try</li>
     <li>void</li>
 </ul>
-<h2>保留字</h2>
-<ul style="font-family: monospace;">
-    <li>con</li>
-    <li>elif</li>
-</ul>
-<h2>内置函数</h2>
-<ul style="font-family: monospace;">
-    <li>repeat</li>
-</ul>
+<h2>命名限制</h2>
+<p>变量名不可以是关键字。</p>
+<p>类声明中的属性名如不用引号，则不可以是<code>new</code>、<code>static</code>。如用引号，则没有限制。</p>
+<p>对象字面量的属性名没有限制。</p>
+<p>当然，不用引号时，以上名称都需要满足JS标识符约束，即：每个字符都是字母、数字、<code>_</code>或<code>$</code>，且起始字符不是数字。</p>
 <h2>符号</h2>
 <ul style="font-family: monospace;">
     <li>-&gt;</li>
@@ -1464,7 +1458,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>答：我的目标是消除CoffeeScript中参数两边的括号。但是如果没有括号的话会产生歧义。所以我就想出了这个办法，如果不加括号，那就必须为1个参数。那零个参数怎么办？就再造一个符号呗。至于多个参数，就必须加括号，不过多参数并不在我的理想化（即激进模式）的构想当中，所以这也可以接受。再有一个原因，就是CoffeeScript用箭头表示零参数的话看上去既别扭又误导，箭头嘛，感觉应该左右都有东西才对。</p>
 <p>问：既然如此，那为啥激进模式不废除箭头符号？反正有<code>@</code>可以用。</p>
 <p>答：激进模式中，大多数情况下确实没必要给参数取名，但当你有多层函数，内层调用外层参数的时候，取名就有必要了。</p>
-<p>问：为啥保留字那么少？</p>
+<p>问：为啥没有保留字？</p>
 <p>答：很多语言都有很多保留字，但我觉得你设计语言的时候预先定义好未来的功能，那未来有可能是你没料到的。我们在版本行使用版本号，也达到了“安全”的目的，因为可以保证只要你不修改版本号，就不会出现兼容性问题。</p>
 <p>问：不支持<code>var</code>是受CoffeeScript启发，但为啥不支持ES6的<code>let</code>和<code>const</code>？</p>
 <p>答：我的理念是，一名程序员也许不熟悉正在开发的文件之外的其他文件，但是一般都会熟悉这个文件当中的其他区域。<code>let</code>提供块级的保护，但是只要你熟悉的不是只是这个块，你完全可以使用一个不同的变量名。块级保护太小了，函数级保护已经足够坚固。否则的话语言本身的复杂度也会增加。<code>let</code>和CoffeeScript风格之间也有矛盾。而且我们是编译成<code>var</code>，曾经我想把所有变量编译成<code>let</code>，但是考虑这样的代码：</p>
