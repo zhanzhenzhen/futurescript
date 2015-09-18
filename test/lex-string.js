@@ -96,3 +96,12 @@ x: r"
 "
 `).toString();
 console.log(s === 'NormalToken "x", Colon, InlineRegex, CallLeftParenthesis, Str "hello \\\\(\\\\\\"world\\\\\\"\\\\)", Plus, NormalToken "a", Dot, NormalToken "b", CallLeftParenthesis, RightParenthesis, Plus, Str "", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedRegex, CallLeftParenthesis, Str "hello \\\\x20\\\\nworld ", Plus, NormalToken "a", Plus, Str " # a", RightParenthesis');
+
+s = new $lex.Lex(`lemo 0.1.0
+x: js"var a = 'asdf\\(asdf)';"
+x: js"
+    var a = "asdf\\(asdf)\\
+    ggg";
+"
+`).toString();
+console.log(s === 'NormalToken "x", Colon, InlineJs, CallLeftParenthesis, Str "var a = \'asdf\\\\(asdf)\';", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedJs, CallLeftParenthesis, Str "var a = \\"asdf\\\\(asdf)\\\\\\\\nggg\\";", RightParenthesis');
