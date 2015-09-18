@@ -25,7 +25,7 @@ x: "
     abc \\(def) ghi
 "
 `).toString();
-console.log(s === 'NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "abc ", Plus, NormalToken "def", Plus, Str " ghi", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, CallLeftParenthesis, Str "abc ", Plus, NormalToken "def", Plus, Str " ghi", RightParenthesis');
+console.log(s === 'NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", RightParenthesis, Plus, Str " ghi", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, CallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", RightParenthesis, Plus, Str " ghi", RightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 --
@@ -113,7 +113,7 @@ x: r"
     world #(a) # a
 "
 `).toString();
-console.log(s === 'NormalToken "x", Colon, InlineRegex, CallLeftParenthesis, Str "hello \\\\(\\\\\\"world\\\\\\"\\\\)", Plus, NormalToken "a", Dot, NormalToken "b", CallLeftParenthesis, RightParenthesis, Plus, NormalToken "c", Plus, Str "", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedRegex, CallLeftParenthesis, Str "hello \\\\x20\\\\nworld ", Plus, NormalToken "a", Plus, Str " # a", RightParenthesis');
+console.log(s === 'NormalToken "x", Colon, InlineRegex, CallLeftParenthesis, Str "hello \\\\(\\\\\\"world\\\\\\"\\\\)", Plus, NormalLeftParenthesis, NormalToken "a", Dot, NormalToken "b", CallLeftParenthesis, RightParenthesis, Plus, NormalToken "c", RightParenthesis, Plus, Str "", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedRegex, CallLeftParenthesis, Str "hello \\\\x20\\\\nworld ", Plus, NormalLeftParenthesis, NormalToken "a", RightParenthesis, Plus, Str " # a", RightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 x: js"var a = 'asdf\\(asdf)';"
