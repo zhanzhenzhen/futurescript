@@ -12,6 +12,14 @@ x: "
 console.log(s === 'NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "abc", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, CallLeftParenthesis, Str "abc", RightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
+x: "abc \\n\\" def"
+x: "
+    abc \\n\\" def
+"
+`).toString();
+console.log(s === 'NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "abc \\\\n\\\\\\" def", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, CallLeftParenthesis, Str "abc \\\\n\\\\\\" def", RightParenthesis');
+
+s = new $lex.Lex(`lemo 0.1.0
 x: "abc \\(def) ghi"
 x: "
     abc \\(def) ghi
@@ -67,8 +75,7 @@ x: v"
     aaa \\(bbb)
 "
 `).toString();
-console.log(s);
-console.log(s === 'NormalToken "x", Colon, InlineVerbatimString, CallLeftParenthesis, Str "C:\\\\Windows", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedVerbatimString, CallLeftParenthesis, Str "C:\\\\Windows", RightParenthesis');
+console.log(s === 'NormalToken "x", Colon, InlineVerbatimString, CallLeftParenthesis, Str "C:\\\\Windows", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedVerbatimString, CallLeftParenthesis, Str "C:\\\\Windows\\\\\\\\naaa \\\\(bbb)", RightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 x: "aaaaaaa\\
