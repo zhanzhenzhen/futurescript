@@ -27,6 +27,13 @@ x: "
 `).toString();
 console.log(s === 'NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "abc ", Plus, NormalToken "def", Plus, Str " ghi", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, CallLeftParenthesis, Str "abc ", Plus, NormalToken "def", Plus, Str " ghi", RightParenthesis');
 
+s = new $lex.Lex(`lemo 0.1.0
+--
+    "abc \\
+            def"
+`).toString();
+console.log(s === 'DashFunction, LeftChevron, InlineNormalString, CallLeftParenthesis, Str "abc         def", RightParenthesis, RightChevron');
+
 // Each last line of the first 5 strings should be treated as empty. But the last line of the 6th string should be treated as not empty. These 6 strings only have differences (of the number of spaces) in their last lines.
 s = new $lex.Lex(`lemo 0.1.0
 --
