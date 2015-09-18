@@ -11,6 +11,14 @@ x: "
 `).toString();
 console.log(s === 'NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "abc", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, CallLeftParenthesis, Str "abc", RightParenthesis');
 
+s = new $lex.Lex(`lemo 0.1.0
+x: "abc \\(def) ghi"
+x: "
+    abc \\(def) ghi
+"
+`).toString();
+console.log(s === 'NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "abc ", Plus, NormalToken "def", Plus, Str " ghi", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, CallLeftParenthesis, Str "abc ", Plus, NormalToken "def", Plus, Str " ghi", RightParenthesis');
+
 // Each last line of the first 5 strings should be treated as empty. But the last line of the 6th string should be treated as not empty. These 6 strings only have differences (of the number of spaces) in their last lines.
 s = new $lex.Lex(`lemo 0.1.0
 --
@@ -55,9 +63,11 @@ console.log(s === 'DashFunction, LeftChevron, FormattedNormalString, CallLeftPar
 s = new $lex.Lex(`lemo 0.1.0
 x: v"C:\\Windows"
 x: v"
-    C:\\Windows
+    C:\\Windows\\
+    aaa \\(bbb)
 "
 `).toString();
+console.log(s);
 console.log(s === 'NormalToken "x", Colon, InlineVerbatimString, CallLeftParenthesis, Str "C:\\\\Windows", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedVerbatimString, CallLeftParenthesis, Str "C:\\\\Windows", RightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
