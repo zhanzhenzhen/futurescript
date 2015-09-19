@@ -19,3 +19,10 @@ Footer!
 ###
 `).toString();
 console.log(s === 'FormattedComment "\\nLong comment!\\n", Semicolon, NormalToken "abc", CallLeftParenthesis, RightParenthesis');
+
+s = new $lex.Lex(`lemo 0.1.0
+###
+Long comment!
+###
+`).toString();
+console.log(s === 'FormattedComment "\\nLong comment!\\n"');

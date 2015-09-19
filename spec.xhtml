@@ -1106,7 +1106,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>do</h2>
 <p><code>do</code>关键字的用法和CoffeeScript完全相同。</p>
 <h2>注释</h2>
-<p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是当紧接在版本行下面时才编译，否则不编译。</p>
+<p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。</p>
 <h2>插入JavaScript</h2>
 <p>使用<code>js"</code>。例如：</p>
 <pre><code><![CDATA[
