@@ -622,7 +622,7 @@
 <h2>逻辑运算</h2>
 <ul style="font-family: monospace;">
     <li>=</li>
-    <li>/= (not =, not=, !=)</li>
+    <li>/= (not =, not=)</li>
     <li>&lt;</li>
     <li>&gt;</li>
     <li>&lt;=</li>
@@ -632,7 +632,7 @@
     <li>not</li>
 </ul>
 <p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
-<p><code>/=</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。考虑程序员们的习惯，目前也支持使用<code>!=</code>，但是建议尽量少用，因为以后有可能会删掉。我觉得单独的感叹号用于表示<code>not</code>是不合适的，<code>not</code>已经够简洁了。如果单独的感叹号在未来有语义（目前还被尘封），那么<code>!=</code>就有可能会产生歧义，所以那时就有可能删除。</p>
+<p><code>/=</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。为什么我们不用<code>!=</code>？因为感叹号目前Lemo还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
 <p>和CoffeeScript一样，我们也支持这种链式比较：</p>
 <pre><code><![CDATA[
     if 200 <= statusCode < 300
@@ -656,6 +656,13 @@
 <pre><code><![CDATA[
     if not 200 <= statusCode < 300
         console.log "failure"
+]]></code></pre>
+<p>再回到刚才说的不等号。其实还可以用<code>not ... =</code>。这4个功能相同，你看哪个顺眼就用哪个：</p>
+<pre><code><![CDATA[
+    if statusCode /= 200 throw
+    if statusCode not= 200 throw
+    if statusCode not = 200 throw
+    if not statusCode = 200 throw
 ]]></code></pre>
 <h2>条件</h2>
 <p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
@@ -1220,7 +1227,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>**</li>
     <li>=</li>
     <li>/=</li>
-    <li>!=</li>
     <li>&lt;</li>
     <li>&gt;</li>
     <li>&lt;=</li>
