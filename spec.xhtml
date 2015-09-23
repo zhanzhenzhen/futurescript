@@ -245,7 +245,7 @@
 <pre><code><![CDATA[
     a: (x: 0, y: 0) -> x * y
 ]]></code></pre>
-<p><code>&lt;&gt;</code>和<code>--</code>的区别是：<code>&lt;&gt;</code>只是没有形参，<code>--</code>是既没形参也没实参，当然严格来讲可以传递实参，但不会有任何效果，因为<code>--</code>没有定义<code>@</code>。<code>--</code>里面可以出现<code>@</code>，但是是指外层<code>&lt;&gt;</code>函数的<code>@</code>。<code>--</code>可以看成是<code>() -&gt;</code>的简写。</p>
+<p><code>&lt;&gt;</code>和<code>--</code>的区别是：<code>&lt;&gt;</code>只是没有形参，<code>--</code>是既没形参也没实参，当然严格来讲可以传递实参，但不会有任何效果，因为<code>--</code>没有定义<code>@</code>。<code>--</code>里面可以出现<code>@</code>，但是是指外层<code>&lt;&gt;</code>函数的<code>@</code>。<code>--</code>也没有定义<code>fun</code>，<code>--</code>里面可以出现<code>fun</code>，但是是指外层<code>-&gt;</code>或<code>&lt;&gt;</code>函数。<code>--</code>基本可以看成是<code>() -&gt;</code>的简写，但在<code>fun</code>上面有所不同。</p>
 <table>
     <tr>
         <th></th>
@@ -266,6 +266,12 @@
         <td>无</td>
     </tr>
     <tr>
+        <td>fun</td>
+        <td>有</td>
+        <td>有</td>
+        <td>无</td>
+    </tr>
+    <tr>
         <td>功能</td>
         <td>较多</td>
         <td>最多，可以模拟其他两个</td>
@@ -278,6 +284,7 @@
         <td>很简洁</td>
     </tr>
 </table>
+<p>内层参数不能和任何外层参数重名。这比CoffeeScript、JS都严格。但不排除在以后版本中放开这个限制。</p>
 <p>函数的调用有4种表示法：空格、小括号、中括号、大括号。</p>
 <pre><code><![CDATA[
     a(2)
@@ -325,7 +332,20 @@
     abc: <> 1 as a
 ]]></code></pre>
 <p>执行<code>abc()</code>返回的值是<code>1</code>。</p>
-<p>变量不用声明也不能声明，这是因为我们为变量赋值的机制和CoffeeScript相同，如果前面还未出现过则会编译成声明并赋值，如果已出现过则会编译成单纯赋值。</p>
+<p>变量不用声明也不能声明，这是因为我们为变量赋值的机制类似CoffeeScript（但有着显著的区别）。CoffeeScript是：如果前面还未出现过则会编译成声明并赋值，如果已出现过则会编译成单纯赋值。Lemo是：如外层没有该变量名，则编译成声明并赋值；如外层有该变量名，则编译成单纯赋值。</p>
+<p>考虑如下CoffeeScript代码：</p>
+<pre><code><![CDATA[
+    ->
+        a = 5
+    a = 3
+]]></code></pre>
+<p>CoffeeScript编译成两个重名变量<code>a</code>。然而在Lemo中如果你写：</p>
+<pre><code><![CDATA[
+    --
+        a: 5
+    a: 3
+]]></code></pre>
+<p>会编译成一个变量<code>a</code>。</p>
 <p><code>:</code>也支持数组解构赋值（不包括嵌套），例如：</p>
 <pre><code><![CDATA[
     [a, b]: [b, a] # swap a and b
@@ -411,7 +431,7 @@
     {fun1, fun2 as f2}: import "lib" all
     import "lib" all as {fun1, fun2 as f2}
 ]]></code></pre>
-<p><code>import</code>后面只能跟内联普通字符串，并且字符串里不可以有插值（但可以有转义符）。这些都是正确的语法：</p>
+<p><code>import</code>后面只能跟内联普通字符串，并且字符串里不可以有插值（但可以有转义符）。<code>import</code>不能既有冒号又有<code>as</code>。这些都是正确的语法：</p>
 <pre><code><![CDATA[
     import "./abc" as abc
     abc: import "./abc"
@@ -424,8 +444,40 @@
     import("./a" + "bc")
     import "./\(filename)"
     import v"abc"
+    aaa: import "bbb" as ccc
 ]]></code></pre>
-<p><code>import</code>的赋值不是普通的赋值，它是“绑定”的，和ES6一样。所以，语法上有限制，它只能是赋给变量，不能赋给对象属性，也不能在冒号左边出现<code>ifvoid</code>、<code>ifnull</code>。</p>
+<p><code>import</code>的赋值不是普通的赋值，它是“绑定”的，和ES6一样。所以，语法上有限制，它只能是赋给变量，不能赋给对象属性，也不能在冒号左边出现<code>ifvoid</code>、<code>ifnull</code>、<code>'</code>。</p>
+<p>我们使用node经常碰到这种情况：每个文件开头都有一大堆的导入，基本都重复，但又无法省略。当然，你可以建立一个新模块（即新文件），把这堆东西都放里面，再导出，于是每个模块只要导入这个新模块就可以了。但是，它的代价是，多出了点号。例如，本来是：</p>
+<pre><code><![CDATA[
+    aaa: import "aaa"
+    bbb: import "bbb"
+    ccc: import "ccc"
+    aaa()
+    bbb()
+    ccc()
+]]></code></pre>
+<p>变成：</p>
+<pre><code><![CDATA[
+    newMod: import "newMod"
+    newMod.aaa()
+    newMod.bbb()
+    newMod.ccc()
+]]></code></pre>
+<p>但似乎也没省多少。</p>
+<p>Lemo语言具有独特的“批量导入”功能（ES6中也没有该功能）。当有<code>all</code>但无冒号也无<code>as</code>时便编译成批量导入，它会导入所有的命名导出（但不包括默认导出）并让它们都成为变量名。于是，我们可以写成：</p>
+<pre><code><![CDATA[
+    import "newMod" all
+    aaa()
+    bbb()
+    ccc()
+]]></code></pre>
+<p>这个功能有个重要特点：编译器生成变量名时，需要读取被导入的模块，路径解析的方法和运行时有所不同，编译器使用以当前目录为准的相对路径（无论版本行里是不是使用node导入）。对于所有用到此功能的import路径名，建议使用本地磁盘相对路径，即：</p>
+<ul>
+    <li>./*</li>
+    <li>../*</li>
+</ul>
+<p>如果你的路径名以字母开头且版本行里使用node导入的话，那么编译器生成变量名时，将错误地翻译成当前目录下的文件而不是node_modules目录中的文件。所以，这是一个限制，该功能只适合导入同一个项目中的另一个模块，绝不适合从别的项目中直接导入（因为这会造成变量名的不确定性）。所以，项目间的导入，一定要在本项目中有一个“清单”模块作为中间模块。</p>
+<p>“批量导入”并不引入全局变量，所以不邪恶。这些变量在别的模块中是不可见的，除非别的模块也批量导入了它们。</p>
 <p>导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些都是正确的语法：</p>
 <pre><code><![CDATA[
     multiply'export: <> @0 * @1
@@ -499,7 +551,7 @@
     str: "Today is \(year)-\(month)-\(day)."
 ]]></code></pre>
 <p>一个插值不能占据多行。目前不支持插值中含有双引号（即字符串嵌套）。其实就算支持，这也会显得太复杂而不美观，完全可以赋值给新变量，再插值。</p>
-<p>上面介绍的都是普通字符串。除了普通字符串外，还有特殊字符串，还有字符串转换值表示法。什么是字符串转换值表示法呢？正则表达式就是典型的例子。</p>
+<p>上面介绍的都是普通字符串。除了普通字符串外，还有特殊字符串和字符串扩展。什么是字符串扩展？正则表达式就是典型的例子。</p>
 <p>正则表达式我们用<code>r"..."</code>来表示。例如：</p>
 <pre><code><![CDATA[
     str.search(r"^\d{3}-\d{3}-\d{4}$")
@@ -534,7 +586,7 @@
     path: v"C:\Windows\System"
 ]]></code></pre>
 <p>原义字符串完全废除了<code>\</code>的功能，所以行末不能用<code>\</code>来连接，在内联原义字符串中也无法表示双引号字符。</p>
-<p>所以总结一下，凡是字符串起始符号<code>"</code>左边紧接着字母的，可以是表示字符串，也可以表示字符串经转换后的值。</p>
+<p>所以总结一下，凡是字符串起始符号<code>"</code>左边紧接着字母的，可以是表示字符串，也可以表示字符串扩展。</p>
 <p>正则表达式引号中间的内容本质上是字符串，这和JS和CoffeeScript都不同。就算是格式正则表达式中的注释，本质上是属于字符串的，只是转换时去掉了而已。注意，转换是编译时而不是运行时，所以不影响效率。</p>
 <p>还有一点和CoffeeScript不同，就是CoffeeScript中：</p>
 <pre><code><![CDATA[
@@ -619,6 +671,28 @@
 <h2>对象</h2>
 <p>对象的表示法和CoffeeScript基本相同，除了它必须加上大括号，不能省略。</p>
 <p>对象成员访问用的是点号，和CoffeeScript基本相同，但如左边是数字，则左边必须加上括号，例如<code>(1).toString()</code>。这个限制是为了防止产生歧义，如<code>1.3</code>，如果没有这个限制就会看上去既像小数又像数组元素访问。当然你可以争辩说其实并没有歧义，因为<code>1</code>不可能是数组，那如果是<code>1.3.a</code>呢？感觉怪怪的，不如<code>(1.3).a</code>直观。所以这一点上我们比JS还严格（JS不允许1.a，但允许1.3.a）。</p>
+<h2>字面量</h2>
+<p>有这些字面量：</p>
+<ul>
+    <li>数字字面量</li>
+    <li>布尔字面量</li>
+    <li>字符串字面量</li>
+    <li>字符串扩展字面量</li>
+    <li>null字面量</li>
+    <li>void字面量</li>
+    <li>对象字面量</li>
+    <li>数组字面量</li>
+    <li>函数字面量</li>
+    <li>类字面量</li>
+</ul>
+<p>字面量都是表达式，但和一般表达式的区别是：</p>
+<ul>
+    <li>字面量都是常量</li>
+    <li>字面量本身不是标识符（但可以含有表示符）</li>
+    <li>字面量属于某种特定类型（注意“类型”的范围大于“类”）</li>
+    <li>字面量通常是这种特定类型值的创造源头</li>
+    <li>字面量有特定的表示法</li>
+</ul>
 <h2>逻辑运算</h2>
 <ul style="font-family: monospace;">
     <li>=</li>
@@ -652,7 +726,7 @@
     if not abc instanceof Abc
         doTask()
 ]]></code></pre>
-<p>当然这个例子只是打个比方，事实上我们没有<code>instanceof</code>关键字，我们是用<code>is</code>关键字，<code>not ... is</code>可能显得不太好看，所以就不举出来了。那有没有好看的例子呢？也有，像这种也不用加上括号：</p>
+<p>但事实上这个例子是非法的，因为我们没有<code>instanceof</code>关键字，我们是用<code>is</code>关键字，你可以写<code>not abc is Abc</code>但稍显别扭（最好是写成<code>abc isnt Abc</code>）。那有没有好看的例子呢？也有，像这种也不用加上括号：</p>
 <pre><code><![CDATA[
     if not 200 <= statusCode < 300
         console.log "failure"
@@ -830,13 +904,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>可以看出，即便是模拟传统的<code>switch</code>，依然比<code>switch</code>简洁。</p>
 <h2>循环</h2>
-<p>循环其实并不符合函数式编程的理念，我们没有循环。但我的mate库提供了全局函数repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。例子：</p>
+<p>循环其实并不符合函数式编程的理念，我们没有循环。但我的mate库提供了全局函数repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。本章不属于Lemo语言规范，只是简要介绍一下repeat函数。例子：</p>
 <pre><code><![CDATA[
     repeat[10, i ->
         console.log "This is \(i) time"
     ]
 ]]></code></pre>
-<p>迭代器返回<code>break</code>则表示跳出循环，类似于JS的<code>break</code>，不过本质上不同，这里的<code>break</code>是表达式，只能使余下的循环不做，并不能使函数内剩下的部分不执行。跳出循环时repeat函数返回<code>break</code>。例子：</p>
+<p>迭代器返回<code>break</code>则表示跳出循环，类似于JS的<code>break</code>，不过本质上不同，这里的<code>break</code>是表达式，只能使余下的循环不做，并不能使函数内剩下的部分不执行。跳出循环时repeat函数返回<code>break</code>。这个例子是一个循环，从0到9，但到5时跳出：</p>
 <pre><code><![CDATA[
     repeat[10, i ->
         if i < 5
@@ -853,7 +927,28 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         else
             doSomething()
 ]]></code></pre>
-<p>Mate的地址：https://www.npmjs.com/package/mate</p>
+<p>这个相当于JS的for循环，从10到1：</p>
+<pre><code><![CDATA[
+    repeat{from: 10, to: 1, by: -1, for: i ->
+        alert i
+    }
+]]></code></pre>
+<p><code>by</code>默认为1。</p>
+<p>这个有所不同，是从9到0：</p>
+<pre><code><![CDATA[
+    repeat{count: 10, by: -1, for: i ->
+        alert i
+    }
+]]></code></pre>
+<p>Mate随时可能更改，因此本章的内容可能过时。以Mate页面的内容为准：https://www.npmjs.com/package/mate</p>
+<h2>递归</h2>
+<p>递归的实现方式没有什么特别的，但我们加入了更简便的方法，你甚至无需命名递归函数，你想，自己调用自己，又何必给自己取名字？使用<code>fun</code>关键字就行了。例如，如果你不想用外部库的话，可以用递归模拟循环：</p>
+<pre><code><![CDATA[
+    do (i: 0) -> if i < 10
+        alert i
+        fun(i + 1)
+]]></code></pre>
+<p>Lemo的递归有个好处，它会自动编译（优化）成循环，当自我调用的语句出现在尾部之时。所以，你无需担心堆栈溢出，就算循环1000000次也没关系，编译后的JS代码是一个真正的循环，突破了传统递归的限制。这个在内部是通过Babel实现的。</p>
 <h2>类</h2>
 <p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>new</code>、<code>nonew</code>、<code>me</code>、<code>Me</code>。例子：</p>
 <pre><code><![CDATA[
@@ -904,7 +999,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>字段的声明中只要是以<code>_</code>开头的，便自动成为防冲突字段。</p>
 <p>对于对象和类而言，属性、成员、字段是同义词。方法是指为函数的字段。</p>
 <p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
-<p><code>Number</code>、<code>String</code>、<code>Boolean</code>始终被识别为不是类，无论编译选项如何。</p>
+<p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
 <p>CoffeeScript对于静态字段是使用<code>@property: value</code>，我们使用的是<code>static</code>，即<code>static property: value</code>。</p>
 <p>防冲突字段也适用于静态字段，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
 <p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
@@ -946,7 +1041,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     finally
         cleanUp()
 ]]></code></pre>
-<p>唯一的不同是：若<code>throw</code>后面啥都没有，不是语法错误，而是：若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw new Error()</code>。</p>
+<p>唯一的不同是：若<code>throw</code>后面啥都没有，不是语法错误，而是：若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。</p>
 <h2>管道</h2>
 <p>管道操作符是<code>|></code>。例子：</p>
 <pre><code><![CDATA[
@@ -967,6 +1062,54 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     (([3, 4, 5] |> u.map(x -> x * 2)).map(x -> x + 1)) |> u.max
 ]]></code></pre>
 <p>所以胖点基本就是点号，只不过它的优先级略低，和管道运算符相同。而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
+<h2>do</h2>
+<p><code>do</code>是<code>(...)()</code>的简便方法，比CoffeeScript的<code>do</code>功能略少，但更纯粹。它可以用来：</p>
+<ul>
+    <li>表示立即执行的递归</li>
+    <li>限定变量范围，防止冲突</li>
+    <li>分隔代码，增加可读性</li>
+</ul>
+<p>它的功能比CoffeeScript少在哪里？看一段CoffeeScript代码：</p>
+<pre><code><![CDATA[
+    for button in buttons
+        do (button) ->
+            button.onclick = ->
+                alert button.textContent
+]]></code></pre>
+<p>这种通过<code>do</code>来hold住一个变量名的方法，由于Lemo实行严格的禁止层级变量重名，所以我们不支持，但是现在看来也无需支持，因为有了更好的方法：</p>
+<pre><code><![CDATA[
+    buttons.forEach button ->
+        button.onclick: --
+            alert button.textContent
+]]></code></pre>
+<p>或：</p>
+<pre><code><![CDATA[
+    buttons.every button ->
+        button.onclick: --
+            alert button.textContent
+        true
+]]></code></pre>
+<p>两者有啥区别？这已经超出了本文的范围，不过挺重要的，还是说一下。这两个数组方法都属于ES5规范，当使用<code>forEach</code>时，是无法模拟<code>break</code>的。当使用<code>every</code>时，可以巧妙地模拟<code>break</code>，只需让它返回false即可。例如：</p>
+<pre><code><![CDATA[
+    range.every i ->
+        alert i
+        i < 5 ? true | false
+]]></code></pre>
+<p>也可以不用<code>true</code>、<code>false</code>，而用更短的<code>1</code>、<code>0</code>：</p>
+<pre><code><![CDATA[
+    range.every i ->
+        alert i
+        i < 5 ? 1 | 0
+]]></code></pre>
+<p>当然，<code>do</code>虽然不能像CoffeeScript一样hold住变量名，但你只要取个不一样的名字，就可以达到相同的目的：</p>
+<pre><code><![CDATA[
+    do --
+        btn: button
+        btn.onclick: --
+            alert btn.textContent
+]]></code></pre>
+<p>但问题是我们没有原生的循环，所以上面这个例子也没有什么用。</p>
+<p><code>do</code>的右面必须紧接函数字面量，这个比CoffeeScript严格。</p>
 <h2>异步</h2>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
 <pre><code><![CDATA[
@@ -1001,7 +1144,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>调用异步函数也可以不加<code>'wait</code>，当调用方不需要等待promise或任务出结果的时候。</p>
 <p>用<code>'wait</code>调用异步函数的例子：</p>
 <pre><code><![CDATA[
-    task: <>
+    task: --
         aaa()'wait
         bbb()'wait
     task()'wait
@@ -1009,7 +1152,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>不用<code>'wait</code>，也可以调用异步函数并达到相同的目的：</p>
 <pre><code><![CDATA[
-    task: <>
+    task: --
         aaa()'wait
         bbb()'wait
         console.log "success"
@@ -1017,7 +1160,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>注意，不用<code>'wait</code>调用异步函数的时候，异步函数执行到第一个<code>'wait</code>的位置之前返回调用方。下面的例子说明了先后顺序：</p>
 <pre><code><![CDATA[
-    task: <>
+    task: --
         console.log "stage 1"
         aaa()'wait
         console.log "stage 3"
@@ -1027,18 +1170,24 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     console.log "stage 2"
 ]]></code></pre>
 <p>其实用<code>'wait</code>调用异步函数的时候也是异步函数执行到第一个<code>'wait</code>的位置之前返回调用方，只不过调用方也在等待，看起来就像没有返回一样。</p>
-<p>异步和<code>do</code>结合的例子：</p>
+<p>异步还可以和<code>do</code>结合：</p>
 <pre><code><![CDATA[
-    largeTask: <>
-        do'wait <>
+    largeTask: --
+
+        do --
             aaa()'wait
             bbb()'wait
-        do'wait <>
+        'wait
+
+        do --
             ccc()'wait
             ddd()'wait
-        do'wait <>
+        'wait
+
+        do --
             eee()'wait
             fff()'wait
+        'wait
 ]]></code></pre>
 <h2>存在</h2>
 <p>这几个关键字或操作符和“存在性”有关<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
@@ -1083,9 +1232,9 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>有些情况下二元<code>'</code>的第一个算元可以省略，例如函数参数默认值中的变量名，但是它仍然属于二元。</p>
 <h2>in</h2>
-<p><code>in</code>的用法和CoffeeScript几乎完全相同，当然，如果要表示否定，可以用<code>not in</code>，不能用<code>!in</code>。</p>
+<p><code>in</code>的用法和CoffeeScript几乎完全相同，当然，不支持<code>!in</code>，可以用<code>... not in ...</code>或<code>not ... in ...</code>。</p>
 <h2>is</h2>
-<p><code>is</code>表示左边是右边的类型，类似于JavaScript的<code>instanceof</code>，但又有些区别，它还能判断原始类型，可以说结合了<code>instanceof</code>和<code>typeof</code>。当右边是<code>Number</code>、<code>Boolean</code>、<code>String</code>（必须严格表示为这3个之中的1个，不能是引用）时使用<code>typeof</code>。</p>
+<p><code>is</code>表示左边是右边的类型，类似于JavaScript的<code>instanceof</code>，但又有些区别，它还能判断原始类型，可以说结合了<code>instanceof</code>和<code>typeof</code>。当右边是<code>Number</code>、<code>Boolean</code>、<code>String</code>、<code>Symbol</code>（必须严格表示为这4个之中的1个，不能是引用）时使用<code>typeof</code>。</p>
 <pre><code><![CDATA[
     a is A # a instanceof A
     a is Number # typeof a === "number"
@@ -1110,8 +1259,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     a: -1 # valid
     a: - 1 # invalid
 ]]></code></pre>
-<h2>do</h2>
-<p><code>do</code>关键字的用法和CoffeeScript完全相同。</p>
 <h2>注释</h2>
 <p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。</p>
 <h2>插入JavaScript</h2>
@@ -1463,7 +1610,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     }
 
     # Existence:
-    alert "I knew it!" if elvis exists
+    alert "I knew it!" if elvis'ok
 
     # Array comprehensions:
     cubes: list.map <> math.cube @
