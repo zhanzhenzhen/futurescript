@@ -1245,7 +1245,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>rem和mod</h2>
 <p><code>rem</code>即是JavaScript的<code>%</code>。<code>mod</code>是另一种求余，正负号和除数相同，只要除数是正数，结果就不为负，所以这种求余适用范围可能更广一些。<code>a mod b</code>相当于JavaScript的<code>(a % b + b) % b</code>。</p>
 <h2>+和-（正负号）</h2>
-<p>一元的<code>+</code>、<code>-</code>（正负号）的用法和CoffeeScript相似但有微小区别，我们规定它只能是紧接着算元，如果有空格则被当作加号和减号。例如：</p>
+<p>一元的<code>+</code>、<code>-</code>（正负号）的用法和CoffeeScript相似但有微小区别，我们规定它只能是紧接着算元，如果右面有空格则被当作加号和减号。例如：</p>
 <pre><code><![CDATA[
     # a is 5. `-2` can't be connected because it is a valid statement.
     # To connect, either add a space or move the `-` to the first line
@@ -1258,7 +1258,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 
     a: -1 # valid
     a: - 1 # invalid
+
+    a+b # a + b
+    a + b # a + b
+    a+ b # a + b
+    a +b # a(+b)
 ]]></code></pre>
+<p>如果右面没有空格，则如果处于行首或左边是空白，则被解析为正负号，否则被解析为加号和减号。</p>
 <h2>注释</h2>
 <p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。</p>
 <h2>插入JavaScript</h2>
