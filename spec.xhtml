@@ -1266,10 +1266,15 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 
     # They are all `a + (-b)`.
     a + (-b)
+    a+(-b)
     a + -b
-    a+-b
+    a+ -b
+
+    a+-b # invalid
+    a++b # invalid
 ]]></code></pre>
 <p>如果后面的字符不是空白，则如果前面的字符是字母、数字、<code>_</code>、<code>$</code>、<code>)</code>、<code>]</code>、<code>}</code>、<code>"</code>或<code>@</code>，则被解析为加号和减号，否则被解析为正负号。</p>
+<p>另外，作为运算符时，<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>之后不能紧接<code>+</code>或<code>-</code>。</p>
 <h2>注释</h2>
 <p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。</p>
 <h2>插入JavaScript</h2>
