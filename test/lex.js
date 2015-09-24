@@ -46,5 +46,31 @@ s = new $lex.Lex(`lemo 0.1.0
 b.if: 1
 b.if.a: 1
 b: {if: 1}
+b: class
+    a: 1
+    if: 2
 `).toString();
-console.log(s === 'NormalToken "b", Dot, NormalToken "if", Colon, Num "1", Semicolon, NormalToken "b", Dot, NormalToken "if", Dot, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "b", Colon, LeftBrace, NormalToken "if", Colon, Num "1", RightBrace');
+console.log(s === 'NormalToken "b", Dot, NormalToken "if", Colon, Num "1", Semicolon, NormalToken "b", Dot, NormalToken "if", Dot, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "b", Colon, LeftBrace, NormalToken "if", Colon, Num "1", RightBrace, Semicolon, NormalToken "b", Colon, Class, LeftChevron, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "if", Colon, Num "2", RightChevron');
+
+s = new $lex.Lex(`lemo 0.1.0
+if a > 100
+    b: 456
+    c: "hello world"
+else
+    b: 444
+if a = 9 throw
+b: match a
+    1 ? 10
+    2 ? 100
+    |   0
+`).toString();
+console.log(s === 'If, NormalToken "a", GreaterThan, Num "100", LeftChevron, NormalToken "b", Colon, Num "456", Semicolon, NormalToken "c", Colon, InlineNormalString, CallLeftParenthesis, Str "hello world", RightParenthesis, RightChevron, Semicolon, Else, LeftChevron, NormalToken "b", Colon, Num "444", RightChevron, Semicolon, If, NormalToken "a", Equal, Num "9", Throw, Semicolon, NormalToken "b", Colon, Match, NormalToken "a", LeftChevron, Num "1", Then, Num "10", Semicolon, Num "2", Then, Num "100", Semicolon, Else, Num "0", RightChevron');
+
+s = new $lex.Lex(`lemo 0.1.0
+x: a + b * -b / 2.5 - b
+x: -3 ** 4
+x: 4**-3
+x: 4+(-3)
+x:-3
+`).toString();
+console.log(s === 'NormalToken "x", Colon, NormalToken "a", Plus, NormalToken "b", Times, Negative, NormalToken "b", Over, Num "2.5", Minus, NormalToken "b", Semicolon, NormalToken "x", Colon, Negative, Num "3", Power, Num "4", Semicolon, NormalToken "x", Colon, Num "4", Power, Negative, Num "3", Semicolon, NormalToken "x", Colon, Num "4", Plus, NormalLeftParenthesis, Negative, Num "3", RightParenthesis, Semicolon, NormalToken "x", Colon, Negative, Num "3"');
