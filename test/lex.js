@@ -74,3 +74,13 @@ x: 4+(-3)
 x:-3
 `).toString();
 console.log(s === 'NormalToken "x", Colon, NormalToken "a", Plus, NormalToken "b", Times, Negative, NormalToken "b", Over, Num "2.5", Minus, NormalToken "b", Semicolon, NormalToken "x", Colon, Negative, Num "3", Power, Num "4", Semicolon, NormalToken "x", Colon, Num "4", Power, Negative, Num "3", Semicolon, NormalToken "x", Colon, Num "4", Plus, NormalLeftParenthesis, Negative, Num "3", RightParenthesis, Semicolon, NormalToken "x", Colon, Negative, Num "3"');
+
+s = new $lex.Lex(`lemo 0.1.0
+x: 1e3
+x: 1e+3
+x: 1e-3
+x: 1e485
+x: 3.685e-48-2
+x: 0x4fe82
+`).toString();
+console.log(s === 'NormalToken "x", Colon, Num "1e3", Semicolon, NormalToken "x", Colon, Num "1e+3", Semicolon, NormalToken "x", Colon, Num "1e-3", Semicolon, NormalToken "x", Colon, Num "1e485", Semicolon, NormalToken "x", Colon, Num "3.685e-48", Minus, Num "2", Semicolon, NormalToken "x", Colon, Num "0x4fe82"');
