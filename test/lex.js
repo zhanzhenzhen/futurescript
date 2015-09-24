@@ -93,7 +93,7 @@ if aaa << task1() >> else << task2() >>; commonTask()
 `).toString();
 console.log(s === 'NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, Num "1", RightChevron, Semicolon, NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, NormalToken "x", ArrowFunction, LeftChevron, NormalToken "x", Plus, Num "1", RightChevron, Comma, NormalToken "bbb", Colon, Num "3", RightChevron, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, RightParenthesis, RightChevron, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, RightParenthesis, RightChevron, NormalToken "commonTask", CallLeftParenthesis, RightParenthesis, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, RightParenthesis, RightChevron, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, RightParenthesis, RightChevron, Semicolon, NormalToken "commonTask", CallLeftParenthesis, RightParenthesis');
 
-s = new $lex.Lex(`lemo 0.1.0, node module
+s = new $lex.Lex(`lemo 0.1.0
 @(b)
 (a)(b)
 a(b)
@@ -105,3 +105,12 @@ a{b:3}
 a {b:3}
 `).toString();
 console.log(s === 'Arg, CallLeftParenthesis, NormalToken "b", RightParenthesis, Semicolon, NormalLeftParenthesis, NormalToken "a", RightParenthesis, CallLeftParenthesis, NormalToken "b", RightParenthesis, Semicolon, NormalToken "a", CallLeftParenthesis, NormalToken "b", RightParenthesis, Semicolon, NormalToken "a", NormalLeftParenthesis, NormalToken "b", RightParenthesis, Semicolon, NormalToken "a", NormalToken "b", Semicolon, NormalToken "a", CallLeftBracket, NormalToken "b", RightBracket, Semicolon, NormalToken "a", NormalLeftBracket, NormalToken "b", RightBracket, Semicolon, NormalToken "a", CallLeftBrace, NormalToken "b", Colon, Num "3", RightBrace, Semicolon, NormalToken "a", NormalLeftBrace, NormalToken "b", Colon, Num "3", RightBrace');
+
+s = new $lex.Lex(`lemo 0.1.0
+a.0: 1
+a.(b): 1
+a."b": 1
+a."b c": 1
+(0).a: 1
+`).toString();
+console.log(s === 'NormalToken "a", Dot, Num "0", Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, NormalToken "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, InlineNormalString, CallLeftParenthesis, Str "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, InlineNormalString, CallLeftParenthesis, Str "b c", RightParenthesis, Colon, Num "1", Semicolon, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalToken "a", Colon, Num "1"');
