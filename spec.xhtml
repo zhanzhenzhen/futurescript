@@ -30,7 +30,7 @@
 <body>
 <h1>Less and more - Lemo语言 0.1.0</h1>
 <p>詹臻臻 zhanzhenzhen@hotmail.com</p>
-<h2>引言</h2>
+<h1>引言</h1>
 <p>JavaScript实在是一门很怪的语言。它早年加入了很多无用的功能，不幸的是，出于兼容性考虑，这些功能永远都不能被删掉。另一方面，JavaScript却缺少很多真正有用的功能。当然，刚刚发布的 ECMAScript 6th 补足了大部分缺少的东西，但代价是显得臃肿不堪。如果有一门新的语言，它只继承JavaScript最精华的部分呢？JavaScript最精华的部分是什么？我觉得JSON肯定包括在内，其他的就不多了。下面介绍Lemo语言，它编写的代码可以被JS调用。但反过来则不尽相同，如果使用了激进编译选项，那么大部分传统JS无法被Lemo代码所调用。但如果使用兼容选项，那么可以双向调用。</p>
 <pre><code><![CDATA[
     a: [] # var a = []
@@ -45,6 +45,7 @@
 
     c: <> Math.random() # var c = function() { return Math.random(); }
 ]]></code></pre>
+<h1>代码结构</h1>
 <h2>文件格式与外观</h2>
 <p>后缀名为.lemo。</p>
 <p>Lemo文件的外观：由版本行、语句、注释和无语义空白组成。语句是可以嵌套的。版本行和语句是有语义的，注释和无语义空白都是无语义的。</p>
@@ -152,6 +153,37 @@
     a.b(aaa)
     .c()
 ]]></code></pre>
+<h2>&lt;&lt;和&gt;&gt;</h2>
+<p>通常来说，把一行拆成几行会增加可读性。但有的时候恰恰相反，你会发觉把几行特别短小的代码合并成一行反而更好看，特别是当你有很多这样的“几行”的时候。例如：</p>
+<pre><code><![CDATA[
+    A: class << aaa: 1 >>
+    B: class << bbb: 1 >>
+    C: class << ccc: 1 >>
+    D: class << ddd: 1 >>
+    E: class << eee: 1 >>
+]]></code></pre>
+<p>和这个做对比：</p>
+<pre><code><![CDATA[
+    A: class
+        aaa: 1
+    B: class
+        bbb: 1
+    C: class
+        ccc: 1
+    D: class
+        ddd: 1
+    E: class
+        eee: 1
+]]></code></pre>
+<p>这时<code>&lt;&lt;</code>和<code>&gt;&gt;</code>的威力就体现出来了。<code>&lt;&lt;</code>表示接下去的代码缩进一级，<code>&gt;&gt;</code>表示还原。</p>
+<p><code>&lt;&lt;</code>和<code>&gt;&gt;</code>必须在1行内结束。也就是说，只能把多行合并成1行，无法把多行合并成2行。</p>
+<p>这两个符号和分号、逗号结合使用，可以达到最大程度的合并效果。分号合并行，但对象属性、数组元素、类属性需要用逗号合并。</p>
+<p>在<code>&gt;&gt;</code>后可加分号或逗号，也可不加分号或逗号，例如：</p>
+<pre><code><![CDATA[
+    A: class << aaa: x -> << x + 1 >>, bbb: 3 >>
+    if aaa << task1() >> else << task2() >>; commonTask()
+]]></code></pre>
+<p>这里的分号和逗号都是可略的。</p>
 <h2>版本行</h2>
 <p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <pre><code><![CDATA[
@@ -210,6 +242,9 @@
 <p><code>node import</code>是指导入被编译成node的导入（即require）。<code>node export</code>是指导出被编译成node的导出（即exports和module.exports）。<code>node module</code>是两者都做。<code>es module</code>是两者都不做（即按照ES6的规范）。</p>
 <p>编译后的代码是strict mode。</p>
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
+<h2>注释</h2>
+<p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。</p>
+<h1>基本语句</h1>
 <h2>函数</h2>
 <p>函数的声明有3种方式：<code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>。<code>&lt;&gt;</code>和<code>--</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
 <pre><code><![CDATA[
@@ -506,6 +541,7 @@
 ]]></code></pre>
 <p>当语句以<code>export</code>开头，且<code>export</code>后除了一个表达式再无其他时，表示ES6中的“默认导出”。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则必须产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，Lemo支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
 <p>导入和导出必须出现在顶层，因为这是基于ES6的。我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃Lemo的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
+<h1>数据</h1>
 <h2>字符串、正则表达式</h2>
 <p>字符串受CoffeeScript启发，不同之处在于不用单引号、不用3个连续引号、不支持字符串的多行自动连接。</p>
 <p>内联字符串：</p>
@@ -694,6 +730,17 @@
     <li>字面量通常是这种特定类型值的创造源头</li>
     <li>字面量有特定的表示法</li>
 </ul>
+<h2>上下文</h2>
+<p>JavaScript表示上下文的只有this和arguments，我们有5个，分别是：</p>
+<ul>
+    <li>当前对象：<code>me</code></li>
+    <li>当前对象的类：<code>Me</code></li>
+    <li>闭包中的当前函数：<code>fun</code></li>
+    <li>当前参数：<code>@</code></li>
+    <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
+</ul>
+<p><code>@</code>后面的点号可以省略，除非点号后面跟<code>(</code>，或者<code>"</code>、<code>v"</code>、<code>r"</code>之类的字符串或字符串扩展。</p>
+<h1>控制流</h1>
 <h2>逻辑运算</h2>
 <ul style="font-family: monospace;">
     <li>=</li>
@@ -950,87 +997,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         fun(i + 1)
 ]]></code></pre>
 <p>Lemo的递归有个好处，它会自动编译（优化）成循环，当自我调用的语句出现在尾部之时。所以，你无需担心堆栈溢出，就算循环1000000次也没关系，编译后的JS代码是一个真正的循环，突破了传统递归的限制。这个在内部是通过Babel实现的。</p>
-<h2>类</h2>
-<p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>new</code>、<code>nonew</code>、<code>me</code>、<code>Me</code>。例子：</p>
-<pre><code><![CDATA[
-    Animal: class
-        new: <>
-            me.name: @0
-
-        move: meters ->
-            alert me.name + " moved \(meters)m."
-
-    Snake: class from Animal
-        move: <>
-            alert "Slithering..."
-            super 5
-
-    Horse: class from Animal
-        move: <>
-            alert "Galloping..."
-            super 45
-
-    sam: Snake "Sammy the Python"
-    tom: Horse "Tommy the Palomino"
-
-    sam.move()
-    tom.move()
-]]></code></pre>
-<p>我们使用比传统更纯粹的形式：让赋值功能从class剥离出来，使用表达式而非语句。</p>
-<p>类的声明方式比较像CoffeeScript。但我们的更严格。我们多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。在Lemo中，类的所有声明的子项都必须是以冒号的形式。</p>
-<p>JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
-<p>getter和setter的例子：</p>
-<pre><code><![CDATA[
-    Animal: class
-        new: <>
-            me._name: @0
-
-        name'get: <>
-            me._name.toUpperCase()
-        name'set: <>
-            me._name: @0
-]]></code></pre>
-<p><code>'get</code>和<code>'set</code>一看就明白。这里的亮点是<code>me._name</code>，它编译成的JS不是像你猜测的那样是<code>this._name</code>，而是<code>this[_name]</code>，其中<code>_name</code>是Symbol。编译器一碰到<code>me.</code>，并且后面是以<code>_</code>开头的话，即这样编译。</p>
-<p>这被称作“防冲突字段”，可以把它近似看成是私有字段。防冲突字段的好处不是外部无法访问，外部虽然无法通过对象的属性直接访问，但可以间接访问，最大的好处是继承类可以放心地使用同名的防冲突字段，而不用担心会覆盖，这在类关系很复杂的大型项目中尤其重要。因为这些字段不属于API，通常别的开发者是不会告诉你是怎样用的，如果你继承别人写的类，有可能你的私有字段正好重名，类的行为就被破坏了。</p>
-<p>以<code>_</code>开头的字段名还可以出现在字段的声明中，例如：</p>
-<pre><code><![CDATA[
-    Animal: class
-        _name: "My Name"
-]]></code></pre>
-<p>字段的声明中只要是以<code>_</code>开头的，便自动成为防冲突字段。</p>
-<p>对于对象和类而言，属性、成员、字段是同义词。方法是指为函数的字段。</p>
-<p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
-<p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
-<p>CoffeeScript对于静态字段是使用<code>@property: value</code>，我们使用的是<code>static</code>，即<code>static property: value</code>。</p>
-<p>防冲突字段也适用于静态字段，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
-<p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
-<pre><code><![CDATA[
-    Website: class
-        static: <>
-            result: longTimeTask()
-            Me.part1: result[0]
-            Me.part2: result[1]
-]]></code></pre>
-<p>静态构造函数内的<code>me.</code>和<code>Me.</code>都指向当前闭包所在的类，即这个类本身，而不是当前对象的类。</p>
-<p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
-<pre><code><![CDATA[
-    Website: class
-        static: <>
-            Abc.prototype.def: <>
-                doSomething()
-]]></code></pre>
-<p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类的关系还是扁平为好。</p>
-<p>只要类有实例化需求，就要避免取非大写开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
-<h2>上下文</h2>
-<p>JavaScript表示上下文的只有this和arguments，我们有5个，分别是：</p>
-<ul>
-    <li>当前对象：<code>me</code></li>
-    <li>当前对象的类：<code>Me</code></li>
-    <li>闭包中的当前函数：<code>fun</code></li>
-    <li>当前参数：<code>@</code></li>
-    <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
-</ul>
-<p><code>@</code>后面的点号可以省略，除非点号后面跟<code>(</code>，或者<code>"</code>、<code>v"</code>、<code>r"</code>之类的字符串或字符串扩展。</p>
 <h2>异常</h2>
 <p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript几乎完全相同。例如：</p>
 <pre><code><![CDATA[
@@ -1043,74 +1009,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         cleanUp()
 ]]></code></pre>
 <p>唯一的不同是：若<code>throw</code>后面啥都没有，不是语法错误，而是：若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。</p>
-<h2>管道</h2>
-<p>管道操作符是<code>|></code>。例子：</p>
-<pre><code><![CDATA[
-    u: require("underscore")
-    [3, 4, 5] |> u.map(x -> x * 2) |> u.max
-]]></code></pre>
-<p>管道使我们使用underscore函数库可以一种人类习惯的顺序来书写，我们再也不用这样写了：</p>
-<pre><code><![CDATA[
-    u: require("underscore")
-    u.max(u.map([3, 4, 5], x -> x * 2))
-]]></code></pre>
-<p>还有一种运算符<code>::</code>，称之为“胖点”，专门应用于含有管道运算符的表达式，如果你想让管道和点号混合，胖点能提供更强的可读性。例如：</p>
-<pre><code><![CDATA[
-    [3, 4, 5] |> u.map(x -> x * 2) :: map(x -> x + 1) |> u.max
-]]></code></pre>
-<p>相当于：</p>
-<pre><code><![CDATA[
-    (([3, 4, 5] |> u.map(x -> x * 2)).map(x -> x + 1)) |> u.max
-]]></code></pre>
-<p>所以胖点基本就是点号，只不过它的优先级略低，和管道运算符相同。而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
-<h2>do</h2>
-<p><code>do</code>是<code>(...)()</code>的简便方法，比CoffeeScript的<code>do</code>功能略少，但更纯粹。它可以用来：</p>
-<ul>
-    <li>表示立即执行的递归</li>
-    <li>限定变量范围，防止冲突</li>
-    <li>分隔代码，增加可读性</li>
-</ul>
-<p>它的功能比CoffeeScript少在哪里？看一段CoffeeScript代码：</p>
-<pre><code><![CDATA[
-    for button in buttons
-        do (button) ->
-            button.onclick = ->
-                alert button.textContent
-]]></code></pre>
-<p>这种通过<code>do</code>来hold住一个变量名的方法，由于Lemo实行严格的禁止层级变量重名，所以我们不支持，但是现在看来也无需支持，因为有了更好的方法：</p>
-<pre><code><![CDATA[
-    buttons.forEach button ->
-        button.onclick: --
-            alert button.textContent
-]]></code></pre>
-<p>或：</p>
-<pre><code><![CDATA[
-    buttons.every button ->
-        button.onclick: --
-            alert button.textContent
-        true
-]]></code></pre>
-<p>两者有啥区别？这已经超出了本文的范围，不过挺重要的，还是说一下。这两个数组方法都属于ES5规范，当使用<code>forEach</code>时，是无法模拟<code>break</code>的。当使用<code>every</code>时，可以巧妙地模拟<code>break</code>，只需让它返回false即可。例如：</p>
-<pre><code><![CDATA[
-    range.every i ->
-        alert i
-        i < 5 ? true | false
-]]></code></pre>
-<p>也可以不用<code>true</code>、<code>false</code>，而用更短的<code>1</code>、<code>0</code>：</p>
-<pre><code><![CDATA[
-    range.every i ->
-        alert i
-        i < 5 ? 1 | 0
-]]></code></pre>
-<p>当然，<code>do</code>虽然不能像CoffeeScript一样hold住变量名，但你只要取个不一样的名字，就可以达到相同的目的：</p>
-<pre><code><![CDATA[
-    do --
-        btn: button
-        btn.onclick: --
-            alert btn.textContent
-]]></code></pre>
-<p>但问题是我们没有原生的循环，所以上面这个例子也没有什么用。</p>
-<p><code>do</code>的右面必须紧接函数字面量，这个比CoffeeScript严格。</p>
 <h2>异步</h2>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
 <pre><code><![CDATA[
@@ -1190,6 +1088,148 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             fff()'wait
         'wait
 ]]></code></pre>
+<h1>面向对象</h1>
+<h2>类</h2>
+<p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>new</code>、<code>nonew</code>、<code>me</code>、<code>Me</code>。例子：</p>
+<pre><code><![CDATA[
+    Animal: class
+        new: <>
+            me.name: @0
+
+        move: meters ->
+            alert me.name + " moved \(meters)m."
+
+    Snake: class from Animal
+        move: <>
+            alert "Slithering..."
+            super 5
+
+    Horse: class from Animal
+        move: <>
+            alert "Galloping..."
+            super 45
+
+    sam: Snake "Sammy the Python"
+    tom: Horse "Tommy the Palomino"
+
+    sam.move()
+    tom.move()
+]]></code></pre>
+<p>我们使用比传统更纯粹的形式：让赋值功能从class剥离出来，使用表达式而非语句。</p>
+<p>类的声明方式比较像CoffeeScript。但我们的更严格。我们多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。在Lemo中，类的所有声明的子项都必须是以冒号的形式。</p>
+<p>JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
+<p>getter和setter的例子：</p>
+<pre><code><![CDATA[
+    Animal: class
+        new: <>
+            me._name: @0
+
+        name'get: <>
+            me._name.toUpperCase()
+        name'set: <>
+            me._name: @0
+]]></code></pre>
+<p><code>'get</code>和<code>'set</code>一看就明白。这里的亮点是<code>me._name</code>，它编译成的JS不是像你猜测的那样是<code>this._name</code>，而是<code>this[_name]</code>，其中<code>_name</code>是Symbol。编译器一碰到<code>me.</code>，并且后面是以<code>_</code>开头的话，即这样编译。</p>
+<p>这被称作“防冲突字段”，可以把它近似看成是私有字段。防冲突字段的好处不是外部无法访问，外部虽然无法通过对象的属性直接访问，但可以间接访问，最大的好处是继承类可以放心地使用同名的防冲突字段，而不用担心会覆盖，这在类关系很复杂的大型项目中尤其重要。因为这些字段不属于API，通常别的开发者是不会告诉你是怎样用的，如果你继承别人写的类，有可能你的私有字段正好重名，类的行为就被破坏了。</p>
+<p>以<code>_</code>开头的字段名还可以出现在字段的声明中，例如：</p>
+<pre><code><![CDATA[
+    Animal: class
+        _name: "My Name"
+]]></code></pre>
+<p>字段的声明中只要是以<code>_</code>开头的，便自动成为防冲突字段。</p>
+<p>对于对象和类而言，属性、成员、字段是同义词。方法是指为函数的字段。</p>
+<p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
+<p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
+<p>CoffeeScript对于静态字段是使用<code>@property: value</code>，我们使用的是<code>static</code>，即<code>static property: value</code>。</p>
+<p>防冲突字段也适用于静态字段，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
+<p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
+<pre><code><![CDATA[
+    Website: class
+        static: <>
+            result: longTimeTask()
+            Me.part1: result[0]
+            Me.part2: result[1]
+]]></code></pre>
+<p>静态构造函数内的<code>me.</code>和<code>Me.</code>都指向当前闭包所在的类，即这个类本身，而不是当前对象的类。</p>
+<p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
+<pre><code><![CDATA[
+    Website: class
+        static: <>
+            Abc.prototype.def: <>
+                doSomething()
+]]></code></pre>
+<p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类的关系还是扁平为好。</p>
+<p>只要类有实例化需求，就要避免取非大写开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
+<h1>第三方包</h1>
+<h2>管道</h2>
+<p>管道操作符是<code>|></code>。例子：</p>
+<pre><code><![CDATA[
+    u: require("underscore")
+    [3, 4, 5] |> u.map(x -> x * 2) |> u.max
+]]></code></pre>
+<p>管道使我们使用underscore函数库可以一种人类习惯的顺序来书写，我们再也不用这样写了：</p>
+<pre><code><![CDATA[
+    u: require("underscore")
+    u.max(u.map([3, 4, 5], x -> x * 2))
+]]></code></pre>
+<p>还有一种运算符<code>::</code>，称之为“胖点”，专门应用于含有管道运算符的表达式，如果你想让管道和点号混合，胖点能提供更强的可读性。例如：</p>
+<pre><code><![CDATA[
+    [3, 4, 5] |> u.map(x -> x * 2) :: map(x -> x + 1) |> u.max
+]]></code></pre>
+<p>相当于：</p>
+<pre><code><![CDATA[
+    (([3, 4, 5] |> u.map(x -> x * 2)).map(x -> x + 1)) |> u.max
+]]></code></pre>
+<p>所以胖点基本就是点号，只不过它的优先级略低，和管道运算符相同。而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
+<h1>其他特色</h1>
+<h2>do</h2>
+<p><code>do</code>是<code>(...)()</code>的简便方法，比CoffeeScript的<code>do</code>功能略少，但更纯粹。它可以用来：</p>
+<ul>
+    <li>表示立即执行的递归</li>
+    <li>限定变量范围，防止冲突</li>
+    <li>分隔代码，增加可读性</li>
+</ul>
+<p>它的功能比CoffeeScript少在哪里？看一段CoffeeScript代码：</p>
+<pre><code><![CDATA[
+    for button in buttons
+        do (button) ->
+            button.onclick = ->
+                alert button.textContent
+]]></code></pre>
+<p>这种通过<code>do</code>来hold住一个变量名的方法，由于Lemo实行严格的禁止层级变量重名，所以我们不支持，但是现在看来也无需支持，因为有了更好的方法：</p>
+<pre><code><![CDATA[
+    buttons.forEach button ->
+        button.onclick: --
+            alert button.textContent
+]]></code></pre>
+<p>或：</p>
+<pre><code><![CDATA[
+    buttons.every button ->
+        button.onclick: --
+            alert button.textContent
+        true
+]]></code></pre>
+<p>两者有啥区别？这已经超出了本文的范围，不过挺重要的，还是说一下。这两个数组方法都属于ES5规范，当使用<code>forEach</code>时，是无法模拟<code>break</code>的。当使用<code>every</code>时，可以巧妙地模拟<code>break</code>，只需让它返回false即可。例如：</p>
+<pre><code><![CDATA[
+    range.every i ->
+        alert i
+        i < 5 ? true | false
+]]></code></pre>
+<p>也可以不用<code>true</code>、<code>false</code>，而用更短的<code>1</code>、<code>0</code>：</p>
+<pre><code><![CDATA[
+    range.every i ->
+        alert i
+        i < 5 ? 1 | 0
+]]></code></pre>
+<p>当然，<code>do</code>虽然不能像CoffeeScript一样hold住变量名，但你只要取个不一样的名字，就可以达到相同的目的：</p>
+<pre><code><![CDATA[
+    do --
+        btn: button
+        btn.onclick: --
+            alert btn.textContent
+]]></code></pre>
+<p>但问题是我们没有原生的循环，所以上面这个例子也没有什么用。</p>
+<p><code>do</code>的右面必须紧接函数字面量，这个比CoffeeScript严格。</p>
 <h2>存在</h2>
 <p>这几个关键字或操作符和“存在性”有关<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
 <p><code>a'ok</code>，意思就是a既不是void，也不是null。</p>
@@ -1276,8 +1316,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>如果后面的字符不是空白，则如果前面的字符是字母、数字、<code>_</code>、<code>$</code>、<code>)</code>、<code>]</code>、<code>}</code>、<code>"</code>或<code>@</code>，则被解析为加号和减号，否则被解析为正负号。</p>
 <p>另外，作为运算符时，<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>之后不能紧接<code>+</code>或<code>-</code>。</p>
-<h2>注释</h2>
-<p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。</p>
 <h2>插入JavaScript</h2>
 <p>使用<code>js"</code>。例如：</p>
 <pre><code><![CDATA[
@@ -1288,37 +1326,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     "
 ]]></code></pre>
 <p>它完全废除了<code>\</code>的功能，双引号也无法在其中用任何变通的办法表示（否则会有代价），不过妙在JS也支持单引号。如果必须用双引号，就用格式。</p>
-<h2>&lt;&lt;和&gt;&gt;</h2>
-<p>通常来说，把一行拆成几行会增加可读性。但有的时候恰恰相反，你会发觉把几行特别短小的代码合并成一行反而更好看，特别是当你有很多这样的“几行”的时候。例如：</p>
-<pre><code><![CDATA[
-    A: class << aaa: 1 >>
-    B: class << bbb: 1 >>
-    C: class << ccc: 1 >>
-    D: class << ddd: 1 >>
-    E: class << eee: 1 >>
-]]></code></pre>
-<p>和这个做对比：</p>
-<pre><code><![CDATA[
-    A: class
-        aaa: 1
-    B: class
-        bbb: 1
-    C: class
-        ccc: 1
-    D: class
-        ddd: 1
-    E: class
-        eee: 1
-]]></code></pre>
-<p>这时<code>&lt;&lt;</code>和<code>&gt;&gt;</code>的威力就体现出来了。<code>&lt;&lt;</code>表示接下去的代码缩进一级，<code>&gt;&gt;</code>表示还原。</p>
-<p><code>&lt;&lt;</code>和<code>&gt;&gt;</code>必须在1行内结束。也就是说，只能把多行合并成1行，无法把多行合并成2行。</p>
-<p>这两个符号和分号、逗号结合使用，可以达到最大程度的合并效果。分号合并行，但对象属性、数组元素、类属性需要用逗号合并。</p>
-<p>在<code>&gt;&gt;</code>后可加分号或逗号，也可不加分号或逗号，例如：</p>
-<pre><code><![CDATA[
-    A: class << aaa: x -> << x + 1 >>, bbb: 3 >>
-    if aaa << task1() >> else << task2() >>; commonTask()
-]]></code></pre>
-<p>这里的分号和逗号都是可略的。</p>
+<h1>汇总</h1>
 <h2>关键字</h2>
 <ul style="font-family: monospace;">
     <li>above</li>
