@@ -15,7 +15,7 @@
             vertical-align: top;
             text-align: left;
         }
-        p > code {
+        p > code, li > code {
             background-color: rgb(224,224,224);
             padding-left: 0.2em;
             padding-right: 0.2em;
@@ -30,21 +30,101 @@
 <body>
 <h1>Less and more - Lemo语言 0.1.0</h1>
 <p>詹臻臻 zhanzhenzhen@hotmail.com</p>
-<h1>引言</h1>
-<p>JavaScript实在是一门很怪的语言。它早年加入了很多无用的功能，不幸的是，出于兼容性考虑，这些功能永远都不能被删掉。另一方面，JavaScript却缺少很多真正有用的功能。当然，刚刚发布的 ECMAScript 6th 补足了大部分缺少的东西，但代价是显得臃肿不堪。如果有一门新的语言，它只继承JavaScript最精华的部分呢？JavaScript最精华的部分是什么？我觉得JSON肯定包括在内，其他的就不多了。下面介绍Lemo语言，它编写的代码可以被JS调用。但反过来则不尽相同，如果使用了激进编译选项，那么大部分传统JS无法被Lemo代码所调用。但如果使用兼容选项，那么可以双向调用。</p>
+<h1>简介</h1>
+<p>JavaScript实在是一门很怪的语言。它早年加入了很多无用的功能，不幸的是，出于兼容性考虑，这些功能永远都不能被删掉。另一方面，JavaScript却缺少很多真正有用的功能。当然，刚刚发布的 ECMAScript 6 补足了大部分缺少的东西，但代价是显得臃肿不堪。如果有一门新的语言，它只继承JavaScript最精华的部分呢？JavaScript最精华的部分是什么？有两个：</p>
+<ul>
+    <li>闭包的思想</li>
+    <li>JSON（大括号和中括号分别表示对象和数组非常直观）</li>
+</ul>
+<p>2009年诞生了CoffeeScript，更改了JavaScript显得不那么协调的语法，取得了巨大的成功，然而仍然留下一些问题：</p>
+<ul>
+    <li>一些类C语言的语法仍保留着，其实它们的可读性很差，而且形式不完美。</li>
+    <li>异步等可以极大简化编程的功能的缺失。</li>
+    <li>版本问题。出于兼容考虑，新版本无法做出大的改变，导致进步越来越微小。</li>
+</ul>
+<p>Lemo语言带来的第一感，是它有着极其统一的语法：</p>
+<ul>
+    <li>中括号<code>[</code>、<code>]</code>始终表示数组字面量，大括号<code>{</code>、<code>}</code>始终表示对象字面量。</li>
+    <li>成员访问都是用点号<code>.</code>表示，不管是对象成员，还是数组成员（即元素），也不管对象成员名是不是加了引号，都是如此。</li>
+    <li>只要是“令左边为右边的值”，不管是对象字面量，还是赋值，都用冒号<code>:</code>。</li>
+    <li>没有烦人的<code>==</code>与<code>===</code>，等号<code>=</code>就表示相等。</li>
+</ul>
 <pre><code><![CDATA[
-    a: [] # var a = []
-    a.0: "hello" # a[0] = "hello"
-    a.1: "world" # a[1] = "world"
-    b: 100
+    a: ["hello", "world"] # var a = ["hello", "world"]
+    console.log(a.0, a.1) # console.log(a[0], a[1])
+
+    b: 5
     a.(b): "last" # a[b] = "last"
 
-    b: {}
-    b.scheme: "https"
-    b."content-length": 123 # b["content-length"] = 123
-
-    c: <> Math.random() # var c = function() { return Math.random(); }
+    c: {scheme: "http"} # var c = {scheme: "http"}
+    c.scheme: "https"
+    c."content-length": 123 # c["content-length"] = 123
 ]]></code></pre>
+<p>Lemo语言带来的第二感，是可读性极佳。看这段：</p>
+<pre><code><![CDATA[
+    a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
+]]></code></pre>
+<p>CoffeeScript也可以用<code>a ?= 8</code>，然而Lemo的可读性更佳。</p>
+<p>Lemo语言带来的第三感，是能够极大简化你的代码。熟悉JS的程序员都知道异步的语法有多么不自然，但现在我们可以：</p>
+<pre><code><![CDATA[
+    console.log abc()'wait.def()'wait.ghi()'wait
+]]></code></pre>
+<p>要知道，promise相对于传统的“恐怖大三角”回调函数已经是一个进步了。但是上面这一行，就相当于下面这一大段promise：</p>
+<pre><code><![CDATA[
+    abc().then(function(x){
+        return x.def();
+    })
+    .then(function(x){
+        return x.ghi();
+    })
+    .then(function(x){
+        console.log(x);
+    });
+]]></code></pre>
+<p>Lemo语言里面，没有长度超过7个字母的关键字，简洁存在于我们的基因之中。像是：</p>
+<ul>
+    <li><code>undefined</code>，我们用<code>void</code>代替。</li>
+    <li><code>arguments</code>，我们用<code>@</code>代替。<code>@0</code>就表示<code>arguments[0]</code>。</li>
+</ul>
+<p>Lemo规定代码文件必须在顶端标明该文件适用的Lemo语言版本。我相信，这个方法能一举解决JS和CoffeeScript的版本问题，这是因为，我们的任何版本都包含历史版本的编译器。这意味着，将来的2.0.0包含1.0.0，当然也包含0.1.0。这是一个创新。</p>
+<p>为了看懂Lemo代码，还需要额外记住的东西真的非常少：</p>
+<ul>
+    <li>JS的<code>a(b)</code>可简化为<code>a b</code>。</li>
+    <li><code>**</code>表示幂运算。<code>2 ** 3</code>即为8。</li>
+    <li><code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>都表示函数，即JS的<code>function(...){...}</code>。箭头是带形参的，其他两个不带形参。区别？后面会说到。</li>
+</ul>
+<p>好了，基本上你只要看完了这一章，任何Lemo代码都能看懂，至少也能猜个八九不离十。</p>
+<p>这一章的最后，附上一段示例，可以将其粘贴到浏览器上，或在本地运行（输入<code>lemo &lt;filename&gt;</code>）。</p>
+<pre><code><![CDATA[
+    Lemo 0.1.0
+
+    # Assignment:
+    number:   42
+    opposite: true
+
+    # Conditions:
+    number: -42 if opposite
+
+    # Functions:
+    square: <> @0 ** 2
+
+    # Arrays:
+    list: [1, 2, 3, 4, 5]
+
+    # Objects:
+    math: {
+        root:   Math.sqrt
+        square: square
+        cube:   <> @0 * square @0
+    }
+
+    # Existence:
+    alert "I knew it!" if elvis'ok
+
+    # Array comprehensions:
+    cubes: list.map <> math.cube @0
+]]></code></pre>
+<p>如果你不仅想看懂，而且想写Lemo代码，那么请看完余下的章节。</p>
 <h1>代码结构</h1>
 <h2>文件格式与外观</h2>
 <p>后缀名为.lemo。</p>
@@ -232,6 +312,7 @@
 <p>激进模式中，管道操作符把数组单参数分隔为两部分，而兼容模式中管道操作符把所有参数分隔为两部分。</p>
 <p>激进模式中，<code>'</code>只能是二元的，而兼容模式中<code>'</code>还可以是一元的。</p>
 <p>下文中，为求简便，如果写道“无参数”，也可指激进模式中的参数为<code>void</code>的情形。</p>
+<p>Lemo代码可以被JS调用。但反过来则不尽相同，如果使用了激进编译选项，那么大部分传统JS无法被Lemo代码所调用。但如果使用兼容选项，那么可以双向调用。</p>
 <p><code>fast new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写的加，小写的不加。但只能识别普通的表示法，像引号内的就不能识别，例如：</p>
 <pre><code><![CDATA[
     aaa."bbb".Ccc() # new can be omitted
@@ -1612,34 +1693,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>import "x"<br/>import("x")</code></td>
     </tr>
 </table>
-<h2>例子</h2>
-<pre><code><![CDATA[
-    # Assignment:
-    number:   42
-    opposite: true
-
-    # Conditions:
-    number: -42 if opposite
-
-    # Functions:
-    square: <> @ * @
-
-    # Arrays:
-    list: [1, 2, 3, 4, 5]
-
-    # Objects:
-    math: {
-        root:   Math.sqrt
-        square: square
-        cube:   <> @ * square @
-    }
-
-    # Existence:
-    alert "I knew it!" if elvis'ok
-
-    # Array comprehensions:
-    cubes: list.map <> math.cube @
-]]></code></pre>
 <h2>常见问题</h2>
 <p>问：为啥没有正则表达式符号？</p>
 <p>答：正则表达式完全可以用<code>r"</code>来表示。</p>
