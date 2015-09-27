@@ -917,12 +917,12 @@
 ]]></code></pre>
 <p>但是要注意，条件前置时无论怎样省略，<code>if</code>和<code>then</code>必须至少出现一个。</p>
 <p>如果<code>else</code>块省略，那么则当<code>else</code>时整个<code>if</code>表达式的值为<code>void</code>。</p>
-<p>条件还可以后置，这时就只能用<code>if</code>，例如：</p>
+<p>条件还可以后置，这时<code>if</code>就不能省略，例如：</p>
 <pre><code><![CDATA[
     alert("a is true!") if a # if (a) {alert("a is true!");}
     mood: "happy" if singing # if (singing) {mood = "happy";}
 ]]></code></pre>
-<p>一条语句中只可以含有一个后置的<code>if</code>。</p>
+<p>一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是块，只能是单条子语句。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
 <p>还有一点和CoffeeScript不同，就是当碰到分号时：</p>
 <pre><code><![CDATA[
     if x > 100 then aaa(); bbb()
