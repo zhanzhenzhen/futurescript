@@ -37,3 +37,19 @@ a.b <>
 .c()
 `).toString();
 console.log(s === 'NormalToken "b", Dot, NormalToken "a", Colon, NormalToken "a", Dot, NormalToken "b", Semicolon, NormalToken "a", Dot, NormalToken "b", DiamondFunction, LeftChevron, NormalToken "aaa", CallLeftParenthesis, Arg, Dot, NormalToken "a", RightParenthesis, RightChevron, Dot, NormalToken "c", CallLeftParenthesis, RightParenthesis');
+
+s = new $lex.Lex(`lemo 0.1.0
+a: 3
+as c
+a: [
+    x ->
+        aaa(x)
+    as c
+    <>
+    above as d
+    4
+]
+a
+export as b
+`).toString();
+console.log(s === 'NormalToken "a", Colon, Num "3", As, NormalToken "c", Semicolon, NormalToken "a", Colon, NormalLeftBracket, NormalToken "x", ArrowFunction, LeftChevron, NormalToken "aaa", CallLeftParenthesis, NormalToken "x", RightParenthesis, RightChevron, As, NormalToken "c", Semicolon, DiamondFunction, As, NormalToken "d", Semicolon, Num "4", RightBracket, Semicolon, NormalToken "a", ExportAs, NormalToken "b"');

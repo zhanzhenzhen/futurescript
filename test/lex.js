@@ -40,7 +40,7 @@ mp: <>
     @0 * @1
 above export as multiply2
 `).toString();
-console.log(s === 'NormalToken "lib", Colon, Import, InlineNormalString, CallLeftParenthesis, Str "lib", RightParenthesis, Semicolon, NormalLeftBrace, NormalToken "fun1", Comma, NormalToken "fun2", As, NormalToken "f2", RightBrace, Colon, Import, InlineNormalString, CallLeftParenthesis, Str "lib2", RightParenthesis, Semicolon, NormalToken "multiply", NormalVariant, NormalToken "export", Colon, DiamondFunction, Arg, Num "0", Times, Arg, Num "1", Semicolon, NormalToken "mp", Colon, DiamondFunction, LeftChevron, Arg, Num "0", Times, Arg, Num "1", RightChevron, Semicolon, Above, Export, As, NormalToken "multiply2"');
+console.log(s === 'NormalToken "lib", Colon, Import, InlineNormalString, CallLeftParenthesis, Str "lib", RightParenthesis, Semicolon, NormalLeftBrace, NormalToken "fun1", Comma, NormalToken "fun2", As, NormalToken "f2", RightBrace, Colon, Import, InlineNormalString, CallLeftParenthesis, Str "lib2", RightParenthesis, Semicolon, NormalToken "multiply", NormalVariant, NormalToken "export", Colon, DiamondFunction, Arg, Num "0", Times, Arg, Num "1", Semicolon, NormalToken "mp", Colon, DiamondFunction, LeftChevron, Arg, Num "0", Times, Arg, Num "1", RightChevron, ExportAs, NormalToken "multiply2"');
 
 s = new $lex.Lex(`lemo 0.1.0
 b.if: 1
