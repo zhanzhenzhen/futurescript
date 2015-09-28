@@ -69,7 +69,7 @@ console.log(s === 'If, NormalToken "a", GreaterThan, Num "100", LeftChevron, Nor
 s = new $lex.Lex(`lemo 0.1.0
 x: a + b * -b / 2.5 - b
 x: -3 ** 4
-x: 4**-3
+x: 4** -3
 x: 4+(-3)
 x:-3
 `).toString();
