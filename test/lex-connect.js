@@ -53,3 +53,21 @@ a
 export as b
 `).toString();
 console.log(s === 'NormalToken "a", Colon, Num "3", As, NormalToken "c", Semicolon, NormalToken "a", Colon, NormalLeftBracket, NormalToken "x", ArrowFunction, LeftChevron, NormalToken "aaa", CallLeftParenthesis, NormalToken "x", RightParenthesis, RightChevron, As, NormalToken "c", Semicolon, DiamondFunction, As, NormalToken "d", Semicolon, Num "4", RightBracket, Semicolon, NormalToken "a", ExportAs, NormalToken "b"');
+
+s = new $lex.Lex(`lemo 0.1.0
+x: 2 as
+a
+x: 2
+as
+a
+x
+:
+2
+as
+a
+x: a
+'aa
+'bb
+    'cc
+`).toString();
+console.log(s === 'NormalToken "x", Colon, Num "2", As, NormalToken "a", Semicolon, NormalToken "x", Colon, Num "2", As, NormalToken "a", Semicolon, NormalToken "x", Colon, Num "2", As, NormalToken "a", Semicolon, NormalToken "x", Colon, NormalToken "a", NormalVariant, NormalToken "aa", NormalVariant, NormalToken "bb", NormalVariant, NormalToken "cc"');
