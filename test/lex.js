@@ -114,3 +114,12 @@ a."b c": 1
 (0).a: 1
 `).toString();
 console.log(s === 'NormalToken "a", Dot, Num "0", Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, NormalToken "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, InlineNormalString, CallLeftParenthesis, Str "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, InlineNormalString, CallLeftParenthesis, Str "b c", RightParenthesis, Colon, Num "1", Semicolon, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalToken "a", Colon, Num "1"');
+
+s = new $lex.Lex(`lemo 0.1.0
+Abc: class from Ab
+    aaa: <>
+    bbb: 2
+x: abc |> def :: ghi
+a'ok.b'()
+`).toString();
+console.log(s === 'NormalToken "Abc", Colon, Class, NormalToken "from", NormalToken "Ab", LeftChevron, NormalToken "aaa", Colon, DiamondFunction, Semicolon, NormalToken "bbb", Colon, Num "2", RightChevron, Semicolon, NormalToken "x", Colon, NormalToken "abc", Pipe, NormalToken "def", FatDot, NormalToken "ghi", Semicolon, NormalToken "a", NormalVariant, NormalToken "ok", Dot, NormalToken "b", FunctionVariant, CallLeftParenthesis, RightParenthesis');
