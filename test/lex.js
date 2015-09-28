@@ -64,7 +64,7 @@ b: match a
     2 ? 100
     |   0
 `).toString();
-console.log(s === 'If, NormalToken "a", GreaterThan, Num "100", LeftChevron, NormalToken "b", Colon, Num "456", Semicolon, NormalToken "c", Colon, InlineNormalString, CallLeftParenthesis, Str "hello world", RightParenthesis, RightChevron, Semicolon, Else, LeftChevron, NormalToken "b", Colon, Num "444", RightChevron, Semicolon, If, NormalToken "a", Equal, Num "9", Throw, Semicolon, NormalToken "b", Colon, Match, NormalToken "a", LeftChevron, Num "1", Then, Num "10", Semicolon, Num "2", Then, Num "100", Semicolon, Else, Num "0", RightChevron');
+console.log(s === 'If, NormalToken "a", GreaterThan, Num "100", LeftChevron, NormalToken "b", Colon, Num "456", Semicolon, NormalToken "c", Colon, InlineNormalString, CallLeftParenthesis, Str "hello world", RightParenthesis, RightChevron, Else, LeftChevron, NormalToken "b", Colon, Num "444", RightChevron, Semicolon, If, NormalToken "a", Equal, Num "9", Throw, Semicolon, NormalToken "b", Colon, Match, NormalToken "a", LeftChevron, Num "1", Then, Num "10", Semicolon, Num "2", Then, Num "100", Semicolon, Else, Num "0", RightChevron');
 
 s = new $lex.Lex(`lemo 0.1.0
 x: a + b * -b / 2.5 - b
@@ -91,7 +91,7 @@ A: class << aaa: x -> << x + 1 >>, bbb: 3 >>
 if aaa << task1() >> else << task2() >> commonTask()
 if aaa << task1() >> else << task2() >>; commonTask()
 `).toString();
-console.log(s === 'NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, Num "1", RightChevron, Semicolon, NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, NormalToken "x", ArrowFunction, LeftChevron, NormalToken "x", Plus, Num "1", RightChevron, Semicolon, Comma, NormalToken "bbb", Colon, Num "3", RightChevron, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, RightParenthesis, RightChevron, Semicolon, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, RightParenthesis, RightChevron, Semicolon, NormalToken "commonTask", CallLeftParenthesis, RightParenthesis, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, RightParenthesis, RightChevron, Semicolon, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, RightParenthesis, RightChevron, Semicolon, NormalToken "commonTask", CallLeftParenthesis, RightParenthesis');
+console.log(s === 'NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, Num "1", RightChevron, Semicolon, NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, NormalToken "x", ArrowFunction, LeftChevron, NormalToken "x", Plus, Num "1", RightChevron, Semicolon, Comma, NormalToken "bbb", Colon, Num "3", RightChevron, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, RightParenthesis, RightChevron, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, RightParenthesis, RightChevron, Semicolon, NormalToken "commonTask", CallLeftParenthesis, RightParenthesis, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, RightParenthesis, RightChevron, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, RightParenthesis, RightChevron, Semicolon, NormalToken "commonTask", CallLeftParenthesis, RightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 @(b)
