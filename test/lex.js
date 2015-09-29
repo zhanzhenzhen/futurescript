@@ -49,8 +49,9 @@ b: {if: 1}
 b: class
     a: 1
     if: 2
+    match'get: 3
 `).toString();
-console.log(s === 'NormalToken "b", Dot, NormalToken "if", Colon, Num "1", Semicolon, NormalToken "b", Dot, NormalToken "if", Dot, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "b", Colon, NormalLeftBrace, NormalToken "if", Colon, Num "1", RightBrace, Semicolon, NormalToken "b", Colon, Class, LeftChevron, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "if", Colon, Num "2", RightChevron');
+console.log(s === 'NormalToken "b", Dot, NormalToken "if", Colon, Num "1", Semicolon, NormalToken "b", Dot, NormalToken "if", Dot, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "b", Colon, NormalLeftBrace, NormalToken "if", Colon, Num "1", RightBrace, Semicolon, NormalToken "b", Colon, Class, LeftChevron, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "if", Colon, Num "2", Semicolon, NormalToken "match", NormalVariant, NormalToken "get", Colon, Num "3", RightChevron');
 
 s = new $lex.Lex(`lemo 0.1.0
 if a > 100

@@ -65,9 +65,5 @@ x
 2
 as
 a
-x: a
-'aa
-'bb
-    'cc
 `).toString();
-console.log(s === 'NormalToken "x", Colon, Num "2", As, NormalToken "a", Semicolon, NormalToken "x", Colon, Num "2", As, NormalToken "a", Semicolon, NormalToken "x", Colon, Num "2", As, NormalToken "a", Semicolon, NormalToken "x", Colon, NormalToken "a", NormalVariant, NormalToken "aa", NormalVariant, NormalToken "bb", NormalVariant, NormalToken "cc"');
+console.log(s === 'NormalToken "x", Colon, Num "2", As, NormalToken "a", Semicolon, NormalToken "x", Colon, Num "2", As, NormalToken "a", Semicolon, NormalToken "x", Colon, Num "2", As, NormalToken "a"');
