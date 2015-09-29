@@ -1361,7 +1361,11 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <pre><code><![CDATA[
     a ' ok
 ]]></code></pre>
-<p>有些情况下二元<code>'</code>的第一个算元可以省略，例如函数参数默认值中的变量名，但是它仍然属于二元。</p>
+<p>行不能以<code>'</code>开始。像这个是非法的（在未来版本中可能会合法但有另外的含义）：</p>
+<pre><code><![CDATA[
+    a
+    'ok
+]]></code></pre>
 <h2>in</h2>
 <p><code>in</code>的用法和CoffeeScript几乎完全相同，当然，不支持<code>!in</code>，可以用<code>... not in ...</code>或<code>not ... in ...</code>。</p>
 <h2>is</h2>
