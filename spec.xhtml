@@ -51,7 +51,7 @@
     <li>异步等可以极大简化编程的功能的缺失。</li>
     <li>版本问题。出于兼容考虑，新版本无法做出大的改变，导致进步越来越微小。</li>
 </ul>
-<p>Lemo语言带来的第一感，是它有着极其统一的语法：</p>
+<p>Lemo语言的第一弹，是它有着极其统一的语法：</p>
 <ul>
     <li>中括号<code>[</code>、<code>]</code>始终表示数组字面量，大括号<code>{</code>、<code>}</code>始终表示对象字面量。</li>
     <li>成员访问都是用点号<code>.</code>表示，不管是对象成员，还是数组成员（即元素），也不管对象成员名是不是加了引号，都是如此。</li>
@@ -69,12 +69,12 @@
     c.scheme: "https"
     c."content-length": 123 # c["content-length"] = 123
 ]]></code></pre>
-<p>Lemo语言带来的第二感，是可读性极佳。看这段：</p>
+<p>Lemo语言的第二弹，是可读性极佳。看这段：</p>
 <pre><code><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
 ]]></code></pre>
 <p>CoffeeScript也可以用<code>a ?= 8</code>，然而Lemo的可读性更佳。</p>
-<p>Lemo语言带来的第三感，是能够极大简化你的代码。熟悉JS的程序员都知道异步的语法有多么不自然，但现在我们可以：</p>
+<p>Lemo语言的第三弹，是能够极大简化你的代码。熟悉JS的程序员都知道异步的语法有多么不自然，但现在我们可以：</p>
 <pre><code><![CDATA[
     console.log abc()'wait.def()'wait.ghi()'wait
 ]]></code></pre>
