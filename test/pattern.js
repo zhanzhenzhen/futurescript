@@ -17,6 +17,8 @@ if a = 1
 else
     b: 2
 `);
-result = $statement.Statement.searchOuterPattern([$statement.Any, $lex.NormalToken, $lex.Equal, $statement.Any], lex, 0, lex.value.length - 1, true);
 console.log(lex);
+result = $statement.Statement.searchOuterPattern([$statement.Any, $lex.NormalToken, $lex.Equal, $statement.Any], lex, 0, lex.value.length - 1, true);
+console.log(result);
+result = $statement.Statement.searchOuterPattern([$statement.Tokens, $lex.NormalToken, $lex.Equal, $statement.Any], lex, 0, lex.value.length - 1, true);
 console.log(result);
