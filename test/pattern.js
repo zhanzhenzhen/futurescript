@@ -20,5 +20,5 @@ else
 console.log(lex);
 result = $statement.Statement.searchOuterPattern([$statement.Any, $lex.NormalToken, $lex.Equal, $statement.Any], lex, 0, lex.value.length - 1, true);
 console.log(result);
-result = $statement.Statement.searchOuterPattern([$statement.Tokens, $lex.NormalToken, $lex.Equal, $statement.Any], lex, 0, lex.value.length - 1, true);
+result = $statement.Statement.searchOuterPattern([$statement.Tokens, $lex.NormalToken, $lex.Equal, $statement.Tokens], lex, 0, lex.value.length - 1, true);
 console.log(result);
