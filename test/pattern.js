@@ -22,3 +22,5 @@ result = $pattern.Pattern.searchPattern([$pattern.Any, $lex.NormalToken, $lex.Eq
 console.log(result);
 result = $pattern.Pattern.searchPattern([$pattern.Tokens, $lex.NormalToken, $lex.Equal, $pattern.Tokens], lex, 0, lex.value.length - 1, true);
 console.log(result);
+result = $pattern.Pattern.searchPattern([$lex.If, $pattern.Any, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair], lex, 0, lex.value.length - 1, true);
+console.log(result);
