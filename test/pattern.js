@@ -8,7 +8,11 @@ let lex, result;
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1
 `);
-result = $pattern.Pattern.searchSequence([$lex.NormalToken, $lex.Colon], lex, 0, lex.value.length - 1, true);
+result = $pattern.Pattern.searchSequence(
+    [$lex.NormalToken, $lex.Colon],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
 console.log(result);
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
@@ -18,9 +22,21 @@ else
     b: 2
 `);
 console.log(lex);
-result = $pattern.Pattern.searchPattern([$pattern.Any, $lex.NormalToken, $lex.Equal, $pattern.Any], lex, 0, lex.value.length - 1, true);
+result = $pattern.Pattern.searchPattern(
+    [$pattern.Any, $lex.NormalToken, $lex.Equal, $pattern.Any],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
 console.log(result);
-result = $pattern.Pattern.searchPattern([$pattern.Tokens, $lex.NormalToken, $lex.Equal, $pattern.Tokens], lex, 0, lex.value.length - 1, true);
+result = $pattern.Pattern.searchPattern(
+    [$pattern.Tokens, $lex.NormalToken, $lex.Equal, $pattern.Tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
 console.log(result);
-result = $pattern.Pattern.searchPattern([$lex.If, $pattern.Any, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair], lex, 0, lex.value.length - 1, true);
+result = $pattern.Pattern.searchPattern(
+    [$lex.If, $pattern.Any, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
 console.log(result);
