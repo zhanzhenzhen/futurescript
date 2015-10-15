@@ -27,54 +27,66 @@ result = $pattern.Pattern.searchPattern(
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
-console.log(result.length === 4);
-console.log(result[0] === 0);
-console.log(result[1] === 1);
-console.log(result[2] === 2);
-console.log(result[3] === 3);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 2 &&
+    result[3] === 3
+);
 
 result = $pattern.Pattern.searchPattern(
     [$pattern.Tokens, $lex.NormalToken, $lex.Equal, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
-console.log(result.length === 4);
-console.log(result[0] === 0);
-console.log(result[1] === 1);
-console.log(result[2] === 2);
-console.log(result[3] === 3);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 2 &&
+    result[3] === 3
+);
 
 result = $pattern.Pattern.searchPattern(
     [$lex.If, $pattern.Any, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
-console.log(result);
-console.log(result.length === 5);
-console.log(result[0] === 0);
-console.log(result[1] === 1);
-console.log(result[2] === 4);
-console.log(result[3] === 9);
-console.log(result[4] === 10);
+console.log(
+    Array.isArray(result) && result.length === 5 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 4 &&
+    result[3] === 9 &&
+    result[4] === 10
+);
 
 result = $pattern.Pattern.searchPattern(
     [$lex.If, $pattern.Tokens, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
-console.log(result.length === 5);
-console.log(result[0] === 0);
-console.log(result[1] === 1);
-console.log(result[2] === 4);
-console.log(result[3] === 9);
-console.log(result[4] === 10);
+console.log(
+    Array.isArray(result) && result.length === 5 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 4 &&
+    result[3] === 9 &&
+    result[4] === 10
+);
 
 result = $pattern.Pattern.searchPattern(
     [$pattern.Tokens, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
-console.log(result);
+console.log(
+    Array.isArray(result) && result.length === 3 &&
+    result[0] === 0 &&
+    result[1] === 9 &&
+    result[2] === 10
+);
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a ? b | c + d ? e | f
