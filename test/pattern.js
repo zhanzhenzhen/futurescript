@@ -49,6 +49,7 @@ result = $pattern.Pattern.searchPattern(
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
+console.log(result);
 console.log(result.length === 5);
 console.log(result[0] === 0);
 console.log(result[1] === 1);
