@@ -85,3 +85,9 @@ result = $pattern.Pattern.searchPattern(
     false
 );
 console.log(result);
+result = $pattern.Pattern.searchPattern(
+    [$pattern.Tokens, $lex.Then, $pattern.Tokens, $lex.Else, $pattern.Tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result);
