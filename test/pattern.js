@@ -91,15 +91,31 @@ console.log(
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a ? b | c + d ? e | f
 `);
+
 result = $pattern.Pattern.searchPattern(
     [$pattern.Tokens, $lex.Then, $pattern.Tokens, $lex.Else, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     false
 );
-console.log(result);
+console.log(
+    Array.isArray(result) && result.length === 5 &&
+    result[0] === 4 &&
+    result[1] === 7 &&
+    result[2] === 8 &&
+    result[3] === 9 &&
+    result[4] === 10
+);
+
 result = $pattern.Pattern.searchPattern(
     [$pattern.Tokens, $lex.Then, $pattern.Tokens, $lex.Else, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
-console.log(result);
+console.log(
+    Array.isArray(result) && result.length === 5 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 2 &&
+    result[3] === 3 &&
+    result[4] === 4
+);
