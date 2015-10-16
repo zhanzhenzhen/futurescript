@@ -147,3 +147,13 @@ console.log(
     result[1] === 5 &&
     result[2] === 6
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: 1
+`);
+result = $pattern.Pattern.searchPattern(
+    [$lex.NormalToken, $pattern.Any, $lex.Colon, $pattern.Tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result);
