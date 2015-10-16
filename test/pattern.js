@@ -156,4 +156,10 @@ result = $pattern.Pattern.searchPattern(
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
-console.log(result);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 1 &&
+    result[3] === 2
+);
