@@ -8,12 +8,33 @@ let lex, result;
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1
 `);
+
 result = $pattern.Pattern.searchSequence(
     [$lex.NormalToken, $lex.Colon],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
 console.log(result === 0);
+
+result = $pattern.Pattern.searchPattern(
+    [$lex.NormalToken, $pattern.Any, $lex.Colon, $pattern.Tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 1 &&
+    result[3] === 2
+);
+
+result = $pattern.Pattern.searchPattern(
+    [$lex.NormalToken, $pattern.Tokens, $lex.Colon, $pattern.Tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === null);
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
 if a = 1
@@ -146,20 +167,4 @@ console.log(
     result[0] === 0 &&
     result[1] === 5 &&
     result[2] === 6
-);
-
-lex = new $lex.Lex(`lemo 0.1.0, node module
-a: 1
-`);
-result = $pattern.Pattern.searchPattern(
-    [$lex.NormalToken, $pattern.Any, $lex.Colon, $pattern.Tokens],
-    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
-    true
-);
-console.log(
-    Array.isArray(result) && result.length === 4 &&
-    result[0] === 0 &&
-    result[1] === 1 &&
-    result[2] === 1 &&
-    result[3] === 2
 );
