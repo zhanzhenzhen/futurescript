@@ -124,3 +124,15 @@ x: abc |> def :: ghi
 a'ok.b'()
 `).toString();
 console.log(s === 'NormalToken "Abc", Colon, Class, NormalToken "from", NormalToken "Ab", LeftChevron, NormalToken "aaa", Colon, DiamondFunction, Semicolon, NormalToken "bbb", Colon, Num "2", RightChevron, Semicolon, NormalToken "x", Colon, NormalToken "abc", Pipe, NormalToken "def", FatDot, NormalToken "ghi", Semicolon, NormalToken "a", NormalVariant, NormalToken "ok", Dot, NormalToken "b", FunctionVariant, CallLeftParenthesis, RightParenthesis');
+
+s = new $lex.Lex(`lemo 0.1.0
+if aaa
+else
+    xxx
+if aaa
+    xxx
+else
+if aaa
+else
+`).toString();
+console.log(s === 'If, NormalToken "aaa", Else, LeftChevron, NormalToken "xxx", RightChevron, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "xxx", RightChevron, Else, Semicolon, If, NormalToken "aaa", Else');
