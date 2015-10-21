@@ -9,6 +9,13 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1
 `);
 
+result = $pattern.Pattern.searchOne(
+    $lex.Colon,
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === 1);
+
 result = $pattern.Pattern.searchSequence(
     [$lex.NormalToken, $lex.Colon],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
@@ -120,7 +127,7 @@ result = $pattern.Pattern.searchPattern(
 );
 console.log(
     Array.isArray(result) && result.length === 5 &&
-    result[0] === 4 &&
+    result[0] === 0 &&
     result[1] === 7 &&
     result[2] === 8 &&
     result[3] === 9 &&
@@ -167,4 +174,20 @@ console.log(
     result[0] === 0 &&
     result[1] === 5 &&
     result[2] === 6
+);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+1 + 2 + 3
+`);
+
+result = $pattern.Pattern.searchPattern(
+    [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    false
+);
+console.log(
+    Array.isArray(result) && result.length === 3 &&
+    result[0] === 0 &&
+    result[1] === 3 &&
+    result[2] === 4
 );
