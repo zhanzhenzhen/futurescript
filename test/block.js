@@ -14,9 +14,11 @@ if a
 else
     c: 5
 d: "xxx"
+e: a.b.c
 `);
 let block = new $block.Block({lex: lex, startIndex: 0, endIndex: lex.count() - 1});
 console.log(block);
 console.log(block.print());
 console.log(block.value[2]);
 console.log(block.value[3]);
+console.log(block.value[5].value);
