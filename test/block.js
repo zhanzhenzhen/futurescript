@@ -13,6 +13,7 @@ if a
     c: 7
 else
     c: 5
+d: "xxx"
 `);
 let block = new $block.Block({lex: lex, startIndex: 0, endIndex: lex.count() - 1});
 console.log(block);
