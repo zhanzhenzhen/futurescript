@@ -191,3 +191,29 @@ console.log(
     result[1] === 3 &&
     result[2] === 4
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+abc(1, 2, 3)
+`);
+result = $pattern.Pattern.split(
+    $lex.Comma,
+    {lex: lex, startIndex: 2, endIndex: 6}
+);
+console.log(
+    Array.isArray(result) && result.length === 3 &&
+    result[0].startIndex === 2 && result[0].endIndex === 2 &&
+    result[1].startIndex === 4 && result[1].endIndex === 4 &&
+    result[2].startIndex === 6 && result[2].endIndex === 6
+);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+abc()
+`);
+result = $pattern.Pattern.split(
+    $lex.Comma,
+    {lex: lex, startIndex: 2, endIndex: 1}
+);
+console.log(
+    Array.isArray(result) && result.length === 1 &&
+    result[0].startIndex === 2 && result[0].endIndex === 1
+);
