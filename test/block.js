@@ -10,3 +10,5 @@ a: 1 + 2
 `);
 let block = new $block.Block({lex: lex, startIndex: 0, endIndex: lex.count() - 1});
 console.log(block);
+console.log(block.print());
+console.log(block.value[0]);
