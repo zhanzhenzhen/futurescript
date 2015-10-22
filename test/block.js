@@ -16,7 +16,7 @@ else
 d: "xxx"
 e: a.b.c
 `);
-let block = new $block.Block({lex: lex, startIndex: 0, endIndex: lex.count() - 1});
+let block = new $block.RootBlock({lex: lex, startIndex: 0, endIndex: lex.count() - 1});
 console.log(block);
 console.log(block.print());
 console.log(block.value[2]);
