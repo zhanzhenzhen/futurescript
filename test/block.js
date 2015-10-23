@@ -19,9 +19,10 @@ e: a.b.c
 f: 1 + 2 * 3
 g: (1 + 2) * 3
 h: f + g > Math.PI ? 1 | 2
+i: x -> x + 1
 `);
 let block = new $block.RootBlock(lex.part());
-console.log(block.print() === `RootBlock [
+console.log(block.print(), block.print() === `RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
         value: PlusExpression {
