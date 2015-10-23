@@ -17,10 +17,7 @@ d: "xxx"
 e: a.b.c
 f: 1 + 2 * 3
 g: (1 + 2) * 3
+h: f + g > Math.PI ? 1 | 2
 `);
 let block = new $block.RootBlock({lex: lex, startIndex: 0, endIndex: lex.count() - 1});
-console.log(block);
 console.log(block.print());
-console.log(block.value[2]);
-console.log(block.value[3]);
-console.log(block.value[5].value);
