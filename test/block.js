@@ -13,13 +13,14 @@ if a
     c: 7
 else
     c: 5
+    b: c
 d: "xxx"
 e: a.b.c
 f: 1 + 2 * 3
 g: (1 + 2) * 3
 h: f + g > Math.PI ? 1 | 2
 `);
-let block = new $block.RootBlock({lex: lex, startIndex: 0, endIndex: lex.count() - 1});
+let block = new $block.RootBlock(lex.part());
 console.log(block.print() === `RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
@@ -61,6 +62,10 @@ console.log(block.print() === `RootBlock [
                 AssignStatement {
                     assignee: VariableExpression "c"
                     value: NumberExpression "5"
+                }
+                AssignStatement {
+                    assignee: VariableExpression "b"
+                    value: VariableExpression "c"
                 }
             ]
         }
