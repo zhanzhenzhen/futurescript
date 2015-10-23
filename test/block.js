@@ -20,4 +20,106 @@ g: (1 + 2) * 3
 h: f + g > Math.PI ? 1 | 2
 `);
 let block = new $block.RootBlock({lex: lex, startIndex: 0, endIndex: lex.count() - 1});
-console.log(block.print());
+console.log(block.print() === `RootBlock [
+    AssignStatement {
+        assignee: VariableExpression "a"
+        value: PlusExpression {
+            x: PlusExpression {
+                x: NumberExpression "1"
+                y: NumberExpression "2"
+            }
+            y: NumberExpression "3"
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "b"
+        value: PlusExpression {
+            x: NumberExpression "2"
+            y: NumberExpression "3"
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "c"
+        value: ParenthesisCallExpression {
+            callee: VariableExpression "abc"
+            arguments: Arr [
+                NumberExpression "5"
+                NumberExpression "6"
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: IfExpression {
+            condition: VariableExpression "a"
+            thenBranch: Block [
+                AssignStatement {
+                    assignee: VariableExpression "c"
+                    value: NumberExpression "7"
+                }
+            ]
+            elseBranch: Block [
+                AssignStatement {
+                    assignee: VariableExpression "c"
+                    value: NumberExpression "5"
+                }
+            ]
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "d"
+        value: ParenthesisCallExpression {
+            callee: InlineNormalStringExpression
+            arguments: Arr [
+                StringExpression "xxx"
+            ]
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "e"
+        value: DotExpression {
+            x: DotExpression {
+                x: VariableExpression "a"
+                y: Atom "b"
+            }
+            y: Atom "c"
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "f"
+        value: PlusExpression {
+            x: NumberExpression "1"
+            y: TimesExpression {
+                x: NumberExpression "2"
+                y: NumberExpression "3"
+            }
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "g"
+        value: TimesExpression {
+            x: PlusExpression {
+                x: NumberExpression "1"
+                y: NumberExpression "2"
+            }
+            y: NumberExpression "3"
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "h"
+        value: IfExpression {
+            condition: GreaterThanExpression {
+                x: PlusExpression {
+                    x: VariableExpression "f"
+                    y: VariableExpression "g"
+                }
+                y: DotExpression {
+                    x: VariableExpression "Math"
+                    y: Atom "PI"
+                }
+            }
+            thenBranch: NumberExpression "1"
+            elseBranch: NumberExpression "2"
+        }
+    }
+]
+`);
