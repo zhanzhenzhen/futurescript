@@ -259,7 +259,7 @@ console.log(
 );
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
-abc(5, 6)
+a.b(5, 6)
 `);
 result = $pattern.Pattern.searchPattern(
     [$pattern.Tokens, $pattern.ParenthesisPair],
@@ -269,5 +269,5 @@ result = $pattern.Pattern.searchPattern(
 console.log(
     Array.isArray(result) && result.length === 2 &&
     result[0] === 0 &&
-    result[1] === 1
+    result[1] === 3
 );
