@@ -217,3 +217,20 @@ console.log(
     Array.isArray(result) && result.length === 1 &&
     result[0].startIndex === 2 && result[0].endIndex === 1
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: {
+    a: 1,
+    b: 2, c: 3
+}
+`);
+result = $pattern.Pattern.split(
+    [$lex.Comma, $lex.Semicolon],
+    {lex: lex, startIndex: 3, endIndex: 13}
+);
+console.log(
+    Array.isArray(result) && result.length === 3 &&
+    result[0].startIndex === 3 && result[0].endIndex === 5 &&
+    result[1].startIndex === 7 && result[1].endIndex === 9 &&
+    result[2].startIndex === 11 && result[2].endIndex === 13
+);
