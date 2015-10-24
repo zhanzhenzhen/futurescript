@@ -234,3 +234,26 @@ console.log(
     result[1].startIndex === 7 && result[1].endIndex === 9 &&
     result[2].startIndex === 11 && result[2].endIndex === 13
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: [1, 2, 3]
+`);
+result = $pattern.Pattern.searchPattern(
+    [$pattern.BracketPair],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+[1, 2, 3]
+`);
+result = $pattern.Pattern.searchPattern(
+    [$pattern.BracketPair],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    false
+);
+console.log(
+    Array.isArray(result) && result.length === 1 &&
+    result[0] === 0
+);

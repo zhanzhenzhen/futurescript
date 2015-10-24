@@ -3,7 +3,7 @@ import * as $block from "../lib/compile-block-0";
 import assert from "assert";
 
 let s = null;
-let lex, result;
+let lex, result, block;
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1 + 2 + 3
@@ -21,7 +21,7 @@ g: (1 + 2) * 3
 h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
-let block = new $block.RootBlock(lex.part());
+block = new $block.RootBlock(lex.part());
 console.log(block.print(), block.print() === `RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
@@ -129,3 +129,9 @@ console.log(block.print(), block.print() === `RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: [1, 2, 3]
+`);
+block = new $block.RootBlock(lex.part());
+console.log(block);
