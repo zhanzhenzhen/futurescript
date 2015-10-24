@@ -22,7 +22,7 @@ h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
 block = new $block.RootBlock(lex.part());
-console.log(block.print(), block.print() === `RootBlock [
+console.log(block.print() === `RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
         value: PlusExpression {
@@ -127,6 +127,18 @@ console.log(block.print(), block.print() === `RootBlock [
             elseBranch: NumberExpression "2"
         }
     }
+    AssignStatement {
+        assignee: VariableExpression "i"
+        value: ArrowFunctionExpression {
+            arguments: Arr [
+                Atom "x"
+            ]
+            body: PlusExpression {
+                x: VariableExpression "x"
+                y: NumberExpression "1"
+            }
+        }
+    }
 ]
 `);
 
@@ -134,4 +146,4 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 a: [1, 2, 3]
 `);
 block = new $block.RootBlock(lex.part());
-console.log(block);
+console.log(block.print());
