@@ -257,3 +257,17 @@ console.log(
     Array.isArray(result) && result.length === 1 &&
     result[0] === 0
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+abc(5, 6)
+`);
+result = $pattern.Pattern.searchPattern(
+    [$pattern.Tokens, $pattern.ParenthesisPair],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    false
+);
+console.log(result);
+console.log(
+    Array.isArray(result) && result.length === 1 &&
+    result[0] === 0
+);
