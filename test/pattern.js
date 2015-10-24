@@ -266,8 +266,8 @@ result = $pattern.Pattern.searchPattern(
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     false
 );
-console.log(result);
 console.log(
-    Array.isArray(result) && result.length === 1 &&
-    result[0] === 0
+    Array.isArray(result) && result.length === 2 &&
+    result[0] === 0 &&
+    result[1] === 1
 );
