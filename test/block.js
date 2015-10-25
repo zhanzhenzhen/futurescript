@@ -145,6 +145,7 @@ console.log(block.print() === `RootBlock [
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: [1, 2, 3]
 a: {a: 1, b: 2}
+a.b: 1
 `);
 block = new $block.RootBlock(lex.part());
 console.log(block.print());
