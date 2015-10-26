@@ -123,8 +123,16 @@ console.log(block.print() === `RootBlock [
                     y: Atom "PI"
                 }
             }
-            thenBranch: NumberExpression "1"
-            elseBranch: NumberExpression "2"
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: NumberExpression "1"
+                }
+            ]
+            elseBranch: Block [
+                ExpressionStatement {
+                    expression: NumberExpression "2"
+                }
+            ]
         }
     }
     AssignStatement {
