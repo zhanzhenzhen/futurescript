@@ -170,18 +170,11 @@
     <li>对象表</li>
     <li>match表</li>
 </ul>
-<p>所有可以出现块的地方，都可以改为不嵌套的一条语句而仍然符合语法。例如：</p>
-<pre><code><![CDATA[
-    if x = 5
-        aaa()
-        bbb()
-        ccc()
-]]></code></pre>
-<p>改为：</p>
+<p>当块只含有单条语句时，也可以写在一行里而不使用缩进，这称为内联块。例如：</p>
 <pre><code><![CDATA[
     if x = 5 then aaa()
 ]]></code></pre>
-<p>仍然符合语法（虽然意思不同）。<code>aaa()</code>是<code>if</code>语句的子语句，没有“块”这一层。但是注意，这种写法中，子语句之前必须有相应的关键字或符号，例如上例中的<code>then</code>不能省略。由此可知，所有可以出现块的地方，语法里都有关键字或符号作为前导，例如<code>-&gt;</code>、<code>then</code>、<code>try</code>，当它不处于语句头部且不处于行的头部且后面是块时才可能允许省略（还要看语法是否支持，例如<code>-&gt;</code>就不能省略）。</p>
+<p>注意此时<code>aaa()</code>仍然是属于then块的。另请注意，这种写法中，块之前必须有相应的关键字或符号，例如上例中的<code>then</code>不能省略。由此可知，所有的块（除后置if中的块外），语法里都有关键字或符号作为前导，例如<code>-&gt;</code>、<code>then</code>、<code>try</code>，当这个前导不处于语句头部且不处于行的头部且后面不是内联块时才可能允许省略（还要看语法是否支持，例如<code>-&gt;</code>就不能省略）。</p>
 <p>块的子语句是从上往下执行。除顶级块外所有块都有值，若最后一个子语句是表达式，则为该表达式的值，若不是，则为<code>void</code>。</p>
 <h2>缩进</h2>
 <p>对于某一行B，若它的起始部分不属于字符串，它的缩进的效果是什么？依下面的步骤：</p>
@@ -905,7 +898,7 @@
     b: a = 3 ? "three" | "other"
 ]]></code></pre>
 <p><code>?</code>和<code>then</code>等价，<code>|</code>和<code>else</code>等价，这条规则不仅限于<code>if</code>语句，在所有地方通用。下文提到的它们任何一个的规则也适用于它的等价方。</p>
-<p>条件前置时，<code>if</code>可写可不写，而<code>then</code>则当有<code>then</code>块时可写可不写。<code>if</code>省略时要注意避免出现优先级的问题，例如：</p>
+<p>条件前置时，<code>if</code>可写可不写，而<code>then</code>则当<code>then</code>块非内联时可写可不写。<code>if</code>省略时要注意避免出现优先级的问题，例如：</p>
 <pre><code><![CDATA[
     a if b > 100 then 100 else b
 ]]></code></pre>
@@ -921,7 +914,7 @@
     alert("a is true!") if a # if (a) {alert("a is true!");}
     mood: "happy" if singing # if (singing) {mood = "happy";}
 ]]></code></pre>
-<p>一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是块，只能是单条子语句。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
+<p>一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是普通的块，只能是内联块。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
 <p>还有一点和CoffeeScript不同，就是当碰到分号时：</p>
 <pre><code><![CDATA[
     if x > 100 then aaa(); bbb()
@@ -1027,7 +1020,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>由此可知，or和and作为运算符在模式中使用是有限制的，它作为运算符时必须出现在括号内，否则会被认为是模式。所以真的有这个需求的话，要用个括号包起来。不过这两个运算符出现在模式中好像也没有什么用。</p>
 <p>作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
 <p>注意<code>or else</code>是一种特殊的写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>在一个模式中一起出现。</p>
-<p>和<code>if</code>一样，可以有<code>then</code>块，这时就不用写<code>then</code>了：</p>
+<p>和<code>if</code>一样，<code>then</code>块可以用缩进，这时就不用写<code>then</code>了：</p>
 <pre><code><![CDATA[
     day: 3
     match day
