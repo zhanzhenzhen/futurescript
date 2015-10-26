@@ -300,6 +300,7 @@ console.log(
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1 + 2 + 3
 `);
+
 result = $pattern.Pattern.matchPattern(
     [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
     {lex: lex, startIndex: 2, endIndex: 6},
@@ -310,4 +311,18 @@ console.log(
     result[0] === 2 &&
     result[1] === 5 &&
     result[2] === 6
+);
+
+result = $pattern.Pattern.matchPatternCapture(
+    [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
+    {lex: lex, startIndex: 2, endIndex: 6},
+    false,
+    [0, 1, 2, null]
+);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0].startIndex === 2 && result[0].endIndex === 4 &&
+    result[1].startIndex === 5 && result[1].endIndex === 5 &&
+    result[2].startIndex === 6 && result[2].endIndex === 6 &&
+    result[3] === null
 );
