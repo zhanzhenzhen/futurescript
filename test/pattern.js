@@ -23,7 +23,7 @@ result = $pattern.Pattern.searchSequence(
 );
 console.log(result === 0);
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$lex.NormalToken, $pattern.Any, $lex.Colon, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -36,7 +36,7 @@ console.log(
     result[3] === 2
 );
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$lex.NormalToken, $pattern.Tokens, $lex.Colon, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -50,7 +50,7 @@ else
     b: 2
 `);
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.Any, $lex.NormalToken, $lex.Equal, $pattern.Any],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -63,7 +63,7 @@ console.log(
     result[3] === 3
 );
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.Tokens, $lex.NormalToken, $lex.Equal, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -76,7 +76,7 @@ console.log(
     result[3] === 3
 );
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$lex.If, $pattern.Any, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -90,7 +90,7 @@ console.log(
     result[4] === 10
 );
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$lex.If, $pattern.Tokens, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -104,7 +104,7 @@ console.log(
     result[4] === 10
 );
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.Tokens, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -120,7 +120,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 a ? b | c + d ? e | f
 `);
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.Tokens, $lex.Then, $pattern.Tokens, $lex.Else, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     false
@@ -134,7 +134,7 @@ console.log(
     result[4] === 10
 );
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.Tokens, $lex.Then, $pattern.Tokens, $lex.Else, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -152,7 +152,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 (x, y) -> x * y
 `);
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.Tokens, $lex.ArrowFunction, $pattern.Any],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -164,7 +164,7 @@ console.log(
     result[2] === 6
 );
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.ParenthesisPair, $lex.ArrowFunction, $pattern.Any],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -180,7 +180,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 1 + 2 + 3
 `);
 
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     false
@@ -238,7 +238,7 @@ console.log(
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: [1, 2, 3]
 `);
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.BracketPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
@@ -248,7 +248,7 @@ console.log(result === null);
 lex = new $lex.Lex(`lemo 0.1.0, node module
 [1, 2, 3]
 `);
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.BracketPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     false
@@ -261,7 +261,7 @@ console.log(
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a.b(5, 6)
 `);
-result = $pattern.Pattern.searchPattern(
+result = $pattern.Pattern.matchPattern(
     [$pattern.Tokens, $pattern.ParenthesisPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     false
