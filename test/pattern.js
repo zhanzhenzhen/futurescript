@@ -296,3 +296,18 @@ console.log(
     result[0] === 0 &&
     result[1] === 3
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: 1 + 2 + 3
+`);
+result = $pattern.Pattern.matchPattern(
+    [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
+    {lex: lex, startIndex: 2, endIndex: 6},
+    false
+);
+console.log(
+    Array.isArray(result) && result.length === 3 &&
+    result[0] === 2 &&
+    result[1] === 5 &&
+    result[2] === 6
+);
