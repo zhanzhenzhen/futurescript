@@ -1514,7 +1514,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>&gt;&gt;</li>
 </ul>
 <h2>运算符优先级</h2>
-<p>运算符的运算结果是表达式，但算元不一定是表达式。不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。下面表格中，优先级从低到高，a、b、c表示表达式算元，x、y、z表示不一定是表达式的算元。别的语言的参考都是优先级从高到低，但我觉得不妥，因为用函数式思维来看，应该从“大”（低）到“小”（高）。</p>
+<p>运算符的运算结果是表达式，但算元不一定是表达式。不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。下面表格中，优先级从低到高，a、b、c表示表达式算元，x、y、z表示不一定是表达式的算元。别的语言的参考都是优先级从高到低，但我觉得不妥，因为用函数式思维来看，应该从“大”（低）到“小”（高）。结合性，我们也和传统的写法相反，传统写为自左向右的，我们写为“右”，而传统写为自右向左的，我们写为“左”，这是因为对于自左向右，解析后的代码树里，右侧是父节点而左侧是子节点，我们仍然是以大为先。</p>
 <table>
     <tr>
         <th>Precedence</th>
@@ -1522,7 +1522,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <th>Examples</th>
     </tr>
     <tr>
-        <td rowspan="3">0 right-to-left</td>
+        <td rowspan="3">0 left</td>
         <td>Arrow Function</td>
         <td><code>x -&gt; y</code></td>
     </tr>
@@ -1535,12 +1535,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>-- x</code></td>
     </tr>
     <tr>
-        <td>1 right-to-left</td>
+        <td>1 left</td>
         <td>Conditional</td>
         <td><code>if a then b else c<br/>a ? b | c<br/>a if b</code></td>
     </tr>
     <tr>
-        <td rowspan="3">2 right-to-left</td>
+        <td rowspan="3">2 left</td>
         <td>Space Function Call</td>
         <td><code>a b</code></td>
     </tr>
@@ -1553,22 +1553,22 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>nonew a b</code></td>
     </tr>
     <tr>
-        <td>3 left-to-right</td>
+        <td>3 right</td>
         <td>or</td>
         <td><code>a or b</code></td>
     </tr>
     <tr>
-        <td>4 left-to-right</td>
+        <td>4 right</td>
         <td>and</td>
         <td><code>a and b</code></td>
     </tr>
     <tr>
-        <td>5 right-to-left</td>
+        <td>5 left</td>
         <td>not</td>
         <td><code>not a</code></td>
     </tr>
     <tr>
-        <td rowspan="6">6 left-to-right</td>
+        <td rowspan="6">6 right</td>
         <td>Equality</td>
         <td><code>a = b</code></td>
     </tr>
@@ -1593,7 +1593,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a &gt;= b</code></td>
     </tr>
     <tr>
-        <td rowspan="4">7 left-to-right</td>
+        <td rowspan="4">7 right</td>
         <td>in</td>
         <td><code>a in b</code></td>
     </tr>
@@ -1610,7 +1610,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a isnt b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">8 left-to-right</td>
+        <td rowspan="2">8 right</td>
         <td>Addition</td>
         <td><code>a + b</code></td>
     </tr>
@@ -1619,7 +1619,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a - b</code></td>
     </tr>
     <tr>
-        <td rowspan="4">9 left-to-right</td>
+        <td rowspan="4">9 right</td>
         <td>Multiplication</td>
         <td><code>a * b</code></td>
     </tr>
@@ -1636,12 +1636,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a mod b</code></td>
     </tr>
     <tr>
-        <td>10 right-to-left</td>
+        <td>10 left</td>
         <td>Exponentiation</td>
         <td><code>a ** b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">11 right-to-left</td>
+        <td rowspan="2">11 left</td>
         <td>Unary Plus</td>
         <td><code>+a</code></td>
     </tr>
@@ -1650,7 +1650,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>-a</code></td>
     </tr>
     <tr>
-        <td rowspan="2">12 left-to-right</td>
+        <td rowspan="2">12 right</td>
         <td>ifvoid</td>
         <td><code>a ifvoid b</code></td>
     </tr>
@@ -1659,7 +1659,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a ifnull b</code></td>
     </tr>
     <tr>
-        <td rowspan="2">13 left-to-right</td>
+        <td rowspan="2">13 right</td>
         <td>as</td>
         <td><code>a as x</code></td>
     </tr>
@@ -1668,7 +1668,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a export as x</code></td>
     </tr>
     <tr>
-        <td rowspan="2">14 left-to-right</td>
+        <td rowspan="2">14 right</td>
         <td>Pipe</td>
         <td><code>a |&gt; x</code></td>
     </tr>
@@ -1677,7 +1677,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a :: x</code></td>
     </tr>
     <tr>
-        <td rowspan="7">15 left-to-right</td>
+        <td rowspan="7">15 right</td>
         <td>Member Access</td>
         <td><code>a.x<br/>a."x"<br/>a.(b)</code></td>
     </tr>
