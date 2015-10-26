@@ -2,6 +2,8 @@ import * as $lex from "../lib/compile-lex-0";
 import assert from "assert";
 
 let s = null;
+let lex = null;
+let lexPart = null;
 
 s = new $lex.Lex(`lemo 0.1.0, node module
 # Assignment:
@@ -125,7 +127,7 @@ a'ok.b'()
 `).toString();
 console.log(s === 'NormalToken "Abc", Colon, Class, NormalToken "from", NormalToken "Ab", LeftChevron, NormalToken "aaa", Colon, DiamondFunction, Semicolon, NormalToken "bbb", Colon, Num "2", RightChevron, Semicolon, NormalToken "x", Colon, NormalToken "abc", Pipe, NormalToken "def", FatDot, NormalToken "ghi", Semicolon, NormalToken "a", NormalVariant, NormalToken "ok", Dot, NormalToken "b", FunctionVariant, CallLeftParenthesis, RightParenthesis');
 
-s = new $lex.Lex(`lemo 0.1.0
+lex = new $lex.Lex(`lemo 0.1.0
 if aaa
 else
     xxx
@@ -134,5 +136,10 @@ if aaa
 else
 if aaa
 else
-`).toString();
+`);
+s = lex.toString();
 console.log(s === 'If, NormalToken "aaa", Else, LeftChevron, NormalToken "xxx", RightChevron, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "xxx", RightChevron, Else, Semicolon, If, NormalToken "aaa", Else');
+lexPart = lex.part().changeTo(3, 4);
+console.log(lexPart.startIndex === 3 && lexPart.endIndex === 4);
+lexPart = lex.part().changeTo({startIndex: 3, endIndex: 4});
+console.log(lexPart.startIndex === 3 && lexPart.endIndex === 4);
