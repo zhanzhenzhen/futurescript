@@ -36,6 +36,18 @@ console.log(
     result[3] === 2
 );
 
+result = $pattern.Pattern.matchPatternCapture(
+    [$lex.NormalToken, $pattern.Any, $lex.Colon, $pattern.Tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true,
+    [1, 3]
+);
+console.log(
+    Array.isArray(result) && result.length === 2 &&
+    result[0].startIndex === 1 && result[0].endIndex === 0 &&
+    result[1].startIndex === 2 && result[1].endIndex === 2
+);
+
 result = $pattern.Pattern.matchPattern(
     [$lex.NormalToken, $pattern.Tokens, $lex.Colon, $pattern.Tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
@@ -102,6 +114,19 @@ console.log(
     result[2] === 4 &&
     result[3] === 9 &&
     result[4] === 10
+);
+
+result = $pattern.Pattern.matchPatternCapture(
+    [$lex.If, $pattern.Tokens, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true,
+    [1, 2, 4]
+);
+console.log(
+    Array.isArray(result) && result.length === 3 &&
+    result[0].startIndex === 1 && result[0].endIndex === 3 &&
+    result[1].startIndex === 4 && result[1].endIndex === 8 &&
+    result[2].startIndex === 10 && result[2].endIndex === 14
 );
 
 result = $pattern.Pattern.matchPattern(
