@@ -340,3 +340,21 @@ console.log(
     result[2] instanceof Object && result[2].startIndex === 2 && result[2].endIndex === 4 &&
     result[3] instanceof Object && result[3].startIndex === 5 && result[3].endIndex === 5
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+if a
+else
+    22
+`);
+result = $pattern.Pattern.matchPattern(
+    [$lex.If, $pattern.tokensExcept([$lex.LeftChevron, $lex.Then]), $lex.Else, $pattern.Any],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 2 &&
+    result[3] === 3
+);
