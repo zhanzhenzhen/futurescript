@@ -156,4 +156,38 @@ a: {a: 1, b: 2}
 a.b: 1
 `);
 block = new $block.RootBlock(lex.part());
-console.log(block.print());
+console.log(block.print() === `RootBlock [
+    AssignStatement {
+        assignee: VariableExpression "a"
+        value: ArrayExpression {
+            value: Arr [
+                NumberExpression "1"
+                NumberExpression "2"
+                NumberExpression "3"
+            ]
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "a"
+        value: ObjectExpression {
+            value: Arr [
+                NameValue {
+                    name: Atom "a"
+                    value: NumberExpression "1"
+                }
+                NameValue {
+                    name: Atom "b"
+                    value: NumberExpression "2"
+                }
+            ]
+        }
+    }
+    AssignStatement {
+        assignee: DotExpression {
+            x: VariableExpression "a"
+            y: Atom "b"
+        }
+        value: NumberExpression "1"
+    }
+]
+`);
