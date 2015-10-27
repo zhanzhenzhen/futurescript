@@ -44,8 +44,8 @@ result = $pattern.Pattern.matchPatternCapture(
 );
 console.log(
     Array.isArray(result) && result.length === 2 &&
-    result[0].startIndex === 1 && result[0].endIndex === 0 &&
-    result[1].startIndex === 2 && result[1].endIndex === 2
+    result[0] instanceof Object && result[0].startIndex === 1 && result[0].endIndex === 0 &&
+    result[1] instanceof Object && result[1].startIndex === 2 && result[1].endIndex === 2
 );
 
 result = $pattern.Pattern.matchPattern(
@@ -124,9 +124,9 @@ result = $pattern.Pattern.matchPatternCapture(
 );
 console.log(
     Array.isArray(result) && result.length === 3 &&
-    result[0].startIndex === 1 && result[0].endIndex === 3 &&
-    result[1].startIndex === 4 && result[1].endIndex === 8 &&
-    result[2].startIndex === 10 && result[2].endIndex === 14
+    result[0] instanceof Object && result[0].startIndex === 1 && result[0].endIndex === 3 &&
+    result[1] instanceof Object && result[1].startIndex === 4 && result[1].endIndex === 8 &&
+    result[2] instanceof Object && result[2].startIndex === 10 && result[2].endIndex === 14
 );
 
 result = $pattern.Pattern.matchPattern(
@@ -226,9 +226,9 @@ result = $pattern.Pattern.split(
 );
 console.log(
     Array.isArray(result) && result.length === 3 &&
-    result[0].startIndex === 2 && result[0].endIndex === 2 &&
-    result[1].startIndex === 4 && result[1].endIndex === 4 &&
-    result[2].startIndex === 6 && result[2].endIndex === 6
+    result[0] instanceof Object && result[0].startIndex === 2 && result[0].endIndex === 2 &&
+    result[1] instanceof Object && result[1].startIndex === 4 && result[1].endIndex === 4 &&
+    result[2] instanceof Object && result[2].startIndex === 6 && result[2].endIndex === 6
 );
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
@@ -240,7 +240,7 @@ result = $pattern.Pattern.split(
 );
 console.log(
     Array.isArray(result) && result.length === 1 &&
-    result[0].startIndex === 2 && result[0].endIndex === 1
+    result[0] instanceof Object && result[0].startIndex === 2 && result[0].endIndex === 1
 );
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
@@ -255,9 +255,9 @@ result = $pattern.Pattern.split(
 );
 console.log(
     Array.isArray(result) && result.length === 3 &&
-    result[0].startIndex === 3 && result[0].endIndex === 5 &&
-    result[1].startIndex === 7 && result[1].endIndex === 9 &&
-    result[2].startIndex === 11 && result[2].endIndex === 13
+    result[0] instanceof Object && result[0].startIndex === 3 && result[0].endIndex === 5 &&
+    result[1] instanceof Object && result[1].startIndex === 7 && result[1].endIndex === 9 &&
+    result[2] instanceof Object && result[2].startIndex === 11 && result[2].endIndex === 13
 );
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
@@ -321,8 +321,22 @@ result = $pattern.Pattern.matchPatternCapture(
 );
 console.log(
     Array.isArray(result) && result.length === 4 &&
-    result[0].startIndex === 2 && result[0].endIndex === 4 &&
-    result[1].startIndex === 5 && result[1].endIndex === 5 &&
-    result[2].startIndex === 6 && result[2].endIndex === 6 &&
+    result[0] instanceof Object && result[0].startIndex === 2 && result[0].endIndex === 4 &&
+    result[1] instanceof Object && result[1].startIndex === 5 && result[1].endIndex === 5 &&
+    result[2] instanceof Object && result[2].startIndex === 6 && result[2].endIndex === 6 &&
     result[3] === null
+);
+
+result = $pattern.Pattern.matchPatternCapture(
+    [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
+    {lex: lex, startIndex: 2, endIndex: 6},
+    false,
+    [null, 2, 0, 1]
+);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0] === null &&
+    result[1] instanceof Object && result[1].startIndex === 6 && result[1].endIndex === 6 &&
+    result[2] instanceof Object && result[2].startIndex === 2 && result[2].endIndex === 4 &&
+    result[3] instanceof Object && result[3].startIndex === 5 && result[3].endIndex === 5
 );
