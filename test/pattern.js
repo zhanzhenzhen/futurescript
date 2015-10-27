@@ -24,7 +24,7 @@ result = $pattern.Pattern.searchSequence(
 console.log(result === 0);
 
 result = $pattern.Pattern.matchPattern(
-    [$lex.NormalToken, $pattern.Any, $lex.Colon, $pattern.Tokens],
+    [$lex.NormalToken, $pattern.any, $lex.Colon, $pattern.tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -37,7 +37,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPatternCapture(
-    [$lex.NormalToken, $pattern.Any, $lex.Colon, $pattern.Tokens],
+    [$lex.NormalToken, $pattern.any, $lex.Colon, $pattern.tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true,
     [1, 3]
@@ -49,7 +49,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPattern(
-    [$lex.NormalToken, $pattern.Tokens, $lex.Colon, $pattern.Tokens],
+    [$lex.NormalToken, $pattern.tokens, $lex.Colon, $pattern.tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -63,7 +63,7 @@ else
 `);
 
 result = $pattern.Pattern.matchPattern(
-    [$pattern.Any, $lex.NormalToken, $lex.Equal, $pattern.Any],
+    [$pattern.any, $lex.NormalToken, $lex.Equal, $pattern.any],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -76,7 +76,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPattern(
-    [$pattern.Tokens, $lex.NormalToken, $lex.Equal, $pattern.Tokens],
+    [$pattern.tokens, $lex.NormalToken, $lex.Equal, $pattern.tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -89,7 +89,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPattern(
-    [$lex.If, $pattern.Any, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
+    [$lex.If, $pattern.any, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -103,7 +103,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPattern(
-    [$lex.If, $pattern.Tokens, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
+    [$lex.If, $pattern.tokens, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -117,7 +117,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPatternCapture(
-    [$lex.If, $pattern.Tokens, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
+    [$lex.If, $pattern.tokens, $pattern.ChevronPair, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true,
     [1, 2, 4]
@@ -130,7 +130,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPattern(
-    [$pattern.Tokens, $lex.Else, $pattern.ChevronPair],
+    [$pattern.tokens, $lex.Else, $pattern.ChevronPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -146,7 +146,7 @@ a ? b | c + d ? e | f
 `);
 
 result = $pattern.Pattern.matchPattern(
-    [$pattern.Tokens, $lex.Then, $pattern.Tokens, $lex.Else, $pattern.Tokens],
+    [$pattern.tokens, $lex.Then, $pattern.tokens, $lex.Else, $pattern.tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     false
 );
@@ -160,7 +160,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPattern(
-    [$pattern.Tokens, $lex.Then, $pattern.Tokens, $lex.Else, $pattern.Tokens],
+    [$pattern.tokens, $lex.Then, $pattern.tokens, $lex.Else, $pattern.tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -178,7 +178,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 `);
 
 result = $pattern.Pattern.matchPattern(
-    [$pattern.Tokens, $lex.ArrowFunction, $pattern.Any],
+    [$pattern.tokens, $lex.ArrowFunction, $pattern.any],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -190,7 +190,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPattern(
-    [$pattern.ParenthesisPair, $lex.ArrowFunction, $pattern.Any],
+    [$pattern.ParenthesisPair, $lex.ArrowFunction, $pattern.any],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
@@ -206,7 +206,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 `);
 
 result = $pattern.Pattern.matchPattern(
-    [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
+    [$pattern.tokens, $lex.Plus, $pattern.tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     false
 );
@@ -287,7 +287,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 a.b(5, 6)
 `);
 result = $pattern.Pattern.matchPattern(
-    [$pattern.Tokens, $pattern.ParenthesisPair],
+    [$pattern.tokens, $pattern.ParenthesisPair],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     false
 );
@@ -302,7 +302,7 @@ a: 1 + 2 + 3
 `);
 
 result = $pattern.Pattern.matchPattern(
-    [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
+    [$pattern.tokens, $lex.Plus, $pattern.tokens],
     {lex: lex, startIndex: 2, endIndex: 6},
     false
 );
@@ -314,7 +314,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPatternCapture(
-    [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
+    [$pattern.tokens, $lex.Plus, $pattern.tokens],
     {lex: lex, startIndex: 2, endIndex: 6},
     false,
     [0, 1, 2, null]
@@ -328,7 +328,7 @@ console.log(
 );
 
 result = $pattern.Pattern.matchPatternCapture(
-    [$pattern.Tokens, $lex.Plus, $pattern.Tokens],
+    [$pattern.tokens, $lex.Plus, $pattern.tokens],
     {lex: lex, startIndex: 2, endIndex: 6},
     false,
     [null, 2, 0, 1]
@@ -347,7 +347,7 @@ else
     22
 `);
 result = $pattern.Pattern.matchPattern(
-    [$lex.If, $pattern.tokensExcept([$lex.LeftChevron, $lex.Then]), $lex.Else, $pattern.Any],
+    [$lex.If, $pattern.tokensExcept([$lex.LeftChevron, $lex.Then]), $lex.Else, $pattern.any],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
