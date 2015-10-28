@@ -367,12 +367,9 @@ result = $pattern.Pattern.matchPattern(
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
     true
 );
-console.log(lex.toString());
-console.log(result);
 console.log(
-    Array.isArray(result) && result.length === 4 &&
+    Array.isArray(result) && result.length === 3 &&
     result[0] === 0 &&
-    result[1] === 1 &&
-    result[2] === 2 &&
-    result[3] === 3
+    result[1] === 2 &&
+    result[2] === 6
 );
