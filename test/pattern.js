@@ -373,3 +373,22 @@ console.log(
     result[1] === 2 &&
     result[2] === 6
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+if a
+    b
+else
+`);
+result = $pattern.Pattern.matchPattern(
+    [$lex.If, $pattern.tokens, $pattern.ChevronPair, $lex.Else, $pattern.any],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(
+    Array.isArray(result) && result.length === 5 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 2 &&
+    result[3] === 5 &&
+    result[4] === 6
+);

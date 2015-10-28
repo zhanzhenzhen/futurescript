@@ -201,6 +201,9 @@ if a then
     1
 else
     22
+if a
+    b
+else
 `);
 console.log(lex.toString());
 block = new $block.RootBlock(lex.part());
