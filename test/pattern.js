@@ -358,3 +358,21 @@ console.log(
     result[2] === 2 &&
     result[3] === 3
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a b (c d) e
+`);
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokens, $pattern.ParenthesisPair, $pattern.tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(lex.toString());
+console.log(result);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 2 &&
+    result[3] === 3
+);
