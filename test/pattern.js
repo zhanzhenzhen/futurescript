@@ -360,6 +360,41 @@ console.log(
 );
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
+a: 1 if b
+`);
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokens, $lex.If, $pattern.tokensExcept([$lex.LeftChevron, $lex.Then, $lex.Else])],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(
+    Array.isArray(result) && result.length === 3 &&
+    result[0] === 0 &&
+    result[1] === 3 &&
+    result[2] === 4
+);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: b if c then d true
+`);
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokens, $lex.If, $pattern.tokensExcept([$lex.LeftChevron, $lex.Then, $lex.Else]), $lex.True],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: b if c then d
+`);
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokens, $lex.If, $pattern.tokensExcept([$lex.LeftChevron, $lex.Then, $lex.Else])],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
 a b (c d) e
 `);
 result = $pattern.Pattern.matchPattern(

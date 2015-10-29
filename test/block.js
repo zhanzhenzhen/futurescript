@@ -312,12 +312,12 @@ a:
     or ccc =
         ddd
         + eee
-    and (
+    and
         if eee
             fff
         else
             ggg
-    )
 `);
+console.log(lex.toString());
 block = new $block.RootBlock(lex.part());
 console.log(block.print());
