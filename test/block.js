@@ -318,6 +318,52 @@ a:
         else
             ggg
 `);
-console.log(lex.toString());
 block = new $block.RootBlock(lex.part());
-console.log(block.print());
+console.log(block.print() === `RootBlock [
+    AssignStatement {
+        assignee: VariableExpression "a"
+        value: OrExpression {
+            x: OrExpression {
+                x: OrExpression {
+                    x: LessThanOrEqualExpression {
+                        x: VariableExpression "aaa"
+                        y: VariableExpression "bbb"
+                    }
+                    y: NotExpression {
+                        x: EqualExpression {
+                            x: VariableExpression "mmm"
+                            y: VariableExpression "nnn"
+                        }
+                    }
+                }
+                y: NotEqualExpression {
+                    x: VariableExpression "ooo"
+                    y: VariableExpression "ppp"
+                }
+            }
+            y: AndExpression {
+                x: EqualExpression {
+                    x: VariableExpression "ccc"
+                    y: PlusExpression {
+                        x: VariableExpression "ddd"
+                        y: VariableExpression "eee"
+                    }
+                }
+                y: IfExpression {
+                    condition: VariableExpression "eee"
+                    thenBranch: Block [
+                        ExpressionStatement {
+                            expression: VariableExpression "fff"
+                        }
+                    ]
+                    elseBranch: Block [
+                        ExpressionStatement {
+                            expression: VariableExpression "ggg"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
+`);
