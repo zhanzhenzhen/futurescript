@@ -305,3 +305,19 @@ console.log(block.print() === `RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a:
+    aaa <= bbb or not mmm = nnn or ooo /= ppp
+    or ccc =
+        ddd
+        + eee
+    and (
+        if eee
+            fff
+        else
+            ggg
+    )
+`);
+block = new $block.RootBlock(lex.part());
+console.log(block.print());
