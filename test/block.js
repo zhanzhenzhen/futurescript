@@ -204,7 +204,104 @@ else
 if a
     b
 else
+if (
+    a
+)
+    b
+a: b = 5 ? 4 | c = 6 ? 3
 `);
-console.log(lex.toString());
 block = new $block.RootBlock(lex.part());
-console.log(block.print());
+console.log(block.print() === `RootBlock [
+    PostIfStatement {
+        expression: IfExpression {
+            condition: VariableExpression "b"
+            thenBranch: Block [
+                AssignStatement {
+                    assignee: VariableExpression "a"
+                    value: NumberExpression "1"
+                }
+            ]
+            elseBranch: null
+        }
+    }
+    ExpressionStatement {
+        expression: IfExpression {
+            condition: VariableExpression "a"
+            thenBranch: null
+            elseBranch: Block [
+                ExpressionStatement {
+                    expression: NumberExpression "22"
+                }
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: IfExpression {
+            condition: VariableExpression "a"
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: NumberExpression "1"
+                }
+            ]
+            elseBranch: Block [
+                ExpressionStatement {
+                    expression: NumberExpression "22"
+                }
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: IfExpression {
+            condition: VariableExpression "a"
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: VariableExpression "b"
+                }
+            ]
+            elseBranch: Block [
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: IfExpression {
+            condition: VariableExpression "a"
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: VariableExpression "b"
+                }
+            ]
+            elseBranch: null
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "a"
+        value: IfExpression {
+            condition: EqualExpression {
+                x: VariableExpression "b"
+                y: NumberExpression "5"
+            }
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: NumberExpression "4"
+                }
+            ]
+            elseBranch: Block [
+                ExpressionStatement {
+                    expression: IfExpression {
+                        condition: EqualExpression {
+                            x: VariableExpression "c"
+                            y: NumberExpression "6"
+                        }
+                        thenBranch: Block [
+                            ExpressionStatement {
+                                expression: NumberExpression "3"
+                            }
+                        ]
+                        elseBranch: null
+                    }
+                }
+            ]
+        }
+    }
+]
+`);
