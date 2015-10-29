@@ -868,6 +868,7 @@
     if statusCode not = 200 throw
     if not statusCode = 200 throw
 ]]></code></pre>
+<p>不过<code>not ... =</code>虽然功能相同，但生成的代码还是与其他三个不同的。</p>
 <h2>条件</h2>
 <p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
 <pre><code><![CDATA[
@@ -1367,7 +1368,14 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     a is A # a instanceof A
     a is Number # typeof a === "number"
 ]]></code></pre>
-<p>与<code>in</code>相似，<code>is</code>表示否定时也是可以用<code>not is</code>，不过也可以使用更顺眼的<code>isnt</code>，但切记，绝不能用<code>is not</code>。</p>
+<p>与<code>in</code>相似，<code>is</code>表示否定时也是可以用<code>not is</code>，不过也可以使用更顺眼的<code>isnt</code>，甚至可以用<code>is not</code>。</p>
+<pre><code><![CDATA[
+    a isnt A
+    a not is A
+    not a is A
+    a is not A
+]]></code></pre>
+<p>这4个表达式的功能是一样的。你可能要问，<code>a is not A</code>不会引起歧义吗？不会，因为<code>a is (not A)</code>是无意义的，布尔值不是类。</p>
 <h2>delete</h2>
 <p><code>delete</code>和JavaScript中的稍有不同。它不再是一个表达式。这是因为在JavaScript strict mode中并没有值为false的情况，而是抛出异常。既然我们都是用strict mode，所以没必要弄成表达式。</p>
 <h2>rem和mod</h2>
