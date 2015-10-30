@@ -451,3 +451,13 @@ result = $pattern.Pattern.matchPattern(
     true
 );
 console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a -> if b then c if d
+`);
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokens, $lex.If, $pattern.tokensExcept([$lex.Then])],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === null);
