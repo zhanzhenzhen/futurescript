@@ -461,3 +461,25 @@ result = $pattern.Pattern.matchPattern(
     true
 );
 console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a b c d
+`);
+
+result = $pattern.Pattern.matchPattern(
+    [(token => token.value === "a"), $pattern.tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(
+    Array.isArray(result) && result.length === 2 &&
+    result[0] === 0 &&
+    result[1] === 1
+);
+
+result = $pattern.Pattern.matchPattern(
+    [(token => token.value === "b"), $pattern.tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === null);
