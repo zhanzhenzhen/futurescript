@@ -151,6 +151,6 @@ c: aaa not = 1
 d: aaa not in bbb
 e: aaa not is bbb
 f: aaa isnt bbb
+g: aaa is not bbb
 `).toString();
-console.log(s);
-console.log(s === 'NormalToken "Abc", Colon, Class, NormalToken "from", NormalToken "Ab", LeftChevron, NormalToken "aaa", Colon, DiamondFunction, Semicolon, NormalToken "bbb", Colon, Num "2", RightChevron, Semicolon, NormalToken "x", Colon, NormalToken "abc", Pipe, NormalToken "def", FatDot, NormalToken "ghi", Semicolon, NormalToken "a", NormalVariant, NormalToken "ok", Dot, NormalToken "b", FunctionVariant, CallLeftParenthesis, RightParenthesis');
+console.log(s === 'NormalToken "a", Colon, NormalToken "aaa", NotEqual, Num "1", Semicolon, NormalToken "b", Colon, NormalToken "aaa", NotEqual, Num "1", Semicolon, NormalToken "c", Colon, NormalToken "aaa", NotEqual, Num "1", Semicolon, NormalToken "d", Colon, NormalToken "aaa", NotIn, NormalToken "bbb", Semicolon, NormalToken "e", Colon, NormalToken "aaa", Isnt, NormalToken "bbb", Semicolon, NormalToken "f", Colon, NormalToken "aaa", Isnt, NormalToken "bbb", Semicolon, NormalToken "g", Colon, NormalToken "aaa", Isnt, NormalToken "bbb"');
