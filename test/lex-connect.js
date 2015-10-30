@@ -74,4 +74,13 @@ a: {
     bbb: 2
 }
 `).toString();
-console.log(s === 'NormalToken "a", Colon, NormalLeftBrace, NormalToken "aaa", Colon, Num "1", Semicolon, NormalToken "bbb", Colon, Num "2", RightBrace');
+console.log(s === 'NormalToken "a", Colon, NormalLeftBrace, NormalToken "aaa", Colon, Num "1", Comma, NormalToken "bbb", Colon, Num "2", RightBrace');
+
+s = new $lex.Lex(`lemo 0.1.0
+a: {
+    aaa: 1
+    ,
+    bbb: 2
+}
+`).toString();
+console.log(s === 'NormalToken "a", Colon, NormalLeftBrace, NormalToken "aaa", Colon, Num "1", Comma, NormalToken "bbb", Colon, Num "2", RightBrace');
