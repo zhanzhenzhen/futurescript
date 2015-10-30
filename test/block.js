@@ -194,6 +194,8 @@ console.log(block.print() === `RootBlock [
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1 if b
+a -> b if c
+a -> if b then c if d
 if a
 else
     22
@@ -211,6 +213,7 @@ if (
 a: b = 5 ? 4 | c = 6 ? 3
 `);
 block = new $block.RootBlock(lex.part());
+console.log(block.print());
 console.log(block.print() === `RootBlock [
     PostIfStatement {
         expression: IfExpression {

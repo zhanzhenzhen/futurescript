@@ -427,3 +427,27 @@ console.log(
     result[3] === 5 &&
     result[4] === 6
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+if if a then b
+`);
+
+result = $pattern.Pattern.matchPattern(
+    [$lex.If, $pattern.tokens, $lex.Then, $pattern.tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0] === 0 &&
+    result[1] === 1 &&
+    result[2] === 3 &&
+    result[3] === 4
+);
+
+result = $pattern.Pattern.matchPattern(
+    [$lex.If, $pattern.tokensExcept([$lex.If]), $lex.Then, $pattern.tokens],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === null);
