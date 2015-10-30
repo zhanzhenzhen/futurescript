@@ -1515,7 +1515,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>&gt;&gt;</li>
 </ul>
 <h2>运算符优先级</h2>
-<p>运算符的运算结果是表达式，但算元不一定是表达式。不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。下面表格中，a、b、c表示表达式算元，x、y、z表示不一定是表达式的算元。</p>
+<p>运算符的运算结果是表达式，但算元不一定是表达式。不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。后置的<code>if</code>也没有优先级。下面表格中，a、b、c表示表达式算元，x、y、z表示不一定是表达式的算元。</p>
 <p>注意，优先级从低到高。别的语言参考，都是优先级从高到低，但我觉得不妥，因为用函数式（递归）思维来看，应该从“大”（低）到“小”（高）。结合性，我们也和传统的写法相反，传统写的是执行顺序，我们写的是解析顺序（更精确地说是用递归解析的顺序）。即：执行时自左向右的，由于右侧较“大”，我们写为自右向左，简称“右”，而执行时自右向左的，由于左侧较“大”，我们写为自左向右，简称“左”。打个比方，<code>1 + 2 + 3</code>其实是被解析为<code>plus(plus(1, 2), 3)</code>。我们仍然是以大为先。总之这方面大家反着看就行了。</p>
 <table>
     <tr>
@@ -1539,7 +1539,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <tr>
         <td>1 left</td>
         <td>Conditional</td>
-        <td><code>if a then b else c<br/>a ? b | c<br/>a if b</code></td>
+        <td><code>if a then b else c<br/>a ? b | c</code></td>
     </tr>
     <tr>
         <td rowspan="3">2 left</td>
