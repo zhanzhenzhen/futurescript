@@ -483,3 +483,27 @@ result = $pattern.Pattern.matchPattern(
     true
 );
 console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+(a) (b)
+`);
+
+result = $pattern.Pattern.searchOne(
+    (token, index) => {
+        let next = lex.at(index + 1);
+        return token instanceof $lex.RightParenthesis && next instanceof $lex.NormalLeftParenthesis;
+    },
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === 2);
+
+result = $pattern.Pattern.searchOne(
+    (token, index) => {
+        let next = lex.at(index + 1);
+        return token instanceof $lex.RightParenthesis && next instanceof $lex.CallLeftParenthesis;
+    },
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(result === null);

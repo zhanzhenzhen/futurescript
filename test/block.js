@@ -384,3 +384,11 @@ console.log(block.print() === `RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a b c
+a(b(c))
+a(b)(c)
+`);
+block = new $block.RootBlock(lex.part());
+console.log(block.print());
