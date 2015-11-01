@@ -389,6 +389,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 a b c
 a(b(c))
 a(b)(c)
+x.(a) b(c)
 `);
 block = new $block.RootBlock(lex.part());
 console.log(block.print() === `RootBlock [
@@ -428,6 +429,22 @@ console.log(block.print() === `RootBlock [
             }
             arguments: Arr [
                 VariableExpression "c"
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            callee: DotExpression {
+                x: VariableExpression "x"
+                y: VariableExpression "a"
+            }
+            arguments: Arr [
+                ParenthesisCallExpression {
+                    callee: VariableExpression "b"
+                    arguments: Arr [
+                        VariableExpression "c"
+                    ]
+                }
             ]
         }
     }
