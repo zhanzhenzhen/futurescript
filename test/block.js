@@ -391,4 +391,45 @@ a(b(c))
 a(b)(c)
 `);
 block = new $block.RootBlock(lex.part());
-console.log(block.print());
+console.log(block.print() === `RootBlock [
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            callee: VariableExpression "a"
+            arguments: Arr [
+                ParenthesisCallExpression {
+                    callee: VariableExpression "b"
+                    arguments: Arr [
+                        VariableExpression "c"
+                    ]
+                }
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            callee: VariableExpression "a"
+            arguments: Arr [
+                ParenthesisCallExpression {
+                    callee: VariableExpression "b"
+                    arguments: Arr [
+                        VariableExpression "c"
+                    ]
+                }
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            callee: ParenthesisCallExpression {
+                callee: VariableExpression "a"
+                arguments: Arr [
+                    VariableExpression "b"
+                ]
+            }
+            arguments: Arr [
+                VariableExpression "c"
+            ]
+        }
+    }
+]
+`);
