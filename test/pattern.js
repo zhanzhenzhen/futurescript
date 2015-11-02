@@ -48,6 +48,19 @@ console.log(
     result[1] instanceof Object && result[1].startIndex === 2 && result[1].endIndex === 2
 );
 
+result = $pattern.Pattern.matchPatternsAndCaptures(
+    [
+        [[$lex.NormalToken, $pattern.any, $lex.Colon, $pattern.tokens], [1, 3]]
+    ],
+    {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},
+    true
+);
+console.log(
+    Array.isArray(result) && result.length === 2 &&
+    result[0] instanceof Object && result[0].startIndex === 1 && result[0].endIndex === 0 &&
+    result[1] instanceof Object && result[1].startIndex === 2 && result[1].endIndex === 2
+);
+
 result = $pattern.Pattern.matchPattern(
     [$lex.NormalToken, $pattern.tokens, $lex.Colon, $pattern.tokens],
     {lex: lex, startIndex: 0, endIndex: lex.value.length - 1},

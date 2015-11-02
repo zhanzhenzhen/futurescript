@@ -498,3 +498,12 @@ console.log(block.print() === `RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+match a
+    1 ? 10
+    2 ? 100
+    |   0
+`);
+block = new $block.RootBlock(lex.part());
+console.log(block.print());
