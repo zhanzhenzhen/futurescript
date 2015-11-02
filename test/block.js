@@ -505,5 +505,6 @@ match a
     2 ? 100
     |   0
 `);
+console.log(lex.toString());
 block = new $block.RootBlock(lex.part());
 console.log(block.print());
