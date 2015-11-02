@@ -450,3 +450,43 @@ console.log(block.print() === `RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+if a
+    b
+else if c
+    d
+else
+    e
+`);
+block = new $block.RootBlock(lex.part());
+console.log(block.print() === `RootBlock [
+    ExpressionStatement {
+        expression: IfExpression {
+            condition: VariableExpression "a"
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: VariableExpression "b"
+                }
+            ]
+            elseBranch: Block [
+                ExpressionStatement {
+                    expression: IfExpression {
+                        condition: VariableExpression "c"
+                        thenBranch: Block [
+                            ExpressionStatement {
+                                expression: VariableExpression "d"
+                            }
+                        ]
+                        elseBranch: Block [
+                            ExpressionStatement {
+                                expression: VariableExpression "e"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+]
+`);
