@@ -205,6 +205,7 @@ else
 if a
     b
 else
+if a
 if (
     a
 )
@@ -277,6 +278,13 @@ console.log(block.print() === `RootBlock [
             ]
             elseBranch: Block [
             ]
+        }
+    }
+    ExpressionStatement {
+        expression: IfExpression {
+            condition: VariableExpression "a"
+            thenBranch: null
+            elseBranch: null
         }
     }
     ExpressionStatement {
