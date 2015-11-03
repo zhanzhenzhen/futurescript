@@ -505,6 +505,63 @@ match a
     2 ? 100
     |   0
 `);
-console.log(lex.toString());
 block = new $block.RootBlock(lex.part());
-console.log(block.print());
+console.log(block.print() === `RootBlock [
+    ExpressionStatement {
+        expression: MatchExpression {
+            comparer: VariableExpression "a"
+            items: Arr [
+                NameValue {
+                    name: NumberExpression "1"
+                    value: NumberExpression "10"
+                }
+                NameValue {
+                    name: NumberExpression "2"
+                    value: NumberExpression "100"
+                }
+                NameValue {
+                    name: null
+                    value: NumberExpression "0"
+                }
+            ]
+        }
+    }
+]
+`);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a:
+    if b = null or b = void
+        true
+    else
+        false
+`);
+block = new $block.RootBlock(lex.part());
+console.log(block.print() === `RootBlock [
+    AssignStatement {
+        assignee: VariableExpression "a"
+        value: IfExpression {
+            condition: OrExpression {
+                x: EqualExpression {
+                    x: VariableExpression "b"
+                    y: NullExpression
+                }
+                y: EqualExpression {
+                    x: VariableExpression "b"
+                    y: VoidExpression
+                }
+            }
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: BooleanExpression "true"
+                }
+            ]
+            elseBranch: Block [
+                ExpressionStatement {
+                    expression: BooleanExpression "false"
+                }
+            ]
+        }
+    }
+]
+`);
