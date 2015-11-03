@@ -21,7 +21,7 @@ g: (1 + 2) * 3
 h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
-block = new $block.RootBlock(lex.part());
+block = new $block.RootBlock(lex);
 console.log(block.print() === `RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
@@ -155,7 +155,7 @@ a: [1, 2, 3]
 a: {a: 1, b: 2}
 a.b: 1
 `);
-block = new $block.RootBlock(lex.part());
+block = new $block.RootBlock(lex);
 console.log(block.print() === `RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
@@ -212,7 +212,7 @@ if (
     b
 a: b = 5 ? 4 | c = 6 ? 3
 `);
-block = new $block.RootBlock(lex.part());
+block = new $block.RootBlock(lex);
 console.log(block.print() === `RootBlock [
     PostIfStatement {
         expression: IfExpression {
@@ -343,7 +343,7 @@ a:
         else
             ggg
 `);
-block = new $block.RootBlock(lex.part());
+block = new $block.RootBlock(lex);
 console.log(block.print() === `RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
@@ -399,7 +399,7 @@ a(b(c))
 a(b)(c)
 x.(a) b(c)
 `);
-block = new $block.RootBlock(lex.part());
+block = new $block.RootBlock(lex);
 console.log(block.print() === `RootBlock [
     ExpressionStatement {
         expression: ParenthesisCallExpression {
@@ -467,7 +467,7 @@ else if c
 else
     e
 `);
-block = new $block.RootBlock(lex.part());
+block = new $block.RootBlock(lex);
 console.log(block.print() === `RootBlock [
     ExpressionStatement {
         expression: IfExpression {
@@ -505,7 +505,7 @@ match a
     2 ? 100
     |   0
 `);
-block = new $block.RootBlock(lex.part());
+block = new $block.RootBlock(lex);
 console.log(block.print() === `RootBlock [
     ExpressionStatement {
         expression: MatchExpression {
@@ -536,7 +536,7 @@ a:
     else
         false
 `);
-block = new $block.RootBlock(lex.part());
+block = new $block.RootBlock(lex);
 console.log(block.print() === `RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
