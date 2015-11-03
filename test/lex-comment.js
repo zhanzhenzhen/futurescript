@@ -18,11 +18,11 @@ abc() # abc
 Footer!
 ###
 `).toString();
-console.log(s === 'FormattedComment "\\nLong comment!\\n", Semicolon, NormalToken "abc", CallLeftParenthesis, RightParenthesis');
+console.log(s === 'VersionDirective "lemo 0.1.0", FormattedComment "\\nLong comment!\\n", Semicolon, NormalToken "abc", CallLeftParenthesis, RightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 ###
 Long comment!
 ###
 `).toString();
-console.log(s === 'FormattedComment "\\nLong comment!\\n"');
+console.log(s === 'VersionDirective "lemo 0.1.0", FormattedComment "\\nLong comment!\\n"');
