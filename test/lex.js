@@ -154,3 +154,12 @@ f: aaa isnt bbb
 g: aaa is not bbb
 `).toString();
 console.log(s === 'NormalToken "a", Colon, NormalToken "aaa", NotEqual, Num "1", Semicolon, NormalToken "b", Colon, NormalToken "aaa", NotEqual, Num "1", Semicolon, NormalToken "c", Colon, NormalToken "aaa", NotEqual, Num "1", Semicolon, NormalToken "d", Colon, NormalToken "aaa", NotIn, NormalToken "bbb", Semicolon, NormalToken "e", Colon, NormalToken "aaa", Isnt, NormalToken "bbb", Semicolon, NormalToken "f", Colon, NormalToken "aaa", Isnt, NormalToken "bbb", Semicolon, NormalToken "g", Colon, NormalToken "aaa", Isnt, NormalToken "bbb"');
+
+s = new $lex.Lex(`0.1.0 {
+    radical
+    node module
+}
+a: 1
+`).toString();
+console.log(s);
+console.log(s === 'NormalToken "a", Colon, NormalToken "aaa", NotEqual, Num "1", Semicolon, NormalToken "b", Colon, NormalToken "aaa", NotEqual, Num "1", Semicolon, NormalToken "c", Colon, NormalToken "aaa", NotEqual, Num "1", Semicolon, NormalToken "d", Colon, NormalToken "aaa", NotIn, NormalToken "bbb", Semicolon, NormalToken "e", Colon, NormalToken "aaa", Isnt, NormalToken "bbb", Semicolon, NormalToken "f", Colon, NormalToken "aaa", Isnt, NormalToken "bbb", Semicolon, NormalToken "g", Colon, NormalToken "aaa", Isnt, NormalToken "bbb"');
