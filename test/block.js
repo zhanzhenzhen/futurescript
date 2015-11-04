@@ -150,6 +150,7 @@ RootBlock [
     }
 ]
 `);
+console.log(block.hasCompilerDirective("node module"));
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: [1, 2, 3]
