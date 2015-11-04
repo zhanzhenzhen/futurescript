@@ -22,7 +22,8 @@ h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `RootBlock [
+console.log(block.print() === `node module
+RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
         value: PlusExpression {
@@ -156,7 +157,8 @@ a: {a: 1, b: 2}
 a.b: 1
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `RootBlock [
+console.log(block.print() === `node module
+RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
         value: ArrayExpression {
@@ -213,7 +215,8 @@ if (
 a: b = 5 ? 4 | c = 6 ? 3
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `RootBlock [
+console.log(block.print() === `node module
+RootBlock [
     PostIfStatement {
         expression: IfExpression {
             condition: VariableExpression "b"
@@ -344,7 +347,8 @@ a:
             ggg
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `RootBlock [
+console.log(block.print() === `node module
+RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
         value: OrExpression {
@@ -400,7 +404,8 @@ a(b)(c)
 x.(a) b(c)
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `RootBlock [
+console.log(block.print() === `node module
+RootBlock [
     ExpressionStatement {
         expression: ParenthesisCallExpression {
             callee: VariableExpression "a"
@@ -468,7 +473,8 @@ else
     e
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `RootBlock [
+console.log(block.print() === `node module
+RootBlock [
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
@@ -506,7 +512,8 @@ match a
     |   0
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `RootBlock [
+console.log(block.print() === `node module
+RootBlock [
     ExpressionStatement {
         expression: MatchExpression {
             comparer: VariableExpression "a"
@@ -537,7 +544,8 @@ a:
         false
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `RootBlock [
+console.log(block.print() === `node module
+RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
         value: IfExpression {
