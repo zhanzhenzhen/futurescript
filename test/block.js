@@ -22,7 +22,7 @@ h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `node module
+console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
@@ -86,9 +86,9 @@ RootBlock [
         value: DotExpression {
             x: DotExpression {
                 x: VariableExpression "a"
-                y: Atom "b"
+                y: AtomNode "b"
             }
-            y: Atom "c"
+            y: AtomNode "c"
         }
     }
     AssignStatement {
@@ -121,7 +121,7 @@ RootBlock [
                 }
                 y: DotExpression {
                     x: VariableExpression "Math"
-                    y: Atom "PI"
+                    y: AtomNode "PI"
                 }
             }
             thenBranch: Block [
@@ -140,7 +140,7 @@ RootBlock [
         assignee: VariableExpression "i"
         value: ArrowFunctionExpression {
             arguments: Arr [
-                Atom "x"
+                AtomNode "x"
             ]
             body: PlusExpression {
                 x: VariableExpression "x"
@@ -158,7 +158,7 @@ a: {a: 1, b: 2}
 a.b: 1
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `node module
+console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
@@ -175,11 +175,11 @@ RootBlock [
         value: ObjectExpression {
             value: Arr [
                 NameValue {
-                    name: Atom "a"
+                    name: AtomNode "a"
                     value: NumberExpression "1"
                 }
                 NameValue {
-                    name: Atom "b"
+                    name: AtomNode "b"
                     value: NumberExpression "2"
                 }
             ]
@@ -188,7 +188,7 @@ RootBlock [
     AssignStatement {
         assignee: DotExpression {
             x: VariableExpression "a"
-            y: Atom "b"
+            y: AtomNode "b"
         }
         value: NumberExpression "1"
     }
@@ -216,7 +216,7 @@ if (
 a: b = 5 ? 4 | c = 6 ? 3
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `node module
+console.log(block.toString() === `node module
 RootBlock [
     PostIfStatement {
         expression: IfExpression {
@@ -237,7 +237,7 @@ RootBlock [
                 ExpressionStatement {
                     expression: ArrowFunctionExpression {
                         arguments: Arr [
-                            Atom "a"
+                            AtomNode "a"
                         ]
                         body: VariableExpression "b"
                     }
@@ -348,7 +348,7 @@ a:
             ggg
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `node module
+console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
@@ -405,7 +405,7 @@ a(b)(c)
 x.(a) b(c)
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `node module
+console.log(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: ParenthesisCallExpression {
@@ -474,7 +474,7 @@ else
     e
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `node module
+console.log(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: IfExpression {
@@ -513,7 +513,7 @@ match a
     |   0
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `node module
+console.log(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: MatchExpression {
@@ -545,7 +545,7 @@ a:
         false
 `);
 block = new $block.RootBlock(lex);
-console.log(block.print() === `node module
+console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignee: VariableExpression "a"
