@@ -162,3 +162,7 @@ s = new $lex.Lex(`0.1.0 {
 a: 1
 `).toString();
 console.log(s === 'VersionDirective "0.1.0 {\\n    radical\\n    node module\\n}", NormalToken "a", Colon, Num "1"');
+
+s = new $lex.Lex(`lemo 0.1.0
+a: 1`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, Num "1"');
