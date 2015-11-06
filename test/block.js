@@ -734,3 +734,28 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+[a, b]: [b, a]
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            BracketAssignee {
+                elements: Arr [
+                    AtomNode "a"
+                    AtomNode "b"
+                ]
+            }
+        ]
+        value: ArrayExpression {
+            value: Arr [
+                VariableExpression "b"
+                VariableExpression "a"
+            ]
+        }
+    }
+]
+`);
