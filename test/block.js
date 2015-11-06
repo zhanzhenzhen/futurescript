@@ -204,6 +204,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 a: [1, 2, 3]
 a: {a: 1, b: 2}
 a.b: 1
+a.(b): 1
 `);
 block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
@@ -246,6 +247,15 @@ RootBlock [
             DotAssignee {
                 x: VariableExpression "a"
                 y: AtomNode "b"
+            }
+        ]
+        value: NumberExpression "1"
+    }
+    AssignStatement {
+        assignees: Arr [
+            DotAssignee {
+                x: VariableExpression "a"
+                y: VariableExpression "b"
             }
         ]
         value: NumberExpression "1"
