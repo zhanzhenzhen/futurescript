@@ -737,9 +737,13 @@ RootBlock [
         expression: AsExpression {
             value: AsExpression {
                 value: VariableExpression "a"
-                assignee: VariableExpression "b"
+                assignee: VariableAssignee {
+                    variable: AtomNode "b"
+                }
             }
-            assignee: VariableExpression "c"
+            assignee: VariableAssignee {
+                variable: AtomNode "c"
+            }
         }
     }
 ]
