@@ -773,3 +773,69 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a[b]
+a{b: 3}
+a [b]
+a {b: 3}
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            callee: VariableExpression "a"
+            arguments: Arr [
+                ArrayExpression {
+                    value: Arr [
+                        VariableExpression "b"
+                    ]
+                }
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            callee: VariableExpression "a"
+            arguments: Arr [
+                ObjectExpression {
+                    value: Arr [
+                        Xy {
+                            x: AtomNode "b"
+                            y: NumberExpression "3"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            callee: VariableExpression "a"
+            arguments: Arr [
+                ArrayExpression {
+                    value: Arr [
+                        VariableExpression "b"
+                    ]
+                }
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            callee: VariableExpression "a"
+            arguments: Arr [
+                ObjectExpression {
+                    value: Arr [
+                        Xy {
+                            x: AtomNode "b"
+                            y: NumberExpression "3"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+]
+`);
