@@ -574,3 +574,39 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: <> Math.random()
+b: -- Math.random()
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignee: VariableExpression "a"
+        value: DiamondFunctionExpression {
+            body: ParenthesisCallExpression {
+                callee: DotExpression {
+                    x: VariableExpression "Math"
+                    y: AtomNode "random"
+                }
+                arguments: Arr [
+                ]
+            }
+        }
+    }
+    AssignStatement {
+        assignee: VariableExpression "b"
+        value: DashFunctionExpression {
+            body: ParenthesisCallExpression {
+                callee: DotExpression {
+                    x: VariableExpression "Math"
+                    y: AtomNode "random"
+                }
+                arguments: Arr [
+                ]
+            }
+        }
+    }
+]
+`);
