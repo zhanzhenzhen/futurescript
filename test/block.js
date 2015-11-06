@@ -610,3 +610,23 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: +1 - (-a)
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignee: VariableExpression "a"
+        value: MinusExpression {
+            x: PositiveExpression {
+                x: NumberExpression "1"
+            }
+            y: NegativeExpression {
+                x: VariableExpression "a"
+            }
+        }
+    }
+]
+`);
