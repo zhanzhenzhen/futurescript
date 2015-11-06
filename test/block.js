@@ -25,7 +25,11 @@ block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
-        assignee: VariableExpression "a"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
         value: PlusExpression {
             x: PlusExpression {
                 x: NumberExpression "1"
@@ -35,14 +39,22 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: VariableExpression "b"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "b"
+            }
+        ]
         value: PlusExpression {
             x: NumberExpression "2"
             y: NumberExpression "3"
         }
     }
     AssignStatement {
-        assignee: VariableExpression "c"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "c"
+            }
+        ]
         value: ParenthesisCallExpression {
             callee: VariableExpression "abc"
             arguments: Arr [
@@ -56,24 +68,40 @@ RootBlock [
             condition: VariableExpression "a"
             thenBranch: Block [
                 AssignStatement {
-                    assignee: VariableExpression "c"
+                    assignees: Arr [
+                        VariableAssignee {
+                            variable: AtomNode "c"
+                        }
+                    ]
                     value: NumberExpression "7"
                 }
             ]
             elseBranch: Block [
                 AssignStatement {
-                    assignee: VariableExpression "c"
+                    assignees: Arr [
+                        VariableAssignee {
+                            variable: AtomNode "c"
+                        }
+                    ]
                     value: NumberExpression "5"
                 }
                 AssignStatement {
-                    assignee: VariableExpression "b"
+                    assignees: Arr [
+                        VariableAssignee {
+                            variable: AtomNode "b"
+                        }
+                    ]
                     value: VariableExpression "c"
                 }
             ]
         }
     }
     AssignStatement {
-        assignee: VariableExpression "d"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "d"
+            }
+        ]
         value: ParenthesisCallExpression {
             callee: InlineNormalStringExpression
             arguments: Arr [
@@ -82,7 +110,11 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: VariableExpression "e"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "e"
+            }
+        ]
         value: DotExpression {
             x: DotExpression {
                 x: VariableExpression "a"
@@ -92,7 +124,11 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: VariableExpression "f"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "f"
+            }
+        ]
         value: PlusExpression {
             x: NumberExpression "1"
             y: TimesExpression {
@@ -102,7 +138,11 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: VariableExpression "g"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "g"
+            }
+        ]
         value: TimesExpression {
             x: PlusExpression {
                 x: NumberExpression "1"
@@ -112,7 +152,11 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: VariableExpression "h"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "h"
+            }
+        ]
         value: IfExpression {
             condition: GreaterThanExpression {
                 x: PlusExpression {
@@ -137,7 +181,11 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: VariableExpression "i"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "i"
+            }
+        ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 AtomNode "x"
@@ -161,7 +209,11 @@ block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
-        assignee: VariableExpression "a"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
         value: ArrayExpression {
             value: Arr [
                 NumberExpression "1"
@@ -171,7 +223,11 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: VariableExpression "a"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
         value: ObjectExpression {
             value: Arr [
                 Xy {
@@ -186,10 +242,12 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: DotExpression {
-            x: VariableExpression "a"
-            y: AtomNode "b"
-        }
+        assignees: Arr [
+            DotAssignee {
+                x: VariableExpression "a"
+                y: AtomNode "b"
+            }
+        ]
         value: NumberExpression "1"
     }
 ]
@@ -223,7 +281,11 @@ RootBlock [
             condition: VariableExpression "b"
             thenBranch: Block [
                 AssignStatement {
-                    assignee: VariableExpression "a"
+                    assignees: Arr [
+                        VariableAssignee {
+                            variable: AtomNode "a"
+                        }
+                    ]
                     value: NumberExpression "1"
                 }
             ]
@@ -303,7 +365,11 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: VariableExpression "a"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
         value: IfExpression {
             condition: EqualExpression {
                 x: VariableExpression "b"
@@ -351,7 +417,11 @@ block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
-        assignee: VariableExpression "a"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
         value: OrExpression {
             x: OrExpression {
                 x: OrExpression {
@@ -548,7 +618,11 @@ block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
-        assignee: VariableExpression "a"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
         value: IfExpression {
             condition: OrExpression {
                 x: EqualExpression {
@@ -583,7 +657,11 @@ block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
-        assignee: VariableExpression "a"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
         value: DiamondFunctionExpression {
             body: ParenthesisCallExpression {
                 callee: DotExpression {
@@ -596,7 +674,11 @@ RootBlock [
         }
     }
     AssignStatement {
-        assignee: VariableExpression "b"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "b"
+            }
+        ]
         value: DashFunctionExpression {
             body: ParenthesisCallExpression {
                 callee: DotExpression {
@@ -618,7 +700,11 @@ block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
-        assignee: VariableExpression "a"
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
         value: MinusExpression {
             x: PositiveExpression {
                 x: NumberExpression "1"
