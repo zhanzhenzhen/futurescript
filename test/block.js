@@ -174,13 +174,13 @@ RootBlock [
         assignee: VariableExpression "a"
         value: ObjectExpression {
             value: Arr [
-                NameValue {
-                    name: AtomNode "a"
-                    value: NumberExpression "1"
+                Xy {
+                    x: AtomNode "a"
+                    y: NumberExpression "1"
                 }
-                NameValue {
-                    name: AtomNode "b"
-                    value: NumberExpression "2"
+                Xy {
+                    x: AtomNode "b"
+                    y: NumberExpression "2"
                 }
             ]
         }
@@ -519,17 +519,17 @@ RootBlock [
         expression: MatchExpression {
             comparer: VariableExpression "a"
             items: Arr [
-                NameValue {
-                    name: NumberExpression "1"
-                    value: NumberExpression "10"
+                Xy {
+                    x: NumberExpression "1"
+                    y: NumberExpression "10"
                 }
-                NameValue {
-                    name: NumberExpression "2"
-                    value: NumberExpression "100"
+                Xy {
+                    x: NumberExpression "2"
+                    y: NumberExpression "100"
                 }
-                NameValue {
-                    name: null
-                    value: NumberExpression "0"
+                Xy {
+                    x: null
+                    y: NumberExpression "0"
                 }
             ]
         }
