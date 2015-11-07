@@ -205,6 +205,9 @@ a: [1, 2, 3]
 a: {a: 1, b: 2}
 a.b: 1
 a.(b): 1
+a."b": 1
+a: b.(c)
+a: b."c"
 `);
 block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
@@ -259,6 +262,47 @@ RootBlock [
             }
         ]
         value: NumberExpression "1"
+    }
+    AssignStatement {
+        assignees: Arr [
+            DotAssignee {
+                x: VariableExpression "a"
+                y: ParenthesisCallExpression {
+                    callee: InlineNormalStringExpression
+                    arguments: Arr [
+                        StringExpression "b"
+                    ]
+                }
+            }
+        ]
+        value: NumberExpression "1"
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: DotExpression {
+            x: VariableExpression "b"
+            y: VariableExpression "c"
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: DotExpression {
+            x: VariableExpression "b"
+            y: ParenthesisCallExpression {
+                callee: InlineNormalStringExpression
+                arguments: Arr [
+                    StringExpression "c"
+                ]
+            }
+        }
     }
 ]
 `);

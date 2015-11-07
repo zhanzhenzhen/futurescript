@@ -116,7 +116,7 @@ a."b": 1
 a."b c": 1
 (0).a: 1
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Dot, Num "0", Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, NormalToken "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, InlineNormalString, CallLeftParenthesis, Str "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, InlineNormalString, CallLeftParenthesis, Str "b c", RightParenthesis, Colon, Num "1", Semicolon, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalToken "a", Colon, Num "1"');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Dot, Num "0", Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, NormalToken "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, CallLeftParenthesis, Str "b", RightParenthesis, RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, CallLeftParenthesis, Str "b c", RightParenthesis, RightParenthesis, Colon, Num "1", Semicolon, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalToken "a", Colon, Num "1"');
 
 s = new $lex.Lex(`lemo 0.1.0
 Abc: class from Ab
