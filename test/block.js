@@ -190,10 +190,14 @@ RootBlock [
             arguments: Arr [
                 AtomNode "x"
             ]
-            body: PlusExpression {
-                x: VariableExpression "x"
-                y: NumberExpression "1"
-            }
+            body: Block [
+                ExpressionStatement {
+                    expression: PlusExpression {
+                        x: VariableExpression "x"
+                        y: NumberExpression "1"
+                    }
+                }
+            ]
         }
     }
 ]
@@ -355,7 +359,11 @@ RootBlock [
                         arguments: Arr [
                             AtomNode "a"
                         ]
-                        body: VariableExpression "b"
+                        body: Block [
+                            ExpressionStatement {
+                                expression: VariableExpression "b"
+                            }
+                        ]
                     }
                 }
             ]
@@ -717,14 +725,18 @@ RootBlock [
             }
         ]
         value: DiamondFunctionExpression {
-            body: ParenthesisCallExpression {
-                callee: DotExpression {
-                    x: VariableExpression "Math"
-                    y: AtomNode "random"
+            body: Block [
+                ExpressionStatement {
+                    expression: ParenthesisCallExpression {
+                        callee: DotExpression {
+                            x: VariableExpression "Math"
+                            y: AtomNode "random"
+                        }
+                        arguments: Arr [
+                        ]
+                    }
                 }
-                arguments: Arr [
-                ]
-            }
+            ]
         }
     }
     AssignStatement {
@@ -734,14 +746,18 @@ RootBlock [
             }
         ]
         value: DashFunctionExpression {
-            body: ParenthesisCallExpression {
-                callee: DotExpression {
-                    x: VariableExpression "Math"
-                    y: AtomNode "random"
+            body: Block [
+                ExpressionStatement {
+                    expression: ParenthesisCallExpression {
+                        callee: DotExpression {
+                            x: VariableExpression "Math"
+                            y: AtomNode "random"
+                        }
+                        arguments: Arr [
+                        ]
+                    }
                 }
-                arguments: Arr [
-                ]
-            }
+            ]
         }
     }
 ]
@@ -1020,6 +1036,36 @@ RootBlock [
         value: IfvoidExpression {
             x: VariableExpression "b"
             y: VariableExpression "c"
+        }
+    }
+]
+`);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: x ->
+    x + 1
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: ArrowFunctionExpression {
+            arguments: Arr [
+                AtomNode "x"
+            ]
+            body: Block [
+                ExpressionStatement {
+                    expression: PlusExpression {
+                        x: VariableExpression "x"
+                        y: NumberExpression "1"
+                    }
+                }
+            ]
         }
     }
 ]
