@@ -936,3 +936,59 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: b in c
+a: b not in c
+a: b is Number
+a: b isnt Number
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: InExpression {
+            x: VariableExpression "b"
+            y: VariableExpression "c"
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: NotInExpression {
+            x: VariableExpression "b"
+            y: VariableExpression "c"
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: IsExpression {
+            x: VariableExpression "b"
+            y: VariableExpression "Number"
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: IsntExpression {
+            x: VariableExpression "b"
+            y: VariableExpression "Number"
+        }
+    }
+]
+`);
