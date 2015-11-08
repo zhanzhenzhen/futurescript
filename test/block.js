@@ -992,3 +992,35 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: b ifnull c
+a: b ifvoid c
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: IfnullExpression {
+            x: VariableExpression "b"
+            y: VariableExpression "c"
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: IfvoidExpression {
+            x: VariableExpression "b"
+            y: VariableExpression "c"
+        }
+    }
+]
+`);
