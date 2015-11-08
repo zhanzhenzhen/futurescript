@@ -895,3 +895,44 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: b.c'ok.d
+a: b'(c)
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: DotExpression {
+            x: OkVariantExpression {
+                x: DotExpression {
+                    x: VariableExpression "b"
+                    y: AtomNode "c"
+                }
+            }
+            y: AtomNode "d"
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: AtomNode "a"
+            }
+        ]
+        value: ParenthesisCallExpression {
+            callee: FunctionVariantExpression {
+                x: VariableExpression "b"
+            }
+            arguments: Arr [
+                VariableExpression "c"
+            ]
+        }
+    }
+]
+`);
