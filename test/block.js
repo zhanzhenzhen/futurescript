@@ -191,7 +191,9 @@ RootBlock [
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
-                "x"
+                ArrowArgument {
+                    variable: "x"
+                }
             ]
             body: ScopeBlock [
                 ExpressionStatement {
@@ -359,7 +361,9 @@ RootBlock [
                 ExpressionStatement {
                     expression: ArrowFunctionExpression {
                         arguments: Arr [
-                            "a"
+                            ArrowArgument {
+                                variable: "a"
+                            }
                         ]
                         body: ScopeBlock [
                             ExpressionStatement {
@@ -1051,7 +1055,9 @@ RootBlock [
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
-                "x"
+                ArrowArgument {
+                    variable: "x"
+                }
             ]
             body: ScopeBlock [
                 ExpressionStatement {
