@@ -30,7 +30,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: PlusExpression {
@@ -44,7 +44,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "b"
+                variable: "b"
             }
         ]
         value: PlusExpression {
@@ -55,7 +55,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "c"
+                variable: "c"
             }
         ]
         value: ParenthesisCallExpression {
@@ -73,7 +73,7 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: AtomNode "c"
+                            variable: "c"
                         }
                     ]
                     value: NumberExpression "7"
@@ -83,7 +83,7 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: AtomNode "c"
+                            variable: "c"
                         }
                     ]
                     value: NumberExpression "5"
@@ -91,7 +91,7 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: AtomNode "b"
+                            variable: "b"
                         }
                     ]
                     value: VariableExpression "c"
@@ -102,7 +102,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "d"
+                variable: "d"
             }
         ]
         value: ParenthesisCallExpression {
@@ -115,21 +115,21 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "e"
+                variable: "e"
             }
         ]
         value: DotExpression {
             x: DotExpression {
                 x: VariableExpression "a"
-                y: AtomNode "b"
+                y: "b"
             }
-            y: AtomNode "c"
+            y: "c"
         }
     }
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "f"
+                variable: "f"
             }
         ]
         value: PlusExpression {
@@ -143,7 +143,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "g"
+                variable: "g"
             }
         ]
         value: TimesExpression {
@@ -157,7 +157,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "h"
+                variable: "h"
             }
         ]
         value: IfExpression {
@@ -168,7 +168,7 @@ RootBlock [
                 }
                 y: DotExpression {
                     x: VariableExpression "Math"
-                    y: AtomNode "PI"
+                    y: "PI"
                 }
             }
             thenBranch: Block [
@@ -186,12 +186,12 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "i"
+                variable: "i"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
-                AtomNode "x"
+                "x"
             ]
             body: ScopeBlock [
                 ExpressionStatement {
@@ -222,7 +222,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: ArrayExpression {
@@ -236,17 +236,17 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: ObjectExpression {
             value: Arr [
                 Xy {
-                    x: AtomNode "a"
+                    x: "a"
                     y: NumberExpression "1"
                 }
                 Xy {
-                    x: AtomNode "b"
+                    x: "b"
                     y: NumberExpression "2"
                 }
             ]
@@ -256,7 +256,7 @@ RootBlock [
         assignees: Arr [
             DotAssignee {
                 x: VariableExpression "a"
-                y: AtomNode "b"
+                y: "b"
             }
         ]
         value: NumberExpression "1"
@@ -287,7 +287,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: DotExpression {
@@ -298,7 +298,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: DotExpression {
@@ -344,7 +344,7 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: AtomNode "a"
+                            variable: "a"
                         }
                     ]
                     value: NumberExpression "1"
@@ -359,7 +359,7 @@ RootBlock [
                 ExpressionStatement {
                     expression: ArrowFunctionExpression {
                         arguments: Arr [
-                            AtomNode "a"
+                            "a"
                         ]
                         body: ScopeBlock [
                             ExpressionStatement {
@@ -426,7 +426,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: IfExpression {
@@ -477,7 +477,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: OrExpression {
@@ -677,7 +677,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: IfExpression {
@@ -716,7 +716,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: DiamondFunctionExpression {
@@ -725,7 +725,7 @@ RootBlock [
                     expression: ParenthesisCallExpression {
                         callee: DotExpression {
                             x: VariableExpression "Math"
-                            y: AtomNode "random"
+                            y: "random"
                         }
                         arguments: Arr [
                         ]
@@ -737,7 +737,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "b"
+                variable: "b"
             }
         ]
         value: DashFunctionExpression {
@@ -746,7 +746,7 @@ RootBlock [
                     expression: ParenthesisCallExpression {
                         callee: DotExpression {
                             x: VariableExpression "Math"
-                            y: AtomNode "random"
+                            y: "random"
                         }
                         arguments: Arr [
                         ]
@@ -767,7 +767,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: MinusExpression {
@@ -793,11 +793,11 @@ RootBlock [
             value: AsExpression {
                 value: VariableExpression "a"
                 assignee: VariableAssignee {
-                    variable: AtomNode "b"
+                    variable: "b"
                 }
             }
             assignee: VariableAssignee {
-                variable: AtomNode "c"
+                variable: "c"
             }
         }
     }
@@ -814,8 +814,8 @@ RootBlock [
         assignees: Arr [
             BracketAssignee {
                 elements: Arr [
-                    AtomNode "a"
-                    AtomNode "b"
+                    "a"
+                    "b"
                 ]
             }
         ]
@@ -850,7 +850,7 @@ RootBlock [
                     }
                 ]
             }
-            y: AtomNode "c"
+            y: "c"
         }
     }
     ExpressionStatement {
@@ -861,14 +861,14 @@ RootBlock [
                     ObjectExpression {
                         value: Arr [
                             Xy {
-                                x: AtomNode "b"
+                                x: "b"
                                 y: NumberExpression "3"
                             }
                         ]
                     }
                 ]
             }
-            y: AtomNode "c"
+            y: "c"
         }
     }
     ExpressionStatement {
@@ -881,7 +881,7 @@ RootBlock [
                             VariableExpression "b"
                         ]
                     }
-                    y: AtomNode "c"
+                    y: "c"
                 }
             ]
         }
@@ -894,12 +894,12 @@ RootBlock [
                     x: ObjectExpression {
                         value: Arr [
                             Xy {
-                                x: AtomNode "b"
+                                x: "b"
                                 y: NumberExpression "3"
                             }
                         ]
                     }
-                    y: AtomNode "c"
+                    y: "c"
                 }
             ]
         }
@@ -917,23 +917,23 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: DotExpression {
             x: OkVariantExpression {
                 x: DotExpression {
                     x: VariableExpression "b"
-                    y: AtomNode "c"
+                    y: "c"
                 }
             }
-            y: AtomNode "d"
+            y: "d"
         }
     }
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: ParenthesisCallExpression {
@@ -960,7 +960,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: InExpression {
@@ -971,7 +971,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: NotInExpression {
@@ -982,7 +982,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: IsExpression {
@@ -993,7 +993,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: IsntExpression {
@@ -1014,7 +1014,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: IfnullExpression {
@@ -1025,7 +1025,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: IfvoidExpression {
@@ -1046,12 +1046,12 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: AtomNode "a"
+                variable: "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
-                AtomNode "x"
+                "x"
             ]
             body: ScopeBlock [
                 ExpressionStatement {
