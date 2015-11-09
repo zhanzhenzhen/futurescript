@@ -22,6 +22,9 @@ h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
 block = new $block.RootBlock(lex);
+console.log(block.allScopeBlocks.length);
+console.log(block.allScopeBlocks[0].getAssignmentVariables().length);
+console.log(block.allScopeBlocks[0].getAssignmentVariables());
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -190,7 +193,7 @@ RootBlock [
             arguments: Arr [
                 AtomNode "x"
             ]
-            body: Block [
+            body: ScopeBlock [
                 ExpressionStatement {
                     expression: PlusExpression {
                         x: VariableExpression "x"
@@ -358,7 +361,7 @@ RootBlock [
                         arguments: Arr [
                             AtomNode "a"
                         ]
-                        body: Block [
+                        body: ScopeBlock [
                             ExpressionStatement {
                                 expression: VariableExpression "b"
                             }
@@ -717,7 +720,7 @@ RootBlock [
             }
         ]
         value: DiamondFunctionExpression {
-            body: Block [
+            body: ScopeBlock [
                 ExpressionStatement {
                     expression: ParenthesisCallExpression {
                         callee: DotExpression {
@@ -738,7 +741,7 @@ RootBlock [
             }
         ]
         value: DashFunctionExpression {
-            body: Block [
+            body: ScopeBlock [
                 ExpressionStatement {
                     expression: ParenthesisCallExpression {
                         callee: DotExpression {
@@ -1050,7 +1053,7 @@ RootBlock [
             arguments: Arr [
                 AtomNode "x"
             ]
-            body: Block [
+            body: ScopeBlock [
                 ExpressionStatement {
                     expression: PlusExpression {
                         x: VariableExpression "x"
