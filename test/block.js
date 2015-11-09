@@ -347,7 +347,6 @@ RootBlock [
                     value: NumberExpression "1"
                 }
             ]
-            elseBranch: null
         }
     }
     PostIfStatement {
@@ -367,13 +366,11 @@ RootBlock [
                     }
                 }
             ]
-            elseBranch: null
         }
     }
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
-            thenBranch: null
             elseBranch: Block [
                 ExpressionStatement {
                     expression: NumberExpression "22"
@@ -411,8 +408,6 @@ RootBlock [
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
-            thenBranch: null
-            elseBranch: null
         }
     }
     ExpressionStatement {
@@ -423,7 +418,6 @@ RootBlock [
                     expression: VariableExpression "b"
                 }
             ]
-            elseBranch: null
         }
     }
     AssignStatement {
@@ -454,7 +448,6 @@ RootBlock [
                                 expression: NumberExpression "3"
                             }
                         ]
-                        elseBranch: null
                     }
                 }
             ]
@@ -660,7 +653,6 @@ RootBlock [
                     y: NumberExpression "100"
                 }
                 Xy {
-                    x: null
                     y: NumberExpression "0"
                 }
             ]
