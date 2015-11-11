@@ -1119,3 +1119,12 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+undefined: 3
+a: <>
+    undefined: self + 1
+`);
+block = new $block.RootBlock(lex);
+block.antiConflict();
+console.log(block.toString());

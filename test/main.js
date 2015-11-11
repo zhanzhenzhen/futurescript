@@ -1,3 +1,4 @@
+import "../lib/compile-shim-0";
 import "./block";
 import "./lex";
 import "./lex-comment";
