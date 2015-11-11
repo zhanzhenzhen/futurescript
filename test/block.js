@@ -22,9 +22,6 @@ h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
 block = new $block.RootBlock(lex);
-console.log(block.allScopeBlocks.length);
-console.log(Object.keys(block.allScopeBlocks[0].getScopeItems()).length);
-console.log(block.allScopeBlocks[0].getScopeItems());
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -1127,4 +1124,37 @@ a: <>
 `);
 block = new $block.RootBlock(lex);
 block.complyWithJs();
-console.log(block.toString());
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: "var_573300145710716007_0"
+            }
+        ]
+        value: NumberExpression "3"
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                variable: "a"
+            }
+        ]
+        value: DiamondFunctionExpression {
+            body: ScopeBlock [
+                AssignStatement {
+                    assignees: Arr [
+                        VariableAssignee {
+                            variable: "var_573300145710716007_0"
+                        }
+                    ]
+                    value: PlusExpression {
+                        x: SelfExpression
+                        y: NumberExpression "1"
+                    }
+                }
+            ]
+        }
+    }
+]
+`);
