@@ -23,8 +23,8 @@ i: x -> x + 1
 `);
 block = new $block.RootBlock(lex);
 console.log(block.allScopeBlocks.length);
-console.log(Object.keys(block.allScopeBlocks[0].getScopeVariables()).length);
-console.log(block.allScopeBlocks[0].getScopeVariables());
+console.log(Object.keys(block.allScopeBlocks[0].getScopeItems()).length);
+console.log(block.allScopeBlocks[0].getScopeItems());
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
