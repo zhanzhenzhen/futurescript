@@ -1126,5 +1126,5 @@ a: <>
     undefined: self + 1
 `);
 block = new $block.RootBlock(lex);
-block.antiConflict();
+block.complyWithJs();
 console.log(block.toString());
