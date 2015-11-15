@@ -22,13 +22,12 @@ h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString());
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: PlusExpression {
@@ -42,7 +41,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "b"
+                variable: Piece "b"
             }
         ]
         value: PlusExpression {
@@ -53,7 +52,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "c"
+                variable: Piece "c"
             }
         ]
         value: ParenthesisCallExpression {
@@ -71,7 +70,7 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: "c"
+                            variable: Piece "c"
                         }
                     ]
                     value: NumberExpression "7"
@@ -81,7 +80,7 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: "c"
+                            variable: Piece "c"
                         }
                     ]
                     value: NumberExpression "5"
@@ -89,7 +88,7 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: "b"
+                            variable: Piece "b"
                         }
                     ]
                     value: VariableExpression "c"
@@ -100,7 +99,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "d"
+                variable: Piece "d"
             }
         ]
         value: ParenthesisCallExpression {
@@ -113,21 +112,21 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "e"
+                variable: Piece "e"
             }
         ]
         value: DotExpression {
             x: DotExpression {
                 x: VariableExpression "a"
-                y: "b"
+                y: Piece "b"
             }
-            y: "c"
+            y: Piece "c"
         }
     }
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "f"
+                variable: Piece "f"
             }
         ]
         value: PlusExpression {
@@ -141,7 +140,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "g"
+                variable: Piece "g"
             }
         ]
         value: TimesExpression {
@@ -155,7 +154,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "h"
+                variable: Piece "h"
             }
         ]
         value: IfExpression {
@@ -166,7 +165,7 @@ RootBlock [
                 }
                 y: DotExpression {
                     x: VariableExpression "Math"
-                    y: "PI"
+                    y: Piece "PI"
                 }
             }
             thenBranch: Block [
@@ -184,13 +183,13 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "i"
+                variable: Piece "i"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
-                    variable: "x"
+                    variable: Piece "x"
                 }
             ]
             body: ScopeBlock [
@@ -222,7 +221,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: ArrayExpression {
@@ -236,17 +235,17 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: ObjectExpression {
             value: Arr [
                 Xy {
-                    x: "a"
+                    x: Piece "a"
                     y: NumberExpression "1"
                 }
                 Xy {
-                    x: "b"
+                    x: Piece "b"
                     y: NumberExpression "2"
                 }
             ]
@@ -256,7 +255,7 @@ RootBlock [
         assignees: Arr [
             DotAssignee {
                 x: VariableExpression "a"
-                y: "b"
+                y: Piece "b"
             }
         ]
         value: NumberExpression "1"
@@ -287,7 +286,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: DotExpression {
@@ -298,7 +297,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: DotExpression {
@@ -344,7 +343,7 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: "a"
+                            variable: Piece "a"
                         }
                     ]
                     value: NumberExpression "1"
@@ -360,7 +359,7 @@ RootBlock [
                     expression: ArrowFunctionExpression {
                         arguments: Arr [
                             ArrowArgument {
-                                variable: "a"
+                                variable: Piece "a"
                             }
                         ]
                         body: ScopeBlock [
@@ -428,7 +427,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: IfExpression {
@@ -479,7 +478,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: OrExpression {
@@ -679,7 +678,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: IfExpression {
@@ -718,7 +717,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: DiamondFunctionExpression {
@@ -727,7 +726,7 @@ RootBlock [
                     expression: ParenthesisCallExpression {
                         callee: DotExpression {
                             x: VariableExpression "Math"
-                            y: "random"
+                            y: Piece "random"
                         }
                         arguments: Arr [
                         ]
@@ -739,7 +738,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "b"
+                variable: Piece "b"
             }
         ]
         value: DashFunctionExpression {
@@ -748,7 +747,7 @@ RootBlock [
                     expression: ParenthesisCallExpression {
                         callee: DotExpression {
                             x: VariableExpression "Math"
-                            y: "random"
+                            y: Piece "random"
                         }
                         arguments: Arr [
                         ]
@@ -769,7 +768,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: MinusExpression {
@@ -795,11 +794,11 @@ RootBlock [
             value: AsExpression {
                 value: VariableExpression "a"
                 assignee: VariableAssignee {
-                    variable: "b"
+                    variable: Piece "b"
                 }
             }
             assignee: VariableAssignee {
-                variable: "c"
+                variable: Piece "c"
             }
         }
     }
@@ -816,8 +815,8 @@ RootBlock [
         assignees: Arr [
             BracketAssignee {
                 elements: Arr [
-                    "a"
-                    "b"
+                    Piece "a"
+                    Piece "b"
                 ]
             }
         ]
@@ -852,7 +851,7 @@ RootBlock [
                     }
                 ]
             }
-            y: "c"
+            y: Piece "c"
         }
     }
     ExpressionStatement {
@@ -863,14 +862,14 @@ RootBlock [
                     ObjectExpression {
                         value: Arr [
                             Xy {
-                                x: "b"
+                                x: Piece "b"
                                 y: NumberExpression "3"
                             }
                         ]
                     }
                 ]
             }
-            y: "c"
+            y: Piece "c"
         }
     }
     ExpressionStatement {
@@ -883,7 +882,7 @@ RootBlock [
                             VariableExpression "b"
                         ]
                     }
-                    y: "c"
+                    y: Piece "c"
                 }
             ]
         }
@@ -896,12 +895,12 @@ RootBlock [
                     x: ObjectExpression {
                         value: Arr [
                             Xy {
-                                x: "b"
+                                x: Piece "b"
                                 y: NumberExpression "3"
                             }
                         ]
                     }
-                    y: "c"
+                    y: Piece "c"
                 }
             ]
         }
@@ -919,23 +918,23 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: DotExpression {
             x: OkVariantExpression {
                 x: DotExpression {
                     x: VariableExpression "b"
-                    y: "c"
+                    y: Piece "c"
                 }
             }
-            y: "d"
+            y: Piece "d"
         }
     }
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: ParenthesisCallExpression {
@@ -962,7 +961,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: InExpression {
@@ -973,7 +972,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: NotInExpression {
@@ -984,7 +983,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: IsExpression {
@@ -995,7 +994,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: IsntExpression {
@@ -1016,7 +1015,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: IfnullExpression {
@@ -1027,7 +1026,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: IfvoidExpression {
@@ -1050,13 +1049,13 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
-                    variable: "x"
+                    variable: Piece "x"
                 }
             ]
             body: ScopeBlock [
@@ -1072,13 +1071,13 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
-                    variable: "x"
+                    variable: Piece "x"
                     voidDefault: NumberExpression "3"
                 }
             ]
@@ -1095,13 +1094,13 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
-                    variable: "x"
+                    variable: Piece "x"
                     nullDefault: NumberExpression "3"
                 }
             ]
@@ -1130,7 +1129,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "var_573300145710716007_0"
+                variable: Piece "var_573300145710716007_0"
             }
         ]
         value: NumberExpression "3"
@@ -1138,7 +1137,7 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: "a"
+                variable: Piece "a"
             }
         ]
         value: DiamondFunctionExpression {
@@ -1146,7 +1145,7 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: "var_573300145710716007_0"
+                            variable: Piece "var_573300145710716007_0"
                         }
                     ]
                     value: PlusExpression {
