@@ -22,6 +22,7 @@ h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
 block = new $block.RootBlock(lex);
+console.log(block.toString());
 console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
