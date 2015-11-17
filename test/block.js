@@ -190,6 +190,8 @@ RootBlock [
             arguments: Arr [
                 ArrowArgument {
                     variable: Piece "x"
+                    voidDefault: null
+                    nullDefault: null
                 }
             ]
             body: ScopeBlock [
@@ -361,6 +363,8 @@ RootBlock [
                         arguments: Arr [
                             ArrowArgument {
                                 variable: Piece "a"
+                                voidDefault: null
+                                nullDefault: null
                             }
                         ]
                         body: ScopeBlock [
@@ -1076,6 +1080,8 @@ RootBlock [
             arguments: Arr [
                 ArrowArgument {
                     variable: Piece "x"
+                    voidDefault: null
+                    nullDefault: null
                 }
             ]
             body: ScopeBlock [
@@ -1099,6 +1105,7 @@ RootBlock [
                 ArrowArgument {
                     variable: Piece "x"
                     voidDefault: NumberExpression "3"
+                    nullDefault: null
                 }
             ]
             body: ScopeBlock [
@@ -1121,6 +1128,7 @@ RootBlock [
             arguments: Arr [
                 ArrowArgument {
                     variable: Piece "x"
+                    voidDefault: null
                     nullDefault: NumberExpression "3"
                 }
             ]
