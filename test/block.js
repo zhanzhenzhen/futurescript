@@ -650,14 +650,26 @@ RootBlock [
             items: Arr [
                 Xy {
                     x: NumberExpression "1"
-                    y: NumberExpression "10"
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "10"
+                        }
+                    ]
                 }
                 Xy {
                     x: NumberExpression "2"
-                    y: NumberExpression "100"
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "100"
+                        }
+                    ]
                 }
                 Xy {
-                    y: NumberExpression "0"
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "0"
+                        }
+                    ]
                 }
             ]
         }
