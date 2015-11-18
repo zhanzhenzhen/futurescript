@@ -173,3 +173,10 @@ b ifnull: 1
 c: d ifnull 1
 `).toString();
 console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Ifvoid, Colon, Num "1", Semicolon, NormalToken "b", Ifnull, Colon, Num "1", Semicolon, NormalToken "c", Colon, NormalToken "d", Ifnull, Num "1"');
+
+s = new $lex.Lex(`lemo 0.1.0
+a: b.3.2
+a: @0.1
+a: b.0x2e+3
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, NormalToken "b", Dot, NormalLeftParenthesis, Num "3", RightParenthesis, Dot, NormalLeftParenthesis, Num "2", RightParenthesis, Semicolon, NormalToken "a", Colon, Arg, Dot, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalLeftParenthesis, Num "1", RightParenthesis, Semicolon, NormalToken "a", Colon, NormalToken "b", Dot, NormalLeftParenthesis, Num "0x2e", RightParenthesis, Plus, Num "3"');
