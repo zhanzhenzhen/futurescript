@@ -35,13 +35,12 @@ a: "aaa"
 console.log(output);
 
 output = compile({code: `lemo 0.1.0, node module
-@0.abc
 move: <>
     console.log "\\(@0) --> \\(@1)"
 
 hanoi: <>
     if @0.count = 1
-        move(from, to)
+        move(@0.from, @0.to)
     else
         fun{
             count: @0.count - 1
@@ -49,7 +48,7 @@ hanoi: <>
             auxiliary: @0.to
             to: @0.auxiliary
         }
-        move(from, to)
+        move(@0.from, @0.to)
         fun{
             count: @0.count - 1
             from: @0.auxiliary
