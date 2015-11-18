@@ -252,6 +252,7 @@ a.(b): 1
 a."b": 1
 a: b.(c)
 a: b."c"
+a: b.0
 `);
 block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
@@ -367,6 +368,20 @@ RootBlock [
                 ]
                 callee: InlineNormalStringExpression
             }
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: Piece "a"
+            }
+        ]
+        value: DotExpression {
+            x: VariableExpression "b"
+            y: NumberExpression "0"
         }
     }
 ]
@@ -1308,6 +1323,46 @@ RootBlock [
                     value: PlusExpression {
                         x: SelfExpression
                         y: NumberExpression "1"
+                    }
+                }
+            ]
+        }
+    }
+]
+`);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: <> "abc\\(@0)def"
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: Piece "a"
+            }
+        ]
+        value: DiamondFunctionExpression {
+            body: ScopeBlock [
+                ExpressionStatement {
+                    expression: ParenthesisCallExpression {
+                        arguments: Arr [
+                            PlusExpression {
+                                x: PlusExpression {
+                                    x: StringExpression "abc"
+                                    y: DotExpression {
+                                        x: ArgExpression
+                                        y: NumberExpression "0"
+                                    }
+                                }
+                                y: StringExpression "def"
+                            }
+                        ]
+                        callee: InlineNormalStringExpression
                     }
                 }
             ]

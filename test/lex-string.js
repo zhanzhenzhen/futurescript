@@ -123,3 +123,14 @@ x: js"
 "
 `).toString();
 console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineJs, CallLeftParenthesis, Str "var a = \'asdf\\\\(asdf)\';", RightParenthesis, Semicolon, NormalToken "x", Colon, FormattedJs, CallLeftParenthesis, Str "var a = \\"asdf\\\\(asdf)\\\\\\\\nggg\\";", RightParenthesis');
+
+s = new $lex.Lex(`lemo 0.1.0
+x: "\\(abc)aaa"
+x: "aaa\\(abc)"
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "", Plus, NormalLeftParenthesis, NormalToken "abc", RightParenthesis, Plus, Str "aaa", RightParenthesis, Semicolon, NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "aaa", Plus, NormalLeftParenthesis, NormalToken "abc", RightParenthesis, Plus, Str "", RightParenthesis');
+
+s = new $lex.Lex(`lemo 0.1.0
+x: "aaa \\((abc + 1).toString()) bbb"
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "aaa ", Plus, NormalLeftParenthesis, NormalLeftParenthesis, NormalToken "abc", Plus, Num "1", RightParenthesis, Dot, NormalToken "toString", CallLeftParenthesis, RightParenthesis, RightParenthesis, Plus, Str " bbb", RightParenthesis');

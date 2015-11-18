@@ -42,7 +42,7 @@ mp: <>
     @0 * @1
 above export as multiply2
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "lib", Colon, Import, InlineNormalString, CallLeftParenthesis, Str "lib", RightParenthesis, Semicolon, NormalLeftBrace, NormalToken "fun1", Comma, NormalToken "fun2", As, NormalToken "f2", RightBrace, Colon, Import, InlineNormalString, CallLeftParenthesis, Str "lib2", RightParenthesis, Semicolon, NormalToken "multiply", NormalVariant, NormalToken "export", Colon, DiamondFunction, Arg, Num "0", Times, Arg, Num "1", Semicolon, NormalToken "mp", Colon, DiamondFunction, LeftChevron, Arg, Num "0", Times, Arg, Num "1", RightChevron, ExportAs, NormalToken "multiply2"');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "lib", Colon, Import, InlineNormalString, CallLeftParenthesis, Str "lib", RightParenthesis, Semicolon, NormalLeftBrace, NormalToken "fun1", Comma, NormalToken "fun2", As, NormalToken "f2", RightBrace, Colon, Import, InlineNormalString, CallLeftParenthesis, Str "lib2", RightParenthesis, Semicolon, NormalToken "multiply", NormalVariant, NormalToken "export", Colon, DiamondFunction, Arg, Dot, NormalLeftParenthesis, Num "0", RightParenthesis, Times, Arg, Dot, NormalLeftParenthesis, Num "1", RightParenthesis, Semicolon, NormalToken "mp", Colon, DiamondFunction, LeftChevron, Arg, Dot, NormalLeftParenthesis, Num "0", RightParenthesis, Times, Arg, Dot, NormalLeftParenthesis, Num "1", RightParenthesis, RightChevron, ExportAs, NormalToken "multiply2"');
 
 s = new $lex.Lex(`lemo 0.1.0
 b.if: 1
@@ -116,7 +116,7 @@ a."b": 1
 a."b c": 1
 (0).a: 1
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Dot, Num "0", Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, NormalToken "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, CallLeftParenthesis, Str "b", RightParenthesis, RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, CallLeftParenthesis, Str "b c", RightParenthesis, RightParenthesis, Colon, Num "1", Semicolon, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalToken "a", Colon, Num "1"');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Dot, NormalLeftParenthesis, Num "0", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, NormalToken "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, CallLeftParenthesis, Str "b", RightParenthesis, RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, CallLeftParenthesis, Str "b c", RightParenthesis, RightParenthesis, Colon, Num "1", Semicolon, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalToken "a", Colon, Num "1"');
 
 s = new $lex.Lex(`lemo 0.1.0
 Abc: class from Ab
