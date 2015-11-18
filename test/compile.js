@@ -28,3 +28,8 @@ b: match a
 console.log b
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+a: "aaa"
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
