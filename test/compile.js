@@ -65,7 +65,43 @@ hanoi{
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
 
+output = compile({code: `lemo 0.1.0, radical, node module
+move: <>
+    console.log "\\(@0) --> \\(@1)"
+
+hanoi: <>
+    if @count = 1
+        move[@from, @to]
+    else
+        fun{
+            count: @count - 1
+            from: @from
+            auxiliary: @to
+            to: @auxiliary
+        }
+        move[@from, @to]
+        fun{
+            count: @count - 1
+            from: @auxiliary
+            auxiliary: @from
+            to: @to
+        }
+
+hanoi{
+    count: 3
+    from: 0
+    auxiliary: 1
+    to: 2
+}
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
+
 output = compile({code: `lemo 0.1.0, node module
+console.log()
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
+
+output = compile({code: `lemo 0.1.0, radical, node module
 console.log()
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
