@@ -27,10 +27,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: PlusExpression {
@@ -44,10 +44,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "b"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "b"
             }
         ]
         value: PlusExpression {
@@ -58,44 +58,31 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "c"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "c"
             }
         ]
         value: ParenthesisCallExpression {
-            callee: VariableExpression "abc"
             arguments: Arr [
                 NumberExpression "5"
                 NumberExpression "6"
             ]
+            callee: VariableExpression "abc"
         }
     }
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
-            thenBranch: Block [
-                AssignStatement {
-                    assignees: Arr [
-                        VariableAssignee {
-                            variable: Piece "c"
-                            export: false
-                            ifvoid: false
-                            ifnull: false
-                        }
-                    ]
-                    value: NumberExpression "7"
-                }
-            ]
             elseBranch: Block [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: Piece "c"
                             export: false
-                            ifvoid: false
                             ifnull: false
+                            ifvoid: false
+                            variable: Piece "c"
                         }
                     ]
                     value: NumberExpression "5"
@@ -103,13 +90,26 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: Piece "b"
                             export: false
-                            ifvoid: false
                             ifnull: false
+                            ifvoid: false
+                            variable: Piece "b"
                         }
                     ]
                     value: VariableExpression "c"
+                }
+            ]
+            thenBranch: Block [
+                AssignStatement {
+                    assignees: Arr [
+                        VariableAssignee {
+                            export: false
+                            ifnull: false
+                            ifvoid: false
+                            variable: Piece "c"
+                        }
+                    ]
+                    value: NumberExpression "7"
                 }
             ]
         }
@@ -117,26 +117,26 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "d"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "d"
             }
         ]
         value: ParenthesisCallExpression {
-            callee: InlineNormalStringExpression
             arguments: Arr [
                 StringExpression "xxx"
             ]
+            callee: InlineNormalStringExpression
         }
     }
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "e"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "e"
             }
         ]
         value: DotExpression {
@@ -150,10 +150,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "f"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "f"
             }
         ]
         value: PlusExpression {
@@ -167,10 +167,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "g"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "g"
             }
         ]
         value: TimesExpression {
@@ -184,10 +184,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "h"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "h"
             }
         ]
         value: IfExpression {
@@ -201,14 +201,14 @@ RootBlock [
                     y: Piece "PI"
                 }
             }
-            thenBranch: Block [
-                ExpressionStatement {
-                    expression: NumberExpression "1"
-                }
-            ]
             elseBranch: Block [
                 ExpressionStatement {
                     expression: NumberExpression "2"
+                }
+            ]
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: NumberExpression "1"
                 }
             ]
         }
@@ -216,18 +216,18 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "i"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "i"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
+                    nullDefault: null
                     variable: Piece "x"
                     voidDefault: null
-                    nullDefault: null
                 }
             ]
             body: ScopeBlock [
@@ -259,10 +259,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: ArrayExpression {
@@ -276,10 +276,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: ObjectExpression {
@@ -298,11 +298,11 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             DotAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
                 x: VariableExpression "a"
                 y: Piece "b"
-                export: false
-                ifvoid: false
-                ifnull: false
             }
         ]
         value: NumberExpression "1"
@@ -310,11 +310,11 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             DotAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
                 x: VariableExpression "a"
                 y: VariableExpression "b"
-                export: false
-                ifvoid: false
-                ifnull: false
             }
         ]
         value: NumberExpression "1"
@@ -322,16 +322,16 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             DotAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
                 x: VariableExpression "a"
                 y: ParenthesisCallExpression {
-                    callee: InlineNormalStringExpression
                     arguments: Arr [
                         StringExpression "b"
                     ]
+                    callee: InlineNormalStringExpression
                 }
-                export: false
-                ifvoid: false
-                ifnull: false
             }
         ]
         value: NumberExpression "1"
@@ -339,10 +339,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: DotExpression {
@@ -353,19 +353,19 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: DotExpression {
             x: VariableExpression "b"
             y: ParenthesisCallExpression {
-                callee: InlineNormalStringExpression
                 arguments: Arr [
                     StringExpression "c"
                 ]
+                callee: InlineNormalStringExpression
             }
         }
     }
@@ -398,33 +398,34 @@ RootBlock [
     PostIfStatement {
         expression: IfExpression {
             condition: VariableExpression "b"
+            elseBranch: null
             thenBranch: Block [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: Piece "a"
                             export: false
-                            ifvoid: false
                             ifnull: false
+                            ifvoid: false
+                            variable: Piece "a"
                         }
                     ]
                     value: NumberExpression "1"
                 }
             ]
-            elseBranch: null
         }
     }
     PostIfStatement {
         expression: IfExpression {
             condition: VariableExpression "c"
+            elseBranch: null
             thenBranch: Block [
                 ExpressionStatement {
                     expression: ArrowFunctionExpression {
                         arguments: Arr [
                             ArrowArgument {
+                                nullDefault: null
                                 variable: Piece "a"
                                 voidDefault: null
-                                nullDefault: null
                             }
                         ]
                         body: ScopeBlock [
@@ -435,72 +436,71 @@ RootBlock [
                     }
                 }
             ]
-            elseBranch: null
         }
     }
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
-            thenBranch: null
             elseBranch: Block [
                 ExpressionStatement {
                     expression: NumberExpression "22"
                 }
             ]
+            thenBranch: null
         }
     }
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
+            elseBranch: Block [
+                ExpressionStatement {
+                    expression: NumberExpression "22"
+                }
+            ]
             thenBranch: Block [
                 ExpressionStatement {
                     expression: NumberExpression "1"
                 }
             ]
-            elseBranch: Block [
-                ExpressionStatement {
-                    expression: NumberExpression "22"
-                }
-            ]
         }
     }
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
+            elseBranch: Block [
+            ]
             thenBranch: Block [
                 ExpressionStatement {
                     expression: VariableExpression "b"
                 }
             ]
-            elseBranch: Block [
-            ]
         }
     }
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
+            elseBranch: null
             thenBranch: null
-            elseBranch: null
         }
     }
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
+            elseBranch: null
             thenBranch: Block [
                 ExpressionStatement {
                     expression: VariableExpression "b"
                 }
             ]
-            elseBranch: null
         }
     }
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: IfExpression {
@@ -508,11 +508,6 @@ RootBlock [
                 x: VariableExpression "b"
                 y: NumberExpression "5"
             }
-            thenBranch: Block [
-                ExpressionStatement {
-                    expression: NumberExpression "4"
-                }
-            ]
             elseBranch: Block [
                 ExpressionStatement {
                     expression: IfExpression {
@@ -520,13 +515,18 @@ RootBlock [
                             x: VariableExpression "c"
                             y: NumberExpression "6"
                         }
+                        elseBranch: null
                         thenBranch: Block [
                             ExpressionStatement {
                                 expression: NumberExpression "3"
                             }
                         ]
-                        elseBranch: null
                     }
+                }
+            ]
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: NumberExpression "4"
                 }
             ]
         }
@@ -552,10 +552,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: OrExpression {
@@ -587,14 +587,14 @@ RootBlock [
                 }
                 y: IfExpression {
                     condition: VariableExpression "eee"
-                    thenBranch: Block [
-                        ExpressionStatement {
-                            expression: VariableExpression "fff"
-                        }
-                    ]
                     elseBranch: Block [
                         ExpressionStatement {
                             expression: VariableExpression "ggg"
+                        }
+                    ]
+                    thenBranch: Block [
+                        ExpressionStatement {
+                            expression: VariableExpression "fff"
                         }
                     ]
                 }
@@ -615,57 +615,57 @@ console.log(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: ParenthesisCallExpression {
-            callee: VariableExpression "a"
             arguments: Arr [
                 ParenthesisCallExpression {
-                    callee: VariableExpression "b"
                     arguments: Arr [
                         VariableExpression "c"
                     ]
+                    callee: VariableExpression "b"
                 }
             ]
+            callee: VariableExpression "a"
         }
     }
     ExpressionStatement {
         expression: ParenthesisCallExpression {
-            callee: VariableExpression "a"
             arguments: Arr [
                 ParenthesisCallExpression {
-                    callee: VariableExpression "b"
                     arguments: Arr [
                         VariableExpression "c"
                     ]
+                    callee: VariableExpression "b"
                 }
             ]
+            callee: VariableExpression "a"
         }
     }
     ExpressionStatement {
         expression: ParenthesisCallExpression {
-            callee: ParenthesisCallExpression {
-                callee: VariableExpression "a"
-                arguments: Arr [
-                    VariableExpression "b"
-                ]
-            }
             arguments: Arr [
                 VariableExpression "c"
             ]
+            callee: ParenthesisCallExpression {
+                arguments: Arr [
+                    VariableExpression "b"
+                ]
+                callee: VariableExpression "a"
+            }
         }
     }
     ExpressionStatement {
         expression: ParenthesisCallExpression {
+            arguments: Arr [
+                ParenthesisCallExpression {
+                    arguments: Arr [
+                        VariableExpression "c"
+                    ]
+                    callee: VariableExpression "b"
+                }
+            ]
             callee: DotExpression {
                 x: VariableExpression "x"
                 y: VariableExpression "a"
             }
-            arguments: Arr [
-                ParenthesisCallExpression {
-                    callee: VariableExpression "b"
-                    arguments: Arr [
-                        VariableExpression "c"
-                    ]
-                }
-            ]
         }
     }
 ]
@@ -685,26 +685,26 @@ RootBlock [
     ExpressionStatement {
         expression: IfExpression {
             condition: VariableExpression "a"
-            thenBranch: Block [
-                ExpressionStatement {
-                    expression: VariableExpression "b"
-                }
-            ]
             elseBranch: Block [
                 ExpressionStatement {
                     expression: IfExpression {
                         condition: VariableExpression "c"
-                        thenBranch: Block [
-                            ExpressionStatement {
-                                expression: VariableExpression "d"
-                            }
-                        ]
                         elseBranch: Block [
                             ExpressionStatement {
                                 expression: VariableExpression "e"
                             }
                         ]
+                        thenBranch: Block [
+                            ExpressionStatement {
+                                expression: VariableExpression "d"
+                            }
+                        ]
                     }
+                }
+            ]
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: VariableExpression "b"
                 }
             ]
         }
@@ -768,10 +768,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: IfExpression {
@@ -785,14 +785,14 @@ RootBlock [
                     y: VoidExpression
                 }
             }
-            thenBranch: Block [
-                ExpressionStatement {
-                    expression: BooleanExpression "true"
-                }
-            ]
             elseBranch: Block [
                 ExpressionStatement {
                     expression: BooleanExpression "false"
+                }
+            ]
+            thenBranch: Block [
+                ExpressionStatement {
+                    expression: BooleanExpression "true"
                 }
             ]
         }
@@ -810,22 +810,22 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: DiamondFunctionExpression {
             body: ScopeBlock [
                 ExpressionStatement {
                     expression: ParenthesisCallExpression {
+                        arguments: Arr [
+                        ]
                         callee: DotExpression {
                             x: VariableExpression "Math"
                             y: Piece "random"
                         }
-                        arguments: Arr [
-                        ]
                     }
                 }
             ]
@@ -834,22 +834,22 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "b"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "b"
             }
         ]
         value: DashFunctionExpression {
             body: ScopeBlock [
                 ExpressionStatement {
                     expression: ParenthesisCallExpression {
+                        arguments: Arr [
+                        ]
                         callee: DotExpression {
                             x: VariableExpression "Math"
                             y: Piece "random"
                         }
-                        arguments: Arr [
-                        ]
                     }
                 }
             ]
@@ -867,10 +867,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: MinusExpression {
@@ -893,20 +893,20 @@ console.log(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: AsExpression {
-            value: AsExpression {
-                value: VariableExpression "a"
-                assignee: VariableAssignee {
-                    variable: Piece "b"
-                    export: false
-                    ifvoid: false
-                    ifnull: false
-                }
-            }
             assignee: VariableAssignee {
-                variable: Piece "c"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "c"
+            }
+            value: AsExpression {
+                assignee: VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "b"
+                }
+                value: VariableExpression "a"
             }
         }
     }
@@ -927,8 +927,8 @@ RootBlock [
                     Piece "b"
                 ]
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
             }
         ]
         value: ArrayExpression {
@@ -953,7 +953,6 @@ RootBlock [
     ExpressionStatement {
         expression: DotExpression {
             x: ParenthesisCallExpression {
-                callee: VariableExpression "a"
                 arguments: Arr [
                     ArrayExpression {
                         value: Arr [
@@ -961,6 +960,7 @@ RootBlock [
                         ]
                     }
                 ]
+                callee: VariableExpression "a"
             }
             y: Piece "c"
         }
@@ -968,7 +968,6 @@ RootBlock [
     ExpressionStatement {
         expression: DotExpression {
             x: ParenthesisCallExpression {
-                callee: VariableExpression "a"
                 arguments: Arr [
                     ObjectExpression {
                         value: Arr [
@@ -979,13 +978,13 @@ RootBlock [
                         ]
                     }
                 ]
+                callee: VariableExpression "a"
             }
             y: Piece "c"
         }
     }
     ExpressionStatement {
         expression: ParenthesisCallExpression {
-            callee: VariableExpression "a"
             arguments: Arr [
                 DotExpression {
                     x: ArrayExpression {
@@ -996,11 +995,11 @@ RootBlock [
                     y: Piece "c"
                 }
             ]
+            callee: VariableExpression "a"
         }
     }
     ExpressionStatement {
         expression: ParenthesisCallExpression {
-            callee: VariableExpression "a"
             arguments: Arr [
                 DotExpression {
                     x: ObjectExpression {
@@ -1014,6 +1013,7 @@ RootBlock [
                     y: Piece "c"
                 }
             ]
+            callee: VariableExpression "a"
         }
     }
 ]
@@ -1029,10 +1029,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: DotExpression {
@@ -1048,19 +1048,19 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: ParenthesisCallExpression {
-            callee: FunctionVariantExpression {
-                x: VariableExpression "b"
-            }
             arguments: Arr [
                 VariableExpression "c"
             ]
+            callee: FunctionVariantExpression {
+                x: VariableExpression "b"
+            }
         }
     }
 ]
@@ -1078,10 +1078,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: InExpression {
@@ -1092,10 +1092,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: NotInExpression {
@@ -1106,10 +1106,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: IsExpression {
@@ -1120,10 +1120,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: IsntExpression {
@@ -1144,10 +1144,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: IfnullExpression {
@@ -1158,10 +1158,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: IfvoidExpression {
@@ -1184,18 +1184,18 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
+                    nullDefault: null
                     variable: Piece "x"
                     voidDefault: null
-                    nullDefault: null
                 }
             ]
             body: ScopeBlock [
@@ -1211,18 +1211,18 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
+                    nullDefault: null
                     variable: Piece "x"
                     voidDefault: NumberExpression "3"
-                    nullDefault: null
                 }
             ]
             body: ScopeBlock [
@@ -1238,18 +1238,18 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
+                    nullDefault: NumberExpression "3"
                     variable: Piece "x"
                     voidDefault: null
-                    nullDefault: NumberExpression "3"
                 }
             ]
             body: ScopeBlock [
@@ -1277,10 +1277,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "var_573300145710716007_0"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "var_573300145710716007_0"
             }
         ]
         value: NumberExpression "3"
@@ -1288,10 +1288,10 @@ RootBlock [
     AssignStatement {
         assignees: Arr [
             VariableAssignee {
-                variable: Piece "a"
                 export: false
-                ifvoid: false
                 ifnull: false
+                ifvoid: false
+                variable: Piece "a"
             }
         ]
         value: DiamondFunctionExpression {
@@ -1299,10 +1299,10 @@ RootBlock [
                 AssignStatement {
                     assignees: Arr [
                         VariableAssignee {
-                            variable: Piece "var_573300145710716007_0"
                             export: false
-                            ifvoid: false
                             ifnull: false
+                            ifvoid: false
+                            variable: Piece "var_573300145710716007_0"
                         }
                     ]
                     value: PlusExpression {
