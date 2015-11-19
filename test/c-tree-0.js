@@ -973,3 +973,19 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+throw Error()
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    ThrowStatement {
+        value: ParenthesisCallExpression {
+            arguments: Arr [
+            ]
+            callee: VariableExpression "Error"
+        }
+    }
+]
+`);
