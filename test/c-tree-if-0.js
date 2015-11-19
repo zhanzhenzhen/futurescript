@@ -207,11 +207,24 @@ RootBlock [
 `);
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
-if a = b then throw
+if a = b throw
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString());
 console.log(block.toString() === `node module
 RootBlock [
+    ExpressionStatement {
+        expression: IfExpression {
+            condition: EqualExpression {
+                x: VariableExpression "a"
+                y: VariableExpression "b"
+            }
+            elseBranch: null
+            thenBranch: Block [
+                ThrowStatement {
+                    value: null
+                }
+            ]
+        }
+    }
 ]
 `);
