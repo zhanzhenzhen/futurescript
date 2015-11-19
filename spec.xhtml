@@ -170,7 +170,7 @@
     <li>对象表</li>
     <li>match表</li>
 </ul>
-<p>当块只含有单条语句时，也可以写在一行里而不使用缩进，这称为内联块。例如：</p>
+<p>当块（除catch块外）只含有单条语句时，也可以写在一行里而不使用缩进，这称为内联块。例如：</p>
 <pre><code><![CDATA[
     if x = 5 then aaa()
 ]]></code></pre>
@@ -1081,7 +1081,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>Lemo的递归有个好处，它会自动编译（优化）成循环，当自我调用的语句出现在尾部之时。所以，你无需担心堆栈溢出，就算循环1000000次也没关系，编译后的JS代码是一个真正的循环，突破了传统递归的限制。这个在内部是通过Babel实现的。</p>
 <h2>异常</h2>
-<p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript几乎完全相同。例如：</p>
+<p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript相似。例如：</p>
 <pre><code><![CDATA[
     try
         allHellBreaksLoose()
@@ -1091,7 +1091,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     finally
         cleanUp()
 ]]></code></pre>
-<p>唯一的不同是：若<code>throw</code>后面啥都没有，不是语法错误，而是：若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。</p>
+<p>和CoffeeScript有两点不同。第一：若<code>throw</code>后面啥都没有，不是语法错误，而是：若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。第二：<code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
 <h2>异步</h2>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
 <pre><code><![CDATA[

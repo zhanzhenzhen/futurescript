@@ -180,3 +180,19 @@ a: @0.1
 a: b.0x2e+3
 `).toString();
 console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, NormalToken "b", Dot, NormalLeftParenthesis, Num "3", RightParenthesis, Dot, NormalLeftParenthesis, Num "2", RightParenthesis, Semicolon, NormalToken "a", Colon, Arg, Dot, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalLeftParenthesis, Num "1", RightParenthesis, Semicolon, NormalToken "a", Colon, NormalToken "b", Dot, NormalLeftParenthesis, Num "0x2e", RightParenthesis, Plus, Num "3"');
+
+s = new $lex.Lex(`lemo 0.1.0
+try
+    a
+catch
+    b
+finally
+    c
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", Try, LeftChevron, NormalToken "a", RightChevron, Catch, LeftChevron, NormalToken "b", RightChevron, Finally, LeftChevron, NormalToken "c", RightChevron');
+
+s = new $lex.Lex(`lemo 0.1.0
+if a
+then b
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", If, NormalToken "a", Then, NormalToken "b"');
