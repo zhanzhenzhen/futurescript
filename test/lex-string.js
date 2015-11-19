@@ -1,4 +1,4 @@
-import * as $lex from "../lib/compile-lex-0";
+import * as $lex from "../lib/c-lex-0";
 import assert from "assert";
 
 let s = null;

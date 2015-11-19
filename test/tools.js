@@ -1,4 +1,4 @@
-import * as $tools from "../lib/compile-tools-0";
+import * as $tools from "../lib/c-tools-0";
 
 let r;
 

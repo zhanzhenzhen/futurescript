@@ -1,4 +1,4 @@
-import "../lib/compile-shim-0";
+import "../lib/c-shim-0";
 import "./tools";
 import "./block";
 import "./lex";
