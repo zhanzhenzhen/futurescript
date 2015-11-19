@@ -1,4 +1,4 @@
-import compile from "../lib/compile";
+import compile from "../lib/c";
 
 let output;
 
