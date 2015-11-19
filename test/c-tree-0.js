@@ -570,64 +570,6 @@ RootBlock [
 `);
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
-a: <> Math.random()
-b: -- Math.random()
-`);
-block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
-RootBlock [
-    AssignStatement {
-        assignees: Arr [
-            VariableAssignee {
-                export: false
-                ifnull: false
-                ifvoid: false
-                variable: Piece "a"
-            }
-        ]
-        value: DiamondFunctionExpression {
-            body: ScopeBlock [
-                ExpressionStatement {
-                    expression: ParenthesisCallExpression {
-                        arguments: Arr [
-                        ]
-                        callee: DotExpression {
-                            x: VariableExpression "Math"
-                            y: Piece "random"
-                        }
-                    }
-                }
-            ]
-        }
-    }
-    AssignStatement {
-        assignees: Arr [
-            VariableAssignee {
-                export: false
-                ifnull: false
-                ifvoid: false
-                variable: Piece "b"
-            }
-        ]
-        value: DashFunctionExpression {
-            body: ScopeBlock [
-                ExpressionStatement {
-                    expression: ParenthesisCallExpression {
-                        arguments: Arr [
-                        ]
-                        callee: DotExpression {
-                            x: VariableExpression "Math"
-                            y: Piece "random"
-                        }
-                    }
-                }
-            ]
-        }
-    }
-]
-`);
-
-lex = new $lex.Lex(`lemo 0.1.0, node module
 a: +1 - (-a)
 `);
 block = new $block.RootBlock(lex);
