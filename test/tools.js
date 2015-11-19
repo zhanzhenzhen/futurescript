@@ -1,4 +1,4 @@
-import * as $tools from "../lib/c-tools-0";
+import * as $tools from "../lib/c-tools-0.js";
 
 let r;
 

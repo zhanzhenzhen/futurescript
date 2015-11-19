@@ -1,5 +1,5 @@
-import * as $lex from "../lib/c-lex-0";
-import * as $pattern from "../lib/c-pattern-0";
+import * as $lex from "../lib/c-lex-0.js";
+import * as $pattern from "../lib/c-pattern-0.js";
 import assert from "assert";
 
 let s = null;
