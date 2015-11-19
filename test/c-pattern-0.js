@@ -344,6 +344,19 @@ result = $pattern.Pattern.matchPatternCapture(
     [$pattern.tokens, $lex.Plus, $pattern.tokens],
     lex.part(3, 7),
     false,
+    [0, [1, 2], null]
+);
+console.log(
+    Array.isArray(result) && result.length === 3 &&
+    result[0] instanceof Object && result[0].startIndex === 3 && result[0].endIndex === 5 &&
+    result[1] instanceof Object && result[1].startIndex === 6 && result[1].endIndex === 7 &&
+    result[2] === null
+);
+
+result = $pattern.Pattern.matchPatternCapture(
+    [$pattern.tokens, $lex.Plus, $pattern.tokens],
+    lex.part(3, 7),
+    false,
     [null, 2, 0, 1]
 );
 console.log(

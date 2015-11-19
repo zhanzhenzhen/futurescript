@@ -207,7 +207,7 @@ RootBlock [
 `);
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
-throw void
+if a = b then throw
 `);
 block = new $block.RootBlock(lex);
 console.log(block.toString());
