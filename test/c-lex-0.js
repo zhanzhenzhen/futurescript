@@ -196,8 +196,3 @@ if a
 then b
 `).toString();
 console.log(s === 'VersionDirective "lemo 0.1.0", If, NormalToken "a", Then, NormalToken "b"');
-
-s = new $lex.Lex(`lemo 0.1.0
-if a << >>
-`).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", If, NormalToken "a"');
