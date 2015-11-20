@@ -962,34 +962,34 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>模式匹配中的“比较”默认是用<code>=</code>，还可以用其他比较运算符，例如：</p>
 <pre><code><![CDATA[
-    message: match statusCode <
-        100 ? "unsupported"
-        200 ? "informational"
-        300 ? "success"
-        400 ? "redirect"
-        500 ? "client error"
-        600 ? "server error"
+    message: match statusCode >=
+        600 ? "unsupported"
+        500 ? "server error"
+        400 ? "client error"
+        300 ? "redirect"
+        200 ? "success"
+        100 ? "informational"
         |     "unsupported"
 ]]></code></pre>
 <p><code>else</code>可以跟前面的并在一起，此时用<code>or else</code>，但该项不能有<code>then</code>。在模式中，<code>or</code>这个关键字若不作为运算符使用，可以简写为逗号<code>,</code>，所以上面的例子可以写成：</p>
 <pre><code><![CDATA[
-    message: match statusCode <
-        100, | "unsupported"
-        200  ? "informational"
-        300  ? "success"
-        400  ? "redirect"
-        500  ? "client error"
-        600  ? "server error"
+    message: match statusCode >=
+        600, | "unsupported"
+        500  ? "server error"
+        400  ? "client error"
+        300  ? "redirect"
+        200  ? "success"
+        100  ? "informational"
 ]]></code></pre>
 <p>用<code>or else</code>的时候<code>or</code>还可以省略，所以还可以写成：</p>
 <pre><code><![CDATA[
-    message: match statusCode <
-        100 | "unsupported"
-        200 ? "informational"
-        300 ? "success"
-        400 ? "redirect"
-        500 ? "client error"
-        600 ? "server error"
+    message: match statusCode >=
+        600 | "unsupported"
+        500 ? "server error"
+        400 ? "client error"
+        300 ? "redirect"
+        200 ? "success"
+        100 ? "informational"
 ]]></code></pre>
 <p>不但可以用比较运算符，还可以自定义比较函数，例如：</p>
 <pre><code><![CDATA[
