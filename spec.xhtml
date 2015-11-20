@@ -1019,7 +1019,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         "c"                 ? "The array includes c."
         |                     "The array doesn't include any of the first 3 letters."
 ]]></code></pre>
-<p>由此可知，or和and作为运算符在模式中使用是有限制的，它作为运算符时必须出现在括号内，否则会被认为是模式。所以真的有这个需求的话，要用个括号包起来。不过这两个运算符出现在模式中好像也没有什么用。</p>
+<p>由此可知，or和and作为运算符在模式中使用是有限制的，它作为运算符时必须出现在括号内，否则会被认为是模式。所以真的有这个需求的话，要用个括号包起来。不过它们作为运算符出现在模式中好像也没有什么用。</p>
 <p>作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
 <p>注意<code>or else</code>是一种特殊的写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>在一个模式中一起出现。</p>
 <p>和<code>if</code>一样，<code>then</code>块可以用缩进，这时就不用写<code>then</code>了：</p>
