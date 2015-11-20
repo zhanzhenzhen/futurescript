@@ -110,3 +110,15 @@ output = compile({code: `lemo 0.1.0, radical, node module
 if true then console.log("a")
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, radical, node module
+a:
+    try
+        true
+    catch b
+        false
+    finally
+        null
+console.log a
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
