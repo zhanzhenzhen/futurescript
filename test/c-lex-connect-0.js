@@ -84,3 +84,21 @@ a: {
 }
 `).toString();
 console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, NormalLeftBrace, NormalToken "aaa", Colon, Num "1", Comma, NormalToken "bbb", Colon, Num "2", RightBrace');
+
+s = new $lex.Lex(`lemo 0.1.0
+a:
+    {
+        b: 1
+        c: {
+            d:
+                2
+            e: 3
+        }
+        f:
+            [
+                4
+                5
+            ]
+    }
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, NormalLeftBrace, NormalToken "b", Colon, Num "1", Semicolon, NormalToken "c", Colon, NormalLeftBrace, NormalToken "d", Colon, Num "2", Semicolon, NormalToken "e", Colon, Num "3", RightBrace, Semicolon, NormalToken "f", Colon, NormalLeftBracket, Num "4", Semicolon, Num "5", RightBracket, RightBrace');
