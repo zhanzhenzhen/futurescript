@@ -91,3 +91,14 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+match a
+    1, |
+        10
+    2
+        100
+`);
+console.log(lex.toString());
+block = new $block.RootBlock(lex);
+console.log(block.toString());
