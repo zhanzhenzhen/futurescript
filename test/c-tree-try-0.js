@@ -36,3 +36,48 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a:
+    try
+        b
+    catch ex
+        throw ex + 1
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: Piece "a"
+            }
+        ]
+        value: TryExpression {
+            catchBranch: Block [
+                ThrowStatement {
+                    value: PlusExpression {
+                        x: VariableExpression "ex"
+                        y: NumberExpression "1"
+                    }
+                }
+            ]
+            catchVar: VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: Piece "ex"
+            }
+            finallyBranch: null
+            tryBranch: Block [
+                ExpressionStatement {
+                    expression: VariableExpression "b"
+                }
+            ]
+        }
+    }
+]
+`);
