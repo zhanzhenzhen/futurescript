@@ -137,3 +137,16 @@ output = compile({code: `lemo 0.1.0, radical, node module
 throw Error("haha")
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, radical, node module
+throw
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
+
+output = compile({code: `lemo 0.1.0, radical, node module
+try
+    a: 1
+catch
+    throw
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
