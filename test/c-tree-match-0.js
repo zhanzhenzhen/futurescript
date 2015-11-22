@@ -176,7 +176,7 @@ RootBlock [
 `);
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
-match a
+match x -> a = x
     1, 2, 3, |
         10
     4
@@ -187,7 +187,23 @@ console.log(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: MatchExpression {
-            comparer: VariableExpression "a"
+            comparer: ArrowFunctionExpression {
+                arguments: Arr [
+                    ArrowArgument {
+                        nullDefault: null
+                        variable: Piece "x"
+                        voidDefault: null
+                    }
+                ]
+                body: ScopeBlock [
+                    ExpressionStatement {
+                        expression: EqualExpression {
+                            x: VariableExpression "a"
+                            y: VariableExpression "x"
+                        }
+                    }
+                ]
+            }
             items: Arr [
                 Xy {
                     x: OrPattern [
