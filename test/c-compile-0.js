@@ -171,3 +171,12 @@ message: match <> statusCode >= @
 console.log message
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+day: "Sun"
+action: match day
+    "Sat", "Sun" ? "have a rest"
+    |              "work"
+console.log action
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
