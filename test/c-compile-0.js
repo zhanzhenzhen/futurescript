@@ -150,3 +150,10 @@ catch
     throw
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+a: 1
+b: match a
+console.log b
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
