@@ -190,3 +190,10 @@ output = compile({code: `lemo 0.1.0, node module
 console.log 7 mod 3
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+a: {f: 5, g: 3}
+delete a.f
+console.log a
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
