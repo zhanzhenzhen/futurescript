@@ -837,16 +837,7 @@
 </ul>
 <p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
 <p><code>/=</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。为什么我们不用<code>!=</code>？因为感叹号目前Lemo还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
-<p>和CoffeeScript一样，我们也支持这种链式比较：</p>
-<pre><code><![CDATA[
-    if 200 <= statusCode < 300
-        console.log "success"
-]]></code></pre>
-<p>但是我们的限制比CoffeeScript多，只有同一个方向的才可以链式比较。像这种就不支持：</p>
-<pre><code><![CDATA[
-    if a < b > c
-        console.log "success"
-]]></code></pre>
+<p>我们暂不支持CoffeeScript风格的链式比较，但以后的版本一定会支持。</p>
 <p>Lemo和其他语言在逻辑运算方面最大的区别就是<code>not</code>的优先级。<code>not</code>的优先级被降低，仅高于<code>and</code>和<code>or</code>。这意味着我们可以少加很多括号。你肯定抱怨过在JS中不得不这样写：</p>
 <pre><code><![CDATA[
     if !(abc instanceof Abc) doTask();
@@ -939,27 +930,7 @@
         |   "Sun"
     # text will be "Wed"
 ]]></code></pre>
-<p>上面只是最普通的模式匹配，<code>day</code>是输入，1、2、3……称作模式。它不但比JavaScript的switch强大，甚至比CoffeeScript的switch还强大，看看这个：</p>
-<pre><code><![CDATA[
-chessBoard: (pos) -> match [pos.x, pos.y]
-    [0, 0] ? "king"
-    [0, 1] ? "pawn"
-    [4, 5] ? "queen"
-    |        "empty"
-piece: chessBoard {x: 4, y: 5} # will be "queen"
-]]></code></pre>
-<p>这个称为数组模式。它不是简单地比较两个数组是否相等（那样会始终不相等，因为不是同一个引用），而是检查数组（直接，非嵌套）中每个元素是否相等。当模式以<code>[</code>开头时，适用数组模式。注意一定要直接写出<code>[</code>，绝不能用变量替代，像这样是没用的：</p>
-<pre><code><![CDATA[
-    a: [0, 0]
-    b: [0, 1]
-    c: [4, 5]
-    chessBoard: (pos) -> match [pos.x, pos.y]
-        a ? "king"
-        b ? "pawn"
-        c ? "queen"
-        |   "empty"
-    piece: chessBoard {x: 4, y: 5} # will be "empty"
-]]></code></pre>
+<p>上面只是最普通的模式匹配，<code>day</code>是输入，1、2、3……称作模式。</p>
 <p>模式匹配中的“比较”默认是用<code>=</code>直接比较输入和模式，<code>match</code>右边还可以不是输入而是比较函数，例如：</p>
 <pre><code><![CDATA[
     statusCode: 404
@@ -974,7 +945,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     # message is "client error"
 ]]></code></pre>
 <p>注意，上例中的<code>@</code>适用于激进模式，在兼容模式中要改成<code>@0</code>。</p>
-<p><code>else</code>可以跟前面的并在一起，此时用<code>or else</code>，但该项不能有<code>then</code>。在模式中，<code>or</code>这个关键字若不作为运算符使用，可以简写为逗号<code>,</code>，所以上面的例子可以写成：</p>
+<p><code>else</code>可以跟前面的并在一起，此时用<code>or else</code>，但该项不能有<code>then</code>。这称为<code>else</code>模式和其他模式的合并写法，但本质上还是两个模式。在模式匹配中，<code>or</code>这个关键字若不作为运算符使用，可以简写为逗号<code>,</code>，所以上面的例子可以写成：</p>
 <pre><code><![CDATA[
     message: match <> statusCode >= @
         600, | "unsupported"
@@ -996,6 +967,15 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>比较函数的功能非常强大，例如：</p>
 <pre><code><![CDATA[
+chessBoard: (pos) -> match <> pos.x = @0 and pos.y = @1
+    [0, 0] ? "king"
+    [0, 1] ? "pawn"
+    [4, 5] ? "queen"
+    |        "empty"
+piece: chessBoard {x: 4, y: 5} # will be "queen"
+]]></code></pre>
+<p>又如：</p>
+<pre><code><![CDATA[
     text: "This is a dog."
     speak: match <> text.includes(@)
         "cat" ? "meow"
@@ -1003,7 +983,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         |       "unknown"
     # speak is "woof"
 ]]></code></pre>
-<p>当<code>match</code>后紧接的是函数时，则被识别成比较函数。要直接写出<code>-&gt;</code>或<code>&lt;&gt;</code>，绝不能用变量替代，这一点和数组模式相似。</p>
+<p>当<code>match</code>后紧接的是函数时，则被识别成比较函数。要直接写出<code>-&gt;</code>或<code>&lt;&gt;</code>，绝不能用变量替代。</p>
 <p>还有or模式和and模式。or模式我们会经常用到，例如：</p>
 <pre><code><![CDATA[
     day: "Tue"
@@ -1021,17 +1001,9 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         "c"                 ? "The array includes c."
         |                     "The array doesn't include any of the first 3 letters."
 ]]></code></pre>
-<p>它们可以和数组模式组合用，例如：</p>
-<pre><code><![CDATA[
-chessBoard: (pos) -> match [pos.x, pos.y]
-    [0, 0]         ? "king"
-    [0, 1], [0, 2] ? "pawn"
-    |                "empty"
-piece: chessBoard {x: 0, y: 2} # will be "pawn"
-]]></code></pre>
 <p>由此可知，or和and作为运算符在模式中使用是有限制的，它作为运算符时必须出现在括号内，否则会被认为是模式。所以真的有这个需求的话，要用个括号包起来。不过它们作为运算符出现在模式中好像也没有什么用。</p>
 <p>作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
-<p>注意<code>or else</code>是一种特殊的写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>在一个模式中一起出现。</p>
+<p>注意<code>or else</code>是一种特殊的合并写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>一起出现。</p>
 <p>和<code>if</code>一样，<code>then</code>块可以用缩进，这时就不用写<code>then</code>了：</p>
 <pre><code><![CDATA[
     day: 3
