@@ -253,6 +253,7 @@ a."b": 1
 a: b.(c)
 a: b."c"
 a: b.0
+a.0: b
 `);
 block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
@@ -383,6 +384,18 @@ RootBlock [
             x: VariableExpression "b"
             y: NumberExpression "0"
         }
+    }
+    AssignStatement {
+        assignees: Arr [
+            DotAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                x: VariableExpression "a"
+                y: NumberExpression "0"
+            }
+        ]
+        value: VariableExpression "b"
     }
 ]
 `);
