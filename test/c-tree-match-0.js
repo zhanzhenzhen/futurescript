@@ -99,6 +99,39 @@ match a
     2
         100
 `);
-console.log(lex.toString());
 block = new $block.RootBlock(lex);
-console.log(block.toString());
+console.log(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: MatchExpression {
+            comparer: VariableExpression "a"
+            items: Arr [
+                Xy {
+                    x: NumberExpression "1"
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "10"
+                        }
+                    ]
+                }
+                Xy {
+                    x: NumberExpression "2"
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "100"
+                        }
+                    ]
+                }
+                Xy {
+                    x: null
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "10"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+]
+`);
