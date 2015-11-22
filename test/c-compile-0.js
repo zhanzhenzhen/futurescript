@@ -157,3 +157,17 @@ b: match a
 console.log b
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module, radical
+statusCode: 404
+message: match <> statusCode >= @
+    600 ? "unsupported"
+    500 ? "server error"
+    400 ? "client error"
+    300 ? "redirect"
+    200 ? "success"
+    100 ? "informational"
+    |     "unsupported"
+console.log message
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
