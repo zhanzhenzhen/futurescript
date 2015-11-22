@@ -989,3 +989,37 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+delete a.b
+delete a.b."c"
+delete a.b.(c)
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    DeleteStatement {
+        x: VariableExpression "a"
+        y: Piece "b"
+    }
+    DeleteStatement {
+        x: DotExpression {
+            x: VariableExpression "a"
+            y: Piece "b"
+        }
+        y: ParenthesisCallExpression {
+            arguments: Arr [
+                StringExpression "c"
+            ]
+            callee: InlineNormalStringExpression
+        }
+    }
+    DeleteStatement {
+        x: DotExpression {
+            x: VariableExpression "a"
+            y: Piece "b"
+        }
+        y: VariableExpression "c"
+    }
+]
+`);
