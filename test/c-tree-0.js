@@ -1059,3 +1059,73 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+[]
+{}
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: ArrayExpression {
+            value: Arr [
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: ObjectExpression {
+            value: Arr [
+            ]
+        }
+    }
+]
+`);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a'ok(1)
+a'ok[1]
+a'ok{}
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            arguments: Arr [
+                NumberExpression "1"
+            ]
+            callee: OkVariantExpression {
+                x: VariableExpression "a"
+            }
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            arguments: Arr [
+                ArrayExpression {
+                    value: Arr [
+                        NumberExpression "1"
+                    ]
+                }
+            ]
+            callee: OkVariantExpression {
+                x: VariableExpression "a"
+            }
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            arguments: Arr [
+                ObjectExpression {
+                    value: Arr [
+                    ]
+                }
+            ]
+            callee: OkVariantExpression {
+                x: VariableExpression "a"
+            }
+        }
+    }
+]
+`);
