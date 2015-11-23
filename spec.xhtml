@@ -1226,7 +1226,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类的关系还是扁平为好。</p>
 <p>只要类有实例化需求，就要避免取非大写开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
-<h1>第三方包</h1>
+<h1>使用外部库</h1>
 <h2>管道</h2>
 <p>管道操作符是<code>|></code>。例子：</p>
 <pre><code><![CDATA[
@@ -1246,7 +1246,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <pre><code><![CDATA[
     (([3, 4, 5] |> u.map(x -> x * 2)).map(x -> x + 1)) |> u.max
 ]]></code></pre>
-<p>所以胖点基本就是点号，只不过它的优先级略低，和管道运算符相同。而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
+<p>所以胖点基本就是点号，只不过我们规定当它出现在管道右边时作为结束标记，而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
 <h1>其他特色</h1>
 <h2>do</h2>
 <p><code>do</code>是<code>(...)()</code>的简便方法，比CoffeeScript的<code>do</code>功能略少，但更纯粹。它可以用来：</p>
@@ -1653,18 +1653,18 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a export as x</code></td>
     </tr>
     <tr>
-        <td rowspan="2">14 right</td>
+        <td>14 right</td>
         <td>Pipe</td>
         <td><code>a |&gt; b</code></td>
     </tr>
     <tr>
-        <td>Fat Dot Member Access</td>
-        <td><code>a :: x</code></td>
-    </tr>
-    <tr>
-        <td rowspan="7">15 right</td>
+        <td rowspan="8">15 right</td>
         <td>Member Access</td>
         <td><code>a.x<br/>a."x"<br/>a.(b)</code></td>
+    </tr>
+    <tr>
+        <td>Fat Dot Member Access</td>
+        <td><code>a :: x</code></td>
     </tr>
     <tr>
         <td>Function Call</td>

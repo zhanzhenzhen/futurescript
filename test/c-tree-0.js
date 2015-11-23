@@ -1134,19 +1134,72 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 [3, 4, 5] |> u.map(x -> x * 2) :: map(x -> x + 1) |> u.max
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString());
 console.log(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
-        expression: ArrayExpression {
-            value: Arr [
-            ]
-        }
-    }
-    ExpressionStatement {
-        expression: ObjectExpression {
-            value: Arr [
-            ]
+        expression: PipeExpression {
+            x: ParenthesisCallExpression {
+                arguments: Arr [
+                    ArrowFunctionExpression {
+                        arguments: Arr [
+                            ArrowArgument {
+                                nullDefault: null
+                                variable: Piece "x"
+                                voidDefault: null
+                            }
+                        ]
+                        body: ScopeBlock [
+                            ExpressionStatement {
+                                expression: PlusExpression {
+                                    x: VariableExpression "x"
+                                    y: NumberExpression "1"
+                                }
+                            }
+                        ]
+                    }
+                ]
+                callee: DotExpression {
+                    x: PipeExpression {
+                        x: ArrayExpression {
+                            value: Arr [
+                                NumberExpression "3"
+                                NumberExpression "4"
+                                NumberExpression "5"
+                            ]
+                        }
+                        y: ParenthesisCallExpression {
+                            arguments: Arr [
+                                ArrowFunctionExpression {
+                                    arguments: Arr [
+                                        ArrowArgument {
+                                            nullDefault: null
+                                            variable: Piece "x"
+                                            voidDefault: null
+                                        }
+                                    ]
+                                    body: ScopeBlock [
+                                        ExpressionStatement {
+                                            expression: TimesExpression {
+                                                x: VariableExpression "x"
+                                                y: NumberExpression "2"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                            callee: DotExpression {
+                                x: VariableExpression "u"
+                                y: Piece "map"
+                            }
+                        }
+                    }
+                    y: Piece "map"
+                }
+            }
+            y: DotExpression {
+                x: VariableExpression "u"
+                y: Piece "max"
+            }
         }
     }
 ]
