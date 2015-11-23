@@ -197,3 +197,9 @@ delete a.f
 console.log a
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+do --
+    console.log("haha")
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
