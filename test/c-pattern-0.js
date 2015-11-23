@@ -533,3 +533,20 @@ result = $pattern.Pattern.searchOne(
     true
 );
 console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a |> b.c :: d
+`);
+result = $pattern.Pattern.matchPatternsAndCaptures(
+    [
+        [[$pattern.tokens, $lex.Dot, $pattern.tokens], [0, 2]],
+        [[$pattern.tokens, $lex.FatDot, $pattern.tokens], [0, 2]]
+    ],
+    lex.part(1),
+    false
+);
+console.log(
+    Array.isArray(result) && result.length === 2 &&
+    result[0] instanceof Object && result[0].startIndex === 1 && result[0].endIndex === 5 &&
+    result[1] instanceof Object && result[1].startIndex === 7 && result[1].endIndex === 7
+);
