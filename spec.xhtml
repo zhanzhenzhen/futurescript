@@ -1307,7 +1307,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <pre><code><![CDATA[
     zip: lottery.winner'ok.address'ok.zipcode
 ]]></code></pre>
-<p><code>'ok</code>还可以和函数调用结合起来使用，和CoffeeScript的<code>?(...)</code>一样。例如这段CoffeeScript</p>
+<p><code>'ok</code>还可以和函数调用结合起来使用，形式是<code>'ok(...)</code>、<code>'ok[...]</code>或<code>'ok{...}</code>。和CoffeeScript的<code>?(...)</code>一样。例如这段CoffeeScript</p>
 <pre><code><![CDATA[
     zip = lottery.drawWinner?().address?.zipcode
 ]]></code></pre>
@@ -1655,7 +1655,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <tr>
         <td rowspan="2">14 right</td>
         <td>Pipe</td>
-        <td><code>a |&gt; x</code></td>
+        <td><code>a |&gt; b</code></td>
     </tr>
     <tr>
         <td>Fat Dot Member Access</td>

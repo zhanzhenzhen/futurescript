@@ -1129,3 +1129,25 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+[3, 4, 5] |> u.map(x -> x * 2) :: map(x -> x + 1) |> u.max
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString());
+console.log(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: ArrayExpression {
+            value: Arr [
+            ]
+        }
+    }
+    ExpressionStatement {
+        expression: ObjectExpression {
+            value: Arr [
+            ]
+        }
+    }
+]
+`);
