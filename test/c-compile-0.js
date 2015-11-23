@@ -234,3 +234,10 @@ a: null
 console.log a'ok()
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+a: null
+b: a ifnull 1
+console.log b
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
