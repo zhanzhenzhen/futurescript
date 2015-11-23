@@ -210,3 +210,9 @@ a: self + 1
 console.log a
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+a: (x, y) -> x + y
+console.log a'[5, 6]
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
