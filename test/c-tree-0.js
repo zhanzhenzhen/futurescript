@@ -1036,3 +1036,26 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+do -- 3 + 5
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: DoExpression {
+            function: DashFunctionExpression {
+                body: ScopeBlock [
+                    ExpressionStatement {
+                        expression: PlusExpression {
+                            x: NumberExpression "3"
+                            y: NumberExpression "5"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+]
+`);
