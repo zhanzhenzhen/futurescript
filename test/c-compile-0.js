@@ -225,6 +225,6 @@ console.log(output);
 
 output = compile({code: `lemo 0.1.0, node module
 a: null
-console.log a'ok.b
+console.log a'ok.b'ok.c
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
