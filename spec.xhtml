@@ -552,13 +552,14 @@
 <pre><code><![CDATA[
     import "./abc" as abc
     abc: import "./abc"
+    abc: import "abc" all
     import "abc"
-    import("\u0041")
+    import "\u0041"
 ]]></code></pre>
 <p>这些是错误的语法：</p>
 <pre><code><![CDATA[
+    import("abc")
     import "./a" + "bc"
-    import("./a" + "bc")
     import "./\(filename)"
     import v"abc"
     aaa: import "bbb" as ccc
