@@ -285,3 +285,12 @@ a: r"
 console.log "this is aaabbbccc".search(a)
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+a: 1
+js"
+    b = 2
+"
+console.log a + b
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
