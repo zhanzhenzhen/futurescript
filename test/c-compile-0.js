@@ -272,3 +272,16 @@ a: r"aaa"
 b: r"aaa"gim
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+console.log "aaa\\nbbb"
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+a: r"
+    aaa bbb # this is comment
+"
+console.log "this is aaabbbccc".search(a)
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
