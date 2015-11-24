@@ -1230,3 +1230,34 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+###
+header comment
+###
+console.log "haha"
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+###
+header comment
+###
+RootBlock [
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            arguments: Arr [
+                ParenthesisCallExpression {
+                    arguments: Arr [
+                        StringExpression "haha"
+                    ]
+                    callee: InlineNormalStringExpression
+                }
+            ]
+            callee: DotExpression {
+                x: VariableExpression "console"
+                y: Piece "log"
+            }
+        }
+    }
+]
+`);
