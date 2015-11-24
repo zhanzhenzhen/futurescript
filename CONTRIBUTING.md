@@ -1,7 +1,7 @@
 Contributing
 ============
 
-Permanent compiler files are files whose names start with "compile-", but not including "compile-v<number>.<number>.<number>" and "compile.js".
+Permanent compiler files are files whose names start with "c-", but not including "c-v<number>.<number>.<number>" and "c.js".
 
 Permanent compiler files conventions
 ------------------------------------
@@ -16,4 +16,4 @@ Each file can't have more than 300 lines.
 
 Each file's size must be < 8kB.
 
-Each file name (without extension) must end with a dash plus a number, like "compile-assign-0.js". The initial number for every name is 0. After release, when first editing a file, don't replace, but keep the old one. We should create a new file with the same name but the number added, like "compile-assign-1.js". When you want to rename a file that exists in releases, also do not rename, but use a new file name with the number 0. Lastly, of course, any file that exists in releases can't be deleted.
+Each file name (without extension) must end with a dash plus a number, like "c-assign-0.js". The initial number for every name is 0. After release, when first editing a file, don't replace, but keep the old one. We should create a new file with the same name but the number added, like "c-assign-1.js". When you want to rename a file that exists in releases, also do not rename, but use a new file name with the number 0. Lastly, of course, any file that exists in releases can't be deleted.
