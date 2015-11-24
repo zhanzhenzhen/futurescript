@@ -288,6 +288,7 @@ console.log(output);
 
 output = compile({code: `lemo 0.1.0, node module
 a: 1
+b: 1
 js"
     b = 2
 "
