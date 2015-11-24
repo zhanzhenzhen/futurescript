@@ -324,7 +324,7 @@
 <p>编译后的代码是strict mode。</p>
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
 <h2>注释</h2>
-<p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。</p>
+<p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。为了和JS兼容，注释中的<code>*/</code>会编译成两个空格。</p>
 <h1>基本语句</h1>
 <h2>函数</h2>
 <p>函数的声明有3种方式：<code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>。<code>&lt;&gt;</code>和<code>--</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
