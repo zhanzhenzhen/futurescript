@@ -266,3 +266,9 @@ console.log "aaa" + "
 " + v"ccc"
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+a: r"aaa"
+b: r"aaa"gim
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
