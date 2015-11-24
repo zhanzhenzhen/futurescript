@@ -134,3 +134,8 @@ s = new $lex.Lex(`lemo 0.1.0
 x: "aaa \\((abc + 1).toString()) bbb"
 `).toString();
 console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, CallLeftParenthesis, Str "aaa ", Plus, NormalLeftParenthesis, NormalLeftParenthesis, NormalToken "abc", Plus, Num "1", RightParenthesis, Dot, NormalToken "toString", CallLeftParenthesis, RightParenthesis, RightParenthesis, Plus, Str " bbb", RightParenthesis');
+
+s = new $lex.Lex(`lemo 0.1.0
+x: r"aaa"gim
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineRegex, CallLeftParenthesis, Str "aaa", Comma, PostQuote "gim", RightParenthesis');
