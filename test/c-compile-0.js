@@ -252,3 +252,10 @@ output = compile({code: `lemo 0.1.0, node module
 console.log 2 ** 3
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0, node module
+a: 3
+plus: (x, y) -> x + y
+console.log a |> plus(2)
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
