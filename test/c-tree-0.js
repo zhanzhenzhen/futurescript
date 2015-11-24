@@ -1204,3 +1204,29 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: r"aaa"gim
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: Piece "a"
+            }
+        ]
+        value: ParenthesisCallExpression {
+            arguments: Arr [
+                StringExpression "aaa"
+                PostQuoteExpression "gim"
+            ]
+            callee: InlineRegexExpression
+        }
+    }
+]
+`);
