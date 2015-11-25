@@ -3,6 +3,7 @@ import * as $block from "../lib/c-block-0.js";
 
 let lex, block;
 
+/*
 lex = new $lex.Lex(`lemo 0.1.0, node module
 import "aaa"
 `);
@@ -31,4 +32,4 @@ RootBlock [
         }
     }
 ]
-`);
+`);*/
