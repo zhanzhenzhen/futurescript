@@ -537,6 +537,7 @@ console.log(result === null);
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a |> b.c :: d
 `);
+
 result = $pattern.Pattern.matchPatternsAndCaptures(
     [
         [[$pattern.tokens, $lex.Dot, $pattern.tokens], [0, 2]],
@@ -549,4 +550,28 @@ console.log(
     Array.isArray(result) && result.length === 2 &&
     result[0] instanceof Object && result[0].startIndex === 1 && result[0].endIndex === 5 &&
     result[1] instanceof Object && result[1].startIndex === 7 && result[1].endIndex === 7
+);
+
+result = $pattern.Pattern.matchPatternsAndCaptures(
+    [
+        [[$pattern.tokens, $lex.Dot, $pattern.tokens], [0, 2]],
+        [[$pattern.tokens, $lex.FatDot, $pattern.tokens], [0, 2]]
+    ],
+    lex.part(1),
+    false,
+    true
+);
+console.log(
+    result instanceof Object && (
+        Array.isArray(result.selected) && result.selected.length === 2 &&
+        result.selected[0] instanceof Object &&
+            result.selected[0].startIndex === 1 && result.selected[0].endIndex === 5 &&
+        result.selected[1] instanceof Object &&
+            result.selected[1].startIndex === 7 && result.selected[1].endIndex === 7
+    ) && (
+        Array.isArray(result.all) && result.all.length === 3 &&
+        result.all[0] instanceof Object && result.all[0].startIndex === 1 && result.all[0].endIndex === 5 &&
+        result.all[1] instanceof Object && result.all[1].startIndex === 6 && result.all[1].endIndex === 6 &&
+        result.all[2] instanceof Object && result.all[2].startIndex === 7 && result.all[2].endIndex === 7
+    )
 );
