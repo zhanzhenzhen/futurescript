@@ -6,6 +6,7 @@ let lex, block;
 lex = new $lex.Lex(`lemo 0.1.0, node module
 import "aaa"
 `);
+console.log(lex.toString());
 block = new $block.RootBlock(lex);
 console.log(block.toString());
 console.log(block.toString() === `node module

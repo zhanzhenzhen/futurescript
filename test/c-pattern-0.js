@@ -575,3 +575,100 @@ console.log(
         result.all[2] instanceof Object && result.all[2].startIndex === 7 && result.all[2].endIndex === 7
     )
 );
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+import "aaa"
+`);
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokensExcept([$lex.InlineNormalString]), $pattern.CallParenthesisPair],
+    lex.part(1),
+    false
+);
+console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+true true true true
+`);
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokens, $lex.True, $pattern.tokens],
+    lex.part(1),
+    false
+);
+console.log(
+    Array.isArray(result) && result.length === 3 &&
+    result[0] === 1 &&
+    result[1] === 3 &&
+    result[2] === 4
+);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+true true true true
+`);
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokens, $lex.True, $pattern.tokens],
+    lex.part(1),
+    true
+);
+console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+true and false
+`);
+
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokensExcept([$lex.Or]), $lex.True, $lex.And, $lex.False],
+    lex.part(1),
+    false
+);
+console.log(result === null);
+
+result = $pattern.Pattern.matchPattern(
+    [$pattern.anyExcept([$lex.Or]), $lex.True, $lex.And, $lex.False],
+    lex.part(1),
+    false
+);
+console.log(
+    Array.isArray(result) && result.length === 4 &&
+    result[0] === 1 &&
+    result[1] === 1 &&
+    result[2] === 2 &&
+    result[3] === 3
+);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+1
+`);
+
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokensExcept([$lex.Or])],
+    lex.part(1),
+    false
+);
+console.log(
+    Array.isArray(result) && result.length === 1 &&
+    result[0] === 1
+);
+
+result = $pattern.Pattern.matchPattern(
+    [$pattern.tokensExcept([$lex.Num])],
+    lex.part(1),
+    false
+);
+console.log(result === null);
+
+result = $pattern.Pattern.matchPattern(
+    [$pattern.anyExcept([$lex.Or])],
+    lex.part(1),
+    false
+);
+console.log(
+    Array.isArray(result) && result.length === 1 &&
+    result[0] === 1
+);
+
+result = $pattern.Pattern.matchPattern(
+    [$pattern.anyExcept([$lex.Num])],
+    lex.part(1),
+    false
+);
+console.log(result === null);

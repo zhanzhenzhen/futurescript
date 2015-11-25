@@ -123,7 +123,7 @@ RootBlock [
                 variable: Piece "d"
             }
         ]
-        value: ParenthesisCallExpression {
+        value: TinyCallExpression {
             arguments: Arr [
                 StringExpression "xxx"
             ]
@@ -328,7 +328,7 @@ RootBlock [
                 ifnull: false
                 ifvoid: false
                 x: VariableExpression "a"
-                y: ParenthesisCallExpression {
+                y: TinyCallExpression {
                     arguments: Arr [
                         StringExpression "b"
                     ]
@@ -363,7 +363,7 @@ RootBlock [
         ]
         value: DotExpression {
             x: VariableExpression "b"
-            y: ParenthesisCallExpression {
+            y: TinyCallExpression {
                 arguments: Arr [
                     StringExpression "c"
                 ]
@@ -965,7 +965,7 @@ RootBlock [
         value: DiamondFunctionExpression {
             body: ScopeBlock [
                 ExpressionStatement {
-                    expression: ParenthesisCallExpression {
+                    expression: TinyCallExpression {
                         arguments: Arr [
                             PlusExpression {
                                 x: PlusExpression {
@@ -1020,7 +1020,7 @@ RootBlock [
             x: VariableExpression "a"
             y: Piece "b"
         }
-        y: ParenthesisCallExpression {
+        y: TinyCallExpression {
             arguments: Arr [
                 StringExpression "c"
             ]
@@ -1220,7 +1220,7 @@ RootBlock [
                 variable: Piece "a"
             }
         ]
-        value: ParenthesisCallExpression {
+        value: TinyCallExpression {
             arguments: Arr [
                 StringExpression "aaa"
                 PostQuoteExpression "gim"
@@ -1246,7 +1246,7 @@ RootBlock [
     ExpressionStatement {
         expression: ParenthesisCallExpression {
             arguments: Arr [
-                ParenthesisCallExpression {
+                TinyCallExpression {
                     arguments: Arr [
                         StringExpression "haha"
                     ]
