@@ -138,3 +138,42 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+{a, b as c}: import "aaa"
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    ImportStatement {
+        batchall: false
+        catchall: null
+        mapping: Arr [
+            Xy {
+                x: VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "a"
+                }
+                y: Piece "a"
+            }
+            Xy {
+                x: VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "c"
+                }
+                y: Piece "b"
+            }
+        ]
+        module: PseudoCallExpression {
+            arguments: Arr [
+                StringExpression "aaa"
+            ]
+            callee: InlineNormalStringExpression
+        }
+    }
+]
+`);
