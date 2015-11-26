@@ -123,7 +123,7 @@ RootBlock [
                 variable: Piece "d"
             }
         ]
-        value: TinyCallExpression {
+        value: PseudoCallExpression {
             arguments: Arr [
                 StringExpression "xxx"
             ]
@@ -328,7 +328,7 @@ RootBlock [
                 ifnull: false
                 ifvoid: false
                 x: VariableExpression "a"
-                y: TinyCallExpression {
+                y: PseudoCallExpression {
                     arguments: Arr [
                         StringExpression "b"
                     ]
@@ -363,7 +363,7 @@ RootBlock [
         ]
         value: DotExpression {
             x: VariableExpression "b"
-            y: TinyCallExpression {
+            y: PseudoCallExpression {
                 arguments: Arr [
                     StringExpression "c"
                 ]
@@ -970,7 +970,7 @@ RootBlock [
         value: DiamondFunctionExpression {
             body: ScopeBlock [
                 ExpressionStatement {
-                    expression: TinyCallExpression {
+                    expression: PseudoCallExpression {
                         arguments: Arr [
                             PlusExpression {
                                 x: PlusExpression {
@@ -1025,7 +1025,7 @@ RootBlock [
             x: VariableExpression "a"
             y: Piece "b"
         }
-        y: TinyCallExpression {
+        y: PseudoCallExpression {
             arguments: Arr [
                 StringExpression "c"
             ]
@@ -1225,7 +1225,7 @@ RootBlock [
                 variable: Piece "a"
             }
         ]
-        value: TinyCallExpression {
+        value: PseudoCallExpression {
             arguments: Arr [
                 StringExpression "aaa"
                 PostQuoteExpression "gim"
@@ -1251,7 +1251,7 @@ RootBlock [
     ExpressionStatement {
         expression: ParenthesisCallExpression {
             arguments: Arr [
-                TinyCallExpression {
+                PseudoCallExpression {
                     arguments: Arr [
                         StringExpression "haha"
                     ]

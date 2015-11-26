@@ -580,7 +580,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 import "aaa"
 `);
 result = $pattern.Pattern.matchPattern(
-    [$pattern.tokensExcept([$lex.InlineNormalString]), $pattern.CallParenthesisPair],
+    [$pattern.tokensExcept([$lex.InlineNormalString]), $pattern.PseudoCallParenthesisPair],
     lex.part(1),
     false
 );
@@ -672,3 +672,17 @@ result = $pattern.Pattern.matchPattern(
     false
 );
 console.log(result === null);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+"aaa"
+`);
+result = $pattern.Pattern.matchPattern(
+    [$lex.InlineNormalString, $pattern.PseudoCallParenthesisPair],
+    lex.part(1),
+    true
+);
+console.log(
+    Array.isArray(result) && result.length === 2 &&
+    result[0] === 1 &&
+    result[1] === 2
+);
