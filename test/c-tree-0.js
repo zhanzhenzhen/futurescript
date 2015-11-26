@@ -645,15 +645,20 @@ console.log(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
-            BracketAssignee {
-                elements: Arr [
-                    Piece "a"
-                    Piece "b"
-                ]
-                export: false
-                ifnull: false
-                ifvoid: false
-            }
+            BracketAssignees [
+                VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "a"
+                }
+                VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "b"
+                }
+            ]
         ]
         value: ArrayExpression {
             value: Arr [
@@ -1257,6 +1262,40 @@ RootBlock [
                 x: VariableExpression "console"
                 y: Piece "log"
             }
+        }
+    }
+]
+`);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+[undefined, instanceof]: [1, 2]
+`);
+block = new $block.RootBlock(lex);
+block.complyWithJs();
+console.log(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            BracketAssignees [
+                VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "var_573300145710716007_0"
+                }
+                VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "var_573300145710716007_1"
+                }
+            ]
+        ]
+        value: ArrayExpression {
+            value: Arr [
+                NumberExpression "1"
+                NumberExpression "2"
+            ]
         }
     }
 ]
