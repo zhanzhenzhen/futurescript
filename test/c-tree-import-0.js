@@ -24,3 +24,26 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+aaa: import "aaa"
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString());
+console.log(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: ImportExpression {
+            batchall: false
+            catchall: null
+            mapping: null
+            module: TinyCallExpression {
+                arguments: Arr [
+                    StringExpression "aaa"
+                ]
+                callee: InlineNormalStringExpression
+            }
+        }
+    }
+]
+`);
