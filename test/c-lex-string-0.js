@@ -25,7 +25,7 @@ x: "
     abc \\(def) ghi
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", RightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", RightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", NormalRightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", NormalRightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 --
@@ -113,7 +113,7 @@ x: r"
     world #(a) # a
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineRegex, PseudoCallLeftParenthesis, Str "hello \\\\(\\\\\\"world\\\\\\"\\\\)", Plus, NormalLeftParenthesis, NormalToken "a", Dot, NormalToken "b", CallLeftParenthesis, RightParenthesis, Plus, NormalToken "c", RightParenthesis, Plus, Str "", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedRegex, PseudoCallLeftParenthesis, Str "hello \\\\x20\\\\nworld ", Plus, NormalLeftParenthesis, NormalToken "a", RightParenthesis, Plus, Str " # a", PseudoCallRightParenthesis');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineRegex, PseudoCallLeftParenthesis, Str "hello \\\\(\\\\\\"world\\\\\\"\\\\)", Plus, NormalLeftParenthesis, NormalToken "a", Dot, NormalToken "b", CallLeftParenthesis, CallRightParenthesis, Plus, NormalToken "c", NormalRightParenthesis, Plus, Str "", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedRegex, PseudoCallLeftParenthesis, Str "hello \\\\x20\\\\nworld ", Plus, NormalLeftParenthesis, NormalToken "a", NormalRightParenthesis, Plus, Str " # a", PseudoCallRightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 x: js"var a = 'asdf\\(asdf)';"
@@ -128,12 +128,12 @@ s = new $lex.Lex(`lemo 0.1.0
 x: "\\(abc)aaa"
 x: "aaa\\(abc)"
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "", Plus, NormalLeftParenthesis, NormalToken "abc", RightParenthesis, Plus, Str "aaa", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaa", Plus, NormalLeftParenthesis, NormalToken "abc", RightParenthesis, Plus, Str "", PseudoCallRightParenthesis');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "", Plus, NormalLeftParenthesis, NormalToken "abc", NormalRightParenthesis, Plus, Str "aaa", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaa", Plus, NormalLeftParenthesis, NormalToken "abc", NormalRightParenthesis, Plus, Str "", PseudoCallRightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 x: "aaa \\((abc + 1).toString()) bbb"
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaa ", Plus, NormalLeftParenthesis, NormalLeftParenthesis, NormalToken "abc", Plus, Num "1", RightParenthesis, Dot, NormalToken "toString", CallLeftParenthesis, RightParenthesis, RightParenthesis, Plus, Str " bbb", PseudoCallRightParenthesis');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaa ", Plus, NormalLeftParenthesis, NormalLeftParenthesis, NormalToken "abc", Plus, Num "1", NormalRightParenthesis, Dot, NormalToken "toString", CallLeftParenthesis, CallRightParenthesis, NormalRightParenthesis, Plus, Str " bbb", PseudoCallRightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 x: r"aaa"gim

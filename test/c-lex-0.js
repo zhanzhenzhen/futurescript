@@ -32,7 +32,7 @@ alert "I knew it!" if elvis'ok
 # Array comprehensions:
 cubes: list.map <> math.cube @
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0, node module", NormalToken "number", Colon, Num "42", Semicolon, NormalToken "opposite", Colon, True, Semicolon, NormalToken "number", Colon, Negative, Num "42", If, NormalToken "opposite", Semicolon, NormalToken "square", Colon, DiamondFunction, Arg, Times, Arg, Semicolon, NormalToken "list", Colon, NormalLeftBracket, Num "1", Comma, Num "2", Comma, Num "3", Comma, Num "4", Comma, Num "5", RightBracket, Semicolon, NormalToken "math", Colon, NormalLeftBrace, NormalToken "root", Colon, NormalToken "Math", Dot, NormalToken "sqrt", Semicolon, NormalToken "square", Colon, NormalToken "square", Semicolon, NormalToken "cube", Colon, DiamondFunction, Arg, Times, NormalToken "square", Arg, RightBrace, Semicolon, NormalToken "alert", InlineNormalString, PseudoCallLeftParenthesis, Str "I knew it!", PseudoCallRightParenthesis, If, NormalToken "elvis", NormalVariant, NormalToken "ok", Semicolon, NormalToken "cubes", Colon, NormalToken "list", Dot, NormalToken "map", DiamondFunction, NormalToken "math", Dot, NormalToken "cube", Arg');
+console.log(s === 'VersionDirective "lemo 0.1.0, node module", NormalToken "number", Colon, Num "42", Semicolon, NormalToken "opposite", Colon, True, Semicolon, NormalToken "number", Colon, Negative, Num "42", If, NormalToken "opposite", Semicolon, NormalToken "square", Colon, DiamondFunction, Arg, Times, Arg, Semicolon, NormalToken "list", Colon, NormalLeftBracket, Num "1", Comma, Num "2", Comma, Num "3", Comma, Num "4", Comma, Num "5", NormalRightBracket, Semicolon, NormalToken "math", Colon, NormalLeftBrace, NormalToken "root", Colon, NormalToken "Math", Dot, NormalToken "sqrt", Semicolon, NormalToken "square", Colon, NormalToken "square", Semicolon, NormalToken "cube", Colon, DiamondFunction, Arg, Times, NormalToken "square", Arg, NormalRightBrace, Semicolon, NormalToken "alert", InlineNormalString, PseudoCallLeftParenthesis, Str "I knew it!", PseudoCallRightParenthesis, If, NormalToken "elvis", NormalVariant, NormalToken "ok", Semicolon, NormalToken "cubes", Colon, NormalToken "list", Dot, NormalToken "map", DiamondFunction, NormalToken "math", Dot, NormalToken "cube", Arg');
 
 s = new $lex.Lex(`lemo 0.1.0
 lib: import "lib"
@@ -42,7 +42,7 @@ mp: <>
     @0 * @1
 above export as multiply2
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "lib", Colon, Import, InlineNormalString, PseudoCallLeftParenthesis, Str "lib", PseudoCallRightParenthesis, Semicolon, NormalLeftBrace, NormalToken "fun1", Comma, NormalToken "fun2", As, NormalToken "f2", RightBrace, Colon, Import, InlineNormalString, PseudoCallLeftParenthesis, Str "lib2", PseudoCallRightParenthesis, Semicolon, NormalToken "multiply", NormalVariant, NormalToken "export", Colon, DiamondFunction, Arg, Dot, NormalLeftParenthesis, Num "0", RightParenthesis, Times, Arg, Dot, NormalLeftParenthesis, Num "1", RightParenthesis, Semicolon, NormalToken "mp", Colon, DiamondFunction, LeftChevron, Arg, Dot, NormalLeftParenthesis, Num "0", RightParenthesis, Times, Arg, Dot, NormalLeftParenthesis, Num "1", RightParenthesis, RightChevron, ExportAs, NormalToken "multiply2"');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "lib", Colon, Import, InlineNormalString, PseudoCallLeftParenthesis, Str "lib", PseudoCallRightParenthesis, Semicolon, NormalLeftBrace, NormalToken "fun1", Comma, NormalToken "fun2", As, NormalToken "f2", NormalRightBrace, Colon, Import, InlineNormalString, PseudoCallLeftParenthesis, Str "lib2", PseudoCallRightParenthesis, Semicolon, NormalToken "multiply", NormalVariant, NormalToken "export", Colon, DiamondFunction, Arg, Dot, NormalLeftParenthesis, Num "0", NormalRightParenthesis, Times, Arg, Dot, NormalLeftParenthesis, Num "1", NormalRightParenthesis, Semicolon, NormalToken "mp", Colon, DiamondFunction, LeftChevron, Arg, Dot, NormalLeftParenthesis, Num "0", NormalRightParenthesis, Times, Arg, Dot, NormalLeftParenthesis, Num "1", NormalRightParenthesis, RightChevron, ExportAs, NormalToken "multiply2"');
 
 s = new $lex.Lex(`lemo 0.1.0
 b.if: 1
@@ -53,7 +53,7 @@ b: class
     if: 2
     match'get: 3
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "b", Dot, NormalToken "if", Colon, Num "1", Semicolon, NormalToken "b", Dot, NormalToken "if", Dot, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "b", Colon, NormalLeftBrace, NormalToken "if", Colon, Num "1", RightBrace, Semicolon, NormalToken "b", Colon, Class, LeftChevron, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "if", Colon, Num "2", Semicolon, NormalToken "match", NormalVariant, NormalToken "get", Colon, Num "3", RightChevron');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "b", Dot, NormalToken "if", Colon, Num "1", Semicolon, NormalToken "b", Dot, NormalToken "if", Dot, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "b", Colon, NormalLeftBrace, NormalToken "if", Colon, Num "1", NormalRightBrace, Semicolon, NormalToken "b", Colon, Class, LeftChevron, NormalToken "a", Colon, Num "1", Semicolon, NormalToken "if", Colon, Num "2", Semicolon, NormalToken "match", NormalVariant, NormalToken "get", Colon, Num "3", RightChevron');
 
 s = new $lex.Lex(`lemo 0.1.0
 if a > 100
@@ -76,7 +76,7 @@ x: 4** -3
 x: 4+(-3)
 x:-3
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, NormalToken "a", Plus, NormalToken "b", Times, Negative, NormalToken "b", Over, Num "2.5", Minus, NormalToken "b", Semicolon, NormalToken "x", Colon, Negative, Num "3", Power, Num "4", Semicolon, NormalToken "x", Colon, Num "4", Power, Negative, Num "3", Semicolon, NormalToken "x", Colon, Num "4", Plus, NormalLeftParenthesis, Negative, Num "3", RightParenthesis, Semicolon, NormalToken "x", Colon, Negative, Num "3"');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, NormalToken "a", Plus, NormalToken "b", Times, Negative, NormalToken "b", Over, Num "2.5", Minus, NormalToken "b", Semicolon, NormalToken "x", Colon, Negative, Num "3", Power, Num "4", Semicolon, NormalToken "x", Colon, Num "4", Power, Negative, Num "3", Semicolon, NormalToken "x", Colon, Num "4", Plus, NormalLeftParenthesis, Negative, Num "3", NormalRightParenthesis, Semicolon, NormalToken "x", Colon, Negative, Num "3"');
 
 s = new $lex.Lex(`lemo 0.1.0
 x: 1e3
@@ -94,7 +94,7 @@ A: class << aaa: x -> << x + 1 >>, bbb: 3 >>
 if aaa << task1() >> else << task2() >> commonTask()
 if aaa << task1() >> else << task2() >>; commonTask()
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, Num "1", RightChevron, Semicolon, NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, NormalToken "x", ArrowFunction, LeftChevron, NormalToken "x", Plus, Num "1", RightChevron, Comma, NormalToken "bbb", Colon, Num "3", RightChevron, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, RightParenthesis, RightChevron, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, RightParenthesis, RightChevron, Semicolon, NormalToken "commonTask", CallLeftParenthesis, RightParenthesis, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, RightParenthesis, RightChevron, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, RightParenthesis, RightChevron, Semicolon, NormalToken "commonTask", CallLeftParenthesis, RightParenthesis');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, Num "1", RightChevron, Semicolon, NormalToken "A", Colon, Class, LeftChevron, NormalToken "aaa", Colon, NormalToken "x", ArrowFunction, LeftChevron, NormalToken "x", Plus, Num "1", RightChevron, Comma, NormalToken "bbb", Colon, Num "3", RightChevron, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, CallRightParenthesis, RightChevron, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, CallRightParenthesis, RightChevron, Semicolon, NormalToken "commonTask", CallLeftParenthesis, CallRightParenthesis, Semicolon, If, NormalToken "aaa", LeftChevron, NormalToken "task1", CallLeftParenthesis, CallRightParenthesis, RightChevron, Else, LeftChevron, NormalToken "task2", CallLeftParenthesis, CallRightParenthesis, RightChevron, Semicolon, NormalToken "commonTask", CallLeftParenthesis, CallRightParenthesis');
 
 s = new $lex.Lex(`lemo 0.1.0
 @(b)
@@ -107,7 +107,7 @@ a [b]
 a{b:3}
 a {b:3}
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", Arg, CallLeftParenthesis, NormalToken "b", RightParenthesis, Semicolon, NormalLeftParenthesis, NormalToken "a", RightParenthesis, CallLeftParenthesis, NormalToken "b", RightParenthesis, Semicolon, NormalToken "a", CallLeftParenthesis, NormalToken "b", RightParenthesis, Semicolon, NormalToken "a", NormalLeftParenthesis, NormalToken "b", RightParenthesis, Semicolon, NormalToken "a", NormalToken "b", Semicolon, NormalToken "a", CallLeftBracket, NormalToken "b", RightBracket, Semicolon, NormalToken "a", NormalLeftBracket, NormalToken "b", RightBracket, Semicolon, NormalToken "a", CallLeftBrace, NormalToken "b", Colon, Num "3", RightBrace, Semicolon, NormalToken "a", NormalLeftBrace, NormalToken "b", Colon, Num "3", RightBrace');
+console.log(s === 'VersionDirective "lemo 0.1.0", Arg, CallLeftParenthesis, NormalToken "b", CallRightParenthesis, Semicolon, NormalLeftParenthesis, NormalToken "a", NormalRightParenthesis, CallLeftParenthesis, NormalToken "b", CallRightParenthesis, Semicolon, NormalToken "a", CallLeftParenthesis, NormalToken "b", CallRightParenthesis, Semicolon, NormalToken "a", NormalLeftParenthesis, NormalToken "b", NormalRightParenthesis, Semicolon, NormalToken "a", NormalToken "b", Semicolon, NormalToken "a", CallLeftBracket, NormalToken "b", CallRightBracket, Semicolon, NormalToken "a", NormalLeftBracket, NormalToken "b", NormalRightBracket, Semicolon, NormalToken "a", CallLeftBrace, NormalToken "b", Colon, Num "3", CallRightBrace, Semicolon, NormalToken "a", NormalLeftBrace, NormalToken "b", Colon, Num "3", NormalRightBrace');
 
 s = new $lex.Lex(`lemo 0.1.0
 a.0: 1
@@ -116,7 +116,7 @@ a."b": 1
 a."b c": 1
 (0).a: 1
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Dot, NormalLeftParenthesis, Num "0", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, NormalToken "b", RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, PseudoCallLeftParenthesis, Str "b", PseudoCallRightParenthesis, RightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, PseudoCallLeftParenthesis, Str "b c", PseudoCallRightParenthesis, RightParenthesis, Colon, Num "1", Semicolon, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalToken "a", Colon, Num "1"');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Dot, NormalLeftParenthesis, Num "0", NormalRightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, NormalToken "b", NormalRightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, PseudoCallLeftParenthesis, Str "b", PseudoCallRightParenthesis, NormalRightParenthesis, Colon, Num "1", Semicolon, NormalToken "a", Dot, NormalLeftParenthesis, InlineNormalString, PseudoCallLeftParenthesis, Str "b c", PseudoCallRightParenthesis, NormalRightParenthesis, Colon, Num "1", Semicolon, NormalLeftParenthesis, Num "0", NormalRightParenthesis, Dot, NormalToken "a", Colon, Num "1"');
 
 s = new $lex.Lex(`lemo 0.1.0
 Abc: class from Ab
@@ -125,7 +125,7 @@ Abc: class from Ab
 x: abc |> def :: ghi
 a'ok.b'()
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "Abc", Colon, Class, NormalToken "from", NormalToken "Ab", LeftChevron, NormalToken "aaa", Colon, DiamondFunction, Semicolon, NormalToken "bbb", Colon, Num "2", RightChevron, Semicolon, NormalToken "x", Colon, NormalToken "abc", Pipe, NormalToken "def", FatDot, NormalToken "ghi", Semicolon, NormalToken "a", NormalVariant, NormalToken "ok", Dot, NormalToken "b", FunctionVariant, CallLeftParenthesis, RightParenthesis');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "Abc", Colon, Class, NormalToken "from", NormalToken "Ab", LeftChevron, NormalToken "aaa", Colon, DiamondFunction, Semicolon, NormalToken "bbb", Colon, Num "2", RightChevron, Semicolon, NormalToken "x", Colon, NormalToken "abc", Pipe, NormalToken "def", FatDot, NormalToken "ghi", Semicolon, NormalToken "a", NormalVariant, NormalToken "ok", Dot, NormalToken "b", FunctionVariant, CallLeftParenthesis, CallRightParenthesis');
 
 lex = new $lex.Lex(`lemo 0.1.0
 if aaa
@@ -179,7 +179,7 @@ a: b.3.2
 a: @0.1
 a: b.0x2e+3
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, NormalToken "b", Dot, NormalLeftParenthesis, Num "3", RightParenthesis, Dot, NormalLeftParenthesis, Num "2", RightParenthesis, Semicolon, NormalToken "a", Colon, Arg, Dot, NormalLeftParenthesis, Num "0", RightParenthesis, Dot, NormalLeftParenthesis, Num "1", RightParenthesis, Semicolon, NormalToken "a", Colon, NormalToken "b", Dot, NormalLeftParenthesis, Num "0x2e", RightParenthesis, Plus, Num "3"');
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, NormalToken "b", Dot, NormalLeftParenthesis, Num "3", NormalRightParenthesis, Dot, NormalLeftParenthesis, Num "2", NormalRightParenthesis, Semicolon, NormalToken "a", Colon, Arg, Dot, NormalLeftParenthesis, Num "0", NormalRightParenthesis, Dot, NormalLeftParenthesis, Num "1", NormalRightParenthesis, Semicolon, NormalToken "a", Colon, NormalToken "b", Dot, NormalLeftParenthesis, Num "0x2e", NormalRightParenthesis, Plus, Num "3"');
 
 s = new $lex.Lex(`lemo 0.1.0
 try
