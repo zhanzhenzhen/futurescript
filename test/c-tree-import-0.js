@@ -14,12 +14,7 @@ RootBlock [
             batchall: false
             catchall: null
             mapping: null
-            module: PseudoCallExpression {
-                arguments: Arr [
-                    StringExpression "aaa"
-                ]
-                callee: InlineNormalStringExpression
-            }
+            module: Piece "\\"aaa\\""
         }
     }
 ]
@@ -45,12 +40,7 @@ RootBlock [
                 y: Piece "default"
             }
         ]
-        module: PseudoCallExpression {
-            arguments: Arr [
-                StringExpression "aaa"
-            ]
-            callee: InlineNormalStringExpression
-        }
+        module: Piece "\\"aaa\\""
     }
 ]
 `);
@@ -76,12 +66,7 @@ RootBlock [
                     y: Piece "default"
                 }
             ]
-            module: PseudoCallExpression {
-                arguments: Arr [
-                    StringExpression "aaa"
-                ]
-                callee: InlineNormalStringExpression
-            }
+            module: Piece "\\"aaa\\""
         }
     }
 ]
@@ -102,12 +87,7 @@ RootBlock [
             variable: Piece "aaa"
         }
         mapping: null
-        module: PseudoCallExpression {
-            arguments: Arr [
-                StringExpression "aaa"
-            ]
-            callee: InlineNormalStringExpression
-        }
+        module: Piece "\\"aaa\\""
     }
 ]
 `);
@@ -128,12 +108,7 @@ RootBlock [
                 variable: Piece "aaa"
             }
             mapping: null
-            module: PseudoCallExpression {
-                arguments: Arr [
-                    StringExpression "aaa"
-                ]
-                callee: InlineNormalStringExpression
-            }
+            module: Piece "\\"aaa\\""
         }
     }
 ]
@@ -168,12 +143,7 @@ RootBlock [
                 y: Piece "b"
             }
         ]
-        module: PseudoCallExpression {
-            arguments: Arr [
-                StringExpression "aaa"
-            ]
-            callee: InlineNormalStringExpression
-        }
+        module: Piece "\\"aaa\\""
     }
 ]
 `);
@@ -207,12 +177,7 @@ RootBlock [
                 y: Piece "b"
             }
         ]
-        module: PseudoCallExpression {
-            arguments: Arr [
-                StringExpression "aaa"
-            ]
-            callee: InlineNormalStringExpression
-        }
+        module: Piece "\\"aaa\\""
     }
 ]
 `);
@@ -247,12 +212,7 @@ RootBlock [
                     y: Piece "b"
                 }
             ]
-            module: PseudoCallExpression {
-                arguments: Arr [
-                    StringExpression "aaa"
-                ]
-                callee: InlineNormalStringExpression
-            }
+            module: Piece "\\"aaa\\""
         }
     }
 ]
@@ -288,12 +248,7 @@ RootBlock [
                     y: Piece "b"
                 }
             ]
-            module: PseudoCallExpression {
-                arguments: Arr [
-                    StringExpression "aaa"
-                ]
-                callee: InlineNormalStringExpression
-            }
+            module: Piece "\\"aaa\\""
         }
     }
 ]
