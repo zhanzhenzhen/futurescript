@@ -321,3 +321,13 @@ output = compile({code: `lemo 0.1.0, node module
 {a, b as c}: import "./a.js"
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0
+a: import "./a.js"
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
+
+output = compile({code: `lemo 0.1.0
+{a, b as c}: import "./a.js"
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
