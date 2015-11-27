@@ -196,3 +196,11 @@ if a
 then b
 `).toString();
 console.log(s === 'VersionDirective "lemo 0.1.0", If, NormalToken "a", Then, NormalToken "b"');
+
+// `345 as true` is illegal, but should succeed while lexing. The first two lines are legal.
+s = new $lex.Lex(`lemo 0.1.0
+export abc as null
+def export as false
+345 as true
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", Export, NormalToken "abc", As, NormalToken "null", Semicolon, NormalToken "def", ExportAs, NormalToken "false", Semicolon, Num "345", As, NormalToken "true"');
