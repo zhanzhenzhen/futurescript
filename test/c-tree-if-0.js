@@ -54,10 +54,9 @@ RootBlock [
                     expression: ArrowFunctionExpression {
                         arguments: Arr [
                             ArrowArgument {
-                                export: false
-                                ifnull: null
-                                ifvoid: null
+                                nullDefault: null
                                 variable: Piece "a"
+                                voidDefault: null
                             }
                         ]
                         body: ScopeBlock [
