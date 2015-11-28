@@ -190,9 +190,10 @@ RootBlock [
             comparer: ArrowFunctionExpression {
                 arguments: Arr [
                     ArrowArgument {
-                        nullDefault: null
+                        export: false
+                        ifnull: null
+                        ifvoid: null
                         variable: Piece "x"
-                        voidDefault: null
                     }
                 ]
                 body: ScopeBlock [

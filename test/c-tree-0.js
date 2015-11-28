@@ -225,9 +225,10 @@ RootBlock [
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
-                    nullDefault: null
+                    export: false
+                    ifnull: null
+                    ifvoid: null
                     variable: Piece "x"
-                    voidDefault: null
                 }
             ]
             body: ScopeBlock [
@@ -1148,9 +1149,10 @@ RootBlock [
                     ArrowFunctionExpression {
                         arguments: Arr [
                             ArrowArgument {
-                                nullDefault: null
+                                export: false
+                                ifnull: null
+                                ifvoid: null
                                 variable: Piece "x"
-                                voidDefault: null
                             }
                         ]
                         body: ScopeBlock [
@@ -1177,9 +1179,10 @@ RootBlock [
                                 ArrowFunctionExpression {
                                     arguments: Arr [
                                         ArrowArgument {
-                                            nullDefault: null
+                                            export: false
+                                            ifnull: null
+                                            ifvoid: null
                                             variable: Piece "x"
-                                            voidDefault: null
                                         }
                                     ]
                                     body: ScopeBlock [
