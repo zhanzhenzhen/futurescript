@@ -51,23 +51,21 @@ import "aaa" as aaa
 block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
-    ExpressionStatement {
-        expression: ImportExpression {
-            batchall: false
-            catchall: null
-            mapping: Arr [
-                Xy {
-                    x: VariableAssignee {
-                        export: false
-                        ifnull: false
-                        ifvoid: false
-                        variable: Piece "aaa"
-                    }
-                    y: Piece "default"
+    ImportStatement {
+        batchall: false
+        catchall: null
+        mapping: Arr [
+            Xy {
+                x: VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "aaa"
                 }
-            ]
-            module: Piece "\\"aaa\\""
-        }
+                y: Piece "default"
+            }
+        ]
+        module: Piece "\\"aaa\\""
     }
 ]
 `);
@@ -98,18 +96,16 @@ import "aaa" all as aaa
 block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
-    ExpressionStatement {
-        expression: ImportExpression {
-            batchall: false
-            catchall: VariableAssignee {
-                export: false
-                ifnull: false
-                ifvoid: false
-                variable: Piece "aaa"
-            }
-            mapping: null
-            module: Piece "\\"aaa\\""
+    ImportStatement {
+        batchall: false
+        catchall: VariableAssignee {
+            export: false
+            ifnull: false
+            ifvoid: false
+            variable: Piece "aaa"
         }
+        mapping: null
+        module: Piece "\\"aaa\\""
     }
 ]
 `);
@@ -188,32 +184,30 @@ import "aaa" as {a, b as c}
 block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
-    ExpressionStatement {
-        expression: ImportExpression {
-            batchall: false
-            catchall: null
-            mapping: Arr [
-                Xy {
-                    x: VariableAssignee {
-                        export: false
-                        ifnull: false
-                        ifvoid: false
-                        variable: Piece "a"
-                    }
-                    y: Piece "a"
+    ImportStatement {
+        batchall: false
+        catchall: null
+        mapping: Arr [
+            Xy {
+                x: VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "a"
                 }
-                Xy {
-                    x: VariableAssignee {
-                        export: false
-                        ifnull: false
-                        ifvoid: false
-                        variable: Piece "c"
-                    }
-                    y: Piece "b"
+                y: Piece "a"
+            }
+            Xy {
+                x: VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "c"
                 }
-            ]
-            module: Piece "\\"aaa\\""
-        }
+                y: Piece "b"
+            }
+        ]
+        module: Piece "\\"aaa\\""
     }
 ]
 `);
@@ -224,32 +218,30 @@ import "aaa" all as {a, b as c}
 block = new $block.RootBlock(lex);
 console.log(block.toString() === `node module
 RootBlock [
-    ExpressionStatement {
-        expression: ImportExpression {
-            batchall: false
-            catchall: null
-            mapping: Arr [
-                Xy {
-                    x: VariableAssignee {
-                        export: false
-                        ifnull: false
-                        ifvoid: false
-                        variable: Piece "a"
-                    }
-                    y: Piece "a"
+    ImportStatement {
+        batchall: false
+        catchall: null
+        mapping: Arr [
+            Xy {
+                x: VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "a"
                 }
-                Xy {
-                    x: VariableAssignee {
-                        export: false
-                        ifnull: false
-                        ifvoid: false
-                        variable: Piece "c"
-                    }
-                    y: Piece "b"
+                y: Piece "a"
+            }
+            Xy {
+                x: VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: Piece "c"
                 }
-            ]
-            module: Piece "\\"aaa\\""
-        }
+                y: Piece "b"
+            }
+        ]
+        module: Piece "\\"aaa\\""
     }
 ]
 `);
