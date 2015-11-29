@@ -11,9 +11,6 @@ console.log(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: ImportExpression {
-            batchall: false
-            catchall: null
-            mapping: null
             module: Piece "\\"aaa\\""
         }
     }
