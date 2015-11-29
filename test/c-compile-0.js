@@ -337,3 +337,8 @@ a: 1
 b: import "./b.js" + 5
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0
+a: 1 export as aaa
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
