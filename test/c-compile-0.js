@@ -347,3 +347,14 @@ output = compile({code: `lemo 0.1.0
 a'export: 1
 `, path: "abc.lemo", sourceMapEnabled: true});
 console.log(output);
+
+output = compile({code: `lemo 0.1.0
+a: 1
+export a
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
+
+output = compile({code: `lemo 0.1.0
+export: 3 + 4
+`, path: "abc.lemo", sourceMapEnabled: true});
+console.log(output);
