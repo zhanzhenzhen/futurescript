@@ -17,3 +17,41 @@ RootBlock [
     }
 ]
 `);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+export abc
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    ExportStatement {
+        externalName: Piece "abc"
+        variable: LocalVariable "abc"
+    }
+]
+`);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+export abc as def
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    ExportStatement {
+        externalName: Piece "def"
+        variable: LocalVariable "abc"
+    }
+]
+`);
+
+lex = new $lex.Lex(`lemo 0.1.0, node module
+export: abc
+`);
+block = new $block.RootBlock(lex);
+console.log(block.toString() === `node module
+RootBlock [
+    ExportColonStatement {
+        value: VariableExpression "abc"
+    }
+]
+`);

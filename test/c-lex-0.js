@@ -204,3 +204,17 @@ def export as false
 345 as true
 `).toString();
 console.log(s === 'VersionDirective "lemo 0.1.0", Export, NormalToken "abc", As, NormalToken "null", Semicolon, NormalToken "def", ExportAs, NormalToken "false", Semicolon, Num "345", As, NormalToken "true"');
+
+// The last `export` is illegal, but should succeed while lexing.
+s = new $lex.Lex(`lemo 0.1.0
+a: {export: 5}
+export: 3
+<>
+    export: 4
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, NormalLeftBrace, NormalToken "export", Colon, Num "5", NormalRightBrace, Semicolon, Export, Colon, Num "3", Semicolon, DiamondFunction, LeftChevron, NormalToken "export", Colon, Num "4", RightChevron');
+
+s = new $lex.Lex(`lemo 0.1.0
+export: 3
+`).toString();
+console.log(s === 'VersionDirective "lemo 0.1.0", Export, Colon, Num "3"');

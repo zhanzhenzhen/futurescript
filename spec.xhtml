@@ -612,17 +612,30 @@
     abc export as def
     export abc as def
     export abc
-    export <> @0 * @1
+    export: abc # note that this is different from above
+    export: <> @0 * @1
 ]]></code></pre>
 <p>和赋值一样，这里的<code>above</code>也是可略的。</p>
 <p>这些是错误的语法：</p>
 <pre><code><![CDATA[
     abc export def
-    export: abc
+    export {abc}
     export multiply: <> @0 * @1
     obj.multiply'export: <> @0 * @1
 ]]></code></pre>
-<p>当语句以<code>export</code>开头，且<code>export</code>后除了一个表达式再无其他时，表示ES6中的“默认导出”。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则必须产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，Lemo支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
+<p>注意<code>abc export as def</code>和<code>export abc as def</code>相似但有着两个区别。一个区别很明显，就是前者是表达式语句而后者是命令语句。另一个区别很微妙，前者的<code>abc</code>是作为表达式，后者的<code>abc</code>是作为变量，这就使得：前者是不绑定的，而后者是绑定的（能享受到ES6模块的变量绑定带来的好处）。</p>
+<p>当语句以<code>export:</code>开头，表示ES6中的“默认导出”。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，Lemo支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
+<p>默认导出还可以用这种形式：</p>
+<pre><code><![CDATA[
+    export abc as default
+]]></code></pre>
+<p>所以默认导出其实是一种特殊的命名导出（详情参见ES6）。当你把它命名为<code>default</code>时即为默认导出。</p>
+<p>所以这两个：</p>
+<pre><code><![CDATA[
+    export abc as default
+    export: abc
+]]></code></pre>
+<p>两者功能相似，唯一的区别是：前者的<code>abc</code>是作为变量，所以是绑定的。后者的<code>abc</code>是作为表达式，所以是不绑定的。（这和ES6的规则相同，ES6的<code>export {... as default}</code>和<code>export default ...</code>也有着上述区别。）</p>
 <p>导入和导出必须出现在顶层，因为这是基于ES6的。我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃Lemo的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
 <h1>数据</h1>
 <h2>字符串、正则表达式</h2>
@@ -1774,5 +1787,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>答：这看上去更自然，更符合人类阅读方式。我承认，这个改变从来没有人做过，具有冒险性。为了看看有没有反例，支持<code>not</code>应该维持目前通用的优先级，我看了GitHub的Atom编辑器的源代码（它是用CoffeeScript编写的），还看了我自己的代码。我发现，几乎没有一处<code>not</code>在目前通用的优先级下更简单的，这给了我信心。因为我的想法是，算术运算符，像加法、乘法，对它们的算元使用<code>not</code>是非常不好的，也许有人会利用这种方式来取巧，但可读性非常差，所以好的代码中是不会出现<code>not a + not b</code>的，这种反例不应该使用。引申到<code>=</code>、<code>&lt;</code>、<code>&gt;</code>也是一样。</p>
 <p>问：为啥格式注释是用<code>###</code>？如果像格式字符串一样，不是更简洁吗？</p>
 <p>答：有时我们喜欢用注释把一段代码作废，就不可能弄得很整齐。</p>
+<p>问：如果<code>export {abc}</code>表示命名导出，<code>export abc</code>表示默认导出不是很好嘛？</p>
+<p>答：原先是有这种考虑，但这在将来版本中可能会产生歧义（将来版本中<code>{abc}</code>可能是一个合法的对象）。</p>
 </body>
 </html>
