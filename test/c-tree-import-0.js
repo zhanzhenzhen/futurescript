@@ -32,7 +32,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "aaa"
+                    variable: LocalVariable "aaa"
                 }
                 y: Piece "default"
             }
@@ -57,7 +57,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "aaa"
+                    variable: LocalVariable "aaa"
                 }
                 y: Piece "default"
             }
@@ -79,7 +79,7 @@ RootBlock [
             export: false
             ifnull: false
             ifvoid: false
-            variable: Piece "aaa"
+            variable: LocalVariable "aaa"
         }
         mapping: null
         module: Piece "\\"aaa\\""
@@ -99,7 +99,7 @@ RootBlock [
             export: false
             ifnull: false
             ifvoid: false
-            variable: Piece "aaa"
+            variable: LocalVariable "aaa"
         }
         mapping: null
         module: Piece "\\"aaa\\""
@@ -122,7 +122,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "a"
+                    variable: LocalVariable "a"
                 }
                 y: Piece "a"
             }
@@ -131,7 +131,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "c"
+                    variable: LocalVariable "c"
                 }
                 y: Piece "b"
             }
@@ -156,7 +156,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "a"
+                    variable: LocalVariable "a"
                 }
                 y: Piece "a"
             }
@@ -165,7 +165,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "c"
+                    variable: LocalVariable "c"
                 }
                 y: Piece "b"
             }
@@ -190,7 +190,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "a"
+                    variable: LocalVariable "a"
                 }
                 y: Piece "a"
             }
@@ -199,7 +199,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "c"
+                    variable: LocalVariable "c"
                 }
                 y: Piece "b"
             }
@@ -224,7 +224,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "a"
+                    variable: LocalVariable "a"
                 }
                 y: Piece "a"
             }
@@ -233,7 +233,7 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "c"
+                    variable: LocalVariable "c"
                 }
                 y: Piece "b"
             }

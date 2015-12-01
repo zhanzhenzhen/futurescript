@@ -16,7 +16,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: DiamondFunctionExpression {
@@ -40,7 +40,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "b"
+                variable: LocalVariable "b"
             }
         ]
         value: DashFunctionExpression {
@@ -76,14 +76,14 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
                     nullDefault: null
-                    variable: Piece "x"
+                    variable: LocalVariable "x"
                     voidDefault: null
                 }
             ]
@@ -103,14 +103,14 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
                     nullDefault: null
-                    variable: Piece "x"
+                    variable: LocalVariable "x"
                     voidDefault: NumberExpression "3"
                 }
             ]
@@ -130,14 +130,14 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
                     nullDefault: NumberExpression "3"
-                    variable: Piece "x"
+                    variable: LocalVariable "x"
                     voidDefault: null
                 }
             ]

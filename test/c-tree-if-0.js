@@ -5,7 +5,7 @@ let lex, block;
 
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1 if b
-a -> b if c
+x -> b if c
 if a
 else
     22
@@ -37,7 +37,7 @@ RootBlock [
                             export: false
                             ifnull: false
                             ifvoid: false
-                            variable: Piece "a"
+                            variable: LocalVariable "a"
                         }
                     ]
                     value: NumberExpression "1"
@@ -55,7 +55,7 @@ RootBlock [
                         arguments: Arr [
                             ArrowArgument {
                                 nullDefault: null
-                                variable: Piece "a"
+                                variable: LocalVariable "x"
                                 voidDefault: null
                             }
                         ]
@@ -131,7 +131,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: IfExpression {

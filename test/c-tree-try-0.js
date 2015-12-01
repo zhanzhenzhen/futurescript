@@ -53,7 +53,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: TryExpression {
@@ -69,7 +69,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "ex"
+                variable: LocalVariable "ex"
             }
             finallyBranch: null
             tryBranch: Block [
@@ -99,7 +99,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: TryExpression {
@@ -115,7 +115,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "var_573300145710716007_0"
+                variable: LocalVariable "var_573300145710716007_0"
             }
             finallyBranch: null
             tryBranch: Block [

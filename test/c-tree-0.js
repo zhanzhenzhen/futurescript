@@ -30,7 +30,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: PlusExpression {
@@ -47,7 +47,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "b"
+                variable: LocalVariable "b"
             }
         ]
         value: PlusExpression {
@@ -61,7 +61,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "c"
+                variable: LocalVariable "c"
             }
         ]
         value: ParenthesisCallExpression {
@@ -82,7 +82,7 @@ RootBlock [
                             export: false
                             ifnull: false
                             ifvoid: false
-                            variable: Piece "c"
+                            variable: LocalVariable "c"
                         }
                     ]
                     value: NumberExpression "5"
@@ -93,7 +93,7 @@ RootBlock [
                             export: false
                             ifnull: false
                             ifvoid: false
-                            variable: Piece "b"
+                            variable: LocalVariable "b"
                         }
                     ]
                     value: VariableExpression "c"
@@ -106,7 +106,7 @@ RootBlock [
                             export: false
                             ifnull: false
                             ifvoid: false
-                            variable: Piece "c"
+                            variable: LocalVariable "c"
                         }
                     ]
                     value: NumberExpression "7"
@@ -120,7 +120,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "d"
+                variable: LocalVariable "d"
             }
         ]
         value: PseudoCallExpression {
@@ -136,7 +136,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "e"
+                variable: LocalVariable "e"
             }
         ]
         value: DotExpression {
@@ -153,7 +153,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "f"
+                variable: LocalVariable "f"
             }
         ]
         value: PlusExpression {
@@ -170,7 +170,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "g"
+                variable: LocalVariable "g"
             }
         ]
         value: TimesExpression {
@@ -187,7 +187,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "h"
+                variable: LocalVariable "h"
             }
         ]
         value: IfExpression {
@@ -219,14 +219,14 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "i"
+                variable: LocalVariable "i"
             }
         ]
         value: ArrowFunctionExpression {
             arguments: Arr [
                 ArrowArgument {
                     nullDefault: null
-                    variable: Piece "x"
+                    variable: LocalVariable "x"
                     voidDefault: null
                 }
             ]
@@ -264,7 +264,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: ArrayExpression {
@@ -281,7 +281,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: ObjectExpression {
@@ -344,7 +344,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: DotExpression {
@@ -358,7 +358,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: DotExpression {
@@ -377,7 +377,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: DotExpression {
@@ -421,7 +421,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: OrExpression {
@@ -553,7 +553,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: IfExpression {
@@ -594,7 +594,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: MinusExpression {
@@ -621,14 +621,14 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "c"
+                variable: LocalVariable "c"
             }
             value: AsExpression {
                 assignee: VariableAssignee {
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "b"
+                    variable: LocalVariable "b"
                 }
                 value: VariableExpression "a"
             }
@@ -650,13 +650,13 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "a"
+                    variable: LocalVariable "a"
                 }
                 VariableAssignee {
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "b"
+                    variable: LocalVariable "b"
                 }
             ]
         ]
@@ -761,7 +761,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: DotExpression {
@@ -780,7 +780,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: ParenthesisCallExpression {
@@ -810,7 +810,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: InExpression {
@@ -824,7 +824,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: NotInExpression {
@@ -838,7 +838,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: IsExpression {
@@ -852,7 +852,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: IsntExpression {
@@ -876,7 +876,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: IfnullExpression {
@@ -890,7 +890,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: IfvoidExpression {
@@ -916,7 +916,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "var_573300145710716007_0"
+                variable: LocalVariable "var_573300145710716007_0"
             }
         ]
         value: NumberExpression "3"
@@ -927,7 +927,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: DiamondFunctionExpression {
@@ -938,7 +938,7 @@ RootBlock [
                             export: false
                             ifnull: false
                             ifvoid: false
-                            variable: Piece "var_573300145710716007_0"
+                            variable: LocalVariable "var_573300145710716007_0"
                         }
                     ]
                     value: PlusExpression {
@@ -964,7 +964,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: DiamondFunctionExpression {
@@ -1149,7 +1149,7 @@ RootBlock [
                         arguments: Arr [
                             ArrowArgument {
                                 nullDefault: null
-                                variable: Piece "x"
+                                variable: LocalVariable "x"
                                 voidDefault: null
                             }
                         ]
@@ -1178,7 +1178,7 @@ RootBlock [
                                     arguments: Arr [
                                         ArrowArgument {
                                             nullDefault: null
-                                            variable: Piece "x"
+                                            variable: LocalVariable "x"
                                             voidDefault: null
                                         }
                                     ]
@@ -1222,7 +1222,7 @@ RootBlock [
                 export: false
                 ifnull: false
                 ifvoid: false
-                variable: Piece "a"
+                variable: LocalVariable "a"
             }
         ]
         value: PseudoCallExpression {
@@ -1281,13 +1281,13 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "var_573300145710716007_0"
+                    variable: LocalVariable "var_573300145710716007_0"
                 }
                 VariableAssignee {
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: Piece "var_573300145710716007_1"
+                    variable: LocalVariable "var_573300145710716007_1"
                 }
             ]
         ]

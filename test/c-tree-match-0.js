@@ -191,7 +191,7 @@ RootBlock [
                 arguments: Arr [
                     ArrowArgument {
                         nullDefault: null
-                        variable: Piece "x"
+                        variable: LocalVariable "x"
                         voidDefault: null
                     }
                 ]
