@@ -1,39 +1,48 @@
+import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
-import assert from "assert";
 
 let s = null;
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: "abc"
 x: "
     abc
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: "abc \\n\\" def"
 x: "
     abc \\n\\" def
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc \\\\n\\\\\\" def", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc \\\\n\\\\\\" def", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc \\\\n\\\\\\" def", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc \\\\n\\\\\\" def", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: "abc \\(def) ghi"
 x: "
     abc \\(def) ghi
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", NormalRightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", NormalRightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", NormalRightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", NormalRightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 --
     "abc \\
             def"
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", DashFunction, LeftChevron, InlineNormalString, PseudoCallLeftParenthesis, Str "abc         def", PseudoCallRightParenthesis, RightChevron');
+assert(s === 'VersionDirective "lemo 0.1.0", DashFunction, LeftChevron, InlineNormalString, PseudoCallLeftParenthesis, Str "abc         def", PseudoCallRightParenthesis, RightChevron');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: "
         aaa
@@ -43,8 +52,10 @@ x: "
         eee
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "    aaa\\\\n        bbb\\\\n        ccc\\\\nddd\\\\n    eee", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "    aaa\\\\n        bbb\\\\n        ccc\\\\nddd\\\\n    eee", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 // Each last line of the first 5 strings should be treated as empty. But the last line of the 6th string should be treated as not empty. These 6 strings only have differences (of the number of spaces) in their last lines.
 s = new $lex.Lex(`lemo 0.1.0
 --
@@ -84,8 +95,10 @@ s = new $lex.Lex(`lemo 0.1.0
             
     "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", DashFunction, LeftChevron, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n    ", PseudoCallRightParenthesis, RightChevron');
+assert(s === 'VersionDirective "lemo 0.1.0", DashFunction, LeftChevron, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n    ", PseudoCallRightParenthesis, RightChevron');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: v"C:\\Windows"
 x: v"
@@ -93,8 +106,10 @@ x: v"
     aaa \\(bbb)
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineVerbatimString, PseudoCallLeftParenthesis, Str "C:\\\\Windows", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedVerbatimString, PseudoCallLeftParenthesis, Str "C:\\\\Windows\\\\\\\\naaa \\\\(bbb)", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineVerbatimString, PseudoCallLeftParenthesis, Str "C:\\\\Windows", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedVerbatimString, PseudoCallLeftParenthesis, Str "C:\\\\Windows\\\\\\\\naaa \\\\(bbb)", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: "aaaaaaa\\
 bbbbbbb"
@@ -104,8 +119,10 @@ x: "
     c
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaaaaaabbbbbbb", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "a\\\\nbc", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaaaaaabbbbbbb", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "a\\\\nbc", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: r"hello \\(\\\"world\\\"\\)#(a.b() + c)"
 x: r"
@@ -113,8 +130,10 @@ x: r"
     world #(a) # a
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineRegex, PseudoCallLeftParenthesis, Str "hello \\\\(\\\\\\"world\\\\\\"\\\\)", Plus, NormalLeftParenthesis, NormalToken "a", Dot, NormalToken "b", CallLeftParenthesis, CallRightParenthesis, Plus, NormalToken "c", NormalRightParenthesis, Plus, Str "", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedRegex, PseudoCallLeftParenthesis, Str "hello \\\\x20\\\\nworld ", Plus, NormalLeftParenthesis, NormalToken "a", NormalRightParenthesis, Plus, Str " # a", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineRegex, PseudoCallLeftParenthesis, Str "hello \\\\(\\\\\\"world\\\\\\"\\\\)", Plus, NormalLeftParenthesis, NormalToken "a", Dot, NormalToken "b", CallLeftParenthesis, CallRightParenthesis, Plus, NormalToken "c", NormalRightParenthesis, Plus, Str "", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedRegex, PseudoCallLeftParenthesis, Str "hello \\\\x20\\\\nworld ", Plus, NormalLeftParenthesis, NormalToken "a", NormalRightParenthesis, Plus, Str " # a", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: js"var a = 'asdf\\(asdf)';"
 x: js"
@@ -122,28 +141,37 @@ x: js"
     ggg";
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineJs, PseudoCallLeftParenthesis, Str "var a = \'asdf\\\\(asdf)\';", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedJs, PseudoCallLeftParenthesis, Str "var a = \\"asdf\\\\(asdf)\\\\\\\\nggg\\";", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineJs, PseudoCallLeftParenthesis, Str "var a = \'asdf\\\\(asdf)\';", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedJs, PseudoCallLeftParenthesis, Str "var a = \\"asdf\\\\(asdf)\\\\\\\\nggg\\";", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: "\\(abc)aaa"
 x: "aaa\\(abc)"
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "", Plus, NormalLeftParenthesis, NormalToken "abc", NormalRightParenthesis, Plus, Str "aaa", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaa", Plus, NormalLeftParenthesis, NormalToken "abc", NormalRightParenthesis, Plus, Str "", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "", Plus, NormalLeftParenthesis, NormalToken "abc", NormalRightParenthesis, Plus, Str "aaa", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaa", Plus, NormalLeftParenthesis, NormalToken "abc", NormalRightParenthesis, Plus, Str "", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: "aaa \\((abc + 1).toString()) bbb"
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaa ", Plus, NormalLeftParenthesis, NormalLeftParenthesis, NormalToken "abc", Plus, Num "1", NormalRightParenthesis, Dot, NormalToken "toString", CallLeftParenthesis, CallRightParenthesis, NormalRightParenthesis, Plus, Str " bbb", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaa ", Plus, NormalLeftParenthesis, NormalLeftParenthesis, NormalToken "abc", Plus, Num "1", NormalRightParenthesis, Dot, NormalToken "toString", CallLeftParenthesis, CallRightParenthesis, NormalRightParenthesis, Plus, Str " bbb", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: r"aaa"gim
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineRegex, PseudoCallLeftParenthesis, Str "aaa", Comma, PostQuote "gim", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineRegex, PseudoCallLeftParenthesis, Str "aaa", Comma, PostQuote "gim", PseudoCallRightParenthesis');
+}); // ============================================================
 
+test(() => {
 s = new $lex.Lex(`lemo 0.1.0
 x: ""
 x: "
     \\x20
 "
 `).toString();
-console.log(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "\\\\x20", PseudoCallRightParenthesis');
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "\\\\x20", PseudoCallRightParenthesis');
+}); // ============================================================
