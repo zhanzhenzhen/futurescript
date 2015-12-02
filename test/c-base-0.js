@@ -1,15 +1,18 @@
+let index = 0;
+
 export let test = function(fn) {
     try {
         fn();
     }
     catch (ex) {
         if (ex instanceof AssertError) {
-            console.log("false");
+            console.log("false, " + index.toString());
         }
         else {
-            console.log("error");
+            console.log("error, " + index.toString());
         }
     }
+    index++;
 };
 
 export let assert = function(x) {
