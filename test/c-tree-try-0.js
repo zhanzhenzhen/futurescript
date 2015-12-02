@@ -1,8 +1,10 @@
+import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
 import * as $block from "../lib/c-block-0.js";
 
 let lex, block;
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 try
     a
@@ -12,7 +14,7 @@ finally
     c
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: TryExpression {
@@ -36,7 +38,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a:
     try
@@ -45,7 +49,7 @@ a:
         throw ex + 1
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -81,7 +85,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a:
     try
@@ -91,7 +97,7 @@ a:
 `);
 block = new $block.RootBlock(lex);
 block.complyWithJs();
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -127,3 +133,4 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================

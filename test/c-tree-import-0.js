@@ -1,13 +1,15 @@
+import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
 import * as $block from "../lib/c-block-0.js";
 
 let lex, block;
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 import "aaa"
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: ImportExpression {
@@ -16,12 +18,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 aaa: import "aaa"
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ImportStatement {
         batchall: false
@@ -41,12 +45,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 import "aaa" as aaa
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ImportStatement {
         batchall: false
@@ -66,12 +72,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 aaa: import "aaa" all
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ImportStatement {
         batchall: false
@@ -86,12 +94,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 import "aaa" all as aaa
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ImportStatement {
         batchall: false
@@ -106,12 +116,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 {a, b as c}: import "aaa"
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ImportStatement {
         batchall: false
@@ -140,12 +152,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 {a, b as c}: import "aaa" all
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ImportStatement {
         batchall: false
@@ -174,12 +188,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 import "aaa" as {a, b as c}
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ImportStatement {
         batchall: false
@@ -208,12 +224,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 import "aaa" all as {a, b as c}
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ImportStatement {
         batchall: false
@@ -242,3 +260,4 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================

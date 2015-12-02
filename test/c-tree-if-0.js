@@ -1,8 +1,10 @@
+import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
 import * as $block from "../lib/c-block-0.js";
 
 let lex, block;
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1 if b
 x -> b if c
@@ -24,7 +26,7 @@ if (
 a: b = 5 ? 4 | c = 6 ? 3
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     PostIfStatement {
         expression: IfExpression {
@@ -164,7 +166,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 if a
     b
@@ -174,7 +178,7 @@ else
     e
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: IfExpression {
@@ -205,12 +209,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 if a = b throw
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: IfExpression {
@@ -228,3 +234,4 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
