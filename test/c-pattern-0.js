@@ -1,10 +1,11 @@
+import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
 import * as $pattern from "../lib/c-pattern-0.js";
-import assert from "assert";
 
 let s = null;
 let lex, result;
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1
 `);
@@ -14,21 +15,21 @@ result = $pattern.Pattern.searchOne(
     lex.part(1),
     true
 );
-console.log(result === 2);
+assert(result === 2);
 
 result = $pattern.Pattern.searchSequence(
     [$lex.NormalToken, $lex.Colon],
     lex.part(1),
     true
 );
-console.log(result === 1);
+assert(result === 1);
 
 result = $pattern.Pattern.matchPattern(
     [$lex.NormalToken, $pattern.any, $lex.Colon, $pattern.tokens],
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 4 &&
     result[0] === 1 &&
     result[1] === 2 &&
@@ -42,7 +43,7 @@ result = $pattern.Pattern.matchPatternCapture(
     true,
     [1, 3]
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 2 &&
     result[0] instanceof Object && result[0].startIndex === 2 && result[0].endIndex === 1 &&
     result[1] instanceof Object && result[1].startIndex === 3 && result[1].endIndex === 3
@@ -55,7 +56,7 @@ result = $pattern.Pattern.matchPatternsAndCaptures(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 2 &&
     result[0] instanceof Object && result[0].startIndex === 2 && result[0].endIndex === 1 &&
     result[1] instanceof Object && result[1].startIndex === 3 && result[1].endIndex === 3
@@ -66,8 +67,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 if a = 1
     b: 1
@@ -80,7 +83,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 4 &&
     result[0] === 1 &&
     result[1] === 2 &&
@@ -93,7 +96,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 4 &&
     result[0] === 1 &&
     result[1] === 2 &&
@@ -106,7 +109,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 5 &&
     result[0] === 1 &&
     result[1] === 2 &&
@@ -120,7 +123,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 5 &&
     result[0] === 1 &&
     result[1] === 2 &&
@@ -135,7 +138,7 @@ result = $pattern.Pattern.matchPatternCapture(
     true,
     [1, 2, 4]
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] instanceof Object && result[0].startIndex === 2 && result[0].endIndex === 4 &&
     result[1] instanceof Object && result[1].startIndex === 5 && result[1].endIndex === 9 &&
@@ -147,13 +150,15 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] === 1 &&
     result[1] === 10 &&
     result[2] === 11
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a ? b | c + d ? e | f
 `);
@@ -163,7 +168,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 5 &&
     result[0] === 1 &&
     result[1] === 8 &&
@@ -177,7 +182,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 5 &&
     result[0] === 1 &&
     result[1] === 2 &&
@@ -185,7 +190,9 @@ console.log(
     result[3] === 4 &&
     result[4] === 5
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 (x, y) -> x * y
 `);
@@ -195,7 +202,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] === 1 &&
     result[1] === 6 &&
@@ -207,13 +214,15 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] === 1 &&
     result[1] === 6 &&
     result[2] === 7
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 1 + 2 + 3
 `);
@@ -223,13 +232,15 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] === 1 &&
     result[1] === 4 &&
     result[2] === 5
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 abc(1, 2, 3)
 `);
@@ -237,13 +248,15 @@ result = $pattern.Pattern.split(
     $lex.Comma,
     lex.part(3, 7)
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] instanceof Object && result[0].startIndex === 3 && result[0].endIndex === 3 &&
     result[1] instanceof Object && result[1].startIndex === 5 && result[1].endIndex === 5 &&
     result[2] instanceof Object && result[2].startIndex === 7 && result[2].endIndex === 7
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 abc()
 `);
@@ -251,11 +264,13 @@ result = $pattern.Pattern.split(
     $lex.Comma,
     lex.part(3, 2)
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 1 &&
     result[0] instanceof Object && result[0].startIndex === 3 && result[0].endIndex === 2
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: {
     a: 1,
@@ -266,13 +281,15 @@ result = $pattern.Pattern.split(
     [$lex.Comma, $lex.Semicolon],
     lex.part(4, 14)
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] instanceof Object && result[0].startIndex === 4 && result[0].endIndex === 6 &&
     result[1] instanceof Object && result[1].startIndex === 8 && result[1].endIndex === 10 &&
     result[2] instanceof Object && result[2].startIndex === 12 && result[2].endIndex === 14
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: [1, 2, 3]
 `);
@@ -281,8 +298,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 [1, 2, 3]
 `);
@@ -291,11 +310,13 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 1 &&
     result[0] === 1
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a.b(5, 6)
 `);
@@ -304,12 +325,14 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 2 &&
     result[0] === 1 &&
     result[1] === 4
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1 + 2 + 3
 `);
@@ -319,7 +342,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(3, 7),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] === 3 &&
     result[1] === 6 &&
@@ -332,7 +355,7 @@ result = $pattern.Pattern.matchPatternCapture(
     false,
     [0, 1, 2, null]
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 4 &&
     result[0] instanceof Object && result[0].startIndex === 3 && result[0].endIndex === 5 &&
     result[1] instanceof Object && result[1].startIndex === 6 && result[1].endIndex === 6 &&
@@ -346,7 +369,7 @@ result = $pattern.Pattern.matchPatternCapture(
     false,
     [0, [1, 2], null]
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] instanceof Object && result[0].startIndex === 3 && result[0].endIndex === 5 &&
     result[1] instanceof Object && result[1].startIndex === 6 && result[1].endIndex === 7 &&
@@ -359,14 +382,16 @@ result = $pattern.Pattern.matchPatternCapture(
     false,
     [null, 2, 0, 1]
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 4 &&
     result[0] === null &&
     result[1] instanceof Object && result[1].startIndex === 7 && result[1].endIndex === 7 &&
     result[2] instanceof Object && result[2].startIndex === 3 && result[2].endIndex === 5 &&
     result[3] instanceof Object && result[3].startIndex === 6 && result[3].endIndex === 6
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 if a
 else
@@ -377,14 +402,16 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 4 &&
     result[0] === 1 &&
     result[1] === 2 &&
     result[2] === 3 &&
     result[3] === 4
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1 if b
 `);
@@ -393,13 +420,15 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] === 1 &&
     result[1] === 4 &&
     result[2] === 5
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: b if c then d true
 `);
@@ -408,8 +437,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: b if c then d
 `);
@@ -418,8 +449,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a b (c d) e
 `);
@@ -428,13 +461,15 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] === 1 &&
     result[1] === 3 &&
     result[2] === 7
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 if a
     b
@@ -445,7 +480,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 5 &&
     result[0] === 1 &&
     result[1] === 2 &&
@@ -453,7 +488,9 @@ console.log(
     result[3] === 6 &&
     result[4] === 7
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 if if a then b
 `);
@@ -463,7 +500,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 4 &&
     result[0] === 1 &&
     result[1] === 2 &&
@@ -476,8 +513,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a -> if b then c if d
 `);
@@ -486,8 +525,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a b c d
 `);
@@ -497,7 +538,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 2 &&
     result[0] === 1 &&
     result[1] === 2
@@ -508,8 +549,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 (a) (b)
 `);
@@ -522,7 +565,7 @@ result = $pattern.Pattern.searchOne(
     lex.part(1),
     true
 );
-console.log(result === 3);
+assert(result === 3);
 
 result = $pattern.Pattern.searchOne(
     (token, index) => {
@@ -532,8 +575,10 @@ result = $pattern.Pattern.searchOne(
     lex.part(1),
     true
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a |> b.c :: d
 `);
@@ -546,7 +591,7 @@ result = $pattern.Pattern.matchPatternsAndCaptures(
     lex.part(1),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 2 &&
     result[0] instanceof Object && result[0].startIndex === 1 && result[0].endIndex === 5 &&
     result[1] instanceof Object && result[1].startIndex === 7 && result[1].endIndex === 7
@@ -561,7 +606,7 @@ result = $pattern.Pattern.matchPatternsAndCaptures(
     false,
     true
 );
-console.log(
+assert(
     result instanceof Object && (
         Array.isArray(result.selected) && result.selected.length === 2 &&
         result.selected[0] instanceof Object &&
@@ -575,7 +620,9 @@ console.log(
         result.all[2] instanceof Object && result.all[2].startIndex === 7 && result.all[2].endIndex === 7
     )
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 import "aaa"
 `);
@@ -584,8 +631,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 true true true true
 `);
@@ -594,13 +643,15 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 3 &&
     result[0] === 1 &&
     result[1] === 3 &&
     result[2] === 4
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 true true true true
 `);
@@ -609,8 +660,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 true and false
 `);
@@ -620,21 +673,23 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(result === null);
+assert(result === null);
 
 result = $pattern.Pattern.matchPattern(
     [$pattern.anyExcept([$lex.Or]), $lex.True, $lex.And, $lex.False],
     lex.part(1),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 4 &&
     result[0] === 1 &&
     result[1] === 1 &&
     result[2] === 2 &&
     result[3] === 3
 );
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 1
 `);
@@ -644,7 +699,7 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 1 &&
     result[0] === 1
 );
@@ -654,14 +709,14 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(result === null);
+assert(result === null);
 
 result = $pattern.Pattern.matchPattern(
     [$pattern.anyExcept([$lex.Or])],
     lex.part(1),
     false
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 1 &&
     result[0] === 1
 );
@@ -671,8 +726,10 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     false
 );
-console.log(result === null);
+assert(result === null);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 "aaa"
 `);
@@ -681,8 +738,9 @@ result = $pattern.Pattern.matchPattern(
     lex.part(1),
     true
 );
-console.log(
+assert(
     Array.isArray(result) && result.length === 2 &&
     result[0] === 1 &&
     result[1] === 2
 );
+}); // ============================================================
