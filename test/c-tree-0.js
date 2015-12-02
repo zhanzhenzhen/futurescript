@@ -1,10 +1,10 @@
+import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
 import * as $block from "../lib/c-block-0.js";
-import assert from "assert";
 
-let s = null;
 let lex, result, block;
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: 1 + 2 + 3
 b: 2 + 3
@@ -22,7 +22,7 @@ h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -242,8 +242,10 @@ RootBlock [
     }
 ]
 `);
-console.log(block.hasCompilerDirective("node module"));
+assert(block.hasCompilerDirective("node module"));
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: [1, 2, 3]
 a: {a: 1, b: 2}
@@ -256,7 +258,7 @@ a: b.0
 a.0: b
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -399,7 +401,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a:
     aaa <= bbb or not mmm = nnn or ooo /= ppp
@@ -413,7 +417,7 @@ a:
             ggg
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -469,7 +473,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a b c
 a(b(c))
@@ -477,7 +483,7 @@ a(b)(c)
 x.(a) b(c)
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: ParenthesisCallExpression {
@@ -536,7 +542,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a:
     if b = null or b = void
@@ -545,7 +553,7 @@ a:
         false
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -581,12 +589,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: +1 - (-a)
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -608,12 +618,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a as b as c
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: AsExpression {
@@ -636,12 +648,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 [a, b]: [b, a]
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -669,7 +683,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a[b].c
 a{b: 3}.c
@@ -677,7 +693,7 @@ a [b].c
 a {b: 3}.c
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: DotExpression {
@@ -747,13 +763,15 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: b.c'ok.d
 a: b'(c)
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -794,7 +812,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: b in c
 a: b not in c
@@ -802,7 +822,7 @@ a: b is Number
 a: b isnt Number
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -862,13 +882,15 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: b ifnull c
 a: b ifvoid c
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -900,7 +922,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 undefined: 3
 a: <>
@@ -908,7 +932,7 @@ a: <>
 `);
 block = new $block.RootBlock(lex);
 block.complyWithJs();
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -951,12 +975,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: <> "abc\\(@0)def"
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -991,12 +1017,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 throw Error()
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ThrowStatement {
         value: ParenthesisCallExpression {
@@ -1007,14 +1035,16 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 delete a.b
 delete a.b."c"
 delete a.b.(c)
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     DeleteStatement {
         x: VariableExpression "a"
@@ -1041,12 +1071,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 do -- 3 + 5
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: DoExpression {
@@ -1064,13 +1096,15 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 []
 {}
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: ArrayExpression {
@@ -1086,14 +1120,16 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a'ok(1)
 a'ok[1]
 a'ok{}
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: ParenthesisCallExpression {
@@ -1134,12 +1170,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 [3, 4, 5] |> u.map(x -> x * 2) :: map(x -> x + 1) |> u.max
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
         expression: PipeExpression {
@@ -1209,12 +1247,14 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: r"aaa"gim
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -1235,7 +1275,9 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 ###
 header comment
@@ -1243,7 +1285,7 @@ header comment
 console.log "haha"
 `);
 block = new $block.RootBlock(lex);
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 ###
 header comment
 ###
@@ -1266,13 +1308,15 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
 
+test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 [undefined, instanceof]: [1, 2]
 `);
 block = new $block.RootBlock(lex);
 block.complyWithJs();
-console.log(block.toString() === `node module
+assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -1300,3 +1344,4 @@ RootBlock [
     }
 ]
 `);
+}); // ============================================================
