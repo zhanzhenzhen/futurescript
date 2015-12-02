@@ -2,7 +2,6 @@ import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
 import * as $pattern from "../lib/c-pattern-0.js";
 
-let s = null;
 let lex, r;
 
 test(() => {
