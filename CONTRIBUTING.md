@@ -6,9 +6,9 @@ Permanent compiler files are under `"lib"` directory with filenames starting wit
 Permanent compiler files conventions
 ------------------------------------
 
-Can't rely on any dependencies except Babel, which can be removed (not replaced with another) finally (maybe in 2016).
+Can't rely on any dependencies (even including Node.js core modules) except Babel, which can be removed finally (maybe in 2016).
 
-Can't rely on any non-permanent files except `"locked-api.js"`.
+Can't rely on any non-permanent files.
 
 Must be in pure JavaScript (i.e. extension: .js) and comply with ECMAScript 6.
 
@@ -21,5 +21,4 @@ Permanent test files
 
 Permanent test files are under "`test`" directory. They should follow the similar rule as above. Note that:
 
-- Permanent test files can rely on permanent compiler files, but permanent compiler files can't rely on permanent test files.
-- Permanent test files can rely on `"lib/locked-api.js"`, but permanent compiler files can't rely on `"test/locked-api.js"`.
+- Permanent test files can rely on permanent compiler files, but permanent compiler files can't rely on permanent test files or any other files in `"test"` directory.
