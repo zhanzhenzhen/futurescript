@@ -33,3 +33,11 @@ export let writeTextFile = function(path, text, encoding = textEncoding.utf8) {
     }
     fs.writeFileSync(path, bytes);
 };
+
+export let directoryExists = function(path) {
+    return fs.existsSync(path) && fs.statSync(path).isDirectory();
+};
+
+export let createDirectory = function(path) {
+    fs.mkdirSync(path);
+};

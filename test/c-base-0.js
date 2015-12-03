@@ -1,3 +1,5 @@
+import * as $lockedApi from "./locked-api.js";
+
 let index = 0;
 
 export let test = function(fn) {
@@ -24,3 +26,7 @@ export let assert = function(x) {
 };
 
 class AssertError extends Error {}
+
+if (!$lockedApi.directoryExists("temp")) {
+    $lockedApi.createDirectory("temp");
+}
