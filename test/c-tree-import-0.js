@@ -284,21 +284,28 @@ RootBlock [
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: LocalVariable "a"
+                    variable: LocalVariable "aaa"
                 }
-                y: Piece "a"
+                y: Piece "aaa"
             }
+        ]
+        module: Piece "\\"./a\\""
+    }
+    ImportStatement {
+        batchall: false
+        catchall: null
+        mapping: Arr [
             Xy {
                 x: VariableAssignee {
                     export: false
                     ifnull: false
                     ifvoid: false
-                    variable: LocalVariable "c"
+                    variable: LocalVariable "bbb"
                 }
-                y: Piece "b"
+                y: Piece "bbb"
             }
         ]
-        module: Piece "\\"aaa\\""
+        module: Piece "\\"./a\\""
     }
 ]
 `);
