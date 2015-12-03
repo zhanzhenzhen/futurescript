@@ -6,7 +6,7 @@ Permanent compiler files are under `"lib"` directory with filenames starting wit
 Permanent compiler files conventions
 ------------------------------------
 
-Can't rely on any dependencies (even including Node.js core modules) except Babel, which can be removed finally (maybe in 2016).
+Can't rely on any dependencies outside the ECMAScript 6 specification (even including Node.js built-ins such as `require`) except Babel, which can be removed finally (maybe in 2016). Basically, if an external dependency is a must, there's only 1 method: inject it to compiler in `"c-v<number>.<number>.<number>.js"`.
 
 Can't rely on any non-permanent files.
 
