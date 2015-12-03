@@ -27,6 +27,6 @@ export let assert = function(x) {
 
 class AssertError extends Error {}
 
-if (!$lockedApi.directoryExists("temp")) {
-    $lockedApi.createDirectory("temp");
+if (!$lockedApi.directoryExists("test/temp")) {
+    $lockedApi.createDirectory("test/temp");
 }
