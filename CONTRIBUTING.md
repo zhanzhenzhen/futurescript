@@ -8,7 +8,7 @@ Permanent compiler files conventions
 
 Can't rely on any dependencies outside the ECMAScript 6 specification (even including Node.js built-ins such as `require`) except Babel, which can be removed finally (maybe in 2016). Basically, if an external dependency is a must, there's only 1 method: inject it to compiler in `"c-v<number>.<number>.<number>.js"`.
 
-Can't rely on any non-permanent files.
+Can't rely on any non-permanent files except `"locked-api.js"`.
 
 Must be in pure JavaScript (i.e. extension: .js) and comply with ECMAScript 6.
 
@@ -21,4 +21,5 @@ Permanent test files
 
 Permanent test files are under "`test`" directory. They should follow the similar rule as above. Note that:
 
-- Permanent test files can rely on permanent compiler files, but permanent compiler files can't rely on permanent test files or any other files in `"test"` directory.
+- Permanent test files can rely on permanent compiler files, but permanent compiler files can't rely on permanent test files.
+-- Permanent test files can rely on `"lib/locked-api.js"`, but permanent compiler files can't rely on `"test/locked-api.js"`.
