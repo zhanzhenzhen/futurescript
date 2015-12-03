@@ -1,7 +1,7 @@
 import {test, assert} from "./c-base-0.js";
+import * as $lockedApi from "./locked-api.js";
 import * as $lex from "../lib/c-lex-0.js";
 import * as $block from "../lib/c-block-0.js";
-import * as $lockedApi from "../lib/locked-api.js";
 
 let lex, block;
 
