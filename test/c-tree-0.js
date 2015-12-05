@@ -1355,3 +1355,43 @@ assert.throws(() => {
     block.complyWithJs();
 });
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: <>
+    b()
+    pause
+    c
+`);
+block = new $block.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "a"
+            }
+        ]
+        value: DiamondFunctionExpression {
+            body: ScopeBlock [
+                ExpressionStatement {
+                    expression: ParenthesisCallExpression {
+                        arguments: Arr [
+                        ]
+                        callee: VariableExpression "b"
+                    }
+                }
+                PauseStatement {
+                }
+                ExpressionStatement {
+                    expression: VariableExpression "c"
+                }
+            ]
+        }
+    }
+]
+`);
+}); // ============================================================
