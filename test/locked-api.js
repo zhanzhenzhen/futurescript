@@ -1,4 +1,4 @@
-import fs from "fs";
+import $fs from "fs";
 
 // Currently we don't support `utf16BeBom` because Node.js doesn't support it.
 export let textEncoding = {
@@ -31,13 +31,13 @@ export let writeTextFile = function(path, text, encoding = textEncoding.utf8) {
     else {
         throw new Error("Encoding not supported.");
     }
-    fs.writeFileSync(path, bytes);
+    $fs.writeFileSync(path, bytes);
 };
 
 export let directoryExists = function(path) {
-    return fs.existsSync(path) && fs.statSync(path).isDirectory();
+    return $fs.existsSync(path) && $fs.statSync(path).isDirectory();
 };
 
 export let createDirectory = function(path) {
-    fs.mkdirSync(path);
+    $fs.mkdirSync(path);
 };
