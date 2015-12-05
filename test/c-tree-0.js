@@ -1345,3 +1345,13 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+undefined()
+`);
+block = new $block.RootBlock(lex);
+assert.throws(() => {
+    block.complyWithJs();
+});
+}); // ============================================================

@@ -25,6 +25,19 @@ export let assert = function(x) {
     }
 };
 
+// `errorType` is optional.
+assert.throws = function(fn, errorType) {
+    try {
+        fn();
+    }
+    catch (ex) {
+        if (errorType === undefined || ex instanceof errorType) {
+            return;
+        }
+    }
+    throw new AssertError();
+};
+
 class AssertError extends Error {}
 
 if (!$lockedApi.directoryExists("test/temp")) {
