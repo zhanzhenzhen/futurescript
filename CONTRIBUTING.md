@@ -22,4 +22,4 @@ Permanent test files
 Permanent test files are under "`test`" directory. They should follow the similar rule as above. Note that:
 
 - Permanent test files can rely on permanent compiler files, but permanent compiler files can't rely on permanent test files.
--- Permanent test files can rely on `"lib/locked-api.js"`, but permanent compiler files can't rely on `"test/locked-api.js"`.
+- Permanent test files can rely on `"lib/locked-api.js"`, but permanent compiler files can't rely on `"test/locked-api.js"`.
