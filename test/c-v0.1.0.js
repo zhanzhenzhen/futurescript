@@ -1,5 +1,3 @@
-import "../lib/c-shim-0.js";
-
 import "./c-tools-0.js";
 import "./c-tree-0.js";
 import "./c-tree-if-0.js";
