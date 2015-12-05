@@ -152,6 +152,7 @@
     <li>import（但不包括既没冒号，也没as，也没all的import）</li>
     <li>export（仅限于语句开头是export，所以不包括export as，但包括export...as）</li>
     <li>throw</li>
+    <li>pause</li>
 </ul>
 <p>给定一条语句，该语句所在级别的最大范围连续内容称作该语句所在的块，块不包括版本行。除了块以外，还有表，块和表合称“容器”。块的子项可以是语句或注释，表的子项不可以是语句。我们说某语句的子块（或子表），是指该语句的一级下属。我们说某块的子语句，也是指该块的一级下属。</p>
 <p>这些容器是块：</p>
@@ -1407,6 +1408,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>如果后面的字符不是空白，则如果前面的字符是字母、数字、<code>_</code>、<code>$</code>、<code>)</code>、<code>]</code>、<code>}</code>、<code>"</code>或<code>@</code>，则被解析为加号和减号，否则被解析为正负号。</p>
 <p>另外，作为运算符时，<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>之后不能紧接<code>+</code>或<code>-</code>。</p>
+<h2>调试</h2>
+<p>使用<code>pause</code>命令插入断点。它等价于JS的<code>debugger</code>命令，因为<code>debugger</code>违反了关键字不能大于7个字符的原则，所以改名为<code>pause</code>。</p>
 <h2>插入JavaScript</h2>
 <p>使用<code>js"</code>。例如：</p>
 <pre><code><![CDATA[
@@ -1449,6 +1452,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>not</li>
     <li>null</li>
     <li>or</li>
+    <li>pause</li>
     <li>rem</li>
     <li>self</li>
     <li>super</li>
