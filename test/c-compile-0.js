@@ -1,11 +1,12 @@
-import compile from "../lib/c";
+import * as $libLockedApi from "../lib/locked-api.js";
 
 let output;
 
-output = compile({code: `lemo 0.1.0, node module
+output = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
 a: 123
-`, path: "abc.lemo", sourceMapEnabled: true});
+`, path: "abc.lemo", level: $libLockedApi.OutputLevel.sourceMap});
 console.log(output);
+process.exit();
 
 output = compile({code: `lemo 0.1.0, node module
 a: 123 + 456 and 3
