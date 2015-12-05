@@ -743,3 +743,18 @@ assert(
     r[1] === 2
 );
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+pause
+`);
+r = $pattern.Pattern.matchPatternCapture(
+    [$lex.Pause],
+    lex.part(1),
+    true,
+    []
+);
+assert(
+    Array.isArray(r) && r.length === 0
+);
+}); // ============================================================
