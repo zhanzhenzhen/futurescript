@@ -12,7 +12,7 @@ Can't rely on any non-permanent files except `"locked-api.js"`.
 
 Must be in pure JavaScript (i.e. extension: .js) and comply with ECMAScript 6.
 
-Can't be modified or deleted after release.
+Can't be modified or deleted after release (unless there are very serious problems).
 
 There are two kinds of filenames: version and other. Version filename is in `"c-v<number>.<number>.<number>.js"` format. Other filename (without extension) must end with a dash plus a number, like `"c-assign-0.js"`. The initial number for every name is 0. When you want to edit a file (that already exists in any old release) for next release, don't edit, but keep it unchanged and create a new file with the same name but the number added, like `"c-assign-1.js"` (and until next release the new file is editable). When you want to rename a file that exists in old release, also do not rename, but use a new filename with the number 0.
 
