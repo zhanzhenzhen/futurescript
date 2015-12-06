@@ -12,6 +12,9 @@
     "dependencies": {
         "esprima": "2.7.0"
     },
+    "devDependencies": {
+        "babel": "5.8.29"
+    },
     "bin": {
         "lemo": "./lib/bin.js"
     }
