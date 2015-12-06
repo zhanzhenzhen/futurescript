@@ -1,7 +1,7 @@
 Contributing
 ============
 
-Permanent compiler files are under `"lib"` directory with filenames starting with `"c-"`, but not including `"c-v<number>.<number>.<number>.js"` and `"c.js"`.
+Permanent compiler files are under `"lib"` directory with filenames starting with `"c-"`.
 
 Permanent compiler files conventions
 ------------------------------------
@@ -12,7 +12,9 @@ Can't rely on any non-permanent files except `"locked-api.js"`.
 
 Must be in pure JavaScript (i.e. extension: .js) and comply with ECMAScript 6.
 
-Each filename (without extension) must end with a dash plus a number, like `"c-assign-0.js"`. The initial number for every name is 0. When you want to edit a file that exists in release, don't edit, but keep it unchanged and create a new file with the same name but the number added, like `"c-assign-1.js"` (and until next release the new file is editable). When you want to rename a file that exists in release, also do not rename, but use a new filename with the number 0. Lastly, of course, any file that exists in release can't be deleted.
+Can't be modified or deleted after release.
+
+There are two kinds of filenames: version and other. Version filename is in `"c-v<number>.<number>.<number>.js"` format. Other filename (without extension) must end with a dash plus a number, like `"c-assign-0.js"`. The initial number for every name is 0. When you want to edit a file (that already exists in any old release) for next release, don't edit, but keep it unchanged and create a new file with the same name but the number added, like `"c-assign-1.js"` (and until next release the new file is editable). When you want to rename a file that exists in old release, also do not rename, but use a new filename with the number 0.
 
 It's highly recommended that large file be splitted into small files.
 
