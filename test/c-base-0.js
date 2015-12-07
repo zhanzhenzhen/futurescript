@@ -1,4 +1,5 @@
 import * as $lockedApi from "./locked-api.js";
+import * as $tools from "./c-tools-0.js";
 
 let index = 0;
 
@@ -25,13 +26,23 @@ export let assert = function(x) {
     }
 };
 
-// `errorType` is optional.
-assert.throws = function(fn, errorType) {
+// `ruler` is optional.
+// If it's `Error` class, or a class derived from `Error`, then it acts like a class.
+// If not so, then it acts like a validation function. The exception will be passed to
+// the function as the first argument.
+assert.throws = function(fn, ruler) {
     try {
         fn();
     }
     catch (ex) {
-        if (errorType === undefined || ex instanceof errorType) {
+        if (
+            ruler === undefined ||
+            (
+                $tools.classIsClass(ruler, Error) ?
+                ex instanceof ruler :
+                ruler(ex)
+            )
+        ) {
             return;
         }
     }
