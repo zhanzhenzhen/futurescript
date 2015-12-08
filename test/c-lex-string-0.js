@@ -186,6 +186,9 @@ x: "
 x: 1
 `);
 },
-e => e instanceof $lex.PunctuationPairError && e.rawPart[0] === 13 && e.rawPart[1] === 28
+e =>
+    e instanceof $lex.PunctuationPairError &&
+    e.rawStart[0] === 1 && e.rawStart[1] === 2 &&
+    e.rawEnd[0] === 3 && e.rawEnd[1] === 4
 );
 }); // ============================================================
