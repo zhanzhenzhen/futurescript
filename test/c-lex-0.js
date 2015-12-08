@@ -260,3 +260,14 @@ export: 3
 `).toString();
 assert(s === 'VersionDirective "lemo 0.1.0", Export, Colon, Num "3"');
 }); // ============================================================
+
+test(() => {
+assert.throws(() =>
+{
+lex = new $lex.Lex(`lemo 0.1.0
+x: 我
+`);
+},
+e => e instanceof $lex.CharacterError && e.rawPart[0] === 14 && e.rawPart[1] === 14
+);
+}); // ============================================================
