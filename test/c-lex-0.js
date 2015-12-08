@@ -268,6 +268,9 @@ lex = new $lex.Lex(`lemo 0.1.0
 x: 我
 `);
 },
-e => e instanceof $lex.CharacterError && e.rawPart[0] === 14 && e.rawPart[1] === 14
+e =>
+    e instanceof $lex.CharacterError &&
+    e.rawStart[0] === 1 && e.rawStart[1] === 3 &&
+    e.rawEnd[0] === 1 && e.rawEnd[1] === 3
 );
 }); // ============================================================
