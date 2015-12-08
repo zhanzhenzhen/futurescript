@@ -2,6 +2,7 @@ import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
 
 let s = null;
+let lex = null;
 
 test(() => {
 s = new $lex.Lex(`lemo 0.1.0
@@ -174,4 +175,17 @@ x: "
 "
 `).toString();
 assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "\\\\x20", PseudoCallRightParenthesis');
+}); // ============================================================
+
+test(() => {
+assert.throws(() =>
+{
+lex = new $lex.Lex(`lemo 0.1.0
+x: "
+    abc
+x: 1
+`);
+},
+e => e instanceof $lex.PunctuationPairError && e.lexPart.startIndex === 5 && e.lexPart.endIndex === 5
+);
 }); // ============================================================

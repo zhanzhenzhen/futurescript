@@ -1,5 +1,5 @@
 import * as $lockedApi from "./locked-api.js";
-import * as $tools from "./c-tools-0.js";
+import * as $tools from "../lib/c-tools-0.js";
 
 let index = 0;
 
