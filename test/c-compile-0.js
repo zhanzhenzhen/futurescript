@@ -21,32 +21,40 @@ export: a
 assert(r === 2);
 }); // ============================================================
 
-process.exit();
-
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: x -> x + 1
-console.log a(2)
-`, path: "aaa/abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a(2)
+`);
+assert(r === 3);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: 1
 b: match a
     1 ? 10
     2 ? 100
     | 0
-console.log b
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: b
+`);
+assert(r === 10);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: "aaa"
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a
+`);
+assert(r === "aaa");
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+message: ""
+
 move: <>
-    console.log "\\(@0) --> \\(@1)"
+    message: self + "\\(@0) --> \\(@1)\\n"
 
 hanoi: <>
     if @0.count = 1
@@ -72,8 +80,20 @@ hanoi{
     auxiliary: 1
     to: 2
 }
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+
+export: message
+`);
+assert(r === `0 --> 2
+0 --> 1
+2 --> 1
+0 --> 2
+1 --> 0
+1 --> 2
+0 --> 2
+`);
+}); // ============================================================
+
+process.exit();
 
 output = compile({code: `lemo 0.1.0, radical, node module
 move: <>
