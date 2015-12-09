@@ -1351,9 +1351,14 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 undefined()
 `);
 block = new $block.RootBlock(lex);
-assert.throws(() => {
+assert.throws(() =>
+{
     block.complyWithJs();
-});
+},
+e => e instanceof $block.GlobalVariableNameError &&
+    e.rawStart[0] === 1 && e.rawStart[1] === 0 &&
+    e.rawEnd[0] === 1 && e.rawEnd[1] === 8
+);
 }); // ============================================================
 
 test(() => {
