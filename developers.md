@@ -1,5 +1,30 @@
-Contributing
-============
+Development
+===========
+
+First, use npm to install lemo globally.
+
+Second, git clone the repository, and let the repository's root directory be your working directory.
+
+Now, we're ready to develop.
+
+Because "lib" and "test" directories hold all versions, we often want to list files of just the current version:
+
+- `lemo list`
+- `lemo l`
+
+Compile (build) all files in "lib" to ES5-compatible files in "target":
+
+- `lemo build`
+- `lemo b`
+
+Test:
+
+- `lemo test`
+- `lemo t`
+
+Note: If you don't want to globally install it, or you want to directly run the raw ECMAScript 6 code (not the JS in the "target" directory), replace the "`lemo`" above with "`babel-node <lemo-directory>/lib/bin`". In this case, you should have Babel 5.x.x installed on your computer.
+
+We must build it before publish it.
 
 Permanent compiler files are under `"lib"` directory with filenames starting with `"c-"`.
 

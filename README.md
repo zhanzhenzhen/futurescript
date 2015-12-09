@@ -1,14 +1,19 @@
-# lemo
+lemo
+====
 
-Commands:
+Compile
+-------
 
-- Compile: lemo c <file>
-- Compile with source map: lemo m <file>
+- `lemo compile <file>`
+- `lemo c <file>`
 
-Lemo Developer commands:
+Compile with source map
+-----------------------
 
-- List: lemo l (or babel-node lib/bin l)
-- Build: lemo b (or babel-node lib/bin b)
-- Test: lemo t (or babel-node lib/bin t)
+- `lemo map-compile <file>`
+- `lemo m <file>`
 
-Note: when using babel or babel-node command the babel version should be 5.x.x.
+Developers
+==========
+
+The most commonly used command is `lemo list` when your working directory is the project root. For details, see "developers.md".
