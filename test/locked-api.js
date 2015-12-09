@@ -1,4 +1,5 @@
 import $fs from "fs";
+import * as $libLockedApi from "../lib/locked-api.js";
 
 // Currently we don't support `utf16BeBom` because Node.js doesn't support it.
 export let TextEncoding = {
@@ -40,4 +41,20 @@ export let directoryExists = function(path) {
 
 export let createDirectory = function(path) {
     $fs.mkdirSync(path);
+};
+
+let runCodeIndex = 0;
+export let runCode = function(code) {
+    let output = $libLockedApi.generateOutput({code: code});
+
+    // Must use this kind of filename. Filename can't be fixed, because `require`
+    // will just load the content with a certain file path for the first time.
+    // Also, `require` can't be used in VM.
+    let jsFilename = "code-" + runCodeIndex + ".js";
+
+    writeTextFile("test/temp/" + jsFilename, output.targets[0].code);
+    runCodeIndex++;
+    let r = require("./temp/" + jsFilename);
+    r = JSON.parse(JSON.stringify(r)); // to make sure it's JSON
+    return r;
 };

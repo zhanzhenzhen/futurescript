@@ -1,18 +1,27 @@
-import * as $libLockedApi from "../lib/locked-api.js";
+import {test, assert} from "./c-base-0.js";
+import * as $lockedApi from "./locked-api.js";
 
 let output;
+let r;
 
-output = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: 123
-`, path: "abc.lemo", level: $libLockedApi.OutputLevel.sourceMap});
-console.log(output);
-process.exit();
+export: a
+`);
+assert(r === 123);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: 123 + 456 and 3
 a: if 1 then 2 else 3
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a
+`);
+assert(r === 2);
+}); // ============================================================
+
+process.exit();
 
 output = compile({code: `lemo 0.1.0, node module
 a: x -> x + 1
