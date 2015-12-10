@@ -392,23 +392,27 @@ export: a + b
 assert(r === 3);
 }); // ============================================================
 
-process.exit();
-
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 ###
 header comment
 ###
-console.log "haha"
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: "haha"
+`);
+assert(r === "haha");
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 ###
 header comment*/
 ###
-console.log "haha"
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: "haha"
+`);
+assert(r === "haha");
+}); // ============================================================
+
+process.exit();
 
 output = compile({code: `lemo 0.1.0, node module
 a: import "./a.js"
