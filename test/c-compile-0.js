@@ -93,11 +93,12 @@ assert(r === `0 --> 2
 `);
 }); // ============================================================
 
-process.exit();
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0, radical
+message: ""
 
-output = compile({code: `lemo 0.1.0, radical, node module
 move: <>
-    console.log "\\(@0) --> \\(@1)"
+    message: self + "\\(@0) --> \\(@1)\\n"
 
 hanoi: <>
     if @count = 1
@@ -123,8 +124,20 @@ hanoi{
     auxiliary: 1
     to: 2
 }
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+
+export: message
+`);
+assert(r === `0 --> 2
+0 --> 1
+2 --> 1
+0 --> 2
+1 --> 0
+1 --> 2
+0 --> 2
+`);
+}); // ============================================================
+
+process.exit();
 
 output = compile({code: `lemo 0.1.0, node module
 console.log()
