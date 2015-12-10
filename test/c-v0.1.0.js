@@ -1,5 +1,6 @@
 import "./c-tools-0.js";
 import "./c-tree-0.js";
+import "./c-tree-assign-0.js";
 import "./c-tree-if-0.js";
 import "./c-tree-match-0.js";
 import "./c-tree-function-0.js";
