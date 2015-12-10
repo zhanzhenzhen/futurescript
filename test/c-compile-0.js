@@ -207,9 +207,8 @@ export: b = void
 assert(r === true);
 }); // ============================================================
 
-process.exit();
-
-output = compile({code: `lemo 0.1.0, node module, radical
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0, radical
 statusCode: 404
 message: match <> statusCode >= @
     600 ? "unsupported"
@@ -219,133 +218,181 @@ message: match <> statusCode >= @
     200 ? "success"
     100 ? "informational"
     |     "unsupported"
-console.log message
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: message
+`);
+assert(r === "client error");
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 day: "Sun"
 action: match day
     "Sat", "Sun" ? "have a rest"
     |              "work"
-console.log action
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: action
+`);
+assert(r === "have a rest");
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
-console.log 1 is Number
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+export: 1 is Number
+`);
+assert(r === true);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
-console.log 7 mod 3
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+export: 7 mod 3
+`);
+assert(r === 1);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: {f: 5, g: 3}
 delete a.f
-console.log a
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a.f = void
+`);
+assert(r === true);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
-do --
-    console.log("haha")
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+export: do --
+    a: "haha"
+    a
+`);
+assert(r === "haha");
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: 2
 a: self + 1
-console.log a
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a
+`);
+assert(r === 3);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: (x, y) -> x + y
-console.log a'[5, 6]
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a'[5, 6]
+`);
+assert(r === 11);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: null
-console.log a'ok
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a'ok
+`);
+assert(r === false);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: null
-console.log a'ok.b'ok.c'ok.d
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a'ok.b'ok.c'ok.d = void
+`);
+assert(r === true);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: null
-console.log a'ok()
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a'ok() = void
+`);
+assert(r === true);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: null
 b: a ifnull 1
-console.log b
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: b
+`);
+assert(r === 1);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: 1 as b
-console.log b
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: b
+`);
+assert(r === 1);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
-console.log 2 ** 3
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+export: 2 ** 3
+`);
+assert(r === 8);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: 3
 plus: (x, y) -> x + y
-console.log a |> plus(2)
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a |> plus(2)
+`);
+assert(r === 5);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
-console.log "aaa" + "
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+export: "aaa" + "
     bbb
 " + v"ccc"
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`);
+assert(r === "aaabbbccc");
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: r"aaa"
 b: r"aaa"gim
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: [
+    a.source
+    a.flags
+    b.source
+    b.flags
+]
+`);
+assert(r[0] === "aaa" && r[1] === "" && r[2] === "aaa" && r[3] === "gim");
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
-console.log "aaa\\nbbb"
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+export: "aaa\\nbbb"
+`);
+assert(r === "aaa\nbbb");
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: r"
     aaa bbb # this is comment
 "
-console.log "this is aaabbbccc".search(a)
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: "this is aaabbbccc".search(a)
+`);
+assert(r === 8);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: 1
 b: 1
 js"
     b = 2
 "
-console.log a + b
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a + b
+`);
+assert(r === 3);
+}); // ============================================================
+
+process.exit();
 
 output = compile({code: `lemo 0.1.0, node module
 ###
