@@ -137,22 +137,15 @@ assert(r === `0 --> 2
 `);
 }); // ============================================================
 
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+if true then a: ("a")
+export: a
+`);
+assert(r === "a");
+}); // ============================================================
+
 process.exit();
-
-output = compile({code: `lemo 0.1.0, node module
-console.log()
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
-
-output = compile({code: `lemo 0.1.0, radical, node module
-console.log()
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
-
-output = compile({code: `lemo 0.1.0, radical, node module
-if true then console.log("a")
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
 
 output = compile({code: `lemo 0.1.0, radical, node module
 a:

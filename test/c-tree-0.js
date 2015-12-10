@@ -1400,3 +1400,61 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+if true then a: 1
+`);
+block = new $block.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: IfExpression {
+            condition: BooleanExpression "true"
+            elseBranch: null
+            thenBranch: Block [
+                AssignStatement {
+                    assignees: Arr [
+                        VariableAssignee {
+                            export: false
+                            ifnull: false
+                            ifvoid: false
+                            variable: LocalVariable "a"
+                        }
+                    ]
+                    value: NumberExpression "1"
+                }
+            ]
+        }
+    }
+]
+`);
+}); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+<> a: 1
+`);
+block = new $block.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: DiamondFunctionExpression {
+            body: ScopeBlock [
+                AssignStatement {
+                    assignees: Arr [
+                        VariableAssignee {
+                            export: false
+                            ifnull: false
+                            ifvoid: false
+                            variable: LocalVariable "a"
+                        }
+                    ]
+                    value: NumberExpression "1"
+                }
+            ]
+        }
+    }
+]
+`);
+}); // ============================================================
