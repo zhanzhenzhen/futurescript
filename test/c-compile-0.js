@@ -145,9 +145,8 @@ export: a
 assert(r === "a");
 }); // ============================================================
 
-process.exit();
-
-output = compile({code: `lemo 0.1.0, radical, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a:
     try
         true
@@ -155,44 +154,60 @@ a:
         false
     finally
         null
-console.log a
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a
+`);
+assert(r === true);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, radical, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a:
     try
         true
     catch
         false
-console.log a
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a
+`);
+assert(r === true);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, radical, node module
+test(() => {
+assert.throws(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 throw Error("haha")
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`);
+});
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, radical, node module
+test(() => {
+assert.throws(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 throw
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`);
+});
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, radical, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 try
     a: 1
 catch
     throw
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: a
+`);
+assert(r === 1);
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: 1
 b: match a
-console.log b
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+export: b = void
+`);
+assert(r === true);
+}); // ============================================================
+
+process.exit();
 
 output = compile({code: `lemo 0.1.0, node module, radical
 statusCode: 404
