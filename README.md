@@ -13,7 +13,7 @@ Compile with source map
 - `lemo map-compile <file>`
 - `lemo m <file>`
 
-Developers
-==========
+Develop this project
+====================
 
 The most commonly used command is `lemo list` when your working directory is the project root. For details, see "developers.md".
