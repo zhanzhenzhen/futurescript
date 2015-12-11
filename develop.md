@@ -1,5 +1,5 @@
-Development
-===========
+Develop this project
+====================
 
 First, use npm to install lemo globally.
 
