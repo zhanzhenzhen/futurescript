@@ -1,4 +1,4 @@
-0.1.0, radical
+lemo 0.1.0, radical
 
 move: <>
     console.log "\(@0) --> \(@1)"

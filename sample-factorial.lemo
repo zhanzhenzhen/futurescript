@@ -1,11 +1,11 @@
-0.1.0, node module
+lemo 0.1.0
 
 factorial: x ->
     if x is Number
         if x = 0 or x = 1
             1
         else
-            fun x
+            x * fun(x - 1)
     else
         throw
 
