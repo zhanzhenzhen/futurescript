@@ -1,7 +1,7 @@
 import {test, assert} from "./c-base-0.js";
 import * as $lockedApi from "./locked-api.js";
+import * as $libLockedApi from "../lib/locked-api.js";
 
-let output;
 let r;
 
 test(() => {
@@ -412,59 +412,76 @@ export: "haha"
 assert(r === "haha");
 }); // ============================================================
 
-process.exit();
-
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
 a: import "./a.js"
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`}).targets[0].code;
+assert(r === '"use strict";var a;a=require("./a.js");');
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0, node module
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
 {a, b as c}: import "./a.js"
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`}).targets[0].code;
+assert(r === '"use strict";var a,c;a=require("./a.js").a;c=require("./a.js").b;');
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 a: import "./a.js"
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`}).targets[0].code;
+assert(r === '"use strict";import a from "./a.js";');
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 {a, b as c}: import "./a.js"
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`}).targets[0].code;
+assert(r === '"use strict";import {a as a,b as c} from "./a.js";');
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 a: 1
 b: import "./b.js" + 5
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`}).targets[0].code;
+assert(r === '"use strict";import var_573300145710716007_0 from "./b.js";var a,b;a=(1);b=((var_573300145710716007_0)+(5));');
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 a: 1 export as aaa
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`}).targets[0].code;
+assert(r === '"use strict";var var_573300145710716007_0;var a;a=(var_573300145710716007_0=(1));export {var_573300145710716007_0 as aaa};');
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 a'export: 1
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`}).targets[0].code;
+assert(r === '"use strict";var a;a=(1);export {a};');
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 a: 1
 export a
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`}).targets[0].code;
+assert(r === '"use strict";var a;a=(1);export {a as a};');
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 export: 3 + 4
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+`}).targets[0].code;
+assert(r === '"use strict";export default ((3)+(4));');
+}); // ============================================================
 
-output = compile({code: `lemo 0.1.0
-a: <>
-    b()
-    pause
-    c
-`, path: "abc.lemo", sourceMapEnabled: true});
-console.log(output);
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+a()
+pause
+b()
+`}).targets[0].code;
+assert(r === '"use strict";((a)());debugger;((b)());');
+}); // ============================================================

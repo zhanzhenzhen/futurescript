@@ -13,3 +13,4 @@ import "./c-lex-connect-0.js";
 import "./c-lex-same-level-0.js";
 import "./c-lex-string-0.js";
 import "./c-pattern-0.js";
+import "./c-compile-0.js";
