@@ -1,11 +1,11 @@
-0.1.0, node module
+0.1.0, radical
 
 move: <>
     console.log "\(@0) --> \(@1)"
 
 hanoi: <>
     if @count = 1
-        move(@from, @to)
+        move[@from, @to]
     else
         fun{
             count: @count - 1
@@ -13,7 +13,7 @@ hanoi: <>
             auxiliary: @to
             to: @auxiliary
         }
-        move(@from, @to)
+        move[@from, @to]
         fun{
             count: @count - 1
             from: @auxiliary
