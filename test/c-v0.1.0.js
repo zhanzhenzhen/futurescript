@@ -7,6 +7,7 @@ import "./c-tree-function-0.js";
 import "./c-tree-try-0.js";
 import "./c-tree-import-0.js";
 import "./c-tree-export-0.js";
+import "./c-tree-class-0.js";
 import "./c-lex-0.js";
 import "./c-lex-comment-0.js";
 import "./c-lex-connect-0.js";

@@ -1212,6 +1212,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         _name: "My Name"
 ]]></code></pre>
 <p>字段的声明中只要是以<code>_</code>开头的，便自动成为防冲突字段。</p>
+<p>防冲突字段不能用引号包起来。所以如果你实在是想让你的普通字段以<code>_</code>开头，就可以写成像<code>me."_name"</code>的形式，这就不是防冲突字段了。</p>
 <p>对于对象和类而言，属性、成员、字段是同义词。方法是指为函数的字段。</p>
 <p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
@@ -1460,7 +1461,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 </ul>
 <h2>命名限制</h2>
 <p>变量名不可以是关键字。</p>
-<p>类声明中的属性名如不用引号，则不可以是<code>new</code>、<code>static</code>。如用引号，则没有限制。</p>
+<p>类声明中的属性名如不用引号，则不可以是<code>new</code>、<code>static</code>。如用引号，则没有限制。注意，<code>static</code>不是关键字，<code>new</code>用来进行类声明（即后面是冒号）时不是关键字。</p>
 <p>对象字面量的属性名没有限制。</p>
 <p>当然，不用引号时，以上名称都需要满足JS标识符约束，即：每个字符都是字母、数字、<code>_</code>或<code>$</code>，且起始字符不是数字。</p>
 <h2>符号</h2>
