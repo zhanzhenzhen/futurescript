@@ -50,7 +50,7 @@ RootBlock [
                                         ifnull: false
                                         ifvoid: false
                                         x: MeExpression
-                                        y: Piece "_name"
+                                        y: SymbolMemberName "_name"
                                     }
                                 ]
                                 value: VariableExpression "name"
@@ -124,7 +124,7 @@ RootBlock [
                             ExpressionStatement {
                                 expression: DotExpression {
                                     x: MeExpression
-                                    y: Piece "_color"
+                                    y: SymbolMemberName "_color"
                                 }
                             }
                         ]
