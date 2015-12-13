@@ -91,3 +91,122 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+Cat: class from Animal
+    color'get: <> me._color
+`);
+block = new $block.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "Cat"
+            }
+        ]
+        value: ClassExpression {
+            body: Arr [
+                Xy {
+                    x: MemberKey {
+                        get: true
+                        name: Piece "color"
+                        new: false
+                        set: false
+                        static: false
+                    }
+                    y: DiamondFunctionExpression {
+                        body: ScopeBlock [
+                            ExpressionStatement {
+                                expression: DotExpression {
+                                    x: MeExpression
+                                    y: Piece "_color"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+            superClass: VariableExpression "Animal"
+        }
+    }
+]
+`);
+}); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+Cmath: class
+    static: <> abc()
+    static add: <> @1 + @2
+`);
+block = new $block.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "Cmath"
+            }
+        ]
+        value: ClassExpression {
+            body: Arr [
+                Xy {
+                    x: MemberKey {
+                        get: false
+                        name: null
+                        new: false
+                        set: false
+                        static: true
+                    }
+                    y: DiamondFunctionExpression {
+                        body: ScopeBlock [
+                            ExpressionStatement {
+                                expression: ParenthesisCallExpression {
+                                    arguments: Arr [
+                                    ]
+                                    callee: VariableExpression "abc"
+                                }
+                            }
+                        ]
+                    }
+                }
+                Xy {
+                    x: MemberKey {
+                        get: false
+                        name: Piece "add"
+                        new: false
+                        set: false
+                        static: true
+                    }
+                    y: DiamondFunctionExpression {
+                        body: ScopeBlock [
+                            ExpressionStatement {
+                                expression: PlusExpression {
+                                    x: DotExpression {
+                                        x: ArgExpression
+                                        y: NumberExpression "1"
+                                    }
+                                    y: DotExpression {
+                                        x: ArgExpression
+                                        y: NumberExpression "2"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+            superClass: null
+        }
+    }
+]
+`);
+}); // ============================================================
