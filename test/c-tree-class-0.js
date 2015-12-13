@@ -264,3 +264,71 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+Aaa: class
+    _a: 7
+    _b'get: <> me._a + Math.random()
+`);
+block = new $block.RootBlock(lex);
+block.complyWithJs();
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "Aaa"
+            }
+        ]
+        value: ClassExpression {
+            body: Arr [
+                Xy {
+                    x: MemberKey {
+                        get: false
+                        name: SymbolMemberName "var_573300145710716007_0"
+                        new: false
+                        set: false
+                        static: false
+                    }
+                    y: NumberExpression "7"
+                }
+                Xy {
+                    x: MemberKey {
+                        get: true
+                        name: SymbolMemberName "var_573300145710716007_1"
+                        new: false
+                        set: false
+                        static: false
+                    }
+                    y: DiamondFunctionExpression {
+                        body: ScopeBlock [
+                            ExpressionStatement {
+                                expression: PlusExpression {
+                                    x: DotExpression {
+                                        x: MeExpression
+                                        y: SymbolMemberName "var_573300145710716007_0"
+                                    }
+                                    y: ParenthesisCallExpression {
+                                        arguments: Arr [
+                                        ]
+                                        callee: DotExpression {
+                                            x: VariableExpression "Math"
+                                            y: Piece "random"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+            superClass: null
+        }
+    }
+]
+`);
+}); // ============================================================
