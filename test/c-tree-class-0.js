@@ -210,3 +210,57 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+Aaa: class
+    _a: 7
+    _b'get: <> 8
+`);
+block = new $block.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "Aaa"
+            }
+        ]
+        value: ClassExpression {
+            body: Arr [
+                Xy {
+                    x: MemberKey {
+                        get: false
+                        name: SymbolMemberName "_a"
+                        new: false
+                        set: false
+                        static: false
+                    }
+                    y: NumberExpression "7"
+                }
+                Xy {
+                    x: MemberKey {
+                        get: true
+                        name: SymbolMemberName "_b"
+                        new: false
+                        set: false
+                        static: false
+                    }
+                    y: DiamondFunctionExpression {
+                        body: ScopeBlock [
+                            ExpressionStatement {
+                                expression: NumberExpression "8"
+                            }
+                        ]
+                    }
+                }
+            ]
+            superClass: null
+        }
+    }
+]
+`);
+}); // ============================================================
