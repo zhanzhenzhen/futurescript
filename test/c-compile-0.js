@@ -488,9 +488,32 @@ assert(r === '"use strict";((a)());debugger;((b)());');
 
 test(() => {
 r = $lockedApi.runCode(`lemo 0.1.0
+undefined: 5
+export: undefined
+`);
+assert(r === 5);
+}); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 A: class
     static abc: x -> x + 1
 export: A.abc(2)
 `);
 assert(r === 3);
+}); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+val: null
+A: class
+    static abc: () -> Me._a: 3
+    static def: () ->
+        Me._a: self + 1
+        val: Me._a
+A.abc()
+A.def()
+export: val
+`);
+assert(r === 4);
 }); // ============================================================
