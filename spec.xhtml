@@ -1220,6 +1220,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>防冲突字段也适用于静态字段，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
 <p>Lemo的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在Lemo（或ES6）中，构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。为什么这种机制可以做到继承<code>Array</code>、<code>Error</code>，限于篇幅不再赘述。但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到2015年6月ES6才正式发布，形势有望在未来数月内改变，届时就会完美。</p>
 <p>但是Lemo中<code>super</code>的语法比较像CoffeeScript，不用写<code>super.methodName()</code>，直接<code>super()</code>即可。我们不支持孤立的<code>super</code>，不过你可以写成<code>super'(@)</code>。</p>
+<p>我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值。所以在Lemo里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。（返回值唯一的用处是使用<code>fun</code>递归时，如果你真的想对构造函数使用递归的话。）</p>
 <p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
 <pre><code><![CDATA[
     Website: class
