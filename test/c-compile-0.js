@@ -517,3 +517,15 @@ export: val
 `);
 assert(r === 4);
 }); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+val: null
+A: class
+    static _a: 1
+    static abc: () -> val: Me._a
+A.abc()
+export: val
+`);
+assert(r === 1);
+}); // ============================================================
