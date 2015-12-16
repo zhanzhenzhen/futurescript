@@ -270,11 +270,11 @@
 <h2>版本行</h2>
 <p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <pre><code><![CDATA[
-    [...][lemo][...] [-]0.1.0[, (radical | compatible) | (slow new | fast new | manual new) | (node import | node export | node module | es module)]...
+    [...][lemo][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node module | es module)]...
 ]]></code></pre>
 <p>默认值为：</p>
 <pre><code><![CDATA[
-    compatible, fast new, es module
+    compatible, capitalized new, es module
 ]]></code></pre>
 <p>版本号后面的以逗号分隔的项不可重复。版本行的例子：</p>
 <pre><code><![CDATA[
@@ -282,9 +282,9 @@
     lemo 0.1.0
     lemo -0.1.0
     0.1.0, node module
-    0.1.0, compatible, fast new
-    0.1.0, compatible, fast new, node import
-    0.1.0, radical, slow new
+    0.1.0, compatible, capitalized new
+    0.1.0, compatible, capitalized new, node import
+    0.1.0, radical, manual new
 ]]></code></pre>
 <p>版本号必须写上。只要你写的版本号不大于安装的Lemo的版本号，该文件就会按照该版本的规范来运行，这是因为你安装的任何一个版本的Lemo都包括了（至少我们会尽量包括）所有历史版本的编译器。而这，是Lemo和其他语言的不同之处。你甚至可以在一个项目中，不同文件使用不同版本。</p>
 <p>写上版本号还有个好处，就是你把某个文件交给别人时，他就知道文件是什么版本的，从而可以更好地修改。</p>
@@ -311,12 +311,11 @@
 <p>激进模式和兼容模式的差异是：激进模式更鼓励单参数的函数。因此：</p>
 <p>激进模式中，<code>@</code>表示JS的<code>arguments[0]</code>。兼容模式中，<code>@</code>表示JS的<code>arguments</code>。</p>
 <p>Lemo代码可以被JS调用。JS代码也可以被Lemo调用。</p>
-<p><code>fast new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写的加，小写的不加。但只能识别普通的表示法，像引号内的就不能识别，例如：</p>
+<p><code>capitalized new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写的加，小写的不加。能识别的有两种形式：变量和普通的点号（<code>x.y</code>，它会判断<code>y</code>），像<code>x."y"</code>或<code>x.y'</code>是不能识别的。例如：</p>
 <pre><code><![CDATA[
     aaa."bbb".Ccc() # new can be omitted
     new aaa.bbb."Ccc"() # new can't be omitted
 ]]></code></pre>
-<p><code>slow new</code>是指创建类的实例不用加<code>new</code>，编译时也不会自动加进去，而是在运行时自动判断，依据它是不是es6的class或Lemo的类，是的加，不是的不加。因为运行时判断比较慢（尤其是判断是否是es6的class时只能先尝试不加然后看是不是出错，用到了try-catch，更慢），所以谨慎使用。而且它无法照顾到用普通函数写的类。</p>
 <p><code>manual new</code>就是传统办法，创建类的实例需要加<code>new</code>。</p>
 <p><code>node import</code>是指导入被编译成node的导入（即require）。<code>node export</code>是指导出被编译成node的导出（即exports和module.exports）。<code>node module</code>是两者都做。<code>es module</code>是两者都不做（即按照ES6的规范）。</p>
 <p>编译后的代码是strict mode。</p>
