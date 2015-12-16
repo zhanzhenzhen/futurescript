@@ -552,3 +552,13 @@ export: A.a()
 `);
 assert(r === 3);
 }); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+Aaa: class
+    static: --
+        Me.init: true
+export: Aaa.init
+`);
+assert(r === true);
+}); // ============================================================
