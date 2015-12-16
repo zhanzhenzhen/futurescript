@@ -79,6 +79,8 @@ RootBlock [
                                         }
                                     ]
                                     callee: VariableExpression "print"
+                                    new: false
+                                    nonew: false
                                 }
                             }
                         ]
@@ -173,6 +175,8 @@ RootBlock [
                                     arguments: Arr [
                                     ]
                                     callee: VariableExpression "abc"
+                                    new: false
+                                    nonew: false
                                 }
                             }
                         ]
@@ -319,6 +323,8 @@ RootBlock [
                                             x: VariableExpression "Math"
                                             y: Piece "random"
                                         }
+                                        new: false
+                                        nonew: false
                                     }
                                 }
                             }

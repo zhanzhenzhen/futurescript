@@ -31,6 +31,8 @@ RootBlock [
                             x: VariableExpression "Math"
                             y: Piece "random"
                         }
+                        new: false
+                        nonew: false
                     }
                 }
             ]
@@ -55,6 +57,8 @@ RootBlock [
                             x: VariableExpression "Math"
                             y: Piece "random"
                         }
+                        new: false
+                        nonew: false
                     }
                 }
             ]

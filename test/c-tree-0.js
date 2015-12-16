@@ -70,6 +70,8 @@ RootBlock [
                 NumberExpression "6"
             ]
             callee: VariableExpression "abc"
+            new: false
+            nonew: false
         }
     }
     ExpressionStatement {
@@ -335,9 +337,13 @@ RootBlock [
                         VariableExpression "c"
                     ]
                     callee: VariableExpression "b"
+                    new: false
+                    nonew: false
                 }
             ]
             callee: VariableExpression "a"
+            new: false
+            nonew: false
         }
     }
     ExpressionStatement {
@@ -348,9 +354,13 @@ RootBlock [
                         VariableExpression "c"
                     ]
                     callee: VariableExpression "b"
+                    new: false
+                    nonew: false
                 }
             ]
             callee: VariableExpression "a"
+            new: false
+            nonew: false
         }
     }
     ExpressionStatement {
@@ -363,7 +373,11 @@ RootBlock [
                     VariableExpression "b"
                 ]
                 callee: VariableExpression "a"
+                new: false
+                nonew: false
             }
+            new: false
+            nonew: false
         }
     }
     ExpressionStatement {
@@ -374,12 +388,16 @@ RootBlock [
                         VariableExpression "c"
                     ]
                     callee: VariableExpression "b"
+                    new: false
+                    nonew: false
                 }
             ]
             callee: DotExpression {
                 x: VariableExpression "x"
                 y: VariableExpression "a"
             }
+            new: false
+            nonew: false
         }
     }
 ]
@@ -513,6 +531,8 @@ RootBlock [
                     }
                 ]
                 callee: VariableExpression "a"
+                new: false
+                nonew: false
             }
             y: Piece "c"
         }
@@ -531,6 +551,8 @@ RootBlock [
                     }
                 ]
                 callee: VariableExpression "a"
+                new: false
+                nonew: false
             }
             y: Piece "c"
         }
@@ -548,6 +570,8 @@ RootBlock [
                 }
             ]
             callee: VariableExpression "a"
+            new: false
+            nonew: false
         }
     }
     ExpressionStatement {
@@ -566,6 +590,8 @@ RootBlock [
                 }
             ]
             callee: VariableExpression "a"
+            new: false
+            nonew: false
         }
     }
 ]
@@ -615,6 +641,8 @@ RootBlock [
             callee: FunctionVariantExpression {
                 x: VariableExpression "b"
             }
+            new: false
+            nonew: false
         }
     }
 ]
@@ -838,6 +866,8 @@ RootBlock [
             arguments: Arr [
             ]
             callee: VariableExpression "Error"
+            new: false
+            nonew: false
         }
     }
 ]
@@ -946,6 +976,8 @@ RootBlock [
             callee: OkVariantExpression {
                 x: VariableExpression "a"
             }
+            new: false
+            nonew: false
         }
     }
     ExpressionStatement {
@@ -960,6 +992,8 @@ RootBlock [
             callee: OkVariantExpression {
                 x: VariableExpression "a"
             }
+            new: false
+            nonew: false
         }
     }
     ExpressionStatement {
@@ -973,6 +1007,8 @@ RootBlock [
             callee: OkVariantExpression {
                 x: VariableExpression "a"
             }
+            new: false
+            nonew: false
         }
     }
 ]
@@ -1041,10 +1077,14 @@ RootBlock [
                                 x: VariableExpression "u"
                                 y: Piece "map"
                             }
+                            new: false
+                            nonew: false
                         }
                     }
                     y: Piece "map"
                 }
+                new: false
+                nonew: false
             }
             y: DotExpression {
                 x: VariableExpression "u"
@@ -1111,6 +1151,8 @@ RootBlock [
                 x: VariableExpression "console"
                 y: Piece "log"
             }
+            new: false
+            nonew: false
         }
     }
 ]
@@ -1194,6 +1236,8 @@ RootBlock [
                         arguments: Arr [
                         ]
                         callee: VariableExpression "b"
+                        new: false
+                        nonew: false
                     }
                 }
                 PauseStatement {
@@ -1202,6 +1246,67 @@ RootBlock [
                     expression: VariableExpression "c"
                 }
             ]
+        }
+    }
+]
+`);
+}); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+Abc()
+abc()
+new abc()
+nonew Abc()
+new abc 5
+`);
+block = new $block.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            arguments: Arr [
+            ]
+            callee: VariableExpression "Abc"
+            new: false
+            nonew: false
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            arguments: Arr [
+            ]
+            callee: VariableExpression "abc"
+            new: false
+            nonew: false
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            arguments: Arr [
+            ]
+            callee: VariableExpression "abc"
+            new: true
+            nonew: false
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            arguments: Arr [
+            ]
+            callee: VariableExpression "Abc"
+            new: false
+            nonew: true
+        }
+    }
+    ExpressionStatement {
+        expression: ParenthesisCallExpression {
+            arguments: Arr [
+                NumberExpression "5"
+            ]
+            callee: VariableExpression "abc"
+            new: true
+            nonew: false
         }
     }
 ]
