@@ -507,8 +507,8 @@ test(() => {
 r = $lockedApi.runCode(`lemo 0.1.0
 val: null
 A: class
-    static abc: () -> Me._a: 3
-    static def: () ->
+    static abc: <> Me._a: 3
+    static def: <>
         Me._a: self + 1
         val: Me._a
 A.abc()
@@ -523,7 +523,7 @@ r = $lockedApi.runCode(`lemo 0.1.0
 val: null
 A: class
     static _a: 1
-    static abc: () -> val: Me._a
+    static abc: <> val: Me._a
 A.abc()
 export: val
 `);
@@ -534,7 +534,7 @@ test(() => {
 r = $lockedApi.runCode(`lemo 0.1.0
 val: null
 A: class
-    new: () -> val: me._a
+    new: <> val: me._a
     _a: 1
 A()
 export: val
@@ -545,7 +545,7 @@ assert(r === 1);
 test(() => {
 r = $lockedApi.runCode(`lemo 0.1.0
 A: class
-    static a: () ->
+    static a: <>
         b: (x) -> x + 1
         b(2)
 export: A.a()
