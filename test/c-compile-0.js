@@ -579,3 +579,17 @@ export: [b.data, b.dataPlus()]
 `);
 assert(r[0] === 3 && r[1] === 8);
 }); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+A: class
+    new: x ->
+        me.data: x
+B: class from A
+    new: <>
+        super'(@)
+b: new B(5)
+export: b.data
+`);
+assert(r === 5);
+}); // ============================================================
