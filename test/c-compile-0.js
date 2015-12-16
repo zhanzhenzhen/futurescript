@@ -568,11 +568,14 @@ r = $lockedApi.runCode(`lemo 0.1.0
 A: class
     new: x ->
         me.data: x
+    dataPlus: x ->
+        me.data + x
 B: class from A
     new: <>
         super(3)
+    dataPlus: <> super 5
 b: new B()
-export: b.data
+export: [b.data, b.dataPlus()]
 `);
-assert(r === 3);
+assert(r[0] === 3 && r[1] === 8);
 }); // ============================================================
