@@ -562,3 +562,17 @@ export: Aaa.init
 `);
 assert(r === true);
 }); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
+A: class
+    new: x ->
+        me.data: x
+B: class from A
+    new: <>
+        super(3)
+b: new B()
+export: b.data
+`);
+assert(r === 3);
+}); // ============================================================
