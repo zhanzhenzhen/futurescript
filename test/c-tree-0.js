@@ -1,6 +1,6 @@
 import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
-import * as $block from "../lib/c-block-0.js";
+import * as $node from "../lib/c-node-0.js";
 
 let lex, block;
 
@@ -21,7 +21,7 @@ g: (1 + 2) * 3
 h: f + g > Math.PI ? 1 | 2
 i: x -> x + 1
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -260,7 +260,7 @@ a:
         else
             ggg
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -326,7 +326,7 @@ a(b(c))
 a(b)(c)
 x.(a) b(c)
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -412,7 +412,7 @@ a:
     else
         false
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -455,7 +455,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: +1 - (-a)
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -484,7 +484,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a as b as c
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -517,7 +517,7 @@ a{b: 3}.c
 a [b].c
 a {b: 3}.c
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -603,7 +603,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 a: b.c'ok.d
 a: b'(c)
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -656,7 +656,7 @@ a: b not in c
 a: b is Number
 a: b isnt Number
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -724,7 +724,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 a: b ifnull c
 a: b ifvoid c
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -765,7 +765,7 @@ undefined: 3
 a: <>
     undefined: self + 1
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 block.complyWithJs();
 assert(block.toString() === `node module
 RootBlock [
@@ -816,7 +816,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: <> "abc\\(@0)def"
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -858,7 +858,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 throw Error()
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ThrowStatement {
@@ -880,7 +880,7 @@ delete a.b
 delete a.b."c"
 delete a.b.(c)
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     DeleteStatement {
@@ -914,7 +914,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 do -- 3 + 5
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -940,7 +940,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 []
 {}
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -965,7 +965,7 @@ a'ok(1)
 a'ok[1]
 a'ok{}
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -1019,7 +1019,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 [3, 4, 5] |> u.map(x -> x * 2) :: map(x -> x + 1) |> u.max
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -1100,7 +1100,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 a: r"aaa"gim
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -1131,7 +1131,7 @@ header comment
 ###
 console.log "haha"
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 ###
 header comment
@@ -1163,7 +1163,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 [undefined, instanceof]: [1, 2]
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 block.complyWithJs();
 assert(block.toString() === `node module
 RootBlock [
@@ -1199,12 +1199,12 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 undefined()
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert.throws(() =>
 {
     block.complyWithJs();
 },
-e => e instanceof $block.GlobalVariableNameError &&
+e => e instanceof $node.GlobalVariableNameError &&
     e.rawStart[0] === 1 && e.rawStart[1] === 0 &&
     e.rawEnd[0] === 1 && e.rawEnd[1] === 8
 );
@@ -1217,7 +1217,7 @@ a: <>
     pause
     c
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -1260,7 +1260,7 @@ new abc()
 nonew Abc()
 new abc 5
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
