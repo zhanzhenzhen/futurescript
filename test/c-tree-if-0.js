@@ -1,6 +1,6 @@
 import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
-import * as $block from "../lib/c-block-0.js";
+import * as $node from "../lib/c-node-0.js";
 
 let lex, block;
 
@@ -25,7 +25,7 @@ if (
     b
 a: b = 5 ? 4 | c = 6 ? 3
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     PostIfStatement {
@@ -177,7 +177,7 @@ else if c
 else
     e
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -215,7 +215,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 if a = b throw
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {

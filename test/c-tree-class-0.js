@@ -1,6 +1,6 @@
 import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
-import * as $block from "../lib/c-block-0.js";
+import * as $node from "../lib/c-node-0.js";
 
 let lex, block;
 
@@ -12,7 +12,7 @@ Animal: class
     move: <>
         print "move!"
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -99,7 +99,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 Cat: class from Animal
     color'get: <> me._color
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -146,7 +146,7 @@ Cmath: class
     static: <> abc()
     static add: <> @1 + @2
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -221,7 +221,7 @@ Aaa: class
     _a: 7
     _b'get: <> 8
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -275,7 +275,7 @@ Aaa: class
     _a: 7
     _b'get: <> me._a + Math.random()
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 block.complyWithJs();
 assert(block.toString() === `node module
 RootBlock [

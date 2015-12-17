@@ -1,6 +1,6 @@
 import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
-import * as $block from "../lib/c-block-0.js";
+import * as $node from "../lib/c-node-0.js";
 
 let lex, block;
 
@@ -13,7 +13,7 @@ catch
 finally
     c
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -48,7 +48,7 @@ a:
     catch ex
         throw ex + 1
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -95,7 +95,7 @@ a:
     catch undefined
         throw undefined + 1
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 block.complyWithJs();
 assert(block.toString() === `node module
 RootBlock [

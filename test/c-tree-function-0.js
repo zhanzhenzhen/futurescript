@@ -1,6 +1,6 @@
 import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
-import * as $block from "../lib/c-block-0.js";
+import * as $node from "../lib/c-node-0.js";
 
 let lex, block;
 
@@ -9,7 +9,7 @@ lex = new $lex.Lex(`lemo 0.1.0, node module
 a: <> Math.random()
 b: -- Math.random()
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {
@@ -75,7 +75,7 @@ a: x ->
 a: (x: 3) -> x + 1
 a: (x ifnull: 3) -> x + 1
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     AssignStatement {

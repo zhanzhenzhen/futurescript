@@ -1,6 +1,6 @@
 import {test, assert} from "./c-base-0.js";
 import * as $lex from "../lib/c-lex-0.js";
-import * as $block from "../lib/c-block-0.js";
+import * as $node from "../lib/c-node-0.js";
 
 let lex, block;
 
@@ -11,7 +11,7 @@ match a
     2 ? 100
     |   0
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -59,7 +59,7 @@ match a
     |
         0
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -105,7 +105,7 @@ match a
     2
         100
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -151,7 +151,7 @@ match a
     3
         100
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -192,7 +192,7 @@ match x -> a = x
     4
         100
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
@@ -254,7 +254,7 @@ test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 match a
 `);
-block = new $block.RootBlock(lex);
+block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
     ExpressionStatement {
