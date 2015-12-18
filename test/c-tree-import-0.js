@@ -23,6 +23,33 @@ RootBlock [
 
 test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
+aaa: import "aaa" + 1
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "aaa"
+            }
+        ]
+        value: PlusExpression {
+            x: ImportExpression {
+                module: Piece "\\"aaa\\""
+            }
+            y: NumberExpression "1"
+        }
+    }
+]
+`);
+}); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
 aaa: import "aaa"
 `);
 block = new $node.RootBlock(lex);
