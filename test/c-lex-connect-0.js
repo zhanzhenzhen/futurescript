@@ -116,3 +116,22 @@ a:
 `).toString();
 assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, NormalLeftBrace, NormalToken "b", Colon, Num "1", Semicolon, NormalToken "c", Colon, NormalLeftBrace, NormalToken "d", Colon, Num "2", Semicolon, NormalToken "e", Colon, Num "3", NormalRightBrace, Semicolon, NormalToken "f", Colon, NormalLeftBracket, Num "4", Semicolon, Num "5", NormalRightBracket, NormalRightBrace');
 }); // ============================================================
+
+test(() => {
+s = new $lex.Lex(`lemo 0.1.0
+a:
+    {
+        "a": 3
+
+        "b":
+            "iii",
+        "c":3+
+            5,
+        "d"
+
+        :
+            9
+    }
+`).toString();
+assert(s === 'VersionDirective "lemo 0.1.0", NormalToken "a", Colon, NormalLeftBrace, InlineNormalString, PseudoCallLeftParenthesis, Str "a", PseudoCallRightParenthesis, Colon, Num "3", Semicolon, InlineNormalString, PseudoCallLeftParenthesis, Str "b", PseudoCallRightParenthesis, Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "iii", PseudoCallRightParenthesis, Comma, InlineNormalString, PseudoCallLeftParenthesis, Str "c", PseudoCallRightParenthesis, Colon, Num "3", Plus, Num "5", Comma, InlineNormalString, PseudoCallLeftParenthesis, Str "d", PseudoCallRightParenthesis, Colon, Num "9", NormalRightBrace');
+}); // ============================================================
