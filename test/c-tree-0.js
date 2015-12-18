@@ -1328,3 +1328,37 @@ e => e instanceof $node.ScopeItemNameConflictError &&
     e.rawEnd[0] === 2 && e.rawEnd[1] === 7
 );
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a: {"a": 1}
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "a"
+            }
+        ]
+        value: ObjectExpression {
+            value: Arr [
+                Xy {
+                    x: PseudoCallExpression {
+                        arguments: Arr [
+                            StringExpression "a"
+                        ]
+                        callee: InlineNormalStringExpression
+                    }
+                    y: NumberExpression "1"
+                }
+            ]
+        }
+    }
+]
+`);
+}); // ============================================================

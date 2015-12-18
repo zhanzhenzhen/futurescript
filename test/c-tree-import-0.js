@@ -50,6 +50,20 @@ RootBlock [
 
 test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
+aaa: import "bbb" as ccc
+`);
+assert.throws(() =>
+{
+    block = new $node.RootBlock(lex);
+},
+e => e instanceof $node.NoPatternMatchError &&
+    e.rawStart[0] === 1 && e.rawStart[1] === 5 &&
+    e.rawEnd[0] === 1 && e.rawEnd[1] === 23
+);
+}); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
 aaa: import "aaa"
 `);
 block = new $node.RootBlock(lex);
