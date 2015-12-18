@@ -1312,3 +1312,19 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+do x ->
+    do x ->
+        abc(x)
+`);
+assert.throws(() =>
+{
+    block = new $node.RootBlock(lex);
+},
+e => e instanceof $node.ScopeItemNameConflictError &&
+    e.rawStart[0] === 2 && e.rawStart[1] === 7 &&
+    e.rawEnd[0] === 2 && e.rawEnd[1] === 7
+);
+}); // ============================================================
