@@ -1085,6 +1085,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>和CoffeeScript有两点不同。第一：若<code>throw</code>后面啥都没有，不是语法错误，而是：若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。第二：<code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
 <h2>异步</h2>
+<p>由于需要尽快促成Lemo面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</p>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
 <pre><code><![CDATA[
     abc().then(function(x){
@@ -1099,9 +1100,11 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>我们现在可以写成：</p>
 <pre><code><![CDATA[
-    console.log abc()'wait.def()'wait.ghi()'wait
+    do --
+        console.log abc()'wait.def()'wait.ghi()'wait
 ]]></code></pre>
 <p>一旦代码有<code>'wait</code>，那么代码所在的函数（直接所在，非嵌套）就被编译成异步函数。我们不用async关键字声明异步函数，这个关键字根本多余。</p>
+<p><code>'wait</code>必须出现在函数中。</p>
 <p><code>'wait</code>针对的要么是promise，要么是别的异步函数的返回值。异步函数的返回值是被编译成一种特殊的生成器对象，我们将其称为任务。注意，生成器对象不是生成器函数。</p>
 <p>在异步函数内部，每执行到<code>'wait</code>，会进入等待，直到该promise或任务有了结果，才继续往下执行。</p>
 <p>网上已有文章介绍如何用yield来实现异步，那我们为什么不直接用yield，要发明一个新的符号？因为：</p>
@@ -1111,37 +1114,41 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 </ul>
 <p>异步和管道结合的例子：</p>
 <pre><code><![CDATA[
-    x: data |> lib.process1'wait |> lib.process2'wait
-    y: data |> lib.remoteCombine(anotherData1)'wait |> lib.remoteCombine(anotherData2)'wait
-    console.log(x, y)
+    do --
+        x: data |> lib.process1'wait |> lib.process2'wait
+        y: data |> lib.remoteCombine(anotherData1)'wait |> lib.remoteCombine(anotherData2)'wait
+        console.log(x, y)
 ]]></code></pre>
 <p>调用异步函数也可以不加<code>'wait</code>，当调用方不需要等待promise或任务出结果的时候。</p>
 <p>用<code>'wait</code>调用异步函数的例子：</p>
 <pre><code><![CDATA[
-    task: --
-        aaa()'wait
-        bbb()'wait
-    task()'wait
-    console.log "success"
+    do --
+        task: --
+            aaa()'wait
+            bbb()'wait
+        task()'wait
+        console.log "success"
 ]]></code></pre>
 <p>不用<code>'wait</code>，也可以调用异步函数并达到相同的目的：</p>
 <pre><code><![CDATA[
-    task: --
-        aaa()'wait
-        bbb()'wait
-        console.log "success"
-    task()
+    do --
+        task: --
+            aaa()'wait
+            bbb()'wait
+            console.log "success"
+        task()
 ]]></code></pre>
 <p>注意，不用<code>'wait</code>调用异步函数的时候，异步函数执行到第一个<code>'wait</code>的位置之前返回调用方。下面的例子说明了先后顺序：</p>
 <pre><code><![CDATA[
-    task: --
-        console.log "stage 1"
-        aaa()'wait
-        console.log "stage 3"
-        bbb()'wait
-        console.log "stage 4"
-    task()
-    console.log "stage 2"
+    do --
+        task: --
+            console.log "stage 1"
+            aaa()'wait
+            console.log "stage 3"
+            bbb()'wait
+            console.log "stage 4"
+        task()
+        console.log "stage 2"
 ]]></code></pre>
 <p>其实用<code>'wait</code>调用异步函数的时候也是异步函数执行到第一个<code>'wait</code>的位置之前返回调用方，只不过调用方也在等待，看起来就像没有返回一样。</p>
 <p>异步还可以和<code>do</code>结合：</p>
