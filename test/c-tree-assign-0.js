@@ -254,3 +254,33 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a as b as c
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: AsExpression {
+            assignee: VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "c"
+            }
+            value: AsExpression {
+                assignee: VariableAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    variable: LocalVariable "b"
+                }
+                value: VariableExpression "a"
+            }
+        }
+    }
+]
+`);
+}); // ============================================================
