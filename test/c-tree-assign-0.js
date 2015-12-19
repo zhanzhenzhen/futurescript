@@ -312,3 +312,89 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+[a.b, a.c]: b
+[a, b] ifnull: c
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            BracketAssignees [
+                DotAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    x: VariableExpression "a"
+                    y: Piece "b"
+                }
+                DotAssignee {
+                    export: false
+                    ifnull: false
+                    ifvoid: false
+                    x: VariableExpression "a"
+                    y: Piece "c"
+                }
+            ]
+        ]
+        value: VariableExpression "b"
+    }
+    AssignStatement {
+        assignees: Arr [
+            BracketAssignees [
+                VariableAssignee {
+                    export: false
+                    ifnull: true
+                    ifvoid: false
+                    variable: LocalVariable "a"
+                }
+                VariableAssignee {
+                    export: false
+                    ifnull: true
+                    ifvoid: false
+                    variable: LocalVariable "b"
+                }
+            ]
+        ]
+        value: VariableExpression "c"
+    }
+]
+`);
+}); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+a'export: 1
+2 as b'export
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: true
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "a"
+            }
+        ]
+        value: NumberExpression "1"
+    }
+    ExpressionStatement {
+        expression: AsExpression {
+            assignee: VariableAssignee {
+                export: true
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "b"
+            }
+            value: NumberExpression "2"
+        }
+    }
+]
+`);
+}); // ============================================================

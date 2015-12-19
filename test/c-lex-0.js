@@ -290,3 +290,18 @@ e =>
     e.rawEnd[0] === 3 && e.rawEnd[1] === 0
 );
 }); // ============================================================
+
+test(() => {
+s = new $lex.Lex(`lemo 0.1.0
+[a, b] ifvoid: c
+`).toString();
+assert(s === 'VersionDirective "lemo 0.1.0", NormalLeftBracket, NormalToken "a", Comma, NormalToken "b", NormalRightBracket, Ifvoid, Colon, NormalToken "c"');
+}); // ============================================================
+
+test(() => {
+s = new $lex.Lex(`lemo 0.1.0
+2 as a'export
+b'if
+`).toString();
+assert(s === 'VersionDirective "lemo 0.1.0", Num "2", As, NormalToken "a", NormalVariant, NormalToken "export", Semicolon, NormalToken "b", NormalVariant, NormalToken "if"');
+}); // ============================================================
