@@ -1301,21 +1301,18 @@ e => e instanceof $node.ScopeItemNameConflictError &&
 
 test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
-a: {"a": 1}
+{
+    "a": 1
+    (b): 2
+    0: 3
+    c: 4
+}
 `);
 block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
-    AssignStatement {
-        assignees: Arr [
-            VariableAssignee {
-                export: false
-                ifnull: false
-                ifvoid: false
-                variable: LocalVariable "a"
-            }
-        ]
-        value: ObjectExpression {
+    ExpressionStatement {
+        expression: ObjectExpression {
             value: Arr [
                 Xy {
                     x: PseudoCallExpression {
@@ -1325,6 +1322,18 @@ RootBlock [
                         callee: InlineNormalStringExpression
                     }
                     y: NumberExpression "1"
+                }
+                Xy {
+                    x: VariableExpression "b"
+                    y: NumberExpression "2"
+                }
+                Xy {
+                    x: NumberExpression "0"
+                    y: NumberExpression "3"
+                }
+                Xy {
+                    x: Piece "c"
+                    y: NumberExpression "4"
                 }
             ]
         }
