@@ -464,6 +464,24 @@ assert(r === '"use strict";var a;a=(1);export {a};');
 
 test(() => {
 r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+a: 1 as b'export
+c'export: 2
+d: 3
+`}).targets[0].code;
+assert(r === '"use strict";var a,b,c,d;a=(b=(1));c=(2);d=(3);export {b};export {c};');
+}); // ============================================================
+
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+a: 1 as b'export
+c'export: 2
+d: 3
+`}).targets[0].code;
+assert(r === '"use strict";var a,b,c,d;a=(exports.b=b=(1));exports.c=c=(2);d=(3);');
+}); // ============================================================
+
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 a: 1
 export a
 `}).targets[0].code;
