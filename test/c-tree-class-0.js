@@ -338,3 +338,48 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`lemo 0.1.0, node module
+class
+    "a b": 1
+    (a): 2
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: ClassExpression {
+            body: Arr [
+                Xy {
+                    x: MemberKey {
+                        get: false
+                        name: PseudoCallExpression {
+                            arguments: Arr [
+                                StringExpression "a b"
+                            ]
+                            callee: InlineNormalStringExpression
+                        }
+                        new: false
+                        set: false
+                        static: false
+                    }
+                    y: NumberExpression "1"
+                }
+                Xy {
+                    x: MemberKey {
+                        get: false
+                        name: VariableExpression "a"
+                        new: false
+                        set: false
+                        static: false
+                    }
+                    y: NumberExpression "2"
+                }
+            ]
+            superClass: null
+        }
+    }
+]
+`);
+}); // ============================================================
