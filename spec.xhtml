@@ -1349,6 +1349,11 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     a ifvoid: 8 # if (a === undefined) {a = 8;}
     b: a ifvoid 8 # b = a !== undefined ? a : 8;
 ]]></code></pre>
+<p>后面跟冒号时，即是赋值，目前暂不支持与<code>[...]</code>、<code>,</code>共存，例如这样是非法的：</p>
+<pre><code><![CDATA[
+    a, b ifnull: 1
+    [a, b] ifvoid: [1, 2]
+]]></code></pre>
 <h2>'</h2>
 <p><code>'</code>的形式有两种，一种是一元<code>'</code>，一种是二元<code>'</code>。一元<code>'</code>即函数的单参数变体。其他的都是二元<code>'</code>。</p>
 <p>编译器如何判断某个<code>'</code>是一元还是二元？看<code>'</code>后面紧跟的字符。如果是数字或字母，则是二元，否则（例如是符号、空格或根本没有字符）要么是一元，要么无法解析。</p>

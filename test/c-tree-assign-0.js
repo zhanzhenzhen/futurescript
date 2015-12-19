@@ -316,7 +316,6 @@ RootBlock [
 test(() => {
 lex = new $lex.Lex(`lemo 0.1.0, node module
 [a.b, a.c]: b
-[a, b] ifnull: c
 `);
 block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
@@ -341,25 +340,6 @@ RootBlock [
             ]
         ]
         value: VariableExpression "b"
-    }
-    AssignStatement {
-        assignees: Arr [
-            BracketAssignees [
-                VariableAssignee {
-                    export: false
-                    ifnull: true
-                    ifvoid: false
-                    variable: LocalVariable "a"
-                }
-                VariableAssignee {
-                    export: false
-                    ifnull: true
-                    ifvoid: false
-                    variable: LocalVariable "b"
-                }
-            ]
-        ]
-        value: VariableExpression "c"
     }
 ]
 `);
