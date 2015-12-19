@@ -456,6 +456,13 @@ assert(r === '"use strict";var var_573300145710716007_0;var a;a=(var_57330014571
 }); // ============================================================
 
 test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+a: 1 export as aaa
+`}).targets[0].code;
+assert(r === '"use strict";var a;a=(exports.aaa=(1));');
+}); // ============================================================
+
+test(() => {
 r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 a'export: 1
 `}).targets[0].code;
@@ -489,10 +496,41 @@ assert(r === '"use strict";var a;a=(1);export {a as a};');
 }); // ============================================================
 
 test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+a: 1
+export a
+`}).targets[0].code;
+assert(r === '"use strict";var a;a=(1);exports.a=a;');
+}); // ============================================================
+
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+a: 1
+export a as b
+`}).targets[0].code;
+assert(r === '"use strict";var a;a=(1);export {a as b};');
+}); // ============================================================
+
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+a: 1
+export a as b
+`}).targets[0].code;
+assert(r === '"use strict";var a;a=(1);exports.b=a;');
+}); // ============================================================
+
+test(() => {
 r = $libLockedApi.generateOutput({code: `lemo 0.1.0
 export: 3 + 4
 `}).targets[0].code;
 assert(r === '"use strict";export default ((3)+(4));');
+}); // ============================================================
+
+test(() => {
+r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+export: 3 + 4
+`}).targets[0].code;
+assert(r === '"use strict";module.exports=((3)+(4));');
 }); // ============================================================
 
 test(() => {
