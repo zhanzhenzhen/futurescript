@@ -1349,10 +1349,11 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     a ifvoid: 8 # if (a === undefined) {a = 8;}
     b: a ifvoid 8 # b = a !== undefined ? a : 8;
 ]]></code></pre>
-<p>后面跟冒号时，即是赋值，目前暂不支持与<code>[...]</code>、<code>,</code>共存，例如这样是非法的：</p>
+<p>后面跟冒号时，即是赋值，目前暂不支持与<code>[...]</code>、<code>,</code>、<code>'export</code>共存，例如这些是非法的：</p>
 <pre><code><![CDATA[
     a, b ifnull: 1
     [a, b] ifvoid: [1, 2]
+    a'export ifnull: 1
 ]]></code></pre>
 <h2>'</h2>
 <p><code>'</code>的形式有两种，一种是一元<code>'</code>，一种是二元<code>'</code>。一元<code>'</code>即函数的单参数变体。其他的都是二元<code>'</code>。</p>
