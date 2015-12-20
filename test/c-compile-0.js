@@ -652,6 +652,15 @@ assert(r === 5);
 
 test(() => {
 r = $lockedApi.runCode(`lemo 0.1.0
+A: class
+    "a a": -- 1
+export: A()."a a"()
+`);
+assert(r === 1);
+}); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(`lemo 0.1.0
 a: {
     "aaa": 1
 }
