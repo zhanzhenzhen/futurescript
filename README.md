@@ -1,19 +1,19 @@
-lemo
-====
+FutureScript
+============
 
 Compile
 -------
 
-- `lemo compile <file>`
-- `lemo c <file>`
+- `fus compile <file>`
+- `fus c <file>`
 
 Compile with source map
 -----------------------
 
-- `lemo map-compile <file>`
-- `lemo m <file>`
+- `fus map-compile <file>`
+- `fus m <file>`
 
 Develop this project
 ====================
 
-The most commonly used command is `lemo list` when your working directory is the project root. For details, see "develop.md".
+The most commonly used command is `fus list` when your working directory is the project root. For details, see "develop.md".

@@ -1,19 +1,19 @@
 {
-    "name": "lemo",
+    "name": "futurescript",
     "version": "0.1.0",
-    "description": "lemo",
+    "description": "A future-style language that compiles to JS.",
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
-    "homepage": "https://github.com/zhanzhenzhen/lemo",
+    "homepage": "https://github.com/zhanzhenzhen/futurescript",
     "license": "SEE LICENSE IN LICENSE.txt",
     "repository": {
         "type": "git",
-        "url": "https://github.com/zhanzhenzhen/lemo.git"
+        "url": "https://github.com/zhanzhenzhen/futurescript.git"
     },
     "dependencies": {
         "babel": "5.8.29",
         "esprima": "2.7.0"
     },
     "bin": {
-        "lemo": "./target/bin.js"
+        "fus": "./target/bin.js"
     }
 }

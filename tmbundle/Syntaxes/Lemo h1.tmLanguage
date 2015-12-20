@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>name</key>
-    <string>Lemo h1</string>
+    <string>FutureScript h1</string>
     <key>scopeName</key>
-    <string>source.lemo.h1</string>
+    <string>source.fus.h1</string>
     <key>uuid</key>
     <string>A9F44CBB-014C-42C2-A275-4E53162D69D4</string>
     <key>firstLineMatch</key>
-    <string>\blemo\b.*\b((0|1|2)\.\d+\.\d+)\b</string>
+    <string>\bfus\b.*\b((0|1|2)\.\d+\.\d+)\b</string>
     <key>foldingStartMarker</key>
     <string>^\s*class\s+\S.*$|.*(-&gt;|&lt;&gt;)\s*$|.*[\[{]\s*$</string>
     <key>foldingStopMarker</key>
@@ -20,21 +20,21 @@
     <array>
         <dict>
             <key>name</key>
-            <string>meta.lemo.h1</string>
+            <string>meta.fus.h1</string>
             <key>match</key>
-            <string>^.*\blemo\b.*\b(\d+\.\d+\.\d+)\b[^\{]*$</string>
+            <string>^.*\bfus\b.*\b(\d+\.\d+\.\d+)\b[^\{]*$</string>
         </dict>
         <dict>
             <key>name</key>
-            <string>meta.lemo.h1</string>
+            <string>meta.fus.h1</string>
             <key>begin</key>
-            <string>^.*\blemo\b.*\b(\d+\.\d+\.\d+)\b\s*\,?\s*\{</string>
+            <string>^.*\bfus\b.*\b(\d+\.\d+\.\d+)\b\s*\,?\s*\{</string>
             <key>end</key>
             <string>\}.*$</string>
         </dict>
         <dict>
             <key>contentName</key>
-            <string>string.quoted.double.lemo.h1</string>
+            <string>string.quoted.double.fus.h1</string>
             <key>begin</key>
             <string>^(\s*)[^"]*(?&lt;!\w)"$</string>
             <key>end</key>
@@ -52,17 +52,17 @@
                     <key>match</key>
                     <string>\\(x..|u....|[^xu(])</string>
                     <key>name</key>
-                    <string>constant.character.escape.lemo.h1</string>
+                    <string>constant.character.escape.fus.h1</string>
                 </dict>
                 <dict>
                     <key>include</key>
-                    <string>#interpolated_lemo</string>
+                    <string>#interpolated_fus</string>
                 </dict>
             </array>
         </dict>
         <dict>
             <key>contentName</key>
-            <string>string.quoted.double.lemo.h1</string>
+            <string>string.quoted.double.fus.h1</string>
             <key>begin</key>
             <string>^(\s*)[^"]*\b(v|r|js)"$</string>
             <key>end</key>
@@ -70,7 +70,7 @@
         </dict>
         <dict>
             <key>contentName</key>
-            <string>string.quoted.double.lemo.h1</string>
+            <string>string.quoted.double.fus.h1</string>
             <key>begin</key>
             <string>(?&lt;!\w)"(?=.)</string>
             <key>end</key>
@@ -81,17 +81,17 @@
                     <key>match</key>
                     <string>\\(x..|u....|[^xu(])</string>
                     <key>name</key>
-                    <string>constant.character.escape.lemo.h1</string>
+                    <string>constant.character.escape.fus.h1</string>
                 </dict>
                 <dict>
                     <key>include</key>
-                    <string>#interpolated_lemo</string>
+                    <string>#interpolated_fus</string>
                 </dict>
             </array>
         </dict>
         <dict>
             <key>contentName</key>
-            <string>string.quoted.double.lemo.h1</string>
+            <string>string.quoted.double.fus.h1</string>
             <key>begin</key>
             <string>\b(v|r|js)"(?=.)</string>
             <key>end</key>
@@ -99,7 +99,7 @@
         </dict>
         <dict>
             <key>name</key>
-            <string>comment.block.lemo.h1</string>
+            <string>comment.block.fus.h1</string>
             <key>begin</key>
             <string>(?&lt;!#)###(?!#)</string>
             <key>end</key>
@@ -107,7 +107,7 @@
         </dict>
         <dict>
             <key>name</key>
-            <string>comment.line.number-sign.lemo.h1</string>
+            <string>comment.line.number-sign.fus.h1</string>
             <key>begin</key>
             <string>#</string>
             <key>end</key>
@@ -115,7 +115,7 @@
         </dict>
         <dict>
             <key>name</key>
-            <string>keyword.control.lemo.h1</string>
+            <string>keyword.control.fus.h1</string>
             <key>match</key>
             <string>(?x)
                 \b(?&lt;![\.\$])(
@@ -129,7 +129,7 @@
         </dict>
         <dict>
             <key>name</key>
-            <string>keyword.operator.lemo.h1</string>
+            <string>keyword.operator.fus.h1</string>
             <key>match</key>
             <string>(?x)
                 \+ | (?&lt;!-)-(?!&gt;|-) | \* | / | \*\* | = | /= | &lt;(?!&gt;) | (?&lt;!&lt;)&gt; |
@@ -139,7 +139,7 @@
         </dict>
         <dict>
             <key>name</key>
-            <string>constant.language.lemo.h1</string>
+            <string>constant.language.fus.h1</string>
             <key>match</key>
             <string>(?x)
                 \b(?&lt;![\.\$])(
@@ -149,7 +149,7 @@
         </dict>
         <dict>
             <key>name</key>
-            <string>variable.language.lemo.h1</string>
+            <string>variable.language.fus.h1</string>
             <key>match</key>
             <string>(?x)
                 \b(?&lt;![\.\$])(
@@ -159,26 +159,26 @@
         </dict>
         <dict>
             <key>name</key>
-            <string>storage.type.function.lemo.h1</string>
+            <string>storage.type.function.fus.h1</string>
             <key>match</key>
             <string>-&gt;|&lt;&gt;|--</string>
         </dict>
         <dict>
             <key>name</key>
-            <string>storage.type.class.lemo.h1</string>
+            <string>storage.type.class.fus.h1</string>
             <key>match</key>
             <string>\b(?&lt;![\.\$])class(?!\s*:)\b</string>
         </dict>
     </array>
     <key>repository</key>
     <dict>
-        <key>interpolated_lemo</key>
+        <key>interpolated_fus</key>
         <dict>
             <key>patterns</key>
             <array>
                 <dict>
                     <key>name</key>
-                    <string>source.lemo.h1.embedded.source</string>
+                    <string>source.fus.h1.embedded.source</string>
                     <key>begin</key>
                     <string>\\\(</string>
                     <key>end</key>
@@ -188,7 +188,7 @@
                         <key>0</key>
                         <dict>
                             <key>name</key>
-                            <string>punctuation.section.embedded.lemo.h1</string>
+                            <string>punctuation.section.embedded.fus.h1</string>
                         </dict>
                     </dict>
                     <key>patterns</key>

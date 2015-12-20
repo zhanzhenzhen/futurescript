@@ -305,14 +305,14 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-$lockedApi.writeTextFile("test/temp/a.lemo", `fus 0.1.0, node module
+$lockedApi.writeTextFile("test/temp/a.fus", `fus 0.1.0, node module
 aaa'export: 1
 bbb'export: 2
 `);
-$lockedApi.writeTextFile("test/temp/b.lemo", `fus 0.1.0, node module
+$lockedApi.writeTextFile("test/temp/b.fus", `fus 0.1.0, node module
 import "./a" all
 `);
-lex = new $lex.Lex(undefined, "test/temp/b.lemo");
+lex = new $lex.Lex(undefined, "test/temp/b.fus");
 block = new $node.RootBlock(lex);
 assert(block.toString() === `node module
 RootBlock [
