@@ -5,7 +5,7 @@ import * as $pattern from "../lib/c-pattern-0.js";
 let lex, r;
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: 1
 `);
 
@@ -70,7 +70,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 if a = 1
     b: 1
 else
@@ -158,7 +158,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a ? b | c + d ? e | f
 `);
 
@@ -192,7 +192,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 (x, y) -> x * y
 `);
 
@@ -222,7 +222,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 1 + 2 + 3
 `);
 
@@ -240,7 +240,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 abc(1, 2, 3)
 `);
 r = $pattern.Pattern.split(
@@ -256,7 +256,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 abc()
 `);
 r = $pattern.Pattern.split(
@@ -270,7 +270,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: {
     a: 1,
     b: 2, c: 3
@@ -289,7 +289,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: [1, 2, 3]
 `);
 r = $pattern.Pattern.matchPattern(
@@ -301,7 +301,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 [1, 2, 3]
 `);
 r = $pattern.Pattern.matchPattern(
@@ -316,7 +316,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a.b(5, 6)
 `);
 r = $pattern.Pattern.matchPattern(
@@ -332,7 +332,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: 1 + 2 + 3
 `);
 
@@ -391,7 +391,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 if a
 else
     22
@@ -411,7 +411,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: 1 if b
 `);
 r = $pattern.Pattern.matchPattern(
@@ -428,7 +428,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: b if c then d true
 `);
 r = $pattern.Pattern.matchPattern(
@@ -440,7 +440,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: b if c then d
 `);
 r = $pattern.Pattern.matchPattern(
@@ -452,7 +452,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a b (c d) e
 `);
 r = $pattern.Pattern.matchPattern(
@@ -469,7 +469,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 if a
     b
 else
@@ -490,7 +490,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 if if a then b
 `);
 
@@ -516,7 +516,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a -> if b then c if d
 `);
 r = $pattern.Pattern.matchPattern(
@@ -528,7 +528,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a b c d
 `);
 
@@ -552,7 +552,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 (a) (b)
 `);
 
@@ -578,7 +578,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a |> b.c :: d
 `);
 
@@ -622,7 +622,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 import "aaa"
 `);
 r = $pattern.Pattern.matchPattern(
@@ -634,7 +634,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 true true true true
 `);
 r = $pattern.Pattern.matchPattern(
@@ -651,7 +651,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 true true true true
 `);
 r = $pattern.Pattern.matchPattern(
@@ -663,7 +663,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 true and false
 `);
 
@@ -689,7 +689,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 1
 `);
 
@@ -729,7 +729,7 @@ assert(r === null);
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 "aaa"
 `);
 r = $pattern.Pattern.matchPattern(
@@ -745,7 +745,7 @@ assert(
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 pause
 `);
 

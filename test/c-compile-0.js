@@ -5,7 +5,7 @@ import * as $libLockedApi from "../lib/locked-api.js";
 let r;
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: 123
 export: a
 `);
@@ -13,7 +13,7 @@ assert(r === 123);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: 123 + 456 and 3
 a: if 1 then 2 else 3
 export: a
@@ -22,7 +22,7 @@ assert(r === 2);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: x -> x + 1
 export: a(2)
 `);
@@ -30,7 +30,7 @@ assert(r === 3);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: 1
 b: match a
     1 ? 10
@@ -42,7 +42,7 @@ assert(r === 10);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: "aaa"
 export: a
 `);
@@ -50,7 +50,7 @@ assert(r === "aaa");
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 message: ""
 
 move: <>
@@ -94,7 +94,7 @@ assert(r === `0 --> 2
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0, radical
+r = $lockedApi.runCode(`fus 0.1.0, radical
 message: ""
 
 move: <>
@@ -138,7 +138,7 @@ assert(r === `0 --> 2
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 if true then a: ("a")
 export: a
 `);
@@ -146,7 +146,7 @@ assert(r === "a");
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a:
     try
         true
@@ -160,7 +160,7 @@ assert(r === true);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a:
     try
         true
@@ -173,7 +173,7 @@ assert(r === true);
 
 test(() => {
 assert.throws(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 throw Error("haha")
 `);
 });
@@ -181,14 +181,14 @@ throw Error("haha")
 
 test(() => {
 assert.throws(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 throw
 `);
 });
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 try
     a: 1
 catch
@@ -199,7 +199,7 @@ assert(r === 1);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: 1
 b: match a
 export: b = void
@@ -208,7 +208,7 @@ assert(r === true);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0, radical
+r = $lockedApi.runCode(`fus 0.1.0, radical
 statusCode: 404
 message: match <> statusCode >= @
     600 ? "unsupported"
@@ -224,7 +224,7 @@ assert(r === "client error");
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 day: "Sun"
 action: match day
     "Sat", "Sun" ? "have a rest"
@@ -235,21 +235,21 @@ assert(r === "have a rest");
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 export: 1 is Number
 `);
 assert(r === true);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 export: 7 mod 3
 `);
 assert(r === 1);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: {f: 5, g: 3}
 delete a.f
 export: a.f = void
@@ -258,7 +258,7 @@ assert(r === true);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 export: do --
     a: "haha"
     a
@@ -267,7 +267,7 @@ assert(r === "haha");
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: 2
 a: self + 1
 export: a
@@ -276,7 +276,7 @@ assert(r === 3);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: (x, y) -> x + y
 export: a'[5, 6]
 `);
@@ -284,7 +284,7 @@ assert(r === 11);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: null
 export: a'ok
 `);
@@ -292,7 +292,7 @@ assert(r === false);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: null
 export: a'ok.b'ok.c'ok.d = void
 `);
@@ -300,7 +300,7 @@ assert(r === true);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: null
 export: a'ok() = void
 `);
@@ -308,7 +308,7 @@ assert(r === true);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: null
 b: a ifnull 1
 export: b
@@ -317,7 +317,7 @@ assert(r === 1);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: 1 as b
 export: b
 `);
@@ -325,14 +325,14 @@ assert(r === 1);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 export: 2 ** 3
 `);
 assert(r === 8);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: 3
 plus: (x, y) -> x + y
 export: a |> plus(2)
@@ -341,7 +341,7 @@ assert(r === 5);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 export: "aaa" + "
     bbb
 " + v"ccc"
@@ -350,7 +350,7 @@ assert(r === "aaabbbccc");
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: r"aaa"
 b: r"aaa"gim
 export: [
@@ -364,14 +364,14 @@ assert(r[0] === "aaa" && r[1] === "" && r[2] === "aaa" && r[3] === "gim");
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 export: "aaa\\nbbb"
 `);
 assert(r === "aaa\nbbb");
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: r"
     aaa bbb # this is comment
 "
@@ -381,7 +381,7 @@ assert(r === 8);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: 1
 b: 1
 js"
@@ -393,7 +393,7 @@ assert(r === 3);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 ###
 header comment
 ###
@@ -403,7 +403,7 @@ assert(r === "haha");
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 ###
 header comment*/
 ###
@@ -413,35 +413,35 @@ assert(r === "haha");
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node module
 a: import "./a.js"
 `}).targets[0].code;
 assert(r === '"use strict";var a;a=require("./a.js");');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node module
 {a, b as c}: import "./a.js"
 `}).targets[0].code;
 assert(r === '"use strict";var a,c;a=require("./a.js").a;c=require("./a.js").b;');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a: import "./a.js"
 `}).targets[0].code;
 assert(r === '"use strict";import a from "./a.js";');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 {a, b as c}: import "./a.js"
 `}).targets[0].code;
 assert(r === '"use strict";import {a as a,b as c} from "./a.js";');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a: 1
 b: import "./b.js" + 5
 `}).targets[0].code;
@@ -449,28 +449,28 @@ assert(r === '"use strict";import var_573300145710716007_0 from "./b.js";var a,b
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a: 1 export as aaa
 `}).targets[0].code;
 assert(r === '"use strict";var var_573300145710716007_0;var a;a=(var_573300145710716007_0=(1));export {var_573300145710716007_0 as aaa};');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node module
 a: 1 export as aaa
 `}).targets[0].code;
 assert(r === '"use strict";var a;a=(exports.aaa=(1));');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a'export: 1
 `}).targets[0].code;
 assert(r === '"use strict";var a;a=(1);export {a};');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a: 1 as b'export
 c'export: 2
 d: 3
@@ -479,7 +479,7 @@ assert(r === '"use strict";var a,b,c,d;a=(b=(1));c=(2);d=(3);export {b};export {
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node module
 a: 1 as b'export
 c'export: 2
 d: 3
@@ -488,7 +488,7 @@ assert(r === '"use strict";var a,b,c,d;a=(exports.b=b=(1));exports.c=c=(2);d=(3)
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a: 1
 export a
 `}).targets[0].code;
@@ -496,7 +496,7 @@ assert(r === '"use strict";var a;a=(1);export {a as a};');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node module
 a: 1
 export a
 `}).targets[0].code;
@@ -504,7 +504,7 @@ assert(r === '"use strict";var a;a=(1);exports.a=a;');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a: 1
 export a as b
 `}).targets[0].code;
@@ -512,7 +512,7 @@ assert(r === '"use strict";var a;a=(1);export {a as b};');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node module
 a: 1
 export a as b
 `}).targets[0].code;
@@ -520,21 +520,21 @@ assert(r === '"use strict";var a;a=(1);exports.b=a;');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 export: 3 + 4
 `}).targets[0].code;
 assert(r === '"use strict";export default ((3)+(4));');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0, node module
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node module
 export: 3 + 4
 `}).targets[0].code;
 assert(r === '"use strict";module.exports=((3)+(4));');
 }); // ============================================================
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `lemo 0.1.0
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a()
 pause
 b()
@@ -543,7 +543,7 @@ assert(r === '"use strict";((a)());debugger;((b)());');
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 undefined: 5
 export: undefined
 `);
@@ -551,7 +551,7 @@ assert(r === 5);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 A: class
     static abc: x -> x + 1
 export: A.abc(2)
@@ -560,7 +560,7 @@ assert(r === 3);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 val: null
 A: class
     static abc: <> Me._a: 3
@@ -575,7 +575,7 @@ assert(r === 4);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 val: null
 A: class
     static _a: 1
@@ -587,7 +587,7 @@ assert(r === 1);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 val: null
 A: class
     new: <> val: me._a
@@ -599,7 +599,7 @@ assert(r === 1);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 A: class
     static a: <>
         b: (x) -> x + 1
@@ -610,7 +610,7 @@ assert(r === 3);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 Aaa: class
     static: --
         Me.init: true
@@ -620,7 +620,7 @@ assert(r === true);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 A: class
     new: x ->
         me.data: x
@@ -637,7 +637,7 @@ assert(r[0] === 3 && r[1] === 8);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 A: class
     new: x ->
         me.data: x
@@ -651,7 +651,7 @@ assert(r === 5);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 A: class
     "a a": -- 1
 export: A()."a a"()
@@ -660,7 +660,7 @@ assert(r === 1);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: {
     "aaa": 1
 }
@@ -670,7 +670,7 @@ assert(r.aaa === 1);
 }); // ============================================================
 
 test(() => {
-r = $lockedApi.runCode(`lemo 0.1.0
+r = $lockedApi.runCode(`fus 0.1.0
 a: null
 a ifnull: 1
 b: 9

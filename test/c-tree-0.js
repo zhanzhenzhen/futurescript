@@ -5,7 +5,7 @@ import * as $node from "../lib/c-node-0.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: 1 + 2 + 3
 b: 2 + 3
 c: abc(5, 6)
@@ -248,7 +248,7 @@ assert(block.hasCompilerDirective("node module"));
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a:
     aaa <= bbb or not mmm = nnn or ooo /= ppp
     or ccc =
@@ -320,7 +320,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a b c
 a(b(c))
 a(b)(c)
@@ -405,7 +405,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a:
     if b = null or b = void
         true
@@ -452,7 +452,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: +1 - (-a)
 `);
 block = new $node.RootBlock(lex);
@@ -481,7 +481,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a[b].c
 a{b: 3}.c
 a [b].c
@@ -569,7 +569,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: b.c'ok.d
 a: b'(c)
 `);
@@ -620,7 +620,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: b in c
 a: b not in c
 a: b is Number
@@ -690,7 +690,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: b ifnull c
 a: b ifvoid c
 `);
@@ -730,7 +730,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 undefined: 3
 a: <>
     undefined: self + 1
@@ -783,7 +783,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: <> "abc\\(@0)def"
 `);
 block = new $node.RootBlock(lex);
@@ -825,7 +825,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 throw Error()
 `);
 block = new $node.RootBlock(lex);
@@ -845,7 +845,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 delete a.b
 delete a.b."c"
 delete a.b.(c)
@@ -881,7 +881,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 do -- 3 + 5
 `);
 block = new $node.RootBlock(lex);
@@ -906,7 +906,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 []
 {}
 `);
@@ -930,7 +930,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a'ok(1)
 a'ok[1]
 a'ok{}
@@ -986,7 +986,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 [3, 4, 5] |> u.map(x -> x * 2) :: map(x -> x + 1) |> u.max
 `);
 block = new $node.RootBlock(lex);
@@ -1067,7 +1067,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: r"aaa"gim
 `);
 block = new $node.RootBlock(lex);
@@ -1095,7 +1095,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 ###
 header comment
 ###
@@ -1130,7 +1130,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 [undefined, instanceof]: [1, 2]
 `);
 block = new $node.RootBlock(lex);
@@ -1166,7 +1166,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 undefined()
 `);
 block = new $node.RootBlock(lex);
@@ -1181,7 +1181,7 @@ e => e instanceof $node.GlobalVariableNameError &&
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: <>
     b()
     pause
@@ -1223,7 +1223,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 Abc()
 abc()
 new abc()
@@ -1284,7 +1284,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 do x ->
     do x ->
         abc(x)
@@ -1300,7 +1300,7 @@ e => e instanceof $node.ScopeItemNameConflictError &&
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 {
     "a": 1
     (b): 2

@@ -5,7 +5,7 @@ import * as $node from "../lib/c-node-0.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: <> Math.random()
 b: -- Math.random()
 `);
@@ -69,7 +69,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: x ->
     x + 1
 a: (x: 3) -> x + 1

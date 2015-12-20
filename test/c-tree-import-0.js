@@ -6,7 +6,7 @@ import * as $node from "../lib/c-node-0.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 import "aaa"
 `);
 block = new $node.RootBlock(lex);
@@ -22,7 +22,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 aaa: import "aaa" + 1
 `);
 block = new $node.RootBlock(lex);
@@ -49,7 +49,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 aaa: import "bbb" as ccc
 `);
 assert.throws(() =>
@@ -63,7 +63,7 @@ e => e instanceof $node.NoPatternMatchError &&
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 aaa: import "aaa"
 `);
 block = new $node.RootBlock(lex);
@@ -90,7 +90,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 import "aaa" as aaa
 `);
 block = new $node.RootBlock(lex);
@@ -117,7 +117,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 aaa: import "aaa" all
 `);
 block = new $node.RootBlock(lex);
@@ -139,7 +139,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 import "aaa" all as aaa
 `);
 block = new $node.RootBlock(lex);
@@ -161,7 +161,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 {a, b as c}: import "aaa"
 `);
 block = new $node.RootBlock(lex);
@@ -197,7 +197,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 {a, b as c}: import "aaa" all
 `);
 block = new $node.RootBlock(lex);
@@ -233,7 +233,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 import "aaa" as {a, b as c}
 `);
 block = new $node.RootBlock(lex);
@@ -269,7 +269,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 import "aaa" all as {a, b as c}
 `);
 block = new $node.RootBlock(lex);
@@ -305,11 +305,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-$lockedApi.writeTextFile("test/temp/a.lemo", `lemo 0.1.0, node module
+$lockedApi.writeTextFile("test/temp/a.lemo", `fus 0.1.0, node module
 aaa'export: 1
 bbb'export: 2
 `);
-$lockedApi.writeTextFile("test/temp/b.lemo", `lemo 0.1.0, node module
+$lockedApi.writeTextFile("test/temp/b.lemo", `fus 0.1.0, node module
 import "./a" all
 `);
 lex = new $lex.Lex(undefined, "test/temp/b.lemo");

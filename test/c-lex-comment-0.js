@@ -4,7 +4,7 @@ import * as $lex from "../lib/c-lex-0.js";
 let s = null;
 
 test(() => {
-s = new $lex.Lex(`lemo 0.1.0
+s = new $lex.Lex(`fus 0.1.0
 
 
 
@@ -19,14 +19,14 @@ abc() # abc
 Footer!
 ###
 `).toString();
-assert(s === 'VersionDirective "lemo 0.1.0", FormattedComment "\\nLong comment!\\n", Semicolon, NormalToken "abc", CallLeftParenthesis, CallRightParenthesis');
+assert(s === 'VersionDirective "fus 0.1.0", FormattedComment "\\nLong comment!\\n", Semicolon, NormalToken "abc", CallLeftParenthesis, CallRightParenthesis');
 }); // ============================================================
 
 test(() => {
-s = new $lex.Lex(`lemo 0.1.0
+s = new $lex.Lex(`fus 0.1.0
 ###
 Long comment!
 ###
 `).toString();
-assert(s === 'VersionDirective "lemo 0.1.0", FormattedComment "\\nLong comment!\\n"');
+assert(s === 'VersionDirective "fus 0.1.0", FormattedComment "\\nLong comment!\\n"');
 }); // ============================================================

@@ -5,7 +5,7 @@ import * as $node from "../lib/c-node-0.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 match a
     1 ? 10
     2 ? 100
@@ -50,7 +50,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 match a
     1
         10
@@ -98,7 +98,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 match a
     1, |
         10
@@ -144,7 +144,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 match a
     1, 2
         10
@@ -185,7 +185,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 match x -> a = x
     1, 2, 3, |
         10
@@ -251,7 +251,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 match a
 `);
 block = new $node.RootBlock(lex);

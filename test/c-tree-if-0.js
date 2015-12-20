@@ -5,7 +5,7 @@ import * as $node from "../lib/c-node-0.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 a: 1 if b
 x -> b if c
 if a
@@ -169,7 +169,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 if a
     b
 else if c
@@ -212,7 +212,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`lemo 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node module
 if a = b throw
 `);
 block = new $node.RootBlock(lex);

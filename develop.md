@@ -1,7 +1,7 @@
 Develop this project
 ====================
 
-First, use npm to install lemo globally.
+First, use npm to install FutureScript globally.
 
 Second, git clone the repository, and let the repository's root directory be your working directory.
 
@@ -9,20 +9,20 @@ Now, we're ready to develop.
 
 Because "lib" and "test" directories hold all versions, we often want to list files of just the current version (specified in "package.json"):
 
-- `lemo list`
-- `lemo l`
+- `fus list`
+- `fus l`
 
 Compile (build) all files in "lib" to ES5-compatible files in "target":
 
-- `lemo build`
-- `lemo b`
+- `fus build`
+- `fus b`
 
 Test:
 
-- `lemo test`
-- `lemo t`
+- `fus test`
+- `fus t`
 
-Note: If you don't want to globally install it, or you want to directly run the raw ECMAScript 6 code (not the JS in the "target" directory), replace the "`lemo`" above with "`babel-node <lemo-directory>/lib/bin`". In this case, you should have Babel 5.x.x installed on your computer.
+Note: If you don't want to globally install it, or you want to directly run the raw ECMAScript 6 code (not the JS in the "target" directory), replace the "`fus`" above with "`babel-node <futurescript-directory>/lib/bin`". In this case, you should have Babel 5.x.x installed on your computer.
 
 We must build it before publish it.
 

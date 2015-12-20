@@ -1,4 +1,4 @@
-lemo 0.1.0
+fus 0.1.0
 
 factorial: x ->
     if x is Number
