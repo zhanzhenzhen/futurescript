@@ -1,12 +1,28 @@
 Copyright (c) 2015 Zhenzhen Zhan
 
-Permission is hereby granted, free of charge, to any person obtaining this
-software or any portion of this software including modified versions (the
-"Software"), to deal in the Software without restriction, subject to the
-following conditions:
+This software is about a programming language "FutureScript".
 
-The above copyright notice and this permission notice shall be included in the
-Software.
+You may use or distribute this software free of charge, provided that the
+software is not modified and any part (including this license file) of it is not
+modified or deleted.
+
+You may use or modify this software, or distribute the modified version free of
+charge, provided that both of the following 2 conditions are met:
+
+1. This license document, including the above copyright notice, shall be
+included in the software (the modified version).
+
+2. If the software (the modified version) is not a programming language, then
+there's no naming restriction. But if the software is still a programming
+language, then the language's name shall still contain the text "FutureScript"
+but not be exactly "FutureScript" (for example, "MyFutureScript") and the
+software shall not be harmful.
+
+Definitions in this document:
+
+1. "You" means any person other than the copyright holder.
+
+2. "Modified version" means the software after it has been modified by you.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
