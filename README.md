@@ -1,17 +1,38 @@
 FutureScript
 ============
 
-Compile
--------
+Please visit http://futurescript.org/ to learn the language.
 
-- `fus compile <file>`
-- `fus c <file>`
+Command Usage
+-------------
 
-Compile with source map
------------------------
+- `fus (compile | c | map-compile | m) <file-or-directory> [<target-file-or-directory>]`
+- `fus (version | v | --version)`
 
-- `fus map-compile <file>`
-- `fus m <file>`
+`compile` or `c` is for compiling without source map.
+
+`map-compile` or `m` is for compiling with source map.
+
+Examples
+--------
+
+Compile "abc.fus" to "abc.js":
+
+```bash
+fus compile abc.fus
+```
+
+Compile the whole "abc" directory to "abc-output":
+
+```bash
+fus compile abc abc-output
+```
+
+Compile "abc.fus" to "abc.js" and generate a source map of "abc.js.map":
+
+```bash
+fus m abc.fus
+```
 
 Develop this project
 ====================
