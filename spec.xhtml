@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xml:lang="zh-Hans" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Less and more - Lemo语言 0.1.0</title>
+    <title>FutureScript语言 0.1.0</title>
     <link rel="stylesheet" href="http://zhanzhenzhen.github.io/essay-themes/base.css" type="text/css" />
     <link rel="stylesheet" href="http://zhanzhenzhen.github.io/essay-themes/simplified-chinese-modern.css" type="text/css" />
     <style type="text/css"><![CDATA[
@@ -37,7 +37,7 @@
     <script src="http://zizisoft.com/doc-html.js" type="text/javascript" />
 </head>
 <body>
-<h1>Less and more - Lemo语言 0.1.0</h1>
+<h1>FutureScript语言 0.1.0</h1>
 <p>詹臻臻 zhanzhenzhen@hotmail.com</p>
 <h1>简介</h1>
 <p>JavaScript实在是一门很怪的语言。它早年加入了很多无用的功能，不幸的是，出于兼容性考虑，这些功能永远都不能被删掉。另一方面，JavaScript却缺少很多真正有用的功能。当然，刚刚发布的 ECMAScript 6 补足了大部分缺少的东西，但代价是显得臃肿不堪。如果有一门新的语言，它只继承JavaScript最精华的部分呢？JavaScript最精华的部分是什么？有两个：</p>
@@ -51,7 +51,8 @@
     <li>异步等可以极大简化编程的功能的缺失。</li>
     <li>版本问题。出于兼容考虑，新版本无法做出大的改变，导致进步越来越微小。</li>
 </ul>
-<p>Lemo语言的第一感，是它有着极其统一的语法：</p>
+<p>在此介绍一个新的语言，叫做FutureScript，简称Fus。</p>
+<p>FutureScript的第一感，是它有着极其统一的语法：</p>
 <ul>
     <li>中括号<code>[</code>、<code>]</code>始终表示数组字面量，大括号<code>{</code>、<code>}</code>始终表示对象字面量。</li>
     <li>成员访问都是用点号<code>.</code>表示，不管是对象成员，还是数组成员（即元素），也不管对象成员名是不是加了引号，都是如此。</li>
@@ -69,12 +70,12 @@
     c.scheme: "https"
     c."content-length": 123 # c["content-length"] = 123
 ]]></code></pre>
-<p>Lemo语言的第二感，是可读性极佳。看这段：</p>
+<p>FutureScript的第二感，是可读性极佳。看这段：</p>
 <pre><code><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
 ]]></code></pre>
-<p>CoffeeScript也可以用<code>a ?= 8</code>，然而Lemo的可读性更佳。另外像逻辑运算符，我们也弃用JS中的符号而改用更自然的<code>and</code>、<code>or</code>、<code>not</code>。</p>
-<p>Lemo语言的第三感，是能够极大简化你的代码。熟悉JS的程序员都知道异步的语法有多么不自然，但现在我们可以：</p>
+<p>CoffeeScript也可以用<code>a ?= 8</code>，然而FutureScript的可读性更佳。另外像逻辑运算符，我们也弃用JS中的符号而改用更自然的<code>and</code>、<code>or</code>、<code>not</code>。</p>
+<p>FutureScript的第三感，是能够极大简化你的代码。熟悉JS的程序员都知道异步的语法有多么不自然，但现在我们可以：</p>
 <pre><code><![CDATA[
     console.log abc()'wait.def()'wait.ghi()'wait
 ]]></code></pre>
@@ -90,20 +91,20 @@
         console.log(x);
     });
 ]]></code></pre>
-<p>Lemo语言里面，没有长度超过7个字母的关键字，简洁存在于我们的基因之中。像是：</p>
+<p>FutureScript里面，没有长度超过7个字母的关键字，简洁存在于我们的基因之中。像是：</p>
 <ul>
     <li><code>undefined</code>，我们用<code>void</code>代替。</li>
     <li><code>arguments</code>，我们用<code>@</code>代替。<code>@0</code>就表示<code>arguments[0]</code>。@这符号的圆圈里面就是个a，很好记，是不是？</li>
 </ul>
-<p>Lemo规定代码文件必须在顶端标明该文件适用的Lemo语言版本。我相信，这个方法能一举解决JS和CoffeeScript的版本问题，这是因为，我们的任何版本都包含历史版本的编译器。这意味着，将来的2.0.0包含1.0.0（当然也包含0.1.0）。</p>
-<p>为了看懂Lemo代码，还需要额外记住的东西非常少，也就这3个：</p>
+<p>我们规定代码文件必须在顶端标明该文件适用的FutureScript版本。我相信，这个方法能一举解决JS和CoffeeScript中存在的版本问题，这是因为，我们的任何版本都包含历史版本的编译器。这意味着，将来的2.0.0包含1.0.0（当然也包含0.1.0）。</p>
+<p>为了看懂FutureScript代码，还需要额外记住的东西非常少，也就这3个：</p>
 <ul>
     <li>JS的<code>a(b)</code>可简化为<code>a b</code>。</li>
     <li><code>**</code>表示幂运算。<code>2 ** 3</code>即为8。</li>
     <li><code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>都表示函数，即JS的<code>function(...){...}</code>。箭头是带形参的，其他两个不带形参（有什么区别后面会说到）。</li>
 </ul>
-<p>好了，基本上你只要看完了这一章，任何Lemo代码都能看懂，至少也能猜个八九不离十。</p>
-<p>这一章的最后，附上一段示例，可以将其粘贴到浏览器上，或在本地运行（输入<code>lemo &lt;filename&gt;</code>）。</p>
+<p>好了，基本上你只要看完了这一章，任何FutureScript代码都能看懂，至少也能猜个八九不离十。</p>
+<p>这一章的最后，附上一段示例，可以将其粘贴到浏览器上运行。</p>
 <pre><code><![CDATA[
     fus 0.1.0
 
@@ -133,13 +134,13 @@
     # Array comprehensions:
     cubes: list.map <> math.cube @0
 ]]></code></pre>
-<p>如果你不仅想看懂，而且想写Lemo代码，那么请看完余下的章节。</p>
+<p>如果你不仅想看懂，而且想写FutureScript代码，那么请看完余下的章节。</p>
 <h1>代码结构</h1>
 <h2>文件格式与外观</h2>
-<p>后缀名为.lemo。</p>
-<p>Lemo文件的外观：由版本行、语句、注释和无语义空白组成。语句是可以嵌套的。版本行和语句是有语义的，注释和无语义空白都是无语义的。</p>
+<p>后缀名为.fus。</p>
+<p>Fus文件的外观：由版本行、语句、注释和无语义空白组成。语句是可以嵌套的。版本行和语句是有语义的，注释和无语义空白都是无语义的。</p>
 <p>语句不是表达式，也不可以作为表达式。表达式不是语句，但可以作为语句，作为语句时称作表达式语句。有两种语句：表达式语句和命令语句。</p>
-<p>类似CoffeeScript，在Lemo中，缩进是很重要的，它构成了嵌套。缩进可以用<code>&lt;&lt;</code>与<code>&gt;&gt;</code>代替。</p>
+<p>类似CoffeeScript，在FutureScript中，缩进是很重要的，它构成了嵌套。缩进可以用<code>&lt;&lt;</code>与<code>&gt;&gt;</code>代替。</p>
 <p>类似CoffeeScript，多个并列的行可以通过分号<code>;</code>合并，单行可以通过<code>\</code>拆分成多行。</p>
 <p>空行，是指不含有字符的行。</p>
 <p>空白行，是指不含有字符或只含有空白字符的行。</p>
@@ -270,7 +271,7 @@
 <h2>版本行</h2>
 <p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <pre><code><![CDATA[
-    [...][lemo][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node module | es module)]...
+    [...][fus][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node module | es module)]...
 ]]></code></pre>
 <p>默认值为：</p>
 <pre><code><![CDATA[
@@ -280,13 +281,13 @@
 <pre><code><![CDATA[
     0.1.0
     fus 0.1.0
-    lemo -0.1.0
+    fus -0.1.0
     0.1.0, node module
     0.1.0, compatible, capitalized new
     0.1.0, compatible, capitalized new, node import
     0.1.0, radical, manual new
 ]]></code></pre>
-<p>版本号必须写上。只要你写的版本号不大于安装的Lemo的版本号，该文件就会按照该版本的规范来运行，这是因为你安装的任何一个版本的Lemo都包括了（至少我们会尽量包括）所有历史版本的编译器。而这，是Lemo和其他语言的不同之处。你甚至可以在一个项目中，不同文件使用不同版本。</p>
+<p>版本号必须写上。只要你写的版本号不大于安装的FutureScript的版本号，该文件就会按照该版本的规范来运行，这是因为你安装的任何一个版本的FutureScript都包括了（至少我们会尽量包括）所有历史版本的编译器。而这正是FutureScript和其他语言的不同之处。你甚至可以在一个项目中，不同文件使用不同版本。</p>
 <p>写上版本号还有个好处，就是你把某个文件交给别人时，他就知道文件是什么版本的，从而可以更好地修改。</p>
 <p>本文只描述一个版本。</p>
 <p>当你想把版本行写成多行时，版本号后面要加上大括号，大括号必须在第一行。版本号和大括号之间可以有逗号，也可以没有逗号。例如：</p>
@@ -296,21 +297,10 @@
         node module
     }
 ]]></code></pre>
-<p>多行应用于Shebang的例子（在Shebang中要加选项的话多行是必须的）：</p>
-<pre><code><![CDATA[
-    #!/usr/bin/env node node_modules/lemo/bin/lemo -0.1.0 {
-        radical
-        node module
-    }
-]]></code></pre>
-<p>单行应用于Shebang的例子：</p>
-<pre><code><![CDATA[
-    #!/usr/bin/env node node_modules/lemo/bin/lemo -0.1.0
-]]></code></pre>
-<p>当文件的后缀名不是.lemo或没有后缀名时，版本号前必须有<code>lemo</code>。当文件的后缀名是.lemo时，不必须，然而我们推荐加上<code>lemo</code>，因为对你的文本编辑器有用，方便它判断应该使用哪个语法包，使代码呈现正确的彩色。</p>
+<p>当文件的后缀名不是.fus或没有后缀名时，版本号前必须有<code>fus</code>。当文件的后缀名是.fus时，不必须，然而我们推荐加上<code>fus</code>，因为对你的文本编辑器有用，方便它判断应该使用哪个语法包，使代码呈现正确的彩色。</p>
 <p>激进模式和兼容模式的差异是：激进模式更鼓励单参数的函数。因此：</p>
 <p>激进模式中，<code>@</code>表示JS的<code>arguments[0]</code>。兼容模式中，<code>@</code>表示JS的<code>arguments</code>。</p>
-<p>Lemo代码可以被JS调用。JS代码也可以被Lemo调用。</p>
+<p>FutureScript代码可以被JS调用。JS代码也可以被FutureScript调用。</p>
 <p><code>capitalized new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写的加，小写的不加。能识别的有两种形式：变量和普通的点号（<code>x.y</code>，它会判断<code>y</code>），像<code>x."y"</code>或<code>x.y'</code>是不能识别的。例如：</p>
 <pre><code><![CDATA[
     aaa."bbb".Ccc() # new can be omitted
@@ -408,7 +398,7 @@
     a(3, 4, 5) # only valid in compatible mode
 ]]></code></pre>
 <p>多参数调用一定要加括号，这个CoffeeScript不同。只有单参数调用是可以不加括号的，零参数要加<code>()</code>。</p>
-<p>CoffeeScript里面如果函数调用要传递的参数本身也是函数的话，如果它没有参数，那么可写成<code>abc -&gt; Math.random()</code>，但Lemo中绝对不能这么写，否则编译器会误以为这是一个参数为abc的函数。必须采用如下一种：</p>
+<p>CoffeeScript里面如果函数调用要传递的参数本身也是函数的话，如果它没有参数，那么可写成<code>abc -&gt; Math.random()</code>，但FutureScript中绝对不能这么写，否则编译器会误以为这是一个参数为abc的函数。必须采用如下一种：</p>
 <pre><code><![CDATA[
     # pass a function as argument to abc
     abc <> Math.random()
@@ -446,14 +436,14 @@
     abc: <> 1 as a
 ]]></code></pre>
 <p>执行<code>abc()</code>返回的值是<code>1</code>。</p>
-<p>变量不用声明也不能声明，这是因为我们为变量赋值的机制类似CoffeeScript（但有着显著的区别）。CoffeeScript是：如果前面还未出现过则会编译成声明并赋值，如果已出现过则会编译成单纯赋值。Lemo是：如外层没有该变量名，则编译成声明并赋值；如外层有该变量名，则编译成单纯赋值。</p>
+<p>变量不用声明也不能声明，这是因为我们为变量赋值的机制类似CoffeeScript（但有着显著的区别）。CoffeeScript是：如果前面还未出现过则会编译成声明并赋值，如果已出现过则会编译成单纯赋值。FutureScript是：如外层没有该变量名，则编译成声明并赋值；如外层有该变量名，则编译成单纯赋值。</p>
 <p>考虑如下CoffeeScript代码：</p>
 <pre><code><![CDATA[
     ->
         a = 5
     a = 3
 ]]></code></pre>
-<p>CoffeeScript编译成两个重名变量<code>a</code>。然而在Lemo中如果你写：</p>
+<p>CoffeeScript编译成两个重名变量<code>a</code>。然而在FutureScript中如果你写：</p>
 <pre><code><![CDATA[
     --
         a: 5
@@ -502,7 +492,7 @@
 ]]></code></pre>
 <p><code>above</code>对机器来说没有任何意义，不加也是合法的，但对人来说有意义。不过我的看法是，空行更直观些，打起来也更方便。</p>
 <p>要注意，上面两个例子中<code>as</code>和上面的函数并不是两个并列的语句，而是一个语句。语句不能以<code>as</code>或<code>above as</code>开头。</p>
-<p>只要不是Lemo关键字，就能作为变量名，哪怕是JS关键字如<code>undefined</code>、<code>function</code>也能作为变量名。但JS关键字不能作为全局变量名来赋值或使用。</p>
+<p>只要不是FutureScript关键字，就能作为变量名，哪怕是JS关键字如<code>undefined</code>、<code>function</code>也能作为变量名。但JS关键字不能作为全局变量名来赋值或使用。</p>
 <h2>模块</h2>
 <p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
 <pre><code><![CDATA[
@@ -580,7 +570,7 @@
     all.ccc()
 ]]></code></pre>
 <p>但问题是调用时多出了<code>all</code>，所以似乎也没省多少。</p>
-<p>Lemo语言具有独特的“批量导入”功能（ES6中也没有该功能）。当有<code>all</code>但无冒号也无<code>as</code>时便编译成批量导入，它会导入所有的命名导出（但不包括默认导出）并让它们都成为变量名。于是，我们可以写成：</p>
+<p>FutureScript具有独特的“批量导入”功能（ES6中也没有该功能）。当有<code>all</code>但无冒号也无<code>as</code>时便编译成批量导入，它会导入所有的命名导出（但不包括默认导出）并让它们都成为变量名。于是，我们可以写成：</p>
 <pre><code><![CDATA[
     import "./all" all
     aaa()
@@ -589,8 +579,8 @@
 ]]></code></pre>
 <p>这个功能有个重要特点：编译器生成变量名时，需要读取被导入的模块，为了保证路径解析的方法和运行时一致，我们使解析器尽可能简单，所以只支持以<code>"./"</code>、<code>"../"</code>或<code>"/"</code>开头的路径。所以，这是一个限制，该功能只适合导入同一个项目中的另一个模块，绝不适合用模块名从别的项目中直接导入（就算支持，这也会造成变量名的不确定性）。所以，项目间的导入，一定要在本项目中有一个“清单”模块作为中间模块。</p>
 <p>“批量导入”并不引入全局变量，所以不邪恶。这些变量在别的模块中是不可见的，除非别的模块也批量导入了它们。</p>
-<p>如果A批量导入B，如果某个B的命名导出（即A中被定义的变量名）恰好是A所在的Lemo版本的关键字，那么该变量将不可用，但不会出错。</p>
-<p>被普通导入的模块可以是Lemo文件或JS文件，但被批量导入的模块必须是Lemo文件（版本不限）。</p>
+<p>如果A批量导入B，如果某个B的命名导出（即A中被定义的变量名）恰好是A所在的FutureScript版本的关键字，那么该变量将不可用，但不会出错。</p>
+<p>被普通导入的模块可以是Fus文件或JS文件，但被批量导入的模块必须是Fus文件（版本不限）。</p>
 <p>以上介绍的是import语句，import还可以作为表达式，格式是：<code>import "module-name"</code>，后面不能是<code>as</code>，例如：</p>
 <pre><code><![CDATA[
     import "abc"
@@ -625,7 +615,7 @@
     obj.multiply'export: <> @0 * @1
 ]]></code></pre>
 <p>注意<code>abc export as def</code>和<code>export abc as def</code>相似但有着两个区别。一个区别很明显，就是前者是表达式语句而后者是命令语句。另一个区别很微妙，前者的<code>abc</code>是作为表达式，后者的<code>abc</code>是作为变量，这就使得：前者是不绑定的，而后者是绑定的（能享受到ES6模块的变量绑定带来的好处）。</p>
-<p>当语句以<code>export:</code>开头，表示ES6中的“默认导出”。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，Lemo支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
+<p>当语句以<code>export:</code>开头，表示ES6中的“默认导出”。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，FutureScript支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
 <p>默认导出还可以用这种形式：</p>
 <pre><code><![CDATA[
     export abc as default
@@ -637,19 +627,19 @@
     export: abc
 ]]></code></pre>
 <p>两者功能相似，唯一的区别是：前者的<code>abc</code>是作为变量，所以是绑定的。后者的<code>abc</code>是作为表达式，所以是不绑定的。（这和ES6的规则相同，ES6的<code>export {... as default}</code>和<code>export default ...</code>也有着上述区别。）</p>
-<p>导入和导出必须出现在顶层，因为这是基于ES6的。我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃Lemo的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
+<p>导入和导出必须出现在顶层，因为这是基于ES6的。我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃FutureScript的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
 <h1>数据</h1>
 <h2>字符串、正则表达式</h2>
 <p>字符串受CoffeeScript启发，不同之处在于不用单引号、不用3个连续引号、不支持字符串的多行自动连接。</p>
 <p>内联字符串：</p>
 <pre><code><![CDATA[
-    str: "Welcome to Lemo!"
+    str: "Welcome to FutureScript!"
 ]]></code></pre>
 <p>格式字符串：</p>
 <pre><code><![CDATA[
     htmlStr: "
         <p>
-            Welcome to "Lemo"!
+            Welcome to "FutureScript"!
         </p>
     "
 ]]></code></pre>
@@ -657,7 +647,7 @@
 <pre><code><![CDATA[
     htmlStr = """
         <p>
-            Welcome to "Lemo"!
+            Welcome to "FutureScript"!
         </p>
     """
 ]]></code></pre>
@@ -852,9 +842,9 @@
     <li>not</li>
 </ul>
 <p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
-<p><code>/=</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。为什么我们不用<code>!=</code>？因为感叹号目前Lemo还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
+<p><code>/=</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。为什么我们不用<code>!=</code>？因为感叹号目前FutureScript还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
 <p>我们暂不支持CoffeeScript风格的链式比较，但以后的版本一定会支持。</p>
-<p>Lemo和其他语言在逻辑运算方面最大的区别就是<code>not</code>的优先级。<code>not</code>的优先级被降低，仅高于<code>and</code>和<code>or</code>。这意味着我们可以少加很多括号。你肯定抱怨过在JS中不得不这样写：</p>
+<p>FutureScript和其他语言在逻辑运算方面最大的区别就是<code>not</code>的优先级。<code>not</code>的优先级被降低，仅高于<code>and</code>和<code>or</code>。这意味着我们可以少加很多括号。你肯定抱怨过在JS中不得不这样写：</p>
 <pre><code><![CDATA[
     if !(abc instanceof Abc) doTask();
 ]]></code></pre>
@@ -931,7 +921,7 @@
 <pre><code><![CDATA[
     if x > 100 << aaa(); bbb() >>
 ]]></code></pre>
-<p>所以这条规则在我们这里作废。Lemo里，分号的左右两边能在不引发语法错误的前提下穿越一切障碍物。</p>
+<p>所以这条规则在我们这里作废。FutureScript里，分号的左右两边能在不引发语法错误的前提下穿越一切障碍物。</p>
 <h2>模式匹配</h2>
 <p><code>match</code>可以看成是一个增强版<code>switch</code>，它称为模式匹配。例如：</p>
 <pre><code><![CDATA[
@@ -1034,7 +1024,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>可以看出，即便是模拟传统的<code>switch</code>，依然比<code>switch</code>简洁。</p>
 <h2>循环</h2>
-<p>循环其实并不符合函数式编程的理念，我们没有循环。但我的mate库提供了全局函数repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。本章不属于Lemo语言规范，只是简要介绍一下repeat函数。例子：</p>
+<p>循环其实并不符合函数式编程的理念，我们没有循环。但我的mate库提供了全局函数repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。本章不属于FutureScript语言规范，只是简要介绍一下repeat函数。例子：</p>
 <pre><code><![CDATA[
     repeat[10, i ->
         console.log "This is \(i) time"
@@ -1078,7 +1068,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         alert i
         fun(i + 1)
 ]]></code></pre>
-<p>Lemo的递归有个好处，它会自动编译（优化）成循环，当自我调用的语句出现在尾部之时。所以，你无需担心堆栈溢出，就算循环1000000次也没关系，编译后的JS代码是一个真正的循环，突破了传统递归的限制。这个在内部是通过Babel实现的。</p>
+<p>FutureScript的递归有个好处，它会自动编译（优化）成循环，当自我调用的语句出现在尾部之时。所以，你无需担心堆栈溢出，就算循环1000000次也没关系，编译后的JS代码是一个真正的循环，突破了传统递归的限制。这个在内部是通过Babel实现的。</p>
 <h2>异常</h2>
 <p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript相似。例如：</p>
 <pre><code><![CDATA[
@@ -1092,7 +1082,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>和CoffeeScript有两点不同。第一：若<code>throw</code>后面啥都没有，不是语法错误，而是：若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。第二：<code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
 <h2>异步</h2>
-<p>由于需要尽快促成Lemo面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</p>
+<p>由于需要尽快促成FutureScript面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</p>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
 <pre><code><![CDATA[
     abc().then(function(x){
@@ -1205,7 +1195,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     tom.move()
 ]]></code></pre>
 <p>我们使用比传统更纯粹的形式：让赋值功能从class剥离出来，使用表达式而非语句。</p>
-<p>类的声明方式比较像CoffeeScript。但我们的更严格。我们多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。在Lemo中，类的所有声明的子项都必须是以冒号的形式。</p>
+<p>类的声明方式比较像CoffeeScript。但我们的更严格。我们多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。在FutureScript中，类的所有声明的子项都必须是以冒号的形式。</p>
 <p>JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
 <p>getter和setter的例子：</p>
 <pre><code><![CDATA[
@@ -1228,13 +1218,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>字段的声明中只要是以<code>_</code>开头的，便自动成为防冲突字段。</p>
 <p>防冲突字段不能用引号包起来。所以如果你实在是想让你的普通字段以<code>_</code>开头，就可以写成像<code>me."_name"</code>的形式，这就不是防冲突字段了。</p>
 <p>对于对象和类而言，属性、成员、字段是同义词。方法是指为函数的字段。</p>
-<p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在Lemo中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
+<p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在FutureScript中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
 <p>CoffeeScript对于静态字段是使用<code>@property: value</code>，我们使用的是<code>static</code>，即<code>static property: value</code>。</p>
 <p>防冲突字段也适用于静态字段，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
-<p>Lemo的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在Lemo（或ES6）中，构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。为什么这种机制可以做到继承<code>Array</code>、<code>Error</code>，限于篇幅不再赘述。但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到2015年6月ES6才正式发布，形势有望在未来数月内改变，届时就会完美。</p>
-<p>但是Lemo中<code>super</code>的语法比较像CoffeeScript，不用写<code>super.methodName()</code>，直接<code>super()</code>即可。我们不支持孤立的<code>super</code>，不过你可以写成<code>super'(@)</code>。</p>
-<p>我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值。所以在Lemo里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。（返回值唯一的用处是使用<code>fun</code>递归时，如果你真的想对构造函数使用递归的话。）</p>
+<p>FutureScript的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在FutureScript（或ES6）中，构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。为什么这种机制可以做到继承<code>Array</code>、<code>Error</code>，限于篇幅不再赘述。但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到2015年6月ES6才正式发布，形势有望在未来数月内改变，届时就会完美。</p>
+<p>但是FutureScript中<code>super</code>的语法比较像CoffeeScript，不用写<code>super.methodName()</code>，直接<code>super()</code>即可。我们不支持孤立的<code>super</code>，不过你可以写成<code>super'(@)</code>。</p>
+<p>我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值。所以在FutureScript里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。（返回值唯一的用处是使用<code>fun</code>递归时，如果你真的想对构造函数使用递归的话。）</p>
 <p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
 <pre><code><![CDATA[
     Website: class
@@ -1274,7 +1264,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     (([3, 4, 5] |> u.map(x -> x * 2)).map(x -> x + 1)) |> u.max
 ]]></code></pre>
 <p>所以胖点基本就是点号，只不过我们规定当它出现在管道右边时作为结束标记，而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
-<p>用到管道的代码可以是兼容模式，也可以是激进模式。但如果管道使用的外部库也用Lemo写的话，还是用兼容模式来写比较好，因为外部库中的函数必须是多参数的，因为管道本身就是分割参数的。</p>
+<p>用到管道的代码可以是兼容模式，也可以是激进模式。但如果管道使用的外部库也用FutureScript写的话，还是用兼容模式来写比较好，因为外部库中的函数必须是多参数的，因为管道本身就是分割参数的。</p>
 <h1>其他特色</h1>
 <h2>do</h2>
 <p><code>do</code>是<code>(...)()</code>的简便方法，比CoffeeScript的<code>do</code>功能略少，但更纯粹。它可以用来：</p>
@@ -1290,7 +1280,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             button.onclick = ->
                 alert button.textContent
 ]]></code></pre>
-<p>这种通过<code>do</code>来hold住一个变量名的方法，由于Lemo实行严格的禁止层级变量重名，所以我们不支持，但是现在看来也无需支持，因为有了更好的方法：</p>
+<p>这种通过<code>do</code>来hold住一个变量名的方法，由于FutureScript实行严格的禁止层级变量重名，所以我们不支持，但是现在看来也无需支持，因为有了更好的方法：</p>
 <pre><code><![CDATA[
     buttons.forEach button ->
         button.onclick: --
@@ -1483,7 +1473,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>void</li>
 </ul>
 <h2>命名限制</h2>
-<p>变量名不可以是关键字。变量名可以是JS关键字（只要它不是Lemo关键字即可），例如<code>function</code>、<code>instanceof</code>都可以作为变量名。</p>
+<p>变量名不可以是关键字。变量名可以是JS关键字（只要它不是FutureScript关键字即可），例如<code>function</code>、<code>instanceof</code>都可以作为变量名。</p>
 <p>类声明中的属性名如不用引号，则不可以是<code>new</code>、<code>static</code>。如用引号，则没有限制。注意，<code>static</code>不是关键字，<code>new</code>用来进行类声明（即后面是冒号）时不是关键字。</p>
 <p>对象字面量的属性名没有限制。</p>
 <p>当然，不用引号时，以上名称都需要满足标识符约束，即：每个字符都是字母、数字、<code>_</code>或<code>$</code>，且起始字符不是数字。</p>
@@ -1733,9 +1723,9 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>问：为啥没有正则表达式符号？</p>
 <p>答：正则表达式完全可以用<code>r"</code>来表示。</p>
 <p>问：为啥没有位操作符？</p>
-<p>答：首先，Lemo作为高级语言，没必要支持。其次，JavaScript的位操作是专门针对32位数字的，这本身就不合理。</p>
+<p>答：首先，FutureScript作为高级语言，没必要支持。其次，JavaScript的位操作是专门针对32位数字的，这本身就不合理。</p>
 <p>问：为啥没有生成器？</p>
-<p>答：生成器是适合特定用途的，似乎普适性还不够。至于缩短代码长度？加一个类库也可以达到这个目的，干嘛非得改动语言层面呢？至于在异步操作中的用途，Lemo也已经有了更好的替代方法。</p>
+<p>答：生成器是适合特定用途的，似乎普适性还不够。至于缩短代码长度？加一个类库也可以达到这个目的，干嘛非得改动语言层面呢？至于在异步操作中的用途，FutureScript也已经有了更好的替代方法。</p>
 <p>问：为啥格式字符串的缩进必须大于引号处的缩进？等于也不行吗？</p>
 <p>答：如果允许等于或小于，就有可能造成编译器误判，当字符串中某行行首正好是引号的时候。</p>
 <p>问：为啥函数除了箭头符号以外还要弄个菱形符号？</p>
@@ -1770,7 +1760,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>问：<code>as</code>为何不能用逗号同时赋值？</p>
 <p>答：若支持，像这个表达式<code>[aaa as a, bbb]</code>就容易产生歧义。</p>
 <p>问：保留旧版本的编译器，那岂不越来越庞大？好恐怖！</p>
-<p>答：其实也没那么恐怖，我们在做Lemo的时候会采取一些手段，使增量不那么大。</p>
+<p>答：其实也没那么恐怖，我们在做FutureScript的时候会采取一些手段，使增量不那么大。</p>
 <p>问：真的所有旧版本的编译器都包括吗？</p>
 <p>答：我们尽量包括。但如果我们发现某个旧版本有安全漏洞，那么我们则会删掉。若不存在与代码相同版本的编译器，编译的时候会出现警告，同时会自动用新版本的编译器编译。</p>
 <p>问：CoffeeScript多行链式（chaining）方法调用不用加括号，这里为啥要加括号？</p>
@@ -1780,9 +1770,9 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>问：为啥<code>-&gt;</code>函数没有定义<code>@</code>？</p>
 <p>答：当你参数有名称时，再用<code>@</code>就显得多余。这时用<code>@</code>唯一的作用就是当函数的参数数量可变时。但是如果你的函数参数数量可变，更好的做法是不设任何形参。也有一种情况是希望后半部分参数数量可变，但是我不太喜欢这样做，我建议把这部分参数弄成一个数组。</p>
 <p>问：JS中可以用<code>typeof a === "undefined"</code>检查变量是否已定义又不引发异常，这里为啥做不到？</p>
-<p>答：这好像并没有什么用。Lemo的变量统统编译成在函数顶部声明，所以变量的定义与否不是动态的，所以检查这个不应该是程序运行时做的事情。</p>
-<p>问：CoffeeScript也有<code>return</code>，Lemo居然没有？</p>
-<p>答：<code>return</code>是一种跳跃式语句，函数式风格应该尽量避免这种语句，很多函数式语言，像微软的F#，是没有<code>return</code>的，F#有循环，但是也没有能跳出循环的<code>break</code>命令。就好比现在人们都认为C语言的<code>goto</code>命令是很邪恶的，就是因为<code>goto</code>是跳跃性的。当然<code>return</code>只是跳出而已，不能自由跳跃，远没有<code>goto</code>那么邪恶，但我想，至少在Lemo语言的初创阶段，还是彻底一些好。其实你很容易就可以达到相同的目的。比如你想这样写：</p>
+<p>答：这好像并没有什么用。FutureScript的变量统统编译成在函数顶部声明，所以变量的定义与否不是动态的，所以检查这个不应该是程序运行时做的事情。</p>
+<p>问：CoffeeScript也有<code>return</code>，FutureScript居然没有？</p>
+<p>答：<code>return</code>是一种跳跃式语句，函数式风格应该尽量避免这种语句，很多函数式语言，像微软的F#，是没有<code>return</code>的，F#有循环，但是也没有能跳出循环的<code>break</code>命令。就好比现在人们都认为C语言的<code>goto</code>命令是很邪恶的，就是因为<code>goto</code>是跳跃性的。当然<code>return</code>只是跳出而已，不能自由跳跃，远没有<code>goto</code>那么邪恶，但我想，至少在FutureScript的初创阶段，还是彻底一些好。其实你很容易就可以达到相同的目的。比如你想这样写：</p>
 <pre><code><![CDATA[
     x ->
         if x isnt Number return
