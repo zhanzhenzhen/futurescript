@@ -3,20 +3,19 @@ Copyright (c) 2015 Zhenzhen Zhan
 This software is about a programming language "FutureScript".
 
 You may use or distribute this software free of charge, provided that the
-software is not modified and any part (including this license file) of it is not
-modified or deleted.
+software is not modified and this license file including the copyright notice is
+not modified or deleted.
 
 You may use or modify this software, or distribute the modified version free of
 charge, provided that both of the following 2 conditions are met:
 
 1. This license document, including the above copyright notice, shall be
-included in the software (the modified version).
+included in the modified version.
 
-2. If the software (the modified version) is not a programming language, then
-there's no naming restriction. But if the software is still a programming
-language, then the language's name shall still contain the text "FutureScript"
-but not be exactly "FutureScript" (for example, "MyFutureScript") and the
-software shall not be harmful.
+2. If the modified version is not a programming language, then there's no naming
+restriction. But if it's still a programming language, then the language's name
+shall still contain the text "FutureScript" but not be exactly "FutureScript"
+(for example, "MyFutureScript") and the modified version shall not be harmful.
 
 Definitions in this document:
 
