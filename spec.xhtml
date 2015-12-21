@@ -57,8 +57,8 @@
 <pre><code><![CDATA[
     a."prop name"
 ]]></code></pre>
-<p>我又想，当今世界，所有的语言都存在版本问题，这既让开发者在升级语言版本时提心吊胆，生怕一升级旧代码就不能运行了，又给语言的设计者套上了枷锁，不敢做出大的改变，导致进步越来越微小。能不能想出一个全新的机制，彻底解决版本问题？</p>
-<p>于是我便产生了自己设计一门语言的念头。</p>
+<p>又想到，在当今世界，所有的语言都存在版本问题，这既让开发者在升级语言版本时提心吊胆，生怕一升级旧代码就不能运行了，又给语言的设计者套上了枷锁，不敢做出大的改变，导致进步越来越微小。能不能想出一个全新的机制，彻底解决版本问题？</p>
+<p>于是我便涌起了自己设计一门语言的念头。</p>
 <p>FutureScript的第一感，是它有着极其统一的语法：</p>
 <ul>
     <li>中括号<code>[</code>、<code>]</code>始终表示数组字面量，大括号<code>{</code>、<code>}</code>始终表示对象字面量。</li>
@@ -143,7 +143,7 @@
     # Array comprehensions:
     cubes: list.map <> math.cube @0
 ]]></code></pre>
-<p>如果你不仅想看懂，而且想写FutureScript代码，那么请看完余下的章节。下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（其实教程也是语言规范的一部分，只是比较好懂）。</p>
+<p>如果你不仅想看懂，而且想写FutureScript代码，那么请看完余下的章节。下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（教程也是语言规范的一部分，只是比较好懂而已）。</p>
 <h1>代码结构</h1>
 <h2>文件格式与外观</h2>
 <p>后缀名为.fus。</p>
@@ -359,7 +359,7 @@
     a: (x ifvoid: 0, y ifvoid: 0) -> x * y
 ]]></code></pre>
 <p>有默认值的话，哪怕只有一个参数，外面也必须有括号（或中括号）。</p>
-<p>如果是<code>ifvoid</code>默认，则<code>ifvoid</code>可以省略，所以上面的例子也等同于：</p>
+<p>如果是<code>ifvoid</code>默认，则<code>ifvoid</code>可以省略，所以上面的例子可简写为：</p>
 <pre><code><![CDATA[
     a: (x: 0, y: 0) -> x * y
 ]]></code></pre>
@@ -403,6 +403,7 @@
     </tr>
 </table>
 <p>内层参数不能和任何外层参数重名。这比CoffeeScript、JS都严格。但不排除在以后版本中放开这个限制。</p>
+<p>我们已经知道所有的成员访问都用点号<code>.</code>，这还有个好处，就是让函数的调用可以省去小括号而直接写上中括号。</p>
 <p>函数的调用有4种表示法：空格、小括号、中括号、大括号。</p>
 <pre><code><![CDATA[
     a(2)
@@ -411,26 +412,40 @@
     a{prop: true} # a({prop: true})
     a(3, 4, 5) # only valid in compatible mode
 ]]></code></pre>
-<p>多参数调用一定要加括号，这个CoffeeScript不同。只有单参数调用是可以不加括号的，零参数要加<code>()</code>。</p>
-<p>CoffeeScript里面如果函数调用要传递的参数本身也是函数的话，如果它没有参数，那么可写成<code>abc -&gt; Math.random()</code>，但FutureScript中绝对不能这么写，否则编译器会误以为这是一个参数为abc的函数。必须采用如下一种：</p>
+<p>多参数调用一定要加括号，这个CoffeeScript不同。只有单参数调用是可以不加括号的。当然我们也都知道没有参数时要加上代表零参数的<code>()</code>。</p>
+<p>CoffeeScript里面如果函数调用要传递的参数本身也是函数的话，如果它没有参数，那么可写成这样的形式：</p>
+<pre><code><![CDATA[
+    abc -> Math.random()
+]]></code></pre>
+<p>因为CoffeeScript把它理解成：</p>
+<pre><code><![CDATA[
+    abc (-> Math.random())
+]]></code></pre>
+<p>但FutureScript中绝对不能这么写，否则编译器会误以为这是一个参数为abc的函数。必须采用如下一种：</p>
 <pre><code><![CDATA[
     # pass a function as argument to abc
     abc <> Math.random()
+    abc -- Math.random()
     abc () -> Math.random()
 ]]></code></pre>
-<p>激进模式会不会限制语言的表达力呢？我认为不会，因为我们可以用对象或数组作为参数，就像上面的例子那样，JSON本身已经十分方便了。</p>
 <p>我们还可以使用<code>'</code>来达到类似splat的效果：</p>
 <pre><code><![CDATA[
     awardMedals' contenders # awardMedals.apply(null, contenders)
 ]]></code></pre>
-<p>这两个是不同的：</p>
+<p>相当于ES6的</p>
+<pre><code><![CDATA[
+    awardMedals(...contenders)
+]]></code></pre>
+<p>单引号<code>'</code>称为变体。<code>'</code>是FutureScript独有的符号，不只这一种形式，后面还会介绍。</p>
+<p>注意这两个函数调用是不同的：</p>
 <pre><code><![CDATA[
     a{prop: true}.b # a({prop: true}).b
     a {prop: true}.b # a({prop: true}.b)
 ]]></code></pre>
-<p>凡是函数都有一个返回值，值即为函数块的值，所以我们无需使用<code>return</code>。</p>
-<p>不像CoffeeScript，我们没有胖箭头<code>=&gt;</code>。我认为JavaScript使<code>this</code>的含义可自定义是一种错误的设计，它应该始终指向当前对象。我们的函数和CoffeeScript的函数的对应关系如下：</p>
-<ul>
+<p>凡是函数都有一个返回值，值即为函数块的值，所以我们无需使用<code>return</code>。函数块的值是啥？精确定义在前面讲过，下面再通俗地讲一遍：就是函数的最后一条语句的值，如果最后一条语句不是表达式，那么则是<code>void</code>。这个规则十分重要，是函数式编程思想的核心。</p>
+<p>不像CoffeeScript，我们没有胖箭头<code>=&gt;</code>，这是因为我认为JavaScript使<code>this</code>的含义可变是一种错误的设计，它应该始终指向当前对象。</p>
+<p class="detail">我们的函数和CoffeeScript的函数的对应关系如下：</p>
+<ul class="detail">
     <li>类的方法和构造器（包括嵌套的类的方法和构造器）：CoffeeScript瘦箭头</li>
     <li>类的方法和构造器内部（不包括嵌套的类的方法和构造器，但包括嵌套的类的方法和构造器内部）：CoffeeScript胖箭头</li>
     <li>其余地方：CoffeeScript瘦箭头</li>
@@ -443,27 +458,48 @@
 ]]></code></pre>
 <p>注意，<code>:</code>不构成表达式，但<code>as</code>构成表达式。例如：</p>
 <pre><code><![CDATA[
-    abc: <> a: 1
+    abc: <>
+        a: 1
 ]]></code></pre>
 <p>执行<code>abc()</code>返回的值是<code>void</code>而不是<code>1</code>。但</p>
 <pre><code><![CDATA[
-    abc: <> 1 as a
+    abc: <>
+        1 as a
 ]]></code></pre>
 <p>执行<code>abc()</code>返回的值是<code>1</code>。</p>
-<p>变量不用声明也不能声明，这是因为我们为变量赋值的机制类似CoffeeScript（但有着显著的区别）。CoffeeScript是：如果前面还未出现过则会编译成声明并赋值，如果已出现过则会编译成单纯赋值。FutureScript是：如外层没有该变量名，则编译成声明并赋值；如外层有该变量名，则编译成单纯赋值。</p>
-<p>考虑如下CoffeeScript代码：</p>
+<p>变量不用声明也不能声明，这是因为我们的变量都是自动声明的。该机制类似CoffeeScript，但有着显著的区别，主要是在内外层方面：</p>
+<ul>
+    <li>CoffeeScript：如<b>前面的外层</b>还未出现过，则编译成声明并赋值；如<b>前面的外层</b>已出现过，则编译成单纯赋值。</li>
+    <li>FutureScript：如<b>外层</b>还未出现过，则编译成声明并赋值；如<b>外层</b>已出现过，则编译成单纯赋值。</li>
+</ul>
+<p>这两段代码是一样的，都是编译成一个变量：</p>
+<p>CoffeeScript：</p>
+<pre><code><![CDATA[
+    a = 3
+    ->
+        a = 5
+]]></code></pre>
+<p>FutureScript：</p>
+<pre><code><![CDATA[
+    a: 3
+    --
+        a: 5
+]]></code></pre>
+<p>但这两段代码不一样：</p>
+<p>CoffeeScript：</p>
 <pre><code><![CDATA[
     ->
         a = 5
     a = 3
 ]]></code></pre>
-<p>CoffeeScript编译成两个重名变量<code>a</code>。然而在FutureScript中如果你写：</p>
+<p>CoffeeScript编译成两个重名变量<code>a</code>。然而在FutureScript中：</p>
 <pre><code><![CDATA[
     --
         a: 5
     a: 3
 ]]></code></pre>
 <p>会编译成一个变量<code>a</code>。</p>
+<p>变量自动声明的灵感源于CoffeeScript，我觉得这是CoffeeScript最好的特性之一，也许很多人不同意，觉得这样禁止了在内层声明同名变量，所以是不好的特性，但其实不然。在大型项目中，不同的程序员分别管理不同的文件是合理的，模块具有隔离作用；但是不同的程序员分别管理一个文件的内外层是不合理的，这会引起混乱。既然一个文件的内外层应作为一个整体管理，所以为内层变量取名的时候顺便注意一下外层并不是一件难事，因此也就没有必要支持在内层声明同名变量。而且我们比CoffeeScript做得更彻底。</p>
 <p><code>:</code>也支持数组解构赋值（不支持嵌套），例如：</p>
 <pre><code><![CDATA[
     [a, b]: [b, a] # swap a and b
