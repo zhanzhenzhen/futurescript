@@ -663,7 +663,7 @@
     export: abc
 ]]></code></pre>
 <p class="detail">两者功能相似，唯一的区别是：前者的<code>abc</code>是作为变量，所以是绑定的。后者的<code>abc</code>是作为表达式，所以是不绑定的。（这和ES6的规则相同，ES6的<code>export {... as default}</code>和<code>export default ...</code>也有着上述区别。）</p>
-<p>导入和导出必须出现在顶层，因为这是基于ES6的。我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃FutureScript的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
+<p>导入和导出必须出现在最外层，因为这是基于ES6的。我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃FutureScript的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
 <h1>数据</h1>
 <h2>字符串、正则表达式</h2>
 <p>内联字符串：</p>
