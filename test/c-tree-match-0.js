@@ -205,6 +205,7 @@ RootBlock [
                         voidDefault: null
                     }
                 ]
+                argumentsReal: true
                 body: ScopeBlock [
                     ExpressionStatement {
                         expression: EqualExpression {

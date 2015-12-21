@@ -42,6 +42,7 @@ RootBlock [
                                 voidDefault: null
                             }
                         ]
+                        argumentsReal: true
                         body: ScopeBlock [
                             AssignStatement {
                                 assignees: Arr [

@@ -232,6 +232,7 @@ RootBlock [
                     voidDefault: null
                 }
             ]
+            argumentsReal: true
             body: ScopeBlock [
                 ExpressionStatement {
                     expression: PlusExpression {
@@ -1004,6 +1005,7 @@ RootBlock [
                                 voidDefault: null
                             }
                         ]
+                        argumentsReal: true
                         body: ScopeBlock [
                             ExpressionStatement {
                                 expression: PlusExpression {
@@ -1033,6 +1035,7 @@ RootBlock [
                                             voidDefault: null
                                         }
                                     ]
+                                    argumentsReal: true
                                     body: ScopeBlock [
                                         ExpressionStatement {
                                             expression: TimesExpression {
