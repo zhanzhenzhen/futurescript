@@ -975,7 +975,7 @@
 <p>模式匹配中的“比较”默认是用<code>=</code>直接比较输入和模式，<code>match</code>右边还可以不是输入而是比较函数，例如：</p>
 <pre><code><![CDATA[
     statusCode: 404
-    message: match <> statusCode >= @
+    message: match <> statusCode >= @0
         600 ? "unsupported"
         500 ? "server error"
         400 ? "client error"
@@ -985,7 +985,7 @@
         |     "unsupported"
     # message is "client error"
 ]]></code></pre>
-<p>注意，上例中的<code>@</code>适用于激进模式，在兼容模式中要改成<code>@0</code>。</p>
+<p>使用激进模式的话，上例中的<code>@0</code>更是可以简化为<code>@</code>。</p>
 <p><code>else</code>可以跟前面的并在一起，此时用<code>or else</code>，但该项不能有<code>then</code>。这称为<code>else</code>模式和其他模式的合并写法，但本质上还是两个模式。在模式匹配中，<code>or</code>这个关键字若不作为运算符使用，可以简写为逗号<code>,</code>，所以上面的例子可以写成：</p>
 <pre><code><![CDATA[
     message: match <> statusCode >= @
