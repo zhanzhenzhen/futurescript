@@ -523,6 +523,8 @@
 ]]></code></pre>
 <p>只要不是FutureScript关键字，就能作为变量名，哪怕是JS关键字如<code>function</code>也能作为变量名。但JS关键字不能作为全局变量名来赋值或使用。</p>
 <h2>模块</h2>
+<p>如果你想仍然使用Node的<code>require</code>、<code>exports</code>和<code>module.exports</code>，那么可以跳过本章，因为在FutureScript中你仍然可以像往常一样使用这些东西。</p>
+<p>我们知道，Node有它自己的模块机制，但问题是该机制并不属于ES6，ES6定义了一套JS原生模块语法。由于FutureScript是基于JS的，所以我们的原生语法是基于ES6的。</p>
 <p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
 <pre><code><![CDATA[
     main: import "lib"
@@ -535,6 +537,11 @@
 <pre><code><![CDATA[
     import main from "lib";
 ]]></code></pre>
+<p>当版本行使用默认值的时候，就编译成上面这样的JS。但妙的是，版本行如果有<code>node import</code>或<code>node module</code>，同样的代码，它就会编译成：</p>
+<pre><code><![CDATA[
+    var main = require("lib");
+]]></code></pre>
+<p>你无需修改代码，就可以控制本模块中的所有<code>import</code>是使用Node机制还是ES6机制，所以现在<code>import</code>可以代替<code>require</code>。</p>
 <p>还可以导入所有的“命名导出”：</p>
 <pre><code><![CDATA[
     lib: import "lib" all
@@ -560,21 +567,21 @@
     import {fun1, fun2 as f2} from "lib";
 ]]></code></pre>
 <p>不支持在一个语句里同时导入“默认导出”和“命名导出”，有此需求请分两个语句。我认为一个模块既有“默认导出”又有“命名导出”并不好。</p>
-<p>注意，其实上面的一些例子利用了<code>all</code>在用大括号的情况下可省略的特性。如果要写全，应该是：</p>
-<pre><code><![CDATA[
+<p class="detail">注意，其实上面的一些例子利用了<code>all</code>在用大括号的情况下可省略的特性。如果要写全，应该是：</p>
+<pre class="detail"><code><![CDATA[
     {fun1, fun2 as f2}: import "lib" all
     import "lib" all as {fun1, fun2 as f2}
 ]]></code></pre>
-<p><code>import</code>后面只能跟内联普通字符串，并且字符串里不可以有插值（但可以有转义符）。<code>import</code>不能既有冒号又有<code>as</code>。这些都是正确的import语句：</p>
-<pre><code><![CDATA[
+<p class="detail"><code>import</code>后面只能跟内联普通字符串，并且字符串里不可以有插值（但可以有转义符）。<code>import</code>不能既有冒号又有<code>as</code>。这些都是正确的import语句：</p>
+<pre class="detail"><code><![CDATA[
     import "./abc" as abc
     abc: import "./abc"
     abc: import "abc" all
     import "abc"
     import "\u0041"
 ]]></code></pre>
-<p>这些是错误的import语句：</p>
-<pre><code><![CDATA[
+<p class="detail">这些是错误的import语句：</p>
+<pre class="detail"><code><![CDATA[
     import("abc")
     import "./a" + "bc" # But this is legal as import expression
     import "./\(filename)"
@@ -636,22 +643,29 @@
     obj.multiply'export: <> @0 * @1
 ]]></code></pre>
 <p>注意<code>abc export as def</code>和<code>export abc as def</code>相似但有着两个区别。一个区别很明显，就是前者是表达式语句而后者是命令语句。另一个区别很微妙，前者的<code>abc</code>是作为表达式，后者的<code>abc</code>是作为变量，这就使得：前者是不绑定的，而后者是绑定的（能享受到ES6模块的变量绑定带来的好处）。</p>
-<p>当语句以<code>export:</code>开头，表示ES6中的“默认导出”。文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，FutureScript支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
-<p>默认导出还可以用这种形式：</p>
+<p>当语句以<code>export:</code>开头，表示ES6中的“默认导出”。例如：</p>
 <pre><code><![CDATA[
+    export: abc
+]]></code></pre>
+<p>当版本行使用<code>node export</code>或<code>node module</code>的时候，这条语句会编译成：</p>
+<pre><code><![CDATA[
+    module.exports = abc;
+]]></code></pre>
+<p class="detail">文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，FutureScript支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
+<p class="detail">默认导出还可以用这种形式：</p>
+<pre class="detail"><code><![CDATA[
     export abc as default
 ]]></code></pre>
-<p>所以默认导出其实是一种特殊的命名导出（详情参见ES6）。当你把它命名为<code>default</code>时即为默认导出。</p>
-<p>所以这两个：</p>
-<pre><code><![CDATA[
+<p class="detail">所以默认导出其实是一种特殊的命名导出（详情参见ES6）。当你把它命名为<code>default</code>时即为默认导出。</p>
+<p class="detail">所以这两个：</p>
+<pre class="detail"><code><![CDATA[
     export abc as default
     export: abc
 ]]></code></pre>
-<p>两者功能相似，唯一的区别是：前者的<code>abc</code>是作为变量，所以是绑定的。后者的<code>abc</code>是作为表达式，所以是不绑定的。（这和ES6的规则相同，ES6的<code>export {... as default}</code>和<code>export default ...</code>也有着上述区别。）</p>
+<p class="detail">两者功能相似，唯一的区别是：前者的<code>abc</code>是作为变量，所以是绑定的。后者的<code>abc</code>是作为表达式，所以是不绑定的。（这和ES6的规则相同，ES6的<code>export {... as default}</code>和<code>export default ...</code>也有着上述区别。）</p>
 <p>导入和导出必须出现在顶层，因为这是基于ES6的。我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃FutureScript的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
 <h1>数据</h1>
 <h2>字符串、正则表达式</h2>
-<p>字符串受CoffeeScript启发，不同之处在于不用单引号、不用3个连续引号、不支持字符串的多行自动连接。</p>
 <p>内联字符串：</p>
 <pre><code><![CDATA[
     str: "Welcome to FutureScript!"
@@ -732,7 +746,7 @@
 ]]></code></pre>
 <p>原义字符串完全废除了<code>\</code>的功能，所以行末不能用<code>\</code>来连接，在内联原义字符串中也无法表示双引号字符。</p>
 <p>所以总结一下，凡是字符串起始符号<code>"</code>左边紧接着字母的，可以是表示字符串，也可以表示字符串扩展。</p>
-<p>正则表达式引号中间的内容本质上是字符串，这和JS和CoffeeScript都不同。就算是格式正则表达式中的注释，本质上是属于字符串的，只是转换时去掉了而已。注意，转换是运行时而不是编译时，因为可能有插值，所以无法在编译时转换。</p>
+<p class="detail">正则表达式引号中间的内容本质上是字符串，这和JS和CoffeeScript都不同。就算是格式正则表达式中的注释，本质上是属于字符串的，只是转换时去掉了而已。注意，转换是运行时而不是编译时，因为可能有插值，所以无法在编译时转换。</p>
 <p>还有一点和CoffeeScript不同，就是CoffeeScript中：</p>
 <pre><code><![CDATA[
     mobyDick = "Call me Ishmael. Some years ago --
@@ -743,7 +757,7 @@
     world..."
 ]]></code></pre>
 <p>这会编译成多行自动连接，连接符是一个空格。但是我们不支持，一个原因是这和我们的格式不兼容，另一个原因是我觉得这只适合西方语言。如果是中文，那加上空格可就错了。所以这个功能不好，应该老老实实用<code>\</code>来连接，是英文的话，前面加个空格。</p>
-<p>下表是多种字符串的转义规则（转换时进行的转义不包括在内，如正则表达式语法本身的<code>\</code>）：</p>
+<p>下表是不同种类的转义规则（转换时进行的转义不包括在内，如正则表达式语法本身的<code>\</code>）：</p>
 <table>
     <tr>
         <th></th>
@@ -864,7 +878,6 @@
 </ul>
 <p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
 <p><code>/=</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。为什么我们不用<code>!=</code>？因为感叹号目前FutureScript还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
-<p>我们暂不支持CoffeeScript风格的链式比较，但以后的版本一定会支持。</p>
 <p>FutureScript和其他语言在逻辑运算方面最大的区别就是<code>not</code>的优先级。<code>not</code>的优先级被降低，仅高于<code>and</code>和<code>or</code>。这意味着我们可以少加很多括号。你肯定抱怨过在JS中不得不这样写：</p>
 <pre><code><![CDATA[
     if !(abc instanceof Abc) doTask();
@@ -874,11 +887,12 @@
     if not abc instanceof Abc
         doTask()
 ]]></code></pre>
-<p>但事实上这个例子是非法的，因为我们没有<code>instanceof</code>关键字，我们是用<code>is</code>关键字，你可以写<code>not abc is Abc</code>但稍显别扭（最好是写成<code>abc isnt Abc</code>）。那有没有好看的例子呢？也有，像这种也不用加上括号：</p>
+<p>但事实上这个例子是非法的，因为我们没有<code>instanceof</code>关键字，我们是用<code>is</code>关键字，你可以写<code>not abc is Abc</code>但稍显难看（所以我们支持写成<code>abc isnt Abc</code>）。那有没有好看的例子呢？有，像这种也不用加上括号：</p>
 <pre><code><![CDATA[
     if not 200 <= statusCode < 300
         console.log "failure"
 ]]></code></pre>
+<p><span class="warning">我们暂不支持这种链式比较，但以后的版本一定会支持。</span></p>
 <p>再回到刚才说的不等号。其实还可以用<code>not ... =</code>。这4个功能相同，你看哪个顺眼就用哪个：</p>
 <pre><code><![CDATA[
     if statusCode /= 200 throw
@@ -886,7 +900,7 @@
     if statusCode not = 200 throw
     if not statusCode = 200 throw
 ]]></code></pre>
-<p>不过<code>not ... =</code>虽然功能相同，但生成的代码还是与其他三个不同的。</p>
+<p class="detail">不过<code>not ... =</code>虽然功能相同，但生成的代码还是与其他三个不同的。</p>
 <h2>条件</h2>
 <p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
 <pre><code><![CDATA[
