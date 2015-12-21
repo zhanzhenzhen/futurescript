@@ -521,39 +521,6 @@
 <pre><code><![CDATA[
     a, b: 1 # both a and b are 1
 ]]></code></pre>
-<p>还可以对包含子语句的语句用<code>as</code>，例如：</p>
-<pre><code><![CDATA[
-    [
-        x ->
-            aaa(x)
-            bbb(x)
-            ccc(x)
-        as f1
-
-        x ->
-            ddd(x)
-            eee(x)
-            fff(x)
-        as f2
-    ]
-]]></code></pre>
-<p>如上例显示，这种<code>as</code>和下一语句之间最好要有空行，不然不容易看清这个<code>as</code>是属于谁的。但我们也提供了你不空行时的好办法，就是加个<code>above</code>。</p>
-<pre><code><![CDATA[
-    [
-        x ->
-            aaa(x)
-            bbb(x)
-            ccc(x)
-        above as f1
-        x ->
-            ddd(x)
-            eee(x)
-            fff(x)
-        above as f2
-    ]
-]]></code></pre>
-<p><code>above</code>对机器来说没有任何意义，不加也是合法的，但对人来说有意义。不过我的看法是，空行更直观些，打起来也更方便。</p>
-<p>要注意，上面两个例子中<code>as</code>和上面的函数并不是两个并列的语句，而是一个语句。语句不能以<code>as</code>或<code>above as</code>开头。</p>
 <p>只要不是FutureScript关键字，就能作为变量名，哪怕是JS关键字如<code>function</code>也能作为变量名。但JS关键字不能作为全局变量名来赋值或使用。</p>
 <h2>模块</h2>
 <p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
@@ -654,13 +621,6 @@
 <pre><code><![CDATA[
     multiply'export: <> @0 * @1
     mp: (<> @0 * @1) export as multiply
-    mp: <>
-        @0 * @1
-    above export as multiply
-    mp: <> @0 * @1
-    above export as multiply
-    <> @0 * @1
-    above export as multiply
     mp: (<> @0 * @1) as multiply'export
     abc export as def
     export abc as def
@@ -668,7 +628,6 @@
     export: abc # note that this is different from above
     export: <> @0 * @1
 ]]></code></pre>
-<p>和赋值一样，这里的<code>above</code>也是可略的。</p>
 <p>这些是错误的语法：</p>
 <pre><code><![CDATA[
     abc export def
@@ -1865,5 +1824,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>答：原先是有这种考虑，但这在将来版本中可能会产生歧义（将来版本中<code>{abc}</code>可能是一个合法的对象）。</p>
 <p>问：为啥不支持Unicode变量名（不用引号时）？</p>
 <p>答：很少有这种需求，因为加上引号就可以了。不过以后版本中可能会支持。</p>
+<p>问：above关键字有啥用？</p>
+<p>答：above关键字本来是用来帮助你看清某些特殊形式的代码，但后来我决定在将来版本中再支持这种“特殊形式的代码”，所以above现在没有任何作用。</p>
 </body>
 </html>
