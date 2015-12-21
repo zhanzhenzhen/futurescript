@@ -18,4 +18,5 @@ import "./c-tree-export-0.js";
 import "./c-tree-class-0.js";
 
 import "./c-compile-0.js";
+import "./c-compile-module-0.js";
 import "./c-compile-class-0.js";
