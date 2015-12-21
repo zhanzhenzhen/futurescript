@@ -454,7 +454,15 @@
     a{prop: true}.b # a({prop: true}).b
     a {prop: true}.b # a({prop: true}.b)
 ]]></code></pre>
-<p>凡是函数都有一个返回值，值即为函数块的值，所以我们无需使用<code>return</code>。函数块的值是啥？精确定义在前面讲过，下面再通俗地讲一遍：就是函数的最后一条语句的值，如果最后一条语句不是表达式，那么则是<code>void</code>。这个规则十分重要，是函数式编程思想的核心。</p>
+<p>凡是函数都有一个返回值，值即为函数块的值，所以我们无需使用<code>return</code>。函数块的值是啥？精确定义在前面讲过，下面再通俗地讲一遍：就是函数的最后一条语句的值，如果最后一条语句不是表达式，那么则是<code>void</code>。这个规则十分重要，是函数式编程思想的核心。示例：</p>
+<pre><code><![CDATA[
+    calc: (x, y) ->
+        a: x * x
+        b: y * y
+        a + b
+    calc(2, 3) # returns 13
+]]></code></pre>
+<p>不单是函数块，<code>if...then...else...</code>里面的块，以及所有其他的块（顶级块除外），用的都是这个规则。</p>
 <p>不像CoffeeScript，我们没有胖箭头<code>=&gt;</code>，这是因为我认为JavaScript使<code>this</code>的含义可变是一种错误的设计，它应该始终指向当前对象。</p>
 <p class="detail">我们的函数和CoffeeScript的函数的对应关系如下：</p>
 <ul class="detail">
@@ -817,7 +825,7 @@
 </table>
 <h2>数组</h2>
 <p>方括号的作用就是表示数组或类似数组的东西（用于解构赋值等），没有其他用途。</p>
-<p>点号的作用就是访问对象的成员。由于数组也是对象，所以JS中<code>arr[3]</code>我们改为<code>arr.3</code>，更一致。其实数组就是属性名为索引值的对象，刚知道时可能会惊讶，但确实是这样，可以用<code>Object.keys(arr)</code>验证这一论断。JS这点和别的语言不同，但不是糟粕，只要形式上变得一致就可以了。</p>
+<p>点号的作用就是访问对象的成员。由于数组也是对象，所以JS中<code>arr[3]</code>我们改为<code>arr.3</code>，更一致。其实数组就是属性名为索引值的对象，不信的话，可以用<code>Object.keys(arr)</code>来验证一下。JS这点和别的语言不同，但不是糟粕，因为这个概念挺统一的，也没有什么破绽。</p>
 <p>当然，在和带小数点的数字同时出现时，会感觉别扭，这时建议加上括号。比较一下：</p>
 <pre><code><![CDATA[
     x.1 + x.2 + 3.5
@@ -930,7 +938,7 @@
 <pre><code><![CDATA[
     b: a = 3 ? "three" | "other"
 ]]></code></pre>
-<p><code>?</code>和<code>then</code>等价，<code>|</code>和<code>else</code>等价，这条规则不仅限于<code>if</code>语句，在所有地方通用。下文提到的它们任何一个的规则也适用于它的等价方。</p>
+<p><code>?</code>和<code>then</code>等价，<code>|</code>和<code>else</code>等价，这条规则不仅限于<code>if</code>语句，在所有地方通用。下文提到的它们任何一个的规则也适用于它的等价方，例如<code>then</code>的规则也适用于<code>?</code>。</p>
 <p>条件前置时，<code>if</code>可写可不写，而<code>then</code>则当<code>then</code>块非内联时可写可不写。<code>if</code>省略时要注意避免出现优先级的问题，例如：</p>
 <pre><code><![CDATA[
     a if b > 100 then 100 else b
