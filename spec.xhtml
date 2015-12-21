@@ -345,11 +345,11 @@
 <pre><code><![CDATA[
     a: (x, y) -> x * y
 ]]></code></pre>
-<p>单参数如果是数组的话，可以使用类似解构赋值的形式：</p>
+<p>如果是单参数，并且该参数是数组，就可以使用类似“解构赋值”的形式：</p>
 <pre><code><![CDATA[
     a: [x, y] -> x * y
 ]]></code></pre>
-<p>注意，当传递的参数不是数组时（例如是<code>void</code>），或者传递的参数个数为零时，它不会出错，而是将x和y都设为<code>void</code>。其实从用途上来说，多参数能达到的，这个也能达到，而且更纯粹，所以，在激进模式中，我们不鼓励使用多参数（多参数在激进模式中功能不全，无法用<code>@</code>表示第一个参数之后的参数）。</p>
+<p>有了这个，激进模式才成为真正实用的东西，因为你可以用<code>a[1, 2]</code>来调用它（具体后面再介绍）。其实从用途上来说，多参数能达到的，这个也能达到，而且更纯粹，所以，在激进模式中，我们不鼓励使用多参数（多参数在激进模式中功能不全，无法用<code>@</code>表示第一个参数之后的参数）。</p>
 <p>在<code>&lt;&gt;</code>函数内部，可以使用<code>@</code>。<code>@</code>取代了JS的<code>arguments</code>（兼容模式下）或<code>arguments[0]</code>（激进模式下），它是如此简便，在许多情况下，你会喜欢不带参数名。例如，我们可以写：</p>
 <pre><code><![CDATA[
     add: <> @0 + @1
@@ -358,13 +358,16 @@
 <p>参数可以有默认值：</p>
 <pre><code><![CDATA[
     a: (x ifvoid: 0, y ifvoid: 0) -> x * y
+    b: [x ifvoid: 0, y ifvoid: 0] -> x * y
 ]]></code></pre>
 <p>有默认值的话，哪怕只有一个参数，外面也必须有括号（或中括号）。</p>
 <p>如果是<code>ifvoid</code>默认，则<code>ifvoid</code>可以省略，所以上面的例子可简写为：</p>
 <pre><code><![CDATA[
     a: (x: 0, y: 0) -> x * y
+    b: [x: 0, y: 0] -> x * y
 ]]></code></pre>
-<p><code>&lt;&gt;</code>和<code>--</code>的区别是：<code>&lt;&gt;</code>只是没有形参，<code>--</code>是既没形参也没实参，当然严格来讲可以传递实参，但不会有任何效果，因为<code>--</code>没有定义<code>@</code>。<code>--</code>里面可以出现<code>@</code>，但是是指外层<code>&lt;&gt;</code>函数的<code>@</code>。<code>--</code>也没有定义<code>fun</code>，<code>--</code>里面可以出现<code>fun</code>，但是是指外层<code>-&gt;</code>或<code>&lt;&gt;</code>函数。<code>--</code>基本可以看成是<code>() -&gt;</code>的简写，但在<code>fun</code>上面有所不同。</p>
+<p>除了<code>ifvoid</code>默认以外，还有<code>ifnull</code>默认，后面会介绍。</p>
+<p>下表列出三种函数符号的详细区别：</p>
 <table>
     <tr>
         <th></th>
@@ -403,6 +406,14 @@
         <td>很简洁</td>
     </tr>
 </table>
+<p>例如在<code>@</code>的使用上，如下代码：</p>
+<pre><code><![CDATA[
+    outer: <>
+        inner: x -> @
+]]></code></pre>
+<p>这里的<code>@</code>不是指<code>inner</code>函数的参数，而是指<code>outer</code>函数的参数，因为<code>-&gt;</code>的语法没有定义<code>@</code>。</p>
+<p><code>fun</code>是一个关键字，指“本函数”。这通常写在递归里，如果函数名很长，这可以减少输入量，甚至无须为函数命名也可以使用递归。</p>
+<p>同理，由于<code>--</code>的语法没有定义<code>fun</code>，所以<code>--</code>里面的<code>fun</code>指的是外层<code>-&gt;</code>或<code>&lt;&gt;</code>函数。</p>
 <p>内层参数不能和任何外层参数重名。这比CoffeeScript、JS都严格。但不排除在以后版本中放开这个限制。</p>
 <p>我们已经知道所有的成员访问都用点号<code>.</code>，这还有个好处，就是让函数的调用可以省去小括号而直接写上中括号。</p>
 <p>函数的调用有4种表示法：空格、小括号、中括号、大括号。</p>
