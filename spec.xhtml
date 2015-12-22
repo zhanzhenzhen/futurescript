@@ -1223,36 +1223,24 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <h1>面向对象</h1>
 <h2>类</h2>
-<p class="detail">本文中的“字段”、“成员”、“属性”是同义词。当字段是函数时，能称为“方法”。</p>
+<p class="detail">本文中的“字段”、“成员”、“属性”是同义词。当字段是函数时，才能称为“方法”。</p>
 <p>例子：</p>
 <pre><code><![CDATA[
-    Animal: class
-        new: <>
-            me.name: @0
+    Cat: class
+        new: name ->
+            me.name: name
+        speak: <>
+            console.log me.name + " makes a noise."
 
-        move: meters ->
-            console.log me.name + " moved \(meters)m."
-
-    Snake: class from Animal
-        move: <>
-            console.log "Slithering..."
-            super 5
-
-    Horse: class from Animal
-        move: <>
-            console.log "Galloping..."
-            super 45
-
-    sam: Snake "Sammy the Python"
-    tom: Horse "Tommy the Palomino"
-
-    sam.move()
-    tom.move()
+    Lion: class from Cat
+        speak: <>
+            super()
+            console.log me.name + " roars."
 ]]></code></pre>
 <p><code>constructor</code>我们简写为<code>new</code>。</p>
 <p>JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
 <p>FutureScript的类的一个亮点是“防冲突字段”，可以把它近似看成是私有字段。防冲突字段的好处不是外部无法访问（外部只是无法通过对象属性直接访问而已），最大的好处是继承类可以放心地使用同名字段，而不用担心会覆盖，这在类关系很复杂的项目中尤其重要。</p>
-<p>我们先看一下反面例子，假设别人用JavaScript写了一个库，里面有个ES6类：</p>
+<p>我们先看一个反面例子，假设别人用JavaScript写了一个库，里面有个ES6类：</p>
 <pre><code><![CDATA[
     class User {
         constructor(username) {
@@ -1303,7 +1291,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>静态字段我们使用<code>static</code>，例如：</p>
 <pre><code><![CDATA[
     Car: class
-        static numberOfWheels: 4
+        static wheelCount: 4
         static energy: "gas"
 ]]></code></pre>
 <p>防冲突字段也适用于静态字段，<code>me.</code>改成<code>Me.</code>即可。</p>
@@ -1342,7 +1330,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
 <p>FutureScript的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在FutureScript（或ES6）中，构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。为什么这种机制可以做到继承<code>Array</code>、<code>Error</code>，限于篇幅不再赘述。（但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到2015年6月ES6才正式发布，形势有望在未来数月内改变，届时就会完美。）</p>
 <p>但是FutureScript中<code>super</code>的语法比较像CoffeeScript，不用写<code>super.methodName()</code>，直接<code>super()</code>即可。我们不支持孤立的<code>super</code>，不过你可以写成<code>super'(@)</code>。</p>
-<p class="detail">我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值。所以在FutureScript里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。（返回值唯一的用处是使用<code>fun</code>递归时，如果你真的想对构造函数使用递归的话。）</p>
+<p class="detail">我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值（有这个用途的话，可以使用静态方法）。所以在FutureScript里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。（返回值唯一的用处是使用<code>fun</code>递归时，如果你真的想对构造函数使用递归的话。）</p>
 <p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
 <pre><code><![CDATA[
     Website: class
@@ -1476,7 +1464,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>冒号左边的<code>'</code>目前不能超过2个。</p>
 <h2>in</h2>
-<p><code>in</code>的用法和CoffeeScript几乎完全相同，当然，不支持<code>!in</code>，可以用<code>... not in ...</code>或<code>not ... in ...</code>。</p>
+<p><code>in</code>的用法和CoffeeScript几乎完全相同，当然，不支持<code>!in</code>，可以用<code>... not in ...</code>或<code>not ... in ...</code>。示例：</p>
+<pre><code><![CDATA[
+    2 in [1, 2, 3] # returns true
+    4 in [1, 2, 3] # returns false
+    4 not in [1, 2, 3] # returns true
+    not 4 in [1, 2, 3] # returns true
+]]></code></pre>
 <h2>is</h2>
 <p><code>is</code>表示左边是右边的类型，类似于JavaScript的<code>instanceof</code>，但又有些区别，它还能判断原始类型，可以说结合了<code>instanceof</code>和<code>typeof</code>。当右边是<code>Number</code>、<code>Boolean</code>、<code>String</code>、<code>Symbol</code>（必须严格表示为这4个之中的1个，不能是引用）时使用<code>typeof</code>。</p>
 <pre><code><![CDATA[
@@ -1496,8 +1490,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>rem和mod</h2>
 <p><code>rem</code>即是JavaScript的<code>%</code>。<code>mod</code>是另一种求余，正负号和除数相同，只要除数是正数，结果就不为负，所以这种求余适用范围可能更广一些。<code>a mod b</code>相当于JavaScript的<code>(a % b + b) % b</code>。</p>
 <h2>+和-（正负号）</h2>
-<p>一元的<code>+</code>、<code>-</code>（正负号）的用法和CoffeeScript相似但有微小区别，我们规定它只能是紧接着算元，如果后面的字符是空白则被当作加号和减号。例如：</p>
-<pre><code><![CDATA[
+<p class="detail">一元的<code>+</code>、<code>-</code>（正负号）的用法和CoffeeScript相似但有微小区别，我们规定它只能是紧接着算元，如果后面的字符是空白则被当作加号和减号。例如：</p>
+<pre class="detail"><code><![CDATA[
     # a is 5. `-2` can't be connected because it is a valid statement.
     # To connect, either add a space or move the `-` to the first line
     a: 5
@@ -1524,8 +1518,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     a+-b # invalid
     a++b # invalid
 ]]></code></pre>
-<p>如果后面的字符不是空白，则如果前面的字符是字母、数字、<code>_</code>、<code>$</code>、<code>)</code>、<code>]</code>、<code>}</code>、<code>"</code>或<code>@</code>，则被解析为加号和减号，否则被解析为正负号。</p>
-<p>另外，作为运算符时，<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>之后不能紧接<code>+</code>或<code>-</code>。</p>
+<p class="detail">如果后面的字符不是空白，则如果前面的字符是字母、数字、<code>_</code>、<code>$</code>、<code>)</code>、<code>]</code>、<code>}</code>、<code>"</code>或<code>@</code>，则被解析为加号和减号，否则被解析为正负号。</p>
+<p class="detail">另外，作为运算符时，<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>之后不能紧接<code>+</code>或<code>-</code>。</p>
 <h2>调试</h2>
 <p>使用<code>pause</code>命令插入断点。它等价于JS的<code>debugger</code>命令，因为<code>debugger</code>违反了关键字不能大于7个字符的原则，所以改名为<code>pause</code>。</p>
 <h2>插入JavaScript</h2>
