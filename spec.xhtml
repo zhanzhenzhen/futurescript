@@ -114,35 +114,22 @@
     <li><code>**</code>表示幂运算。<code>2 ** 3</code>即为8。</li>
 </ul>
 <p>好了，基本上你只要看完了这一章，任何FutureScript代码都能看懂，至少也能猜个八九不离十。</p>
-<p>这一章的最后，附上一段示例，可以将其粘贴到浏览器上运行。</p>
+<p>这一章的最后，附上一段示例。</p>
 <pre><code><![CDATA[
     fus 0.1.0
 
-    # Assignment:
-    number:   42
+    number:   36
     opposite: true
 
-    # Conditions:
-    number: -42 if opposite
+    # number will be -36
+    number: -self if opposite
 
-    # Functions:
-    square: <> @0 ** 2
+    square: x -> x ** 2
 
-    # Arrays:
     list: [1, 2, 3, 4, 5]
 
-    # Objects:
-    math: {
-        root:   Math.sqrt
-        square: square
-        cube:   x -> x * square(x)
-    }
-
-    # Existence:
-    console.log "I knew it!" if elvis'ok
-
-    # Array comprehensions:
-    cubes: list.map <> math.cube @0
+    # squares will be [1, 4, 9, 16, 25]
+    squares: list.map(x -> square x)
 ]]></code></pre>
 <p>如果你不仅想看懂，而且想写FutureScript代码，那么请看完余下的章节。下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（教程也是语言规范的一部分，只是比较好懂而已）。</p>
 <h1>代码结构</h1>
@@ -256,7 +243,7 @@
     D: class << ddd: 1 >>
     E: class << eee: 1 >>
 ]]></code></pre>
-<p>和这个做对比：</p>
+<p>它和这个是等价的：</p>
 <pre><code><![CDATA[
     A: class
         aaa: 1
