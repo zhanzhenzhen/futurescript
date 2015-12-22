@@ -139,7 +139,7 @@
     }
 
     # Existence:
-    alert "I knew it!" if elvis'ok
+    console.log "I knew it!" if elvis'ok
 
     # Array comprehensions:
     cubes: list.map <> math.cube @0
@@ -312,7 +312,7 @@
 <p>激进模式中，<code>@</code>表示JS的<code>arguments[0]</code>。兼容模式中，<code>@</code>表示JS的<code>arguments</code>。</p>
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
 <p>FutureScript代码可以被JS调用。JS代码也可以被FutureScript调用。</p>
-<p><code>capitalized new</code>是指创建类的实例不用加<code>new</code>，编译时会自动加进去，依据类名的首字母大小写，大写时会自动加上<code>new</code>，小写则不加。示例：</p>
+<p><code>capitalized new</code>是指创建类的实例不用加<code>new</code>，编译后的JS会自动加入<code>new</code>，它依据类名的首字母大小写，碰到大写则会加。示例：</p>
 <pre><code><![CDATA[
     animal: Animal() # var animal = new Animal();
 ]]></code></pre>
@@ -474,7 +474,7 @@
 <p>用<code>:</code>、<code>as</code>。例如：</p>
 <pre><code><![CDATA[
     a: "hello world" # var a = "hello world";
-    3 as b = 4 ? alert "impossible!" # var b; if ((b = 3) === 4) {alert("impossible");}
+    3 as b = 4 ? console.log "impossible!" # var b; if ((b = 3) === 4) {console.log("impossible");}
 ]]></code></pre>
 <p>注意，<code>:</code>不构成表达式，但<code>as</code>构成表达式。例如：</p>
 <pre><code><![CDATA[
@@ -952,7 +952,7 @@
 <p>但是要注意，条件前置时无论怎样省略，<code>if</code>和<code>then</code>必须至少出现一个。</p>
 <p>条件还可以后置，例如：</p>
 <pre><code><![CDATA[
-    alert("a is true!") if a # if (a) {alert("a is true!");}
+    console.log("a is true!") if a # if (a) {console.log("a is true!");}
     mood: "happy" if singing # if (singing) {mood = "happy";}
 ]]></code></pre>
 <p>条件后置时<code>if</code>绝不能省略。一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是普通的块，只能是内联块。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
@@ -1095,14 +1095,14 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>这个相当于JS的for循环，从10到1：</p>
 <pre><code><![CDATA[
     repeat{from: 10, to: 1, by: -1, for: i ->
-        alert i
+        console.log i
     }
 ]]></code></pre>
 <p><code>by</code>默认为1。</p>
 <p>这个有所不同，是从9到0：</p>
 <pre><code><![CDATA[
     repeat{count: 10, by: -1, for: i ->
-        alert i
+        console.log i
     }
 ]]></code></pre>
 <p>fus-ext随时可能更改，因此本章的内容可能过时。以fus-ext页面的内容为准：https://www.npmjs.com/package/fus-ext</p>
@@ -1110,7 +1110,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>递归的实现方式没有什么特别的，但我们加入了更简便的方法，你甚至无需命名递归函数，你想，自己调用自己，又何必给自己取名字？使用<code>fun</code>关键字就行了。例如，如果你不想用外部库的话，可以用递归模拟循环：</p>
 <pre><code><![CDATA[
     do (i: 0) -> if i < 10
-        alert i
+        console.log i
         fun(i + 1)
 ]]></code></pre>
 <p>FutureScript的递归有个好处，它会自动编译（优化）成循环，当自我调用的语句出现在尾部之时。所以，你无需担心堆栈溢出，就算循环1000000次也没关系，编译后的JS代码是一个真正的循环，突破了传统递归的限制。这个在内部是通过Babel实现的。</p>
@@ -1223,23 +1223,24 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <h1>面向对象</h1>
 <h2>类</h2>
-<p>和类有关的关键字有<code>class</code>、<code>super</code>、<code>new</code>、<code>nonew</code>、<code>me</code>、<code>Me</code>。例子：</p>
+<p class="detail">本文中的“字段”、“成员”、“属性”是同义词。当字段是函数时，能称为“方法”。</p>
+<p>例子：</p>
 <pre><code><![CDATA[
     Animal: class
         new: <>
             me.name: @0
 
         move: meters ->
-            alert me.name + " moved \(meters)m."
+            console.log me.name + " moved \(meters)m."
 
     Snake: class from Animal
         move: <>
-            alert "Slithering..."
+            console.log "Slithering..."
             super 5
 
     Horse: class from Animal
         move: <>
-            alert "Galloping..."
+            console.log "Galloping..."
             super 45
 
     sam: Snake "Sammy the Python"
@@ -1248,10 +1249,84 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     sam.move()
     tom.move()
 ]]></code></pre>
-<p>我们使用比传统更纯粹的形式：让赋值功能从class剥离出来，使用表达式而非语句。</p>
-<p>类的声明方式比较像CoffeeScript。但我们的更严格。我们多了getter and setter功能，以及<code>constructor:</code>简写成<code>new:</code>。在FutureScript中，类的所有声明的子项都必须是以冒号的形式。</p>
+<p><code>constructor</code>我们简写为<code>new</code>。</p>
 <p>JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
-<p>getter和setter的例子：</p>
+<p>FutureScript的类的一个亮点是“防冲突字段”，可以把它近似看成是私有字段。防冲突字段的好处不是外部无法访问（外部只是无法通过对象属性直接访问而已），最大的好处是继承类可以放心地使用同名字段，而不用担心会覆盖，这在类关系很复杂的项目中尤其重要。</p>
+<p>我们先看一下反面例子，假设别人用JavaScript写了一个库，里面有个ES6类：</p>
+<pre><code><![CDATA[
+    class User {
+        constructor(username) {
+            this._name = username;
+        }
+        getUsername() {
+            return this._name;
+        }
+    }
+]]></code></pre>
+<p>他还在API文档中写明了<code>User</code>类的构造器和<code>getUsername</code>的使用方法。于是你写了一个<code>HumanUser</code>类，继承<code>User</code>：</p>
+<pre><code><![CDATA[
+    class HumanUser extends User {
+        constructor(username, name) {
+            super();
+            this._name = name;
+        }
+        getName() {
+            return this._name;
+        }
+    }
+]]></code></pre>
+<p>由于别人在API文档中没有告诉你用到了哪些“私有字段”，而你的“私有字段”正好也使用了<code>_name</code>，这样一来，你的类就无法正常运行了。</p>
+<p>在FutureScript中，只要字段名以<code>_</code>开头，便自动成为防冲突字段。这两个类用FutureScript可以改写为：</p>
+<pre><code><![CDATA[
+    User: class
+        new: username ->
+            me._name: username
+        getUsername: <>
+            me._name
+]]></code></pre>
+<p>和</p>
+<pre><code><![CDATA[
+    HumanUser: class from User
+        new: (username, name) ->
+            super()
+            me._name: name
+        getName: <>
+            me._name
+]]></code></pre>
+<p>为什么它能防冲突？因为<code>me._name</code>不是编译成<code>this._name</code>，而是编译成<code>this[_name]</code>，其中<code>_name</code>不是字符串，而是Symbol的一个实例。编译器一碰到<code>me.</code>，并且后面是以<code>_</code>开头的话，即这样编译。你可以试试看，在JS中还能不能用<code>instance._name</code>来访问这个属性。</p>
+<p>防冲突字段还可以出现在字段的声明中，例如：</p>
+<pre><code><![CDATA[
+    Animal: class
+        _name: "My Name"
+]]></code></pre>
+<p>防冲突字段不能用引号包起来。所以如果你实在是想让你的普通字段以<code>_</code>开头，就可以写成像<code>me."_name"</code>的形式，这就不是防冲突字段了。</p>
+<p>静态字段我们使用<code>static</code>，例如：</p>
+<pre><code><![CDATA[
+    Car: class
+        static numberOfWheels: 4
+        static energy: "gas"
+]]></code></pre>
+<p>防冲突字段也适用于静态字段，<code>me.</code>改成<code>Me.</code>即可。</p>
+<p>还支持像C#一样的“静态构造函数”，只要<code>static</code>后面不跟任何名称，例如：</p>
+<pre><code><![CDATA[
+    Website: class
+        static: <>
+            result: longTimeTask()
+            Me.part1: result[0]
+            Me.part2: result[1]
+        static ok: <> Me.part1'ok
+]]></code></pre>
+<p>它就相当于：</p>
+<pre><code><![CDATA[
+    Website: class
+        static ok: <> Me.part1'ok
+    result: longTimeTask()
+    Website.part1: result[0]
+    Website.part2: result[1]
+]]></code></pre>
+<p>静态构造函数的好处是所有和类有关的代码可以都写在类里面，看上去更舒服，还能减少输入量，变量可以不暴露在外面。</p>
+<p>静态构造函数内的<code>me.</code>和<code>Me.</code>都指向当前闭包所在的类，即这个类本身，而不是当前对象的类。</p>
+<p>写过C#的程序员一定不会对getter和setter陌生，我们的类也支持：</p>
 <pre><code><![CDATA[
     Animal: class
         new: <>
@@ -1262,32 +1337,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         name'set: <>
             me._name: @0
 ]]></code></pre>
-<p><code>'get</code>和<code>'set</code>一看就明白。这里的亮点是<code>me._name</code>，它编译成的JS不是像你猜测的那样是<code>this._name</code>，而是<code>this[_name]</code>，其中<code>_name</code>是Symbol。编译器一碰到<code>me.</code>，并且后面是以<code>_</code>开头的话，即这样编译。</p>
-<p>这被称作“防冲突字段”，可以把它近似看成是私有字段。防冲突字段的好处不是外部无法访问，外部虽然无法通过对象的属性直接访问，但可以间接访问，最大的好处是继承类可以放心地使用同名的防冲突字段，而不用担心会覆盖，这在类关系很复杂的大型项目中尤其重要。因为这些字段不属于API，通常别的开发者是不会告诉你是怎样用的，如果你继承别人写的类，有可能你的私有字段正好重名，类的行为就被破坏了。</p>
-<p>以<code>_</code>开头的字段名还可以出现在字段的声明中，例如：</p>
-<pre><code><![CDATA[
-    Animal: class
-        _name: "My Name"
-]]></code></pre>
-<p>字段的声明中只要是以<code>_</code>开头的，便自动成为防冲突字段。</p>
-<p>防冲突字段不能用引号包起来。所以如果你实在是想让你的普通字段以<code>_</code>开头，就可以写成像<code>me."_name"</code>的形式，这就不是防冲突字段了。</p>
-<p>对于对象和类而言，属性、成员、字段是同义词。方法是指为函数的字段。</p>
-<p>创建实例时无需使用new，因为其实JS的new是多余的，如果一个函数只能被当作类来使用，肯定会加new。所以在FutureScript中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
+<p>创建实例时无需使用new，因为其实JS的new是多余的，一个类作为一般函数也没有什么实用价值。所以在FutureScript中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
+<p>只要类有实例化需求，就要避免取非大写开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
-<p>CoffeeScript对于静态字段是使用<code>@property: value</code>，我们使用的是<code>static</code>，即<code>static property: value</code>。</p>
-<p>防冲突字段也适用于静态字段，区别是使用的不是<code>me.</code>而是<code>Me.</code>。</p>
-<p>FutureScript的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在FutureScript（或ES6）中，构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。为什么这种机制可以做到继承<code>Array</code>、<code>Error</code>，限于篇幅不再赘述。但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到2015年6月ES6才正式发布，形势有望在未来数月内改变，届时就会完美。</p>
+<p>FutureScript的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在FutureScript（或ES6）中，构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。为什么这种机制可以做到继承<code>Array</code>、<code>Error</code>，限于篇幅不再赘述。（但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到2015年6月ES6才正式发布，形势有望在未来数月内改变，届时就会完美。）</p>
 <p>但是FutureScript中<code>super</code>的语法比较像CoffeeScript，不用写<code>super.methodName()</code>，直接<code>super()</code>即可。我们不支持孤立的<code>super</code>，不过你可以写成<code>super'(@)</code>。</p>
-<p>我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值。所以在FutureScript里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。（返回值唯一的用处是使用<code>fun</code>递归时，如果你真的想对构造函数使用递归的话。）</p>
-<p>有的时候我们想写静态构造函数，也可以，<code>static</code>后面不要跟任何名称即可，例如：</p>
-<pre><code><![CDATA[
-    Website: class
-        static: <>
-            result: longTimeTask()
-            Me.part1: result[0]
-            Me.part2: result[1]
-]]></code></pre>
-<p>静态构造函数内的<code>me.</code>和<code>Me.</code>都指向当前闭包所在的类，即这个类本身，而不是当前对象的类。</p>
+<p class="detail">我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值。所以在FutureScript里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。（返回值唯一的用处是使用<code>fun</code>递归时，如果你真的想对构造函数使用递归的话。）</p>
 <p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
 <pre><code><![CDATA[
     Website: class
@@ -1296,7 +1351,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
                 doSomething()
 ]]></code></pre>
 <p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类的关系还是扁平为好。</p>
-<p>只要类有实例化需求，就要避免取非大写开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
 <h1>使用外部库</h1>
 <h2>管道</h2>
 <p>管道操作符是<code>|></code>。例子：</p>
@@ -1332,31 +1386,31 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     for button in buttons
         do (button) ->
             button.onclick = ->
-                alert button.textContent
+                console.log button.textContent
 ]]></code></pre>
 <p>这种通过<code>do</code>来hold住一个变量名的方法，由于FutureScript实行严格的禁止层级变量重名，所以我们不支持，但是现在看来也无需支持，因为有了更好的方法：</p>
 <pre><code><![CDATA[
     buttons.forEach button ->
         button.onclick: --
-            alert button.textContent
+            console.log button.textContent
 ]]></code></pre>
 <p>或：</p>
 <pre><code><![CDATA[
     buttons.every button ->
         button.onclick: --
-            alert button.textContent
+            console.log button.textContent
         true
 ]]></code></pre>
 <p>两者有啥区别？这已经超出了本文的范围，不过挺重要的，还是说一下。这两个数组方法都属于ES5规范，当使用<code>forEach</code>时，是无法模拟<code>break</code>的。当使用<code>every</code>时，可以巧妙地模拟<code>break</code>，只需让它返回false即可。例如：</p>
 <pre><code><![CDATA[
     range.every i ->
-        alert i
+        console.log i
         i < 5 ? true | false
 ]]></code></pre>
 <p>也可以不用<code>true</code>、<code>false</code>，而用更短的<code>1</code>、<code>0</code>：</p>
 <pre><code><![CDATA[
     range.every i ->
-        alert i
+        console.log i
         i < 5 ? 1 | 0
 ]]></code></pre>
 <p>当然，<code>do</code>虽然不能像CoffeeScript一样hold住变量名，但你只要取个不一样的名字，就可以达到相同的目的：</p>
@@ -1364,7 +1418,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     do --
         btn: button
         btn.onclick: --
-            alert btn.textContent
+            console.log btn.textContent
 ]]></code></pre>
 <p>但问题是我们没有原生的循环，所以上面这个例子也没有什么用。</p>
 <p><code>do</code>的右面必须紧接函数字面量，这个比CoffeeScript严格。</p>
