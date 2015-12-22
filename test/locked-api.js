@@ -59,6 +59,6 @@ export let runCode = function(code) {
     return r;
 };
 
-export let print = function(str) {
+export let printLine = function(str) {
     console.log(str);
 };

@@ -508,7 +508,7 @@ a: 1
 a: 1
 a: 1
 `);
-$lockedApi.print("Long 1: " + (new Date().getTime() - startTime));
+$lockedApi.printLine("Long 1: " + (new Date().getTime() - startTime));
 }); // ============================================================
 
 test(() => {
@@ -611,5 +611,5 @@ b:
                     else
                         0
 `);
-$lockedApi.print("Long 2: " + (new Date().getTime() - startTime));
+$lockedApi.printLine("Long 2: " + (new Date().getTime() - startTime));
 }); // ============================================================
