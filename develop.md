@@ -37,6 +37,7 @@ Note that these are outside ECMAScript 6 spec:
 
 - `console.log`
 - `require` and other Node.js built-ins
+- `global` and `window`
 
 Can't rely on any non-permanent files except `"locked-api.js"`.
 
