@@ -31,7 +31,12 @@ Permanent compiler files are under `"lib"` directory with filenames starting wit
 Permanent compiler files conventions
 ------------------------------------
 
-Can't rely on any dependencies outside the ECMAScript 6 specification (even including Node.js built-ins such as `require`) except Babel, which can be removed finally (maybe in 2016).
+Can't rely on anything outside the ECMAScript 6 specification. For now, we use Babel to simulate the ECMAScript 6 environment, but Babel can be removed finally (maybe in 2016).
+
+Note that these are outside ECMAScript 6 spec:
+
+- `console.log`
+- `require` and other Node.js built-ins
 
 Can't rely on any non-permanent files except `"locked-api.js"`.
 

@@ -9,10 +9,10 @@ export let test = function(fn) {
     }
     catch (ex) {
         if (ex instanceof AssertError) {
-            console.log("false, " + index.toString());
+            $lockedApi.print("false, " + index.toString());
         }
         else {
-            console.log("error, " + index.toString());
+            $lockedApi.print("error, " + index.toString());
         }
     }
     index++;

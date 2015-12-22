@@ -58,3 +58,7 @@ export let runCode = function(code) {
     r = JSON.parse(JSON.stringify(r)); // to make sure it's JSON
     return r;
 };
+
+export let print = function(str) {
+    console.log(str);
+};

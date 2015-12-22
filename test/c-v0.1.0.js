@@ -20,3 +20,4 @@ import "./c-tree-class-0.js";
 import "./c-compile-0.js";
 import "./c-compile-module-0.js";
 import "./c-compile-class-0.js";
+import "./c-compile-long-0.js";
