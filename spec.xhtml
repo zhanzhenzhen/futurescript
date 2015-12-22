@@ -948,14 +948,14 @@
 <pre><code><![CDATA[
     if a > 100 throw new Error()
 ]]></code></pre>
+<p>如果没有<code>else</code>块，那么则当<code>else</code>时整个<code>if</code>表达式的值为<code>void</code>。</p>
 <p>但是要注意，条件前置时无论怎样省略，<code>if</code>和<code>then</code>必须至少出现一个。</p>
-<p>如果<code>else</code>块省略，那么则当<code>else</code>时整个<code>if</code>表达式的值为<code>void</code>。</p>
-<p>条件还可以后置，这时<code>if</code>就不能省略，例如：</p>
+<p>条件还可以后置，例如：</p>
 <pre><code><![CDATA[
     alert("a is true!") if a # if (a) {alert("a is true!");}
     mood: "happy" if singing # if (singing) {mood = "happy";}
 ]]></code></pre>
-<p>一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是普通的块，只能是内联块。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
+<p>条件后置时<code>if</code>绝不能省略。一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是普通的块，只能是内联块。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
 <p>还有一点和CoffeeScript不同，就是当碰到分号时：</p>
 <pre><code><![CDATA[
     if x > 100 then aaa(); bbb()
@@ -996,7 +996,7 @@
 <p>使用激进模式的话，上例中的<code>@0</code>更是可以简化为<code>@</code>。</p>
 <p><code>else</code>可以跟前面的并在一起，此时用<code>or else</code>，但该项不能有<code>then</code>。这称为<code>else</code>模式和其他模式的合并写法，但本质上还是两个模式。在模式匹配中，<code>or</code>这个关键字若不作为运算符使用，可以简写为逗号<code>,</code>，所以上面的例子可以写成：</p>
 <pre><code><![CDATA[
-    message: match <> statusCode >= @
+    message: match <> statusCode >= @0
         600, | "unsupported"
         500  ? "server error"
         400  ? "client error"
@@ -1006,7 +1006,7 @@
 ]]></code></pre>
 <p>用<code>or else</code>的时候<code>or</code>还可以省略，所以还可以写成：</p>
 <pre><code><![CDATA[
-    message: match <> statusCode >= @
+    message: match <> statusCode >= @0
         600 | "unsupported"
         500 ? "server error"
         400 ? "client error"
@@ -1016,17 +1016,18 @@
 ]]></code></pre>
 <p>比较函数的功能非常强大，例如：</p>
 <pre><code><![CDATA[
-chessBoard: (pos) -> match <> pos.x = @0 and pos.y = @1
+chessBoard: (pos) -> match <> pos.x = @0.0 and pos.y = @0.1
     [0, 0] ? "king"
     [0, 1] ? "pawn"
     [4, 5] ? "queen"
     |        "empty"
 piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
+<p>（注：激进模式中<code>@0.0</code>和<code>@0.1</code>可以简化为<code>@0</code>和<code>@1</code>。）</p>
 <p>又如：</p>
 <pre><code><![CDATA[
     text: "This is a dog."
-    speak: match <> text.includes(@)
+    speak: match <> text.includes(@0)
         "cat" ? "meow"
         "dog" ? "woof"
         |       "unknown"
@@ -1043,7 +1044,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>and模式则不常用，但也有例子：</p>
 <pre><code><![CDATA[
     array: ["a", "c", "b", "d"]
-    message: match <> array.includes(@)
+    message: match <> array.includes(@0)
         "a" and "b" and "c" ? "The array includes all of the first 3 letters."
         "a"                 ? "The array includes a."
         "b"                 ? "The array includes b."
@@ -1067,7 +1068,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>可以看出，即便是模拟传统的<code>switch</code>，依然比<code>switch</code>简洁。</p>
 <h2>循环</h2>
-<p>循环其实并不符合函数式编程的理念，我们没有循环。但我的mate库提供了全局函数repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。本章不属于FutureScript语言规范，只是简要介绍一下repeat函数。例子：</p>
+<p>循环其实并不符合函数式编程的理念，所以我有意使FutureScript没有循环。但我可以肯定地说，所有循环能做的事，FutureScript都能做，而且简洁程度不亚于循环。</p>
+<p>fus-ext提供了repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。本章不属于FutureScript语言规范，只是简要介绍一下repeat函数。例子：</p>
 <pre><code><![CDATA[
     repeat[10, i ->
         console.log "This is \(i) time"
@@ -1103,7 +1105,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         alert i
     }
 ]]></code></pre>
-<p>Mate随时可能更改，因此本章的内容可能过时。以Mate页面的内容为准：https://www.npmjs.com/package/mate</p>
+<p>fus-ext随时可能更改，因此本章的内容可能过时。以fus-ext页面的内容为准：https://www.npmjs.com/package/fus-ext</p>
 <h2>递归</h2>
 <p>递归的实现方式没有什么特别的，但我们加入了更简便的方法，你甚至无需命名递归函数，你想，自己调用自己，又何必给自己取名字？使用<code>fun</code>关键字就行了。例如，如果你不想用外部库的话，可以用递归模拟循环：</p>
 <pre><code><![CDATA[
@@ -1123,9 +1125,18 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     finally
         cleanUp()
 ]]></code></pre>
-<p>和CoffeeScript有两点不同。第一：若<code>throw</code>后面啥都没有，不是语法错误，而是：若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。第二：<code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
+<p><code>throw</code>后面甚至可以啥都没有，若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。例如：</p>
+<pre><code><![CDATA[
+    try
+        doSth()
+    catch error
+        console.log "error"
+        throw # throw error;
+]]></code></pre>
+<p>当你想在<code>catch</code>块内重新抛出异常时就可以省略很多字符。</p>
+<p class="detail"><code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
 <h2>异步</h2>
-<p>由于需要尽快促成FutureScript面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</p>
+<p><span class="warning">由于需要尽快促成FutureScript面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</span></p>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
 <pre><code><![CDATA[
     abc().then(function(x){
