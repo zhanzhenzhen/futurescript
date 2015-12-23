@@ -50,11 +50,11 @@
 <h1>简介</h1>
 <p>我在写JavaScript代码时常想：<code>==</code>和<code>===</code>十分讨厌，如果能统一成<code>=</code>就好了。有一天我想到，如果一门新的语言能用冒号<code>:</code>表示赋值，不是就实现了吗？本来JSON中的冒号，就是“让左边的属性拥有右边的值”的意思，可说含义相近，而我们只需把这种语法延展到“变量赋值”就行了。</p>
 <p>我又想，如果所有的成员访问都统一用点号<code>.</code>，这该有多完美？不管是对象成员，还是数组成员，也不管对象成员名是不是加了引号。这意味着JS的<code>a[0]</code>，可以写成：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a.0
 ]]></code></pre>
 <p>而JS的<code>a["prop name"]</code>，可以写成：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a."prop name"
 ]]></code></pre>
 <p>很多JS的权威人物说，函数只应传递少量参数，如果函数要传递很多参数，那表示函数没设计好，更合理的是传递对象。我完全同意，但有更加激进的想法：“多参数”本身是否把事情变复杂了？</p>
@@ -67,7 +67,7 @@
     <li>只要是“令左边为右边的值”，不管是对象字面量，还是赋值，都用冒号<code>:</code>。</li>
     <li>没有烦人的<code>==</code>与<code>===</code>，等号<code>=</code>就表示相等。</li>
 </ul>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a: ["hello", "world"] # var a = ["hello", "world"]
     console.log(a.0, a.1) # console.log(a[0], a[1])
 
@@ -79,12 +79,12 @@
     c."content-length": 123 # c["content-length"] = 123
 ]]></code></pre>
 <p>FutureScript的第二感，是可读性极佳。看这段：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
 ]]></code></pre>
 <p>CoffeeScript也可以用<code>a ?= 8</code>，然而FutureScript的可读性更佳。另外像逻辑运算符，我们也弃用JS中的符号而改用更自然的<code>and</code>、<code>or</code>、<code>not</code>。</p>
 <p>FutureScript的第三感，是能够极大简化你的代码。熟悉JS的程序员都知道异步的语法有多么不自然，但现在我们可以：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     console.log abc()'wait.def()'wait.ghi()'wait
 ]]></code></pre>
 <p>要知道，promise相对于传统的“恐怖大三角”回调函数已经是一个进步了。但是上面这一行更进一步，它相当于下面这一大段promise：</p>
@@ -116,7 +116,7 @@
 </ul>
 <p>好了，基本上你只要看完了这一章，任何FutureScript代码都能看懂，至少也能猜个八九不离十。</p>
 <p>这一章的最后，附上一段示例。</p>
-<pre><code><![CDATA[
+<pre><code class="fus"><![CDATA[
     fus 0.1.0
 
     number:   36
@@ -172,7 +172,7 @@
     <li>match表</li>
 </ul>
 <p>当块（除catch块外）只含有单条语句时，也可以写在一行里而不使用缩进，这称为内联块。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if x = 5 then aaa()
 ]]></code></pre>
 <p class="detail">注意此时<code>aaa()</code>仍然是属于then块的。另请注意，这种写法中，块之前必须有相应的关键字或符号，例如上例中的<code>then</code>不能省略。由此可知，所有的块（除后置if中的块外），语法里都有关键字或符号作为前导，例如<code>-&gt;</code>、<code>then</code>、<code>try</code>，当这个前导不处于语句头部且不处于行的头部且后面不是内联块时才可能允许省略（还要看语法是否支持，例如<code>-&gt;</code>就不能省略）。</p>
@@ -183,38 +183,38 @@
 <p class="detail">2. 并列：上面存在一行A，满足B的缩进等于A的缩进，且A和B之间无其他行或A和B之间的所有行的缩进都大于B的缩进，且A没有被连接或被强制连接（术语解释：“被连接者”是指连接后的右面，“连接者”是指左面）吗？若否，则做下一步。若是，则执行：A的起始部分和B的起始部分被解析为并列关系并跳到5，若无法解析则跳到4。</p>
 <p class="detail">3. 层级：上面存在一行A，满足B的缩进大于A的缩进，且A和B之间无其他行或A和B之间的所有行的缩进都大于B的缩进，且A没有被连接或被强制连接吗？若否，则做下一步。若是，则执行：A的结尾部分和B的起始部分被解析为层级关系并跳到5，若无法解析则跳到4。</p>
 <p class="detail">4. 连接：上面存在一行A，满足B的缩进不小于A的缩进，且A和B之间无其他行或A和B之间的所有行的缩进都大于B的缩进吗？若否，则跳到6。若是，则执行：B被解析为犹如被连接到A的末尾所属语句的末尾并跳到5，若无法解析则跳到6。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if x = 5 and
     y = 5 then aaa()
 ]]></code></pre>
 <p>或：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if x = 5
     and y = 5 then aaa()
 ]]></code></pre>
 <p>或：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if x = 5 and
         y = 5 then aaa()
 ]]></code></pre>
 <p>都等价于：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if x = 5 and y = 5 then aaa()
 ]]></code></pre>
 <p>又例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a.b <>
         aaa()
     .c()
 ]]></code></pre>
 <p>等价于：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a.b(<> aaa()).c()
 ]]></code></pre>
 <p class="detail">5. 解析成功并退出。</p>
 <p class="detail">6. 解析失败并退出。</p>
 <p>缩进的规则很适合用来表示一些复杂的语句。例如，你可以这样写：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     text: "This is a dog."
     speak: match (<>
         s = @toLowerCase()
@@ -231,13 +231,13 @@
     .c()
 ]]></code></pre>
 <p class="detail">CoffeeScript编译成<code>a.b(aaa).c()</code>，但我们还是按常规编译成<code>a.b(aaa.c())</code>。如果你想要达到CoffeeScript的效果，要加上括号：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     a.b(aaa)
     .c()
 ]]></code></pre>
 <h2>&lt;&lt;和&gt;&gt;</h2>
 <p>通常来说，把一行拆成几行会增加可读性。但有的时候恰恰相反，你会发觉把几行特别短小的代码合并成一行反而更好看，特别是当你有很多这样的“几行”的时候。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     A: class << aaa: 1 >>
     B: class << bbb: 1 >>
     C: class << ccc: 1 >>
@@ -245,7 +245,7 @@
     E: class << eee: 1 >>
 ]]></code></pre>
 <p>它和这个是等价的：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     A: class
         aaa: 1
     B: class
@@ -261,7 +261,7 @@
 <p><code>&lt;&lt;</code>和<code>&gt;&gt;</code>必须在1行内结束。也就是说，只能把多行合并成1行，无法把多行合并成2行。</p>
 <p>这两个符号和分号、逗号结合使用，可以达到最大程度的合并效果。分号合并行，但对象属性、数组元素、类属性需要用逗号合并。</p>
 <p class="detail">在<code>&gt;&gt;</code>后可加分号或逗号，也可不加分号或逗号，例如：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     A: class << aaa: x -> << x + 1 >>, bbb: 3 >>
     if aaa << task1() >> else << task2() >>; commonTask()
 ]]></code></pre>
@@ -301,12 +301,12 @@
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
 <p>FutureScript代码可以被JS调用。JS代码也可以被FutureScript调用。</p>
 <p><code>capitalized new</code>是指创建类的实例不用加<code>new</code>，编译后的JS会自动加入<code>new</code>，它依据类名的首字母大小写，碰到大写则会加。示例：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     animal: Animal() # var animal = new Animal();
 ]]></code></pre>
 <p>这是默认的。</p>
 <p class="detail">能识别的有两种形式：变量和普通的点号（<code>x.y</code>，它会判断<code>y</code>），像<code>x."y"</code>或<code>x.y'</code>是不能识别的。例如：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     aaa."bbb".Ccc() # new can be omitted
     new aaa.bbb."Ccc"() # new can't be omitted
 ]]></code></pre>
@@ -318,39 +318,39 @@
 <h1>基本语句</h1>
 <h2>函数</h2>
 <p>函数的声明有3种方式：<code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>。<code>&lt;&gt;</code>和<code>--</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     # both are valid
     a: x -> x + 1
     a: (x) -> x + 1
 ]]></code></pre>
 <p>如果没有参数，那么必须使用如下一种：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a: <> Math.random()
     a: -- Math.random()
     a: () -> Math.random()
 ]]></code></pre>
 <p>允许多参数，但必须要有括号：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a: (x, y) -> x * y
 ]]></code></pre>
 <p>如果是单参数，并且该参数是数组，就可以使用类似“解构赋值”的形式：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a: [x, y] -> x * y
 ]]></code></pre>
 <p>有了这个，激进模式才成为真正实用的东西，因为你可以用<code>a[1, 2]</code>来调用它（具体后面再介绍）。其实从用途上来说，多参数能达到的，这个也能达到，而且更纯粹，所以，在激进模式中，我们不鼓励使用多参数（多参数在激进模式中功能不全，无法用<code>@</code>表示第一个参数之后的参数）。</p>
 <p>在<code>&lt;&gt;</code>函数内部，可以使用<code>@</code>。<code>@</code>取代了JS的<code>arguments</code>（兼容模式下）或<code>arguments[0]</code>（激进模式下），它是如此简便，在许多情况下，你会喜欢不带参数名。例如，我们可以写：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     add: <> @0 + @1
     console.log add(2, 3) # output 5
 ]]></code></pre>
 <p>参数可以有默认值：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a: (x ifvoid: 0, y ifvoid: 0) -> x * y
     b: [x ifvoid: 0, y ifvoid: 0] -> x * y
 ]]></code></pre>
 <p>有默认值的话，哪怕只有一个参数，外面也必须有括号（或中括号）。</p>
 <p>如果是<code>ifvoid</code>默认，则<code>ifvoid</code>可以省略，所以上面的例子可简写为：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a: (x: 0, y: 0) -> x * y
     b: [x: 0, y: 0] -> x * y
 ]]></code></pre>
@@ -395,7 +395,7 @@
     </tr>
 </table>
 <p>例如在<code>@</code>的使用上，如下代码：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     outer: <>
         inner: x -> @
 ]]></code></pre>
@@ -405,7 +405,7 @@
 <p>内层参数不能和任何外层参数重名。这比CoffeeScript、JS都严格。但不排除在以后版本中放开这个限制。</p>
 <p>我们已经知道所有的成员访问都用点号<code>.</code>，这还有个好处，就是让函数的调用可以省去小括号而直接写上中括号。</p>
 <p>函数的调用有4种表示法：空格、小括号、中括号、大括号。</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a(2)
     a 2 # equivalent to above
     a[3, 4, 5] # a([3, 4, 5])
@@ -422,14 +422,14 @@
     abc (-> Math.random())
 ]]></code></pre>
 <p>但FutureScript中绝对不能这么写，否则编译器会误以为这是一个参数为abc的函数。必须采用如下一种：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     # pass a function as argument to abc
     abc <> Math.random()
     abc -- Math.random()
     abc () -> Math.random()
 ]]></code></pre>
 <p>我们还可以使用<code>'</code>来达到类似splat的效果：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     awardMedals' contenders # awardMedals.apply(null, contenders)
 ]]></code></pre>
 <p>相当于ES6的</p>
@@ -438,12 +438,12 @@
 ]]></code></pre>
 <p>单引号<code>'</code>称为变体。<code>'</code>是FutureScript独有的符号，不只这一种形式，后面还会介绍。</p>
 <p>注意这两个函数调用是不同的：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a{prop: true}.b # a({prop: true}).b
     a {prop: true}.b # a({prop: true}.b)
 ]]></code></pre>
 <p>凡是函数都有一个返回值，值即为函数块的值，所以我们无需使用<code>return</code>。函数块的值是啥？精确定义在前面讲过，下面再通俗地讲一遍：就是函数的最后一条语句的值，如果最后一条语句不是表达式，那么则是<code>void</code>。这个规则十分重要，是函数式编程思想的核心。示例：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     calc: (x, y) ->
         a: x * x
         b: y * y
@@ -460,17 +460,17 @@
 </ul>
 <h2>赋值与声明</h2>
 <p>用<code>:</code>、<code>as</code>。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a: "hello world" # var a = "hello world";
     3 as b = 4 ? console.log "impossible!" # var b; if ((b = 3) === 4) {console.log("impossible");}
 ]]></code></pre>
 <p>注意，<code>:</code>不构成表达式，但<code>as</code>构成表达式。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     abc: <>
         a: 1
 ]]></code></pre>
 <p>执行<code>abc()</code>返回的值是<code>void</code>而不是<code>1</code>。但</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     abc: <>
         1 as a
 ]]></code></pre>
@@ -488,7 +488,7 @@
         a = 5
 ]]></code></pre>
 <p>FutureScript：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a: 3
     --
         a: 5
@@ -501,7 +501,7 @@
     a = 3
 ]]></code></pre>
 <p>CoffeeScript编译成两个重名变量<code>a</code>。然而在FutureScript中：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     --
         a: 5
     a: 3
@@ -509,12 +509,12 @@
 <p>会编译成一个变量<code>a</code>。</p>
 <p>变量自动声明的灵感源于CoffeeScript，我觉得这是CoffeeScript最好的特性之一，也许很多人不同意，觉得这样禁止了在内层声明同名变量，所以是不好的特性，但其实不然。在大型项目中，不同的程序员分别管理不同的文件是合理的，模块具有隔离作用；但是不同的程序员分别管理一个文件的内外层是不合理的，这会引起混乱。既然一个文件的内外层应作为一个整体管理，所以为内层变量取名的时候顺便注意一下外层并不是一件难事，因此也就没有必要支持在内层声明同名变量。而且我们比CoffeeScript做得更彻底。</p>
 <p><code>:</code>也支持数组解构赋值（不支持嵌套），例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     [a, b]: [b, a] # swap a and b
 ]]></code></pre>
 <p>冒号的作用就是让左边的拥有右边的值。无论是对象中的冒号还是赋值中的冒号，含义相似。</p>
 <p><code>:</code>支持对多标识符同时赋值，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a, b: 1 # both a and b are 1
 ]]></code></pre>
 <p>只要不是FutureScript关键字，就能作为变量名，哪怕是JS关键字如<code>function</code>也能作为变量名。但JS关键字不能作为全局变量名来赋值或使用。</p>
@@ -522,11 +522,11 @@
 <p>如果你想仍然使用Node的<code>require</code>、<code>exports</code>和<code>module.exports</code>，那么可以跳过本章，因为在FutureScript中你仍然可以像往常一样使用这些东西。</p>
 <p>我们知道，Node有它自己的模块机制，但问题是该机制并不属于ES6，ES6定义了一套JS原生模块语法。由于FutureScript是基于JS的，所以我们的原生语法是基于ES6的。</p>
 <p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     main: import "lib"
 ]]></code></pre>
 <p>或</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     import "lib" as main
 ]]></code></pre>
 <p>都是指导入ES6中的“默认导出”，等同于JS的</p>
@@ -539,11 +539,11 @@
 ]]></code></pre>
 <p>你无需修改代码，就可以控制本模块中的所有<code>import</code>是使用Node机制还是ES6机制，所以现在<code>import</code>可以代替<code>require</code>。</p>
 <p>还可以导入所有的“命名导出”：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     lib: import "lib" all
 ]]></code></pre>
 <p>或</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     import "lib" all as lib
 ]]></code></pre>
 <p>相当于JS的</p>
@@ -551,11 +551,11 @@
     import * as lib from "lib";
 ]]></code></pre>
 <p>还可以导入指定的“命名导出”：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     {fun1, fun2 as f2}: import "lib"
 ]]></code></pre>
 <p>或</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     import "lib" as {fun1, fun2 as f2}
 ]]></code></pre>
 <p>相当于JS的</p>
@@ -564,12 +564,12 @@
 ]]></code></pre>
 <p>不支持在一个语句里同时导入“默认导出”和“命名导出”，有此需求请分两个语句。我认为一个模块既有“默认导出”又有“命名导出”并不好。</p>
 <p class="detail">注意，其实上面的一些例子利用了<code>all</code>在用大括号的情况下可省略的特性。如果要写全，应该是：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     {fun1, fun2 as f2}: import "lib" all
     import "lib" all as {fun1, fun2 as f2}
 ]]></code></pre>
 <p class="detail"><code>import</code>后面只能跟内联普通字符串，并且字符串里不可以有插值（但可以有转义符）。<code>import</code>不能既有冒号又有<code>as</code>。这些都是正确的import语句：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     import "./abc" as abc
     abc: import "./abc"
     abc: import "abc" all
@@ -586,7 +586,7 @@
 ]]></code></pre>
 <p><code>import</code>的赋值不是普通的赋值，它是“绑定”的，和ES6一样。所以，语法上有限制，它只能是赋给变量，不能赋给对象属性，也不能在冒号左边出现<code>ifvoid</code>、<code>ifnull</code>、<code>'</code>。</p>
 <p>我们使用node经常碰到这种情况：每个文件开头都有一大堆的导入，基本都重复，但又无法省略。当然，你可以建立一个新模块（即新文件），把这堆东西都放里面，再导出，于是每个模块只要导入这个新模块就可以了。但是，它的代价是，多出了点号。例如，本来是：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     aaa: import "aaa"
     bbb: import "bbb"
     ccc: import "ccc"
@@ -594,8 +594,8 @@
     bbb()
     ccc()
 ]]></code></pre>
-<p>你建一个all.js文件，把这三个<code>import</code>放里面，然后在原文件里写：</p>
-<pre><code><![CDATA[
+<p>你建一个all.fus文件，把这三个<code>import</code>放里面，然后在原文件里写：</p>
+<pre><code class="fus-part"><![CDATA[
     all: import "./all"
     all.aaa()
     all.bbb()
@@ -603,7 +603,7 @@
 ]]></code></pre>
 <p>但问题是调用时多出了<code>all</code>，所以似乎也没省多少。</p>
 <p>FutureScript具有独特的“批量导入”功能（ES6中也没有该功能）。当有<code>all</code>但无冒号也无<code>as</code>时便编译成批量导入，它会导入所有的命名导出（但不包括默认导出）并让它们都成为变量名。于是，我们可以写成：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     import "./all" all
     aaa()
     bbb()
@@ -614,14 +614,14 @@
 <p>如果A批量导入B，如果某个B的命名导出（即A中被定义的变量名）恰好是A所在的FutureScript版本的关键字，那么该变量将不可用，但不会出错。</p>
 <p>被普通导入的模块可以是Fus文件或JS文件，但被批量导入的模块必须是Fus文件（版本不限）。</p>
 <p>以上介绍的是import语句，import还可以作为表达式，格式是：<code>import "module-name"</code>，后面不能是<code>as</code>，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     import "abc"
     import "abc" + 1
     a: import "abc" + 1
 ]]></code></pre>
 <p>所以import表达式格式比较自由，但只能导入默认导出，并且如果使用到赋值，那就是普通的赋值，不是绑定的。</p>
 <p>导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些都是正确的语法：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     multiply'export: <> @0 * @1
     mp: (<> @0 * @1) export as multiply
     mp: (<> @0 * @1) as multiply'export
@@ -640,7 +640,7 @@
 ]]></code></pre>
 <p>注意<code>abc export as def</code>和<code>export abc as def</code>相似但有着两个区别。一个区别很明显，就是前者是表达式语句而后者是命令语句。另一个区别很微妙，前者的<code>abc</code>是作为表达式，后者的<code>abc</code>是作为变量，这就使得：前者是不绑定的，而后者是绑定的（能享受到ES6模块的变量绑定带来的好处）。</p>
 <p>当语句以<code>export:</code>开头，表示ES6中的“默认导出”。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     export: abc
 ]]></code></pre>
 <p>当版本行使用<code>node export</code>或<code>node module</code>的时候，这条语句会编译成：</p>
@@ -649,12 +649,12 @@
 ]]></code></pre>
 <p class="detail">文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，FutureScript支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
 <p class="detail">默认导出还可以用这种形式：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     export abc as default
 ]]></code></pre>
 <p class="detail">所以默认导出其实是一种特殊的命名导出（详情参见ES6）。当你把它命名为<code>default</code>时即为默认导出。</p>
 <p class="detail">所以这两个：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     export abc as default
     export: abc
 ]]></code></pre>
@@ -663,11 +663,11 @@
 <h1>数据</h1>
 <h2>字符串、正则表达式</h2>
 <p>内联字符串：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     str: "Welcome to FutureScript!"
 ]]></code></pre>
 <p>格式字符串：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     htmlStr: "
         <p>
             Welcome to "FutureScript"!
@@ -694,7 +694,7 @@
     "
 ]]></code></pre>
 <p>这个虽然表示一个空格，但是是允许的：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     str: "
         \x20
     "
@@ -702,29 +702,29 @@
 <p>编译器是怎样判断某个引号是内联的还是格式的？看起始引号后面紧接的字符，如果是换行，则为格式，如果是其他字符，则为内联。</p>
 <p>我们不用单引号，因为我觉得你要想用单引号，当字符串很长时，你可以用格式<code>"</code>；当字符串很短时，像<code>'"'</code>，这其实只增加了微小的可读性，我宁愿写成<code>"\""</code>。无论哪一种用单引号都没有明显优势，所以，还是别占用宝贵的符号资源为好。而且双引号是和JSON一致的。</p>
 <p>也支持字符串插值，就像CoffeeScript，不过我们使用<code>\(...)</code>。</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     str: "Today is \(year)-\(month)-\(day)."
 ]]></code></pre>
 <p>一个插值不能占据多行。目前不支持插值中含有双引号（即字符串嵌套）。其实就算支持，这也会显得太复杂而不美观，完全可以赋值给新变量，再插值。</p>
 <p>上面介绍的都是普通字符串。除了普通字符串外，还有特殊字符串和字符串扩展。什么是字符串扩展？正则表达式就是典型的例子。</p>
 <p>正则表达式我们用<code>r"..."</code>来表示。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     str.search(r"^\d{3}-\d{3}-\d{4}$")
 ]]></code></pre>
 <p>内联正则表达式废除了<code>\</code>的大部分功能，除了2个：<code>\"</code>、用于行尾连接的<code>\</code>。注意，JS的正则表达式里的<code>"</code>和<code>#</code>可以直接表示，但在这儿必须用<code>\"</code>和<code>\#</code>，因为这两个字符有特殊含义。</p>
 <p>正则表达式可以有插值，插入的是字符串：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     first: "hello"
     second: "world"
     r"#(first)-#(second)"
 ]]></code></pre>
 <p>和CoffeeScript相同，正则表达式的插值如果是普通字符串的话，如果想用字面量表示<code>\</code>字符，会比较繁琐，所以建议仅把插值用于动态插入非符号字符。</p>
 <p>还可以表示带有标志的正则表达式：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     r"\d{3}-\d{3}-\d{4}"gim
 ]]></code></pre>
 <p>格式正则表达式的例子：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     str.search(r"
         ^
         \d{3} # first
@@ -737,7 +737,7 @@
 ]]></code></pre>
 <p>格式正则表达式的不同点是：空格和换行无意义，支持注释，表示双引号字符更简单。注释的<code>#</code>左边必须至少有一个空格，这和普通注释不同。</p>
 <p>原义字符串是受C#启发。原义字符串用<code>v"..."</code>来表示，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     path: v"C:\Windows\System"
 ]]></code></pre>
 <p>原义字符串完全废除了<code>\</code>的功能，所以行末不能用<code>\</code>来连接，在内联原义字符串中也无法表示双引号字符。</p>
@@ -815,7 +815,7 @@
 <p>方括号的作用就是表示数组或类似数组的东西（用于解构赋值等），没有其他用途。</p>
 <p>点号的作用就是访问对象的成员。由于数组也是对象，所以JS中<code>arr[3]</code>我们改为<code>arr.3</code>，更一致。其实数组就是属性名为索引值的对象，不信的话，可以用<code>Object.keys(arr)</code>来验证一下。JS这点和别的语言不同，但不是糟粕，因为这个概念挺统一的，也没有什么破绽。</p>
 <p>当然，在和带小数点的数字同时出现时，会感觉别扭，这时建议加上括号。比较一下：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     x.1 + x.2 + 3.5
     x.(1) + x.(2) + 3.5 # the same as above but looks better
     x1.1 + x1.2 + 2.4
@@ -884,13 +884,13 @@
         doTask()
 ]]></code></pre>
 <p>但事实上这个例子是非法的，因为我们没有<code>instanceof</code>关键字，我们是用<code>is</code>关键字，你可以写<code>not abc is Abc</code>但稍显难看（所以我们支持写成<code>abc isnt Abc</code>）。那有没有好看的例子呢？有，像这种也不用加上括号：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if not 200 <= statusCode < 300
         console.log "failure"
 ]]></code></pre>
 <p><span class="warning">我们暂不支持这种链式比较，但以后的版本一定会支持。</span></p>
 <p>再回到刚才说的不等号。其实还可以用<code>not ... =</code>。这4个功能相同，你看哪个顺眼就用哪个：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if statusCode /= 200 throw
     if statusCode not= 200 throw
     if statusCode not = 200 throw
@@ -899,7 +899,7 @@
 <p class="detail">不过<code>not ... =</code>虽然功能相同，但生成的代码还是与其他三个不同的。</p>
 <h2>条件</h2>
 <p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     b:
         if a = 3
             "three"
@@ -907,7 +907,7 @@
             "other"
 ]]></code></pre>
 <p>或</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     b:
         a = 3 ?
             "three"
@@ -915,31 +915,31 @@
             "other"
 ]]></code></pre>
 也可以并成一行：
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     b: if a = 3 then "three" else "other"
 ]]></code></pre>
 <p>或</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     b: a = 3 ? "three" else "other"
 ]]></code></pre>
 <p>甚至</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     b: a = 3 ? "three" | "other"
 ]]></code></pre>
 <p><code>?</code>和<code>then</code>等价，<code>|</code>和<code>else</code>等价，这条规则不仅限于<code>if</code>语句，在所有地方通用。下文提到的它们任何一个的规则也适用于它的等价方，例如<code>then</code>的规则也适用于<code>?</code>。</p>
 <p>条件前置时，<code>if</code>可写可不写，而<code>then</code>则当<code>then</code>块非内联时可写可不写。<code>if</code>省略时要注意避免出现优先级的问题，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a if b > 100 then 100 else b
 ]]></code></pre>
 <p>这里的<code>if</code>省略的话意思就完全不一样了，除非加个括号。</p>
 <p>当<code>then</code>后紧接的是表示命令语句的关键字时，<code>then</code>也可省略（这也适用于模式匹配）。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if a > 100 throw new Error()
 ]]></code></pre>
 <p>如果没有<code>else</code>块，那么则当<code>else</code>时整个<code>if</code>表达式的值为<code>void</code>。</p>
 <p>但是要注意，条件前置时无论怎样省略，<code>if</code>和<code>then</code>必须至少出现一个。</p>
 <p>条件还可以后置，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     console.log("a is true!") if a # if (a) {console.log("a is true!");}
     mood: "happy" if singing # if (singing) {mood = "happy";}
 ]]></code></pre>
@@ -949,13 +949,13 @@
     if x > 100 then aaa(); bbb()
 ]]></code></pre>
 <p>CoffeeScript是把<code>aaa(); bbb()</code>全作为子语句，这看上去似乎是硬插入一条规则，很不统一，而且我们已有了专门的符号，可以写成：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if x > 100 << aaa(); bbb() >>
 ]]></code></pre>
 <p>所以这条规则在我们这里作废。FutureScript里，分号的左右两边能在不引发语法错误的前提下穿越一切障碍物。</p>
 <h2>模式匹配</h2>
 <p><code>match</code>可以看成是一个增强版<code>switch</code>，它称为模式匹配。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     day: 3
     text: match day
         1 ? "Mon"
@@ -969,7 +969,7 @@
 ]]></code></pre>
 <p>上面只是最普通的模式匹配，<code>day</code>是输入，1、2、3……称作模式。</p>
 <p>模式匹配中的“比较”默认是用<code>=</code>直接比较输入和模式，<code>match</code>右边还可以不是输入而是比较函数，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     statusCode: 404
     message: match <> statusCode >= @0
         600 ? "unsupported"
@@ -983,7 +983,7 @@
 ]]></code></pre>
 <p>使用激进模式的话，上例中的<code>@0</code>更是可以简化为<code>@</code>。</p>
 <p><code>else</code>可以跟前面的并在一起，此时用<code>or else</code>，但该项不能有<code>then</code>。这称为<code>else</code>模式和其他模式的合并写法，但本质上还是两个模式。在模式匹配中，<code>or</code>这个关键字若不作为运算符使用，可以简写为逗号<code>,</code>，所以上面的例子可以写成：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     message: match <> statusCode >= @0
         600, | "unsupported"
         500  ? "server error"
@@ -993,7 +993,7 @@
         100  ? "informational"
 ]]></code></pre>
 <p>用<code>or else</code>的时候<code>or</code>还可以省略，所以还可以写成：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     message: match <> statusCode >= @0
         600 | "unsupported"
         500 ? "server error"
@@ -1003,7 +1003,7 @@
         100 ? "informational"
 ]]></code></pre>
 <p>比较函数的功能非常强大，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
 chessBoard: (pos) -> match <> pos.x = @0.0 and pos.y = @0.1
     [0, 0] ? "king"
     [0, 1] ? "pawn"
@@ -1013,7 +1013,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>（注：激进模式中<code>@0.0</code>和<code>@0.1</code>可以简化为<code>@0</code>和<code>@1</code>。）</p>
 <p>又如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     text: "This is a dog."
     speak: match <> text.includes(@0)
         "cat" ? "meow"
@@ -1023,14 +1023,14 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>当<code>match</code>后紧接的是函数时，则被识别成比较函数。要直接写出<code>-&gt;</code>或<code>&lt;&gt;</code>，绝不能用变量替代。</p>
 <p>还有or模式和and模式。or模式我们会经常用到，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     day: "Tue"
     action: match day
         "Sat", "Sun" ? "have a rest"
         |              "work"
 ]]></code></pre>
 <p>and模式则不常用，但也有例子：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     array: ["a", "c", "b", "d"]
     message: match <> array.includes(@0)
         "a" and "b" and "c" ? "The array includes all of the first 3 letters."
@@ -1043,7 +1043,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
 <p>注意<code>or else</code>是一种特殊的合并写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>一起出现。</p>
 <p>和<code>if</code>一样，<code>then</code>块可以用缩进，这时就不用写<code>then</code>了：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     day: 3
     match day
         6
@@ -1058,13 +1058,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>循环</h2>
 <p>循环其实并不符合函数式编程的理念，所以我有意使FutureScript没有循环。但我可以肯定地说，所有循环能做的事，FutureScript都能做，而且简洁程度不亚于循环。</p>
 <p>fus-ext提供了repeat来模拟循环。为方便起见，本文中的“循环”一般指repeat。本章不属于FutureScript语言规范，只是简要介绍一下repeat函数。例子：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     repeat[10, i ->
         console.log "This is \(i) time"
     ]
 ]]></code></pre>
 <p>迭代器返回<code>break</code>则表示跳出循环，类似于JS的<code>break</code>，不过本质上不同，这里的<code>break</code>是表达式，只能使余下的循环不做，并不能使函数内剩下的部分不执行。跳出循环时repeat函数返回<code>break</code>。这个例子是一个循环，从0到9，但到5时跳出：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     repeat[10, i ->
         if i < 5
             console.log "This is \(i) time"
@@ -1073,7 +1073,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     ]
 ]]></code></pre>
 <p>不设次数则表示永远，相当于JS的<code>while (true)</code>：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     repeat --
         if abc()
             break
@@ -1081,14 +1081,14 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             doSomething()
 ]]></code></pre>
 <p>这个相当于JS的for循环，从10到1：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     repeat{from: 10, to: 1, by: -1, for: i ->
         console.log i
     }
 ]]></code></pre>
 <p><code>by</code>默认为1。</p>
 <p>这个有所不同，是从9到0：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     repeat{count: 10, by: -1, for: i ->
         console.log i
     }
@@ -1096,7 +1096,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>fus-ext随时可能更改，因此本章的内容可能过时。以fus-ext页面的内容为准：https://www.npmjs.com/package/fus-ext</p>
 <h2>递归</h2>
 <p>递归的实现方式没有什么特别的，但我们加入了更简便的方法，你甚至无需命名递归函数，你想，自己调用自己，又何必给自己取名字？使用<code>fun</code>关键字就行了。例如，如果你不想用外部库的话，可以用递归模拟循环：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     do (i: 0) -> if i < 10
         console.log i
         fun(i + 1)
@@ -1104,7 +1104,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>FutureScript的递归有个好处，它会自动编译（优化）成循环，当自我调用的语句出现在尾部之时。所以，你无需担心堆栈溢出，就算循环1000000次也没关系，编译后的JS代码是一个真正的循环，突破了传统递归的限制。这个在内部是通过Babel实现的。</p>
 <h2>异常</h2>
 <p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript相似。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     try
         allHellBreaksLoose()
         catsAndDogsLivingTogether()
@@ -1114,7 +1114,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         cleanUp()
 ]]></code></pre>
 <p><code>throw</code>后面甚至可以啥都没有，若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     try
         doSth()
     catch error
@@ -1138,7 +1138,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     });
 ]]></code></pre>
 <p>我们现在可以写成：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     do --
         console.log abc()'wait.def()'wait.ghi()'wait
 ]]></code></pre>
@@ -1152,7 +1152,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>yield是前置的，但这里其实应该后置。试想，前面的例子翻译成yield会是什么样？<code>var result = yield (yield (yield abc()).def()).ghi();</code>多层括号，前面3个yield，多难看？而且从时间顺序来说也应该后置。其实C#的await也应该是后置，它也弄得不好。是什么时候wait？是promise函数或异步函数执行完后wait，而不是wait之后再执行。注意promise函数执行完不表示promise有了结果，promise函数本身的执行是同步的。</li>
 </ul>
 <p>异步和管道结合的例子：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     do --
         x: data |> lib.process1'wait |> lib.process2'wait
         y: data |> lib.remoteCombine(anotherData1)'wait |> lib.remoteCombine(anotherData2)'wait
@@ -1160,7 +1160,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>调用异步函数也可以不加<code>'wait</code>，当调用方不需要等待promise或任务出结果的时候。</p>
 <p>用<code>'wait</code>调用异步函数的例子：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     do --
         task: --
             aaa()'wait
@@ -1169,7 +1169,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log "success"
 ]]></code></pre>
 <p>不用<code>'wait</code>，也可以调用异步函数并达到相同的目的：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     do --
         task: --
             aaa()'wait
@@ -1178,7 +1178,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         task()
 ]]></code></pre>
 <p>注意，不用<code>'wait</code>调用异步函数的时候，异步函数执行到第一个<code>'wait</code>的位置之前返回调用方。下面的例子说明了先后顺序：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     do --
         task: --
             console.log "stage 1"
@@ -1191,7 +1191,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>其实用<code>'wait</code>调用异步函数的时候也是异步函数执行到第一个<code>'wait</code>的位置之前返回调用方，只不过调用方也在等待，看起来就像没有返回一样。</p>
 <p>异步还可以和<code>do</code>结合：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     largeTask: --
 
         do --
@@ -1213,7 +1213,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>类</h2>
 <p class="detail">本文中的“字段”、“成员”、“属性”是同义词。当字段是函数时，才能称为“方法”。</p>
 <p>例子：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     Cat: class
         new: name ->
             me.name: name
@@ -1253,7 +1253,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>由于别人在API文档中没有告诉你用到了哪些“私有字段”，而你的“私有字段”正好也使用了<code>_name</code>，这样一来，你的类就无法正常运行了。</p>
 <p>在FutureScript中，只要字段名以<code>_</code>开头，便自动成为防冲突字段。这两个类用FutureScript可以改写为：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     User: class
         new: username ->
             me._name: username
@@ -1261,7 +1261,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             me._name
 ]]></code></pre>
 <p>和</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     HumanUser: class from User
         new: (username, name) ->
             super()
@@ -1271,20 +1271,20 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>为什么它能防冲突？因为<code>me._name</code>不是编译成<code>this._name</code>，而是编译成<code>this[_name]</code>，其中<code>_name</code>不是字符串，而是Symbol的一个实例。编译器一碰到<code>me.</code>，并且后面是以<code>_</code>开头的话，即这样编译。你可以试试看，在JS中还能不能用<code>instance._name</code>来访问这个属性。</p>
 <p>防冲突字段还可以出现在字段的声明中，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     Animal: class
         _name: "My Name"
 ]]></code></pre>
 <p>防冲突字段不能用引号包起来。所以如果你实在是想让你的普通字段以<code>_</code>开头，就可以写成像<code>me."_name"</code>的形式，这就不是防冲突字段了。</p>
 <p>静态字段我们使用<code>static</code>，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     Car: class
         static wheelCount: 4
         static energy: "gas"
 ]]></code></pre>
 <p>防冲突字段也适用于静态字段，<code>me.</code>改成<code>Me.</code>即可。</p>
 <p>还支持像C#一样的“静态构造函数”，只要<code>static</code>后面不跟任何名称，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     Website: class
         static: <>
             result: longTimeTask()
@@ -1293,7 +1293,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         static ok: <> Me.part1'ok
 ]]></code></pre>
 <p>它就相当于：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     Website: class
         static ok: <> Me.part1'ok
     result: longTimeTask()
@@ -1303,7 +1303,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>静态构造函数的好处是所有和类有关的代码可以都写在类里面，看上去更舒服，还能减少输入量，变量可以不暴露在外面。</p>
 <p>静态构造函数内的<code>me.</code>和<code>Me.</code>都指向当前闭包所在的类，即这个类本身，而不是当前对象的类。</p>
 <p>写过C#的程序员一定不会对getter和setter陌生，我们的类也支持：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     Animal: class
         new: <>
             me._name: @0
@@ -1320,7 +1320,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>但是FutureScript中<code>super</code>的语法比较像CoffeeScript，不用写<code>super.methodName()</code>，直接<code>super()</code>即可。我们不支持孤立的<code>super</code>，不过你可以写成<code>super'(@)</code>。</p>
 <p class="detail">我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值（有这个用途的话，可以使用静态方法）。所以在FutureScript里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。（返回值唯一的用处是使用<code>fun</code>递归时，如果你真的想对构造函数使用递归的话。）</p>
 <p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     Website: class
         static: <>
             Abc.prototype.def: <>
@@ -1335,19 +1335,19 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     console.log(_.max(_.map([3, 4, 5], function(x){return x * 2;})));
 ]]></code></pre>
 <p>管道操作符是<code>|></code>，可以把顺序调整为人类习惯的顺序，于是可以这样写：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     console.log [3, 4, 5] |> _.map(x -> x * 2) |> _.max
 ]]></code></pre>
 <p>注意，由于运算符的优先级，管道内的函数调用不应使用空格，例如上例不应写成：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     console.log [3, 4, 5] |> _.map x -> x * 2 |> _.max
 ]]></code></pre>
 <p>还有一种运算符<code>::</code>，称之为“胖点”，专门应用于含有管道运算符的表达式，如果你想让管道和点号混合，胖点能提供更强的可读性。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     [3, 4, 5] |> _.map(x -> x * 2) :: map(x -> x + 1) |> _.max
 ]]></code></pre>
 <p>相当于：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     (([3, 4, 5] |> _.map(x -> x * 2)).map(x -> x + 1)) |> _.max
 ]]></code></pre>
 <p>所以胖点基本就是点号，只不过我们规定当它出现在管道右边时作为结束标记，而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
@@ -1355,12 +1355,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h1>其他特色</h1>
 <h2>do</h2>
 <p><code>do</code>是<code>(...)()</code>的简便方法，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     do --
         console.log "This will be displayed immediately."
 ]]></code></pre>
 <p>相当于</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     (--
         console.log "This will be displayed immediately."
     )()
@@ -1379,13 +1379,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
                 console.log button.textContent
 ]]></code></pre>
 <p>这种通过<code>do</code>来hold住一个变量名的方法，由于FutureScript实行严格的禁止层级变量重名，所以我们不支持，但是现在看来也无需支持，因为有了更好的方法：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     buttons.forEach button ->
         button.onclick: --
             console.log button.textContent
 ]]></code></pre>
 <p>或：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     buttons.every button ->
         button.onclick: --
             console.log button.textContent
@@ -1393,19 +1393,19 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>这就是函数式风格胜过循环的地方。</p>
 <p>但<code>forEach</code>和<code>every</code>有啥区别？这已经超出了本文的范围，不过挺重要的，还是说一下。这两个数组方法都属于ES5规范，当使用<code>forEach</code>时，是无法模拟<code>break</code>的。当使用<code>every</code>时，可以巧妙地模拟<code>break</code>，只需让它返回false即可。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     range.every i ->
         console.log i
         i < 5 ? true | false
 ]]></code></pre>
 <p>也可以不用<code>true</code>、<code>false</code>，而用更短的<code>1</code>、<code>0</code>：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     range.every i ->
         console.log i
         i < 5 ? 1 | 0
 ]]></code></pre>
 <p class="detail">当然，<code>do</code>虽然不能像CoffeeScript一样hold住变量名，但你只要取个不一样的名字，就可以达到相同的目的：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     do --
         btn: button
         btn.onclick: --
@@ -1415,17 +1415,17 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p><code>do</code>的右面必须紧接函数字面量，这个比CoffeeScript严格。</p>
 <h2>存在</h2>
 <p>这几个关键字或操作符和“存在性”有关：<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a'ok # a !== undefined && a !== null
 ]]></code></pre>
 <p><code>a'ok</code>，意思就是a既不是void，也不是null。</p>
 <p><code>'ok</code>还可以和点号结合起来使用，例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     zip: lottery.winner'ok.address'ok.zipcode
 ]]></code></pre>
 <p>只有当<code>lottery.winner</code>不是<code>void</code>也不是<code>null</code>时，且<code>lottery.winner.address</code>不是<code>void</code>也不是<code>null</code>时，<code>zip</code>才等于<code>lottery.winner.address.zipcode</code>。一旦这个链条有一个环节被打破，<code>zip</code>就等于<code>void</code>，而不会出错。</p>
 <p><code>ifnull</code>和<code>ifvoid</code>有两种形式，一种是后面跟冒号，一种是后面不跟冒号。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
     a ifvoid: 8 # if (a === undefined) {a = 8;}
     b: a ifvoid 8 # b = a !== undefined ? a : 8;
@@ -1441,12 +1441,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>形式有两种，一元<code>'</code>和二元<code>'</code>。一元<code>'</code>即函数的单参数变体。其他的都是二元<code>'</code>。</p>
 <p class="detail">编译器如何判断某个<code>'</code>是一元还是二元？看<code>'</code>后面紧跟的字符。如果是数字或字母，则是二元，否则（例如是符号、空格或根本没有字符）要么是一元，要么无法解析。</p>
 <p class="detail">所以这两者是一样的：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     a'ok
     a 'ok
 ]]></code></pre>
 <p class="detail">但这个不一样：</p>
-<pre class="detail"><code><![CDATA[
+<pre class="detail"><code class="fus-part"><![CDATA[
     a' ok
 ]]></code></pre>
 <p class="detail">为了可读性，一元的<code>'</code>前面的那个字符不能是空白。像这个就是非法的，必须无法解析：</p>
@@ -1461,7 +1461,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p class="detail">冒号左边的<code>'</code>目前不能超过2个。</p>
 <h2>in</h2>
 <p><code>in</code>的用法和CoffeeScript几乎完全相同，当然，不支持<code>!in</code>，可以用<code>... not in ...</code>或<code>not ... in ...</code>。示例：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     2 in [1, 2, 3] # returns true
     4 in [1, 2, 3] # returns false
     4 not in [1, 2, 3] # returns true
@@ -1469,12 +1469,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <h2>is</h2>
 <p><code>is</code>表示左边是右边的类型，类似于JavaScript的<code>instanceof</code>，但又有些区别，它还能判断原始类型，可以说结合了<code>instanceof</code>和<code>typeof</code>。当右边是<code>Number</code>、<code>Boolean</code>、<code>String</code>、<code>Symbol</code>（必须严格表示为这4个之中的1个，不能是引用）时使用<code>typeof</code>。</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a is A # a instanceof A
     a is Number # typeof a === "number"
 ]]></code></pre>
 <p>与<code>in</code>相似，<code>is</code>表示否定时也是可以用<code>not is</code>，不过也可以使用更顺眼的<code>isnt</code>，甚至可以用<code>is not</code>。</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     a isnt A
     a not is A
     not a is A
@@ -1520,7 +1520,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>使用<code>pause</code>命令插入断点。它等价于JS的<code>debugger</code>命令，因为<code>debugger</code>违反了关键字不能大于7个字符的原则，所以改名为<code>pause</code>。</p>
 <h2>插入JavaScript</h2>
 <p>使用<code>js"</code>。例如：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     hi = js"
         function() {
             return [document.title, "Hello JavaScript"].join(": ");
@@ -1834,7 +1834,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>答：很多语言都有很多保留字，但我觉得你设计语言的时候预先定义好未来的功能，那未来有可能是你没料到的。我们在版本行使用版本号，也达到了“安全”的目的，因为可以保证只要你不修改版本号，就不会出现兼容性问题。</p>
 <p>问：不支持<code>var</code>是受CoffeeScript启发，但为啥不支持ES6的<code>let</code>和<code>const</code>？</p>
 <p>答：我的理念是，一名程序员也许不熟悉正在开发的文件之外的其他文件，但是一般都会熟悉这个文件当中的其他区域。<code>let</code>提供块级的保护，但是只要你熟悉的不是只是这个块，你完全可以使用一个不同的变量名。块级保护太小了，函数级保护已经足够坚固。否则的话语言本身的复杂度也会增加。<code>let</code>和CoffeeScript风格之间也有矛盾。而且我们是编译成<code>var</code>，曾经我想把所有变量编译成<code>let</code>，但是考虑这样的代码：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     if x > 0
         a: 1
         b: 2
@@ -1877,7 +1877,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         x * 2
 ]]></code></pre>
 <p>现在你可以这样写：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     x ->
         if x isnt Number
             void
@@ -1885,7 +1885,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             x * 2
 ]]></code></pre>
 <p>如果你嫌行多，可以这样写，也是2行：</p>
-<pre><code><![CDATA[
+<pre><code class="fus-part"><![CDATA[
     x ->
         x isnt Number ? void |
             x * 2
