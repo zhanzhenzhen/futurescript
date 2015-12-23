@@ -88,7 +88,7 @@
     console.log abc()'wait.def()'wait.ghi()'wait
 ]]></code></pre>
 <p>要知道，promise相对于传统的“恐怖大三角”回调函数已经是一个进步了。但是上面这一行更进一步，它相当于下面这一大段promise：</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     abc().then(function(x){
         return x.def();
     })
@@ -414,11 +414,11 @@
 ]]></code></pre>
 <p>多参数调用一定要加括号，这个CoffeeScript不同。只有单参数调用是可以不加括号的。当然我们也都知道没有参数时要加上代表零参数的<code>()</code>。</p>
 <p>CoffeeScript里面如果函数调用要传递的参数本身也是函数的话，如果它没有参数，那么可写成这样的形式：</p>
-<pre><code><![CDATA[
+<pre><code class="coffee"><![CDATA[
     abc -> Math.random()
 ]]></code></pre>
 <p>因为CoffeeScript把它理解成：</p>
-<pre><code><![CDATA[
+<pre><code class="coffee"><![CDATA[
     abc (-> Math.random())
 ]]></code></pre>
 <p>但FutureScript中绝对不能这么写，否则编译器会误以为这是一个参数为abc的函数。必须采用如下一种：</p>
@@ -433,7 +433,7 @@
     awardMedals' contenders # awardMedals.apply(null, contenders)
 ]]></code></pre>
 <p>相当于ES6的</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     awardMedals(...contenders)
 ]]></code></pre>
 <p>单引号<code>'</code>称为变体。<code>'</code>是FutureScript独有的符号，不只这一种形式，后面还会介绍。</p>
@@ -482,7 +482,7 @@
 </ul>
 <p>这两段代码是一样的，都是编译成一个变量：</p>
 <p>CoffeeScript：</p>
-<pre><code><![CDATA[
+<pre><code class="coffee"><![CDATA[
     a = 3
     ->
         a = 5
@@ -495,7 +495,7 @@
 ]]></code></pre>
 <p>但这两段代码不一样：</p>
 <p>CoffeeScript：</p>
-<pre><code><![CDATA[
+<pre><code class="coffee"><![CDATA[
     ->
         a = 5
     a = 3
@@ -530,11 +530,11 @@
     import "lib" as main
 ]]></code></pre>
 <p>都是指导入ES6中的“默认导出”，等同于JS的</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     import main from "lib";
 ]]></code></pre>
 <p>当版本行使用默认值的时候，就编译成上面这样的JS。但妙的是，版本行如果有<code>node import</code>或<code>node module</code>，同样的代码，它就会编译成：</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     var main = require("lib");
 ]]></code></pre>
 <p>你无需修改代码，就可以控制本模块中的所有<code>import</code>是使用Node机制还是ES6机制，所以现在<code>import</code>可以代替<code>require</code>。</p>
@@ -547,7 +547,7 @@
     import "lib" all as lib
 ]]></code></pre>
 <p>相当于JS的</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     import * as lib from "lib";
 ]]></code></pre>
 <p>还可以导入指定的“命名导出”：</p>
@@ -559,7 +559,7 @@
     import "lib" as {fun1, fun2 as f2}
 ]]></code></pre>
 <p>相当于JS的</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     import {fun1, fun2 as f2} from "lib";
 ]]></code></pre>
 <p>不支持在一个语句里同时导入“默认导出”和“命名导出”，有此需求请分两个语句。我认为一个模块既有“默认导出”又有“命名导出”并不好。</p>
@@ -644,7 +644,7 @@
     export: abc
 ]]></code></pre>
 <p>当版本行使用<code>node export</code>或<code>node module</code>的时候，这条语句会编译成：</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     module.exports = abc;
 ]]></code></pre>
 <p class="detail">文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，FutureScript支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
@@ -675,7 +675,7 @@
     "
 ]]></code></pre>
 <p>上例的字符串其实就相当于CoffeeScript的：</p>
-<pre><code><![CDATA[
+<pre><code class="coffee"><![CDATA[
     htmlStr = """
         <p>
             Welcome to "FutureScript"!
@@ -744,7 +744,7 @@
 <p>所以总结一下，凡是字符串起始符号<code>"</code>左边紧接着字母的，可以是表示字符串，也可以表示字符串扩展。</p>
 <p class="detail">正则表达式引号中间的内容本质上是字符串，这和JS和CoffeeScript都不同。就算是格式正则表达式中的注释，本质上是属于字符串的，只是转换时去掉了而已。注意，转换是运行时而不是编译时，因为可能有插值，所以无法在编译时转换。</p>
 <p>还有一点和CoffeeScript不同，就是CoffeeScript中：</p>
-<pre><code><![CDATA[
+<pre><code class="coffee"><![CDATA[
     mobyDick = "Call me Ishmael. Some years ago --
     never mind how long precisely -- having little
     or no money in my purse, and nothing particular
@@ -875,7 +875,7 @@
 <p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
 <p><code>/=</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。为什么我们不用<code>!=</code>？因为感叹号目前FutureScript还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
 <p>FutureScript和其他语言在逻辑运算方面最大的区别就是<code>not</code>的优先级。<code>not</code>的优先级被降低，仅高于<code>and</code>和<code>or</code>。这意味着我们可以少加很多括号。你肯定抱怨过在JS中不得不这样写：</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     if !(abc instanceof Abc) doTask();
 ]]></code></pre>
 <p>但现在我们可以：</p>
@@ -945,7 +945,7 @@
 ]]></code></pre>
 <p>条件后置时<code>if</code>绝不能省略。一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是普通的块，只能是内联块。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
 <p>还有一点和CoffeeScript不同，就是当碰到分号时：</p>
-<pre><code><![CDATA[
+<pre><code class="coffee"><![CDATA[
     if x > 100 then aaa(); bbb()
 ]]></code></pre>
 <p>CoffeeScript是把<code>aaa(); bbb()</code>全作为子语句，这看上去似乎是硬插入一条规则，很不统一，而且我们已有了专门的符号，可以写成：</p>
@@ -1126,7 +1126,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>异步</h2>
 <p><span class="warning">由于需要尽快促成FutureScript面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</span></p>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     abc().then(function(x){
         return x.def();
     })
@@ -1229,7 +1229,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
 <p>FutureScript的类的一个亮点是“防冲突字段”，可以把它近似看成是私有字段。防冲突字段的好处不是外部无法访问（外部只是无法通过对象属性直接访问而已），最大的好处是继承类可以放心地使用同名字段，而不用担心会覆盖，这在类关系很复杂的项目中尤其重要。</p>
 <p>我们先看一个反面例子，假设别人用JavaScript写了一个库，里面有个ES6类：</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     class User {
         constructor(username) {
             this._name = username;
@@ -1240,7 +1240,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     }
 ]]></code></pre>
 <p>他还在API文档中写明了<code>User</code>类的构造器和<code>getUsername</code>的使用方法。于是你写了一个<code>HumanUser</code>类，继承<code>User</code>：</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     class HumanUser extends User {
         constructor(username, name) {
             super();
@@ -1330,7 +1330,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h1>使用外部库</h1>
 <h2>管道</h2>
 <p>如果你使用过underscore函数库，应该比较熟悉这样的代码：</p>
-<pre><code><![CDATA[
+<pre><code class="js"><![CDATA[
     var _ = require("underscore");
     console.log(_.max(_.map([3, 4, 5], function(x){return x * 2;})));
 ]]></code></pre>
@@ -1372,7 +1372,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>分隔代码，增加可读性</li>
 </ul>
 <p>它的功能比CoffeeScript少在哪里？看一段CoffeeScript代码：</p>
-<pre><code><![CDATA[
+<pre><code class="coffee"><![CDATA[
     for button in buttons
         do (button) ->
             button.onclick = ->
