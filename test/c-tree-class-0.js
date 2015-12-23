@@ -384,3 +384,45 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`fus 0.1.0, node module
+A: class
+B: class from A
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "A"
+            }
+        ]
+        value: ClassExpression {
+            body: Arr [
+            ]
+            superClass: null
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "B"
+            }
+        ]
+        value: ClassExpression {
+            body: Arr [
+            ]
+            superClass: VariableExpression "A"
+        }
+    }
+]
+`);
+}); // ============================================================
