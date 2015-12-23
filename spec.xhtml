@@ -1350,7 +1350,18 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>用到管道的代码可以是兼容模式，也可以是激进模式。但如果管道使用的外部库也用FutureScript写的话，还是用兼容模式来写比较好，因为外部库中的函数必须是多参数的，因为管道本身就是分割参数的。</p>
 <h1>其他特色</h1>
 <h2>do</h2>
-<p><code>do</code>是<code>(...)()</code>的简便方法，比CoffeeScript的<code>do</code>功能略少，但更纯粹。它可以用来：</p>
+<p><code>do</code>是<code>(...)()</code>的简便方法，例如：</p>
+<pre><code><![CDATA[
+    do --
+        console.log "This will be displayed immediately."
+]]></code></pre>
+<p>相当于</p>
+<pre><code><![CDATA[
+    (--
+        console.log "This will be displayed immediately."
+    )()
+]]></code></pre>
+<p>比CoffeeScript的<code>do</code>功能略少，但更纯粹。它可以用来：</p>
 <ul>
     <li>表示立即执行的递归</li>
     <li>限定变量范围，防止冲突</li>
@@ -1376,7 +1387,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             console.log button.textContent
         true
 ]]></code></pre>
-<p>两者有啥区别？这已经超出了本文的范围，不过挺重要的，还是说一下。这两个数组方法都属于ES5规范，当使用<code>forEach</code>时，是无法模拟<code>break</code>的。当使用<code>every</code>时，可以巧妙地模拟<code>break</code>，只需让它返回false即可。例如：</p>
+<p>这就是函数式风格胜过循环的地方。</p>
+<p>但<code>forEach</code>和<code>every</code>有啥区别？这已经超出了本文的范围，不过挺重要的，还是说一下。这两个数组方法都属于ES5规范，当使用<code>forEach</code>时，是无法模拟<code>break</code>的。当使用<code>every</code>时，可以巧妙地模拟<code>break</code>，只需让它返回false即可。例如：</p>
 <pre><code><![CDATA[
     range.every i ->
         console.log i
@@ -1388,68 +1400,61 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log i
         i < 5 ? 1 | 0
 ]]></code></pre>
-<p>当然，<code>do</code>虽然不能像CoffeeScript一样hold住变量名，但你只要取个不一样的名字，就可以达到相同的目的：</p>
-<pre><code><![CDATA[
+<p class="detail">当然，<code>do</code>虽然不能像CoffeeScript一样hold住变量名，但你只要取个不一样的名字，就可以达到相同的目的：</p>
+<pre class="detail"><code><![CDATA[
     do --
         btn: button
         btn.onclick: --
             console.log btn.textContent
 ]]></code></pre>
-<p>但问题是我们没有原生的循环，所以上面这个例子也没有什么用。</p>
+<p class="detail">但问题是我们没有原生的循环，所以上面这个例子也没有什么用。</p>
 <p><code>do</code>的右面必须紧接函数字面量，这个比CoffeeScript严格。</p>
 <h2>存在</h2>
-<p>这几个关键字或操作符和“存在性”有关<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
-<p><code>a'ok</code>，意思就是a既不是void，也不是null。</p>
-<p><code>'ok</code>还可以和点号结合起来使用，<code>'ok.</code>等同于CoffeeScript的<code>?.</code>，例如这段CoffeeScript</p>
+<p>这几个关键字或操作符和“存在性”有关：<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
 <pre><code><![CDATA[
-    zip = lottery.winner?.address?.zipcode
+    a'ok # a !== undefined && a !== null
 ]]></code></pre>
-<p>就可以写成：</p>
+<p><code>a'ok</code>，意思就是a既不是void，也不是null。</p>
+<p><code>'ok</code>还可以和点号结合起来使用，例如：</p>
 <pre><code><![CDATA[
     zip: lottery.winner'ok.address'ok.zipcode
 ]]></code></pre>
-<p><code>'ok</code>还可以和函数调用结合起来使用，形式是<code>'ok(...)</code>、<code>'ok[...]</code>或<code>'ok{...}</code>。和CoffeeScript的<code>?(...)</code>一样。例如这段CoffeeScript</p>
-<pre><code><![CDATA[
-    zip = lottery.drawWinner?().address?.zipcode
-]]></code></pre>
-<p>就可以写成：</p>
-<pre><code><![CDATA[
-    zip: lottery.drawWinner'ok().address'ok.zipcode
-]]></code></pre>
+<p>只有当<code>lottery.winner</code>不是<code>void</code>也不是<code>null</code>时，且<code>lottery.winner.address</code>不是<code>void</code>也不是<code>null</code>时，<code>zip</code>才等于<code>lottery.winner.address.zipcode</code>。一旦这个链条有一个环节被打破，<code>zip</code>就等于<code>void</code>，而不会出错。</p>
 <p><code>ifnull</code>和<code>ifvoid</code>有两种形式，一种是后面跟冒号，一种是后面不跟冒号。例如：</p>
 <pre><code><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
     a ifvoid: 8 # if (a === undefined) {a = 8;}
     b: a ifvoid 8 # b = a !== undefined ? a : 8;
 ]]></code></pre>
-<p>后面跟冒号时，即是赋值，目前暂不支持与<code>[...]</code>、<code>,</code>、<code>'export</code>共存，例如这些是非法的：</p>
-<pre><code><![CDATA[
+<p class="detail">后面跟冒号时，即是赋值，目前暂不支持与<code>[...]</code>、<code>,</code>、<code>'export</code>共存，例如这些是非法的：</p>
+<pre class="detail"><code><![CDATA[
     a, b ifnull: 1
     [a, b] ifvoid: [1, 2]
     a'export ifnull: 1
 ]]></code></pre>
-<h2>'</h2>
-<p><code>'</code>的形式有两种，一种是一元<code>'</code>，一种是二元<code>'</code>。一元<code>'</code>即函数的单参数变体。其他的都是二元<code>'</code>。</p>
-<p>编译器如何判断某个<code>'</code>是一元还是二元？看<code>'</code>后面紧跟的字符。如果是数字或字母，则是二元，否则（例如是符号、空格或根本没有字符）要么是一元，要么无法解析。</p>
-<p>所以这两者是一样的：</p>
-<pre><code><![CDATA[
+<h2>变体</h2>
+<p>前面介绍的很多都用到了单引号，这称为变体，下面总结一下。</p>
+<p>形式有两种，一元<code>'</code>和二元<code>'</code>。一元<code>'</code>即函数的单参数变体。其他的都是二元<code>'</code>。</p>
+<p class="detail">编译器如何判断某个<code>'</code>是一元还是二元？看<code>'</code>后面紧跟的字符。如果是数字或字母，则是二元，否则（例如是符号、空格或根本没有字符）要么是一元，要么无法解析。</p>
+<p class="detail">所以这两者是一样的：</p>
+<pre class="detail"><code><![CDATA[
     a'ok
     a 'ok
 ]]></code></pre>
-<p>但这个不一样：</p>
-<pre><code><![CDATA[
+<p class="detail">但这个不一样：</p>
+<pre class="detail"><code><![CDATA[
     a' ok
 ]]></code></pre>
-<p>为了可读性，一元的<code>'</code>前面的那个字符不能是空白。像这个就是非法的，必须无法解析：</p>
-<pre><code><![CDATA[
+<p class="detail">为了可读性，一元的<code>'</code>前面的那个字符不能是空白。像这个就是非法的，必须无法解析：</p>
+<pre class="detail"><code><![CDATA[
     a ' ok
 ]]></code></pre>
-<p>行不能以<code>'</code>开始。像这个是非法的（在未来版本中可能会合法）：</p>
-<pre><code><![CDATA[
+<p class="detail">行不能以<code>'</code>开始。像这个是非法的（在未来版本中可能会合法）：</p>
+<pre class="detail"><code><![CDATA[
     a
     'ok
 ]]></code></pre>
-<p>冒号左边的<code>'</code>目前不能超过2个。</p>
+<p class="detail">冒号左边的<code>'</code>目前不能超过2个。</p>
 <h2>in</h2>
 <p><code>in</code>的用法和CoffeeScript几乎完全相同，当然，不支持<code>!in</code>，可以用<code>... not in ...</code>或<code>not ... in ...</code>。示例：</p>
 <pre><code><![CDATA[
