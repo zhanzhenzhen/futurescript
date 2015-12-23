@@ -1328,23 +1328,26 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类的关系还是扁平为好。</p>
 <h1>使用外部库</h1>
 <h2>管道</h2>
-<p>管道操作符是<code>|></code>。例子：</p>
+<p>如果你使用过underscore函数库，应该比较熟悉这样的代码：</p>
 <pre><code><![CDATA[
-    u: import("underscore")
-    [3, 4, 5] |> u.map(x -> x * 2) |> u.max
+    var _ = require("underscore");
+    console.log(_.max(_.map([3, 4, 5], function(x){return x * 2;})));
 ]]></code></pre>
-<p>管道使我们使用underscore函数库可以一种人类习惯的顺序来书写，我们再也不用这样写了：</p>
+<p>管道操作符是<code>|></code>，可以把顺序调整为人类习惯的顺序，于是可以这样写：</p>
 <pre><code><![CDATA[
-    u: require("underscore")
-    u.max(u.map([3, 4, 5], x -> x * 2))
+    console.log [3, 4, 5] |> _.map(x -> x * 2) |> _.max
+]]></code></pre>
+<p>注意，由于运算符的优先级，管道内的函数调用不应使用空格，例如上例不应写成：</p>
+<pre><code><![CDATA[
+    console.log [3, 4, 5] |> _.map x -> x * 2 |> _.max
 ]]></code></pre>
 <p>还有一种运算符<code>::</code>，称之为“胖点”，专门应用于含有管道运算符的表达式，如果你想让管道和点号混合，胖点能提供更强的可读性。例如：</p>
 <pre><code><![CDATA[
-    [3, 4, 5] |> u.map(x -> x * 2) :: map(x -> x + 1) |> u.max
+    [3, 4, 5] |> _.map(x -> x * 2) :: map(x -> x + 1) |> _.max
 ]]></code></pre>
 <p>相当于：</p>
 <pre><code><![CDATA[
-    (([3, 4, 5] |> u.map(x -> x * 2)).map(x -> x + 1)) |> u.max
+    (([3, 4, 5] |> _.map(x -> x * 2)).map(x -> x + 1)) |> _.max
 ]]></code></pre>
 <p>所以胖点基本就是点号，只不过我们规定当它出现在管道右边时作为结束标记，而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
 <p>用到管道的代码可以是兼容模式，也可以是激进模式。但如果管道使用的外部库也用FutureScript写的话，还是用兼容模式来写比较好，因为外部库中的函数必须是多参数的，因为管道本身就是分割参数的。</p>
