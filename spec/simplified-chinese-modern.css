@@ -1,0 +1,10 @@
+html {
+    font-family: "Lantinghei SC", "Microsoft YaHei", SimHei, serif;
+    line-height: 1.5;
+}
+h1, h2, h3, h4, h5, h6, b, strong {
+    font-weight: 600;
+}
+p, pre, div.paragraph {
+    margin: 0.8rem 0 0 0;
+}
