@@ -48,27 +48,27 @@
     <script src="doc-html.js" type="text/javascript" />
 </head>
 <body>
-<h1>FutureScript语言 0.1.0</h1>
-<p>詹臻臻 zhanzhenzhen@hotmail.com</p>
-<h1>简介</h1>
-<p>我在写JavaScript代码时常想：<code>==</code>和<code>===</code>十分讨厌，如果能统一成<code>=</code>就好了。有一天我想到，如果一门新的语言能用冒号<code>:</code>表示赋值，不是就实现了吗？本来JSON中的冒号，就是“让左边的属性拥有右边的值”的意思，可说含义相近，而我们只需把这种语法延展到“变量赋值”就行了。</p>
-<p>我又想，如果所有的成员访问都统一用点号<code>.</code>，这该有多完美？不管是对象成员，还是数组成员，也不管对象成员名是不是加了引号。这意味着JS的<code>a[0]</code>，可以写成：</p>
+<h1>FutureScript 0.1.0</h1>
+<p>Zhenzhen Zhan zhanzhenzhen@hotmail.com</p>
+<h1>Introduction</h1>
+<p>When I was writing JavaScript code I often think: <code>==</code> and <code>===</code> are very annoying, and if it could be <code>=</code> then that would be great. Later I found that if a new language used the colon <code>:</code> to assign, this dream could have come true. Because the colon in JSON means "to let the left-hand side have the value of the right-hand side", the meaning is similar. We just need to extend this grammar to "variable assignment".</p>
+<p>I also thought, that if all types of member access uniformly use <code>.</code>, isn't that perfect? Regardless of whether it's object member, array member, or the object member name is enclosed with quotation marks. This means <code>a[0]</code> in JS could be written as:</p>
 <pre><code class="fus-part"><![CDATA[
     a.0
 ]]></code></pre>
-<p>而JS的<code>a["prop name"]</code>，可以写成：</p>
+<p>And <code>a["prop name"]</code> in JS could be written as:</p>
 <pre><code class="fus-part"><![CDATA[
     a."prop name"
 ]]></code></pre>
-<p>很多JS的权威人物说，函数只应传递少量参数，如果函数要传递很多参数，那表示函数没设计好，更合理的是传递对象。我完全同意，但有更加激进的想法：“多参数”本身是否把事情变复杂了？</p>
-<p>又想到，在当今世界，所有的语言都存在版本问题，这既让开发者在升级语言版本时提心吊胆，生怕一升级旧代码就不能运行了，又给语言的设计者套上了枷锁，不敢做出大的改变，导致进步越来越微小。能不能想出一个全新的机制，彻底解决版本问题？</p>
-<p>于是我便涌起了自己设计一门语言的念头。</p>
-<p>FutureScript的第一感，是它有着极其统一的语法：</p>
+<p>Many famous JS programmers say that function should just take a few arguments. If there are many arguments, that means the function isn't designed well. I fully agree, but with some more radical thought: Does the "multiple arguments" grammar by itself make things complicated?</p>
+<p>I also thought, that in today's world all languages has version problems. This not only makes developers afraid to upgrade language versions for the possible incompatibility, but also make the language designers fear to make big changes, so that new features are getting fewer and fewer. Can we think a wholly new mechanism to solve that problem?</p>
+<p>Then an idea of designing a new language came into my mind.</p>
+<p>The first feeling of FutureScript is that the grammar is extremely consistent:</p>
 <ul>
-    <li>中括号<code>[</code>、<code>]</code>始终表示数组字面量，大括号<code>{</code>、<code>}</code>始终表示对象字面量。</li>
-    <li>成员访问都是用点号<code>.</code>表示，不管是对象成员，还是数组成员（即元素），也不管对象成员名是不是加了引号，都是如此。</li>
-    <li>只要是“令左边为右边的值”，不管是对象字面量，还是赋值，都用冒号<code>:</code>。</li>
-    <li>没有烦人的<code>==</code>与<code>===</code>，等号<code>=</code>就表示相等。</li>
+    <li>Bracket pair <code>[</code> and <code>]</code> always means array literal. Brace pair <code>{</code> and <code>}</code> always means object literal.</li>
+    <li>Member access always uses the dot <code>.</code>, be it an object member or an array member, or the object member name is enclosed with quotation marks or not.</li>
+    <li>If it's "let left-hand side have the value of right-hand side", always use <code>:</code>, be it in object literal or assignment.</li>
+    <li>No annoying <code>==</code> and <code>===</code>. The equal character <code>=</code> means equal.</li>
 </ul>
 <pre><code class="fus-part"><![CDATA[
     a: ["hello", "world"] # var a = ["hello", "world"]
@@ -81,16 +81,16 @@
     c.scheme: "https"
     c."content-length": 123 # c["content-length"] = 123
 ]]></code></pre>
-<p>FutureScript的第二感，是可读性极佳。看这段：</p>
+<p>The second feeling of FutureScript is that it's extremely readable. See this:</p>
 <pre><code class="fus-part"><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
 ]]></code></pre>
-<p>CoffeeScript也可以用<code>a ?= 8</code>，然而FutureScript的可读性更佳。另外像逻辑运算符，我们也弃用JS中的符号而改用更自然的<code>and</code>、<code>or</code>、<code>not</code>。</p>
-<p>FutureScript的第三感，是能够极大简化你的代码。熟悉JS的程序员都知道异步的语法有多么不自然，但现在我们可以：</p>
+<p>CoffeeScript can also achieve this by <code>a ?= 8</code>, but FutureScript is more readable. Also for logic operators, we dropped JS's equivalents in favor of the more natural <code>and</code>, <code>or</code>, <code>not</code>.</p>
+<p>The third feeling of FutureScript is that it can extremely simplify your code. All JS programmers know how unnatural the asynchronous grammar is. But now we can:</p>
 <pre><code class="fus-part"><![CDATA[
     console.log abc()'wait.def()'wait.ghi()'wait
 ]]></code></pre>
-<p>要知道，promise相对于传统的“恐怖大三角”回调函数已经是一个进步了。但是上面这一行更进一步，它相当于下面这一大段promise：</p>
+<p>You know, "promise" is a leap forward than the traditional "triangle of doom". But the code above is a further leap forward. It's equal to the following promise：</p>
 <pre><code class="js"><![CDATA[
     abc().then(function(x){
         return x.def();
@@ -102,23 +102,23 @@
         console.log(x);
     });
 ]]></code></pre>
-<p><span class="warning">由于需要尽快促成FutureScript面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</span></p>
-<p>FutureScript里面，没有长度超过7个字母的关键字，简洁存在于我们的基因之中。像是：</p>
+<p><span class="warning">Since FutureScript needs to be released soon, I've made a last-minute decision that the asynchronous feature won't be included in this version, but will be implemented soon in subsequent versions.</span></p>
+<p>In FutureScript, there's no keyword of more than 7 letters. Such as：</p>
 <ul>
-    <li><code>undefined</code>，我们用<code>void</code>代替。</li>
-    <li><code>arguments</code>，我们用<code>@</code>代替。<code>@0</code>就表示<code>arguments[0]</code>。@这符号的圆圈里面就是个a，很好记，是不是？</li>
-    <li><code>instanceof</code>，我们用<code>is</code>代替。</li>
+    <li><code>undefined</code>, superseded by <code>void</code>.</li>
+    <li><code>arguments</code>, superseded by <code>@</code>. <code>@0</code> means <code>arguments[0]</code>. In the circle of the "@" character there's an "a". Easy to remember.</li>
+    <li><code>instanceof</code>, superseded by <code>is</code>.</li>
 </ul>
-<p>我们规定代码文件必须在顶端标明该文件适用的FutureScript版本。我相信，这个方法能一举解决JS和CoffeeScript中存在的版本问题，这是因为，我们的任何版本都包含历史版本的编译器。这意味着，将来的2.0.0包含1.0.0（当然也包含0.1.0）。</p>
-<p>为了看懂FutureScript代码，还需要额外记住的东西非常少，也就这4个：</p>
+<p>We require that in every file you must mark the FutureScript version number in the top line. I believe this will solve the version problem that exists in JS and CoffeeScript, because any version of FutureScript contains compilers of all historical versions. This means 2.0.0 contains 1.0.0 (and of course 0.1.0).</p>
+<p>To read FutureScript code, very few additional things need to be remembered (just 4 things):</p>
 <ul>
-    <li><code>#</code>表示注释。</li>
-    <li>JS的<code>a(b)</code>可简化为<code>a b</code>。</li>
-    <li><code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>都表示函数，箭头是带形参的，其他两个不带形参（有什么区别后面会说到）。</li>
-    <li><code>**</code>表示幂运算。<code>2 ** 3</code>即为8。</li>
+    <li><code>#</code> means comment.</li>
+    <li><code>a(b)</code> in JS could be simplified as <code>a b</code>。</li>
+    <li><code>-&gt;</code>, <code>&lt;&gt;</code> and <code>--</code> all mean function. The arrow one takes parameters while the other two take no parameter (detailed difference will be discussed later).</li>
+    <li><code>**</code> means exponentiation. So <code>2 ** 3</code> is 8.</li>
 </ul>
-<p>好了，基本上你只要看完了这一章，任何FutureScript代码都能看懂，至少也能猜个八九不离十。</p>
-<p>这一章的最后，附上一段示例。</p>
+<p>Okay, basically if you have finished reading this chapter, you can read any FutureScript code (at least guess it).</p>
+<p>An example is provided at the last of this chapter:</p>
 <pre><code class="fus"><![CDATA[
     fus 0.1.0
 
@@ -135,7 +135,7 @@
     # squares will be [1, 4, 9, 16, 25]
     squares: list.map(x -> square x)
 ]]></code></pre>
-<p>如果你不仅想看懂，而且想写FutureScript代码，那么请看完余下的章节。下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（教程也是语言规范的一部分，只是比较好懂而已）。</p>
+<p>If you want to not only read but also write FutureScript, then please read the remaining chapters. Below are tutorial (shown in normal font), and detailed specification that may be uninteresting to developers (shown in gray, smaller font). On first time reading, you can just read the tutorial (tutorial is also part of the specification, though easier to understand).</p>
 <h1>代码结构</h1>
 <h2>文件格式与外观</h2>
 <p>后缀名为.fus。</p>
