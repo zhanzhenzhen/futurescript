@@ -220,7 +220,7 @@
 <pre><code class="fus-part"><![CDATA[
     text: "This is a dog."
     speak: match (<>
-        s = @toLowerCase()
+        s = @0.toLowerCase()
         text.includes(s)
     )
         "cat" ? "meow"

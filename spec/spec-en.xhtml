@@ -136,91 +136,91 @@
     squares: list.map(x -> square x)
 ]]></code></pre>
 <p>If you want to not only read but also write FutureScript, then please read the remaining chapters. Below are tutorial (shown in normal font), and detailed specification that may be uninteresting to developers (shown in gray, smaller font). On first time reading, you can just read the tutorial (tutorial is also part of the specification, though easier to understand).</p>
-<h1>代码结构</h1>
-<h2>文件格式与外观</h2>
-<p>后缀名为.fus。</p>
-<p class="detail">Fus文件的外观：由版本行、语句、注释和无语义空白组成。语句是可以嵌套的。版本行和语句是有语义的，注释和无语义空白都是无语义的。</p>
-<p class="detail">语句不是表达式，也不可以作为表达式。表达式不是语句，但可以作为语句，作为语句时称作表达式语句。有两种语句：表达式语句和命令语句。</p>
-<p>类似CoffeeScript，在FutureScript中，缩进是很重要的，它构成了嵌套。缩进可以用<code>&lt;&lt;</code>与<code>&gt;&gt;</code>代替。</p>
-<p>类似CoffeeScript，多个并列的行可以通过分号<code>;</code>合并，单行可以通过<code>\</code>拆分成多行。</p>
-<p class="detail">空行，是指不含有字符的行。</p>
-<p class="detail">空白行，是指不含有字符或只含有空白字符的行。</p>
-<p class="detail">无语义空白，是指空白行，或者行右侧无意义的空白。</p>
-<p class="detail">下文的所有描述，都是假设代码中的无语义空白已被去除。</p>
-<p class="detail">大多数语句都是表达式语句，除了这些是命令语句：</p>
+<h1>Code Structure</h1>
+<h2>File Format and Appearance</h2>
+<p>File extension is <code>.fus</code>.</p>
+<p class="detail">Fus file appearance: comprises version line, statements, comments, and meaningless whitespaces. Statements can be nested. Version line and statements are meaningful. Comments and meaningless whitespaces are meaningless.</p>
+<p class="detail">A statement is not an expression nor treated as expression. An expression is not a statement, but can be treated as statement (named as "expression statement"). There are 2 kinds of statements: expression statements and command statements.</p>
+<p>Similar to CoffeeScript, in FutureScript, indents are important, for they form the nested structure. Indent can be substituted by <code>&lt;&lt;</code> and <code>&gt;&gt;</code>.</p>
+<p>Similar to CoffeeScript, juxtaposed lines can be combined using semicolon<code>;</code>, and a single line can be splitted by using <code>\</code>.</p>
+<p class="detail">Empty line, or blank line, means a line that doesn't have any character.</p>
+<p class="detail">Whitespace line, means an empty line or a line that only have whitespaces.</p>
+<p class="detail">Meaningless whitespace, means an empty line, or the whitespace that's meaningless in the right side of a line.</p>
+<p class="detail">In all text hereinafter, we assume that meaningless whitespaces are removed.</p>
+<p class="detail">Most statements are expression statements, except that these are command statements:</p>
 <ul class="detail">
-    <li>:（冒号，表示赋值时）</li>
+    <li>: (colon, when meaning assignment)</li>
     <li>delete</li>
-    <li>import（但不包括import表达式）</li>
-    <li>export（仅限于语句开头是export，所以不包括export as，但包括export...as）</li>
+    <li>import (excluding <code>import</code> expression)</li>
+    <li>export (limited to <code>export</code> at the start of a statement, so excluding<code>export as</code>, but including<code>export...as</code>)</li>
     <li>throw</li>
     <li>pause</li>
 </ul>
-<p class="detail">给定一条语句，该语句所在级别的最大范围连续内容称作该语句所在的块，块不包括版本行。除了块以外，还有表，块和表合称“容器”。块的子项可以是语句或注释，表的子项不可以是语句。我们说某语句的子块（或子表），是指该语句的一级下属。我们说某块的子语句，也是指该块的一级下属。</p>
-<p class="detail">这些容器是块：</p>
+<p class="detail">Given a statement, the maximum consecutive content of the level of the statement is called the block of the statement. Block doesn't include version line. Besides block, there is list. Either block or list is called a "container". Block's child can be statement or comment. List's child can't be statement. A child block (or child list) of a statement means the first-level descendant of the statement. A child statement of a block also means first-level descendant.</p>
+<p class="detail">These containers and blocks:</p>
 <ul class="detail">
-    <li>顶级块</li>
-    <li>函数块</li>
-    <li>then块</li>
-    <li>else块</li>
-    <li>try块</li>
-    <li>catch块</li>
-    <li>finally块</li>
+    <li>Root block</li>
+    <li>Function block</li>
+    <li><code>then</code> block</li>
+    <li><code>else</code> block</li>
+    <li><code>try</code> block</li>
+    <li><code>catch</code> block</li>
+    <li><code>finally</code> block</li>
 </ul>
-<p class="detail">其他容器则都是表，例如：</p>
+<p class="detail">All other containers are lists. For example:</p>
 <ul class="detail">
-    <li>class表</li>
-    <li>数组表</li>
-    <li>对象表</li>
-    <li>match表</li>
+    <li><code>class</code> list</li>
+    <li>Array list</li>
+    <li>Object list</li>
+    <li><code>match</code> list</li>
 </ul>
-<p>当块（除catch块外）只含有单条语句时，也可以写在一行里而不使用缩进，这称为内联块。例如：</p>
+<p>If a block (except <code>catch</code> block) has only a single statement, it can be written in the same line without indent. This is called inline block. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     if x = 5 then aaa()
 ]]></code></pre>
-<p class="detail">注意此时<code>aaa()</code>仍然是属于then块的。另请注意，这种写法中，块之前必须有相应的关键字或符号，例如上例中的<code>then</code>不能省略。由此可知，所有的块（除后置if中的块外），语法里都有关键字或符号作为前导，例如<code>-&gt;</code>、<code>then</code>、<code>try</code>，当这个前导不处于语句头部且不处于行的头部且后面不是内联块时才可能允许省略（还要看语法是否支持，例如<code>-&gt;</code>就不能省略）。</p>
-<p>块的子语句是从上往下执行。除顶级块外所有块都有值，若最后一个子语句是表达式，则为该表达式的值，若不是，则为<code>void</code>。</p>
-<h2>缩进</h2>
-<p class="detail">对于某一行B，若它的起始部分不属于字符串，它的缩进的效果是什么？依下面的步骤：</p>
-<p class="detail">1. 强制连接：上一行A以<code>\</code>结尾吗？若否，则做下一步。若是，则执行：无论缩进如何，该行被解析为犹如被连接到上一行末尾并跳到5，若无法解析则跳到6。（术语解释：这些步骤中的“连接”指的是两行相连，中间插入一空格。第二行的缩进不算入字符。）</p>
-<p class="detail">2. 并列：上面存在一行A，满足B的缩进等于A的缩进，且A和B之间无其他行或A和B之间的所有行的缩进都大于B的缩进，且A没有被连接或被强制连接（术语解释：“被连接者”是指连接后的右面，“连接者”是指左面）吗？若否，则做下一步。若是，则执行：A的起始部分和B的起始部分被解析为并列关系并跳到5，若无法解析则跳到4。</p>
-<p class="detail">3. 层级：上面存在一行A，满足B的缩进大于A的缩进，且A和B之间无其他行或A和B之间的所有行的缩进都大于B的缩进，且A没有被连接或被强制连接吗？若否，则做下一步。若是，则执行：A的结尾部分和B的起始部分被解析为层级关系并跳到5，若无法解析则跳到4。</p>
-<p class="detail">4. 连接：上面存在一行A，满足B的缩进不小于A的缩进，且A和B之间无其他行或A和B之间的所有行的缩进都大于B的缩进吗？若否，则跳到6。若是，则执行：B被解析为犹如被连接到A的末尾所属语句的末尾并跳到5，若无法解析则跳到6。例如：</p>
+<p class="detail">Note that <code>aaa()</code> still belongs to <code>then</code> block. Also note, that in this notation, there must be a corresponding keyword or symbol ahead of the block. In the above example the <code>then</code> can't be omitted. From this we know that every block (except that in post-if) has a leading keyword or symbol in grammar. For example, <code>-&gt;</code>, <code>then</code>, and<code>try</code>. It can be omitted only when it isn't at the start of a statement and isn't at the start of a line and isn't followed by an inline block (also depends on whether the grammar supports it. For example <code>-&gt;</code> can't be omitted).</p>
+<p>Block's child statements are run from top to bottom. Except for the root block, every block has a value. If the last statement is an expression, then the value is the expression value, otherwise the value is <code>void</code>.</p>
+<h2>Indent</h2>
+<p class="detail">For a given line B, if the starting part doesn't belong to a string, what's the effect of its indent? Follow the following steps:</p>
+<p class="detail">1. Force connect: Does the previous line A end with <code>\</code>? If not, do next step. If yes, then: No matter how much indent, the line is parsed as if connected to the end of last line, then skip to step 5. If failing to parse then skip to step 6. (Terminology: "connect" in these steps means concatenation of two lines with a space inserted between them. The indent of the second line doesn't count.)</p>
+<p class="detail">2. Juxtaposition: In above code does there exist a line A satisfying that B's indent is equal to A's indent, and there's no line between A and B or the indent of any line between A and B is greater than B's indent, and A is not connected or force connected (Terminology: the "connected" one means the right-hand side after connect, while the "connector" means the left-hand side)? If not, do the next step. If yes, then: A's starting part and B's starting part is parsed as the "juxtaposition" relation, then skip to step 5. If failing to parse, skip to step 4.</p>
+<p class="detail">3. Hierarchical: In above code does there exist a line A satisfying that B's indent is greater than A's indent, and there's no line between A and B or the indent of any line between A and B is greater than B's indent, and A is not connected or force connected? If not, do the next step. If yes, then: A's ending part and B's starting part is parsed as the "hierarchical" relation, then skip to step 5. If failing to parse, skip to step 4.</p>
+<p class="detail">4. Connect: In above code does there exist a line A satisfying that B's indent is greater than or equal to A's indent, and there's no line between A and B or the indent of any line between A and B is greater than B's indent? If not, then skip to step 6. If yes, then: B is parsed as if it's connected to the end of the statement of A's end. If failing to parse, skip to step 6. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     if x = 5 and
     y = 5 then aaa()
 ]]></code></pre>
-<p>或：</p>
+<p>Or:</p>
 <pre><code class="fus-part"><![CDATA[
     if x = 5
     and y = 5 then aaa()
 ]]></code></pre>
-<p>或：</p>
+<p>Or:</p>
 <pre><code class="fus-part"><![CDATA[
     if x = 5 and
         y = 5 then aaa()
 ]]></code></pre>
-<p>都等价于：</p>
+<p>Both equivalent to:</p>
 <pre><code class="fus-part"><![CDATA[
     if x = 5 and y = 5 then aaa()
 ]]></code></pre>
-<p>又例如：</p>
+<p>Another example:</p>
 <pre><code class="fus-part"><![CDATA[
     a.b <>
         aaa()
     .c()
 ]]></code></pre>
-<p>等价于：</p>
+<p>equivalent to:</p>
 <pre><code class="fus-part"><![CDATA[
     a.b(<> aaa()).c()
 ]]></code></pre>
-<p class="detail">5. 解析成功并退出。</p>
-<p class="detail">6. 解析失败并退出。</p>
-<p>缩进的规则很适合用来表示一些复杂的语句。例如，你可以这样写：</p>
+<p class="detail">5. Succeed and exit.</p>
+<p class="detail">6. Fail and exit.</p>
+<p>Indents are very suitable to represent some complex statement. For example, you can write:</p>
 <pre><code class="fus-part"><![CDATA[
     text: "This is a dog."
     speak: match (<>
-        s = @toLowerCase()
+        s = @0.toLowerCase()
         text.includes(s)
     )
         "cat" ? "meow"
@@ -228,18 +228,18 @@
         |       "unknown"
     # speak is "woof"
 ]]></code></pre>
-<p class="detail">和CoffeeScript有一点不同，如下代码：</p>
+<p class="detail">One thing different from CoffeeScript is the following code:</p>
 <pre class="detail"><code><![CDATA[
     a.b aaa
     .c()
 ]]></code></pre>
-<p class="detail">CoffeeScript编译成<code>a.b(aaa).c()</code>，但我们还是按常规编译成<code>a.b(aaa.c())</code>。如果你想要达到CoffeeScript的效果，要加上括号：</p>
+<p class="detail">CoffeeScript compiles it into <code>a.b(aaa).c()</code>, but we strictly follow the rule above to compile it as <code>a.b(aaa.c())</code>. If you want the CoffeeScript effect, you should add parentheses:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     a.b(aaa)
     .c()
 ]]></code></pre>
-<h2>&lt;&lt;和&gt;&gt;</h2>
-<p>通常来说，把一行拆成几行会增加可读性。但有的时候恰恰相反，你会发觉把几行特别短小的代码合并成一行反而更好看，特别是当你有很多这样的“几行”的时候。例如：</p>
+<h2>&lt;&lt; and &gt;&gt;</h2>
+<p>Usually, Splitting one line into several lines will add readability. But sometimes things are just the opposite - you will find combining several short lines into one makes it beautiful, particularly when you have many such "several lines". For example:</p>
 <pre><code class="fus-part"><![CDATA[
     A: class << aaa: 1 >>
     B: class << bbb: 1 >>
@@ -247,7 +247,7 @@
     D: class << ddd: 1 >>
     E: class << eee: 1 >>
 ]]></code></pre>
-<p>它和这个是等价的：</p>
+<p>It's equivalent to:</p>
 <pre><code class="fus-part"><![CDATA[
     A: class
         aaa: 1
@@ -260,15 +260,15 @@
     E: class
         eee: 1
 ]]></code></pre>
-<p>这时<code>&lt;&lt;</code>和<code>&gt;&gt;</code>的威力就体现出来了。<code>&lt;&lt;</code>表示接下去的代码缩进一级，<code>&gt;&gt;</code>表示还原。</p>
-<p><code>&lt;&lt;</code>和<code>&gt;&gt;</code>必须在1行内结束。也就是说，只能把多行合并成1行，无法把多行合并成2行。</p>
-<p>这两个符号和分号、逗号结合使用，可以达到最大程度的合并效果。分号合并行，但对象属性、数组元素、类属性需要用逗号合并。</p>
-<p class="detail">在<code>&gt;&gt;</code>后可加分号或逗号，也可不加分号或逗号，例如：</p>
+<p>This leverages the power of <code>&lt;&lt;</code> and <code>&gt;&gt;</code>. <code>&lt;&lt;</code> means to indent one level, and <code>&gt;&gt;</code> means to unindent one level.</p>
+<p><code>&lt;&lt;</code> and <code>&gt;&gt;</code> must be closed in one line. That is, multiple lines can be combined into 1 line, but not into 2 lines.</p>
+<p>These 2 symbols, used together with semicolons and commas, can achieve the maximum combination effect. Semicolons combine lines, but object properties, array elements and class properties need to be combined through commas.</p>
+<p class="detail">After <code>&gt;&gt;</code> there can be a semicolon or comma, but it's optional. For example:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     A: class << aaa: x -> << x + 1 >>, bbb: 3 >>
     if aaa << task1() >> else << task2() >>; commonTask()
 ]]></code></pre>
-<p class="detail">这里的分号和逗号都是可略的。</p>
+<p class="detail">Here the semicolon and comma can be omitted.</p>
 <h2>版本行</h2>
 <p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <pre><code><![CDATA[
