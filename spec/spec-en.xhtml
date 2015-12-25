@@ -269,16 +269,16 @@
     if aaa << task1() >> else << task2() >>; commonTask()
 ]]></code></pre>
 <p class="detail">Here the semicolon and comma can be omitted.</p>
-<h2>版本行</h2>
-<p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
+<h2>Version Line</h2>
+<p>The first line of each file must be version line. It's usually in one line so we call it "version line", but it can be in multiple lines. Version line's syntax:</p>
 <pre><code><![CDATA[
     [...][fus][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node module | es module)]...
 ]]></code></pre>
-<p>默认值为：</p>
+<p>Default value is:</p>
 <pre><code><![CDATA[
     compatible, capitalized new, es module
 ]]></code></pre>
-<p>版本号后面的以逗号分隔的项不可重复。版本行的例子：</p>
+<p>The items separated by comma after the version number can't be duplicated. Examples of version line:</p>
 <pre><code><![CDATA[
     0.1.0
     fus 0.1.0
@@ -288,77 +288,77 @@
     0.1.0, compatible, capitalized new, node import
     0.1.0, radical, manual new
 ]]></code></pre>
-<p>版本号必须写上。只要你写的版本号不大于安装的FutureScript的版本号，该文件就会按照该版本的规范来运行，这是因为你安装的任何一个版本的FutureScript都包括了（至少我们会尽量包括）所有历史版本的编译器。而这正是FutureScript和其他语言的不同之处。你甚至可以在一个项目中，不同文件使用不同版本。</p>
-<p>写上版本号还有个好处，就是你把某个文件交给别人时，他就知道文件是什么版本的，从而可以更好地修改。</p>
-<p>本文只描述一个版本。</p>
-<p>当你想把版本行写成多行时，版本号后面要加上大括号，大括号必须在第一行。版本号和大括号之间可以有逗号，也可以没有逗号。例如：</p>
+<p>Version number must be written. As long as the number is not greater than the FutureScript version you've installed, the code will be run according to the specification of the file's version. This is because any version you install contains all historical compilers (at least as much as possible). This is exactly the difference between FutureScript and other languages. You can even use different versions for different files in one project.</p>
+<p>Another benefit of writing version number is that when you hand your file to somebody else, he will know the version, so that he can better modify it.</p>
+<p>This article only describes one version.</p>
+<p>When you want to write the version line in multiple lines, a brace must be added. The left (opening) brace must be in the first line. A comma between the version number and the left brace is optional. For example:</p>
 <pre><code><![CDATA[
     0.1.0 {
         radical
         node module
     }
 ]]></code></pre>
-<p>当文件的后缀名不是.fus或没有后缀名时，版本号前必须有<code>fus</code>。当文件的后缀名是.fus时，不必须，然而我们推荐加上<code>fus</code>，因为对你的文本编辑器有用，方便它判断应该使用哪个语法包，使代码呈现正确的彩色。</p>
-<p>激进模式（radical）和兼容模式（compatible）的差异是：激进模式更鼓励单参数的函数。你是否觉得函数的多参数把事情弄复杂了？如果每个函数最多只能有一个参数，这个参数也可以是数组，那不也能实现“多参数”的功能吗？但是这个变化实在太大，所以我们默认不开启激进模式，而是采用兼容模式，你仍然能够使用多参数的全部功能。</p>
-<p>激进模式中，<code>@</code>表示JS的<code>arguments[0]</code>。兼容模式中，<code>@</code>表示JS的<code>arguments</code>。</p>
-<p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
-<p>FutureScript代码可以被JS调用。JS代码也可以被FutureScript调用。</p>
-<p><code>capitalized new</code>是指创建类的实例不用加<code>new</code>，编译后的JS会自动加入<code>new</code>，它依据类名的首字母大小写，碰到大写则会加。示例：</p>
+<p>If the file extension isn't <code>.fus</code> or it has no extension, then there must be a <code>fus</code> before the version number. If the file extension is <code>.fus</code>, it's not necessary, but highly recommended, because your text editor can recognize it so that the syntax can be highlighted.</p>
+<p>The difference between "radical mode" and "compatible mode" is: radical mode encourages single-argument functions. Did you find the multiple-argument paradigm makes things complicated? If every function can take at most one argument, this argument can be an array, which can also achieve the similar functionality. But this change is too big, so we don't enable it by default. The default mode is compatible mode, in which you can still use all features of multiple-argument functions.</p>
+<p>In radical mode, <code>@</code> means JS's <code>arguments[0]</code>. In compatible mode, <code>@</code> means JS's <code>arguments</code>.</p>
+<p>All examples in this article are for compatible mode. In radical mode some code needs modification.</p>
+<p>FutureScript code can be used by JS. JS code can also be used by FutureScript.</p>
+<p><code>capitalized new</code> means you don't need to add <code>new</code> when creating an instance of a class. The compiler will automatically add the <code>new</code> to the generated code. It depends on the name of the function or class. If it's capitalized then it will add <code>new</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     animal: Animal() # var animal = new Animal();
 ]]></code></pre>
-<p>这是默认的。</p>
-<p class="detail">能识别的有两种形式：变量和普通的点号（<code>x.y</code>，它会判断<code>y</code>），像<code>x."y"</code>或<code>x.y'</code>是不能识别的。例如：</p>
+<p>This is by default.</p>
+<p class="detail">Two forms can be recognized: variable and the normal dot (<code>x.y</code>, it will check <code>y</code>). Things like <code>x."y"</code>或<code>x.y'</code> can't be recognized. For example:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     aaa."bbb".Ccc() # new can be omitted
     new aaa.bbb."Ccc"() # new can't be omitted
 ]]></code></pre>
-<p><code>manual new</code>就是传统办法，创建类的实例需要加<code>new</code>。</p>
-<p><code>node import</code>是指导入被编译成node的导入（即require）。<code>node export</code>是指导出被编译成node的导出（即exports和module.exports）。<code>node module</code>是两者都做。<code>es module</code>是两者都不做（即按照ES6的规范）。具体这有什么意义，参见“模块”一章。</p>
-<p class="detail">编译后的代码是strict mode。</p>
-<h2>注释</h2>
-<p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。为了和JS兼容，注释中的<code>*/</code>会编译成两个空格。</p>
-<h1>基本语句</h1>
-<h2>函数</h2>
-<p>函数的声明有3种方式：<code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>。<code>&lt;&gt;</code>和<code>--</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
+<p><code>manual new</code> is just the traditional way. When creating instance of a class you should add <code>new</code>.</p>
+<p><code>node import</code> means all imports are compiled into Node.js imports (i.e. <code>require</code>). <code>node export</code> means all exports are compiled into Node.js exports (i.e. <code>exports</code> and <code>module.exports</code>). <code>node module</code>means to do both. <code>es module</code> means to do neither (i.e. comply with ES6). For details, see the "module" section.</p>
+<p class="detail">The generated JS code is in strict mode。</p>
+<h2>Comment</h2>
+<p>Use <code>#</code> (inline) and <code>###</code> (formatted), similar to CoffeeScript. But one thing different is that CoffeeScript's <code>###</code> is compiled for all occurrences, while our <code>###</code> is compiled only when the opening <code>###</code> is immediately below the version line (or there are only whitespaces between them) and the right side of the closing <code>###</code> doesn't have any non-whitespace character, otherwise it will be ignored by the compiler. To comply with JS, the <code>*/</code> in the comment will be compiled into two spaces.</p>
+<h1>Basic Elements</h1>
+<h2>Function</h2>
+<p>There are 3 ways to create a function: <code>-&gt;</code>, <code>&lt;&gt;</code>, <code>--</code>. <code>&lt;&gt;</code> and <code>--</code> are shorthand for no parameter. Unlike CoffeeScript, when there's only 1 parameter the parenthesis pair can be omitted.</p>
 <pre><code class="fus-part"><![CDATA[
     # both are valid
     a: x -> x + 1
     a: (x) -> x + 1
 ]]></code></pre>
-<p>如果没有参数，那么必须使用如下一种：</p>
+<p>If there's no parameter, then your must use either of these forms:</p>
 <pre><code class="fus-part"><![CDATA[
     a: <> Math.random()
     a: -- Math.random()
     a: () -> Math.random()
 ]]></code></pre>
-<p>允许多参数，但必须要有括号：</p>
+<p>Multiple-parameter is allowed, but must be within a parenthesis pair:</p>
 <pre><code class="fus-part"><![CDATA[
     a: (x, y) -> x * y
 ]]></code></pre>
-<p>如果是单参数，并且该参数是数组，就可以使用类似“解构赋值”的形式：</p>
+<p>If it's single-parameter, and this parameter is an array, then we can use a form similar to "destructuring assignment":</p>
 <pre><code class="fus-part"><![CDATA[
     a: [x, y] -> x * y
 ]]></code></pre>
-<p>有了这个，激进模式才成为真正实用的东西，因为你可以用<code>a[1, 2]</code>来调用它（具体后面再介绍）。其实从用途上来说，多参数能达到的，这个也能达到，而且更纯粹，所以，在激进模式中，我们不鼓励使用多参数（多参数在激进模式中功能不全，无法用<code>@</code>表示第一个参数之后的参数）。</p>
-<p>在<code>&lt;&gt;</code>函数内部，可以使用<code>@</code>。<code>@</code>取代了JS的<code>arguments</code>（兼容模式下）或<code>arguments[0]</code>（激进模式下），它是如此简便，在许多情况下，你会喜欢不带参数名。例如，我们可以写：</p>
+<p>With this, radical mode have become truly useful. You can use <code>a[1, 2]</code> to call it (we'll discuss the details later). In fact, if a purpose can be achieved by multiple-parameter, it can also be achieved by the single array parameter, and even more pure. So, in radical mode we discourage the use of multiple parameters (Multiple-parameter is partially supported in radical mode. You can't use <code>@</code> to denote the arguments after the first argument).</p>
+<p>Inside <code>&lt;&gt;</code>, we can use <code>@</code>. <code>@</code> supersedes JS's <code>arguments</code> (compatible mode) or <code>arguments[0]</code> (radical mode). It's so handy that in many cases you'd like to take no parameter. For example, we can write:</p>
 <pre><code class="fus-part"><![CDATA[
     add: <> @0 + @1
     console.log add(2, 3) # output 5
 ]]></code></pre>
-<p>参数可以有默认值：</p>
+<p>Parameter can have default value:</p>
 <pre><code class="fus-part"><![CDATA[
     a: (x ifvoid: 0, y ifvoid: 0) -> x * y
     b: [x ifvoid: 0, y ifvoid: 0] -> x * y
 ]]></code></pre>
-<p>有默认值的话，哪怕只有一个参数，外面也必须有括号（或中括号）。</p>
-<p>如果是<code>ifvoid</code>默认，则<code>ifvoid</code>可以省略，所以上面的例子可简写为：</p>
+<p>If it has a default value, then there must be a parenthesis pair (or bracket pair) outside even if there's only 1 parameter.</p>
+<p>If it's <code>ifvoid</code> default, then <code>ifvoid</code> can be omitted. So the above example can be simplified to:</p>
 <pre><code class="fus-part"><![CDATA[
     a: (x: 0, y: 0) -> x * y
     b: [x: 0, y: 0] -> x * y
 ]]></code></pre>
-<p>除了<code>ifvoid</code>默认以外，还有<code>ifnull</code>默认，后面会介绍。</p>
-<p>下表列出三种函数符号的详细区别：</p>
+<p>Besides <code>ifvoid</code> default, there's also <code>ifnull</code> default. We'll discuss that later.</p>
+<p>The following table lists the detailed differences between the 3 function symbols:</p>
 <table class="table">
     <tr>
         <th></th>
@@ -367,47 +367,47 @@
         <th>--</th>
     </tr>
     <tr>
-        <td>形参</td>
-        <td>有</td>
-        <td>无</td>
-        <td>无</td>
+        <td>Parameter</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
     </tr>
     <tr>
         <td>@</td>
-        <td>无</td>
-        <td>有</td>
-        <td>无</td>
+        <td>No</td>
+        <td>Yes</td>
+        <td>No</td>
     </tr>
     <tr>
         <td>fun</td>
-        <td>有</td>
-        <td>有</td>
-        <td>无</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
     </tr>
     <tr>
-        <td>功能</td>
-        <td>较多</td>
-        <td>最多，可以模拟其他两个</td>
-        <td>少</td>
+        <td>Features</td>
+        <td>Many</td>
+        <td>All. Can simulate the other 2</td>
+        <td>Fewer</td>
     </tr>
     <tr>
-        <td>简洁</td>
-        <td>较简洁</td>
-        <td>通常很简洁，但有时不简洁</td>
-        <td>很简洁</td>
+        <td>Conciseness</td>
+        <td>Concise</td>
+        <td>Usually very concise, but sometimes not</td>
+        <td>Very concise</td>
     </tr>
 </table>
-<p>例如在<code>@</code>的使用上，如下代码：</p>
+<p>For example, for the use of <code>@</code>, the following code:</p>
 <pre><code class="fus-part"><![CDATA[
     outer: <>
         inner: x -> @
 ]]></code></pre>
-<p>这里的<code>@</code>不是指<code>inner</code>函数的参数，而是指<code>outer</code>函数的参数，因为<code>-&gt;</code>的语法没有定义<code>@</code>。</p>
-<p><code>fun</code>是一个关键字，指“本函数”。这通常写在递归里，如果函数名很长，这可以减少输入量，甚至无须为函数命名也可以使用递归。</p>
-<p>同理，由于<code>--</code>的语法没有定义<code>fun</code>，所以<code>--</code>里面的<code>fun</code>指的是外层<code>-&gt;</code>或<code>&lt;&gt;</code>函数。</p>
-<p>内层参数不能和任何外层参数重名。这比CoffeeScript、JS都严格。但不排除在以后版本中放开这个限制。</p>
-<p>我们已经知道所有的成员访问都用点号<code>.</code>，这还有个好处，就是让函数的调用可以省去小括号而直接写上中括号。</p>
-<p>函数的调用有4种表示法：空格、小括号、中括号、大括号。</p>
+<p>Here the <code>@</code> doesn't mean <code>inner</code>'s argument, but mean <code>outer</code>'s argument, because the grammar of <code>-&gt;</code> doesn't define <code>@</code>.</p>
+<p><code>fun</code> is a keyword, meaning "this function". It's usually written in a recursive function. If the function name is very long, it can reduce your typed characters. It even enables you to use a recursive function without naming it.</p>
+<p>Similarly, because the grammar of <code>--</code> doesn't define <code>fun</code>, the <code>fun</code> inside <code>--</code> means the outer <code>-&gt;</code> or <code>&lt;&gt;</code> function.</p>
+<p>Inner parameter can't have the same name as any of outer parameters. This is stricter than CoffeeScript and JS. It might be less strict in later versions.</p>
+<p>We have known that member access all uses <code>.</code>. Another benefit of it is that in function call you can omit parentheses and use brackets directly.</p>
+<p>Function call has 4 notations: space, parenthesis <code>()</code>, bracket <code>[]</code>, and brace <code>{}</code>.</p>
 <pre><code class="fus-part"><![CDATA[
     a(2)
     a 2 # equivalent to above
@@ -415,37 +415,37 @@
     a{prop: true} # a({prop: true})
     a(3, 4, 5) # only valid in compatible mode
 ]]></code></pre>
-<p>多参数调用一定要加括号，这个CoffeeScript不同。只有单参数调用是可以不加括号的。当然我们也都知道没有参数时要加上代表零参数的<code>()</code>。</p>
-<p>CoffeeScript里面如果函数调用要传递的参数本身也是函数的话，如果它没有参数，那么可写成这样的形式：</p>
+<p>In multiple-argument function call a parenthesis pair must be added. This is different from CoffeeScript. Space call is only applicable in single-argument function call. And of course we all know that if it takes no argument then <code>()</code> must be added.</p>
+<p>In CoffeeScript, if the passed argument is itself a function which takes no parameters, then it could be written as:</p>
 <pre><code class="coffee"><![CDATA[
     abc -> Math.random()
 ]]></code></pre>
-<p>因为CoffeeScript把它理解成：</p>
+<p>Because CoffeeScript understands it as:</p>
 <pre><code class="coffee"><![CDATA[
     abc (-> Math.random())
 ]]></code></pre>
-<p>但FutureScript中绝对不能这么写，否则编译器会误以为这是一个参数为abc的函数。必须采用如下一种：</p>
+<p>But in FutureScript you couldn't write so, because the compiler will treat it as a function with parameter <code>abc</code>. You must write either of these:</p>
 <pre><code class="fus-part"><![CDATA[
     # pass a function as argument to abc
     abc <> Math.random()
     abc -- Math.random()
     abc () -> Math.random()
 ]]></code></pre>
-<p>我们还可以使用<code>'</code>来达到类似splat的效果：</p>
+<p>We can also use <code>'</code> to achieve the "splat" effect:</p>
 <pre><code class="fus-part"><![CDATA[
     awardMedals' contenders # awardMedals.apply(null, contenders)
 ]]></code></pre>
-<p>相当于ES6的</p>
+<p>Equivalent to ES6's</p>
 <pre><code class="js"><![CDATA[
     awardMedals(...contenders)
 ]]></code></pre>
-<p>单引号<code>'</code>称为变体。<code>'</code>是FutureScript独有的符号，不只这一种形式，后面还会介绍。</p>
-<p>注意这两个函数调用是不同的：</p>
+<p>The apostrophe <code>'</code> is called variant. <code>'</code> is a unique symbol in FutureScript. Not limited to this form. We will discuss it later.</p>
+<p>Note that these 2 functions are different:</p>
 <pre><code class="fus-part"><![CDATA[
     a{prop: true}.b # a({prop: true}).b
     a {prop: true}.b # a({prop: true}.b)
 ]]></code></pre>
-<p>凡是函数都有一个返回值，值即为函数块的值，所以我们无需使用<code>return</code>。函数块的值是啥？精确定义在前面讲过，下面再通俗地讲一遍：就是函数的最后一条语句的值，如果最后一条语句不是表达式，那么则是<code>void</code>。这个规则十分重要，是函数式编程思想的核心。示例：</p>
+<p>Every function has a return value - the value of the function block, so we don't need to use <code>return</code>. What does the value of the function block mean? The accurate definition is described before. Now I give an informal definition: It's just the last statement's value in that function. If the last statement isn't an expression, then it's <code>void</code>. This rule is very important - it's the core of the functional programming. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     calc: (x, y) ->
         a: x * x
@@ -453,13 +453,13 @@
         a + b
     calc(2, 3) # returns 13
 ]]></code></pre>
-<p>不单是函数块，<code>if...then...else...</code>里面的块，以及所有其他的块（顶级块除外），用的都是这个规则。</p>
-<p>不像CoffeeScript，我们没有胖箭头<code>=&gt;</code>，这是因为我认为JavaScript使<code>this</code>的含义可变是一种错误的设计，它应该始终指向当前对象。</p>
-<p class="detail">我们的函数和CoffeeScript的函数的对应关系如下：</p>
+<p>This rule applies to not only the function block, but blocks inside <code>if...then...else...</code>, and all other blocks (except the root block).</p>
+<p>Unlike CoffeeScript, we don't have fat arrow <code>=&gt;</code>, because I think JavaScript's changeable meaning of <code>this</code> isn't a good design. It should always point to the current object.</p>
+<p class="detail">The mapping between our function and CoffeeScript's function is as follows:</p>
 <ul class="detail">
-    <li>类的方法和构造器（包括嵌套的类的方法和构造器）：CoffeeScript瘦箭头</li>
-    <li>类的方法和构造器内部（不包括嵌套的类的方法和构造器，但包括嵌套的类的方法和构造器内部）：CoffeeScript胖箭头</li>
-    <li>其余地方：CoffeeScript瘦箭头</li>
+    <li>Class method and constructor (including nested class's method and constructor): CoffeeScript thin arrow</li>
+    <li>Inside class method and constructor (excluding nested class's method or constructor, but including those inside nested class's method and constructor: CoffeeScript fat arrow</li>
+    <li>The rest: CoffeeScript thin arrow</li>
 </ul>
 <h2>赋值与声明</h2>
 <p>用<code>:</code>、<code>as</code>。例如：</p>
