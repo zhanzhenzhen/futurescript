@@ -461,117 +461,117 @@
     <li>Inside class method and constructor (excluding nested class's method or constructor, but including those inside nested class's method and constructor: CoffeeScript fat arrow</li>
     <li>The rest: CoffeeScript thin arrow</li>
 </ul>
-<h2>赋值与声明</h2>
-<p>用<code>:</code>、<code>as</code>。例如：</p>
+<h2>Assignment and Declaration</h2>
+<p>Use <code>:</code> and <code>as</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     a: "hello world" # var a = "hello world";
     3 as b = 4 ? console.log "impossible!" # var b; if ((b = 3) === 4) {console.log("impossible");}
 ]]></code></pre>
-<p>注意，<code>:</code>不构成表达式，但<code>as</code>构成表达式。例如：</p>
+<p>Note that <code>:</code> doesn't form an expression, but <code>as</code> forms an expression. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     abc: <>
         a: 1
 ]]></code></pre>
-<p>执行<code>abc()</code>返回的值是<code>void</code>而不是<code>1</code>。但</p>
+<p>Run <code>abc()</code> and the return value is <code>void</code> not <code>1</code>. But</p>
 <pre><code class="fus-part"><![CDATA[
     abc: <>
         1 as a
 ]]></code></pre>
-<p>执行<code>abc()</code>返回的值是<code>1</code>。</p>
-<p>变量不用声明也不能声明，这是因为我们的变量都是自动声明的。该机制类似CoffeeScript，但有着显著的区别，主要是在内外层方面：</p>
+<p>Run <code>abc()</code> and the return value is <code>1</code>.</p>
+<p>Variables don't need, and shouldn't be declared, because our variables are automatically declared. This mechanism is like CoffeeScript, but with notable difference mainly in dealing with the inner and outer level:</p>
 <ul>
-    <li>CoffeeScript：如<b>前面的外层</b>还未出现过，则编译成声明并赋值；如<b>前面的外层</b>已出现过，则编译成单纯赋值。</li>
-    <li>FutureScript：如<b>外层</b>还未出现过，则编译成声明并赋值；如<b>外层</b>已出现过，则编译成单纯赋值。</li>
+    <li>CoffeeScript: If it doesn't exist in the <b>preceding outer level</b>, then it will be compiled to "declare and assign". If exist, then it will be compiled to "assign only".</li>
+    <li>FutureScript: If it doesn't exist in the <b>outer level</b>, then it will be compiled to "declare and assign". If exist, then it will be compiled to "assign only".</li>
 </ul>
-<p>这两段代码是一样的，都是编译成一个变量：</p>
-<p>CoffeeScript：</p>
+<p>These two codes are equivalent. Both are compiled to a single variable:</p>
+<p>CoffeeScript:</p>
 <pre><code class="coffee"><![CDATA[
     a = 3
     ->
         a = 5
 ]]></code></pre>
-<p>FutureScript：</p>
+<p>FutureScript:</p>
 <pre><code class="fus-part"><![CDATA[
     a: 3
     --
         a: 5
 ]]></code></pre>
-<p>但这两段代码不一样：</p>
-<p>CoffeeScript：</p>
+<p>But these two are different:</p>
+<p>CoffeeScript:</p>
 <pre><code class="coffee"><![CDATA[
     ->
         a = 5
     a = 3
 ]]></code></pre>
-<p>CoffeeScript编译成两个重名变量<code>a</code>。然而在FutureScript中：</p>
+<p>CoffeeScript compiles it to two variables with the same name <code>a</code>. But in FutureScript:</p>
 <pre><code class="fus-part"><![CDATA[
     --
         a: 5
     a: 3
 ]]></code></pre>
-<p>会编译成一个变量<code>a</code>。</p>
-<p>变量自动声明的灵感源于CoffeeScript，我觉得这是CoffeeScript最好的特性之一，也许很多人不同意，觉得这样禁止了在内层声明同名变量，所以是不好的特性，但其实不然。在大型项目中，不同的程序员分别管理不同的文件是合理的，模块具有隔离作用；但是不同的程序员分别管理一个文件的内外层是不合理的，这会引起混乱。既然一个文件的内外层应作为一个整体管理，所以为内层变量取名的时候顺便注意一下外层并不是一件难事，因此也就没有必要支持在内层声明同名变量。而且我们比CoffeeScript做得更彻底。</p>
-<p><code>:</code>也支持数组解构赋值（不支持嵌套），例如：</p>
+<p>will be compiled to a single variable <code>a</code>.</p>
+<p>Auto-declaration is inspired by CoffeeScript. I think it's one of the best features in CoffeeScript. Maybe many people don't agree, feeling it's a bad feature because it inhibits declaring a same-name variable in inner level. But this is not the truth. In a large project, it's reasonable for different developers to manage different files, for modules are isolated; but it isn't reasonable for different developers to manage the inner and outer level of a file respectively, for it will cause chaos. Now that a file's inner and outer level should be managed as a whole, when you name an inner-level variable, it's not difficult to pay attention to the outer level, so there's really no need to support the same-name variable in inner level. We even do it more thoroughly than CoffeeScript.</p>
+<p><code>:</code> supports array destructuring assignment (without nested). For example:</p>
 <pre><code class="fus-part"><![CDATA[
     [a, b]: [b, a] # swap a and b
 ]]></code></pre>
-<p>冒号的作用就是让左边的拥有右边的值。无论是对象中的冒号还是赋值中的冒号，含义相似。</p>
-<p><code>:</code>支持对多标识符同时赋值，例如：</p>
+<p>The effect or a colon is just to let the left side have the value of the right side, be it in object or in assignment.</p>
+<p><code>:</code> supports assigning a value to multiple identifiers. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     a, b: 1 # both a and b are 1
 ]]></code></pre>
-<p>只要不是FutureScript关键字，就能作为变量名，哪怕是JS关键字如<code>function</code>也能作为变量名。但JS关键字不能作为全局变量名来赋值或使用。</p>
-<h2>模块</h2>
-<p>如果你想仍然使用Node的<code>require</code>、<code>exports</code>和<code>module.exports</code>，那么可以跳过本章，因为在FutureScript中你仍然可以像往常一样使用这些东西。</p>
-<p>我们知道，Node有它自己的模块机制，但问题是该机制并不属于ES6，ES6定义了一套JS原生模块语法。由于FutureScript是基于JS的，所以我们的原生语法是基于ES6的。</p>
-<p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
+<p>If a name isn't a FutureScript keyword, it can be a variable name. Even JS keywords such as <code>function</code> can be variable names. But JS keywords can't be global variable names.</p>
+<h2>Module</h2>
+<p>If you want to continue using Node's <code>require</code>, <code>exports</code> and <code>module.exports</code>, you can simply skip this section. In FutureScript you can still use them as usual.</p>
+<p>We know that Node has its own module system, but the problem is that this system doesn't belong to ES6. ES6 defines a native JS module syntax. Because FutureScript is based on JS, our native module syntax is based on ES6.</p>
+<p>One file is to one module. Syntaxes related to module are <code>import</code>, <code>export</code> and <code>'export</code>.</p>
 <pre><code class="fus-part"><![CDATA[
     main: import "lib"
 ]]></code></pre>
-<p>或</p>
+<p>or</p>
 <pre><code class="fus-part"><![CDATA[
     import "lib" as main
 ]]></code></pre>
-<p>都是指导入ES6中的“默认导出”，等同于JS的</p>
+<p>Both mean to import ES6's default export, equivalent to JS's:</p>
 <pre><code class="js"><![CDATA[
     import main from "lib";
 ]]></code></pre>
-<p>当版本行使用默认值的时候，就编译成上面这样的JS。但妙的是，版本行如果有<code>node import</code>或<code>node module</code>，同样的代码，它就会编译成：</p>
+<p>If the version line uses the default value, it will be compiled to the above JS. But the wonderful thing is: if the version line has <code>node import</code> or <code>node module</code>, the same code will be compiled into:</p>
 <pre><code class="js"><![CDATA[
     var main = require("lib");
 ]]></code></pre>
-<p>你无需修改代码，就可以控制本模块中的所有<code>import</code>是使用Node机制还是ES6机制，所以现在<code>import</code>可以代替<code>require</code>。</p>
-<p>还可以导入所有的“命名导出”：</p>
+<p>Without modifying your code, you can control whether to use Node module system or ES6 module system for all <code>import</code> in this file. So now <code>import</code> can replace <code>require</code>.</p>
+<p>To import all named exports:</p>
 <pre><code class="fus-part"><![CDATA[
     lib: import "lib" all
 ]]></code></pre>
-<p>或</p>
+<p>Or</p>
 <pre><code class="fus-part"><![CDATA[
     import "lib" all as lib
 ]]></code></pre>
-<p>相当于JS的</p>
+<p>Equivalent to JS's:</p>
 <pre><code class="js"><![CDATA[
     import * as lib from "lib";
 ]]></code></pre>
-<p>还可以导入指定的“命名导出”：</p>
+<p>To import specified named exports:</p>
 <pre><code class="fus-part"><![CDATA[
     {fun1, fun2 as f2}: import "lib"
 ]]></code></pre>
-<p>或</p>
+<p>Or</p>
 <pre><code class="fus-part"><![CDATA[
     import "lib" as {fun1, fun2 as f2}
 ]]></code></pre>
-<p>相当于JS的</p>
+<p>Equivalent to JS's:</p>
 <pre><code class="js"><![CDATA[
     import {fun1, fun2 as f2} from "lib";
 ]]></code></pre>
-<p>不支持在一个语句里同时导入“默认导出”和“命名导出”，有此需求请分两个语句。我认为一个模块既有“默认导出”又有“命名导出”并不好。</p>
-<p class="detail">注意，其实上面的一些例子利用了<code>all</code>在用大括号的情况下可省略的特性。如果要写全，应该是：</p>
+<p>Importing both default export and named exports is not supported. If you have this requirement please split them into two statements. I think it's not good for a module to have both default export and named exports.</p>
+<p class="detail">Note, that some examples above use the feature that <code>all</code> can be omitted. The complete form is:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     {fun1, fun2 as f2}: import "lib" all
     import "lib" all as {fun1, fun2 as f2}
 ]]></code></pre>
-<p class="detail"><code>import</code>后面只能跟内联普通字符串，并且字符串里不可以有插值（但可以有转义符）。<code>import</code>不能既有冒号又有<code>as</code>。这些都是正确的import语句：</p>
+<p class="detail"><code>import</code> can only be followed by an inline normal string. The string can't have interpolations (but can have escapes). <code>import</code> can't have both colon and <code>as</code>. These are correct <code>import</code> statements:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     import "./abc" as abc
     abc: import "./abc"
@@ -579,7 +579,7 @@
     import "abc"
     import "\u0041"
 ]]></code></pre>
-<p class="detail">这些是错误的import语句：</p>
+<p class="detail">These are illegal <code>import</code> statements:</p>
 <pre class="detail"><code><![CDATA[
     import("abc")
     import "./a" + "bc" # But this is legal as import expression
@@ -587,8 +587,8 @@
     import v"abc"
     aaa: import "bbb" as ccc
 ]]></code></pre>
-<p><code>import</code>的赋值不是普通的赋值，它是“绑定”的，和ES6一样。所以，语法上有限制，它只能是赋给变量，不能赋给对象属性，也不能在冒号左边出现<code>ifvoid</code>、<code>ifnull</code>、<code>'</code>。</p>
-<p>我们使用node经常碰到这种情况：每个文件开头都有一大堆的导入，基本都重复，但又无法省略。当然，你可以建立一个新模块（即新文件），把这堆东西都放里面，再导出，于是每个模块只要导入这个新模块就可以了。但是，它的代价是，多出了点号。例如，本来是：</p>
+<p>An <code>import</code> assignment is not a normal assignment. It is "binding", like in ES6. So it's limited to variables. It can't be assigned to object properties. There can't be <code>ifvoid</code>, <code>ifnull</code> or <code>'</code> before the colon.</p>
+<p>When we use Node we often come into this situation：Each file has a large number of imports, most of which are duplicated, but can't be omitted. Of course you can create a new module and put everything into it, then export, so each module only needs to import this new module. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     aaa: import "aaa"
     bbb: import "bbb"
@@ -597,33 +597,33 @@
     bbb()
     ccc()
 ]]></code></pre>
-<p>你建一个all.fus文件，把这三个<code>import</code>放里面，然后在原文件里写：</p>
+<p>You create a <code>all.fus</code> file and put the 3 <code>import</code> into it and write the following in the original file:</p>
 <pre><code class="fus-part"><![CDATA[
     all: import "./all"
     all.aaa()
     all.bbb()
     all.ccc()
 ]]></code></pre>
-<p>但问题是调用时多出了<code>all</code>，所以似乎也没省多少。</p>
-<p>FutureScript具有独特的“批量导入”功能（ES6中也没有该功能）。当有<code>all</code>但无冒号也无<code>as</code>时便编译成批量导入，它会导入所有的命名导出（但不包括默认导出）并让它们都成为变量名。于是，我们可以写成：</p>
+<p>But the problem is: When calling, <code>all.</code> must be added. So it seems not much shorter than before.</p>
+<p>FutureScript has a unique "batch import" feature (even ES6 doesn't have). If there's <code>all</code> but no colon or <code>as</code>, then it will be compiled to batch import. It will import all named exports (except the default export) and let them all be variable names. So, we can write:</p>
 <pre><code class="fus-part"><![CDATA[
     import "./all" all
     aaa()
     bbb()
     ccc()
 ]]></code></pre>
-<p>这个功能有个重要特点：编译器生成变量名时，需要读取被导入的模块，为了保证路径解析的方法和运行时一致，我们使解析器尽可能简单，所以只支持以<code>"./"</code>、<code>"../"</code>或<code>"/"</code>开头的路径。所以，这是一个限制，该功能只适合导入同一个项目中的另一个模块，绝不适合用模块名从别的项目中直接导入（就算支持，这也会造成变量名的不确定性）。所以，项目间的导入，一定要在本项目中有一个“清单”模块作为中间模块。</p>
-<p>“批量导入”并不引入全局变量，所以不邪恶。这些变量在别的模块中是不可见的，除非别的模块也批量导入了它们。</p>
-<p>如果A批量导入B，如果某个B的命名导出（即A中被定义的变量名）恰好是A所在的FutureScript版本的关键字，那么该变量将不可用，但不会出错。</p>
-<p>被普通导入的模块可以是Fus文件或JS文件，但被批量导入的模块必须是Fus文件（版本不限）。</p>
-<p>以上介绍的是import语句，import还可以作为表达式，格式是：<code>import "module-name"</code>，后面不能是<code>as</code>，例如：</p>
+<p>This feature has an important property: When compiling, it needs to generate variable names by reading the imported module. To ensure the path's parsing mechanism is the same as runtime, we made the parser as simple as possible. So it only supports paths starting with <code>"./"</code>, <code>"../"</code> or <code>"/"</code>. So this is a limitation: it's only suitable for importing another module in the current project, not suitable for importing directly from another project by using the module name. So if you want to import between projects, you need to have a "manifest" module as the "middle" in the current project.</p>
+<p>"Batch import" doesn't introduce global variables, so it's not evil. These variables are invisible in other modules, unless other modules batch-import them too.</p>
+<p>If A batch imports B, and if some B's named export (imported as A's variable) happen to be a keyword of A's FutureScript version, then this variable will be inaccessible, but it won't cause error.</p>
+<p>A normally imported module can be a Fus or JS file, but a batch imported module must be a Fus file (any version number is allowed).</p>
+<p>In the above we introduced <code>import</code> statement. <code>import</code> can also act as expression. The syntax is: <code>import "module-name"</code>. It can't be followed by <code>as</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     import "abc"
     import "abc" + 1
     a: import "abc" + 1
 ]]></code></pre>
-<p>所以import表达式格式比较自由，但只能导入默认导出，并且如果使用到赋值，那就是普通的赋值，不是绑定的。</p>
-<p>导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些都是正确的语法：</p>
+<p>So the syntax of <code>import</code> expression gives you more freedom, but it can only import default exports. Also, if used together with assignment, then it's a normal assignment, not a binding.</p>
+<p>When export, we can use 4 syntaxes: <code>export</code>, <code>'export</code>, <code>export as</code>, <code>export ... as</code>. These are all correct:</p>
 <pre><code class="fus-part"><![CDATA[
     multiply'export: <> @0 * @1
     mp: (<> @0 * @1) export as multiply
@@ -634,35 +634,35 @@
     export: abc # note that this is different from above
     export: <> @0 * @1
 ]]></code></pre>
-<p>这些是错误的语法：</p>
+<p>These are illegal:</p>
 <pre><code><![CDATA[
     abc export def
     export {abc}
     export multiply: <> @0 * @1
     obj.multiply'export: <> @0 * @1
 ]]></code></pre>
-<p>注意<code>abc export as def</code>和<code>export abc as def</code>相似但有着两个区别。一个区别很明显，就是前者是表达式语句而后者是命令语句。另一个区别很微妙，前者的<code>abc</code>是作为表达式，后者的<code>abc</code>是作为变量，这就使得：前者是不绑定的，而后者是绑定的（能享受到ES6模块的变量绑定带来的好处）。</p>
-<p>当语句以<code>export:</code>开头，表示ES6中的“默认导出”。例如：</p>
+<p>Note that <code>abc export as def</code> and <code>export abc as def</code> behave similarly, but with two differences. One is obvious: the former is an expression statement while the latter is a command statement. The other is subtle: The former <code>abc</code> is treated as an expression, while the latter <code>abc</code> is treated as a variable. This makes it so that: The former is not a binding, but the latter is a binding (can have the benefit of ES6 module's variable binding).</p>
+<p>If a statement starts with <code>export:</code>, it means ES6's default export. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     export: abc
 ]]></code></pre>
-<p>当版本行使用<code>node export</code>或<code>node module</code>的时候，这条语句会编译成：</p>
+<p>If the version line has <code>node export</code> or <code>node module</code>, this statement will be compiled into:</p>
 <pre><code class="js"><![CDATA[
     module.exports = abc;
 ]]></code></pre>
-<p class="detail">文件中这种语句只能出现一次，而且若出现则不能含有其他形式的导出，否则产生编译错误。这是因为如前面提到的，一个模块既有“默认导出”又有“命名导出”不好，虽然出于兼容考虑，FutureScript支持导入其他这种架构的模块，但自己的模块就不要使用这种架构了。</p>
-<p class="detail">默认导出还可以用这种形式：</p>
+<p class="detail">This kind of statement can appear only once. If it appears, then there can't be any other exports, otherwise a compiler error will be raised. This is because (as mentioned before) it's not good to have both default export and named exports in one module. Although for compatibility FutureScript supports importing a JS module of this architecture, for Fus module we can dismiss this architecture.</p>
+<p class="detail">Default export can be in this form:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     export abc as default
 ]]></code></pre>
-<p class="detail">所以默认导出其实是一种特殊的命名导出（详情参见ES6）。当你把它命名为<code>default</code>时即为默认导出。</p>
-<p class="detail">所以这两个：</p>
+<p class="detail">So default export is actually a special named export (for details see ES6 articles). If you name it <code>default</code> then it's default export.</p>
+<p class="detail">So these two:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     export abc as default
     export: abc
 ]]></code></pre>
-<p class="detail">两者功能相似，唯一的区别是：前者的<code>abc</code>是作为变量，所以是绑定的。后者的<code>abc</code>是作为表达式，所以是不绑定的。（这和ES6的规则相同，ES6的<code>export {... as default}</code>和<code>export default ...</code>也有着上述区别。）</p>
-<p>导入和导出必须出现在最外层，因为这是基于ES6的。我们是静态导入，无法动态导入，这比Node要严格。当然，我知道有些场合可能需要动态导入，那你完全可以抛弃FutureScript的原生模块语法，而用<code>Node</code>的<code>require</code>。</p>
+<p class="detail">They behave similarly. The only difference is: The former <code>abc</code> is treated as a variable, so it's a binding. The latter <code>abc</code> is treated as an expression, so it's not a binding. (This is the same as ES6's rule. ES6's <code>export {... as default}</code> and <code>export default ...</code> also has such difference.)</p>
+<p>Imports and exports must be in the outermost level, because it's based on ES6. Our imports are static, not dynamic, so it's stricter than Node. But I know in some cases you may need to dynamic import, you can use <code>require</code> instead of the native module syntax.</p>
 <h1>数据</h1>
 <h2>字符串、正则表达式</h2>
 <p>内联字符串：</p>
