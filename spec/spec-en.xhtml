@@ -814,54 +814,54 @@
         <td>No</td>
     </tr>
 </table>
-<h2>数组</h2>
-<p>方括号的作用就是表示数组或类似数组的东西（用于解构赋值等），没有其他用途。</p>
-<p>点号的作用就是访问对象的成员。由于数组也是对象，所以JS中<code>arr[3]</code>我们改为<code>arr.3</code>，更一致。其实数组就是属性名为索引值的对象，不信的话，可以用<code>Object.keys(arr)</code>来验证一下。JS这点和别的语言不同，但不是糟粕，因为这个概念挺统一的，也没有什么破绽。</p>
-<p>当然，在和带小数点的数字同时出现时，会感觉别扭，这时建议加上括号。比较一下：</p>
+<h2>Array</h2>
+<p>The bracket pair <code>[...]</code> is to represent an array literal or an array-like thing (in destructuring assignment). No other uses.</p>
+<p>The dot <code>.</code> is to access an object property. Because an array is also an object, JS's <code>arr[3]</code> is superseded by <code>arr.3</code>, which is more consistent. In fact an array is an object whose property name is the index (converted to string). If you don't believe you can test by typing <code>Object.keys(arr)</code>. JS is different than other languages in this part, but it's not a bad part, because the concept is consistent.</p>
+<p>Of course, when used together with fractions it may look unsuitable. In this case you can add a parenthesis pair. Compare the following:</p>
 <pre><code class="fus-part"><![CDATA[
     x.1 + x.2 + 3.5
     x.(1) + x.(2) + 3.5 # the same as above but looks better
     x1.1 + x1.2 + 2.4
     x1.(1) + x1.(2) + 2.4 # the same as above but looks much better
 ]]></code></pre>
-<p><code>a.(b)</code>等价于JS的<code>a[b]</code>。</p>
-<p>数组的表示法和CoffeeScript完全相同。</p>
-<h2>对象</h2>
-<p>对象的表示法和CoffeeScript基本相同，除了它必须加上大括号，不能省略。</p>
-<p>对象成员访问用的是点号，和CoffeeScript基本相同，但如左边是数字，则左边必须加上括号，例如<code>(1).toString()</code>。这个限制是为了防止产生歧义，如<code>1.3</code>，如果没有这个限制就会看上去既像小数又像数组元素访问。当然你可以争辩说其实并没有歧义，因为<code>1</code>不可能是数组，那如果是<code>1.3.a</code>呢？感觉怪怪的，不如<code>(1.3).a</code>直观。所以这一点上我们比JS还严格（JS不允许1.a，但允许1.3.a）。</p>
-<h2>字面量</h2>
-<p>有这些字面量：</p>
+<p><code>a.(b)</code> is equivalent to JS's <code>a[b]</code>.</p>
+<p>The notation of array literal is the same as CoffeeScript.</p>
+<h2>Object</h2>
+<p>The notation of object literal is almost the same as CoffeeScript, except that it must be enclosed with a brace pair <code>{...}</code>, which can't be omitted.</p>
+<p>In object property access, if the left side of a dot <code>.</code> is a number, then the number must be enclosed by parentheses, for example <code>(1).toString()</code>. This restriction is to avoid ambiguity, such as <code>1.3</code>. You may argue that there's no ambiguity because <code>1</code> is unlikely to be an array, then how about <code>1.3.a</code>? It feels weird, less intuitive than <code>(1.3).a</code>. So in this point we are stricter than JS (JS doesn't allow <code>1.a</code>, but allow <code>1.3.a</code>).</p>
+<h2>Literal</h2>
+<p>There are the following kinds of literal:</p>
 <ul>
-    <li>数字字面量</li>
-    <li>布尔字面量</li>
-    <li>字符串字面量</li>
-    <li>字符串扩展字面量</li>
-    <li>null字面量</li>
-    <li>void字面量</li>
-    <li>对象字面量</li>
-    <li>数组字面量</li>
-    <li>函数字面量</li>
-    <li>类字面量</li>
+    <li>Number literal</li>
+    <li>Boolean literal</li>
+    <li>String literal</li>
+    <li>String extension literal</li>
+    <li><code>null</code> literal</li>
+    <li><code>void</code> literal</li>
+    <li>Object literal</li>
+    <li>Array literal</li>
+    <li>Function literal</li>
+    <li>Class literal</li>
 </ul>
-<p>字面量都是表达式，但和一般表达式的区别是：</p>
+<p>A literal is an expression. Its difference from a normal expression is:</p>
 <ul>
-    <li>字面量都是常量</li>
-    <li>字面量本身不是标识符（但可以含有标识符）</li>
-    <li>字面量属于某种特定类型（注意“类型”的范围大于“类”）</li>
-    <li>字面量通常是这种特定类型值的创造源头</li>
-    <li>字面量有特定的表示法</li>
+    <li>A literal is a constant.</li>
+    <li>A literal by itself isn't an identifier (but can contain identifiers).</li>
+    <li>A literal belongs to some certain type (note that "type" is wider than "class" in range).</li>
+    <li>A literal is usually the source of creating a value of this certain type.</li>
+    <li>A literal has a specific notation.</li>
 </ul>
-<h2>上下文</h2>
-<p>我们有6个关键字或符号表示上下文，分别是：</p>
+<h2>Context</h2>
+<p>We have 6 keywords or symbols to denote the contexts, as follows:</p>
 <ul>
-    <li>当前对象：<code>me</code></li>
-    <li>当前对象的类：<code>Me</code></li>
-    <li>父对象的成员：<code>super</code></li>
-    <li>闭包中的当前函数：<code>fun</code></li>
-    <li>当前参数：<code>@</code></li>
-    <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
+    <li>Current object: <code>me</code></li>
+    <li>Current object's class: <code>Me</code></li>
+    <li>Parent object's member: <code>super</code></li>
+    <li>Current function in the closure: <code>fun</code></li>
+    <li>Current argument: <code>@</code></li>
+    <li>The left side of the colon in assignment: <code>self</code></li>
 </ul>
-<p><code>@</code>后面的点号可以省略，除非点号后面跟<code>(</code>，或者<code>"</code>、<code>v"</code>、<code>r"</code>之类的字符串或字符串扩展。</p>
+<p>The dot immediately after <code>@</code> can be omitted, except that the dot is followed by <code>(</code> or string or string extension such as <code>"</code>, <code>v"</code> and <code>r"</code>.</p>
 <h1>控制流</h1>
 <h2>逻辑运算</h2>
 <ul style="font-family: monospace;">
