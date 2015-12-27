@@ -136,6 +136,42 @@
     squares: list.map(x -> square x)
 ]]></code></pre>
 <p>If you want to not only read but also write FutureScript, then please read the remaining chapters. Below are tutorial (shown in normal font), and detailed specification that may be uninteresting to developers (shown in gray, smaller font). On first time reading, you can just read the tutorial (tutorial is also part of the specification, though easier to understand).</p>
+<h1>Usage</h1>
+<p>(This chapter is not part of the language specification. Because the command-line tool will be updated in the future, this chapter may be out-of-date then. The document of the newest version governs the usage.)</p>
+<p>First confirm you've installed Node.js on your computer.</p>
+<p>Type:</p>
+<pre><code><![CDATA[
+    npm install -g futurescript
+]]></code></pre>
+<p>If you want to compile "abc.fus" to "abc.js":</p>
+<pre><code><![CDATA[
+    fus compile abc.fus
+]]></code></pre>
+<p>Or</p>
+<pre><code><![CDATA[
+    fus c abc.fus
+]]></code></pre>
+<p>If you want to compile the whole "abc" directory to "abc-output":</p>
+<pre><code><![CDATA[
+    fus compile abc abc-output
+]]></code></pre>
+<p>Or</p>
+<pre><code><![CDATA[
+    fus c abc abc-output
+]]></code></pre>
+<p>If you want to compile "abc.fus" to "abc.js" and generate a source map of "abc.js.map":</p>
+<pre><code><![CDATA[
+    fus map-compile abc.fus
+]]></code></pre>
+<p>Or</p>
+<pre><code><![CDATA[
+    fus m abc.fus
+]]></code></pre>
+<p>The detailed synopsis is as follows:</p>
+<pre><code><![CDATA[
+    fus (compile | c | map-compile | m) <file-or-directory> [<target-file-or-directory>]
+    fus (version | v | --version)
+]]></code></pre>
 <h1>Code Structure</h1>
 <h2>File Format and Appearance</h2>
 <p>File extension is <code>.fus</code>.</p>
