@@ -378,3 +378,38 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`fus 0.1.0, node module
+undefined'export: 1
+2 as instanceof'export
+`);
+block = new $node.RootBlock(lex);
+block.complyWithJs();
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: Piece "undefined"
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "var_573300145710716007_0"
+            }
+        ]
+        value: NumberExpression "1"
+    }
+    ExpressionStatement {
+        expression: AsExpression {
+            assignee: VariableAssignee {
+                export: Piece "instanceof"
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "var_573300145710716007_1"
+            }
+            value: NumberExpression "2"
+        }
+    }
+]
+`);
+}); // ============================================================
