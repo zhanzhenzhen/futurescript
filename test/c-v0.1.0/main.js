@@ -1,23 +1,23 @@
-import "../c-v0.1.0/c-tools.js";
-import "../c-v0.1.0/c-pattern.js";
+import "../c-v0.1.0/tools.js";
+import "../c-v0.1.0/pattern.js";
 
-import "../c-v0.1.0/c-lex.js";
-import "../c-v0.1.0/c-lex-comment.js";
-import "../c-v0.1.0/c-lex-connect.js";
-import "../c-v0.1.0/c-lex-same-level.js";
-import "../c-v0.1.0/c-lex-string.js";
+import "../c-v0.1.0/lex.js";
+import "../c-v0.1.0/lex-comment.js";
+import "../c-v0.1.0/lex-connect.js";
+import "../c-v0.1.0/lex-same-level.js";
+import "../c-v0.1.0/lex-string.js";
 
-import "../c-v0.1.0/c-tree.js";
-import "../c-v0.1.0/c-tree-assign.js";
-import "../c-v0.1.0/c-tree-if.js";
-import "../c-v0.1.0/c-tree-match.js";
-import "../c-v0.1.0/c-tree-function.js";
-import "../c-v0.1.0/c-tree-try.js";
-import "../c-v0.1.0/c-tree-import.js";
-import "../c-v0.1.0/c-tree-export.js";
-import "../c-v0.1.0/c-tree-class.js";
+import "../c-v0.1.0/tree.js";
+import "../c-v0.1.0/tree-assign.js";
+import "../c-v0.1.0/tree-if.js";
+import "../c-v0.1.0/tree-match.js";
+import "../c-v0.1.0/tree-function.js";
+import "../c-v0.1.0/tree-try.js";
+import "../c-v0.1.0/tree-import.js";
+import "../c-v0.1.0/tree-export.js";
+import "../c-v0.1.0/tree-class.js";
 
-import "../c-v0.1.0/c-compile.js";
-import "../c-v0.1.0/c-compile-module.js";
-import "../c-v0.1.0/c-compile-class.js";
-import "../c-v0.1.0/c-compile-long.js";
+import "../c-v0.1.0/compile.js";
+import "../c-v0.1.0/compile-module.js";
+import "../c-v0.1.0/compile-class.js";
+import "../c-v0.1.0/compile-long.js";
