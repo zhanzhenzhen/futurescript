@@ -58,7 +58,7 @@ test(() => {
 r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a'export: 1
 `}).targets[0].code;
-assert(r === '"use strict";var a;a=(1);export {a};');
+assert(r === '"use strict";var a;a=(1);export {a as a};');
 }); // ============================================================
 
 test(() => {
@@ -67,7 +67,7 @@ a: 1 as b'export
 c'export: 2
 d: 3
 `}).targets[0].code;
-assert(r === '"use strict";var a,b,c,d;a=(b=(1));c=(2);d=(3);export {b};export {c};');
+assert(r === '"use strict";var a,b,c,d;a=(b=(1));c=(2);d=(3);export {b as b};export {c as c};');
 }); // ============================================================
 
 test(() => {
@@ -123,4 +123,20 @@ r = $libLockedApi.generateOutput({code: `fus 0.1.0, node module
 export: 3 + 4
 `}).targets[0].code;
 assert(r === '"use strict";module.exports=((3)+(4));');
+}); // ============================================================
+
+test(() => {
+r = $libLockedApi.generateOutput({code: `fus 0.1.0
+undefined'export: 1
+a: 2 as instanceof'export
+`}).targets[0].code;
+assert(r === '"use strict";var a,var_573300145710716007_0,var_573300145710716007_1;var_573300145710716007_0=(1);a=(var_573300145710716007_1=(2));export {var_573300145710716007_0 as undefined};export {var_573300145710716007_1 as instanceof};');
+}); // ============================================================
+
+test(() => {
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node module
+undefined'export: 1
+a: 2 as instanceof'export
+`}).targets[0].code;
+assert(r === '"use strict";var a,var_573300145710716007_0,var_573300145710716007_1;exports.undefined=var_573300145710716007_0=(1);a=(exports.instanceof=var_573300145710716007_1=(2));');
 }); // ============================================================
