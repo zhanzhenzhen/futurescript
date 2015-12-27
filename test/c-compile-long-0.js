@@ -4,6 +4,7 @@ import * as $libLockedApi from "../lib/locked-api.js";
 
 let r;
 
+// This takes around 200ms for a 2.7GHz computer.
 test(() => {
 let startTime = new Date().getTime();
 r = $lockedApi.runCode(`fus 0.1.0
@@ -511,6 +512,7 @@ a: 1
 $lockedApi.printLine("Long 1: " + (new Date().getTime() - startTime));
 }); // ============================================================
 
+// This takes around 100ms for a 2.7GHz computer.
 test(() => {
 let startTime = new Date().getTime();
 r = $lockedApi.runCode(`fus 0.1.0
