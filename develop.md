@@ -7,7 +7,7 @@ Second, git clone the repository, and let the repository's root directory be you
 
 Now, we're ready to develop.
 
-Because "lib" and "test" directories hold all versions, we often want to list files of just the current version (specified in "package.json"):
+Because "lib" and "test" directories hold all versions, we often want to list files used by just the current version (specified in "package.json"):
 
 - `fus list`
 - `fus l`
