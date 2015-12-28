@@ -85,7 +85,7 @@
 <pre><code class="fus-part"><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
 ]]></code></pre>
-<p>CoffeeScript can also achieve this by <code>a ?= 8</code>, but FutureScript is more readable. Also for logic operators, we dropped JS's equivalents in favor of the more natural <code>and</code>, <code>or</code>, <code>not</code>.</p>
+<p>CoffeeScript can also achieve this by <code>a ?= 8</code>, but FutureScript is more readable. Also for logical operators, we dropped JS's equivalents in favor of the more natural <code>and</code>, <code>or</code>, <code>not</code>.</p>
 <p>The third feeling of FutureScript is that it can extremely simplify your code. All JS programmers know how unnatural the asynchronous grammar is. But now we can:</p>
 <pre><code class="fus-part"><![CDATA[
     console.log abc()'wait.def()'wait.ghi()'wait
@@ -905,8 +905,8 @@
     <li>The left side of the colon in assignment: <code>self</code></li>
 </ul>
 <p>The dot immediately after <code>@</code> can be omitted, except that the dot is followed by <code>(</code> or string or string extension such as <code>"</code>, <code>v"</code> and <code>r"</code>.</p>
-<h1>控制流</h1>
-<h2>逻辑运算</h2>
+<h1>Control Flow</h1>
+<h2>Logical Operation</h2>
 <ul style="font-family: monospace;">
     <li>=</li>
     <li>/= (not =, not=)</li>
@@ -918,31 +918,31 @@
     <li>or</li>
     <li>not</li>
 </ul>
-<p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
-<p><code>/=</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。为什么我们不用<code>!=</code>？因为感叹号目前FutureScript还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
-<p>FutureScript和其他语言在逻辑运算方面最大的区别就是<code>not</code>的优先级。<code>not</code>的优先级被降低，仅高于<code>and</code>和<code>or</code>。这意味着我们可以少加很多括号。你肯定抱怨过在JS中不得不这样写：</p>
+<p>The equals sign <code>=</code> is just to determine equality. No longer need to distinguish between <code>=</code>, <code>==</code> and <code>===</code>.</p>
+<p><code>/=</code> means inequality. It can also be written as <code>not =</code>, where the space can be omitted. Why don't we use <code>!=</code>? Because <code>!</code> isn't used by FutureScript so far, I really don't want a precious symbol to be only usable with <code>=</code>. <code>/=</code> also looks more like <code>≠</code> than <code>!=</code>.</p>
+<p>For logical operation, the biggest difference in FutureScript is the precedence of <code>not</code>. <code>not</code> is lowered, only higher than <code>and</code> and <code>or</code>. This means we can omit many parentheses. You must have complained in JS you have to write:</p>
 <pre><code class="js"><![CDATA[
     if !(abc instanceof Abc) doTask();
 ]]></code></pre>
-<p>但现在我们可以：</p>
+<p>But now we can:</p>
 <pre><code><![CDATA[
     if not abc instanceof Abc
         doTask()
 ]]></code></pre>
-<p>但事实上这个例子是非法的，因为我们没有<code>instanceof</code>关键字，我们是用<code>is</code>关键字，你可以写<code>not abc is Abc</code>但稍显难看（所以我们支持写成<code>abc isnt Abc</code>）。那有没有好看的例子呢？有，像这种也不用加上括号：</p>
+<p>But in fact this example is illegal, because we don't have <code>instanceof</code>. We use <code>is</code>. You can write <code>not abc is Abc</code> but it's a bit ugly (so we support <code>abc isnt Abc</code>). So are there any beautiful examples? Yes, in this example you can also omit parentheses:</p>
 <pre><code class="fus-part"><![CDATA[
     if not 200 <= statusCode < 300
         console.log "failure"
 ]]></code></pre>
-<p><span class="warning">我们暂不支持这种链式比较，但以后的版本一定会支持。</span></p>
-<p>再回到刚才说的不等号。其实还可以用<code>not ... =</code>。这4个功能相同，你看哪个顺眼就用哪个：</p>
+<p><span class="warning">For now we don't support chained comparison, but I'm sure it will be implemented soon in a future version.</span></p>
+<p>Back to the inequality sign. You can also use <code>not ... =</code>. These 4 forms behaves the same:</p>
 <pre><code class="fus-part"><![CDATA[
     if statusCode /= 200 throw
     if statusCode not= 200 throw
     if statusCode not = 200 throw
     if not statusCode = 200 throw
 ]]></code></pre>
-<p class="detail">不过<code>not ... =</code>虽然功能相同，但生成的代码还是与其他三个不同的。</p>
+<p class="detail">But <code>not ... =</code> generates different code than the other 3, though the behavior is the same.</p>
 <h2>条件</h2>
 <p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
 <pre><code class="fus-part"><![CDATA[
