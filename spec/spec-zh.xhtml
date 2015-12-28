@@ -989,7 +989,7 @@
     console.log("a is true!") if a # if (a) {console.log("a is true!");}
     mood: "happy" if singing # if (singing) {mood = "happy";}
 ]]></code></pre>
-<p>条件后置时<code>if</code>绝不能省略。一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是普通的块，只能是内联块。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
+<p class="detail">条件后置时<code>if</code>绝不能省略。一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是普通的块，只能是内联块。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
 <p>还有一点和CoffeeScript不同，就是当碰到分号时：</p>
 <pre><code class="coffee"><![CDATA[
     if x > 100 then aaa(); bbb()
@@ -1086,8 +1086,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         |                     "The array doesn't include any of the first 3 letters."
 ]]></code></pre>
 <p>由此可知，or和and作为运算符在模式中使用是有限制的，它作为运算符时必须出现在括号内，否则会被认为是模式。所以真的有这个需求的话，要用个括号包起来。不过它们作为运算符出现在模式中好像也没有什么用。</p>
-<p>作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
-<p>注意<code>or else</code>是一种特殊的合并写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>一起出现。</p>
+<p class="detail">作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
+<p class="detail">注意<code>or else</code>是一种特殊的合并写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>一起出现。</p>
 <p>和<code>if</code>一样，<code>then</code>块可以用缩进，这时就不用写<code>then</code>了：</p>
 <pre><code class="fus-part"><![CDATA[
     day: 3

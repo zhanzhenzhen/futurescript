@@ -943,8 +943,8 @@
     if not statusCode = 200 throw
 ]]></code></pre>
 <p class="detail">But <code>not ... =</code> generates different code than the other 3, though the behavior is the same.</p>
-<h2>条件</h2>
-<p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
+<h2>Condition</h2>
+<p>Use<code>if</code>, <code>?</code>, <code>then</code>, <code>else</code>, <code>|</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     b:
         if a = 3
@@ -952,7 +952,7 @@
         else
             "other"
 ]]></code></pre>
-<p>或</p>
+<p>Or</p>
 <pre><code class="fus-part"><![CDATA[
     b:
         a = 3 ?
@@ -960,47 +960,47 @@
         else
             "other"
 ]]></code></pre>
-也可以并成一行：
+Can be combined into one line:
 <pre><code class="fus-part"><![CDATA[
     b: if a = 3 then "three" else "other"
 ]]></code></pre>
-<p>或</p>
+<p>Or</p>
 <pre><code class="fus-part"><![CDATA[
     b: a = 3 ? "three" else "other"
 ]]></code></pre>
-<p>甚至</p>
+<p>Or even</p>
 <pre><code class="fus-part"><![CDATA[
     b: a = 3 ? "three" | "other"
 ]]></code></pre>
-<p><code>?</code>和<code>then</code>等价，<code>|</code>和<code>else</code>等价，这条规则不仅限于<code>if</code>语句，在所有地方通用。下文提到的它们任何一个的规则也适用于它的等价方，例如<code>then</code>的规则也适用于<code>?</code>。</p>
-<p>条件前置时，<code>if</code>可写可不写，而<code>then</code>则当<code>then</code>块非内联时可写可不写。<code>if</code>省略时要注意避免出现优先级的问题，例如：</p>
+<p><code>?</code> is equivalent to <code>then</code>, and <code>|</code> is equivalent to <code>else</code>. This rule is not limited to <code>if</code>, but rather in all the language. Any rule mentioned hereinafter is applicable to its equivalent. For example, the rule of <code>then</code> also applies to <code>?</code>.</p>
+<p>When the condition is prefixed, <code>if</code> can be omitted, and <code>then</code> can be omitted if <code>then</code> block isn't an inline block. When <code>if</code> is omitted take note of the precedence problem it may cause. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     a if b > 100 then 100 else b
 ]]></code></pre>
-<p>这里的<code>if</code>省略的话意思就完全不一样了，除非加个括号。</p>
-<p>当<code>then</code>后紧接的是表示命令语句的关键字时，<code>then</code>也可省略（这也适用于模式匹配）。例如：</p>
+<p>Here if the <code>if</code> is omitted the meaning will be changed, unless a parenthesis pair is added.</p>
+<p>When <code>then</code> is followed by a keyword of command statement, <code>then</code> can also be omitted (this also applies to pattern matching, which we will discuss later). For example:</p>
 <pre><code class="fus-part"><![CDATA[
     if a > 100 throw new Error()
 ]]></code></pre>
-<p>如果没有<code>else</code>块，那么则当<code>else</code>时整个<code>if</code>表达式的值为<code>void</code>。</p>
-<p>但是要注意，条件前置时无论怎样省略，<code>if</code>和<code>then</code>必须至少出现一个。</p>
-<p>条件还可以后置，例如：</p>
+<p>If there's no <code>else</code> block, then if the condition matches <code>else</code>, the whole <code>if</code> expression's value will be <code>void</code>.</p>
+<p>But note that however omitted, you can't omit both <code>if</code> and <code>then</code> in the prefixed-condition form.</p>
+<p>Condition can also be postfixed. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     console.log("a is true!") if a # if (a) {console.log("a is true!");}
     mood: "happy" if singing # if (singing) {mood = "happy";}
 ]]></code></pre>
-<p>条件后置时<code>if</code>绝不能省略。一条语句中只可以含有一个后置的<code>if</code>，它必须出现在语句的最外层（外面不能有括号），而且<code>if</code>之前不能是普通的块，只能是内联块。由于后置的<code>if</code>只能处于语句的最外层，所以如前面是冒号赋值，那么冒号和<code>if</code>之间的应该属于冒号而不是<code>if</code>。</p>
-<p>还有一点和CoffeeScript不同，就是当碰到分号时：</p>
+<p class="detail">When condition is postfixed, <code>if</code> can't be omitted. One statement can only have one postfixed <code>if</code>. It must be in the outermost level of a statement (can't be enclosed with parentheses). Also, the block before <code>if</code> can't be a normal block. It can only be an inline block. Because postfixed <code>if</code> must be in the outermost level, so if a colon assignment is before it, then the code between the colon and <code>if</code> should belong to the colon not <code>if</code>.</p>
+<p>Another thing different from CoffeeScript is when come across semicolons:</p>
 <pre><code class="coffee"><![CDATA[
     if x > 100 then aaa(); bbb()
 ]]></code></pre>
-<p>CoffeeScript是把<code>aaa(); bbb()</code>全作为子语句，这看上去似乎是硬插入一条规则，很不统一，而且我们已有了专门的符号，可以写成：</p>
+<p>CoffeeScript treats <code>aaa(); bbb()</code> as child statements. But this rule looks inconsistent with other rules. Also we have unique symbols for this so it can be written as:</p>
 <pre><code class="fus-part"><![CDATA[
     if x > 100 << aaa(); bbb() >>
 ]]></code></pre>
-<p>所以这条规则在我们这里作废。FutureScript里，分号的左右两边能在不引发语法错误的前提下穿越一切障碍物。</p>
-<h2>模式匹配</h2>
-<p><code>match</code>可以看成是一个增强版<code>switch</code>，它称为模式匹配。例如：</p>
+<p>So CoffeeScript's "semicolon rule" is cancelled in our language. In FutureScript, the left and right side of semicolon can pass through any obstacles, provided there's no grammar error.</p>
+<h2>Pattern Matching</h2>
+<p><code>match</code> can be regarded as an enhanced version of <code>switch</code>, called pattern matching. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     day: 3
     text: match day
@@ -1013,8 +1013,8 @@
         |   "Sun"
     # text will be "Wed"
 ]]></code></pre>
-<p>上面只是最普通的模式匹配，<code>day</code>是输入，1、2、3……称作模式。</p>
-<p>模式匹配中的“比较”默认是用<code>=</code>直接比较输入和模式，<code>match</code>右边还可以不是输入而是比较函数，例如：</p>
+<p>Above is the simplest pattern matching, where <code>day</code> is called the input, and 1, 2, 3... is called patterns.</p>
+<p>The "comparison" is by default using <code>=</code> to directly compare the input with a pattern. <code>match</code> can also be followed by not the input, but a comparison function. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     statusCode: 404
     message: match <> statusCode >= @0
@@ -1027,8 +1027,8 @@
         |     "unsupported"
     # message is "client error"
 ]]></code></pre>
-<p>使用激进模式的话，上例中的<code>@0</code>更是可以简化为<code>@</code>。</p>
-<p><code>else</code>可以跟前面的并在一起，此时用<code>or else</code>，但该项不能有<code>then</code>。这称为<code>else</code>模式和其他模式的合并写法，但本质上还是两个模式。在模式匹配中，<code>or</code>这个关键字若不作为运算符使用，可以简写为逗号<code>,</code>，所以上面的例子可以写成：</p>
+<p>If using radical mode, the above <code>@0</code> can be simplified to <code>@</code>。</p>
+<p><code>else</code> can be combined with a preceding pattern by using <code>or else</code>, but this pattern can't contain <code>then</code>. This is called the combination of <code>else</code> pattern and other pattern, but in essence it's still two patterns. In addition, if <code>or</code> isn't treated as an operator, it can be simplified as <code>,</code>. So the above example can be written as:</p>
 <pre><code class="fus-part"><![CDATA[
     message: match <> statusCode >= @0
         600, | "unsupported"
@@ -1038,7 +1038,7 @@
         200  ? "success"
         100  ? "informational"
 ]]></code></pre>
-<p>用<code>or else</code>的时候<code>or</code>还可以省略，所以还可以写成：</p>
+<p>When using <code>or else</code> for patterns, <code>or</code> can be omitted. So it can be further simplified to: </p>
 <pre><code class="fus-part"><![CDATA[
     message: match <> statusCode >= @0
         600 | "unsupported"
@@ -1048,7 +1048,7 @@
         200 ? "success"
         100 ? "informational"
 ]]></code></pre>
-<p>比较函数的功能非常强大，例如：</p>
+<p>Comparison function is very powerful. For example:</p>
 <pre><code class="fus-part"><![CDATA[
 chessBoard: (pos) -> match <> pos.x = @0.0 and pos.y = @0.1
     [0, 0] ? "king"
@@ -1057,8 +1057,8 @@ chessBoard: (pos) -> match <> pos.x = @0.0 and pos.y = @0.1
     |        "empty"
 piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
-<p>（注：激进模式中<code>@0.0</code>和<code>@0.1</code>可以简化为<code>@0</code>和<code>@1</code>。）</p>
-<p>又如：</p>
+<p>(Note: In radical mode <code>@0.0</code> and <code>@0.1</code> can be simplified to <code>@0</code> and <code>@1</code>.)</p>
+<p>Another example:</p>
 <pre><code class="fus-part"><![CDATA[
     text: "This is a dog."
     speak: match <> text.includes(@0)
@@ -1067,15 +1067,15 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         |       "unknown"
     # speak is "woof"
 ]]></code></pre>
-<p>当<code>match</code>后紧接的是函数时，则被识别成比较函数。要直接写出<code>-&gt;</code>或<code>&lt;&gt;</code>，绝不能用变量替代。</p>
-<p>还有or模式和and模式。or模式我们会经常用到，例如：</p>
+<p>Once <code>match</code> is followed by a function, it will be recognized as a comparison function. <code>-&gt;</code> or <code>&lt;&gt;</code> must be directly written here. It can't be replaced by a variable.</p>
+<p>There are also <code>or</code> pattern and <code>and</code> pattern. <code>or</code> pattern is very commonly used. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     day: "Tue"
     action: match day
         "Sat", "Sun" ? "have a rest"
         |              "work"
 ]]></code></pre>
-<p>and模式则不常用，但也有例子：</p>
+<p><code>and</code> pattern is less common. But here is an example:</p>
 <pre><code class="fus-part"><![CDATA[
     array: ["a", "c", "b", "d"]
     message: match <> array.includes(@0)
@@ -1085,10 +1085,10 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         "c"                 ? "The array includes c."
         |                     "The array doesn't include any of the first 3 letters."
 ]]></code></pre>
-<p>由此可知，or和and作为运算符在模式中使用是有限制的，它作为运算符时必须出现在括号内，否则会被认为是模式。所以真的有这个需求的话，要用个括号包起来。不过它们作为运算符出现在模式中好像也没有什么用。</p>
-<p>作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
-<p>注意<code>or else</code>是一种特殊的合并写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>一起出现。</p>
-<p>和<code>if</code>一样，<code>then</code>块可以用缩进，这时就不用写<code>then</code>了：</p>
+<p>From this we know, that the use of <code>or</code> and <code>and</code> as operators are limited within a pattern, for they must be enclosed in a parenthesis pair, otherwise they will be treated as a pattern. But it seems that logical operators are rarely used within patterns.</p>
+<p class="detail">作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
+<p class="detail">注意<code>or else</code>是一种特殊的合并写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>一起出现。</p>
+<p>Like <code>if</code>, in pattern matching <code>then</code> block can be indented. In this way we can omit <code>then</code>:</p>
 <pre><code class="fus-part"><![CDATA[
     day: 3
     match day
@@ -1100,7 +1100,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         |
             go work
 ]]></code></pre>
-<p>可以看出，即便是模拟传统的<code>switch</code>，依然比<code>switch</code>简洁。</p>
+<p>We can find that even when simulating the traditional <code>switch</code>, it's shorter than <code>switch</code>.</p>
 <h2>循环</h2>
 <p>循环其实并不符合函数式编程的理念，所以我有意使FutureScript没有循环。但我可以肯定地说，所有循环能做的事，FutureScript都能做，而且简洁程度不亚于循环。（本章不属于FutureScript语言规范，只是简要介绍一下fus-ext包的repeat函数。本章的内容可能过时，以fus-ext的教程为准。为方便起见，本文中的“循环”一般指repeat。）</p>
 <p>可以使用FutureScript的扩展包fus-ext来实现循环。</p>
