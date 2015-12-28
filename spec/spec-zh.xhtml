@@ -1147,7 +1147,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log i
         fun(i + 1)
 ]]></code></pre>
-<p>FutureScript的递归有个好处，它会自动编译（优化）成循环，当自我调用的语句出现在尾部之时。所以，你无需担心堆栈溢出，就算循环1000000次也没关系，编译后的JS代码是一个真正的循环，突破了传统递归的限制。这个在内部是通过Babel实现的。</p>
 <h2>异常</h2>
 <p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript相似。例如：</p>
 <pre><code class="fus-part"><![CDATA[
@@ -1567,14 +1566,30 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>插入JavaScript</h2>
 <p>使用<code>js"</code>。例如：</p>
 <pre><code class="fus-part"><![CDATA[
-    hi = js"
+    hi: js"
         function() {
-            return [document.title, "Hello JavaScript"].join(": ");
+            return ["Hello", "JavaScript"].join(" ");
         }
     "
 ]]></code></pre>
 <p>它完全废除了<code>\</code>的功能，双引号也无法在其中用任何变通的办法表示（否则会有代价），不过妙在JS也支持单引号。如果必须用双引号，就用格式。</p>
 <p>为了能够正常运行，插入的整体必须是表达式，例如JS函数表达式、JS赋值表达式等。这一点，和CoffeeScript相同。</p>
+<p>因为整体必须是表达式，所以最外层不能有分号，例如你可以这样：</p>
+<pre><code class="fus-part"><![CDATA[
+    js"
+        (function() {
+            a = 1;
+            b = 2;
+        })()
+    "
+]]></code></pre>
+<p>但你不能这样：</p>
+<pre><code class="fus-part"><![CDATA[
+    js"
+        a = 1;
+        b = 2;
+    "
+]]></code></pre>
 <h1>汇总</h1>
 <h2>关键字</h2>
 <ul style="font-family: monospace;">
