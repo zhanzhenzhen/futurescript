@@ -1126,6 +1126,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         else
             doSomething()
 ]]></code></pre>
+<p>这个相当于JS的for循环，从1到10：</p>
+<pre><code class="fus-part"><![CDATA[
+    repeat{from: 1, to: 10, for: i ->
+        console.log i
+    }
+]]></code></pre>
 <p>这个相当于JS的for循环，从10到1：</p>
 <pre><code class="fus-part"><![CDATA[
     repeat{from: 10, to: 1, by: -1, for: i ->
@@ -1133,12 +1139,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     }
 ]]></code></pre>
 <p><code>by</code>默认为1。</p>
-<p>这个有所不同，是从9到0：</p>
-<pre><code class="fus-part"><![CDATA[
-    repeat{count: 10, by: -1, for: i ->
-        console.log i
-    }
-]]></code></pre>
 <p>fus-ext随时可能更改，因此本章的内容可能过时。以fus-ext页面的内容为准：https://www.npmjs.com/package/fus-ext</p>
 <h2>递归</h2>
 <p>递归的实现方式没有什么特别的，但我们加入了更简便的方法，你甚至无需命名递归函数，你想，自己调用自己，又何必给自己取名字？使用<code>fun</code>关键字就行了。例如，如果你不想用外部库的话，可以用递归模拟循环：</p>
