@@ -350,6 +350,15 @@ assert(r === "aaabbbccc");
 }); // ============================================================
 
 test(() => {
+r = $lockedApi.runCode(String.raw`fus 0.1.0
+export: "
+    a"a\"a
+"
+`);
+assert(r === "a\"a\"a");
+}); // ============================================================
+
+test(() => {
 r = $lockedApi.runCode(`fus 0.1.0
 a: r"aaa"
 b: r"aaa"gim
@@ -387,6 +396,14 @@ a: r"
     \n
     b
 "
+export: "a\"a\nb".search(a)
+`);
+assert(r === 0);
+}); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(String.raw`fus 0.1.0
+a: r"a\"a\nb"
 export: "a\"a\nb".search(a)
 `);
 assert(r === 0);
