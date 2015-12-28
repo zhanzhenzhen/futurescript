@@ -394,6 +394,43 @@ assert(r === 3);
 
 test(() => {
 r = $lockedApi.runCode(`fus 0.1.0
+a: 1
+js"
+    (function(){
+        a = 2;
+    })()
+"
+export: a
+`);
+assert(r === 2);
+}); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(String.raw`fus 0.1.0
+a: "
+    Hello
+    World\(1+2)\n
+    !
+"
+export: a
+`);
+assert(r === "Hello\nWorld3\n\n!");
+}); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(String.raw`fus 0.1.0
+a: v"
+    Hello
+    World\(1+2)\n
+    !
+"
+export: a
+`);
+assert(r === "Hello\nWorld\\(1+2)\\n\n!");
+}); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(`fus 0.1.0
 ###
 header comment
 ###

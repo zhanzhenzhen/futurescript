@@ -15,29 +15,29 @@ assert(s === 'VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineNormal
 }); // ============================================================
 
 test(() => {
-s = new $lex.Lex(`fus 0.1.0
-x: "abc \\n\\" def"
+s = new $lex.Lex(String.raw`fus 0.1.0
+x: "abc \n\" def"
 x: "
-    abc \\n\\" def
+    abc \n\" def
 "
 `).toString();
-assert(s === 'VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc \\\\n\\\\\\" def", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc \\\\n\\\\\\" def", PseudoCallRightParenthesis');
+assert(s === String.raw`VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc \\n\\\" def", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc \\n\\\" def", PseudoCallRightParenthesis`);
 }); // ============================================================
 
 test(() => {
-s = new $lex.Lex(`fus 0.1.0
-x: "abc \\(def) ghi"
+s = new $lex.Lex(String.raw`fus 0.1.0
+x: "abc \(def) ghi"
 x: "
-    abc \\(def) ghi
+    abc \(def) ghi
 "
 `).toString();
 assert(s === 'VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", NormalRightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc ", Plus, NormalLeftParenthesis, NormalToken "def", NormalRightParenthesis, Plus, Str " ghi", PseudoCallRightParenthesis');
 }); // ============================================================
 
 test(() => {
-s = new $lex.Lex(`fus 0.1.0
+s = new $lex.Lex(String.raw`fus 0.1.0
 --
-    "abc \\
+    "abc \
             def"
 `).toString();
 assert(s === 'VersionDirective "fus 0.1.0", DashFunction, LeftChevron, InlineNormalString, PseudoCallLeftParenthesis, Str "abc         def", PseudoCallRightParenthesis, RightChevron');
@@ -53,7 +53,7 @@ x: "
         eee
 "
 `).toString();
-assert(s === 'VersionDirective "fus 0.1.0", NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "    aaa\\\\n        bbb\\\\n        ccc\\\\nddd\\\\n    eee", PseudoCallRightParenthesis');
+assert(s === String.raw`VersionDirective "fus 0.1.0", NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "    aaa\n        bbb\n        ccc\nddd\n    eee", PseudoCallRightParenthesis`);
 }); // ============================================================
 
 test(() => {
@@ -96,53 +96,67 @@ s = new $lex.Lex(`fus 0.1.0
             
     "
 `).toString();
-assert(s === 'VersionDirective "fus 0.1.0", DashFunction, LeftChevron, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\\\\n    def\\\\n    ", PseudoCallRightParenthesis, RightChevron');
+assert(s === String.raw`VersionDirective "fus 0.1.0", DashFunction, LeftChevron, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\n    def\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\n    def\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\n    def\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\n    def\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\n    def\n", PseudoCallRightParenthesis, Semicolon, FormattedNormalString, PseudoCallLeftParenthesis, Str "abc\n    def\n    ", PseudoCallRightParenthesis, RightChevron`);
 }); // ============================================================
 
 test(() => {
-s = new $lex.Lex(`fus 0.1.0
-x: v"C:\\Windows"
+s = new $lex.Lex(String.raw`fus 0.1.0
+x: v"C:\Windows"
 x: v"
-    C:\\Windows\\
-    aaa \\(bbb)
+    C:\Windows\
+    aaa \(bbb)
 "
 `).toString();
-assert(s === 'VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineVerbatimString, PseudoCallLeftParenthesis, Str "C:\\\\Windows", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedVerbatimString, PseudoCallLeftParenthesis, Str "C:\\\\Windows\\\\\\\\naaa \\\\(bbb)", PseudoCallRightParenthesis');
+assert(s === String.raw`VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineVerbatimString, PseudoCallLeftParenthesis, Str "C:\\Windows", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedVerbatimString, PseudoCallLeftParenthesis, Str "C:\\Windows\\\naaa \\(bbb)", PseudoCallRightParenthesis`);
 }); // ============================================================
 
 test(() => {
-s = new $lex.Lex(`fus 0.1.0
-x: "aaaaaaa\\
-bbbbbbb"
+s = new $lex.Lex(String.raw`fus 0.1.0
 x: "
-    a
-    b\\
+    a\nb
+    c
+"
+x: v"
+    a\nb
     c
 "
 `).toString();
-assert(s === 'VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaaaaaabbbbbbb", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "a\\\\nbc", PseudoCallRightParenthesis');
+assert(s === String.raw`VersionDirective "fus 0.1.0", NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "a\\nb\nc", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedVerbatimString, PseudoCallLeftParenthesis, Str "a\\nb\nc", PseudoCallRightParenthesis`);
 }); // ============================================================
 
 test(() => {
-s = new $lex.Lex(`fus 0.1.0
-x: r"hello \\(\\\"world\\\"\\)#(a.b() + c)"
+s = new $lex.Lex(String.raw`fus 0.1.0
+x: "aaaaaaa\
+bbbbbbb"
+x: "
+    a
+    b\
+    c
+"
+`).toString();
+assert(s === String.raw`VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineNormalString, PseudoCallLeftParenthesis, Str "aaaaaaabbbbbbb", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedNormalString, PseudoCallLeftParenthesis, Str "a\nbc", PseudoCallRightParenthesis`);
+}); // ============================================================
+
+test(() => {
+s = new $lex.Lex(String.raw`fus 0.1.0
+x: r"hello \(\"world\"\)#(a.b() + c)"
 x: r"
-    hello \\x20
+    hello \x20
     world #(a) # a
 "
 `).toString();
-assert(s === 'VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineRegex, PseudoCallLeftParenthesis, Str "hello \\\\(\\\\\\"world\\\\\\"\\\\)", Plus, NormalLeftParenthesis, NormalToken "a", Dot, NormalToken "b", CallLeftParenthesis, CallRightParenthesis, Plus, NormalToken "c", NormalRightParenthesis, Plus, Str "", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedRegex, PseudoCallLeftParenthesis, Str "hello \\\\x20\\\\nworld ", Plus, NormalLeftParenthesis, NormalToken "a", NormalRightParenthesis, Plus, Str " # a", PseudoCallRightParenthesis');
+assert(s === String.raw`VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineRegex, PseudoCallLeftParenthesis, Str "hello \\(\\\"world\\\"\\)", Plus, NormalLeftParenthesis, NormalToken "a", Dot, NormalToken "b", CallLeftParenthesis, CallRightParenthesis, Plus, NormalToken "c", NormalRightParenthesis, Plus, Str "", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedRegex, PseudoCallLeftParenthesis, Str "hello \\x20\nworld ", Plus, NormalLeftParenthesis, NormalToken "a", NormalRightParenthesis, Plus, Str " # a", PseudoCallRightParenthesis`);
 }); // ============================================================
 
 test(() => {
-s = new $lex.Lex(`fus 0.1.0
-x: js"var a = 'asdf\\(asdf)';"
+s = new $lex.Lex(String.raw`fus 0.1.0
+x: js"var a = 'asdf\(asdf)';"
 x: js"
-    var a = "asdf\\(asdf)\\
+    var a = "asdf\(asdf)\
     ggg";
 "
 `).toString();
-assert(s === 'VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineJs, PseudoCallLeftParenthesis, Str "var a = \'asdf\\\\(asdf)\';", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedJs, PseudoCallLeftParenthesis, Str "var a = \\"asdf\\\\(asdf)\\\\\\\\nggg\\";", PseudoCallRightParenthesis');
+assert(s === String.raw`VersionDirective "fus 0.1.0", NormalToken "x", Colon, InlineJs, PseudoCallLeftParenthesis, Str "var a = 'asdf\\(asdf)';", PseudoCallRightParenthesis, Semicolon, NormalToken "x", Colon, FormattedJs, PseudoCallLeftParenthesis, Str "var a = \"asdf\\(asdf)\\\nggg\";", PseudoCallRightParenthesis`);
 }); // ============================================================
 
 test(() => {
