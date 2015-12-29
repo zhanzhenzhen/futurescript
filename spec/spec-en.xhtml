@@ -733,7 +733,7 @@
     """
 ]]></code></pre>
 <p>You may wonder why we can use only 1 quotation mark to wrap a text block (the text itself has quotation marks). The secret is that we require every indent in the string to be greater than the indent of the quotation mark, and require that the indent of the opening quotation mark be the same as that of the closing quotation mark. So no matter how many quotation marks there are inside the string, they won't affect the compiler.</p>
-<p>The opening quotation mark of a formatted string must be followed by a newline (the 2 newlines for starting and ending doesn't count towards the string characters). In the line of the closing quotation mark, before the quotation mark there should only be whitespaces. Within a line inside the string, the left part of the indent doesn't count towards the string characters until an indent whitespace exceeds the "minimum indent in the string". Note: Here "minimum indent" doesn't include empty lines.</p>
+<p>The opening quotation mark of a formatted string must be followed immediately by a newline (the 2 newlines for starting and ending doesn't count towards the string characters). In the line of the closing quotation mark, before the quotation mark there should only be whitespaces. Within a line inside the string, the left part of the indent doesn't count towards the string characters until an indent whitespace exceeds the "minimum indent in the string". Note: Here "minimum indent" doesn't include empty lines.</p>
 <p>The inside of a formatted string can't be all whitespaces (except those in escape form). For example, these are all illegal:</p>
 <pre><code><![CDATA[
     str: "
@@ -791,7 +791,7 @@
     path: v"C:\Windows\System"
 ]]></code></pre>
 <p>A verbatim string suppresses all the features of <code>\</code>, so you can't connect using <code>\</code> in line end. In inline verbatim strings you can't represent double quotation marks.</p>
-<p>So in summary, if the opening <code>"</code> is preceded by a letter, then it means a string or string extension.</p>
+<p>So in summary, if the opening <code>"</code> is preceded immediately by a letter, then it means a string or string extension.</p>
 <p class="detail">In essence, the content enclosed by quotation marks in a regular expression is a string. This is different from JS and CoffeeScript. Even the comment in a formatted regular expression belongs to a string in essence (but just got removed during conversion). Note, that the conversion is at runtime not compile time. Because it's possible to have interpolations, we can't convert it while compiling.</p>
 <p>There's another difference from CoffeeScript. In CoffeeScript:</p>
 <pre><code class="coffee"><![CDATA[
@@ -1492,31 +1492,31 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     [a, b] ifvoid: [1, 2]
     a'export ifnull: 1
 ]]></code></pre>
-<h2>变体</h2>
-<p>前面介绍的很多都用到了单引号，这称为变体，下面总结一下。</p>
-<p>形式有两种，一元<code>'</code>和二元<code>'</code>。一元<code>'</code>即函数的单参数变体。其他的都是二元<code>'</code>。</p>
-<p class="detail">编译器如何判断某个<code>'</code>是一元还是二元？看<code>'</code>后面紧跟的字符。如果是数字或字母，则是二元，否则（例如是符号、空格或根本没有字符）要么是一元，要么无法解析。</p>
-<p class="detail">所以这两者是一样的：</p>
+<h2>Variant</h2>
+<p>You've already seen many apostrophes. These are called variants. Now let's gather them together.</p>
+<p>There are 2 forms: unary <code>'</code> and binary <code>'</code>. Unary <code>'</code> is the function's single-argument variant. Others are all binary <code>'</code>.</p>
+<p class="detail">How does the compiler determine if a <code>'</code> is unary or binary? It checks the character immediately after <code>'</code>. If it's a number or letter, it's binary; otherwise (e.g. a symbol, space or nothing at all) it's either unary or a parsing failure.</p>
+<p class="detail">So these two are the same:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     a'ok
     a 'ok
 ]]></code></pre>
-<p class="detail">但这个不一样：</p>
+<p class="detail">But this is different:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     a' ok
 ]]></code></pre>
-<p class="detail">为了可读性，一元的<code>'</code>前面的那个字符不能是空白。像这个就是非法的，必须无法解析：</p>
+<p class="detail">For readability, a unary<code>'</code> can't be preceded by a space. So this is illegal:</p>
 <pre class="detail"><code><![CDATA[
     a ' ok
 ]]></code></pre>
-<p class="detail">行不能以<code>'</code>开始。像这个是非法的（在未来版本中可能会合法）：</p>
+<p class="detail">A line can't start with <code>'</code>. So this is illegal (but may be illegal in future versions):</p>
 <pre class="detail"><code><![CDATA[
     a
     'ok
 ]]></code></pre>
-<p class="detail">冒号左边的<code>'</code>目前不能超过2个。</p>
+<p class="detail">For now there can be at most two <code>'</code> before the colon.</p>
 <h2>in</h2>
-<p><code>in</code>的用法和CoffeeScript几乎完全相同，当然，不支持<code>!in</code>，可以用<code>... not in ...</code>或<code>not ... in ...</code>。示例：</p>
+<p><code>in</code> is almost the same as CoffeeScript. Of course we don't support <code>!in</code>, but you can use <code>... not in ...</code> or <code>not ... in ...</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     2 in [1, 2, 3] # returns true
     4 in [1, 2, 3] # returns false
@@ -1524,25 +1524,25 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     not 4 in [1, 2, 3] # returns true
 ]]></code></pre>
 <h2>is</h2>
-<p><code>is</code>表示左边是右边的类型，类似于JavaScript的<code>instanceof</code>，但又有些区别，它还能判断原始类型，可以说结合了<code>instanceof</code>和<code>typeof</code>。当右边是<code>Number</code>、<code>Boolean</code>、<code>String</code>、<code>Symbol</code>（必须严格表示为这4个之中的1个，不能是引用）时使用<code>typeof</code>。</p>
+<p><code>is</code> means the left side is of the right side type, similar to JavaScript's <code>instanceof</code> but a little different. It can also check primitive types. So it's a mix of <code>instanceof</code> and <code>typeof</code>. If the right side is <code>Number</code>, <code>Boolean</code>, <code>String</code> or <code>Symbol</code> (must be verbatim, not a reference), it will use <code>typeof</code>.</p>
 <pre><code class="fus-part"><![CDATA[
     a is A # a instanceof A
     a is Number # typeof a === "number"
 ]]></code></pre>
-<p>与<code>in</code>相似，<code>is</code>表示否定时也是可以用<code>not is</code>，不过也可以使用更顺眼的<code>isnt</code>，甚至可以用<code>is not</code>。</p>
+<p>Similar to <code>in</code>, to negate it you can use <code>not is</code>, but it's recommended to use the good-looking <code>isnt</code>. You can even use <code>is not</code>.</p>
 <pre><code class="fus-part"><![CDATA[
     a isnt A
     a not is A
     not a is A
     a is not A
 ]]></code></pre>
-<p>这4个表达式的功能是一样的。你可能要问，<code>a is not A</code>不会引起歧义吗？不会，因为<code>a is (not A)</code>是无意义的，布尔值不是类。</p>
+<p>These 4 behaves the same. You might ask if <code>a is not A</code> is ambiguous. No, because <code>a is (not A)</code> is meaningless - a boolean isn't a class.</p>
 <h2>delete</h2>
-<p><code>delete</code>和JavaScript中的稍有不同。它不再是一个表达式。这是因为在JavaScript strict mode中并没有值为false的情况，而是抛出异常。既然我们都是用strict mode，所以没必要弄成表达式。</p>
-<h2>rem和mod</h2>
-<p><code>rem</code>即是JavaScript的<code>%</code>。<code>mod</code>是另一种求余，正负号和除数相同，只要除数是正数，结果就不为负，所以这种求余适用范围可能更广一些。<code>a mod b</code>相当于JavaScript的<code>(a % b + b) % b</code>。</p>
-<h2>+和-（正负号）</h2>
-<p class="detail">一元的<code>+</code>、<code>-</code>（正负号）的用法和CoffeeScript相似但有微小区别，我们规定它只能是紧接着算元，如果后面的字符是空白则被当作加号和减号。例如：</p>
+<p><code>delete</code> is a bit different from JS. It's no longer an expression. This is because in JavaScript strict mode <code>delete</code> will never be <code>false</code>, but will instead throw an error. Since we always use strict mode, there's no need to make it an expression.</p>
+<h2>rem, mod</h2>
+<p><code>rem</code> (remainder) means JS's <code>%</code>. <code>mod</code> is just another modulo operation, where the result has the same sign as the divisor. If the divisor is positive, it's guaranteed that the result is non-negative. So I think <code>mod</code> can be used more widely than <code>rem</code>. <code>a mod b</code> is equivalent to JS's <code>(a % b + b) % b</code>.</p>
+<h2>+ and - (as sign)</h2>
+<p class="detail">The grammar of the unary <code>+</code> and <code>-</code> (treated as sign) is similar to CoffeeScript with slight difference. We require that it must be followed immediately by an operand. If it's followed by a space then it will be treated as the binary addition and subtraction. For example:</p>
 <pre class="detail"><code><![CDATA[
     # a is 5. `-2` can't be connected because it is a valid statement.
     # To connect, either add a space or move the `-` to the first line
@@ -1570,8 +1570,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     a+-b # invalid
     a++b # invalid
 ]]></code></pre>
-<p class="detail">如果后面的字符不是空白，则如果前面的字符是字母、数字、<code>_</code>、<code>$</code>、<code>)</code>、<code>]</code>、<code>}</code>、<code>"</code>或<code>@</code>，则被解析为加号和减号，否则被解析为正负号。</p>
-<p class="detail">另外，作为运算符时，<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>之后不能紧接<code>+</code>或<code>-</code>。</p>
+<p class="detail">If it's not followed by a space, then if it's preceded by a letter, number, <code>_</code>, <code>$</code>, <code>)</code>, <code>]</code>, <code>}</code>, <code>"</code> or <code>@</code>, then it will be treated as binary, otherwise unary.</p>
+<p class="detail">Also, when treated as an operator, <code>+</code>, <code>-</code>, <code>*</code> or <code>/</code> can't be followed immediately by <code>+</code> or <code>-</code>.</p>
 <h2>调试</h2>
 <p>使用<code>pause</code>命令插入断点。它等价于JS的<code>debugger</code>命令，因为<code>debugger</code>违反了关键字不能大于7个字符的原则，所以改名为<code>pause</code>。</p>
 <h2>插入JavaScript</h2>

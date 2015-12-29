@@ -982,7 +982,7 @@
     a if b > 100 then 100 else b
 ]]></code></pre>
 <p>这里的<code>if</code>省略的话意思就完全不一样了，除非加个括号。</p>
-<p>当<code>then</code>后紧接的是表示命令语句的关键字时，<code>then</code>也可省略（这也适用于模式匹配）。例如：</p>
+<p>当<code>then</code>之后是表示命令语句的关键字时，<code>then</code>也可省略（这也适用于模式匹配）。例如：</p>
 <pre><code class="fus-part"><![CDATA[
     if a > 100 throw new Error()
 ]]></code></pre>
@@ -1071,7 +1071,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         |       "unknown"
     # speak is "woof"
 ]]></code></pre>
-<p>当<code>match</code>后紧接的是函数时，则被识别成比较函数。要直接写出<code>-&gt;</code>或<code>&lt;&gt;</code>，绝不能用变量替代。</p>
+<p>当<code>match</code>后面是函数时，则被识别成比较函数。要直接写出<code>-&gt;</code>或<code>&lt;&gt;</code>，绝不能用变量替代。</p>
 <p>还有or模式和and模式。or模式我们会经常用到，例如：</p>
 <pre><code class="fus-part"><![CDATA[
     day: "Tue"
@@ -1468,7 +1468,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             console.log btn.textContent
 ]]></code></pre>
 <p class="detail">但问题是我们没有原生的循环，所以上面这个例子也没有什么用。</p>
-<p><code>do</code>的右面必须紧接函数字面量，这个比CoffeeScript严格。</p>
+<p><code>do</code>的右面必须是函数字面量，这个比CoffeeScript严格。</p>
 <h2>存在</h2>
 <p>这几个关键字或操作符和“存在性”有关：<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
 <pre><code class="fus-part"><![CDATA[
