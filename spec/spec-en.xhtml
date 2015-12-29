@@ -1383,110 +1383,110 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
                 doSomething()
 ]]></code></pre>
 <p>It's because <code>me</code> is bound to the outer class even in the inner <code>prototype</code> function. The correct way is to write it outside the class. Regarding nested classes, they will work as expected, because the compiler can recognize the <code>class</code> keyword and then interpret <code>me</code> correctly. But nested classes are not very useful. It's suggested that classes be flat.</p>
-<h1>使用外部库</h1>
-<h2>管道</h2>
-<p>如果你使用过underscore函数库，应该比较熟悉这样的代码：</p>
+<h1>Use External Libraries</h1>
+<h2>Pipe</h2>
+<p>If you have used the library "underscore", you must be familiar with this code:</p>
 <pre><code class="js"><![CDATA[
     var _ = require("underscore");
     console.log(_.max(_.map([3, 4, 5], function(x){return x * 2;})));
 ]]></code></pre>
-<p>管道操作符是<code>|></code>，可以把顺序调整为人类习惯的顺序，于是可以这样写：</p>
+<p>Pipe operator is <code>|></code>. It can adjust the order to a natural order, so it can be written as:</p>
 <pre><code class="fus-part"><![CDATA[
     console.log [3, 4, 5] |> _.map(x -> x * 2) |> _.max
 ]]></code></pre>
-<p>注意，由于运算符的优先级，管道内的函数调用不应使用空格，例如上例不应写成：</p>
+<p>Note, that because of the precedence, you should avoid using space function call in pipe. For example, the above code can't be written as:</p>
 <pre><code class="fus-part"><![CDATA[
     console.log [3, 4, 5] |> _.map x -> x * 2 |> _.max
 ]]></code></pre>
-<p>还有一种运算符<code>::</code>，称之为“胖点”，专门应用于含有管道运算符的表达式，如果你想让管道和点号混合，胖点能提供更强的可读性。例如：</p>
+<p>Another operator is <code>::</code>, called "fat dot", used specifically in pipe expressions. If you want to use pipe along with dots, then fat dot brings more readability. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     [3, 4, 5] |> _.map(x -> x * 2) :: map(x -> x + 1) |> _.max
 ]]></code></pre>
-<p>相当于：</p>
+<p>Equivalent to:</p>
 <pre><code class="fus-part"><![CDATA[
     (([3, 4, 5] |> _.map(x -> x * 2)).map(x -> x + 1)) |> _.max
 ]]></code></pre>
-<p>所以胖点基本就是点号，只不过我们规定当它出现在管道右边时作为结束标记，而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
-<p>用到管道的代码可以是兼容模式，也可以是激进模式。但如果管道使用的外部库也用FutureScript写的话，还是用兼容模式来写比较好，因为外部库中的函数必须是多参数的，因为管道本身就是分割参数的。</p>
-<h1>其他特色</h1>
+<p>So basically a fat dot is equal to a normal dot, except that it acts as an ending tag when it's on the right side of the pipe operator. Also, it is as "fat" as the pipe operator, so looks better.</p>
+<p>The code using pipe can be in either compatible mode or radical mode. But if an external library is also written in FutureScript, then this external library should better be written in comptatible mode, because the functions in it must take multiple arguments because pipe itself is to split arguments.</p>
+<h1>Other features</h1>
 <h2>do</h2>
-<p><code>do</code>是<code>(...)()</code>的简便方法，例如：</p>
+<p><code>do</code> is a shorthand for <code>(...)()</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     do --
         console.log "This will be displayed immediately."
 ]]></code></pre>
-<p>相当于</p>
+<p>Equivalent to:</p>
 <pre><code class="fus-part"><![CDATA[
     (--
         console.log "This will be displayed immediately."
     )()
 ]]></code></pre>
-<p>比CoffeeScript的<code>do</code>功能略少，但更纯粹。它可以用来：</p>
+<p>The features are a little less, but purer than CoffeeScript's <code>do</code>. It can be used to:</p>
 <ul>
-    <li>表示立即执行的递归</li>
-    <li>限定变量范围，防止冲突</li>
-    <li>分隔代码，增加可读性</li>
+    <li>Represent a recursion that should run immediately.</li>
+    <li>Restrict the scope of a variable to avoid conflicts.</li>
+    <li>Wrap code to increase readability.</li>
 </ul>
-<p>它的功能比CoffeeScript少在哪里？看一段CoffeeScript代码：</p>
+<p>Which CoffeeScript feature is missing in FutureScript? See this CoffeeScript code：</p>
 <pre><code class="coffee"><![CDATA[
     for button in buttons
         do (button) ->
             button.onclick = ->
                 console.log button.textContent
 ]]></code></pre>
-<p>这种通过<code>do</code>来hold住一个变量名的方法，由于FutureScript实行严格的禁止层级变量重名，所以我们不支持，但是现在看来也无需支持，因为有了更好的方法：</p>
+<p>Using <code>do</code> to "hold" a variable name is not supported, because we strictly prohibit same-name variables in different levels. But now it seems there's no need to support it, because we have a better way:</p>
 <pre><code class="fus-part"><![CDATA[
     buttons.forEach button ->
         button.onclick: --
             console.log button.textContent
 ]]></code></pre>
-<p>或：</p>
+<p>Or:</p>
 <pre><code class="fus-part"><![CDATA[
     buttons.every button ->
         button.onclick: --
             console.log button.textContent
         true
 ]]></code></pre>
-<p>这就是函数式风格胜过循环的地方。</p>
-<p>但<code>forEach</code>和<code>every</code>有啥区别？这已经超出了本文的范围，不过挺重要的，还是说一下。这两个数组方法都属于ES5规范，当使用<code>forEach</code>时，是无法模拟<code>break</code>的。当使用<code>every</code>时，可以巧妙地模拟<code>break</code>，只需让它返回false即可。例如：</p>
+<p>This is where the functional style surpasses loops.</p>
+<p>But what's the difference between <code>forEach</code> and <code>every</code>? This is beyond this specification but important so I want to point it out. These 2 are ES5 methods. When using <code>forEach</code>, you can't simulate <code>break</code>. But when using <code>every</code>, you can neatly simulate <code>break</code> - just let it return <code>false</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     range.every i ->
         console.log i
         i < 5 ? true | false
 ]]></code></pre>
-<p>也可以不用<code>true</code>、<code>false</code>，而用更短的<code>1</code>、<code>0</code>：</p>
+<p>We can also replace the <code>true</code> and <code>false</code> with the shorter <code>1</code> and <code>0</code>:</p>
 <pre><code class="fus-part"><![CDATA[
     range.every i ->
         console.log i
         i < 5 ? 1 | 0
 ]]></code></pre>
-<p class="detail">当然，<code>do</code>虽然不能像CoffeeScript一样hold住变量名，但你只要取个不一样的名字，就可以达到相同的目的：</p>
+<p class="detail">Although <code>do</code> can't hold a variable name like CoffeeScript, you can reach the target by naming it differently:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     do --
         btn: button
         btn.onclick: --
             console.log btn.textContent
 ]]></code></pre>
-<p class="detail">但问题是我们没有原生的循环，所以上面这个例子也没有什么用。</p>
-<p><code>do</code>的右面必须紧接函数字面量，这个比CoffeeScript严格。</p>
-<h2>存在</h2>
-<p>这几个关键字或操作符和“存在性”有关：<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
+<p class="detail">But the problem is that we don't have native loops, so this example is useless.</p>
+<p><code>do</code> must be followed by a function literal. This is stricter than CoffeeScript.</p>
+<h2>Existence</h2>
+<p>These keywords or symbols are about "existence": <code>'ok</code>, <code>ifvoid</code>, <code>ifnull</code>.</p>
 <pre><code class="fus-part"><![CDATA[
     a'ok # a !== undefined && a !== null
 ]]></code></pre>
-<p><code>a'ok</code>，意思就是a既不是void，也不是null。</p>
-<p><code>'ok</code>还可以和点号结合起来使用，例如：</p>
+<p><code>a'ok</code> means <code>a</code> isn't <code>void</code> or <code>null</code>.</p>
+<p><code>'ok</code> can be used in combination with dots. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     zip: lottery.winner'ok.address'ok.zipcode
 ]]></code></pre>
-<p>只有当<code>lottery.winner</code>不是<code>void</code>也不是<code>null</code>时，且<code>lottery.winner.address</code>不是<code>void</code>也不是<code>null</code>时，<code>zip</code>才等于<code>lottery.winner.address.zipcode</code>。一旦这个链条有一个环节被打破，<code>zip</code>就等于<code>void</code>，而不会出错。</p>
-<p><code>ifnull</code>和<code>ifvoid</code>有两种形式，一种是后面跟冒号，一种是后面不跟冒号。例如：</p>
+<p>If and only if <code>lottery.winner</code> isn't <code>void</code> or <code>null</code> and <code>lottery.winner.address</code> isn't <code>void</code> or <code>null</code>, <code>zip</code> will be <code>lottery.winner.address.zipcode</code>. If any part of the chain is broken, <code>zip</code> will be <code>void</code> without raising errors.</p>
+<p><code>ifnull</code> and <code>ifvoid</code> have two forms respectively. One is for expression and the other is for colon assignment. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
     a ifvoid: 8 # if (a === undefined) {a = 8;}
     b: a ifvoid 8 # b = a !== undefined ? a : 8;
 ]]></code></pre>
-<p class="detail">后面跟冒号时，即是赋值，目前暂不支持与<code>[...]</code>、<code>,</code>、<code>'export</code>共存，例如这些是非法的：</p>
+<p class="detail">When used in colon assignment, for now we don't support they coexist with <code>[...]</code>, <code>,</code> or <code>'export</code>. For example, these are illegal:</p>
 <pre class="detail"><code><![CDATA[
     a, b ifnull: 1
     [a, b] ifvoid: [1, 2]
