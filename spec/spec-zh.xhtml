@@ -174,9 +174,13 @@
 <pre><code><![CDATA[
     fus m abc.fus
 ]]></code></pre>
+<p>或者，和上面一样，但不使用Babel来转换成ES5兼容代码，即生成的是原生的ES6代码：</p>
+<pre><code><![CDATA[
+    fus m --no-shim abc.fus
+]]></code></pre>
 <p>详细语法如下：</p>
 <pre><code><![CDATA[
-    fus (compile | c | map-compile | m) <file-or-directory> [<target-file-or-directory>]
+    fus (compile | c | map-compile | m) [--no-shim] <file-or-directory> [<target-file-or-directory>]
     fus (version | v | --version)
 ]]></code></pre>
 <h1>代码结构</h1>

@@ -174,9 +174,13 @@
 <pre><code><![CDATA[
     fus m abc.fus
 ]]></code></pre>
+<p>Or, the same as above, but without using Babel for ES5-compatibility. That is, generate the raw ES6 code:</p>
+<pre><code><![CDATA[
+    fus m --no-shim abc.fus
+]]></code></pre>
 <p>The detailed synopsis is as follows:</p>
 <pre><code><![CDATA[
-    fus (compile | c | map-compile | m) <file-or-directory> [<target-file-or-directory>]
+    fus (compile | c | map-compile | m) [--no-shim] <file-or-directory> [<target-file-or-directory>]
     fus (version | v | --version)
 ]]></code></pre>
 <h1>Code Structure</h1>
