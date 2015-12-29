@@ -1101,14 +1101,14 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             go work
 ]]></code></pre>
 <p>We can find that even when simulating the traditional <code>switch</code>, it's shorter than <code>switch</code>.</p>
-<h2>循环</h2>
-<p>循环其实并不符合函数式编程的理念，所以我有意使FutureScript没有循环。但我可以肯定地说，所有循环能做的事，FutureScript都能做，而且简洁程度不亚于循环。（本章不属于FutureScript语言规范，只是简要介绍一下fus-ext包的repeat函数。本章的内容可能过时，以fus-ext的教程为准。为方便起见，本文中的“循环”一般指repeat。）</p>
-<p>可以使用FutureScript的扩展包fus-ext来实现循环。</p>
+<h2>Loop</h2>
+<p>In fact, loops violates the idea of functional programming. That's why I deliberately take away loops in FutureScript. But I'm confident that FutureScript can do anything that a loop can do, with the same or shorter length of syntax. (This chapter doesn't belong to the FutureScript specification. It just introduces the <code>repeat</code> function in the <code>fus-ext</code> package. This chapter may be outdated. The <code>fus-ext</code> tutorial governs the usage. For convenience, "loop" in this article usually means <code>repeat</code>.)</p>
+<p>We can use FutureScript's extension package <code>fus-ext</code> to implement loops.</p>
 <pre><code><![CDATA[
     npm install fus-ext
 ]]></code></pre>
-<p>把<code>node_modules/fus-ext/examples/manifest.fus</code>文件拷贝到你的代码所在的目录中。</p>
-<p>你的代码可以是这样：</p>
+<p>Copy <code>node_modules/fus-ext/examples/manifest.fus</code> file to your code's directory.</p>
+<p>You code can be like this:</p>
 <pre><code class="fus"><![CDATA[
     fus 0.1.0
     import "./manifest" all
@@ -1117,8 +1117,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log "This is \(i) time"
     ]
 ]]></code></pre>
-<p>这里使用了“批量导入”的功能（详见前文的“模块”一节）。注意manifest.fus的导出和你的导入应该匹配，如果你想改用node而不是es，那么需要对两个文件的版本行都作出相应修改。</p>
-<p>迭代器返回<code>break</code>则表示跳出循环，类似于JS的<code>break</code>，不过本质上不同，这里的<code>break</code>是表达式，只能使余下的循环不做，并不能使函数内剩下的部分不执行。跳出循环时repeat函数返回<code>break</code>。这个例子是一个循环，从0到9，但到5时跳出：</p>
+<p>Here we used the "batch import" feature (for details see the "Module" section above). Note that the export of <code>manifest.fus</code> should match the import of yours. If you want to use <code>node</code> instead of <code>es</code>, then you'll need to make corresponding changes in the version line of the two files.</p>
+<p>If the iterator returns <code>break</code> then it means to jump out of the loop, similar to JS's <code>break</code>, but different in essence. Here <code>break</code> is an expression, and only capable of cancelling the remaining cycles, not capable of cancelling the remaining part of the function. If <code>break</code> then the <code>repeat</code> function returns <code>break</code>。This example is a loop, from 0 to 9, but it will jump out on 5:</p>
 <pre><code class="fus-part"><![CDATA[
     repeat[10, i ->
         if i < 5
@@ -1127,7 +1127,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             break
     ]
 ]]></code></pre>
-<p>不设次数则表示永远，相当于JS的<code>while (true)</code>：</p>
+<p>If no count is set, it means forever, equivalent to JS's <code>while (true)</code>:</p>
 <pre><code class="fus-part"><![CDATA[
     repeat --
         if abc()
@@ -1135,27 +1135,27 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         else
             doSomething()
 ]]></code></pre>
-<p>这个相当于JS的for循环，从1到10：</p>
+<p>This corresponds to JS's <code>for</code> loop, from 1 to 10:</p>
 <pre><code class="fus-part"><![CDATA[
     repeat{from: 1, to: 10, for: i ->
         console.log i
     }
 ]]></code></pre>
-<p>这个相当于JS的for循环，从10到1：</p>
+<p>This corresponds to JS's <code>for</code> loop, from 10 to 1:</p>
 <pre><code class="fus-part"><![CDATA[
     repeat{from: 10, to: 1, by: -1, for: i ->
         console.log i
     }
 ]]></code></pre>
-<h2>递归</h2>
-<p>递归的实现方式没有什么特别的，但我们加入了更简便的方法，你甚至无需命名递归函数，你想，自己调用自己，又何必给自己取名字？使用<code>fun</code>关键字就行了。例如，如果你不想用外部库的话，可以用递归模拟循环：</p>
+<h2>Recursion</h2>
+<p>Recursion is not special, but we added some simpler way. You even don't need to name a recursive function. Just think that if it invokes itself, why it must have a name? Just use the <code>fun</code> keyword and it's OK. For example, if you don't want to use an external library, you can simulate a loop using recursion:</p>
 <pre><code class="fus-part"><![CDATA[
     do (i: 0) -> if i < 10
         console.log i
         fun(i + 1)
 ]]></code></pre>
-<h2>异常</h2>
-<p>用<code>try</code>、<code>catch</code>、<code>finally</code>、<code>throw</code>，具体实现和CoffeeScript相似。例如：</p>
+<h2>Exception</h2>
+<p>Use <code>try</code>, <code>catch</code>, <code>finally</code> and <code>throw</code>, like CoffeeScript. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     try
         allHellBreaksLoose()
@@ -1165,7 +1165,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     finally
         cleanUp()
 ]]></code></pre>
-<p><code>throw</code>后面甚至可以啥都没有，若在catch块内则编译成<code>throw catchExceptionVar</code>，若不在catch块内则编译成<code>throw undefined</code>。例如：</p>
+<p><code>throw</code> can even be followed by nothing. If it's in <code>catch</code> block then compiled into <code>throw catchExceptionVar</code>, otherwise compiled into <code>throw undefined</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     try
         doSth()
@@ -1173,8 +1173,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log "error"
         throw # throw error;
 ]]></code></pre>
-<p>当你想在<code>catch</code>块内重新抛出异常时就可以省略很多字符。</p>
-<p class="detail"><code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
+<p>When you want to rethrow an exception in <code>catch</code> block, you can type less.</p>
+<p class="detail">If <code>try</code> block or <code>finally</code> block is an inline block, then it must occupy the whole line.</p>
 <h2>异步</h2>
 <p><span class="warning">由于需要尽快促成FutureScript面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</span></p>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
