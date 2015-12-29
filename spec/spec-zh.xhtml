@@ -1370,9 +1370,9 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             me._name: @0
 ]]></code></pre>
 <p>创建实例时无需使用new，因为其实JS的new是多余的，一个类作为一般函数也没有什么实用价值。所以在FutureScript中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
-<p>只要类有实例化需求，就要避免取非大写开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
+<p>只要类有实例化需求，就应该取大写字母开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
-<p>FutureScript的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在FutureScript（或ES6）中，构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。为什么这种机制可以做到继承<code>Array</code>、<code>Error</code>，限于篇幅不再赘述。（但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到2015年6月ES6才正式发布，形势有望在未来数月内改变，届时就会完美。）</p>
+<p>FutureScript的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，继承类的构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在FutureScript（或ES6）中，继承类的构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。（但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到ES6在2015年6月才正式发布，形势有望在未来数月内改变，届时就会完美。）</p>
 <p>但是FutureScript中<code>super</code>的语法比较像CoffeeScript，不用写<code>super.methodName()</code>，直接<code>super()</code>即可。我们不支持孤立的<code>super</code>，不过你可以写成<code>super'(@)</code>。</p>
 <p class="detail">我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值（有这个用途的话，可以使用静态方法）。所以在FutureScript里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。（返回值唯一的用处是使用<code>fun</code>递归时，如果你真的想对构造函数使用递归的话。）</p>
 <p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
