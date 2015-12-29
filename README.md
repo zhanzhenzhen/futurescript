@@ -6,7 +6,7 @@ Please visit http://futurescript.org/ to learn the language.
 Command Usage
 -------------
 
-- `fus (compile | c | map-compile | m) <file-or-directory> [<target-file-or-directory>]`
+- `fus (compile | c | map-compile | m) [--no-shim] <file-or-directory> [<target-file-or-directory>]`
 - `fus (version | v | --version)`
 
 `compile` or `c` is for compiling without source map.
@@ -32,6 +32,12 @@ Compile "abc.fus" to "abc.js" and generate a source map of "abc.js.map":
 
 ```bash
 fus m abc.fus
+```
+
+The same as above, but without using Babel for ES5-compatibility. That is, generate the raw ES6 code:
+
+```bash
+fus m --no-shim abc.fus
 ```
 
 Develop this project
