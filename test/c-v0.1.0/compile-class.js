@@ -112,3 +112,17 @@ export: A()."a a"()
 `);
 assert(r === 1);
 }); // ============================================================
+
+test(() => {
+r = $lockedApi.runCode(`fus 0.1.0
+Animal: class
+    name'get: <>
+        me._name.toUpperCase()
+    name'set: <>
+        me._name: @0
+animal: Animal()
+animal.name: "aaa"
+export: animal.name
+`);
+assert(r === "AAA");
+}); // ============================================================
