@@ -5,7 +5,7 @@ import * as $node from "../../lib/c-v0.1.0/node.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a: 1 if b
 x -> b if c
 if a
@@ -26,7 +26,7 @@ if (
 a: b = 5 ? 4 | c = 6 ? 3
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     PostIfStatement {
         expression: IfExpression {
@@ -170,7 +170,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 if a
     b
 else if c
@@ -179,7 +179,7 @@ else
     e
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExpressionStatement {
         expression: IfExpression {
@@ -213,11 +213,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 if a = b throw
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExpressionStatement {
         expression: IfExpression {

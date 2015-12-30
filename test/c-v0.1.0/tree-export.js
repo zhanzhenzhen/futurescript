@@ -5,11 +5,11 @@ import * as $node from "../../lib/c-v0.1.0/node.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 1 export as a
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExpressionStatement {
         expression: ExportAsExpression {
@@ -22,11 +22,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 export abc
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExportStatement {
         externalName: Piece "abc"
@@ -37,11 +37,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 export abc as def
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExportStatement {
         externalName: Piece "def"
@@ -52,11 +52,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 export: abc
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExportColonStatement {
         value: VariableExpression "abc"

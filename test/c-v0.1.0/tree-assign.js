@@ -5,7 +5,7 @@ import * as $node from "../../lib/c-v0.1.0/node.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a: [1, 2, 3]
 a: {a: 1, b: 2}
 a.b: 1
@@ -17,7 +17,7 @@ a: b.0
 a.0: b
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -163,11 +163,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 [a, b]: [b, a]
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -198,11 +198,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 if true then a: 1
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExpressionStatement {
         expression: IfExpression {
@@ -228,11 +228,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 <> a: 1
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExpressionStatement {
         expression: DiamondFunctionExpression {
@@ -256,11 +256,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a as b as c
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExpressionStatement {
         expression: AsExpression {
@@ -286,11 +286,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a as b."c"
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExpressionStatement {
         expression: AsExpression {
@@ -314,11 +314,11 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 [a.b, a.c]: b
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -346,12 +346,12 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a'export: 1
 2 as b'export
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -380,13 +380,13 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 undefined'export: 1
 2 as instanceof'export
 `);
 block = new $node.RootBlock(lex);
 block.complyWithJs();
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [

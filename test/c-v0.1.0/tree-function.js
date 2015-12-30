@@ -5,12 +5,12 @@ import * as $node from "../../lib/c-v0.1.0/node.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a: <> Math.random()
 b: -- Math.random()
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -69,14 +69,14 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a: x ->
     x + 1
 a: (x: 3) -> x + 1
 a: (x ifnull: 3) -> x + 1
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -167,12 +167,12 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a: [x, y] -> x + y
 b: [w, x: 3, y ifnull: 4, z ifvoid: 1] -> w + x + y + z
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -261,13 +261,13 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a: <>
 b: --
 c: x ->
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [

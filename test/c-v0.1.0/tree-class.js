@@ -5,7 +5,7 @@ import * as $node from "../../lib/c-v0.1.0/node.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 Animal: class
     new: name ->
         me._name: name
@@ -13,7 +13,7 @@ Animal: class
         print "move!"
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -96,12 +96,12 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 Cat: class from Animal
     color'get: <> me._color
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -142,13 +142,13 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 Cmath: class
     static: <> abc()
     static add: <> @1 + @2
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -217,13 +217,13 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 Aaa: class
     _a: 7
     _b'get: <> 8
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -271,14 +271,14 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 Aaa: class
     _a: 7
     _b'get: <> me._a + Math.random()
 `);
 block = new $node.RootBlock(lex);
 block.complyWithJs();
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -341,13 +341,13 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 class
     "a b": 1
     (a): 2
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExpressionStatement {
         expression: ClassExpression {
@@ -386,12 +386,12 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 A: class
 B: class from A
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [

@@ -6,7 +6,7 @@ let lex = null;
 let lexPart = null;
 
 test(() => {
-s = new $lex.Lex(`fus 0.1.0, node module
+s = new $lex.Lex(`fus 0.1.0, node modules
 # Assignment:
 number:   42
 opposite: true
@@ -33,7 +33,7 @@ alert "I knew it!" if elvis'ok
 # Array comprehensions:
 cubes: list.map <> math.cube @
 `).toString();
-assert(s === 'VersionDirective "fus 0.1.0, node module", NormalToken "number", Colon, Num "42", Semicolon, NormalToken "opposite", Colon, True, Semicolon, NormalToken "number", Colon, Negative, Num "42", If, NormalToken "opposite", Semicolon, NormalToken "square", Colon, DiamondFunction, Arg, Times, Arg, Semicolon, NormalToken "list", Colon, NormalLeftBracket, Num "1", Comma, Num "2", Comma, Num "3", Comma, Num "4", Comma, Num "5", NormalRightBracket, Semicolon, NormalToken "math", Colon, NormalLeftBrace, NormalToken "root", Colon, NormalToken "Math", Dot, NormalToken "sqrt", Semicolon, NormalToken "square", Colon, NormalToken "square", Semicolon, NormalToken "cube", Colon, DiamondFunction, Arg, Times, NormalToken "square", Arg, NormalRightBrace, Semicolon, NormalToken "alert", InlineNormalString, PseudoCallLeftParenthesis, Str "I knew it!", PseudoCallRightParenthesis, If, NormalToken "elvis", NormalVariant, NormalToken "ok", Semicolon, NormalToken "cubes", Colon, NormalToken "list", Dot, NormalToken "map", DiamondFunction, NormalToken "math", Dot, NormalToken "cube", Arg');
+assert(s === 'VersionDirective "fus 0.1.0, node modules", NormalToken "number", Colon, Num "42", Semicolon, NormalToken "opposite", Colon, True, Semicolon, NormalToken "number", Colon, Negative, Num "42", If, NormalToken "opposite", Semicolon, NormalToken "square", Colon, DiamondFunction, Arg, Times, Arg, Semicolon, NormalToken "list", Colon, NormalLeftBracket, Num "1", Comma, Num "2", Comma, Num "3", Comma, Num "4", Comma, Num "5", NormalRightBracket, Semicolon, NormalToken "math", Colon, NormalLeftBrace, NormalToken "root", Colon, NormalToken "Math", Dot, NormalToken "sqrt", Semicolon, NormalToken "square", Colon, NormalToken "square", Semicolon, NormalToken "cube", Colon, DiamondFunction, Arg, Times, NormalToken "square", Arg, NormalRightBrace, Semicolon, NormalToken "alert", InlineNormalString, PseudoCallLeftParenthesis, Str "I knew it!", PseudoCallRightParenthesis, If, NormalToken "elvis", NormalVariant, NormalToken "ok", Semicolon, NormalToken "cubes", Colon, NormalToken "list", Dot, NormalToken "map", DiamondFunction, NormalToken "math", Dot, NormalToken "cube", Arg');
 }); // ============================================================
 
 test(() => {
@@ -182,11 +182,11 @@ assert(s === 'VersionDirective "fus 0.1.0", NormalToken "a", Colon, NormalToken 
 test(() => {
 s = new $lex.Lex(`0.1.0 {
     radical
-    node module
+    node modules
 }
 a: 1
 `).toString();
-assert(s === 'VersionDirective "0.1.0 {\\n    radical\\n    node module\\n}", NormalToken "a", Colon, Num "1"');
+assert(s === 'VersionDirective "0.1.0 {\\n    radical\\n    node modules\\n}", NormalToken "a", Colon, Num "1"');
 }); // ============================================================
 
 test(() => {

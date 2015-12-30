@@ -5,7 +5,7 @@ import * as $node from "../../lib/c-v0.1.0/node.js";
 let lex, block;
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 try
     a
 catch
@@ -14,7 +14,7 @@ finally
     c
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     ExpressionStatement {
         expression: TryExpression {
@@ -41,7 +41,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a:
     try
         b
@@ -49,7 +49,7 @@ a:
         throw ex + 1
 `);
 block = new $node.RootBlock(lex);
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
@@ -88,7 +88,7 @@ RootBlock [
 }); // ============================================================
 
 test(() => {
-lex = new $lex.Lex(`fus 0.1.0, node module
+lex = new $lex.Lex(`fus 0.1.0, node modules
 a:
     try
         b
@@ -97,7 +97,7 @@ a:
 `);
 block = new $node.RootBlock(lex);
 block.complyWithJs();
-assert(block.toString() === `node module
+assert(block.toString() === `node modules
 RootBlock [
     AssignStatement {
         assignees: Arr [
