@@ -1,7 +1,7 @@
 FutureScript
 ============
 
-Please visit http://futurescript.org/ to learn the language.
+Please visit [http://futurescript.org/](http://futurescript.org/) to learn the language.
 
 Command Usage
 -------------
