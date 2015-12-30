@@ -590,6 +590,7 @@
     var main = require("lib");
 ]]></code></pre>
 <p>你无需修改代码，就可以控制本模块中的所有<code>import</code>是使用Node机制还是ES6机制，所以现在<code>import</code>可以代替<code>require</code>。</p>
+<p>其实，由于现在的Node和浏览器对ES6的支持还不是非常完美，我们不得不用Babel来转换成ES5，而Babel会自动把<code>import</code>转换成Node机制，所以就算你版本行里不写明，应该也没什么关系（但可能两者有些微小的区别）。那如果想生成真正的ES6代码怎么办？命令行里面加入<code>--no-shim</code>。</p>
 <p>还可以导入所有的“命名导出”：</p>
 <pre><code class="fus-part"><![CDATA[
     lib: import "lib" all

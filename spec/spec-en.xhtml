@@ -590,6 +590,7 @@
     var main = require("lib");
 ]]></code></pre>
 <p>Without modifying your code, you can control whether to use Node module system or ES6 module system for all <code>import</code> in this file. So now <code>import</code> can replace <code>require</code>.</p>
+<p>In fact, because currently Node.js and browsers only provide partial ES6 support, we have to use Babel to convert it to ES5, and Babel will automatically convert your <code>import</code> to use the Node module system, so even if you don't specify it in the version line, I think it doesn't matter (but there may be slight differences). Then how to generate the ES6 code? Use <code>--no-shim</code> in the command line.</p>
 <p>To import all named exports:</p>
 <pre><code class="fus-part"><![CDATA[
     lib: import "lib" all
