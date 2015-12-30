@@ -1346,8 +1346,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     Website: class
         static: <>
             result: longTimeTask()
-            Me.part1: result[0]
-            Me.part2: result[1]
+            Me.part1: result.0
+            Me.part2: result.1
         static ok: <> Me.part1'ok
 ]]></code></pre>
 <p>Equivalent to:</p>
@@ -1355,8 +1355,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     Website: class
         static ok: <> Me.part1'ok
     result: longTimeTask()
-    Website.part1: result[0]
-    Website.part2: result[1]
+    Website.part1: result.0
+    Website.part2: result.1
 ]]></code></pre>
 <p>The benefit of a static constructor is that all class-related code can be held inside the class. This looks nicer, brings less typing, and makes variables unexposed.</p>
 <p>In static constructors, <code>me.</code> and <code>Me.</code> both mean the class in the closure (i.e. the class itself), not the class of the current object.</p>

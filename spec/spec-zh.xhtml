@@ -1346,8 +1346,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     Website: class
         static: <>
             result: longTimeTask()
-            Me.part1: result[0]
-            Me.part2: result[1]
+            Me.part1: result.0
+            Me.part2: result.1
         static ok: <> Me.part1'ok
 ]]></code></pre>
 <p>它就相当于：</p>
@@ -1355,8 +1355,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     Website: class
         static ok: <> Me.part1'ok
     result: longTimeTask()
-    Website.part1: result[0]
-    Website.part2: result[1]
+    Website.part1: result.0
+    Website.part2: result.1
 ]]></code></pre>
 <p>静态构造函数的好处是所有和类有关的代码可以都写在类里面，看上去更舒服，还能减少输入量，变量可以不暴露在外面。</p>
 <p>静态构造函数内的<code>me.</code>和<code>Me.</code>都指向当前闭包所在的类，即这个类本身，而不是当前对象的类。</p>
