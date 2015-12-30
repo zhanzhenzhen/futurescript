@@ -41,6 +41,14 @@ assert(r === '"use strict";import var_573300145710716007_0 from "./b.js";var a,b
 }); // ============================================================
 
 test(() => {
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node modules
+a: 1
+b: import "./b.js" + 5
+`}).targets[0].code;
+assert(r === '"use strict";var a,b;a=(1);b=((require("./b.js"))+(5));');
+}); // ============================================================
+
+test(() => {
 r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a: 1 export as aaa
 `}).targets[0].code;
