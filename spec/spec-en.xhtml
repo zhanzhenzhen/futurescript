@@ -269,7 +269,7 @@
 <pre><code class="fus-part"><![CDATA[
     text: "This is a dog."
     speak: match (<>
-        s = @0.toLowerCase()
+        s: @0.toLowerCase()
         text.includes(s)
     )
         "cat" ? "meow"
@@ -462,7 +462,7 @@
     a 2 # equivalent to above
     a[3, 4, 5] # a([3, 4, 5])
     a{prop: true} # a({prop: true})
-    a(3, 4, 5) # only valid in compatible mode
+    a(3, 4, 5)
 ]]></code></pre>
 <p>In multiple-argument function call a parenthesis pair must be added. This is different from CoffeeScript. Space call is only applicable in single-argument function call. And of course we all know that if it takes no argument then <code>()</code> must be added.</p>
 <p>In CoffeeScript, if the passed argument is itself a function which takes no parameters, then it could be written as:</p>

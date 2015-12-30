@@ -269,7 +269,7 @@
 <pre><code class="fus-part"><![CDATA[
     text: "This is a dog."
     speak: match (<>
-        s = @0.toLowerCase()
+        s: @0.toLowerCase()
         text.includes(s)
     )
         "cat" ? "meow"
@@ -462,7 +462,7 @@
     a 2 # equivalent to above
     a[3, 4, 5] # a([3, 4, 5])
     a{prop: true} # a({prop: true})
-    a(3, 4, 5) # only valid in compatible mode
+    a(3, 4, 5)
 ]]></code></pre>
 <p>多参数调用一定要加括号，这个和CoffeeScript不同。只有单参数调用是可以不加括号的。当然我们也都知道没有参数时要加上代表零参数的<code>()</code>。</p>
 <p>CoffeeScript里面如果函数调用要传递的参数本身也是函数的话，如果它没有参数，那么可写成这样的形式：</p>
