@@ -268,3 +268,91 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`fus 0.1.0, node module
+match a
+    1, | 10
+    2  ? 100
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: MatchExpression {
+            comparer: VariableExpression "a"
+            items: Arr [
+                Xy {
+                    x: NumberExpression "1"
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "10"
+                        }
+                    ]
+                }
+                Xy {
+                    x: NumberExpression "2"
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "100"
+                        }
+                    ]
+                }
+                Xy {
+                    x: null
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "10"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+]
+`);
+}); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`fus 0.1.0, node module
+match a
+    1 | 10
+    2 ? 100
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    ExpressionStatement {
+        expression: MatchExpression {
+            comparer: VariableExpression "a"
+            items: Arr [
+                Xy {
+                    x: NumberExpression "1"
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "10"
+                        }
+                    ]
+                }
+                Xy {
+                    x: NumberExpression "2"
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "100"
+                        }
+                    ]
+                }
+                Xy {
+                    x: null
+                    y: Block [
+                        ExpressionStatement {
+                            expression: NumberExpression "10"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+]
+`);
+}); // ============================================================
