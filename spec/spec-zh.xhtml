@@ -158,6 +158,10 @@
 <pre><code><![CDATA[
     fus c abc.fus
 ]]></code></pre>
+<p>或者，和上面一样，但不使用Babel来转换成ES5兼容代码，即生成的是原生的ES6代码：</p>
+<pre><code><![CDATA[
+    fus c --no-shim abc.fus
+]]></code></pre>
 <p>如果你想把整个"abc"目录编译到"abc-output"：</p>
 <pre><code><![CDATA[
     fus compile abc abc-output
@@ -166,17 +170,13 @@
 <pre><code><![CDATA[
     fus c abc abc-output
 ]]></code></pre>
-<p>如果你想把"abc.fus"编译成"abc.js"，并生成一个名为"abc.js.map"的source map：</p>
+<p>如果你想把"abc.fus"编译成"abc.js"，并生成一个名为"abc.js.map"的source map（source map可能有bug，因为我还没有时间在浏览器上完整测试source map的功能）：</p>
 <pre><code><![CDATA[
     fus map-compile abc.fus
 ]]></code></pre>
 <p>或</p>
 <pre><code><![CDATA[
     fus m abc.fus
-]]></code></pre>
-<p>或者，和上面一样，但不使用Babel来转换成ES5兼容代码，即生成的是原生的ES6代码：</p>
-<pre><code><![CDATA[
-    fus m --no-shim abc.fus
 ]]></code></pre>
 <p>详细语法如下：</p>
 <pre><code><![CDATA[
