@@ -1570,7 +1570,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     a+-b # invalid
     a++b # invalid
 ]]></code></pre>
-<p class="detail">If it's not followed by a space, then if it's preceded by a letter, number, <code>_</code>, <code>$</code>, <code>)</code>, <code>]</code>, <code>}</code>, <code>"</code> or <code>@</code>, then it will be treated as binary, otherwise unary.</p>
+<p class="detail">If it's not followed by a space, then if it's preceded by a letter, digit, <code>_</code>, <code>$</code>, <code>)</code>, <code>]</code>, <code>}</code>, <code>"</code> or <code>@</code>, then it will be treated as binary, otherwise unary.</p>
 <p class="detail">Also, when treated as an operator, <code>+</code>, <code>-</code>, <code>*</code> or <code>/</code> can't be followed immediately by <code>+</code> or <code>-</code>.</p>
 <h2>Debug</h2>
 <p>Use <code>pause</code> to insert a breakpoint. It's equivalent to JS's <code>debugger</code>. We renamed it to <code>pause</code> because <code>debugger</code> is longer than 7 characters.</p>
@@ -1601,8 +1601,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         b = 2;
     "
 ]]></code></pre>
-<h1>汇总</h1>
-<h2>关键字</h2>
+<h1>All Together</h1>
+<h2>Keywords</h2>
 <ul style="font-family: monospace;">
     <li>above</li>
     <li>and</li>
@@ -1642,12 +1642,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>try</li>
     <li>void</li>
 </ul>
-<h2>命名限制</h2>
-<p>变量名不可以是关键字。变量名可以是JS关键字（只要它不是FutureScript关键字即可），例如<code>function</code>、<code>instanceof</code>都可以作为变量名。</p>
-<p>类声明中的属性名如不用引号，则不可以是<code>new</code>、<code>static</code>。如用引号，则没有限制。注意，<code>static</code>不是关键字，<code>new</code>用来进行类声明（即后面是冒号）时不是关键字。</p>
-<p>对象字面量的属性名没有限制。</p>
-<p>当然，不用引号时，以上名称都需要满足标识符约束，即：每个字符都是字母、数字、<code>_</code>或<code>$</code>，且起始字符不是数字。</p>
-<h2>符号</h2>
+<h2>Naming Restrictions</h2>
+<p>A variable name can't be a keyword. A variable name can be a JS keyword (as long as it's not a FutureScript keyword). For example, <code>function</code> and <code>instanceof</code> can be variable names.</p>
+<p>In class definition, a property name, if not enclosed with double quotes, can't be <code>new</code> or <code>static</code>. Note that <code>static</code> isn't a keyword. <code>new</code> isn't a keyword in class definition (i.e. followed by a colon).</p>
+<p>Object literal's property name doesn't have any restrictions.</p>
+<p>Of course, if not enclosed with double quotes, the above names must meet the identifier restriction, that is: each character must be a letter, digit, <code>_</code> or <code>$</code>, and it doesn't start with a digit.</p>
+<h2>Symbols</h2>
 <ul style="font-family: monospace;">
     <li>-&gt;</li>
     <li>&lt;&gt;</li>
@@ -1695,9 +1695,9 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>&lt;&lt;</li>
     <li>&gt;&gt;</li>
 </ul>
-<h2>运算符优先级</h2>
-<p>运算符的运算结果是表达式，但算元不一定是表达式，也可以是块，甚至是非值的东西。不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。后置的<code>if</code>也没有优先级。下面表格中，a、b、c表示表达式算元，m、n表示块算元，x、y、z表示不一定是表达式或块的算元。</p>
-<p>注意，优先级从低到高。别的语言参考，都是优先级从高到低，但我觉得不妥，因为用函数式（递归）思维来看，应该从“大”（低）到“小”（高）。结合性，我们也和传统的写法相反，传统写的是执行顺序，我们写的是解析顺序（更精确地说是用递归解析的顺序）。即：执行时自左向右的，由于右侧较“大”，我们写为自右向左，简称“右”，而执行时自右向左的，由于左侧较“大”，我们写为自左向右，简称“左”。打个比方，<code>1 + 2 + 3</code>其实是被解析为<code>plus(plus(1, 2), 3)</code>。我们仍然是以大为先。总之这方面大家反着看就行了。</p>
+<h2>Operator Precedence</h2>
+<p class="detail">The result of an operation is an expression, but an operator isn't always an expression. It can be a block or a non-value thing. Not all operators have precedence. Those whose operands must occupy all the remaining area of the line (unless using <code>&lt;&lt;</code> and <code>&gt;&gt;</code>) don't have precedence, for example <code>match</code> and <code>class</code>. Postfixed <code>if</code> also doesn't have precedence. In the following table, <code>a</code>, <code>b</code>, <code>c</code> mean expression operands; <code>m</code>, <code>n</code> mean block operands; <code>x</code>, <code>y</code>, <code>z</code> mean operands that's not always expressions or blocks.</p>
+<p>Note: Precedence is ordered from lowest to highest. In references of other languages they are all from highest to lowest, but I think it's improper for this language because from the functional (recursive) point of view, it should be from "big" (low) to "small" (high). As for associativity, we are also opposite to the traditional way. The traditional table shows the order of execution, but our table shows the order of parsing (to be more accurate, parsing recursively). That is: If executed from left to right, because the right side is "bigger", it's defined as from right to left, simplified as "right"; If executed from right to left, because the left side is "bigger", it's defined as from left to right, simplified as "left". For example, <code>1 + 2 + 3</code> is parsed as <code>plus(plus(1, 2), 3)</code>, and the bigger is shown first. In brief, you can just think we show everything in reverse order in the table.</p>
 <table class="table">
     <tr>
         <th>Precedence</th>
