@@ -5,20 +5,6 @@ import * as $libLockedApi from "../../lib/locked-api.js";
 let r;
 
 test(() => {
-r = $libLockedApi.generateOutput({code: `fus 0.1.0, node modules
-a: import "./a.js"
-`}).targets[0].code;
-assert(r === '"use strict";var a;a=require("./a.js");');
-}); // ============================================================
-
-test(() => {
-r = $libLockedApi.generateOutput({code: `fus 0.1.0, node modules
-{a, b as c}: import "./a.js"
-`}).targets[0].code;
-assert(r === '"use strict";var a,c;a=require("./a.js").a;c=require("./a.js").b;');
-}); // ============================================================
-
-test(() => {
 r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a: import "./a.js"
 `}).targets[0].code;
@@ -26,10 +12,24 @@ assert(r === '"use strict";import a from "./a.js";');
 }); // ============================================================
 
 test(() => {
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node modules
+a: import "./a.js"
+`}).targets[0].code;
+assert(r === '"use strict";var a;a=require("./a.js");');
+}); // ============================================================
+
+test(() => {
 r = $libLockedApi.generateOutput({code: `fus 0.1.0
 {a, b as c}: import "./a.js"
 `}).targets[0].code;
 assert(r === '"use strict";import {a as a,b as c} from "./a.js";');
+}); // ============================================================
+
+test(() => {
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node modules
+{a, b as c}: import "./a.js"
+`}).targets[0].code;
+assert(r === '"use strict";var a,c;a=require("./a.js").a;c=require("./a.js").b;');
 }); // ============================================================
 
 test(() => {
