@@ -251,15 +251,17 @@
 <pre><code class="fus-part"><![CDATA[
     if x = 5 and y = 5 then aaa()
 ]]></code></pre>
-<p>又例如：</p>
+<p>注意：这种写法我们暂时不支持：</p>
 <pre><code class="fus-part"><![CDATA[
     a.b <>
         aaa()
     .c()
 ]]></code></pre>
-<p>等价于：</p>
+<p>你需要写一个括号：</p>
 <pre><code class="fus-part"><![CDATA[
-    a.b(<> aaa()).c()
+    a.b(<>
+        aaa()
+    ).c()
 ]]></code></pre>
 <p class="detail">5. 解析成功并退出。</p>
 <p class="detail">6. 解析失败并退出。</p>

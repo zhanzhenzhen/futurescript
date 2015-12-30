@@ -251,15 +251,17 @@
 <pre><code class="fus-part"><![CDATA[
     if x = 5 and y = 5 then aaa()
 ]]></code></pre>
-<p>Another example:</p>
+<p>Note that for now this is not supported:</p>
 <pre><code class="fus-part"><![CDATA[
     a.b <>
         aaa()
     .c()
 ]]></code></pre>
-<p>equivalent to:</p>
+<p>You need to add a parenthesis pair:</p>
 <pre><code class="fus-part"><![CDATA[
-    a.b(<> aaa()).c()
+    a.b(<>
+        aaa()
+    ).c()
 ]]></code></pre>
 <p class="detail">5. Succeed and exit.</p>
 <p class="detail">6. Fail and exit.</p>
