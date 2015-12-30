@@ -1084,7 +1084,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>and模式则不常用，但也有例子：</p>
 <pre><code class="fus-part"><![CDATA[
     array: ["a", "c", "b", "d"]
-    message: match <> array.includes(@0)
+    message: match <> array.includes(@0) # note: arr.includes is an ES7 feature
         "a" and "b" and "c" ? "The array includes all of the first 3 letters."
         "a"                 ? "The array includes a."
         "b"                 ? "The array includes b."
