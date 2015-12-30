@@ -321,11 +321,11 @@
 <h2>Version Line</h2>
 <p>The first line of each file must be version line. It's usually in one line so we call it "version line", but it can be in multiple lines. Version line's syntax:</p>
 <pre><code><![CDATA[
-    [...][fus][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node modules | es module)]...
+    [...][fus][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node modules | es modules)]...
 ]]></code></pre>
 <p>Default value is:</p>
 <pre><code><![CDATA[
-    compatible, capitalized new, es module
+    compatible, capitalized new, es modules
 ]]></code></pre>
 <p>The items separated by comma after the version number can't be duplicated. Examples of version line:</p>
 <pre><code><![CDATA[
@@ -363,7 +363,7 @@
     new aaa.bbb."Ccc"() # new can't be omitted
 ]]></code></pre>
 <p><code>manual new</code> is just the traditional way. When creating instance of a class you should add <code>new</code>.</p>
-<p><code>node import</code> means all imports are compiled into Node.js imports (i.e. <code>require</code>). <code>node export</code> means all exports are compiled into Node.js exports (i.e. <code>exports</code> and <code>module.exports</code>). <code>node modules</code>means to do both. <code>es module</code> means to do neither (i.e. comply with ES6). For details, see the "module" section.</p>
+<p><code>node import</code> means all imports are compiled into Node.js imports (i.e. <code>require</code>). <code>node export</code> means all exports are compiled into Node.js exports (i.e. <code>exports</code> and <code>module.exports</code>). <code>node modules</code>means to do both. <code>es modules</code> means to do neither (i.e. comply with ES6). For details, see the "module" section.</p>
 <p class="detail">The generated JS code is in strict mode。</p>
 <h2>Comment</h2>
 <p>Use <code>#</code> (inline) and <code>###</code> (formatted), similar to CoffeeScript. But one thing different is that CoffeeScript's <code>###</code> is compiled for all occurrences, while our <code>###</code> is compiled only when the opening <code>###</code> is immediately below the version line (or there are only whitespaces between them) and the right side of the closing <code>###</code> doesn't have any non-whitespace character, otherwise it will be ignored by the compiler. To comply with JS, the <code>*/</code> in the comment will be compiled into two spaces.</p>
