@@ -321,7 +321,7 @@
 <h2>Version Line</h2>
 <p>The first line of each file must be version line. It's usually in one line so we call it "version line", but it can be in multiple lines. Version line's syntax:</p>
 <pre><code><![CDATA[
-    [...][fus][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node module | es module)]...
+    [...][fus][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node modules | es module)]...
 ]]></code></pre>
 <p>Default value is:</p>
 <pre><code><![CDATA[
@@ -332,7 +332,7 @@
     0.1.0
     fus 0.1.0
     fus -0.1.0
-    0.1.0, node module
+    0.1.0, node modules
     0.1.0, compatible, capitalized new
     0.1.0, compatible, capitalized new, node import
     0.1.0, radical, manual new
@@ -344,7 +344,7 @@
 <pre><code><![CDATA[
     0.1.0 {
         radical
-        node module
+        node modules
     }
 ]]></code></pre>
 <p>If the file extension isn't <code>.fus</code> or it has no extension, then there must be a <code>fus</code> before the version number. If the file extension is <code>.fus</code>, it's not necessary, but highly recommended, because your text editor can recognize it so that the syntax can be highlighted.</p>
@@ -363,7 +363,7 @@
     new aaa.bbb."Ccc"() # new can't be omitted
 ]]></code></pre>
 <p><code>manual new</code> is just the traditional way. When creating instance of a class you should add <code>new</code>.</p>
-<p><code>node import</code> means all imports are compiled into Node.js imports (i.e. <code>require</code>). <code>node export</code> means all exports are compiled into Node.js exports (i.e. <code>exports</code> and <code>module.exports</code>). <code>node module</code>means to do both. <code>es module</code> means to do neither (i.e. comply with ES6). For details, see the "module" section.</p>
+<p><code>node import</code> means all imports are compiled into Node.js imports (i.e. <code>require</code>). <code>node export</code> means all exports are compiled into Node.js exports (i.e. <code>exports</code> and <code>module.exports</code>). <code>node modules</code>means to do both. <code>es module</code> means to do neither (i.e. comply with ES6). For details, see the "module" section.</p>
 <p class="detail">The generated JS code is in strict mode。</p>
 <h2>Comment</h2>
 <p>Use <code>#</code> (inline) and <code>###</code> (formatted), similar to CoffeeScript. But one thing different is that CoffeeScript's <code>###</code> is compiled for all occurrences, while our <code>###</code> is compiled only when the opening <code>###</code> is immediately below the version line (or there are only whitespaces between them) and the right side of the closing <code>###</code> doesn't have any non-whitespace character, otherwise it will be ignored by the compiler. To comply with JS, the <code>*/</code> in the comment will be compiled into two spaces.</p>
@@ -585,7 +585,7 @@
 <pre><code class="js"><![CDATA[
     import main from "lib";
 ]]></code></pre>
-<p>If the version line uses the default value, it will be compiled to the above JS. But the wonderful thing is: if the version line has <code>node import</code> or <code>node module</code>, the same code will be compiled into:</p>
+<p>If the version line uses the default value, it will be compiled to the above JS. But the wonderful thing is: if the version line has <code>node import</code> or <code>node modules</code>, the same code will be compiled into:</p>
 <pre><code class="js"><![CDATA[
     var main = require("lib");
 ]]></code></pre>
@@ -695,7 +695,7 @@
 <pre><code class="fus-part"><![CDATA[
     export: abc
 ]]></code></pre>
-<p>If the version line has <code>node export</code> or <code>node module</code>, this statement will be compiled into:</p>
+<p>If the version line has <code>node export</code> or <code>node modules</code>, this statement will be compiled into:</p>
 <pre><code class="js"><![CDATA[
     module.exports = abc;
 ]]></code></pre>

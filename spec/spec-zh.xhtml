@@ -321,7 +321,7 @@
 <h2>版本行</h2>
 <p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <pre><code><![CDATA[
-    [...][fus][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node module | es module)]...
+    [...][fus][...] [-]0.1.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node modules | es module)]...
 ]]></code></pre>
 <p>默认值为：</p>
 <pre><code><![CDATA[
@@ -332,7 +332,7 @@
     0.1.0
     fus 0.1.0
     fus -0.1.0
-    0.1.0, node module
+    0.1.0, node modules
     0.1.0, compatible, capitalized new
     0.1.0, compatible, capitalized new, node import
     0.1.0, radical, manual new
@@ -344,7 +344,7 @@
 <pre><code><![CDATA[
     0.1.0 {
         radical
-        node module
+        node modules
     }
 ]]></code></pre>
 <p>当文件的后缀名不是.fus或没有后缀名时，版本号前必须有<code>fus</code>。当文件的后缀名是.fus时，不必须，然而我们推荐加上<code>fus</code>，因为对你的文本编辑器有用，方便它判断应该使用哪个语法包，使代码呈现正确的彩色。</p>
@@ -363,7 +363,7 @@
     new aaa.bbb."Ccc"() # new can't be omitted
 ]]></code></pre>
 <p><code>manual new</code>就是传统办法，创建类的实例需要加<code>new</code>。</p>
-<p><code>node import</code>是指导入被编译成node的导入（即require）。<code>node export</code>是指导出被编译成node的导出（即exports和module.exports）。<code>node module</code>是两者都做。<code>es module</code>是两者都不做（即按照ES6的规范）。具体这有什么意义，参见“模块”一章。</p>
+<p><code>node import</code>是指导入被编译成node的导入（即require）。<code>node export</code>是指导出被编译成node的导出（即exports和module.exports）。<code>node modules</code>是两者都做。<code>es module</code>是两者都不做（即按照ES6的规范）。具体这有什么意义，参见“模块”一章。</p>
 <p class="detail">编译后的代码是strict mode。</p>
 <h2>注释</h2>
 <p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。为了和JS兼容，注释中的<code>*/</code>会编译成两个空格。</p>
@@ -585,7 +585,7 @@
 <pre><code class="js"><![CDATA[
     import main from "lib";
 ]]></code></pre>
-<p>当版本行使用默认值的时候，就编译成上面这样的JS。但妙的是，版本行如果有<code>node import</code>或<code>node module</code>，同样的代码，它就会编译成：</p>
+<p>当版本行使用默认值的时候，就编译成上面这样的JS。但妙的是，版本行如果有<code>node import</code>或<code>node modules</code>，同样的代码，它就会编译成：</p>
 <pre><code class="js"><![CDATA[
     var main = require("lib");
 ]]></code></pre>
@@ -695,7 +695,7 @@
 <pre><code class="fus-part"><![CDATA[
     export: abc
 ]]></code></pre>
-<p>当版本行使用<code>node export</code>或<code>node module</code>的时候，这条语句会编译成：</p>
+<p>当版本行使用<code>node export</code>或<code>node modules</code>的时候，这条语句会编译成：</p>
 <pre><code class="js"><![CDATA[
     module.exports = abc;
 ]]></code></pre>

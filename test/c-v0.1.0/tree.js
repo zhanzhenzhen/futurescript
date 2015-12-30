@@ -245,7 +245,7 @@ RootBlock [
     }
 ]
 `);
-assert(block.hasCompilerDirective("node module"));
+assert(block.hasCompilerDirective("node modules"));
 }); // ============================================================
 
 test(() => {
