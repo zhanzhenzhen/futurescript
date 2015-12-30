@@ -70,6 +70,13 @@ assert(r === '"use strict";var a;a=(1);export {a as a};');
 }); // ============================================================
 
 test(() => {
+r = $libLockedApi.generateOutput({code: `fus 0.1.0, node modules
+a'export: 1
+`}).targets[0].code;
+assert(r === '"use strict";var a;exports.a=a=(1);');
+}); // ============================================================
+
+test(() => {
 r = $libLockedApi.generateOutput({code: `fus 0.1.0
 a: 1 as b'export
 c'export: 2
