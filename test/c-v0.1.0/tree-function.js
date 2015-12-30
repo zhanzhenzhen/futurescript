@@ -259,3 +259,66 @@ RootBlock [
 ]
 `);
 }); // ============================================================
+
+test(() => {
+lex = new $lex.Lex(`fus 0.1.0, node module
+a: <>
+b: --
+c: x ->
+`);
+block = new $node.RootBlock(lex);
+assert(block.toString() === `node module
+RootBlock [
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "a"
+            }
+        ]
+        value: DiamondFunctionExpression {
+            body: ScopeBlock [
+            ]
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "b"
+            }
+        ]
+        value: DashFunctionExpression {
+            body: ScopeBlock [
+            ]
+        }
+    }
+    AssignStatement {
+        assignees: Arr [
+            VariableAssignee {
+                export: false
+                ifnull: false
+                ifvoid: false
+                variable: LocalVariable "c"
+            }
+        ]
+        value: ArrowFunctionExpression {
+            arguments: Arr [
+                ArrowArgument {
+                    nullDefault: null
+                    variable: LocalVariable "x"
+                    voidDefault: null
+                }
+            ]
+            argumentsReal: true
+            body: ScopeBlock [
+            ]
+        }
+    }
+]
+`);
+}); // ============================================================
