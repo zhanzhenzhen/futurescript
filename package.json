@@ -2,6 +2,7 @@
     "name": "futurescript",
     "version": "0.1.0",
     "description": "A future-style language that compiles to JS.",
+    "keywords": ["fus", "js", "javascript", "language", "es6", "futurescript"],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
     "homepage": "https://github.com/zhanzhenzhen/futurescript",
     "license": "SEE LICENSE IN LICENSE.txt",
@@ -13,7 +14,11 @@
         "babel": "5.8.29",
         "esprima": "2.7.0"
     },
+    "engines": {
+        "node": ">=0.12.0"
+    },
     "bin": {
-        "fus": "./target/bin.js"
-    }
+        "fus": "./bin/fus"
+    },
+    "preferGlobal": true
 }
