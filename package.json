@@ -1,6 +1,6 @@
 {
     "name": "futurescript",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "A future-style language that compiles to JS.",
     "keywords": ["fus", "js", "javascript", "language", "es6", "futurescript"],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
