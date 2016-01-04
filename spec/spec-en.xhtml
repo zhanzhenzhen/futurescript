@@ -159,27 +159,19 @@
 ]]></code></pre>
 <p>Or, the same as above, but without using Babel for ES5-compatibility. That is, generate the raw ES6 code:</p>
 <pre><code><![CDATA[
-    fus m --no-shim abc.fus
+    fus c --no-shim abc.fus
+]]></code></pre>
+<p>If you want to debug, use <code>--map</code> and it will add some information to the generated code:</p>
+<pre><code><![CDATA[
+    fus c --map abc.fus
 ]]></code></pre>
 <p>If you want to compile the whole "abc" directory to "abc-output":</p>
 <pre><code><![CDATA[
-    fus compile abc abc-output
-]]></code></pre>
-<p>Or</p>
-<pre><code><![CDATA[
     fus c abc abc-output
-]]></code></pre>
-<p>If you want to compile "abc.fus" to "abc.js" and generate a source map of "abc.js.map" (source map may have bugs, for I didn't have enough time to fully test it on browsers):</p>
-<pre><code><![CDATA[
-    fus map-compile abc.fus
-]]></code></pre>
-<p>Or</p>
-<pre><code><![CDATA[
-    fus m abc.fus
 ]]></code></pre>
 <p>The detailed synopsis is as follows:</p>
 <pre><code><![CDATA[
-    fus (compile | c | map-compile | m) [--no-shim] <file-or-directory> [<target-file-or-directory>]
+    fus (compile | c) [--no-shim] [--map] <file-or-directory> [<target-file-or-directory>]
     fus (version | v | --version)
 ]]></code></pre>
 <h1>Code Structure</h1>
