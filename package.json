@@ -23,5 +23,8 @@
     "bin": {
         "fus": "./bin/fus"
     },
-    "preferGlobal": true
+    "preferGlobal": true,
+    "babel": {
+        "presets": ["es2015"]
+    }
 }
