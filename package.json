@@ -14,7 +14,7 @@
         "esprima": "2.7.1"
     },
     "devDependencies": {
-        "babel": "6.3.26"
+        "babel-core": "6.3.26"
     },
     "engines": {
         "node": ">=0.12.0"
