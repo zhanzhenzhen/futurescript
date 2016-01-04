@@ -4,15 +4,17 @@
     "description": "A future-style language that compiles to JS.",
     "keywords": ["fus", "js", "javascript", "language", "es6", "futurescript"],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
-    "homepage": "https://github.com/zhanzhenzhen/futurescript",
+    "homepage": "http://futurescript.org/",
     "license": "SEE LICENSE IN LICENSE.txt",
     "repository": {
         "type": "git",
         "url": "https://github.com/zhanzhenzhen/futurescript.git"
     },
     "dependencies": {
-        "babel": "5.8.29",
-        "esprima": "2.7.0"
+        "esprima": "2.7.1"
+    },
+    "devDependencies": {
+        "babel": "6.3.26"
     },
     "engines": {
         "node": ">=0.12.0"
