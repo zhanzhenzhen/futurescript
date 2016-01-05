@@ -54,8 +54,10 @@ export let runCode = function(code) {
 
     writeTextFile("test/temp/" + jsFilename, output.targets[0].code);
     runCodeIndex++;
-    let r = require("./temp/" + jsFilename);
-    r = JSON.parse(JSON.stringify(r)); // to make sure it's JSON
+    let r = require("./temp/" + jsFilename).default;
+    if (r !== undefined) {
+        r = JSON.parse(JSON.stringify(r)); // to make sure it's JSON
+    }
     return r;
 };
 
