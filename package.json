@@ -25,6 +25,9 @@
         "fus": "./bin/fus"
     },
     "preferGlobal": true,
+    "scripts": {
+        "postinstall": "./lib/fill-ref.js"
+    },
     "babel": {
         "plugins": [
             "transform-es2015-modules-commonjs",

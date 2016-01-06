@@ -1,6 +1,8 @@
 import $fs from "fs";
 import * as $libLockedApi from "../lib/locked-api.js";
 
+export let currentVersion = require("../package.json").version;
+
 // Currently we don't support `utf16BeBom` because Node.js doesn't support it.
 export let TextEncoding = {
     utf8: 0,
