@@ -19,7 +19,7 @@
         "babel-cli": "6.x"
     },
     "engines": {
-        "node": ">=0.12.0"
+        "node": ">=5.0.0"
     },
     "bin": {
         "fus": "./bin/fus"
