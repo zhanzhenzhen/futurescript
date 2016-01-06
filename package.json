@@ -26,7 +26,7 @@
     },
     "preferGlobal": true,
     "scripts": {
-        "postinstall": "./target/fill-ref.js"
+        "postinstall": "node ./target/fill-ref.js"
     },
     "babel": {
         "plugins": [
