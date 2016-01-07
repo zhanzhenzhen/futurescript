@@ -1,46 +1,67 @@
 FutureScript
 ============
 
+1. Consistent. Member access always uses the dot `.`, regardless of whether it's in object or array.
+
+2. Simple. The `=` just means equality. Say goodbye to the annoying `==` and `===`.
+
+3. Highly expressive and readable. If you are a fan of "functional style", then you must be interested.
+
+4. And many, many more.
+
 Please visit [http://futurescript.org/](http://futurescript.org/) to learn the language.
 
 Command Usage
--------------
+=============
 
-- `fus (compile | c | map-compile | m) [--no-shim] <file-or-directory> [<target-file-or-directory>]`
-- `fus (version | v | --version)`
+```bash
+npm install -g futurescript
+```
 
-`compile` or `c` is for compiling without source map.
+Your Node.js version should be 5.0 or higher.
 
-`map-compile` or `m` is for compiling with source map.
+```bash
+fus (compile | c) [--no-shim | --heavy-shim] [--map] <file-or-directory> [<target-file-or-directory>]
+
+fus (version | v | --version)
+```
+
+To compile, use `compile` or `c`.
+
+The default shim policy is for Node.js, so if your code only runs on Node then just use the default. But if you want it to also run on browsers (particularly on old browsers), you may need `--heavy-shim`.
+
+`--no-shim` will generate the raw ES6 code, though at present it doesn't work in any platform. It may get supported by Node and browsers by the second half of 2016.
+
+`--map` will add the line numbers of the source to the generated code. Useful for debugging. (Note: this is not "source map", which is another technology.)
 
 Examples
---------
+========
 
-Compile "abc.fus" to "abc.js":
+Compile "a.fus" to "a.js":
 
 ```bash
-fus compile abc.fus
+fus compile a.fus
 ```
 
-Compile the whole "abc" directory to "abc-output":
+Compile for debugging:
 
 ```bash
-fus compile abc abc-output
+fus compile --map a.fus
 ```
 
-Compile "abc.fus" to "abc.js" and generate a source map of "abc.js.map":
+Compile the whole "lib" directory to "target":
 
 ```bash
-fus m abc.fus
+fus compile lib target
 ```
 
-The same as above, but without using Babel for ES5-compatibility. That is, generate the raw ES6 code:
+Compile for browser compatibility:
 
 ```bash
-fus m --no-shim abc.fus
+fus compile --heavy-shim a.fus
 ```
 
 Develop this project
 ====================
 
-The most commonly used command is `fus list` when your working directory is the project root. For details, see "develop.md".
+See "develop.md".
