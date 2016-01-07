@@ -42,7 +42,7 @@ fus fill
 
 Note: If you don't want to globally install it, replace the "`fus`" above with "`node lib/bin`".
 
-We must build it (but must NOT fill it) before publish it.
+We must build it (but must NOT fill it) before publish it. When a user installs it, referenced files will be automatically filled in the post-install period.
 
 Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent compiler files (including testing files). They can't have sub-directories.
 
