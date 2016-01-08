@@ -1,3 +1,16 @@
 #!/usr/bin/env node
 
-require("../target/bin");
+"use strict";
+
+let $fs = require("fs");
+let $path = require("path");
+
+let moduleDirName = $path.dirname(module.filename);
+let libDir = $path.join(moduleDirName, "../lib");
+
+if ($fs.existsSync(libDir)) {
+    require("../lib/bin");
+}
+else {
+    require("../target/bin");
+}
