@@ -96,4 +96,6 @@ Then build release:
 bin/fus build-release
 ```
 
+Then write changelog. Use `git` command to commit the change and tag the commit as the new version name.
+
 Then publish.
