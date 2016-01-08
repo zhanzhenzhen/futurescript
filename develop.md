@@ -90,6 +90,8 @@ It's highly recommended that large file be splitted into small files.
 Publish
 =======
 
+Make sure the newest version is reflected in the spec. (All "version" areas are already commented by `<!-- version -->`.)
+
 Make sure all examples in `"examples"` directory is using the newest version.
 
 Then run test to make sure there's no false or error result:
