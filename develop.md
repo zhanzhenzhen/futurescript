@@ -1,48 +1,50 @@
 Develop this project
 ====================
 
-First, use npm to install FutureScript globally.
-
-Then, git clone the repository, and let the repository's root directory be your working directory.
+Git clone the repository, and let the repository's root directory be your working directory.
 
 Now, we're ready to develop.
 
 Compile (build) all files in "lib" to "target":
 
 ```bash
-fus build
+bin/fus build
 ```
 
-Build and fill and test:
+Build and fill and test (this is most commonly used):
 
 ```bash
-fus build-test
-fus bt
+bin/fus build-test
+bin/fus bt
 ```
 
 Build and fill:
 
 ```bash
-fus build-fill
-fus bf
+bin/fus build-fill
+bin/fus bf
 ```
 
 Test only:
 
 ```bash
-fus test
-fus t
+bin/fus test
+bin/fus t
 ```
 
 Fill only:
 
 ```bash
-fus fill
+bin/fus fill
 ```
 
-Note: If you don't want to globally install it, replace the "`fus`" above with "`node lib/bin`".
+Build release (discard testing files):
 
-We must build it (but must NOT fill it) before publish it. When a user installs it, referenced files will be automatically filled in the post-install period.
+```bash
+bin/fus build-release
+```
+
+We must build release (but must NOT fill it) before publishing. When a user installs it, referenced files will be automatically filled in the post-install period.
 
 Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent compiler files (including testing files). They can't have sub-directories.
 
@@ -85,13 +87,13 @@ Make sure all examples in `"examples"` directory is using the newest version.
 Then run test to make sure there's no false or error result:
 
 ```bash
-fus bt
+bin/fus bt
 ```
 
-Then build (but must NOT fill!):
+Then build release:
 
 ```bash
-fus build
+bin/fus build-release
 ```
 
 Then publish.
