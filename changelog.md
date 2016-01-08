@@ -1,6 +1,8 @@
 v0.2.0
 ======
 
+2016-01-08T17:37:31Z
+
 Redesign the entire directory structure to be more reasonable.
 
 Add "comment map" to compiler.
