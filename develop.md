@@ -1,7 +1,15 @@
 Develop this project
 ====================
 
-Git clone the repository, and let the repository's root directory be your working directory.
+First, Git clone the repository, and let the repository's root directory be your working directory.
+
+Then:
+
+```bash
+npm update
+```
+
+(Note: we can't use `npm install` because it will mistakenly run the postinstall script.)
 
 Now, we're ready to develop.
 
