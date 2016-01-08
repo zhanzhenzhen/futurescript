@@ -65,3 +65,13 @@ Develop this project
 ====================
 
 See "develop.md".
+
+Changelog
+=========
+
+See "changelog.md".
+
+License
+=======
+
+See "LICENSE.txt".
