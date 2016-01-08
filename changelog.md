@@ -5,6 +5,8 @@ Redesign the entire directory structure to be more reasonable.
 
 Add "comment map" to compiler.
 
+Make use of Node 5.x so that it compiles faster.
+
 Language features
 -----------------
 
