@@ -137,44 +137,20 @@
 ]]></code></pre>
 <p>如果你不仅想看懂，而且想写FutureScript代码，那么请看完余下的章节。下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（教程通常也是语言规范的一部分，只是比较好懂而已）。</p>
 <h1>使用方法</h1>
-<p>（这章不属于语言规范。由于命令行工具会更新，本章可能在将来过时，命令行的用法以最新版为准。）</p>
+<p>（这章不属于语言规范。由于工具会更新，本章可能在将来过时，命令行的用法以npmjs上面的为准。）</p>
 <h3>文本编辑器</h3>
 <p>我们为文本编辑器提供了语法高亮显示的模块，用于Sublime Text、Atom，应该也可用于WebStrom等支持tmbundle的编辑器。</p>
 <p><a href="tmbundle.zip">点此下载</a>。</p>
 <p>把它解压缩为一个目录，目录名为FutureScript。</p>
 <p>以Sublime Text为例，在Sublime Text菜单中选Preferences，Browse Packages，弹出的窗口就是包含所有语法包的目录。然后把FutureScript目录拷贝进去即可。</p>
 <p>我们使用的语法名称为“FutureScript h1”，请注意辨别。</p>
-<h3>编译</h3>
-<p>首先确定你的电脑上安装了Node.js。</p>
-<p>输入：</p>
+<h3>安装</h3>
+<p>首先确定你的电脑上安装了Node.js 5.0以上的版本。</p>
 <pre><code><![CDATA[
     npm install -g futurescript
 ]]></code></pre>
-<p>如果你想把"abc.fus"编译成"abc.js"：</p>
-<pre><code><![CDATA[
-    fus compile abc.fus
-]]></code></pre>
-<p>或</p>
-<pre><code><![CDATA[
-    fus c abc.fus
-]]></code></pre>
-<p>或者，和上面一样，但不使用Babel来转换成ES5兼容代码，即生成的是原生的ES6代码：</p>
-<pre><code><![CDATA[
-    fus c --no-shim abc.fus
-]]></code></pre>
-<p>如果你需要调试，则加上<code>--map</code>，它会将一些信息以注释的形式嵌入代码中：</p>
-<pre><code><![CDATA[
-    fus c --map abc.fus
-]]></code></pre>
-<p>如果你想把整个"abc"目录编译到"abc-output"：</p>
-<pre><code><![CDATA[
-    fus c abc abc-output
-]]></code></pre>
-<p>详细语法如下：</p>
-<pre><code><![CDATA[
-    fus (compile | c) [--no-shim] [--map] <file-or-directory> [<target-file-or-directory>]
-    fus (version | v | --version)
-]]></code></pre>
+<p><code>fus</code>命令具体使用方法请点击：</p>
+<p><a href="https://www.npmjs.com/package/futurescript">https://www.npmjs.com/package/futurescript</a></p>
 <h1>代码结构</h1>
 <h2>文件格式与外观</h2>
 <p>后缀名为.fus。</p>

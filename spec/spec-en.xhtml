@@ -143,37 +143,13 @@
 <p>Extract it to a directory. Name the directory as <code>FutureScript</code>.</p>
 <p>Regarding Sublime Text, in its menu choose Preferences, Browse Packages. The popped-up window is the directory containing all language packages. Copy FutureScript directory into it.</p>
 <p>The syntax highlighting name we use is "FutureScript h1".</p>
-<h3>Compile</h3>
-<p>First confirm you've installed Node.js on your computer.</p>
-<p>Type:</p>
+<h3>Install</h3>
+<p>First confirm you've installed Node.js 5.0 or higher on your computer.</p>
 <pre><code><![CDATA[
     npm install -g futurescript
 ]]></code></pre>
-<p>If you want to compile "abc.fus" to "abc.js":</p>
-<pre><code><![CDATA[
-    fus compile abc.fus
-]]></code></pre>
-<p>Or</p>
-<pre><code><![CDATA[
-    fus c abc.fus
-]]></code></pre>
-<p>Or, the same as above, but without using Babel for ES5-compatibility. That is, generate the raw ES6 code:</p>
-<pre><code><![CDATA[
-    fus c --no-shim abc.fus
-]]></code></pre>
-<p>If you want to debug, use <code>--map</code> and it will add some information to the generated code:</p>
-<pre><code><![CDATA[
-    fus c --map abc.fus
-]]></code></pre>
-<p>If you want to compile the whole "abc" directory to "abc-output":</p>
-<pre><code><![CDATA[
-    fus c abc abc-output
-]]></code></pre>
-<p>The detailed synopsis is as follows:</p>
-<pre><code><![CDATA[
-    fus (compile | c) [--no-shim] [--map] <file-or-directory> [<target-file-or-directory>]
-    fus (version | v | --version)
-]]></code></pre>
+<p>For detailed usage of <code>fus</code> command, please click:</p>
+<p><a href="https://www.npmjs.com/package/futurescript">https://www.npmjs.com/package/futurescript</a></p>
 <h1>Code Structure</h1>
 <h2>File Format and Appearance</h2>
 <p>File extension is <code>.fus</code>.</p>
@@ -358,7 +334,7 @@
 <p class="detail">The generated JS code is in strict mode。</p>
 <h2>Comment</h2>
 <p>Use <code>#</code> (inline) and <code>###</code> (formatted), similar to CoffeeScript. But one thing different is that CoffeeScript's <code>###</code> is compiled for all occurrences, while our <code>###</code> is compiled only when the opening <code>###</code> is immediately below the version line (or there are only whitespaces between them) and the right side of the closing <code>###</code> doesn't have any non-whitespace character, otherwise it will be ignored by the compiler. To comply with JS, the <code>*/</code> in the comment will be compiled into two spaces.</p>
-<h1>Basic Elements</h1>
+<h1>Fundamentals</h1>
 <h2>Function</h2>
 <p>There are 3 ways to create a function: <code>-&gt;</code>, <code>&lt;&gt;</code>, <code>--</code>. <code>&lt;&gt;</code> and <code>--</code> are shorthand for no parameter. Unlike CoffeeScript, when there's only 1 parameter the parenthesis pair can be omitted.</p>
 <pre><code class="fus-part"><![CDATA[
