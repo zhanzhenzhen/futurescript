@@ -76,3 +76,22 @@ Can't be modified or deleted after release (unless there are very serious proble
 When you want to edit a file (that already exists in any old release) for next release, don't edit, but keep it unchanged and copy the file to a new file in the new version's directory (and until next release the new file is editable). When you want to rename a file that exists in old release, also do not rename, but use a new filename in the new version's directory.
 
 It's highly recommended that large file be splitted into small files.
+
+Publish
+=======
+
+Make sure all examples in `"examples"` directory is using the newest version.
+
+Then run test to make sure there's no false or error result:
+
+```bash
+fus bt
+```
+
+Then build (but must NOT fill!):
+
+```bash
+fus build
+```
+
+Then publish.
