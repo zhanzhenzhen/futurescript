@@ -28,9 +28,9 @@ fus (version | v | --version)
 
 To compile, use `compile` or `c`.
 
-At present, you may need Babel to downgrade the code to be compatible with your environment. For details, see [Babel](https://babeljs.io/).
+At present, you may need Babel to downgrade the generated ES6 code to be compatible with your environment. For details, see [Babel website](https://babeljs.io/).
 
-For Node.js 5.x, you only need to enable these 3 plugins:
+For Node.js 5.x, you only need to enable these 3 Babel plugins:
 
 - transform-es2015-modules-commonjs
 - transform-es2015-destructuring
