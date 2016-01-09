@@ -1,3 +1,23 @@
+v0.3.0
+======
+
+2016-01-09T06:21:49Z
+
+Language features
+-----------------
+
+None.
+
+Compiler incompatibilities
+--------------------------
+
+None.
+
+Command
+-------
+
+Remove all shim options, due to some Babel issue.
+
 v0.2.0
 ======
 
