@@ -2,7 +2,7 @@
 <html xml:lang="zh-Hans" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!-- version -->
-    <title>FutureScript 0.2.0</title>
+    <title>FutureScript 0.3.0</title>
     <link rel="stylesheet" href="base.css" type="text/css" />
     <link rel="stylesheet" href="simplified-chinese-modern.css" type="text/css" />
     <style type="text/css"><![CDATA[
@@ -120,7 +120,7 @@
 <p>这一章的最后，附上一段示例。</p>
 <!-- version -->
 <pre><code class="fus"><![CDATA[
-    fus 0.2.0
+    fus 0.3.0
 
     number:   36
     opposite: true
@@ -290,7 +290,7 @@
 <p>每个文件的第一行必须是版本行。版本行通常都写成一行，但写成多行也是允许的，但为了方便说明，还是说成“版本行”。版本行的一般语法：</p>
 <!-- version -->
 <pre><code><![CDATA[
-    [...][fus][...] [-]0.2.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node modules | es modules)]...
+    [...][fus][...] [-]0.3.0[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node modules | es modules)]...
 ]]></code></pre>
 <p>默认值为：</p>
 <pre><code><![CDATA[
@@ -299,13 +299,13 @@
 <p>版本号后面的以逗号分隔的项不可重复。版本行的例子：</p>
 <!-- version -->
 <pre><code><![CDATA[
-    0.2.0
-    fus 0.2.0
-    fus -0.2.0
-    0.2.0, node modules
-    0.2.0, compatible, capitalized new
-    0.2.0, compatible, capitalized new, node import
-    0.2.0, radical, manual new
+    0.3.0
+    fus 0.3.0
+    fus -0.3.0
+    0.3.0, node modules
+    0.3.0, compatible, capitalized new
+    0.3.0, compatible, capitalized new, node import
+    0.3.0, radical, manual new
 ]]></code></pre>
 <p>版本号必须写上。只要你写的版本号不大于安装的FutureScript的版本号，该文件就会按照该版本的规范来运行，这是因为你安装的任何一个版本的FutureScript都包括了（至少我们会尽量包括）所有历史版本的编译器。而这正是FutureScript和其他语言的不同之处。你甚至可以在一个项目中，不同文件使用不同版本。</p>
 <p>写上版本号还有个好处，就是你把某个文件交给别人时，他就知道文件是什么版本的，从而可以更好地修改。</p>
@@ -313,7 +313,7 @@
 <p>当你想把版本行写成多行时，版本号后面要加上大括号，大括号必须在第一行。版本号和大括号之间可以有逗号，也可以没有逗号。例如：</p>
 <!-- version -->
 <pre><code><![CDATA[
-    0.2.0 {
+    0.3.0 {
         radical
         node modules
     }
@@ -561,7 +561,7 @@
     var main = require("lib");
 ]]></code></pre>
 <p>你无需修改代码，就可以控制本模块中的所有<code>import</code>是使用Node机制还是ES6机制，所以现在<code>import</code>可以代替<code>require</code>。</p>
-<p>其实，由于现在的Node和浏览器对ES6的支持还不是非常完美，我们不得不用Babel来转换成ES5，而Babel会自动把<code>import</code>转换成Node机制，所以就算你版本行里不写明，应该也没什么关系（但可能两者有些微小的区别）。那如果想生成真正的ES6代码怎么办？命令行里面加入<code>--no-shim</code>。</p>
+<p>其实，由于现在的Node和浏览器对ES6的支持还不是非常完美，你也许不得不用Babel来转换成ES5，而Babel会自动把<code>import</code>转换成Node机制，所以就算你版本行里不写明，应该也没什么关系（但可能两者有些微小的区别）。</p>
 <p>还可以导入所有的“命名导出”：</p>
 <pre><code class="fus-part"><![CDATA[
     lib: import "lib" all
@@ -1089,7 +1089,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>你的代码可以是这样：</p>
 <!-- version -->
 <pre><code class="fus"><![CDATA[
-    fus 0.2.0
+    fus 0.3.0
     import "./manifest" all
 
     repeat[10, i ->

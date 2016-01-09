@@ -21,16 +21,22 @@ npm install -g futurescript
 Your Node.js version should be 5.0 or higher.
 
 ```bash
-fus (compile | c) [--no-shim | --heavy-shim] [--map] <file-or-directory> [<target-file-or-directory>]
+fus (compile | c) [--map] <file-or-directory> [<target-file-or-directory>]
 
 fus (version | v | --version)
 ```
 
 To compile, use `compile` or `c`.
 
-The default shim policy is for Node.js, so if your code only runs on Node then just use the default. But if you want it to also run on browsers (particularly on old browsers), you may need `--heavy-shim`.
+At present, you may need Babel to downgrade the code to be compatible with your environment. For details, see [Babel](https://babeljs.io/).
 
-`--no-shim` will generate the raw ES6 code, though at present it doesn't work in any platform. It may get supported by Node and browsers by the second half of 2016.
+For Node.js 5.x, you only need to enable these 3 plugins:
+
+- transform-es2015-modules-commonjs
+- transform-es2015-destructuring
+- transform-es2015-parameters
+
+For Node.js prior to 5.0 and for browsers, you may need to enable the entire "es2015" preset.
 
 `--map` will add the line numbers of the source to the generated code. Useful for debugging. (Note: this is not "source map", which is another technology.)
 
@@ -53,12 +59,6 @@ Compile the whole "lib" directory to "target":
 
 ```bash
 fus compile lib target
-```
-
-Compile for browser compatibility:
-
-```bash
-fus compile --heavy-shim a.fus
 ```
 
 Develop this project
