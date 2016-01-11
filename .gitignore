@@ -14,3 +14,4 @@ node_modules
 *.log
 
 /target
+/es5-target

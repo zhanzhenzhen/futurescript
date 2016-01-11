@@ -1,6 +1,6 @@
 {
     "name": "futurescript",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "A future-style language that compiles to JS.",
     "keywords": ["fus", "js", "javascript", "language", "es6", "futurescript"],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
@@ -17,6 +17,7 @@
         "babel-preset-es2015": "6.x",
         "babel-polyfill": "6.x",
         "babel-cli": "6.x",
+        "babel": "5.x",
         "rimraf": "2.x"
     },
     "engines": {
@@ -28,12 +29,5 @@
     "preferGlobal": true,
     "scripts": {
         "postinstall": "node ./target/bin.js postinstall"
-    },
-    "babel": {
-        "plugins": [
-            "transform-es2015-modules-commonjs",
-            "transform-es2015-destructuring",
-            "transform-es2015-parameters"
-        ]
     }
 }
