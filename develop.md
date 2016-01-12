@@ -94,6 +94,8 @@ Make sure the newest version is reflected in the spec. (All "version" areas are 
 
 Make sure all examples in `"examples"` directory is using the newest version.
 
+Make sure in `"lib/locked-api.js"` the `bundlerLookup` function includes versions you want to bundle for browser.
+
 Then run test to make sure there's no false or error result:
 
 ```bash
