@@ -40,7 +40,7 @@ For Node.js prior to 5.0 and for browsers, you may need to enable the entire "es
 
 `--map` will add the line numbers of the source to the generated code. Useful for debugging. (Note: this is not "source map", which is another technology.)
 
-To avoid waste of disk space, if you want to install it to your project directory rather than globally, it should be in "devDependencies", not "dependencies" (particularly when you're writing a middleware). This is important because we use a very sophisticated versioning model that all historical compilers are kept.
+Because we use a very sophisticated versioning model that all historical compilers are kept, there's really no need to install it to your project directory - conflicts are very unlikely. But if you really "hate global", to avoid waste of disk space, it should be stated in "devDependencies", not "dependencies" (particularly when you're writing a middleware).
 
 Examples
 ========
