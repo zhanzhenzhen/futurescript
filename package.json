@@ -28,6 +28,6 @@
     },
     "preferGlobal": true,
     "scripts": {
-        "postinstall": "node ./target/bin.js postinstall"
+        "postinstall": "node bin/fus postinstall"
     }
 }
