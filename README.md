@@ -18,7 +18,7 @@ Command Usage
 npm install -g futurescript
 ```
 
-Your Node.js version should be 5.0 or higher.
+We recommend your Node.js version be 5.0 or higher. The CLI may work on 0.12.x or 4.x, but not tested.
 
 ```bash
 fus (compile | c) [--map] <file-or-directory> [<target-file-or-directory>]
@@ -30,7 +30,7 @@ To compile, use `compile` or `c`.
 
 At present, you may need Babel to downgrade the generated ES6 code to be compatible with your environment. For details, see [Babel website](https://babeljs.io/).
 
-For Node.js 5.x, you only need to enable these 3 Babel plugins:
+For example, if you want your generated JS to run on Node.js 5.x, you only need to enable these 3 Babel plugins:
 
 - transform-es2015-modules-commonjs
 - transform-es2015-destructuring
