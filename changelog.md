@@ -1,3 +1,25 @@
+v0.4.0
+======
+
+2016-01-13T12:40:02Z
+
+Now the compiler can work cross-platform.
+
+Language features
+-----------------
+
+None.
+
+Compiler incompatibilities
+--------------------------
+
+None.
+
+Command
+-------
+
+Add "es5-target" to possibly support lower version of Node.js.
+
 v0.3.0
 ======
 
