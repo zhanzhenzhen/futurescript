@@ -1345,6 +1345,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             me._name: @0
 ]]></code></pre>
 <p>创建实例时无需使用new，因为其实JS的new是多余的，一个类作为一般函数也没有什么实用价值。所以在FutureScript中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
+<p class="detail">JS支持<code>new new a(b)(c)</code>的形式，但我们不支持，这太没有可读性了，完全可以写成<code>new (new a(b))(c)</code>。</p>
 <p>只要类有实例化需求，就应该取大写字母开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
 <p>FutureScript的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，继承类的构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在FutureScript（或ES6）中，继承类的构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。（但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到ES6在2015年6月才正式发布，形势有望在未来数月内改变，届时就会完美。）</p>
