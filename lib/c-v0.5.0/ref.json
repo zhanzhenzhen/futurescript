@@ -1,5 +1,4 @@
 [
-    ["0.2.0", "block.js"],
     ["0.1.0", "expression-base.js"],
     ["0.1.0", "expression-class.js"],
     ["0.1.0", "expression-condition.js"],
@@ -10,7 +9,6 @@
     ["0.1.0", "expression-module.js"],
     ["0.1.0", "expression-object.js"],
     ["0.1.0", "expression-relation.js"],
-    ["0.1.0", "expression-variant.js"],
     ["0.1.0", "expression.js"],
     ["0.1.0", "js-builder.js"],
     ["0.1.0", "lex.js"],
