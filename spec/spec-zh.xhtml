@@ -87,21 +87,20 @@
 <p>CoffeeScript也可以用<code>a ?= 8</code>，然而FutureScript的可读性更佳。另外像逻辑运算符，我们也弃用JS中的符号而改用更自然的<code>and</code>、<code>or</code>、<code>not</code>。</p>
 <p>FutureScript的第三感，是能够极大简化你的代码。熟悉JS的程序员都知道异步的语法有多么不自然，但现在我们可以：</p>
 <pre><code class="fus-part"><![CDATA[
-    console.log abc()'wait.def()'wait.ghi()'wait
+    console.log aaa()'wait.bbb()'wait.ccc()'wait
 ]]></code></pre>
 <p>要知道，promise相对于传统的“恐怖大三角”回调函数已经是一个进步了。但是上面这一行更进一步，它相当于下面这一大段promise：</p>
 <pre><code class="js"><![CDATA[
-    abc().then(function(x){
-        return x.def();
+    aaa().then(function(x){
+        return x.bbb();
     })
     .then(function(x){
-        return x.ghi();
+        return x.ccc();
     })
     .then(function(x){
         console.log(x);
     });
 ]]></code></pre>
-<p><span class="warning">由于需要尽快促成FutureScript面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</span></p>
 <p>FutureScript里面，没有长度超过7个字母的关键字，简洁存在于我们的基因之中。像是：</p>
 <ul>
     <li><code>undefined</code>，我们用<code>void</code>代替。</li>
@@ -1155,14 +1154,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>当你想在<code>catch</code>块内重新抛出异常时就可以省略很多字符。</p>
 <p class="detail"><code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
 <h2>异步</h2>
-<p><span class="warning">由于需要尽快促成FutureScript面世，我临时决定异步功能不包括在此版本中，但是马上就会在后续版本中实现。</span></p>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
 <pre><code class="js"><![CDATA[
-    abc().then(function(x){
-        return x.def();
+    aaa().then(function(x){
+        return x.bbb();
     })
     .then(function(x){
-        return x.ghi();
+        return x.ccc();
     })
     .then(function(x){
         console.log(x);
@@ -1171,25 +1169,18 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>我们现在可以写成：</p>
 <pre><code class="fus-part"><![CDATA[
     do --
-        console.log abc()'wait.def()'wait.ghi()'wait
+        console.log aaa()'wait.bbb()'wait.ccc()'wait
 ]]></code></pre>
 <p>一旦代码有<code>'wait</code>，那么代码所在的函数（直接所在，非嵌套）就被编译成异步函数。我们不用async关键字声明异步函数，这个关键字根本多余。</p>
 <p><code>'wait</code>必须出现在函数中。</p>
-<p><code>'wait</code>针对的要么是promise，要么是别的异步函数的返回值。异步函数的返回值是被编译成一种特殊的生成器对象，我们将其称为任务。注意，生成器对象不是生成器函数。</p>
-<p>在异步函数内部，每执行到<code>'wait</code>，会进入等待，直到该promise或任务有了结果，才继续往下执行。</p>
+<p><code>'wait</code>针对的是promise，它可以是一个普通的promise，也可以是别的异步函数的返回值。异步函数的返回值也是一个promise。</p>
+<p>在异步函数内部，每执行到<code>'wait</code>，会进入等待，直到该promise有了结果，才继续往下执行。</p>
 <p>网上已有文章介绍如何用yield来实现异步，那我们为什么不直接用yield，要发明一个新的符号？因为：</p>
 <ul>
     <li>yield的本来意思是“产出”，用来表示异步显得怪怪的。</li>
-    <li>yield是前置的，但这里其实应该后置。试想，前面的例子翻译成yield会是什么样？<code>var result = yield (yield (yield abc()).def()).ghi();</code>多层括号，前面3个yield，多难看？而且从时间顺序来说也应该后置。其实C#的await也应该是后置，它也弄得不好。是什么时候wait？是promise函数或异步函数执行完后wait，而不是wait之后再执行。注意promise函数执行完不表示promise有了结果，promise函数本身的执行是同步的。</li>
+    <li>yield是前置的，但这里其实应该后置。试想，前面的例子翻译成yield会是什么样？<code>var result = yield (yield (yield aaa()).bbb()).ccc();</code>多层括号，前面3个yield，多难看？而且从时间顺序来说也应该后置。其实C#的await也应该是后置，它也弄得不好。是什么时候wait？是promise函数或异步函数执行完后wait，而不是wait之后再执行。注意promise函数执行完不表示promise有了结果，promise函数本身的执行是同步的。</li>
 </ul>
-<p>异步和管道结合的例子：</p>
-<pre><code class="fus-part"><![CDATA[
-    do --
-        x: data |> lib.process1'wait |> lib.process2'wait
-        y: data |> lib.remoteCombine(anotherData1)'wait |> lib.remoteCombine(anotherData2)'wait
-        console.log(x, y)
-]]></code></pre>
-<p>调用异步函数也可以不加<code>'wait</code>，当调用方不需要等待promise或任务出结果的时候。</p>
+<p>调用异步函数也可以不加<code>'wait</code>，当调用方不需要等待promise出结果的时候。</p>
 <p>用<code>'wait</code>调用异步函数的例子：</p>
 <pre><code class="fus-part"><![CDATA[
     do --
@@ -1221,25 +1212,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log "stage 2"
 ]]></code></pre>
 <p>其实用<code>'wait</code>调用异步函数的时候也是异步函数执行到第一个<code>'wait</code>的位置之前返回调用方，只不过调用方也在等待，看起来就像没有返回一样。</p>
-<p>异步还可以和<code>do</code>结合：</p>
-<pre><code class="fus-part"><![CDATA[
-    largeTask: --
-
-        do --
-            aaa()'wait
-            bbb()'wait
-        'wait
-
-        do --
-            ccc()'wait
-            ddd()'wait
-        'wait
-
-        do --
-            eee()'wait
-            fff()'wait
-        'wait
-]]></code></pre>
 <h1>面向对象</h1>
 <h2>类</h2>
 <p class="detail">本文中的“字段”、“成员”、“属性”是同义词。当字段是函数时，才能称为“方法”。</p>

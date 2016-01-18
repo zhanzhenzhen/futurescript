@@ -86,21 +86,20 @@
 <p>CoffeeScript can also achieve this by <code>a ?= 8</code>, but FutureScript is more readable. Also for logical operators, we dropped JS's equivalents in favor of the more natural <code>and</code>, <code>or</code>, <code>not</code>.</p>
 <p>The third feeling of FutureScript is that it can extremely simplify your code. All JS programmers know how unnatural the asynchronous grammar is. But now we can:</p>
 <pre><code class="fus-part"><![CDATA[
-    console.log abc()'wait.def()'wait.ghi()'wait
+    console.log aaa()'wait.bbb()'wait.ccc()'wait
 ]]></code></pre>
 <p>You know, "promise" is a leap forward than the traditional "triangle of doom". But the code above is a further leap forward. It's equal to the following promise：</p>
 <pre><code class="js"><![CDATA[
-    abc().then(function(x){
-        return x.def();
+    aaa().then(function(x){
+        return x.bbb();
     })
     .then(function(x){
-        return x.ghi();
+        return x.ccc();
     })
     .then(function(x){
         console.log(x);
     });
 ]]></code></pre>
-<p><span class="warning">Since FutureScript needs to be released soon, I've made a last-minute decision that the asynchronous feature won't be included in this version, but will be implemented soon in subsequent versions.</span></p>
 <p>In FutureScript, there's no keyword of more than 7 letters. Such as：</p>
 <ul>
     <li><code>undefined</code>, superseded by <code>void</code>.</li>
@@ -1154,7 +1153,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>When you want to rethrow an exception in <code>catch</code> block, you can type less.</p>
 <p class="detail">If <code>try</code> block or <code>finally</code> block is an inline block, then it must occupy the whole line.</p>
 <h2>Asynchronous</h2>
-<p><span class="warning">Since FutureScript needs to be released soon, I've made a last-minute decision that the asynchronous feature won't be included in this version, but will be implemented soon in subsequent versions.</span></p>
 <p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
 <pre><code class="js"><![CDATA[
     abc().then(function(x){
