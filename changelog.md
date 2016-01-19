@@ -1,3 +1,23 @@
+v0.5.0
+======
+
+Fix a bug that makes `new` precedence incorrect. Now support asynchronous functions.
+
+Language features
+-----------------
+
+Asynchronous function.
+
+Compiler incompatibilities
+--------------------------
+
+None.
+
+Command
+-------
+
+None.
+
 v0.4.0
 ======
 
