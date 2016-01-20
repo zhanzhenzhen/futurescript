@@ -45,10 +45,21 @@
         .question {
             text-decoration: underline;
         }
+        .try {
+            display: none;
+        }
     ]]></style>
     <script src="doc-html.js" type="text/javascript" />
 </head>
 <body>
+<!-- version -->
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.5.0
+    import "./manifest" all
+
+    movies: web.jsonGet("http://zizisoft.com/mate/demo-service/movies")'wait
+    console.log movies
+]]></code></pre>
 <h1>简介</h1>
 <p>我在写JavaScript代码时常想：<code>==</code>和<code>===</code>十分讨厌，如果能统一成<code>=</code>就好了。有一天我想到，如果一门新的语言能用冒号<code>:</code>表示赋值，不是就实现了吗？本来JSON中的冒号，就是“让左边的属性拥有右边的值”的意思，可说含义相近，而我们只需把这种语法延展到“变量赋值”就行了。</p>
 <p>我又想，如果所有的成员访问都统一用点号<code>.</code>，这该有多完美？不管是对象成员，还是数组成员，也不管对象成员名是不是加了引号。这意味着JS的<code>a[0]</code>，可以写成：</p>
