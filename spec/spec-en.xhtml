@@ -1164,41 +1164,29 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>When you want to rethrow an exception in <code>catch</code> block, you can type less.</p>
 <p class="detail">If <code>try</code> block or <code>finally</code> block is an inline block, then it must occupy the whole line.</p>
 <h2>Asynchronous</h2>
-<p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
+<p><code>'wait</code> makes an asynchronous function internally synchronous-style, without changing its asynchronous essence. Consider the following JS:</p>
 <pre><code class="js"><![CDATA[
-    abc().then(function(x){
-        return x.def();
+    aaa().then(function(x){
+        return x.bbb();
     })
     .then(function(x){
-        return x.ghi();
+        return x.ccc();
     })
     .then(function(x){
         console.log(x);
     });
 ]]></code></pre>
-<p>我们现在可以写成：</p>
+<p>Now we can write:</p>
 <pre><code class="fus-part"><![CDATA[
     do --
-        console.log abc()'wait.def()'wait.ghi()'wait
+        console.log aaa()'wait.bbb()'wait.ccc()'wait
 ]]></code></pre>
-<p>一旦代码有<code>'wait</code>，那么代码所在的函数（直接所在，非嵌套）就被编译成异步函数。我们不用async关键字声明异步函数，这个关键字根本多余。</p>
-<p><code>'wait</code>必须出现在函数中。</p>
-<p><code>'wait</code>针对的要么是promise，要么是别的异步函数的返回值。异步函数的返回值是被编译成一种特殊的生成器对象，我们将其称为任务。注意，生成器对象不是生成器函数。</p>
-<p>在异步函数内部，每执行到<code>'wait</code>，会进入等待，直到该promise或任务有了结果，才继续往下执行。</p>
-<p>网上已有文章介绍如何用yield来实现异步，那我们为什么不直接用yield，要发明一个新的符号？因为：</p>
-<ul>
-    <li>yield的本来意思是“产出”，用来表示异步显得怪怪的。</li>
-    <li>yield是前置的，但这里其实应该后置。试想，前面的例子翻译成yield会是什么样？<code>var result = yield (yield (yield abc()).def()).ghi();</code>多层括号，前面3个yield，多难看？而且从时间顺序来说也应该后置。其实C#的await也应该是后置，它也弄得不好。是什么时候wait？是promise函数或异步函数执行完后wait，而不是wait之后再执行。注意promise函数执行完不表示promise有了结果，promise函数本身的执行是同步的。</li>
-</ul>
-<p>异步和管道结合的例子：</p>
-<pre><code class="fus-part"><![CDATA[
-    do --
-        x: data |> lib.process1'wait |> lib.process2'wait
-        y: data |> lib.remoteCombine(anotherData1)'wait |> lib.remoteCombine(anotherData2)'wait
-        console.log(x, y)
-]]></code></pre>
-<p>调用异步函数也可以不加<code>'wait</code>，当调用方不需要等待promise或任务出结果的时候。</p>
-<p>用<code>'wait</code>调用异步函数的例子：</p>
+<p>Once the code has <code>'wait</code>, the parent function will be compiled into asynchronous function. We don't need the <code>async</code> keyword, which is totally redundant.</p>
+<p><code>'wait</code> must be in a function.</p>
+<p><code>'wait</code> is to operate promises. The operand can be a normal promise, or another asynchronous function's return value. The return value of an asynchronous function is also a promise.</p>
+<p>Inside an asynchronous function, when executing <code>'wait</code> it will wait until the promise is resolved, then proceed.</p>
+<p>An asynchronous function can be called without <code>'wait</code>, if the caller doesn't want to wait for the promise to finish.</p>
+<p>An example for using <code>'wait</code> to call an asynchronous function:</p>
 <pre><code class="fus-part"><![CDATA[
     do --
         task: --
@@ -1207,7 +1195,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         task()'wait
         console.log "success"
 ]]></code></pre>
-<p>不用<code>'wait</code>，也可以调用异步函数并达到相同的目的：</p>
+<p>Without using <code>'wait</code>, it can also be called for the same purpose:</p>
 <pre><code class="fus-part"><![CDATA[
     do --
         task: --
@@ -1216,7 +1204,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             console.log "success"
         task()
 ]]></code></pre>
-<p>注意，不用<code>'wait</code>调用异步函数的时候，异步函数执行到第一个<code>'wait</code>的位置之前返回调用方。下面的例子说明了先后顺序：</p>
+<p>Note that if an asynchronous function is called without <code>'wait</code>, then it will return before reaching the first <code>'wait</code> inside the asynchronous function. The following example describes the order:</p>
 <pre><code class="fus-part"><![CDATA[
     do --
         task: --
@@ -1228,26 +1216,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         task()
         console.log "stage 2"
 ]]></code></pre>
-<p>其实用<code>'wait</code>调用异步函数的时候也是异步函数执行到第一个<code>'wait</code>的位置之前返回调用方，只不过调用方也在等待，看起来就像没有返回一样。</p>
-<p>异步还可以和<code>do</code>结合：</p>
-<pre><code class="fus-part"><![CDATA[
-    largeTask: --
-
-        do --
-            aaa()'wait
-            bbb()'wait
-        'wait
-
-        do --
-            ccc()'wait
-            ddd()'wait
-        'wait
-
-        do --
-            eee()'wait
-            fff()'wait
-        'wait
-]]></code></pre>
+<p>There's one limitation: Because an asynchronous function is compiled into a generator, and the ES6 generator can't contain <code>super</code>, so an asynchronous function can't contain <code>super</code>. It may be solved in later versions, but it requires a huge amount of code to simulate a generator. Surely, it will eventually be solved after ES7 is released, for we can compile it to the native ES7 asynchronous function.</p>
 <h1>Object-oriented</h1>
 <h2>Class</h2>
 <p class="detail">"Field", "member", and "property" are synonyms in this article. A field can be called a "method" if it's a function.</p>

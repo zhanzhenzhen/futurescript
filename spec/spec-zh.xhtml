@@ -1165,7 +1165,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>当你想在<code>catch</code>块内重新抛出异常时就可以省略很多字符。</p>
 <p class="detail"><code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
 <h2>异步</h2>
-<p><code>'wait</code>类似C#的await，使异步看上去像同步一样（然而不改变其异步的本质），所以它超越了promise。考虑这样一个JS：</p>
+<p><code>'wait</code>使异步函数从内部看上去像同步一样（然而不改变其异步的本质）。考虑这样一个JS：</p>
 <pre><code class="js"><![CDATA[
     aaa().then(function(x){
         return x.bbb();
@@ -1186,12 +1186,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p><code>'wait</code>必须出现在函数中。</p>
 <p><code>'wait</code>针对的是promise，它可以是一个普通的promise，也可以是别的异步函数的返回值。异步函数的返回值也是一个promise。</p>
 <p>在异步函数内部，每执行到<code>'wait</code>，会进入等待，直到该promise有了结果，才继续往下执行。</p>
-<p>网上已有文章介绍如何用yield来实现异步，那我们为什么不直接用yield，要发明一个新的符号？因为：</p>
-<ul>
-    <li>yield的本来意思是“产出”，用来表示异步显得怪怪的。</li>
-    <li>yield是前置的，但这里其实应该后置。试想，前面的例子翻译成yield会是什么样？<code>var result = yield (yield (yield aaa()).bbb()).ccc();</code>多层括号，前面3个yield，多难看？而且从时间顺序来说也应该后置。其实C#的await也应该是后置，它也弄得不好。是什么时候wait？是promise函数或异步函数执行完后wait，而不是wait之后再执行。注意promise函数执行完不表示promise有了结果，promise函数本身的执行是同步的。</li>
-</ul>
-<p>调用异步函数也可以不加<code>'wait</code>，当调用方不需要等待promise出结果的时候。</p>
+<p>调用异步函数可以不加<code>'wait</code>，当调用方不需要等待promise出结果的时候。</p>
 <p>用<code>'wait</code>调用异步函数的例子：</p>
 <pre><code class="fus-part"><![CDATA[
     do --
@@ -1222,7 +1217,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         task()
         console.log "stage 2"
 ]]></code></pre>
-<p>其实用<code>'wait</code>调用异步函数的时候也是异步函数执行到第一个<code>'wait</code>的位置之前返回调用方，只不过调用方也在等待，看起来就像没有返回一样。</p>
 <p>目前的一个限制是：由于异步函数会编译成生成器函数，而ES6的生成器函数不能含有<code>super</code>，所以异步函数内不能含有<code>super</code>。这一点也许以后的版本中会得到解决，但需要加入大量的代码来模拟一个生成器函数。当然，最终总会得到解决，因为ES7发布后我们就可以编译成原生的ES7异步函数了。</p>
 <h1>面向对象</h1>
 <h2>类</h2>
