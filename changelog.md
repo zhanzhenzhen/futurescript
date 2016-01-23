@@ -1,6 +1,8 @@
 v0.5.0
 ======
 
+2016-01-23T06:46:19Z
+
 Fix a bug that makes `new` precedence incorrect. Now support asynchronous functions.
 
 Language features
