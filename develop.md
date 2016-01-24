@@ -78,7 +78,7 @@ Note that these are outside ECMAScript 6 spec:
 
 - `console.log`
 - `require` and other Node.js built-ins
-- `global` and `window`
+- `global`, `window`, `setTimeout`, `setInterval`
 
 Can't import any path outside this file's directory except `"../locked-api.js"` and `"../test-locked-api.js"`.
 
