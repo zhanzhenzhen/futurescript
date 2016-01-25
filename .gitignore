@@ -13,5 +13,6 @@ node_modules
 
 *.log
 
+/c-current
 /target
 /es5-target
