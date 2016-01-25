@@ -59,13 +59,20 @@ Build release (discard testing files):
 bin/fus build-release
 ```
 
+This command is handy when you want to "find" something, for it copies all compiler files for the current version to `"c-current"` directory:
+
+```bash
+bin/fus c-current
+bin/fus cc
+```
+
 We must build release (but must NOT fill it) before publishing. When a user installs it, referenced files will be automatically filled in the post-install period.
 
 Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent compiler files (including testing files). They can't have sub-directories.
 
 Each permanent directory must have a `"ref.json"` file.
 
-`"main.js"` is the entry of each permanent directory. `"test-main.js"` is the entry of testing files. `"ref.json"` lists all referenced permanent files in old versions. These referenced files will be copied to the directory (to that in "target" or "es5-target", not in "lib") when filling.
+`"main.js"` is the entry of each permanent directory. `"test-main.js"` is the entry of testing files. `"ref.json"` lists all referenced permanent files. These referenced files will be copied to the directory (to that in "target" or "es5-target", not in "lib") when filling.
 
 For each version, there may be a related `"readme.js"` file in one permanent directory. So, for contributors, there are 2 important documents: This document and the permanent readme document.
 
@@ -90,7 +97,7 @@ Except for `"ref.json"`, all files must be in pure JavaScript (i.e. extension: .
 
 Can't be modified or deleted after release (unless there are very serious problems).
 
-When you want to edit a file (that already exists in any old release) for next release, don't edit, but keep it unchanged and copy the file to a new file in the new version's directory (and until next release the new file is editable). When you want to rename a file that exists in old release, also do not rename, but use a new filename in the new version's directory.
+When you want to edit a file (that already exists in any old release) for next release, don't edit, but keep it unchanged and copy the file to the new version's directory (and until next release the new file is editable). When you want to rename a file that exists in old release, also do not rename, but use a new filename in the new version's directory.
 
 It's highly recommended that large file be splitted into small files.
 
