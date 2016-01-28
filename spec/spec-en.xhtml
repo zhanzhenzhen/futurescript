@@ -54,10 +54,22 @@
 <!-- version -->
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.5.0
+
     import "./manifest" all
 
-    movies: web.jsonGet("http://zizisoft.com/mate/demo-service/movies")'wait
-    console.log movies
+    do --
+        console.log "Querying stock price..."
+
+        query: encodeURIComponent "
+            select * from yahoo.finance.quotes where symbol in ("AAPL")
+        "
+        env: encodeURIComponent "store://datatables.org/alltableswithkeys"
+        allQuery: "?q=\(query)&env=\(env)&format=json"
+
+        response: web.jsonGet("https://query.yahooapis.com/v1/public/yql\(allQuery)")'wait
+
+        quote: response.body.query.results.quote
+        console.log "Apple Inc. Bid Price: \(quote.Bid), Ask Price: \(quote.Ask)"
 ]]></code></pre>
 <h1>Introduction</h1>
 <p>When I was writing JavaScript code I often think: <code>==</code> and <code>===</code> are very annoying, and if it could be <code>=</code> then that would be great. Later I found that if a new language used the colon <code>:</code> to assign, this dream could have come true. Because the colon in JSON means "to let the left-hand side have the value of the right-hand side", the meaning is similar. We just need to extend this grammar to "variable assignment".</p>
