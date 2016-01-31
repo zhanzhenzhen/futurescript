@@ -34,7 +34,7 @@
     ["0.1.0", "test-lex-connect.js"],
     ["0.1.0", "test-lex-same-level.js"],
     ["0.1.0", "test-lex-string.js"],
-    ["0.1.0", "test-lex.js"],
+    ["0.6.0", "test-lex.js"],
     ["0.6.0", "test-main.js"],
     ["0.1.0", "test-pattern.js"],
     ["0.6.0", "test-style.js"],
