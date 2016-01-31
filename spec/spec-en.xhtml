@@ -68,6 +68,7 @@
         quote: response.body.query.results.quote
 
         console.log "Apple Inc. Bid Price: \(quote.Bid), Ask Price: \(quote.Ask)"
+
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.6.0
@@ -82,6 +83,7 @@
     # You can even use different libraries in one chain, or mix native methods
     # such as "map". Still so simple.
     console.log [1, 1, 3, 3, 5, 7] |> u.shuffle :: map(x -> -x) |> _.uniq
+
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.6.0
@@ -98,6 +100,7 @@
         6 ? "Sat"
         |   "Sun"
     console.log text
+
 ]]></code></pre>
 <h1>Introduction</h1>
 <p>When I was writing JavaScript code I often think: <code>==</code> and <code>===</code> are very annoying, and if it could be <code>=</code> then that would be great. Later I found that if a new language used the colon <code>:</code> to assign, this dream could have come true. Because the colon in JSON means "to let the left-hand side have the value of the right-hand side", the meaning is similar. We just need to extend this grammar to "variable assignment".</p>
