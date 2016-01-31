@@ -2,7 +2,8 @@ v0.6.0
 ======
 
 - Normalize the format of "ref.json".
-- Can generate styles useful for syntax highlighting.
+- Can generate styles, which is useful for syntax highlighting.
+- Fix a lex bug of empty brace or bracket pair occupying multiple lines.
 
 Language features
 -----------------
