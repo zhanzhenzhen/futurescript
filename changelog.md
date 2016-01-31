@@ -1,3 +1,24 @@
+v0.6.0
+======
+
+- Normalize the format of "ref.json".
+- Can generate styles useful for syntax highlighting.
+
+Language features
+-----------------
+
+None.
+
+Compiler incompatibilities
+--------------------------
+
+None.
+
+Command
+-------
+
+Add `c-current`.
+
 v0.5.0
 ======
 
