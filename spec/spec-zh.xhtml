@@ -55,21 +55,19 @@
 <!-- version -->
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.6.0
-
     import "./manifest" all
 
+    q: encodeURIComponent("select * from yahoo.finance.quotes where symbol in (\"AAPL\")")
+    env: encodeURIComponent("store://datatables.org/alltableswithkeys")
+    query: "?q=\(q)&env=\(env)&format=json"
+
+    # 异步函数
     do --
         console.log "正在查询股价..."
 
-        query: encodeURIComponent "
-            select * from yahoo.finance.quotes where symbol in ("AAPL")
-        "
-        env: encodeURIComponent "store://datatables.org/alltableswithkeys"
-        allQuery: "?q=\(query)&env=\(env)&format=json"
-
-        response: web.jsonGet("https://query.yahooapis.com/v1/public/yql\(allQuery)")'wait
-
+        response: web.jsonGet("https://query.yahooapis.com/v1/public/yql\(query)")'wait
         quote: response.body.query.results.quote
+
         console.log "苹果公司 买入价: \(quote.Bid), 卖出价: \(quote.Ask)"
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
