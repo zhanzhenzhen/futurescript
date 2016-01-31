@@ -1,6 +1,8 @@
 v0.6.0
 ======
 
+2016-01-31T11:10:36Z
+
 - Normalize the format of "ref.json".
 - Can generate styles, which is useful for syntax highlighting.
 - Fix a lex bug of empty brace or bracket pair occupying multiple lines.
