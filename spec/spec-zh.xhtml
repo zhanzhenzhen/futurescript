@@ -101,6 +101,34 @@
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.6.0
 
+    # 忘了那烦人的==和===吧。相等就是等号。
+    a: 3
+    b: 3
+    if a = b
+        console.log "a等于b"
+
+    # 你甚至可以用≠来表示不相等，只需按Alt加=。
+    a: 3
+    b: 4
+    if a ≠ b
+        console.log "a不等于b"
+    # 当然也可以用/=表示不相等，功能完全一样。
+    if a /= b
+        console.log "a真的不等于b"
+
+    c: 3
+    if 1 ≤ c ≤ 5
+        console.log "c在1和5之间"
+    if 1 <= c <= 5
+        console.log "c真的在1和5之间"
+
+    # Mac OS原生支持Alt加=、<、>，Windows用户可以在编辑器中自定义快捷键，就像
+    # 我们在这个编辑器中定义的一样。
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
     # 模式匹配可以看成是增强版的switch，但它不是命令语句，而是表达式，它是函数式的。
     day: 3
     text: match day
@@ -112,6 +140,18 @@
         6 ? "Sat"
         |   "Sun"
     console.log text
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    a: {}
+    console.log(a is Object) # a instanceof Object
+
+    a: 1
+    console.log(a is Number) # typeof a === "number"
+
+    # is可以根据后面是不是原始类型来编译出不同的代码，替代instanceof和typeof。
 
 ]]></code></pre>
 <h1>简介</h1>

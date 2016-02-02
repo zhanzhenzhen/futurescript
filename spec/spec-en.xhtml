@@ -103,6 +103,34 @@
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.6.0
 
+    # Forget about the annoying == and ===. Euqal sign means equal.
+    a: 3
+    b: 3
+    if a = b
+        console.log "a is equal to b"
+
+    # You can even use ≠ to mean inequality by holding "Alt" key then "=".
+    a: 3
+    b: 4
+    if a ≠ b
+        console.log "a is not equal to b"
+    # You can also use /= to mean inequality, which is the same as above.
+    if a /= b
+        console.log "a is really not equal to b"
+
+    c: 3
+    if 1 ≤ c ≤ 5
+        console.log "c is between 1 and 5"
+    if 1 <= c <= 5
+        console.log "c is really between 1 and 5"
+
+    # Mac OS natively supports "Alt" + "=", "<" and ">". Windows users can customize
+    # shortcut keys in editor, just like what we customized in this editor.
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
     # Pattern matching could be regarded as an enhanced "switch", except that
     # it's an expression rather than a command so it's functional.
     day: 3
@@ -115,6 +143,19 @@
         6 ? "Sat"
         |   "Sun"
     console.log text
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    a: {}
+    console.log(a is Object) # a instanceof Object
+
+    a: 1
+    console.log(a is Number) # typeof a === "number"
+
+    # `is` compiles differently based on whether it's followed by a
+    # primitive type. It's a combination of `instanceof` and `typeof`.
 
 ]]></code></pre>
 <h1>Introduction</h1>
