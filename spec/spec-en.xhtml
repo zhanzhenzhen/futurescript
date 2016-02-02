@@ -939,17 +939,28 @@
 <h2>Logical Operation</h2>
 <ul style="font-family: monospace;">
     <li>=</li>
-    <li>/= (not =, not=)</li>
+    <li>/= (not =, not=, ≠)</li>
     <li>&lt;</li>
     <li>&gt;</li>
-    <li>&lt;=</li>
-    <li>&gt;=</li>
+    <li>&lt;= (≤)</li>
+    <li>&gt;= (≥)</li>
     <li>and</li>
     <li>or</li>
     <li>not</li>
 </ul>
 <p>The equals sign <code>=</code> is just to determine equality. No longer need to distinguish between <code>=</code>, <code>==</code> and <code>===</code>.</p>
-<p><code>/=</code> means inequality. It can also be written as <code>not =</code>, where the space can be omitted. Why don't we use <code>!=</code>? Because <code>!</code> isn't used by FutureScript so far, I really don't want a precious symbol to be only usable with <code>=</code>. <code>/=</code> also looks more like <code>≠</code> than <code>!=</code>.</p>
+<p><code>/=</code> or <code>≠</code> means inequality. It can also be written as <code>not =</code>, where the space can be omitted. The highlight here is <code>≠</code>. If you use Mac, you can directly input <code>≠</code> by holding "Alt" key and pressing "=". Mac natively supports inputting inequality signs. If you use Windows, you can define shortcut keys in your editor, so actually everyone can input <code>≠</code> easily. This greatly improves readability.</p>
+<p>Why don't we use <code>!=</code>? Because <code>!</code> isn't used by FutureScript so far, I really don't want a precious symbol to be only usable with <code>=</code>. <code>/=</code> also looks more like <code>≠</code> than <code>!=</code>.</p>
+<p>Like CoffeeScript, we support chained comparison:</p>
+<pre><code><![CDATA[
+    if 200 ≤ statusCode < 300
+        console.log "success"
+]]></code></pre>
+<p>But our limitation is more than CoffeeScript. You can only compare in the same direction. Such is not supported:</p>
+<pre><code><![CDATA[
+    if a < b > c
+        console.log "success"
+]]></code></pre>
 <p>For logical operation, the biggest difference in FutureScript is the precedence of <code>not</code>. <code>not</code> is lowered, only higher than <code>and</code> and <code>or</code>. This means we can omit many parentheses. You must have complained in JS you have to write:</p>
 <pre><code class="js"><![CDATA[
     if !(abc instanceof Abc) doTask();
@@ -961,12 +972,12 @@
 ]]></code></pre>
 <p>But in fact this example is illegal, because we don't have <code>instanceof</code>. We use <code>is</code>. You can write <code>not abc is Abc</code> but it's a bit ugly (so we support <code>abc isnt Abc</code>). So are there any beautiful examples? Yes, in this example you can also omit parentheses:</p>
 <pre><code class="fus-part"><![CDATA[
-    if not 200 <= statusCode < 300
+    if not 200 ≤ statusCode < 300
         console.log "failure"
 ]]></code></pre>
-<p><span class="warning">For now we don't support chained comparison, but I'm sure it will be implemented soon in a future version.</span></p>
-<p>Back to the inequality sign. You can also use <code>not ... =</code>. These 4 forms behaves the same:</p>
+<p>Back to the inequality sign. You can also use <code>not ... =</code>. These 5 forms behaves the same:</p>
 <pre><code class="fus-part"><![CDATA[
+    if statusCode ≠ 200 throw
     if statusCode /= 200 throw
     if statusCode not= 200 throw
     if statusCode not = 200 throw

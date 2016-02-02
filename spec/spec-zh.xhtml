@@ -937,17 +937,28 @@
 <h2>逻辑运算</h2>
 <ul style="font-family: monospace;">
     <li>=</li>
-    <li>/= (not =, not=)</li>
+    <li>/= (或者not =, not=, ≠)</li>
     <li>&lt;</li>
     <li>&gt;</li>
-    <li>&lt;=</li>
-    <li>&gt;=</li>
+    <li>&lt;= (或者≤)</li>
+    <li>&gt;= (或者≥)</li>
     <li>and</li>
     <li>or</li>
     <li>not</li>
 </ul>
 <p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
-<p><code>/=</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。为什么我们不用<code>!=</code>？因为感叹号目前FutureScript还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
+<p><code>/=</code>或<code>≠</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。这里的亮点是<code>≠</code>。如果你用Mac，可以直接通过按“Alt”键加“=”键输入<code>≠</code>，Mac OS原生支持输入不等号。如果你用Windows，也可以在编辑器中自定义快捷键，所以其实每个人都可以很方便地输入<code>≠</code>，这大大增强了可读性。</p>
+<p>为什么我们不用<code>!=</code>？因为感叹号目前FutureScript还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
+<p>和CoffeeScript一样，我们也支持这种链式比较：</p>
+<pre><code><![CDATA[
+    if 200 ≤ statusCode < 300
+        console.log "success"
+]]></code></pre>
+<p>但是我们的限制比CoffeeScript多，只有同一个方向的才可以链式比较。像这种就不支持：</p>
+<pre><code><![CDATA[
+    if a < b > c
+        console.log "success"
+]]></code></pre>
 <p>FutureScript和其他语言在逻辑运算方面最大的区别就是<code>not</code>的优先级。<code>not</code>的优先级被降低，仅高于<code>and</code>和<code>or</code>。这意味着我们可以少加很多括号。你肯定抱怨过在JS中不得不这样写：</p>
 <pre><code class="js"><![CDATA[
     if !(abc instanceof Abc) doTask();
@@ -959,12 +970,12 @@
 ]]></code></pre>
 <p>但事实上这个例子是非法的，因为我们没有<code>instanceof</code>关键字，我们是用<code>is</code>关键字，你可以写<code>not abc is Abc</code>但稍显难看（所以我们支持写成<code>abc isnt Abc</code>）。那有没有好看的例子呢？有，像这种也不用加上括号：</p>
 <pre><code class="fus-part"><![CDATA[
-    if not 200 <= statusCode < 300
+    if not 200 ≤ statusCode < 300
         console.log "failure"
 ]]></code></pre>
-<p><span class="warning">我们暂不支持这种链式比较，但以后的版本一定会支持。</span></p>
-<p>再回到刚才说的不等号。其实还可以用<code>not ... =</code>。这4个功能相同，你看哪个顺眼就用哪个：</p>
+<p>再回到刚才说的不等号。其实还可以用<code>not ... =</code>。这5个功能相同，你看哪个顺眼就用哪个：</p>
 <pre><code class="fus-part"><![CDATA[
+    if statusCode ≠ 200 throw
     if statusCode /= 200 throw
     if statusCode not= 200 throw
     if statusCode not = 200 throw
