@@ -54,6 +54,28 @@
 <!-- version -->
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.6.0
+
+    u: import "underscore"
+    _: import "lodash"
+
+    # Pipe operator |> makes using underscore and lodash easier than ever.
+    # Forget about `_()` and `.value()`.
+    console.log [2, 3, 4] |> _.max
+
+    # You can even use different libraries in one chain, or mix Array's
+    # native methods such as "map". Fat dot :: preserves the simplicity.
+    console.log [1, 1, 3, 3, 5, 7] |> u.shuffle :: map(x -> -x) |> _.uniq
+
+    # FutureScript compiles into JavaScript. Fus is fully compatible with JS.
+    # Fus can import JS modules, and JS can also import Fus modules.
+    # The `import` in this code can be changed to the traditional `require`
+    # form (but please don't change `:` to `=`).
+
+    # Run the code, then view the 2nd example.
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
     import "./manifest" all
 
     q: encodeURIComponent("select * from yahoo.finance.quotes where symbol in (\"AAPL\")")
@@ -69,20 +91,13 @@
 
         console.log "Apple Inc. Bid Price: \(quote.Bid), Ask Price: \(quote.Ask)"
 
-]]></code></pre>
-<pre class="try"><code class="fus"><![CDATA[
-    fus 0.6.0
+    # Forget about the "Pyramid of Doom" and even promise callbacks. You
+    # only need to add a 'wait to a promise, then the enclosing function will
+    # be an async function. Async is as easy as sync, without any callback.
+    # `--` in this code means parameterless function. `do` means call itself.
 
-    u: import "underscore"
-    _: import "lodash"
-
-    # Pipe operator |> makes using underscore and lodash easier than ever.
-    # Forget _() and value().
-    console.log [2, 3, 4] |> _.max
-
-    # You can even use different libraries in one chain, or mix native methods
-    # such as "map". Still so simple.
-    console.log [1, 1, 3, 3, 5, 7] |> u.shuffle :: map(x -> -x) |> _.uniq
+    # Now, you may have guessed what `:` means in Fus. But why? See the next
+    # example and you'll know.
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[

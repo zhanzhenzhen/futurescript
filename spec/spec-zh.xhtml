@@ -55,6 +55,26 @@
 <!-- version -->
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.6.0
+
+    u: import "underscore"
+    _: import "lodash"
+
+    # 管道符号|>让使用underscore和lodash变得前所未有地简单。忘掉_()和.value()吧。
+    console.log [2, 3, 4] |> _.max
+
+    # 你甚至可以在一串式子中同时使用underscore和lodash，并混入Array的原生方法map。
+    # “胖点”::让简洁程度丝毫不降低。
+    console.log [1, 1, 3, 3, 5, 7] |> u.shuffle :: map(x -> -x) |> _.uniq
+
+    # FutureScript编译成JavaScript。Fus和JS完全兼容。Fus能导入JS模块，JS也能
+    # 导入Fus模块。
+    # 这段代码中的import也可以改成经典的require形式（但请不要把冒号改成等号）。
+
+    # 运行代码，然后观看第2个示例吧。
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
     import "./manifest" all
 
     q: encodeURIComponent("select * from yahoo.finance.quotes where symbol in (\"AAPL\")")
@@ -70,18 +90,12 @@
 
         console.log "苹果公司 买入价: \(quote.Bid), 卖出价: \(quote.Ask)"
 
-]]></code></pre>
-<pre class="try"><code class="fus"><![CDATA[
-    fus 0.6.0
+    # 忘了恐怖金字塔吧，也忘了promise回调函数吧。只要对一个promise加'wait，所在的
+    # 函数就会成为异步函数。异步，也可以像同步一样，不需要回调函数。
+    # 这段代码的--表示无参数函数。do表示调用自身。
 
-    u: import "underscore"
-    _: import "lodash"
-
-    # 管道符号“|>”让使用underscore和lodash变得前所未有地简单。忘掉_()和value()吧。
-    console.log [2, 3, 4] |> _.max
-
-    # 你甚至可以在一串表达式中使用不同的包，还可以混入原生方法，例如map，仍然如此简单。
-    console.log [1, 1, 3, 3, 5, 7] |> u.shuffle :: map(x -> -x) |> _.uniq
+    # 现在，你可能已经猜到Fus中的冒号是什么意思了。为什么要这样做呢？看下一个示例
+    # 就知道啦。
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
