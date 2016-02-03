@@ -158,6 +158,79 @@
     # primitive type. It's a combination of `instanceof` and `typeof`.
 
 ]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    # Array's index is actually a property. Don't believe? Type it in JS console:
+    # a=[12,34]
+    # Object.keys(a)
+    # You'll find two properties "0" and "1". That's why JS's a[0] is equivalent to
+    # a["0"]. And a["0"] is actually its "normative" form.
+
+    # But JS's [] itself is inconsistent. e.g. [12, 34] means an array while a[0] means
+    # element access. It's far from perfect. A future language should aim to be perfect.
+    # We know array is an object with index being property. So we use "." to access.
+
+    a: [12, 34]
+    console.log(a.0, a.1) # console.log(a[0], a[1])
+
+    a: {"long prop": 777}
+    console.log a."long prop" # console.log(a["long prop"])
+
+    index: 1
+    a: [12, 34, 56]
+    console.log a.(index) # console.log(a[index])
+
+    # This solution is consistent and concise. I bet you'll be attracted by its beauty.
+
+    # In Fus, every syntax is extremely consistent. e.g. [] is array, {} is object, and
+    # `:` means "let left be right" - the same as JSON, which is the best part of JS.
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    # Now that the syntax is consistent, function call will be not limited to ().
+
+    console.log([12, 34, 56])
+    console.log[12, 34, 56] # same as above, but more concise
+
+    console.log({a: 1, b: 2})
+    console.log{a: 1, b: 2} # same as above, but more concise
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    add: <> @0 + @1 # var add = function() {return arguments[0] + arguments[1];};
+    console.log add(2, 3)
+
+    # Feel JS's `arguments` is too long? Fus provides `@`. You can even omit
+    # the dot. `@0` is the same as `@.0`.
+    # <> is another parameterless function. In <> you can use `@`.
+    # @ is easy to remember. From now on you can pronounce @ as "arg".
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    distance: point ->
+        x: point.x
+        y: point.y
+        Math.sqrt(x * x + y * y)
+
+    console.log distance{x: 3, y: 4}
+
+    # Function doesn't need `return`. The last statement is the return value.
+    # Variables don't need to be declared with `var`. They will be declared
+    # automatically when first assigned. The scope is the function level.
+    # It's concise and can avoid global pollution. In JS if you forget writing
+    # `var` then it will become a global variable that results in global pollution.
+
+    # You can strip the # in the next line and see what error it shows.
+    #console.log x
+
+]]></code></pre>
 <h1>Introduction</h1>
 <p>When I was writing JavaScript code I often think: <code>==</code> and <code>===</code> are very annoying, and if it could be <code>=</code> then that would be great. Later I found that if a new language used the colon <code>:</code> to assign, this dream could have come true. Because the colon in JSON means "to let the left-hand side have the value of the right-hand side", the meaning is similar. We just need to extend this grammar to "variable assignment".</p>
 <p>I also thought, that if all types of member access uniformly use <code>.</code>, isn't that perfect? Regardless of whether it's object member, array member, or the object member name is enclosed with quotation marks. This means <code>a[0]</code> in JS could be written as:</p>

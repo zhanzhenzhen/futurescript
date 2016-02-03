@@ -154,6 +154,77 @@
     # is可以根据后面是不是原始类型来编译出不同的代码，替代instanceof和typeof。
 
 ]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    # 数组的索引的本质是对象的属性。不信？在JavaScript环境中，输入：
+    # a=[12,34]
+    # Object.keys(a)
+    # 你会看到有两个属性名"0"和"1"。这就是为什么JS的a[0]等价于a["0"]。而a["0"]
+    # 倒反而是它的“正规”形式呢。
+
+    # 但其实JS的中括号[]本身的概念就不统一，例如[12, 34]表示数组，但同样用中括号
+    # 的a[0]却表示数组的元素访问。这很不完美。未来的语言应该是趋向完美的。
+    # 因为我们已经知道数组是索引为属性的对象，所以元素访问应该和对象一样使用点号.。
+
+    a: [12, 34]
+    console.log(a.0, a.1) # console.log(a[0], a[1])
+
+    a: {"long prop": 777}
+    console.log a."long prop" # console.log(a["long prop"])
+
+    index: 1
+    a: [12, 34, 56]
+    console.log a.(index) # console.log(a[index])
+
+    # 这个方案既统一，又简洁。我相信，在花半个小时适应之后，你一定会被它的美丽所吸引。
+
+    # Fus中，一切语法都统一到极致，例如[]就表示数组，{}就表示对象，而冒号:就表示让左边
+    # 拥有右边的值，和JSON一致，而JSON是JS最精华的部份之一。
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    # 语法统一了，函数的调用就不限于小括号，变得更酷。
+
+    console.log([12, 34, 56])
+    console.log[12, 34, 56] # 和上面一样，但更简洁
+
+    console.log({a: 1, b: 2})
+    console.log{a: 1, b: 2} # 和上面一样，但更简洁
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    add: <> @0 + @1 # var add = function() {return arguments[0] + arguments[1];};
+    console.log add(2, 3)
+
+    # 觉得JS的arguments太长？Fus提供了@，你甚至可以省去点号，@0和@.0完全一样。
+    # <>是另一种无参数函数，在<>中可以使用@。
+    # @很好记，圆圈里面就是个a。从此以后把@读做arg吧。
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    distance: point ->
+        x: point.x
+        y: point.y
+        Math.sqrt(x * x + y * y)
+
+    console.log distance{x: 3, y: 4}
+
+    # 函数无需写return，最后一个语句即是返回的值。
+    # 你无需用var声明一个变量。变量在第一次赋值时自动声明。作用域为函数级。
+    # 这既简洁又避免了全局污染。如果在JS中忘了写var那可糟了，会变成全局变量，造成
+    # 全局污染。
+
+    # 你可以把下面一行的#去掉，看看它出现了什么错误。
+    #console.log x
+
+]]></code></pre>
 <h1>简介</h1>
 <p>我在写JavaScript代码时常想：<code>==</code>和<code>===</code>十分讨厌，如果能统一成<code>=</code>就好了。有一天我想到，如果一门新的语言能用冒号<code>:</code>表示赋值，不是就实现了吗？本来JSON中的冒号，就是“让左边的属性拥有右边的值”的意思，可说含义相近，而我们只需把这种语法延展到“变量赋值”就行了。</p>
 <p>我又想，如果所有的成员访问都统一用点号<code>.</code>，这该有多完美？不管是对象成员，还是数组成员，也不管对象成员名是不是加了引号。这意味着JS的<code>a[0]</code>，可以写成：</p>
