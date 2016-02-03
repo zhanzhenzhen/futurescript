@@ -199,12 +199,17 @@
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.6.0
 
-    add: <> @0 + @1 # var add = function() {return arguments[0] + arguments[1];};
-    console.log add(2, 3)
-
     # 觉得JS的arguments太长？Fus提供了@，你甚至可以省去点号，@0和@.0完全一样。
     # <>是另一种无参数函数，在<>中可以使用@。
     # @很好记，圆圈里面就是个a。从此以后把@读做arg吧。
+    #
+    add: <> @0 + @1 # var add = function() {return arguments[0] + arguments[1];};
+    console.log add(2, 3)
+
+    # 觉得undefined也太长了？没问题，Fus提供了void。
+    console.log void
+
+    # 在Fus中，没有长度超过7个字母的关键字。
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
@@ -252,32 +257,7 @@
     # Fus的类本质上就是JS的类，所以你也完全可以在JS文件中导入Fus的类。
 
 ]]></code></pre>
-<h1>简介</h1>
-<p>我在写JavaScript代码时常想：<code>==</code>和<code>===</code>十分讨厌，如果能统一成<code>=</code>就好了。有一天我想到，如果一门新的语言能用冒号<code>:</code>表示赋值，不是就实现了吗？本来JSON中的冒号，就是“让左边的属性拥有右边的值”的意思，可说含义相近，而我们只需把这种语法延展到“变量赋值”就行了。</p>
-<p>我又想，如果所有的成员访问都统一用点号<code>.</code>，这该有多完美？不管是对象成员，还是数组成员，也不管对象成员名是不是加了引号。这意味着JS的<code>a[0]</code>，可以写成：</p>
-<pre><code class="fus-part"><![CDATA[
-    a.0
-]]></code></pre>
-<p>而JS的<code>a["prop name"]</code>，可以写成：</p>
-<pre><code class="fus-part"><![CDATA[
-    a."prop name"
-]]></code></pre>
-<p>很多JS的权威人物说，函数只应传递少量参数，如果函数要传递很多参数，那表示函数没设计好，更合理的是传递对象。我完全同意，但有更加激进的想法：“多参数”本身是否把事情变复杂了？</p>
-<p>又想到，在当今世界，所有的语言都存在版本问题，这既让开发者在升级语言版本时提心吊胆，生怕一升级旧代码就不能运行了，又给语言的设计者套上了枷锁，不敢做出大的改变，导致进步越来越微小。能不能想出一个全新的机制，彻底解决版本问题？</p>
-<p>于是我便涌起了自己设计一门语言的念头。</p>
-<p>FutureScript的第二感，是可读性极佳。看这段：</p>
-<pre><code class="fus-part"><![CDATA[
-    a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
-]]></code></pre>
-<p>CoffeeScript也可以用<code>a ?= 8</code>，然而FutureScript的可读性更佳。另外像逻辑运算符，我们也弃用JS中的符号而改用更自然的<code>and</code>、<code>or</code>、<code>not</code>。</p>
-<p>FutureScript里面，没有长度超过7个字母的关键字，简洁存在于我们的基因之中。像是：</p>
-<ul>
-    <li><code>undefined</code>，我们用<code>void</code>代替。</li>
-    <li><code>arguments</code>，我们用<code>@</code>代替。<code>@0</code>就表示<code>arguments[0]</code>。@这符号的圆圈里面就是个a，很好记，是不是？（我们约定<code>@</code>读作/ɑːg/。）</li>
-    <li><code>instanceof</code>，我们用<code>is</code>代替。</li>
-</ul>
-<p>我们规定代码文件必须在顶端标明该文件适用的FutureScript版本。我相信，这个方法能一举解决JS和CoffeeScript中存在的版本问题，这是因为，我们的任何版本都包含历史版本的编译器。这意味着，将来的2.0.0包含1.0.0。</p>
-<p>如果你不仅想看懂，而且想写FutureScript代码，那么请看完余下的章节。下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（教程通常也是语言规范的一部分，只是比较好懂而已）。</p>
+<p>注：下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（教程通常也是语言规范的一部分，只是比较好懂而已）。</p>
 <h1>使用方法</h1>
 <p>（这章不属于语言规范。由于工具会更新，因此本章可能会过时。）</p>
 <h3>安装</h3>
@@ -623,7 +603,7 @@
     <li>类的方法和构造器内部（不包括嵌套的类的方法和构造器，但包括嵌套的类的方法和构造器内部）：CoffeeScript胖箭头</li>
     <li>其余地方：CoffeeScript瘦箭头</li>
 </ul>
-<h2>赋值与声明</h2>
+<h2>赋值</h2>
 <p>用<code>:</code>、<code>as</code>。例如：</p>
 <pre><code class="fus-part"><![CDATA[
     a: "hello world" # var a = "hello world";

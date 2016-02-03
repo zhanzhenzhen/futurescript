@@ -203,13 +203,18 @@
 <pre class="try"><code class="fus"><![CDATA[
     fus 0.6.0
 
-    add: <> @0 + @1 # var add = function() {return arguments[0] + arguments[1];};
-    console.log add(2, 3)
-
     # Feel JS's `arguments` is too long? Fus provides `@`. You can even omit
     # the dot. `@0` is the same as `@.0`.
     # <> is another parameterless function. In <> you can use `@`.
     # @ is easy to remember. From now on you can pronounce @ as "arg".
+    #
+    add: <> @0 + @1 # var add = function() {return arguments[0] + arguments[1];};
+    console.log add(2, 3)
+
+    # `undefined` is also too long? No problem. Fus provides `void`.
+    console.log void
+
+    # In Fus, there's no keyword longer than 7 letters.
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
@@ -261,31 +266,7 @@
 
 ]]></code></pre>
 <h1>Introduction</h1>
-<p>When I was writing JavaScript code I often think: <code>==</code> and <code>===</code> are very annoying, and if it could be <code>=</code> then that would be great. Later I found that if a new language used the colon <code>:</code> to assign, this dream could have come true. Because the colon in JSON means "to let the left-hand side have the value of the right-hand side", the meaning is similar. We just need to extend this grammar to "variable assignment".</p>
-<p>I also thought, that if all types of member access uniformly use <code>.</code>, isn't that perfect? Regardless of whether it's object member, array member, or the object member name is enclosed with quotation marks. This means <code>a[0]</code> in JS could be written as:</p>
-<pre><code class="fus-part"><![CDATA[
-    a.0
-]]></code></pre>
-<p>And <code>a["prop name"]</code> in JS could be written as:</p>
-<pre><code class="fus-part"><![CDATA[
-    a."prop name"
-]]></code></pre>
-<p>Many famous JS programmers say that function should just take a few arguments. If there are many arguments, that means the function isn't designed well. I fully agree, but with some more radical thought: Does the "multiple arguments" grammar by itself make things complicated?</p>
-<p>I also thought, that in today's world all languages has version problems. This not only makes developers afraid to upgrade language versions for the possible incompatibility, but also make the language designers fear to make big changes, so that new features are getting fewer and fewer. Can we think a wholly new mechanism to solve that problem?</p>
-<p>Then an idea of designing a new language came into my mind.</p>
-<p>The second feeling of FutureScript is that it's extremely readable. See this:</p>
-<pre><code class="fus-part"><![CDATA[
-    a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
-]]></code></pre>
-<p>CoffeeScript can also achieve this by <code>a ?= 8</code>, but FutureScript is more readable. Also for logical operators, we dropped JS's equivalents in favor of the more natural <code>and</code>, <code>or</code>, <code>not</code>.</p>
-<p>In FutureScript, there's no keyword of more than 7 letters. Such as：</p>
-<ul>
-    <li><code>undefined</code>, superseded by <code>void</code>.</li>
-    <li><code>arguments</code>, superseded by <code>@</code>. <code>@0</code> means <code>arguments[0]</code>. In the middle of the "@" character is an "a". Easy to remember. (Let's agree that <code>@</code> is pronounced /ɑːg/.)</li>
-    <li><code>instanceof</code>, superseded by <code>is</code>.</li>
-</ul>
-<p>We require that in every file you must mark the FutureScript version number in the top line. I believe this will solve the version problem that exists in JS and CoffeeScript, because any version of FutureScript contains compilers of all historical versions. This means 2.0.0 contains 1.0.0.</p>
-<p>If you want to not only read but also write FutureScript, then please read the remaining chapters. Below are tutorial (shown in normal font), and detailed specification that may be uninteresting to developers (shown in gray, smaller font). On first time reading, you can just read the tutorial (tutorial is also part of the specification, though easier to understand).</p>
+<p>Note: Below are tutorial (shown in normal font), and detailed specification that may be uninteresting to developers (shown in gray, smaller font). On first time reading, you can just read the tutorial (tutorial is also part of the specification, though easier to understand).</p>
 <h1>Usage</h1>
 <p>(This chapter is not part of the language specification. Because tools will be updated in the future, this chapter may be out-of-date then.)</p>
 <h3>Install</h3>
@@ -302,7 +283,7 @@
 <p>Regarding Sublime Text, in its menu choose Preferences, Browse Packages. The popped-up window is the directory containing all language packages. Copy FutureScript directory into it.</p>
 <p>The syntax highlighting name we use is "FutureScript h1".</p>
 <h1>Code Structure</h1>
-<h2>File Format and Appearance</h2>
+<h2>File Appearance</h2>
 <p>File extension is <code>.fus</code>.</p>
 <p class="detail">Fus file appearance: comprises version line, statements, comments, and meaningless whitespaces. Statements can be nested. Version line and statements are meaningful. Comments and meaningless whitespaces are meaningless.</p>
 <p class="detail">A statement is not an expression nor treated as expression. An expression is not a statement, but can be treated as statement (named as "expression statement"). There are 2 kinds of statements: expression statements and command statements.</p>
@@ -631,7 +612,7 @@
     <li>Inside class method and constructor (excluding nested class's method or constructor, but including those inside nested class's method and constructor: CoffeeScript fat arrow</li>
     <li>The rest: CoffeeScript thin arrow</li>
 </ul>
-<h2>Assignment and Declaration</h2>
+<h2>Assignment</h2>
 <p>Use <code>:</code> and <code>as</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     a: "hello world" # var a = "hello world";
@@ -835,7 +816,7 @@
 <p class="detail">They behave similarly. The only difference is: The former <code>abc</code> is treated as a variable, so it's a binding. The latter <code>abc</code> is treated as an expression, so it's not a binding. (This is the same as ES6's rule. ES6's <code>export {... as default}</code> and <code>export default ...</code> also has such difference.)</p>
 <p>Imports and exports must be in the outermost level, because it's based on ES6. Our imports are static, not dynamic, so it's stricter than Node. But I know in some cases you may need to dynamic import, you can use <code>require</code> instead of the native module syntax.</p>
 <h1>Data</h1>
-<h2>String and Regular Expression</h2>
+<h2>String and RegExp</h2>
 <p>Inline string:</p>
 <pre><code class="fus-part"><![CDATA[
     str: "Welcome to FutureScript!"
@@ -1488,7 +1469,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
                 doSomething()
 ]]></code></pre>
 <p>It's because <code>me</code> is bound to the outer class even in the inner <code>prototype</code> function. The correct way is to write it outside the class. Regarding nested classes, they will work as expected, because the compiler can recognize the <code>class</code> keyword and then interpret <code>me</code> correctly. But nested classes are not very useful. It's suggested that classes be flat.</p>
-<h1>Use External Libraries</h1>
+<h1>Using External Libraries</h1>
 <h2>Pipe</h2>
 <p>If you have used the library "underscore", you must be familiar with this code:</p>
 <pre><code class="js"><![CDATA[
@@ -1513,7 +1494,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>So basically a fat dot is equal to a normal dot, except that it acts as an ending tag when it's on the right side of the pipe operator. Also, it is as "fat" as the pipe operator, so looks better.</p>
 <p>The code using pipe can be in either compatible mode or radical mode. But if an external library is also written in FutureScript, then this external library should better be written in comptatible mode, because the functions in it must take multiple arguments because pipe itself is to split arguments.</p>
-<h1>Other features</h1>
+<h1>Other Features</h1>
 <h2>do</h2>
 <p><code>do</code> is a shorthand for <code>(...)()</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
