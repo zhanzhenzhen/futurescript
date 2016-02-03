@@ -222,6 +222,7 @@
     console.log distance{x: 3, y: 4}
 
     # Function doesn't need `return`. The last statement is the return value.
+
     # Variables don't need to be declared with `var`. They will be declared
     # automatically when first assigned. The scope is the function level.
     # It's concise and can avoid global pollution. In JS if you forget writing
@@ -229,6 +230,33 @@
 
     # You can strip the # in the next line and see what error it shows.
     #console.log x
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    Cat: class
+        new: name ->
+            me.name: name
+            me._spoken: 0
+        speak: <>
+            me._spoken: self + 1
+            console.log "\(me.name) meows for the \(me._spoken) time."
+
+    # Instantiating a class doesn't require `new`. Fus will check it. If a callee
+    # (here `Cat`) is capitalized, it will automatically add `new` in the compiled JS.
+    cat: Cat("Dabai")
+    cat.speak()
+    cat.speak()
+
+    console.log cat.name
+
+    # If a class property name starts with `_`, it will be "private". So
+    # `cat._spoken` is undefined.
+    console.log cat._spoken
+
+    # In essence, Fus class is just JS class. So you may well import Fus classes
+    # in your JS file.
 
 ]]></code></pre>
 <h1>Introduction</h1>

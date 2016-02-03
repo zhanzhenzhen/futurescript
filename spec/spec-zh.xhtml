@@ -217,12 +217,38 @@
     console.log distance{x: 3, y: 4}
 
     # 函数无需写return，最后一个语句即是返回的值。
+
     # 你无需用var声明一个变量。变量在第一次赋值时自动声明。作用域为函数级。
     # 这既简洁又避免了全局污染。如果在JS中忘了写var那可糟了，会变成全局变量，造成
     # 全局污染。
 
     # 你可以把下面一行的#去掉，看看它出现了什么错误。
     #console.log x
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 0.6.0
+
+    Cat: class
+        new: name ->
+            me.name: name
+            me._spoken: 0
+        speak: <>
+            me._spoken: self + 1
+            console.log "\(me.name)喵了一声儿。第\(me._spoken)次。"
+
+    # 类的实例化，无需使用new，Fus会根据首字母是否大写来判断，如首字母大写，会自动
+    # 在编译成的JS里加上new。
+    cat: Cat("大白")
+    cat.speak()
+    cat.speak()
+
+    console.log cat.name
+
+    # 只要类的属性名以_开头，它就自动成为“私有”的。所以cat._spoken是undefined。
+    console.log cat._spoken
+
+    # Fus的类本质上就是JS的类，所以你也完全可以在JS文件中导入Fus的类。
 
 ]]></code></pre>
 <h1>简介</h1>
