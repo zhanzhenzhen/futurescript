@@ -273,45 +273,11 @@
 <p>Many famous JS programmers say that function should just take a few arguments. If there are many arguments, that means the function isn't designed well. I fully agree, but with some more radical thought: Does the "multiple arguments" grammar by itself make things complicated?</p>
 <p>I also thought, that in today's world all languages has version problems. This not only makes developers afraid to upgrade language versions for the possible incompatibility, but also make the language designers fear to make big changes, so that new features are getting fewer and fewer. Can we think a wholly new mechanism to solve that problem?</p>
 <p>Then an idea of designing a new language came into my mind.</p>
-<p>The first feeling of FutureScript is that the grammar is extremely consistent:</p>
-<ul>
-    <li>Bracket pair <code>[</code> and <code>]</code> always means array literal. Brace pair <code>{</code> and <code>}</code> always means object literal.</li>
-    <li>Member access always uses the dot <code>.</code>, be it an object member or an array member, or the object member name is enclosed with quotation marks or not.</li>
-    <li>If it's "let left-hand side have the value of right-hand side", always use <code>:</code>, be it in object literal or assignment.</li>
-    <li>No annoying <code>==</code> and <code>===</code>. The equal character <code>=</code> means equal.</li>
-</ul>
-<pre><code class="fus-part"><![CDATA[
-    a: ["hello", "world"] # var a = ["hello", "world"]
-    console.log(a.0, a.1) # console.log(a[0], a[1])
-
-    b: 5
-    a.(b): "last" # a[b] = "last"
-
-    c: {scheme: "http"} # var c = {scheme: "http"}
-    c.scheme: "https"
-    c."content-length": 123 # c["content-length"] = 123
-]]></code></pre>
 <p>The second feeling of FutureScript is that it's extremely readable. See this:</p>
 <pre><code class="fus-part"><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
 ]]></code></pre>
 <p>CoffeeScript can also achieve this by <code>a ?= 8</code>, but FutureScript is more readable. Also for logical operators, we dropped JS's equivalents in favor of the more natural <code>and</code>, <code>or</code>, <code>not</code>.</p>
-<p>The third feeling of FutureScript is that it can extremely simplify your code. All JS programmers know how unnatural the asynchronous grammar is. But now we can:</p>
-<pre><code class="fus-part"><![CDATA[
-    console.log aaa()'wait.bbb()'wait.ccc()'wait
-]]></code></pre>
-<p>You know, "promise" is a leap forward than the traditional "triangle of doom". But the code above is a further leap forward. It's equal to the following promise：</p>
-<pre><code class="js"><![CDATA[
-    aaa().then(function(x){
-        return x.bbb();
-    })
-    .then(function(x){
-        return x.ccc();
-    })
-    .then(function(x){
-        console.log(x);
-    });
-]]></code></pre>
 <p>In FutureScript, there's no keyword of more than 7 letters. Such as：</p>
 <ul>
     <li><code>undefined</code>, superseded by <code>void</code>.</li>
@@ -319,32 +285,6 @@
     <li><code>instanceof</code>, superseded by <code>is</code>.</li>
 </ul>
 <p>We require that in every file you must mark the FutureScript version number in the top line. I believe this will solve the version problem that exists in JS and CoffeeScript, because any version of FutureScript contains compilers of all historical versions. This means 2.0.0 contains 1.0.0.</p>
-<p>To read FutureScript code, very few additional things need to be remembered (just 4 things):</p>
-<ul>
-    <li><code>#</code> means comment.</li>
-    <li><code>a(b)</code> in JS could be simplified as <code>a b</code>。</li>
-    <li><code>-&gt;</code>, <code>&lt;&gt;</code> and <code>--</code> all mean function. The arrow one takes parameters while the other two take no parameter (detailed difference will be discussed later).</li>
-    <li><code>**</code> means exponentiation. So <code>2 ** 3</code> is 8.</li>
-</ul>
-<p>Okay, basically if you have finished reading this chapter, you can read any FutureScript code (at least guess it).</p>
-<p>An example is provided at the last of this chapter:</p>
-<!-- version -->
-<pre><code class="fus"><![CDATA[
-    fus 0.6.0
-
-    number:   36
-    opposite: true
-
-    # number will be -36
-    number: -self if opposite
-
-    square: x -> x ** 2
-
-    list: [1, 2, 3, 4, 5]
-
-    # squares will be [1, 4, 9, 16, 25]
-    squares: list.map(x -> square x)
-]]></code></pre>
 <p>If you want to not only read but also write FutureScript, then please read the remaining chapters. Below are tutorial (shown in normal font), and detailed specification that may be uninteresting to developers (shown in gray, smaller font). On first time reading, you can just read the tutorial (tutorial is also part of the specification, though easier to understand).</p>
 <h1>Usage</h1>
 <p>(This chapter is not part of the language specification. Because tools will be updated in the future, this chapter may be out-of-date then.)</p>

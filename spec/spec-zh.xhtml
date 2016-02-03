@@ -265,45 +265,11 @@
 <p>很多JS的权威人物说，函数只应传递少量参数，如果函数要传递很多参数，那表示函数没设计好，更合理的是传递对象。我完全同意，但有更加激进的想法：“多参数”本身是否把事情变复杂了？</p>
 <p>又想到，在当今世界，所有的语言都存在版本问题，这既让开发者在升级语言版本时提心吊胆，生怕一升级旧代码就不能运行了，又给语言的设计者套上了枷锁，不敢做出大的改变，导致进步越来越微小。能不能想出一个全新的机制，彻底解决版本问题？</p>
 <p>于是我便涌起了自己设计一门语言的念头。</p>
-<p>FutureScript的第一感，是它有着极其统一的语法：</p>
-<ul>
-    <li>中括号<code>[</code>、<code>]</code>始终表示数组字面量，大括号<code>{</code>、<code>}</code>始终表示对象字面量。</li>
-    <li>成员访问都是用点号<code>.</code>表示，不管是对象成员，还是数组成员（即元素），也不管对象成员名是不是加了引号，都是如此。</li>
-    <li>只要是“令左边为右边的值”，不管是对象字面量，还是赋值，都用冒号<code>:</code>。</li>
-    <li>没有烦人的<code>==</code>与<code>===</code>，等号<code>=</code>就表示相等。</li>
-</ul>
-<pre><code class="fus-part"><![CDATA[
-    a: ["hello", "world"] # var a = ["hello", "world"]
-    console.log(a.0, a.1) # console.log(a[0], a[1])
-
-    b: 5
-    a.(b): "last" # a[b] = "last"
-
-    c: {scheme: "http"} # var c = {scheme: "http"}
-    c.scheme: "https"
-    c."content-length": 123 # c["content-length"] = 123
-]]></code></pre>
 <p>FutureScript的第二感，是可读性极佳。看这段：</p>
 <pre><code class="fus-part"><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
 ]]></code></pre>
 <p>CoffeeScript也可以用<code>a ?= 8</code>，然而FutureScript的可读性更佳。另外像逻辑运算符，我们也弃用JS中的符号而改用更自然的<code>and</code>、<code>or</code>、<code>not</code>。</p>
-<p>FutureScript的第三感，是能够极大简化你的代码。熟悉JS的程序员都知道异步的语法有多么不自然，但现在我们可以：</p>
-<pre><code class="fus-part"><![CDATA[
-    console.log aaa()'wait.bbb()'wait.ccc()'wait
-]]></code></pre>
-<p>要知道，promise相对于传统的“恐怖大三角”回调函数已经是一个进步了。但是上面这一行更进一步，它相当于下面这一大段promise：</p>
-<pre><code class="js"><![CDATA[
-    aaa().then(function(x){
-        return x.bbb();
-    })
-    .then(function(x){
-        return x.ccc();
-    })
-    .then(function(x){
-        console.log(x);
-    });
-]]></code></pre>
 <p>FutureScript里面，没有长度超过7个字母的关键字，简洁存在于我们的基因之中。像是：</p>
 <ul>
     <li><code>undefined</code>，我们用<code>void</code>代替。</li>
@@ -311,32 +277,6 @@
     <li><code>instanceof</code>，我们用<code>is</code>代替。</li>
 </ul>
 <p>我们规定代码文件必须在顶端标明该文件适用的FutureScript版本。我相信，这个方法能一举解决JS和CoffeeScript中存在的版本问题，这是因为，我们的任何版本都包含历史版本的编译器。这意味着，将来的2.0.0包含1.0.0。</p>
-<p>为了看懂FutureScript代码，还需要额外记住的东西非常少，也就这4个：</p>
-<ul>
-    <li><code>#</code>表示注释。</li>
-    <li>JS的<code>a(b)</code>可简化为<code>a b</code>。</li>
-    <li><code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>都表示函数，箭头是带形参的，其他两个不带形参（有什么区别后面会说到）。</li>
-    <li><code>**</code>表示幂运算。<code>2 ** 3</code>即为8。</li>
-</ul>
-<p>好了，基本上你只要看完了这一章，任何FutureScript代码都能看懂，至少也能猜个八九不离十。</p>
-<p>这一章的最后，附上一段示例。</p>
-<!-- version -->
-<pre><code class="fus"><![CDATA[
-    fus 0.6.0
-
-    number:   36
-    opposite: true
-
-    # number will be -36
-    number: -self if opposite
-
-    square: x -> x ** 2
-
-    list: [1, 2, 3, 4, 5]
-
-    # squares will be [1, 4, 9, 16, 25]
-    squares: list.map(x -> square x)
-]]></code></pre>
 <p>如果你不仅想看懂，而且想写FutureScript代码，那么请看完余下的章节。下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（教程通常也是语言规范的一部分，只是比较好懂而已）。</p>
 <h1>使用方法</h1>
 <p>（这章不属于语言规范。由于工具会更新，因此本章可能会过时。）</p>
