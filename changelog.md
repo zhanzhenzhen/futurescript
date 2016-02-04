@@ -1,3 +1,25 @@
+v0.7.0
+======
+
+2016-02-04T11:26:01Z
+
+Support chained comparison.
+
+Language features
+-----------------
+
+Chained comparison.
+
+Compiler incompatibilities
+--------------------------
+
+None.
+
+Command
+-------
+
+None.
+
 v0.6.0
 ======
 

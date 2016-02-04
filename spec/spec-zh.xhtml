@@ -1022,7 +1022,7 @@
 <p>等号的作用就是判断相等，不用再考虑烦人的<code>=</code>、<code>==</code>、<code>===</code>之间的区别。</p>
 <p><code>/=</code>或<code>≠</code>表示不相等，也可写作<code>not =</code>，中间的空白可有可无。这里的亮点是<code>≠</code>。如果你用Mac，可以直接通过按“Alt”键加“=”键输入<code>≠</code>，Mac OS原生支持输入不等号。如果你用Windows，也可以在编辑器中自定义快捷键，所以其实每个人都可以很方便地输入<code>≠</code>，这大大增强了可读性。</p>
 <p>为什么我们不用<code>!=</code>？因为感叹号目前FutureScript还没用到，我实在不想让一个宝贵的符号只能（或者说，只适合）和等号结合。<code>/=</code>显得也比<code>!=</code>更像<code>≠</code>。</p>
-<p>和CoffeeScript一样，我们也支持这种链式比较：</p>
+<p>和CoffeeScript一样，我们也支持这种链式比较（目前仅支持3个算元）：</p>
 <pre><code><![CDATA[
     if 200 ≤ statusCode < 300
         console.log "success"

@@ -1030,7 +1030,7 @@
 <p>The equals sign <code>=</code> is just to determine equality. No longer need to distinguish between <code>=</code>, <code>==</code> and <code>===</code>.</p>
 <p><code>/=</code> or <code>≠</code> means inequality. It can also be written as <code>not =</code>, where the space can be omitted. The highlight here is <code>≠</code>. If you use Mac, you can directly input <code>≠</code> by holding "Alt" key and pressing "=". Mac natively supports inputting inequality signs. If you use Windows, you can define shortcut keys in your editor, so actually everyone can input <code>≠</code> easily. This greatly improves readability.</p>
 <p>Why don't we use <code>!=</code>? Because <code>!</code> isn't used by FutureScript so far, I really don't want a precious symbol to be only usable with <code>=</code>. <code>/=</code> also looks more like <code>≠</code> than <code>!=</code>.</p>
-<p>Like CoffeeScript, we support chained comparison:</p>
+<p>Like CoffeeScript, we support chained comparison (for now only support 3 operands):</p>
 <pre><code><![CDATA[
     if 200 ≤ statusCode < 300
         console.log "success"
