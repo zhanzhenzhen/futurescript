@@ -3,12 +3,13 @@ v0.7.0
 
 2016-02-04T11:26:01Z
 
-Support chained comparison.
+Support chained comparison and `≠`, `≤`, `≥` operators.
 
 Language features
 -----------------
 
-Chained comparison.
+- Chained comparison.
+- `≠`, `≤`, `≥` operators.
 
 Compiler incompatibilities
 --------------------------
