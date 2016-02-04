@@ -18,7 +18,9 @@ Command Usage
 npm install -g futurescript
 ```
 
-We recommend your Node.js version be 5.0 or higher. The CLI may work on 0.12.x or 4.x, but not tested.
+The `fus` command works on Node.js 4.0 or higher. (We recommend Node.js 5.0 or higher.)
+
+The generated JS, after "Babeled", works on any JS environment that supports ECMAScript 5th, including browser and Node.js old versions.
 
 ```bash
 fus (compile | c) [--map] <file-or-directory> [<target-file-or-directory>]
@@ -30,13 +32,13 @@ To compile, use `compile` or `c`.
 
 At present, you may need Babel to downgrade the generated ES6 code to be compatible with your environment. For details, see [Babel website](https://babeljs.io/).
 
-For example, if you want your generated JS to run on Node.js 5.x, you only need to enable these 3 Babel plugins:
+In my opinion, Babel 5 is stable and easy to use. Babel 6 still has some bugs in some plug-ins. I recommend using Babel 5 if you want your generated JS to run on older Node.js or browser.
+
+If you want your generated JS to run on Node.js 5.x or higher, you can use Babel 6 because you only need to enable these 3 Babel plugins which has no bugs (through my test):
 
 - transform-es2015-modules-commonjs
 - transform-es2015-destructuring
 - transform-es2015-parameters
-
-For Node.js prior to 5.0 and for browsers, you may need to enable the entire "es2015" preset.
 
 `--map` will add the line numbers of the source to the generated code. Useful for debugging. (Note: this is not "source map", which is another technology.)
 
