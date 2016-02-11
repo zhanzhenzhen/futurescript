@@ -132,8 +132,8 @@
             <string>keyword.operator.fus.h1</string>
             <key>match</key>
             <string>(?x)
-                \+ | (?&lt;!-)-(?!&gt;|-) | \* | / | \*\* | = | /= | &lt;(?!&gt;) | (?&lt;!&lt;)&gt; |
-                &lt;= | &gt;= | \|&gt; | \? | :: | \| |
+                \+ | (?&lt;!-)-(?!&gt;|-) | \* | / | \*\* | = | /= | ≠ | &lt;(?!&gt;) | (?&lt;!&lt;)&gt; |
+                &lt;= | ≤ | &gt;= | ≥ | \|&gt; | \? | :: | \| |
                 '[\w]*
             </string>
         </dict>
