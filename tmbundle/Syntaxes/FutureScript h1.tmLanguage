@@ -149,6 +149,14 @@
         </dict>
         <dict>
             <key>name</key>
+            <string>entity.name.function.fus.h1</string>
+            <key>match</key>
+            <string>[\w\$][\w\.\$]*\s*:(?!:)</string>
+            <key>comment</key>
+            <string>In fact this name is wrong, but we must use this name because all well-known themes can highlight this. If use another name such as "variable", most likely it won't be highlighted.</string>
+        </dict>
+        <dict>
+            <key>name</key>
             <string>variable.language.fus.h1</string>
             <key>match</key>
             <string>(?x)
