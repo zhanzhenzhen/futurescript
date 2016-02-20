@@ -1,14 +1,6 @@
 FutureScript
 ============
 
-1. Consistent. Member access always uses the dot `.`, regardless of whether it's in object or array.
-
-2. Simple. The `=` just means equality. Say goodbye to the annoying `==` and `===`.
-
-3. Highly expressive and readable. If you are a fan of "functional style", then you must be interested.
-
-4. And many, many more.
-
 Please visit [https://futurescript.org/](https://futurescript.org/) to learn the language.
 
 Command Usage
