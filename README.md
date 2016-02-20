@@ -9,7 +9,7 @@ FutureScript
 
 4. And many, many more.
 
-Please visit [http://futurescript.org/](http://futurescript.org/) to learn the language.
+Please visit [https://futurescript.org/](https://futurescript.org/) to learn the language.
 
 Command Usage
 =============
@@ -73,7 +73,7 @@ See "develop.md".
 Changelog
 =========
 
-See "changelog.md".
+See [history](https://futurescript.org/).
 
 License
 =======

@@ -4,7 +4,7 @@
     "description": "A future-style language that compiles to JS.",
     "keywords": ["fus", "js", "javascript", "language", "es6", "futurescript"],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
-    "homepage": "http://futurescript.org/",
+    "homepage": "https://futurescript.org/",
     "license": "SEE LICENSE IN LICENSE.txt",
     "repository": {
         "type": "git",
