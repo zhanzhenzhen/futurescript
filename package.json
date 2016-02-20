@@ -1,7 +1,7 @@
 {
     "name": "futurescript",
     "version": "1.0.0",
-    "description": "A future-style language that compiles to JS.",
+    "description": "FutureScript aims to become a perfect language of the future. It's fully compatible with JavaScript.",
     "keywords": ["fus", "js", "javascript", "language", "es6", "futurescript"],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
     "homepage": "https://futurescript.org/",
@@ -21,7 +21,7 @@
         "rimraf": "2.x"
     },
     "engines": {
-        "node": ">=5.0.0"
+        "node": ">=4.0.0"
     },
     "bin": {
         "fus": "./bin/fus"
