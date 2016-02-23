@@ -14,7 +14,7 @@
     ["0.5.0", "expression-variant.js"],
     ["0.1.0", "expression.js"],
     ["0.1.0", "js-builder.js"],
-    ["1.0.0", "lex.js"],
+    ["1.1.0", "lex.js"],
     ["0.6.0", "main.js"],
     ["0.7.0", "node-base.js"],
     ["0.1.0", "node.js"],
