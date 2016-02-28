@@ -48,6 +48,15 @@
         .try {
             display: none;
         }
+        .column-center td {
+            text-align: center;
+        }
+        .first-column-left td:first-child {
+            text-align: left;
+        }
+        .first-column-right td:first-child {
+            text-align: right;
+        }
     ]]></style>
     <script src="doc-html.js" type="text/javascript" />
 </head>
@@ -260,9 +269,9 @@
 <p>下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（教程通常也是语言规范的一部分，只是比较好懂而已）。</p>
 <h1>更少和更多</h1>
 <h2>更多</h2>
-<table class="table">
+<table class="table column-center first-column-left">
     <tr>
-        <th></th>
+        <th style="width: 10em;"></th>
         <th>FutureScript</th>
         <th>JS (ES5)</th>
         <th>JS (ES6)</th>
@@ -301,7 +310,7 @@
         <td>✓</td>
         <td></td>
         <td></td>
-        <td>✓</td>
+        <td>✓部分</td>
     </tr>
     <tr>
         <td>复杂自我赋值</td>
@@ -445,11 +454,17 @@
     </tr>
 </table>
 <h2>更少</h2>
-<table class="table">
+<p>近些年，JS的语法越来越复杂，同时也越来越臃肿。</p>
+<table class="table column-center first-column-left">
     <tr>
         <th></th>
         <th>FutureScript</th>
         <th>JS</th>
+    </tr>
+    <tr>
+        <td>三种符号表示字符串</td>
+        <td>统一用双引号</td>
+        <td>✓</td>
     </tr>
     <tr>
         <td><code>=</code>赋值</td>
@@ -518,15 +533,16 @@
     </tr>
 </table>
 <h2>未来风格</h2>
-<p>FutureScript是第一个采用如下风格的语言：</p>
+<p>FutureScript是第一个具有全部这4种属性的语言：</p>
 <ul>
+    <li>版本行</li>
     <li>冒号表示赋值</li>
     <li>等号表示相等</li>
-    <li>点号表示访问，包括数组元素</li>
-    <li>版本行</li>
+    <li>访问数组元素不用方括号而用点号</li>
 </ul>
-<p>作者把这一风格称为“未来风格”。</p>
-<p>它的其他一些功能，也是此前从未有语言实现过的，例如弹性对象。</p>
+<p>作者把这一组属性称为“未来风格”。</p>
+<p>Fus的一些功能，例如弹性对象，此前也从未有语言实现过。</p>
+<p>Fus的目标：我们要使<b>比她简洁的语言都没她易懂，比她易懂的语言都没她简洁。</b>我们探求简洁和易懂的最佳平衡点，并让她保持惊人的美丽与统一。</p>
 <h1>使用方法</h1>
 <p>（这章不属于语言规范。由于工具会更新，因此本章可能会过时。）</p>
 <h3>安装</h3>
