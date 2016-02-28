@@ -48,13 +48,13 @@
         .try {
             display: none;
         }
-        .column-center td {
+        .column-center td, .column-center th {
             text-align: center;
         }
-        .first-column-left td:first-child {
+        .first-column-left td:first-child, .first-column-left th:first-child {
             text-align: left;
         }
-        .first-column-right td:first-child {
+        .first-column-right td:first-child, .first-column-right th:first-child {
             text-align: right;
         }
     ]]></style>
@@ -457,79 +457,64 @@
 <p>近些年，JS的语法越来越复杂，同时也越来越臃肿。</p>
 <table class="table column-center first-column-left">
     <tr>
-        <th></th>
-        <th>FutureScript</th>
         <th>JS</th>
+        <th>FutureScript</th>
     </tr>
     <tr>
         <td>三种符号表示字符串</td>
         <td>统一用双引号</td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>=</code>赋值</td>
         <td>统一使用冒号</td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>[]</code>访问数组元素</td>
         <td>统一使用点号</td>
-        <td>✓</td>
     </tr>
     <tr>
         <td>原生循环</td>
         <td>使用弹性对象实现</td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>return</code></td>
         <td></td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>someVar++</code></td>
         <td><code>someVar: self + 1</code></td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>someVar--</code></td>
         <td><code>someVar: self - 1</code></td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>someVar += 2</code></td>
         <td><code>someVar: self + 2</code></td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>someVar -= 2</code></td>
         <td><code>someVar: self - 2</code></td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>someVar *= 2</code></td>
         <td><code>someVar: self * 2</code></td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>someVar /= 2</code></td>
         <td><code>someVar: self / 2</code></td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>&lt;&lt;</code></td>
         <td></td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>&gt;&gt;</code></td>
         <td></td>
-        <td>✓</td>
     </tr>
     <tr>
         <td><code>&gt;&gt;&gt;</code></td>
         <td></td>
-        <td>✓</td>
     </tr>
 </table>
 <h2>未来风格</h2>
