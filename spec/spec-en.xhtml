@@ -738,7 +738,7 @@
 <h2>Comment</h2>
 <p>Use <code>#</code> (inline) and <code>###</code> (formatted), similar to CoffeeScript. But one thing different is that CoffeeScript's <code>###</code> is compiled for all occurrences, while our <code>###</code> is compiled only when the opening <code>###</code> is immediately below the version line (or there are only whitespaces between them) and the right side of the closing <code>###</code> doesn't have any non-whitespace character, otherwise it will be ignored by the compiler. To comply with JS, the <code>*/</code> in the comment will be compiled into two spaces.</p>
 <h1>Fundamentals</h1>
-<h2>Function</h2>
+<h2 id="13c8cdd4-8926-4fb8-af19-54ecf57ace68">Function</h2>
 <p>There are 3 ways to create a function: <code>-&gt;</code>, <code>&lt;&gt;</code>, <code>--</code>. <code>&lt;&gt;</code> and <code>--</code> are shorthand for no parameter. Unlike CoffeeScript, when there's only 1 parameter the parenthesis pair can be omitted.</p>
 <pre><code class="fus-part"><![CDATA[
     # both are valid
@@ -1330,6 +1330,12 @@
     <li>The left side of the colon in assignment: <code>self</code></li>
 </ul>
 <p>The dot immediately after <code>@</code> can be omitted, except that the dot is followed by <code>(</code> or string or string extension such as <code>"</code>, <code>v"</code> and <code>r"</code>.</p>
+<p><code>self</code> can represent complex self-assignment. For example, when you want to self-add something to the left side rather than the right side:</p>
+<pre><code class="fus-part"><![CDATA[
+    longString: "foo"
+    longString: "prefix-" + self
+    # longString will be "prefix-foo"
+]]></code></pre>
 <h1>Control Flow</h1>
 <h2>Logical Operation</h2>
 <ul style="font-family: monospace;">
@@ -1379,7 +1385,7 @@
     if not statusCode = 200 throw
 ]]></code></pre>
 <p class="detail">But <code>not ... =</code> generates different code than the other 3, though the behavior is the same.</p>
-<h2>Condition</h2>
+<h2 id="489b552b-f32e-42e7-84ee-c43e1100c4d3">Condition</h2>
 <p>Use<code>if</code>, <code>?</code>, <code>then</code>, <code>else</code>, <code>|</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     b:
@@ -1388,7 +1394,7 @@
         else
             "other"
 ]]></code></pre>
-<p>Or</p>
+<p id="45cf5b2b-c445-4018-b491-d3c46f61aa50">Or</p>
 <pre><code class="fus-part"><![CDATA[
     b:
         a = 3 ?
@@ -1435,7 +1441,7 @@ Can be combined into one line:
     if x > 100 << aaa(); bbb() >>
 ]]></code></pre>
 <p>So CoffeeScript's "semicolon rule" is cancelled in our language. In FutureScript, the left and right side of semicolon can pass through any obstacles, provided there's no grammar error.</p>
-<h2>Pattern Matching</h2>
+<h2 id="f79a8657-a1a6-42d6-a2ff-fbb5782ae2c5">Pattern Matching</h2>
 <p><code>match</code> can be regarded as an enhanced version of <code>switch</code>, called pattern matching. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     day: 3
@@ -1612,7 +1618,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>When you want to rethrow an exception in <code>catch</code> block, you can type less.</p>
 <p class="detail">If <code>try</code> block or <code>finally</code> block is an inline block, then it must occupy the whole line.</p>
-<h2>Asynchronous</h2>
+<h2 id="358d4ea8-456b-473a-b2d2-8452aaaf4341">Asynchronous</h2>
 <p><code>'wait</code> makes an asynchronous function internally synchronous-style, without changing its asynchronous essence. Consider the following JS:</p>
 <pre><code class="js"><![CDATA[
     aaa().then(function(x){

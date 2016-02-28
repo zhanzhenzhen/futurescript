@@ -730,7 +730,7 @@
 <h2>注释</h2>
 <p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。为了和JS兼容，注释中的<code>*/</code>会编译成两个空格。</p>
 <h1>基本元素</h1>
-<h2>函数</h2>
+<h2 id="13c8cdd4-8926-4fb8-af19-54ecf57ace68">函数</h2>
 <p>函数的声明有3种方式：<code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>。<code>&lt;&gt;</code>和<code>--</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
 <pre><code class="fus-part"><![CDATA[
     # both are valid
@@ -1322,6 +1322,12 @@
     <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
 </ul>
 <p><code>@</code>后面的点号可以省略，除非点号后面跟<code>(</code>，或者<code>"</code>、<code>v"</code>、<code>r"</code>之类的字符串或字符串扩展。</p>
+<p><code>self</code>能表示复杂的自我赋值，例如，当要自加到左边而不是右边时：</p>
+<pre><code class="fus-part"><![CDATA[
+    longString: "foo"
+    longString: "prefix-" + self
+    # longString will be "prefix-foo"
+]]></code></pre>
 <h1>控制流</h1>
 <h2>逻辑运算</h2>
 <ul style="font-family: monospace;">
@@ -1371,7 +1377,7 @@
     if not statusCode = 200 throw
 ]]></code></pre>
 <p class="detail">不过<code>not ... =</code>虽然功能相同，但生成的代码还是与其他三个不同的。</p>
-<h2>条件</h2>
+<h2 id="489b552b-f32e-42e7-84ee-c43e1100c4d3">条件</h2>
 <p>用<code>if</code>、<code>?</code>、<code>then</code>、<code>else</code>、<code>|</code>。例如：</p>
 <pre><code class="fus-part"><![CDATA[
     b:
@@ -1380,7 +1386,7 @@
         else
             "other"
 ]]></code></pre>
-<p>或</p>
+<p id="45cf5b2b-c445-4018-b491-d3c46f61aa50">或</p>
 <pre><code class="fus-part"><![CDATA[
     b:
         a = 3 ?
@@ -1427,7 +1433,7 @@
     if x > 100 << aaa(); bbb() >>
 ]]></code></pre>
 <p>所以这条规则在我们这里作废。FutureScript里，分号的左右两边能在不引发语法错误的前提下穿越一切障碍物。</p>
-<h2>模式匹配</h2>
+<h2 id="f79a8657-a1a6-42d6-a2ff-fbb5782ae2c5">模式匹配</h2>
 <p><code>match</code>可以看成是一个增强版<code>switch</code>，它称为模式匹配。例如：</p>
 <pre><code class="fus-part"><![CDATA[
     day: 3
@@ -1604,7 +1610,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>当你想在<code>catch</code>块内重新抛出异常时就可以省略很多字符。</p>
 <p class="detail"><code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
-<h2>异步</h2>
+<h2 id="358d4ea8-456b-473a-b2d2-8452aaaf4341">异步</h2>
 <p><code>'wait</code>使异步函数从内部看上去像同步一样（然而不改变其异步的本质）。考虑这样一个JS：</p>
 <pre><code class="js"><![CDATA[
     aaa().then(function(x){
