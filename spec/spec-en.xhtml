@@ -47,6 +47,15 @@
         .try {
             display: none;
         }
+        .column-center td, .column-center th {
+            text-align: center;
+        }
+        .first-column-left td:first-child, .first-column-left th:first-child {
+            text-align: left;
+        }
+        .first-column-right td:first-child, .first-column-right th:first-child {
+            text-align: right;
+        }
     ]]></style>
     <script src="doc-html.js" type="text/javascript" />
 </head>
@@ -266,6 +275,267 @@
 
 ]]></code></pre>
 <p>Below are tutorial (shown in normal font), and detailed specification that may be uninteresting to developers (shown in gray, smaller font). On first time reading, you can just read the tutorial (tutorial is also part of the specification, though easier to understand).</p>
+<h1>更少和更多</h1>
+<h2>更多</h2>
+<table class="table column-center first-column-left">
+    <tr>
+        <th style="width: 10em;"></th>
+        <th>FutureScript</th>
+        <th>JS (ES5)</th>
+        <th>JS (ES6)</th>
+        <th>CoffeeScript</th>
+    </tr>
+    <tr>
+        <td id="to-358d4ea8-456b-473a-b2d2-8452aaaf4341">异步函数</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-13c8cdd4-8926-4fb8-af19-54ecf57ace68">简化的函数表示法</td>
+        <td>✓</td>
+        <td></td>
+        <td>✓</td>
+        <td>✓</td>
+    </tr>
+    <tr>
+        <td id="to-489b552b-f32e-42e7-84ee-c43e1100c4d3">函数式<code>if</code></td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td>✓</td>
+    </tr>
+    <tr>
+        <td id="to-45cf5b2b-c445-4018-b491-d3c46f61aa50">简化的<code>if</code></td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-f79a8657-a1a6-42d6-a2ff-fbb5782ae2c5">模式匹配</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td>✓部分</td>
+    </tr>
+    <tr>
+        <td id="to-07f8b8dd-4758-4796-96bf-7e5c18b0adf8">复杂自我赋值</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-45c16ac3-746a-489e-9fd9-be4044b79691">递归无需命名</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-652ac57c-8042-442d-aaa3-8152fe86836f">类私有属性</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-1619f159-69e3-48ae-acb5-ff258e2c3c37">当前类</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-0262e17a-facd-431e-94c8-2779b4c9ab0a">管道</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-7f0551f5-957f-4921-ba69-1cabef57f5d8"><code>rem</code>求余</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✓</td>
+        <td>✓</td>
+    </tr>
+    <tr>
+        <td id="to-9fac9a39-2e51-475c-aeb7-6dfebec74886"><code>mod</code>求余</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td>✓</td>
+    </tr>
+    <tr>
+        <td id="to-208ce2a3-d863-45af-81e1-5c2d573bd28e">精简<code>instanceof</code>和<code>typeof</code></td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-c88a5a59-72cf-4778-b414-a5da92a89ec4">导入</td>
+        <td>✓</td>
+        <td></td>
+        <td>✓</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-28715698-580a-4a4d-b70c-91126bffa74b">批量导入</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-e652b57f-7914-464d-b58d-d34eef33ab97">导出</td>
+        <td>✓</td>
+        <td></td>
+        <td>✓</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-1178787f-e307-4df2-9149-f0197bb762a3">字符串插值</td>
+        <td>✓</td>
+        <td></td>
+        <td>✓</td>
+        <td>✓</td>
+    </tr>
+    <tr>
+        <td id="to-7e0f8522-9f6b-43e6-ae1b-d16025011688">函数式<code>try...catch</code></td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td>✓</td>
+    </tr>
+    <tr>
+        <td id="to-d32afece-1962-414d-9720-ccb039b55a72">弹性对象</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-0a58dc19-117d-444a-93a3-f6ddef662118">自然的枚举</td>
+        <td>✓通过fus-ext</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-4f86f72f-4e5f-4f17-89a1-fb5e48fd2eca">自然的函数式循环</td>
+        <td>✓通过fus-ext</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-7122051a-71aa-45e4-9af3-79271969be81">自我调用</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td>✓</td>
+    </tr>
+    <tr>
+        <td id="to-cc452c6d-d76a-4836-b9ff-0617b74d5d34">存在运算符</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td>✓</td>
+    </tr>
+    <tr>
+        <td id="to-3d5383b2-f689-49fc-ad1f-693030300f9e">包含运算符</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td>✓</td>
+    </tr>
+    <tr>
+        <td id="to-27423eb9-49f7-426a-9517-187a886a940f">幂运算符</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td>✓</td>
+    </tr>
+</table>
+<h2>更少</h2>
+<p>近些年，JS的语法越来越复杂，同时也越来越臃肿。</p>
+<table class="table column-center first-column-left">
+    <tr>
+        <th>JS</th>
+        <th>FutureScript</th>
+    </tr>
+    <tr>
+        <td>三种符号表示字符串</td>
+        <td>统一用双引号</td>
+    </tr>
+    <tr>
+        <td><code>=</code>赋值</td>
+        <td>统一使用冒号</td>
+    </tr>
+    <tr>
+        <td><code>[]</code>访问数组元素</td>
+        <td>统一使用点号</td>
+    </tr>
+    <tr>
+        <td>原生循环</td>
+        <td>使用弹性对象实现</td>
+    </tr>
+    <tr>
+        <td><code>return</code></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>someVar++</code></td>
+        <td><code>someVar: self + 1</code></td>
+    </tr>
+    <tr>
+        <td><code>someVar--</code></td>
+        <td><code>someVar: self - 1</code></td>
+    </tr>
+    <tr>
+        <td><code>someVar += 2</code></td>
+        <td><code>someVar: self + 2</code></td>
+    </tr>
+    <tr>
+        <td><code>someVar -= 2</code></td>
+        <td><code>someVar: self - 2</code></td>
+    </tr>
+    <tr>
+        <td><code>someVar *= 2</code></td>
+        <td><code>someVar: self * 2</code></td>
+    </tr>
+    <tr>
+        <td><code>someVar /= 2</code></td>
+        <td><code>someVar: self / 2</code></td>
+    </tr>
+    <tr>
+        <td><code>&lt;&lt;</code></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>&gt;&gt;</code></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>&gt;&gt;&gt;</code></td>
+        <td></td>
+    </tr>
+</table>
+<h2>未来风格</h2>
+<p>FutureScript是第一个具有全部这4种属性的语言：</p>
+<ul>
+    <li>版本行</li>
+    <li>冒号表示赋值</li>
+    <li>等号表示相等</li>
+    <li>访问数组元素不用方括号而用点号</li>
+</ul>
+<p>作者把这一组属性称为“未来风格”。</p>
+<p>Fus的一些功能，例如弹性对象，此前也从未有语言实现过。</p>
+<p>Fus的目标：我们要使<b>比她简洁的语言都没她易懂，比她易懂的语言都没她简洁。</b>我们探求简洁和易懂的最佳平衡点，并让她保持惊人的美丽与统一。</p>
 <h1>Usage</h1>
 <p>(This chapter is not part of the language specification. Because tools will be updated in the future, this chapter may be out-of-date then.)</p>
 <h3>Install</h3>
@@ -979,7 +1249,7 @@
 <h2>Object</h2>
 <p>The notation of object literal is similar to CoffeeScript, but it must be enclosed with a brace pair <code>{...}</code>, which can't be omitted.</p>
 <p>In object property access, if the left side of a dot <code>.</code> is a number, then the number must be enclosed by parentheses, for example <code>(1).toString()</code>. This restriction is to avoid ambiguity, such as <code>1.3</code>. You may argue that there's no ambiguity because <code>1</code> is unlikely to be an array, then how about <code>1.3.a</code>? It feels weird, less intuitive than <code>(1.3).a</code>. So in this point we are stricter than JS (JS doesn't allow <code>1.a</code>, but allow <code>1.3.a</code>).</p>
-<p>FutureScript提供了独特的“弹性对象表示法”。支持两种弹性。其一是<code>true</code>可以省略，例如：</p>
+<p>FutureScript提供了独特的“弹性对象表示法”。支持两种弹性。第一种弹性是省略冒号和<code>true</code>，例如：</p>
 <pre><code class="fus-part"><![CDATA[
     options: {
         port: 443
@@ -993,7 +1263,7 @@
         rejectsUnauthorized: true
     };
 ]]></code></pre>
-<p>其二是当大括号内所有项集中于一行时（项内的缩进不算），冒号和逗号可以省略，例如：</p>
+<p>第二种弹性是省略冒号和逗号，例如：</p>
 <pre><code class="fus-part"><![CDATA[
     repeat{1 to 5 for i ->
         console.log(i * i)
@@ -1023,9 +1293,9 @@
     });
 ]]></code></pre>
 <p>上面两个例子分别使用了fus-ext包中的repeat函数（第二种弹性）和enum函数（第一种弹性）。弹性对象表示法有着强大的力量，使你可以接近于自定义语法。我们再也不需要在语言层面支持循环和枚举，直接使用外部包的函数，其简洁性达到（甚至超过）许多有原生语法支持的语言。</p>
-<p>注意，不可对一个对象同时使用两种弹性。另外，第二种弹性必须存在至少两项（键和值分别算一项）。所以<code>{a b}</code>是第二种弹性（相当于<code>{a: b}</code>），但<code>{a}</code>是第一种弹性（相当于<code>{a: true}</code>）。</p>
-<p>第二种弹性中，如果项数为奇数，那么第一项被解析为值，它的键为空字符串。参见<code>repeat</code>的例子。</p>
-<p>第二种弹性中，项与项之间不可以有逗号或冒号。</p>
+<p>注意，不可对一个对象同时使用两种弹性。另外，第二种弹性中的任何一行必须存在至少两项（键和值分别算一项）。所以<code>{a b}</code>是第二种弹性（相当于<code>{a: b}</code>），但<code>{a}</code>是第一种弹性（相当于<code>{a: true}</code>）。</p>
+<p>第二种弹性中，如果项数为奇数，那么第一项被解析为值而非键，它的键为空字符串。参见<code>repeat</code>的例子。</p>
+<p>第二种弹性中，调用函数时不能用空格，而应该用括号。</p>
 <p>最后请注意，因为本章的例子有外部函数，所以这些例子可能会过时。</p>
 <h2>Literal</h2>
 <p>There are the following kinds of literal:</p>
