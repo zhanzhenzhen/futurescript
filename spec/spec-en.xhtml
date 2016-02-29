@@ -1580,13 +1580,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>This corresponds to JS's <code>for</code> loop, from 1 to 10:</p>
 <pre><code class="fus-part"><![CDATA[
-    repeat{from: 1, to: 10, for: i ->
+    repeat{1 to 10 for i ->
         console.log i
     }
 ]]></code></pre>
 <p>This corresponds to JS's <code>for</code> loop, from 10 to 1:</p>
 <pre><code class="fus-part"><![CDATA[
-    repeat{from: 10, to: 1, by: -1, for: i ->
+    repeat{10 to 1 by -1 for i ->
         console.log i
     }
 ]]></code></pre>
