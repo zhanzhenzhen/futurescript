@@ -1241,7 +1241,7 @@
 <h2>对象</h2>
 <p>对象的表示法和CoffeeScript相似，但它必须加上大括号，不能省略。</p>
 <p>对象成员访问用的是点号，和CoffeeScript基本相同，但如左边是数字，则左边必须加上括号，例如<code>(1).toString()</code>。这个限制是为了防止产生歧义，如<code>1.3</code>，如果没有这个限制就会看上去既像小数又像数组元素访问。当然你可以争辩说其实并没有歧义，因为<code>1</code>不可能是数组，那如果是<code>1.3.a</code>呢？感觉怪怪的，不如<code>(1.3).a</code>直观。所以这一点上我们比JS还严格（JS不允许1.a，但允许1.3.a）。</p>
-<p>FutureScript提供了独特的“弹性对象表示法”。支持两种弹性。第一种弹性是省略冒号和<code>true</code>，例如：</p>
+<p id="d32afece-1962-414d-9720-ccb039b55a72">FutureScript提供了独特的“弹性对象表示法”。支持两种弹性。第一种弹性是省略冒号和<code>true</code>，例如：</p>
 <pre><code class="fus-part"><![CDATA[
     options: {
         port: 443
@@ -1255,7 +1255,7 @@
         rejectsUnauthorized: true
     };
 ]]></code></pre>
-<p>第二种弹性是省略冒号和逗号，例如：</p>
+<p id="4f86f72f-4e5f-4f17-89a1-fb5e48fd2eca">第二种弹性是省略冒号和逗号，例如：</p>
 <pre><code class="fus-part"><![CDATA[
     repeat{1 to 5 for i ->
         console.log(i * i)
@@ -1271,7 +1271,7 @@
         }
     });
 ]]></code></pre>
-<p>弹性对象表示法的另一个例子是枚举：</p>
+<p id="0a58dc19-117d-444a-93a3-f6ddef662118">弹性对象表示法的另一个例子是枚举：</p>
 <pre><code class="fus-part"><![CDATA[
     Color: enum{red, green, blue}
     # Color.red is 0, Color.green is 1, Color.blue is 2
@@ -1609,6 +1609,14 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         throw # throw error;
 ]]></code></pre>
 <p>当你想在<code>catch</code>块内重新抛出异常时就可以省略很多字符。</p>
+<p id="7e0f8522-9f6b-43e6-ae1b-d16025011688"><code>try...catch</code>的本质是函数式的。例如你可以写：</p>
+<pre><code class="fus-part"><![CDATA[
+    a:
+        try
+            JSON.parse(x)
+        catch
+            void
+]]></code></pre>
 <p class="detail"><code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
 <h2 id="358d4ea8-456b-473a-b2d2-8452aaaf4341">异步</h2>
 <p><code>'wait</code>使异步函数从内部看上去像同步一样（然而不改变其异步的本质）。考虑这样一个JS：</p>
@@ -1809,7 +1817,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>所以胖点基本就是点号，只不过我们规定当它出现在管道右边时作为结束标记，而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
 <p>用到管道的代码可以是兼容模式，也可以是激进模式。但如果管道使用的外部库也用FutureScript写的话，还是用兼容模式来写比较好，因为外部库中的函数必须是多参数的，因为管道本身就是分割参数的。</p>
 <h1>其他特色</h1>
-<h2>do</h2>
+<h2 id="7122051a-71aa-45e4-9af3-79271969be81">do</h2>
 <p><code>do</code>是<code>(...)()</code>的简便方法，例如：</p>
 <pre><code class="fus-part"><![CDATA[
     do --
@@ -1869,7 +1877,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p class="detail">但问题是我们没有原生的循环，所以上面这个例子也没有什么用。</p>
 <p><code>do</code>的右面必须是函数字面量，这个比CoffeeScript严格。</p>
-<h2>存在</h2>
+<h2 id="cc452c6d-d76a-4836-b9ff-0617b74d5d34">存在</h2>
 <p>这几个关键字或操作符和“存在性”有关：<code>'ok</code>、<code>ifvoid</code>、<code>ifnull</code>。</p>
 <pre><code class="fus-part"><![CDATA[
     a'ok # a !== undefined && a !== null
@@ -1915,7 +1923,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     'ok
 ]]></code></pre>
 <p class="detail">冒号左边的<code>'</code>目前不能超过2个。</p>
-<h2>in</h2>
+<h2 id="3d5383b2-f689-49fc-ad1f-693030300f9e">in</h2>
 <p><code>in</code>的用法和CoffeeScript几乎完全相同，当然，不支持<code>!in</code>，可以用<code>... not in ...</code>或<code>not ... in ...</code>。示例：</p>
 <pre><code class="fus-part"><![CDATA[
     2 in [1, 2, 3] # returns true

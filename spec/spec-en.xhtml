@@ -1249,7 +1249,7 @@
 <h2>Object</h2>
 <p>The notation of object literal is similar to CoffeeScript, but it must be enclosed with a brace pair <code>{...}</code>, which can't be omitted.</p>
 <p>In object property access, if the left side of a dot <code>.</code> is a number, then the number must be enclosed by parentheses, for example <code>(1).toString()</code>. This restriction is to avoid ambiguity, such as <code>1.3</code>. You may argue that there's no ambiguity because <code>1</code> is unlikely to be an array, then how about <code>1.3.a</code>? It feels weird, less intuitive than <code>(1.3).a</code>. So in this point we are stricter than JS (JS doesn't allow <code>1.a</code>, but allow <code>1.3.a</code>).</p>
-<p>FutureScript provides the unique "flexible object notation". It supports two types of flexibilities. In type-1, colons and <code>true</code> can be omitted. For example:</p>
+<p id="d32afece-1962-414d-9720-ccb039b55a72">FutureScript provides the unique "flexible object notation". It supports two types of flexibilities. In type-1, colons and <code>true</code> can be omitted. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     options: {
         port: 443
@@ -1263,7 +1263,7 @@
         rejectsUnauthorized: true
     };
 ]]></code></pre>
-<p>In type-2, colons and commas are omitted. For example:</p>
+<p id="4f86f72f-4e5f-4f17-89a1-fb5e48fd2eca">In type-2, colons and commas are omitted. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     repeat{1 to 5 for i ->
         console.log(i * i)
@@ -1279,7 +1279,7 @@
         }
     });
 ]]></code></pre>
-<p>Another example of flexible object notation is enum:</p>
+<p id="0a58dc19-117d-444a-93a3-f6ddef662118">Another example of flexible object notation is enum:</p>
 <pre><code class="fus-part"><![CDATA[
     Color: enum{red, green, blue}
     # Color.red is 0, Color.green is 1, Color.blue is 2
@@ -1617,6 +1617,14 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         throw # throw error;
 ]]></code></pre>
 <p>When you want to rethrow an exception in <code>catch</code> block, you can type less.</p>
+<p id="7e0f8522-9f6b-43e6-ae1b-d16025011688">In essence, <code>try...catch</code> is functional. For example, you can write:</p>
+<pre><code class="fus-part"><![CDATA[
+    a:
+        try
+            JSON.parse(x)
+        catch
+            void
+]]></code></pre>
 <p class="detail">If <code>try</code> block or <code>finally</code> block is an inline block, then it must occupy the whole line.</p>
 <h2 id="358d4ea8-456b-473a-b2d2-8452aaaf4341">Asynchronous</h2>
 <p><code>'wait</code> makes an asynchronous function internally synchronous-style, without changing its asynchronous essence. Consider the following JS:</p>
@@ -1817,7 +1825,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>So basically a fat dot is equal to a normal dot, except that it acts as an ending tag when it's on the right side of the pipe operator. Also, it is as "fat" as the pipe operator, so looks better.</p>
 <p>The code using pipe can be in either compatible mode or radical mode. But if an external library is also written in FutureScript, then this external library should better be written in comptatible mode, because the functions in it must take multiple arguments because pipe itself is to split arguments.</p>
 <h1>Other Features</h1>
-<h2>do</h2>
+<h2 id="7122051a-71aa-45e4-9af3-79271969be81">do</h2>
 <p><code>do</code> is a shorthand for <code>(...)()</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     do --
@@ -1877,7 +1885,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p class="detail">But the problem is that we don't have native loops, so this example is useless.</p>
 <p><code>do</code> must be followed by a function literal. This is stricter than CoffeeScript.</p>
-<h2>Existence</h2>
+<h2 id="cc452c6d-d76a-4836-b9ff-0617b74d5d34">Existence</h2>
 <p>These keywords or symbols are about "existence": <code>'ok</code>, <code>ifvoid</code>, <code>ifnull</code>.</p>
 <pre><code class="fus-part"><![CDATA[
     a'ok # a !== undefined && a !== null
@@ -1923,7 +1931,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     'ok
 ]]></code></pre>
 <p class="detail">For now there can be at most two <code>'</code> before the colon.</p>
-<h2>in</h2>
+<h2 id="3d5383b2-f689-49fc-ad1f-693030300f9e">in</h2>
 <p><code>in</code> is almost the same as CoffeeScript. Of course we don't support <code>!in</code>, but you can use <code>... not in ...</code> or <code>not ... in ...</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     2 in [1, 2, 3] # returns true
