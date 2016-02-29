@@ -936,7 +936,7 @@
 <p>如果你想仍然使用Node的<code>require</code>、<code>exports</code>和<code>module.exports</code>，那么可以跳过本章，因为在FutureScript中你仍然可以像往常一样使用这些东西。</p>
 <p>我们知道，Node有它自己的模块机制，但问题是该机制并不属于ES6，ES6定义了一套JS原生模块语法。由于FutureScript是基于JS的，所以我们的原生语法是基于ES6的。</p>
 <p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
-<pre><code class="fus-part"><![CDATA[
+<pre id="c88a5a59-72cf-4778-b414-a5da92a89ec4"><code class="fus-part"><![CDATA[
     main: import "lib"
 ]]></code></pre>
 <p>或</p>
@@ -1000,7 +1000,7 @@
     aaa: import "bbb" as ccc
 ]]></code></pre>
 <p><code>import</code>的赋值不是普通的赋值，它是“绑定”的，和ES6一样。所以，语法上有限制，它只能是赋给变量，不能赋给对象属性，也不能在冒号左边出现<code>ifvoid</code>、<code>ifnull</code>、<code>'</code>。</p>
-<p>我们使用node经常碰到这种情况：每个文件开头都有一大堆的导入，基本都重复，但又无法省略。当然，你可以建立一个新模块（即新文件），把这堆东西都放里面，再导出，于是每个模块只要导入这个新模块就可以了。但是，它的代价是，多出了点号。例如，本来是：</p>
+<p id="28715698-580a-4a4d-b70c-91126bffa74b">我们使用node经常碰到这种情况：每个文件开头都有一大堆的导入，基本都重复，但又无法省略。当然，你可以建立一个新模块（即新文件），把这堆东西都放里面，再导出，于是每个模块只要导入这个新模块就可以了。但是，它的代价是，多出了点号。例如，本来是：</p>
 <pre><code class="fus-part"><![CDATA[
     aaa: import "aaa"
     bbb: import "bbb"
@@ -1035,7 +1035,7 @@
     a: import "abc" + 1
 ]]></code></pre>
 <p>所以import表达式格式比较自由，但只能导入默认导出，并且如果使用到赋值，那就是普通的赋值，不是绑定的。</p>
-<p>导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些都是正确的语法：</p>
+<p id="e652b57f-7914-464d-b58d-d34eef33ab97">导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些都是正确的语法：</p>
 <pre><code class="fus-part"><![CDATA[
     multiply'export: <> @0 * @1
     mp: (<> @0 * @1) export as multiply
@@ -1116,7 +1116,7 @@
 ]]></code></pre>
 <p class="detail">编译器是怎样判断某个引号是内联的还是格式的？看起始引号后面紧接的字符，如果是换行，则为格式，如果是其他字符，则为内联。</p>
 <p>我们不用单引号，因为我觉得你要想用单引号，当字符串很长时，你可以用格式<code>"</code>；当字符串很短时，像<code>'"'</code>，这其实只增加了微小的可读性，我宁愿写成<code>"\""</code>。无论哪一种用单引号都没有明显优势，所以，还是别占用宝贵的符号资源为好。而且双引号是和JSON一致的。</p>
-<p>也支持字符串插值，就像CoffeeScript，不过我们使用<code>\(...)</code>。</p>
+<p id="1178787f-e307-4df2-9149-f0197bb762a3">也支持字符串插值，就像CoffeeScript，不过我们使用<code>\(...)</code>。</p>
 <pre><code class="fus-part"><![CDATA[
     str: "Today is \(year)-\(month)-\(day)."
 ]]></code></pre>
@@ -1322,7 +1322,7 @@
     <li>赋值中冒号左边的标识符的旧值：<code>self</code></li>
 </ul>
 <p><code>@</code>后面的点号可以省略，除非点号后面跟<code>(</code>，或者<code>"</code>、<code>v"</code>、<code>r"</code>之类的字符串或字符串扩展。</p>
-<p><code>self</code>能表示复杂的自我赋值，例如，当要自加到左边而不是右边时：</p>
+<p id="07f8b8dd-4758-4796-96bf-7e5c18b0adf8"><code>self</code>能表示复杂的自我赋值，例如，当要自加到左边而不是右边时：</p>
 <pre><code class="fus-part"><![CDATA[
     longString: "foo"
     longString: "prefix-" + self
@@ -1583,7 +1583,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     }
 ]]></code></pre>
 <h2>递归</h2>
-<p>递归的实现方式没有什么特别的，但我们加入了更简便的方法，你甚至无需命名递归函数，你想，自己调用自己，又何必给自己取名字？使用<code>fun</code>关键字就行了。例如，如果你不想用外部库的话，可以用递归模拟循环：</p>
+<p id="45c16ac3-746a-489e-9fd9-be4044b79691">递归的实现方式没有什么特别的，但我们加入了更简便的方法，你甚至无需命名递归函数，你想，自己调用自己，又何必给自己取名字？使用<code>fun</code>关键字就行了。例如，如果你不想用外部库的话，可以用递归模拟循环：</p>
 <pre><code class="fus-part"><![CDATA[
     do (i: 0) -> if i < 10
         console.log i
@@ -1681,8 +1681,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             console.log me.name + " roars."
 ]]></code></pre>
 <p><code>constructor</code>我们简写为<code>new</code>。</p>
-<p>JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
-<p>FutureScript的类的一个亮点是“防冲突字段”，可以把它近似看成是私有字段。防冲突字段的好处不是外部无法访问（外部只是无法通过对象属性直接访问而已），最大的好处是继承类可以放心地使用同名字段，而不用担心会覆盖，这在类关系很复杂的项目中尤其重要。</p>
+<p id="1619f159-69e3-48ae-acb5-ff258e2c3c37">JS的<code>this</code>我们用<code>me</code>代替。我们还有一个关键字<code>Me</code>，M大写，表示<code>me</code>所在的类。当静态调用时<code>Me</code>和<code>me</code>相同，但建议使用<code>Me</code>，因为大写比较像类。</p>
+<p id="652ac57c-8042-442d-aaa3-8152fe86836f">FutureScript的类的一个亮点是“防冲突字段”，可以把它近似看成是私有字段。防冲突字段的好处不是外部无法访问（外部只是无法通过对象属性直接访问而已），最大的好处是继承类可以放心地使用同名字段，而不用担心会覆盖，这在类关系很复杂的项目中尤其重要。</p>
 <p>我们先看一个反面例子，假设别人用JavaScript写了一个库，里面有个ES6类：</p>
 <pre><code class="js"><![CDATA[
     class User {
@@ -1784,7 +1784,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>这是因为在该原型方法内使用<code>me</code>的话表示不了你想要表示的东西。正确的方法是把它写在类的外面。至于嵌套类，是可以的，因为编译器能识别<code>class</code>关键字，从而做出对于<code>me</code>的正确解释。不过嵌套类好像用处也不大，建议类与类的关系还是扁平为好。</p>
 <h1>使用外部库</h1>
-<h2>管道</h2>
+<h2 id="0262e17a-facd-431e-94c8-2779b4c9ab0a">管道</h2>
 <p>如果你使用过underscore函数库，应该比较熟悉这样的代码：</p>
 <pre><code class="js"><![CDATA[
     var _ = require("underscore");
@@ -1923,7 +1923,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     4 not in [1, 2, 3] # returns true
     not 4 in [1, 2, 3] # returns true
 ]]></code></pre>
-<h2>is</h2>
+<h2 id="208ce2a3-d863-45af-81e1-5c2d573bd28e">is</h2>
 <p><code>is</code>表示左边是右边的类型，类似于JavaScript的<code>instanceof</code>，但又有些区别，它还能判断原始类型，可以说结合了<code>instanceof</code>和<code>typeof</code>。当右边是<code>Number</code>、<code>Boolean</code>、<code>String</code>、<code>Symbol</code>（必须严格表示为这4个之中的1个，不能是引用）时使用<code>typeof</code>。</p>
 <pre><code class="fus-part"><![CDATA[
     a is A # a instanceof A
@@ -1940,7 +1940,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>delete</h2>
 <p><code>delete</code>和JavaScript中的稍有不同。它不再是一个表达式。这是因为在JavaScript strict mode中并没有值为false的情况，而是抛出异常。既然我们都是用strict mode，所以没必要弄成表达式。</p>
 <h2>rem和mod</h2>
-<p><code>rem</code>即是JavaScript的<code>%</code>。<code>mod</code>是另一种求余，正负号和除数相同，只要除数是正数，结果就不为负，所以这种求余适用范围可能更广一些。<code>a mod b</code>相当于JavaScript的<code>(a % b + b) % b</code>。</p>
+<p><code id="7f0551f5-957f-4921-ba69-1cabef57f5d8">rem</code>即是JavaScript的<code>%</code>。<code id="9fac9a39-2e51-475c-aeb7-6dfebec74886">mod</code>是另一种求余，正负号和除数相同，只要除数是正数，结果就不为负，所以这种求余适用范围可能更广一些。<code>a mod b</code>相当于JavaScript的<code>(a % b + b) % b</code>。</p>
 <h2>+和-（正负号）</h2>
 <p class="detail">一元的<code>+</code>、<code>-</code>（正负号）的用法和CoffeeScript相似但有微小区别，我们规定它只能是紧接着算元，如果后面的字符是空白则被当作加号和减号。例如：</p>
 <pre class="detail"><code><![CDATA[

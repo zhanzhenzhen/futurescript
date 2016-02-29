@@ -944,7 +944,7 @@
 <p>If you want to continue using Node's <code>require</code>, <code>exports</code> and <code>module.exports</code>, you can simply skip this section. In FutureScript you can still use them as usual.</p>
 <p>We know that Node has its own module system, but the problem is that this system doesn't belong to ES6. ES6 defines a native JS module syntax. Because FutureScript is based on JS, our native module syntax is based on ES6.</p>
 <p>One file is to one module. Syntaxes related to module are <code>import</code>, <code>export</code> and <code>'export</code>.</p>
-<pre><code class="fus-part"><![CDATA[
+<pre id="c88a5a59-72cf-4778-b414-a5da92a89ec4"><code class="fus-part"><![CDATA[
     main: import "lib"
 ]]></code></pre>
 <p>or</p>
@@ -1008,7 +1008,7 @@
     aaa: import "bbb" as ccc
 ]]></code></pre>
 <p>An <code>import</code> assignment is not a normal assignment. It is "binding", like in ES6. So it's limited to variables. It can't be assigned to object properties. There can't be <code>ifvoid</code>, <code>ifnull</code> or <code>'</code> before the colon.</p>
-<p>When we use Node we often come into this situation：Each file has a large number of imports, most of which are duplicated, but can't be omitted. Of course you can create a new module and put everything into it, then export, so each module only needs to import this new module. For example:</p>
+<p id="28715698-580a-4a4d-b70c-91126bffa74b">When we use Node we often come into this situation：Each file has a large number of imports, most of which are duplicated, but can't be omitted. Of course you can create a new module and put everything into it, then export, so each module only needs to import this new module. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     aaa: import "aaa"
     bbb: import "bbb"
@@ -1043,7 +1043,7 @@
     a: import "abc" + 1
 ]]></code></pre>
 <p>So the syntax of <code>import</code> expression gives you more freedom, but it can only import default exports. Also, if used together with assignment, then it's a normal assignment, not a binding.</p>
-<p>When export, we can use 4 syntaxes: <code>export</code>, <code>'export</code>, <code>export as</code>, <code>export ... as</code>. These are all correct:</p>
+<p id="e652b57f-7914-464d-b58d-d34eef33ab97">When export, we can use 4 syntaxes: <code>export</code>, <code>'export</code>, <code>export as</code>, <code>export ... as</code>. These are all correct:</p>
 <pre><code class="fus-part"><![CDATA[
     multiply'export: <> @0 * @1
     mp: (<> @0 * @1) export as multiply
@@ -1124,7 +1124,7 @@
 ]]></code></pre>
 <p class="detail">How does the compiler determine if it's inline or formatted? It checks the character immediately after the opening quotation mark. If it's newline, then formatted. If otherwise then inline.</p>
 <p>We don't use apostrophe to represent strings, because I feel when you want to use it, if the string is very long, you can use formatted <code>"</code>; If the string is very short, such as <code>'"'</code>, this just add very little readability. I'd rather use<code>"\""</code>. Neither of these has an obvious advantage over the double quotation mark. So, better not spend the precious symbol resource on this. Also, double quotation mark is consistent with JSON.</p>
-<p>Like CoffeeScript, we support string interpolation, but we use <code>\(...)</code>.</p>
+<p id="1178787f-e307-4df2-9149-f0197bb762a3">Like CoffeeScript, we support string interpolation, but we use <code>\(...)</code>.</p>
 <pre><code class="fus-part"><![CDATA[
     str: "Today is \(year)-\(month)-\(day)."
 ]]></code></pre>
@@ -1330,7 +1330,7 @@
     <li>The left side of the colon in assignment: <code>self</code></li>
 </ul>
 <p>The dot immediately after <code>@</code> can be omitted, except that the dot is followed by <code>(</code> or string or string extension such as <code>"</code>, <code>v"</code> and <code>r"</code>.</p>
-<p><code>self</code> can represent complex self-assignment. For example, when you want to self-add something to the left side rather than the right side:</p>
+<p id="07f8b8dd-4758-4796-96bf-7e5c18b0adf8"><code>self</code> can represent complex self-assignment. For example, when you want to self-add something to the left side rather than the right side:</p>
 <pre><code class="fus-part"><![CDATA[
     longString: "foo"
     longString: "prefix-" + self
@@ -1591,7 +1591,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     }
 ]]></code></pre>
 <h2>Recursion</h2>
-<p>Recursion is not special, but we added some simpler way. You even don't need to name a recursive function. Just think that if it invokes itself, why it must have a name? Just use the <code>fun</code> keyword and it's OK. For example, if you don't want to use an external library, you can simulate a loop using recursion:</p>
+<p id="45c16ac3-746a-489e-9fd9-be4044b79691">Recursion is not special, but we added some simpler way. You even don't need to name a recursive function. Just think that if it invokes itself, why it must have a name? Just use the <code>fun</code> keyword and it's OK. For example, if you don't want to use an external library, you can simulate a loop using recursion:</p>
 <pre><code class="fus-part"><![CDATA[
     do (i: 0) -> if i < 10
         console.log i
@@ -1689,8 +1689,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             console.log me.name + " roars."
 ]]></code></pre>
 <p><code>constructor</code> is simplified to <code>new</code>。</p>
-<p>JS's <code>this</code> is replaced by <code>me</code>. We also have another keyword <code>Me</code>, where M is in uppercase, meaning the class of <code>me</code>. When a method is called statically, <code>Me</code> is identical to <code>me</code>, but it's recommended to use <code>Me</code> because it looks more like a class.</p>
-<p>A highlight of FutureScript's classes is the "anti-conflict field", which is similar to "private field". The benefit of an anti-conflict field is not that the external code can't access it (though can't access it directly by object property). The benefit is that derived classes can safely define a field with the same name, without worrying about the possible conflicts. This is especially important in projects with very complex class structures.</p>
+<p id="1619f159-69e3-48ae-acb5-ff258e2c3c37">JS's <code>this</code> is replaced by <code>me</code>. We also have another keyword <code>Me</code>, where M is in uppercase, meaning the class of <code>me</code>. When a method is called statically, <code>Me</code> is identical to <code>me</code>, but it's recommended to use <code>Me</code> because it looks more like a class.</p>
+<p id="652ac57c-8042-442d-aaa3-8152fe86836f">A highlight of FutureScript's classes is the "anti-conflict field", which is similar to "private field". The benefit of an anti-conflict field is not that the external code can't access it (though can't access it directly by object property). The benefit is that derived classes can safely define a field with the same name, without worrying about the possible conflicts. This is especially important in projects with very complex class structures.</p>
 <p>First we look at a negative example. Assuming someone has written a library with an ES6 class in JS:</p>
 <pre><code class="js"><![CDATA[
     class User {
@@ -1792,7 +1792,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>It's because <code>me</code> is bound to the outer class even in the inner <code>prototype</code> function. The correct way is to write it outside the class. Regarding nested classes, they will work as expected, because the compiler can recognize the <code>class</code> keyword and then interpret <code>me</code> correctly. But nested classes are not very useful. It's suggested that classes be flat.</p>
 <h1>Using External Libraries</h1>
-<h2>Pipe</h2>
+<h2 id="0262e17a-facd-431e-94c8-2779b4c9ab0a">Pipe</h2>
 <p>If you have used the library "underscore", you must be familiar with this code:</p>
 <pre><code class="js"><![CDATA[
     var _ = require("underscore");
@@ -1931,7 +1931,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     4 not in [1, 2, 3] # returns true
     not 4 in [1, 2, 3] # returns true
 ]]></code></pre>
-<h2>is</h2>
+<h2 id="208ce2a3-d863-45af-81e1-5c2d573bd28e">is</h2>
 <p><code>is</code> means the left side is of the right side type, similar to JavaScript's <code>instanceof</code> but a little different. It can also check primitive types. So it's a mix of <code>instanceof</code> and <code>typeof</code>. If the right side is <code>Number</code>, <code>Boolean</code>, <code>String</code> or <code>Symbol</code> (must be verbatim, not a reference), it will use <code>typeof</code>.</p>
 <pre><code class="fus-part"><![CDATA[
     a is A # a instanceof A
@@ -1948,7 +1948,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>delete</h2>
 <p><code>delete</code> is a bit different from JS. It's no longer an expression. This is because in JavaScript strict mode <code>delete</code> will never be <code>false</code>, but will instead throw an error. Since we always use strict mode, there's no need to make it an expression.</p>
 <h2>rem, mod</h2>
-<p><code>rem</code> (remainder) means JS's <code>%</code>. <code>mod</code> is just another modulo operation, where the result has the same sign as the divisor. If the divisor is positive, it's guaranteed that the result is non-negative. So I think <code>mod</code> can be used more widely than <code>rem</code>. <code>a mod b</code> is equivalent to JS's <code>(a % b + b) % b</code>.</p>
+<p><code id="7f0551f5-957f-4921-ba69-1cabef57f5d8">rem</code> (remainder) means JS's <code>%</code>. <code id="9fac9a39-2e51-475c-aeb7-6dfebec74886">mod</code> is just another modulo operation, where the result has the same sign as the divisor. If the divisor is positive, it's guaranteed that the result is non-negative. So I think <code>mod</code> can be used more widely than <code>rem</code>. <code>a mod b</code> is equivalent to JS's <code>(a % b + b) % b</code>.</p>
 <h2>+ and - (as sign)</h2>
 <p class="detail">The grammar of the unary <code>+</code> and <code>-</code> (treated as sign) is similar to CoffeeScript with slight difference. We require that it must be followed immediately by an operand. If it's followed by a space then it will be treated as the binary addition and subtraction. For example:</p>
 <pre class="detail"><code><![CDATA[
