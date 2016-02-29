@@ -266,6 +266,33 @@
     # Fus的类本质上就是JS的类，所以你也完全可以在JS文件中导入Fus的类。
 
 ]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 1.1.0
+    import "./manifest" all
+
+    Color: enum{red, green, blue}
+
+    console.log(Color.red, Color.green, Color.blue)
+
+    # 第一种弹性对象使你轻松地实现枚举，而其本质是函数传递对象。
+    # 不信？把下面这行的#去掉，看看输出结果。
+    #console.log{red, green, blue}
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 1.1.0
+    import "./manifest" all
+
+    repeat{1 to 5 for i ->
+        console.log(i * i)
+    }
+
+    # 第二种弹性对象应用于repeat函数，使你能够接近于自定义语法，实现美丽的循环，
+    # 而其本质却仍是函数传递对象。
+    # 不信？把repeat改成console.log，看看输出结果。
+    # 有了这两种弹性对象，每个人都接近于拥有扩展这门语言的能力。
+
+]]></code></pre>
 <p>下文既有教程（以正常字体表示），又有对一般开发者不太重要的可能比较枯燥的语言规范（以灰色小楷体表示）。第一次读的时候只要读教程就可以了（教程通常也是语言规范的一部分，只是比较好懂而已）。</p>
 <h1>更少和更多</h1>
 <h2>更多</h2>

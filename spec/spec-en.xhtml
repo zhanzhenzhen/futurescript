@@ -274,6 +274,36 @@
     # in your JS file.
 
 ]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 1.1.0
+    import "./manifest" all
+
+    Color: enum{red, green, blue}
+
+    console.log(Color.red, Color.green, Color.blue)
+
+    # Flexible object (type-1) lets you achieve enum easily, while in essence it's
+    # the return value of a function call that passes an object.
+    # Don't believe? Just strip the # in the next line and see the output.
+    #console.log{red, green, blue}
+
+]]></code></pre>
+<pre class="try"><code class="fus"><![CDATA[
+    fus 1.1.0
+    import "./manifest" all
+
+    repeat{1 to 5 for i ->
+        console.log(i * i)
+    }
+
+    # Flexible object (type-2) can apply to `repeat` function. It makes you close
+    # to be able to customize grammars to write a beautiful loop, while in essence
+    # it's still "an object is passed to a function".
+    # Don't believe? Replace `repeat` with `console.log` and see the output.
+    # With these 2 types of flexible objects, everyone is close to have the power
+    # to extend this language.
+
+]]></code></pre>
 <p>Below are tutorial (shown in normal font), and detailed specification that may be uninteresting to developers (shown in gray, smaller font). On first time reading, you can just read the tutorial (tutorial is also part of the specification, though easier to understand).</p>
 <h1>Less and More</h1>
 <h2>More</h2>
