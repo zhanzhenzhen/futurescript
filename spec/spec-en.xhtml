@@ -739,7 +739,7 @@
 <p>Use <code>#</code> (inline) and <code>###</code> (formatted), similar to CoffeeScript. But one thing different is that CoffeeScript's <code>###</code> is compiled for all occurrences, while our <code>###</code> is compiled only when the opening <code>###</code> is immediately below the version line (or there are only whitespaces between them) and the right side of the closing <code>###</code> doesn't have any non-whitespace character, otherwise it will be ignored by the compiler. To comply with JS, the <code>*/</code> in the comment will be compiled into two spaces.</p>
 <h1>Fundamentals</h1>
 <h2 id="13c8cdd4-8926-4fb8-af19-54ecf57ace68">Function</h2>
-<p>There are 3 ways to create a function: <code>-&gt;</code>, <code>&lt;&gt;</code>, <code>--</code>. <code>&lt;&gt;</code> and <code>--</code> are shorthand for no parameter. Unlike CoffeeScript, when there's only 1 parameter the parenthesis pair can be omitted.</p>
+<p>There are 3 ways to create a function: arrow <code>-&gt;</code>, diamond <code>&lt;&gt;</code>, dash <code>--</code>. <code>&lt;&gt;</code> and <code>--</code> are shorthand for no parameter. Unlike CoffeeScript, when there's only 1 parameter the parenthesis pair can be omitted.</p>
 <pre><code class="fus-part"><![CDATA[
     # both are valid
     a: x -> x + 1
@@ -781,9 +781,9 @@
 <table class="table">
     <tr>
         <th></th>
-        <th>-&gt;</th>
-        <th>&lt;&gt;</th>
-        <th>--</th>
+        <th>Arrow function <code>-&gt;</code></th>
+        <th>Diamond function <code>&lt;&gt;</code></th>
+        <th>Dash function <code>--</code></th>
     </tr>
     <tr>
         <td>Parameter</td>
@@ -792,13 +792,13 @@
         <td>No</td>
     </tr>
     <tr>
-        <td>@</td>
+        <td><code>@</code></td>
         <td>No</td>
         <td>Yes</td>
         <td>No</td>
     </tr>
     <tr>
-        <td>fun</td>
+        <td><code>fun</code></td>
         <td>Yes</td>
         <td>Yes</td>
         <td>No</td>

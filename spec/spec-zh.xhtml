@@ -731,7 +731,7 @@
 <p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。为了和JS兼容，注释中的<code>*/</code>会编译成两个空格。</p>
 <h1>基本元素</h1>
 <h2 id="13c8cdd4-8926-4fb8-af19-54ecf57ace68">函数</h2>
-<p>函数的声明有3种方式：<code>-&gt;</code>、<code>&lt;&gt;</code>、<code>--</code>。<code>&lt;&gt;</code>和<code>--</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
+<p>函数的声明有3种方式：箭头<code>-&gt;</code>、钻石<code>&lt;&gt;</code>、线<code>--</code>。<code>&lt;&gt;</code>和<code>--</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
 <pre><code class="fus-part"><![CDATA[
     # both are valid
     a: x -> x + 1
@@ -773,9 +773,9 @@
 <table class="table">
     <tr>
         <th></th>
-        <th>-&gt;</th>
-        <th>&lt;&gt;</th>
-        <th>--</th>
+        <th>箭头函数<code>-&gt;</code></th>
+        <th>钻石函数<code>&lt;&gt;</code></th>
+        <th>线函数<code>--</code></th>
     </tr>
     <tr>
         <td>形参</td>
@@ -784,13 +784,13 @@
         <td>无</td>
     </tr>
     <tr>
-        <td>@</td>
+        <td><code>@</code></td>
         <td>无</td>
         <td>有</td>
         <td>无</td>
     </tr>
     <tr>
-        <td>fun</td>
+        <td><code>fun</code></td>
         <td>有</td>
         <td>有</td>
         <td>无</td>
