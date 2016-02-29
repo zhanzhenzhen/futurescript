@@ -1949,6 +1949,11 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p><code>delete</code>和JavaScript中的稍有不同。它不再是一个表达式。这是因为在JavaScript strict mode中并没有值为false的情况，而是抛出异常。既然我们都是用strict mode，所以没必要弄成表达式。</p>
 <h2>rem和mod</h2>
 <p><code id="7f0551f5-957f-4921-ba69-1cabef57f5d8">rem</code>即是JavaScript的<code>%</code>。<code id="9fac9a39-2e51-475c-aeb7-6dfebec74886">mod</code>是另一种求余，正负号和除数相同，只要除数是正数，结果就不为负，所以这种求余适用范围可能更广一些。<code>a mod b</code>相当于JavaScript的<code>(a % b + b) % b</code>。</p>
+<h2 id="27423eb9-49f7-426a-9517-187a886a940f">幂运算</h2>
+<p><code>**</code>表示幂运算。例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    a ** 3 # Math.pow(a, 3)
+]]></code></pre>
 <h2>+和-（正负号）</h2>
 <p class="detail">一元的<code>+</code>、<code>-</code>（正负号）的用法和CoffeeScript相似但有微小区别，我们规定它只能是紧接着算元，如果后面的字符是空白则被当作加号和减号。例如：</p>
 <pre class="detail"><code><![CDATA[
