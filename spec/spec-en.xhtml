@@ -1300,6 +1300,26 @@
 <pre><code><![CDATA[
     Color: enum{"red", "green", "blue"}
 ]]></code></pre>
+<p>In type-2, a keyword acts as a keyword only if the item is a value. That is, the following code:</p>
+<pre><code class="fus-part"><![CDATA[
+    {true or false}
+]]></code></pre>
+<p>Will be compiled to:</p>
+<pre><code class="js"><![CDATA[
+    {
+        "": true,
+        or: false
+    }
+]]></code></pre>
+<p>You can write:</p>
+<pre><code class="fus-part"><![CDATA[
+    {set a + b}
+]]></code></pre>
+<p>But if you want to modify the operator to <code>or</code>, then you should add a parenthesis pair:</p>
+<pre><code class="fus-part"><![CDATA[
+    {set (a or b)}
+]]></code></pre>
+<p class="detail">In type-2, key name can't be <code>not</code> or <code>as</code>.</p>
 <p>Finally, please note that since the examples in this section contain external functions, these examples are likely to be outdated.</p>
 <h2>Literal</h2>
 <p>There are the following kinds of literal:</p>

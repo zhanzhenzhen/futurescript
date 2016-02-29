@@ -1292,6 +1292,26 @@
 <pre><code><![CDATA[
     Color: enum{"red", "green", "blue"}
 ]]></code></pre>
+<p>第二种弹性中的关键字只当该项是值时才真正作为关键字。这就是说，如下代码：</p>
+<pre><code class="fus-part"><![CDATA[
+    {true or false}
+]]></code></pre>
+<p>是会编译成：</p>
+<pre><code class="js"><![CDATA[
+    {
+        "": true,
+        or: false
+    }
+]]></code></pre>
+<p>你可以写：</p>
+<pre><code class="fus-part"><![CDATA[
+    {set a + b}
+]]></code></pre>
+<p>但你如果要把运算符改成<code>or</code>的话，应该加上括号：</p>
+<pre><code class="fus-part"><![CDATA[
+    {set (a or b)}
+]]></code></pre>
+<p class="detail">第二种弹性中的键名不可以是<code>not</code>或<code>as</code>。</p>
 <p>最后请注意，因为本章的例子有外部函数，所以这些例子可能会过时。</p>
 <h2>字面量</h2>
 <p>有这些字面量：</p>
