@@ -1296,6 +1296,10 @@
 <p>Note, that you can't apply both type-1 and type-2 to an object. Additionally, in type-2 each line must have at least two items (key or value counts as one item respectively). So <code>{a b}</code> is of type-2 (equivalent to <code>{a: b}</code>), while <code>{a}</code> is of type-1 (equivalent to <code>{a: true}</code>).</p>
 <p>In type-2, if the number of items is odd, then the first item is parsed as a value rather than a key. Its key is an empty string. See <code>repeat</code> example.</p>
 <p>In type-2, you can't use space to call a function. You should use parenthesis pair.</p>
+<p>Regardless of the type, if a key isn't followed by a colon, then the key itself can't be written as an expression. For example this is illegal:</p>
+<pre><code><![CDATA[
+    Color: enum{"red", "green", "blue"}
+]]></code></pre>
 <p>Finally, please note that since the examples in this section contain external functions, these examples are likely to be outdated.</p>
 <h2>Literal</h2>
 <p>There are the following kinds of literal:</p>
