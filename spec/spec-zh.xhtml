@@ -79,12 +79,14 @@
 
         console.log "苹果公司 买入价: \(quote.Bid), 卖出价: \(quote.Ask)"
 
-    # 忘了恐怖大三角吧，甚至可以忘了promise回调。只要对一个promise加'wait，所在的
-    # 函数就会成为异步函数。异步，也可以像同步一样，不需要回调函数。
+    # FutureScript编译成JavaScript。
+
+    # 忘了“恐怖大三角”吧，甚至可以不使用promise回调。只要对一个promise加'wait，
+    # 所在的函数就会成为异步函数。异步，也可以像同步一样，不需要回调函数。
+
     # 线函数--表示它没有形参。do表示调用自身。
 
-    # 现在，你可能已经猜到Fus中的冒号是什么意思了。为什么要这样做呢？看下一个示例
-    # 就知道啦。
+    # 运行代码，然后看下一个示例，它会告诉你如何赋值和判断。
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
@@ -129,11 +131,8 @@
     # “胖点”::让简洁程度丝毫不降低。
     console.log [1, 1, 3, 3, 5, 7] |> u.shuffle :: map(x -> -x) |> _.uniq
 
-    # FutureScript编译成JavaScript。Fus和JS完全兼容。Fus能导入JS模块，JS也能
-    # 导入Fus模块。
+    # Fus能导入JS模块，JS也能导入Fus模块。
     # 这段代码中的import也可以改成经典的require形式（但请不要把冒号改成等号）。
-
-    # 运行代码，然后观看第2个示例吧。
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
