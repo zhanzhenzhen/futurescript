@@ -311,7 +311,7 @@
 <h2>More</h2>
 <table class="table column-center first-column-left">
     <tr>
-        <th style="width: 10em;"></th>
+        <th style="width: 12em;"></th>
         <th>FutureScript</th>
         <th>JS (ES5)</th>
         <th>JS (ES6)</th>
@@ -361,6 +361,13 @@
     </tr>
     <tr>
         <td id="to-45c16ac3-746a-489e-9fd9-be4044b79691">Anonymous recursion</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-9cb14d0e-24e4-4cc1-8ef3-f7318845e58b">Instantiating a class doesn't require <code>new</code></td>
         <td>✓</td>
         <td></td>
         <td></td>
@@ -768,7 +775,7 @@
 <p>In radical mode, <code>@</code> means JS's <code>arguments[0]</code>. In compatible mode, <code>@</code> means JS's <code>arguments</code>.</p>
 <p>All examples in this article are for compatible mode. In radical mode some code needs modification.</p>
 <p>FutureScript code can be used by JS. JS code can also be used by FutureScript.</p>
-<p><code>capitalized new</code> means you don't need to add <code>new</code> when creating an instance of a class. The compiler will automatically add the <code>new</code> to the generated code. It depends on the name of the function or class. If it's capitalized then it will add <code>new</code>. For example:</p>
+<p id="9cb14d0e-24e4-4cc1-8ef3-f7318845e58b"><code>capitalized new</code> means you don't need to add <code>new</code> when creating an instance of a class. The compiler will automatically add the <code>new</code> to the generated code. It depends on the name of the function or class. If it's capitalized then it will add <code>new</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     animal: Animal() # var animal = new Animal();
 ]]></code></pre>

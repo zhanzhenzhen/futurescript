@@ -298,7 +298,7 @@
 <h2>更多</h2>
 <table class="table column-center first-column-left">
     <tr>
-        <th style="width: 10em;"></th>
+        <th style="width: 12em;"></th>
         <th>FutureScript</th>
         <th>JS (ES5)</th>
         <th>JS (ES6)</th>
@@ -348,6 +348,13 @@
     </tr>
     <tr>
         <td id="to-45c16ac3-746a-489e-9fd9-be4044b79691">递归无需命名</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-9cb14d0e-24e4-4cc1-8ef3-f7318845e58b">类实例化无需<code>new</code></td>
         <td>✓</td>
         <td></td>
         <td></td>
@@ -755,7 +762,7 @@
 <p>激进模式中，<code>@</code>表示JS的<code>arguments[0]</code>。兼容模式中，<code>@</code>表示JS的<code>arguments</code>。</p>
 <p>本文的示例是按照兼容模式写的，在激进模式下有些地方需要改写。</p>
 <p>FutureScript代码可以被JS调用。JS代码也可以被FutureScript调用。</p>
-<p><code>capitalized new</code>是指创建类的实例不用加<code>new</code>，编译后的JS会自动加入<code>new</code>，它依据类名的首字母大小写，碰到大写则会加。示例：</p>
+<p id="9cb14d0e-24e4-4cc1-8ef3-f7318845e58b"><code>capitalized new</code>是指创建类的实例不用加<code>new</code>，编译后的JS会自动加入<code>new</code>，它依据类名的首字母大小写，碰到大写则会加。示例：</p>
 <pre><code class="fus-part"><![CDATA[
     animal: Animal() # var animal = new Animal();
 ]]></code></pre>
