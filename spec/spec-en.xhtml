@@ -65,18 +65,17 @@
     fus 1.1.0
     import "./manifest" all
 
-    q: encodeURIComponent("select * from yahoo.finance.quotes where symbol in (\"AAPL\")")
-    env: encodeURIComponent("store://datatables.org/alltableswithkeys")
-    query: "?q=\(q)&env=\(env)&format=json"
+    q: encodeURIComponent("select * from weather.forecast where woeid=2502265")
+    query: "?q=\(q)&format=json"
 
     # Asynchronous function
     do --
-        console.log "Querying stock price..."
+        console.log "Fetching weather for Sunnyvale, CA..."
 
         response: web.jsonGet("https://query.yahooapis.com/v1/public/yql\(query)")'wait
-        quote: response.body.query.results.quote
+        forecast: response.body.query.results.channel.item.forecast.0
 
-        console.log "Apple Inc. Bid Price: \(quote.Bid), Ask Price: \(quote.Ask)"
+        console.log "High: \(forecast.high), Low: \(forecast.low), \(forecast.text)"
 
     # FutureScript compiles into JavaScript.
 

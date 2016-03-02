@@ -66,18 +66,17 @@
     fus 1.1.0
     import "./manifest" all
 
-    q: encodeURIComponent("select * from yahoo.finance.quotes where symbol in (\"AAPL\")")
-    env: encodeURIComponent("store://datatables.org/alltableswithkeys")
-    query: "?q=\(q)&env=\(env)&format=json"
+    q: encodeURIComponent("select * from weather.forecast where woeid=2502265")
+    query: "?q=\(q)&format=json"
 
     # 异步函数
     do --
-        console.log "正在查询股价..."
+        console.log "正在获取 Sunnyvale, CA 的天气..."
 
         response: web.jsonGet("https://query.yahooapis.com/v1/public/yql\(query)")'wait
-        quote: response.body.query.results.quote
+        forecast: response.body.query.results.channel.item.forecast.0
 
-        console.log "苹果公司 买入价: \(quote.Bid), 卖出价: \(quote.Ask)"
+        console.log "最高: \(forecast.high), 最低: \(forecast.low), \(forecast.text)"
 
     # FutureScript编译成JavaScript。
 
