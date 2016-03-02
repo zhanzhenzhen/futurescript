@@ -374,6 +374,20 @@
         <td></td>
     </tr>
     <tr>
+        <td id="to-70259430-cb80-46c7-b662-ef56643820a3">Class getter, setter</td>
+        <td>✓</td>
+        <td></td>
+        <td>✓</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-9861d8b0-8d40-4504-8408-80d9d557cdf0">Class static constructor</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
         <td id="to-1619f159-69e3-48ae-acb5-ff258e2c3c37">Current class</td>
         <td>✓</td>
         <td></td>
@@ -1810,7 +1824,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         static energy: "gas"
 ]]></code></pre>
 <p>Anti-conflict fields also apply to static fields. Just rename <code>me.</code> to <code>Me.</code>.</p>
-<p>Like C#, it also supports "static constructor". Just make <code>static</code> followed by nothing. For example:</p>
+<p id="9861d8b0-8d40-4504-8408-80d9d557cdf0">Like C#, it also supports "static constructor". Just make <code>static</code> followed by nothing. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     Website: class
         static: <>
@@ -1829,7 +1843,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>The benefit of a static constructor is that all class-related code can be held inside the class. This looks nicer, brings less typing, and makes variables unexposed.</p>
 <p>In static constructors, <code>me.</code> and <code>Me.</code> both mean the class in the closure (i.e. the class itself), not the class of the current object.</p>
-<p>C# programmers will not feel strange about getters and setters. We also support them:</p>
+<p id="70259430-cb80-46c7-b662-ef56643820a3">C# programmers will not feel strange about getters and setters. We also support them:</p>
 <pre><code class="fus-part"><![CDATA[
     Animal: class
         new: <>

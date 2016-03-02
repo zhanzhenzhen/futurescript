@@ -361,6 +361,20 @@
         <td></td>
     </tr>
     <tr>
+        <td id="to-70259430-cb80-46c7-b662-ef56643820a3">类getter、setter</td>
+        <td>✓</td>
+        <td></td>
+        <td>✓</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td id="to-9861d8b0-8d40-4504-8408-80d9d557cdf0">类静态构造函数</td>
+        <td>✓</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
         <td id="to-1619f159-69e3-48ae-acb5-ff258e2c3c37">当前类</td>
         <td>✓</td>
         <td></td>
@@ -1797,7 +1811,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         static energy: "gas"
 ]]></code></pre>
 <p>防冲突字段也适用于静态字段，<code>me.</code>改成<code>Me.</code>即可。</p>
-<p>还支持像C#一样的“静态构造函数”，只要<code>static</code>后面不跟任何名称，例如：</p>
+<p id="9861d8b0-8d40-4504-8408-80d9d557cdf0">还支持像C#一样的“静态构造函数”，只要<code>static</code>后面不跟任何名称，例如：</p>
 <pre><code class="fus-part"><![CDATA[
     Website: class
         static: <>
@@ -1816,7 +1830,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>静态构造函数的好处是所有和类有关的代码可以都写在类里面，看上去更舒服，还能减少输入量，变量可以不暴露在外面。</p>
 <p>静态构造函数内的<code>me.</code>和<code>Me.</code>都指向当前闭包所在的类，即这个类本身，而不是当前对象的类。</p>
-<p>写过C#的程序员一定不会对getter和setter陌生，我们的类也支持：</p>
+<p id="70259430-cb80-46c7-b662-ef56643820a3">写过C#的程序员一定不会对getter和setter陌生，我们的类也支持：</p>
 <pre><code class="fus-part"><![CDATA[
     Animal: class
         new: <>
