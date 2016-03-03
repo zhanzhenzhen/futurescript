@@ -37,7 +37,7 @@
     ["1.1.0", "test-lex-flexible-object.js"],
     ["0.1.0", "test-lex-same-level.js"],
     ["0.1.0", "test-lex-string.js"],
-    ["1.0.0", "test-lex.js"],
+    ["1.2.0", "test-lex.js"],
     ["1.1.0", "test-main.js"],
     ["0.1.0", "test-pattern.js"],
     ["1.0.0", "test-style.js"],
