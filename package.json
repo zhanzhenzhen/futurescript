@@ -1,6 +1,6 @@
 {
     "name": "futurescript",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "FutureScript compiles to JavaScript. It aims to become a perfect language of the future.",
     "keywords": ["fus", "js", "javascript", "language", "es6", "futurescript"],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
