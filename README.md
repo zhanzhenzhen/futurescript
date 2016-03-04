@@ -1,6 +1,8 @@
 FutureScript
 ============
 
+![](https://futurescript.org/readme-splash.png)
+
 Please visit [https://futurescript.org/](https://futurescript.org/) to learn the language.
 
 Command Usage
