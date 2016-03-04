@@ -45,7 +45,7 @@
     ["0.1.0", "test-tree-assign.js"],
     ["0.1.0", "test-tree-class.js"],
     ["0.1.0", "test-tree-export.js"],
-    ["0.1.0", "test-tree-function.js"],
+    ["1.2.0", "test-tree-function.js"],
     ["0.1.0", "test-tree-if.js"],
     ["0.1.0", "test-tree-import.js"],
     ["0.1.0", "test-tree-match.js"],
