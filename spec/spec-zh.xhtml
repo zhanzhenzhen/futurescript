@@ -899,6 +899,11 @@
     awardMedals(...contenders)
 ]]></code></pre>
 <p>单引号<code>'</code>称为变体。<code>'</code>是FutureScript独有的符号，不只这一种形式，后面还会介绍。</p>
+<p>可以使用展开符号<code>...</code>，例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    a: (x, y...) -> y.length
+    a(0, 0, 0) # returns 2
+]]></code></pre>
 <p>注意这两个函数调用是不同的：</p>
 <pre><code class="fus-part"><![CDATA[
     a{prop: true}.b # a({prop: true}).b
@@ -2182,6 +2187,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>'export</li>
     <li>&lt;&lt;</li>
     <li>&gt;&gt;</li>
+    <li>...</li>
 </ul>
 <h2>运算符优先级</h2>
 <p class="detail">运算符的运算结果是表达式，但算元不一定是表达式，也可以是块，甚至是非值的东西。不是所有运算符都有优先级。算元必须占满该行剩余部分（除非用<code>&lt;&lt;</code>和<code>&gt;&gt;</code>）的运算符（即通常分多行写的）就没有优先级，例如<code>match</code>和<code>class</code>。后置的<code>if</code>也没有优先级。下面表格中，a、b、c表示表达式算元，m、n表示块算元，x、y、z表示不一定是表达式或块的算元。</p>

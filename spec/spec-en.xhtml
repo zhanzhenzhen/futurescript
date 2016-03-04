@@ -912,6 +912,11 @@
     awardMedals(...contenders)
 ]]></code></pre>
 <p>The apostrophe <code>'</code> is called variant. <code>'</code> is a unique symbol in FutureScript. Not limited to this form. We will discuss it later.</p>
+<p>You can use the spread symbol <code>...</code>. For example:</p>
+<pre><code class="fus-part"><![CDATA[
+    a: (x, y...) -> y.length
+    a(0, 0, 0) # returns 2
+]]></code></pre>
 <p>Note that these 2 functions are different:</p>
 <pre><code class="fus-part"><![CDATA[
     a{prop: true}.b # a({prop: true}).b
@@ -2195,6 +2200,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>'export</li>
     <li>&lt;&lt;</li>
     <li>&gt;&gt;</li>
+    <li>...</li>
 </ul>
 <h2>Operator Precedence</h2>
 <p class="detail">The result of an operation is an expression, but an operator isn't always an expression. It can be a block or a non-value thing. Not all operators have precedence. Those whose operands must occupy all the remaining area of the line (unless using <code>&lt;&lt;</code> and <code>&gt;&gt;</code>) don't have precedence, for example <code>match</code> and <code>class</code>. Postfixed <code>if</code> also doesn't have precedence. In the following table, <code>a</code>, <code>b</code>, <code>c</code> mean expression operands; <code>m</code>, <code>n</code> mean block operands; <code>x</code>, <code>y</code>, <code>z</code> mean operands that's not always expressions or blocks.</p>
