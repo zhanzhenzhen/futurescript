@@ -1893,6 +1893,35 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>所以胖点基本就是点号，只不过我们规定当它出现在管道右边时作为结束标记，而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
 <p>用到管道的代码可以是兼容模式，也可以是激进模式。但如果管道使用的外部库也用FutureScript写的话，还是用兼容模式来写比较好，因为外部库中的函数必须是多参数的，因为管道本身就是分割参数的。</p>
+<h2>点点</h2>
+<p>点点<code>..</code>方法可以看成是虚拟的方法，它和管道的用途相似，但让使用underscore变得更为简单：</p>
+<pre><code class="fus-part"><![CDATA[
+    ..: _
+    console.log [3, 4, 5]..map(x -> x * 2)..max()
+]]></code></pre>
+<p>相当于JS的：</p>
+<pre><code class="js"><![CDATA[
+    console.log(_.max(_.map([3, 4, 5], function(x){return x * 2;})));
+]]></code></pre>
+<p>你也可以让点点方法和点号方法混合，点号方法即是对象的原生方法，例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    [3, 4, 5]..map(x -> x * 2).map(x -> x + 1)..max()
+]]></code></pre>
+<p>第二个<code>map</code>是<code>Array</code>的原生方法。</p>
+<p>对<code>..</code>赋值可以用冒号，也可以用<code>as</code>。</p>
+<p>支持导出和导入<code>..</code>。这样你就可以把它放进被批量导入的manifest模块，就不用在每个文件中都给<code>..</code>赋值了。例如你在manifest.fus中可以写：</p>
+<pre><code class="fus-part"><![CDATA[
+    _: import "underscore"
+    ..'export: _
+]]></code></pre>
+<p>导入和导出的不同形式也适用于<code>..</code>，例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    ..: import "underscore"
+]]></code></pre>
+<p>或：</p>
+<pre><code class="fus-part"><![CDATA[
+    import "underscore" as ..
+]]></code></pre>
 <h1>其他特色</h1>
 <h2 id="7122051a-71aa-45e4-9af3-79271969be81">do</h2>
 <p><code>do</code>是<code>(...)()</code>的简便方法，例如：</p>
