@@ -1896,7 +1896,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2>点点</h2>
 <p>点点<code>..</code>方法可以看成是虚拟的方法，它和管道的用途相似，但让使用underscore变得更为简单：</p>
 <pre><code class="fus-part"><![CDATA[
-    ..: _
+    ..: <> _
     console.log [3, 4, 5]..map(x -> x * 2)..max()
 ]]></code></pre>
 <p>相当于JS的：</p>
@@ -1912,15 +1912,15 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>支持导出和导入<code>..</code>。这样你就可以把它放进被批量导入的manifest模块，就不用在每个文件中都给<code>..</code>赋值了。例如你在manifest.fus中可以写：</p>
 <pre><code class="fus-part"><![CDATA[
     _: import "underscore"
-    ..'export: _
+    ..'export: <> _
 ]]></code></pre>
-<p>导入和导出的不同形式也适用于<code>..</code>，例如：</p>
-<pre><code class="fus-part"><![CDATA[
-    ..: import "underscore"
+<p class="detail">导入和导出的不同形式也适用于<code>..</code>，例如：</p>
+<pre class="detail"><code class="fus-part"><![CDATA[
+    ..: import "foo"
 ]]></code></pre>
-<p>或：</p>
-<pre><code class="fus-part"><![CDATA[
-    import "underscore" as ..
+<p class="detail">或：</p>
+<pre class="detail"><code class="fus-part"><![CDATA[
+    import "foo" as ..
 ]]></code></pre>
 <h1>其他特色</h1>
 <h2 id="7122051a-71aa-45e4-9af3-79271969be81">do</h2>
