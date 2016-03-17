@@ -63,37 +63,27 @@
 <!-- version -->
 <pre class="try"><code class="fus"><![CDATA[
     fus 1.3.0
-    import "./manifest" all
 
-    q: encodeURIComponent("select * from weather.forecast where woeid=2502265")
-    query: "?q=\(q)&format=json"
+    ..: <> require("lodash")
 
-    # Asynchronous function
-    do --
-        console.log "Fetching weather for Sunnyvale, CA..."
+    # Dot-dot symbol `..` means virtual method. It lets you use underscore or lodash
+    # much easier.
+    # So you can forget about `_()` and `.value()`.
 
-        response: web.jsonGet("https://query.yahooapis.com/v1/public/yql\(query)")'wait
-        forecast: response.body.query.results.channel.item.forecast.0
+    console.log [2, 3, 4]..max()
 
-        console.log "High: \(forecast.high), Low: \(forecast.low), \(forecast.text)"
+    console.log [5, 3, [2, 4], 1]..flatten()..sortBy()
 
-    # FutureScript compiles into JavaScript.
-
-    # Forget about the "Triangle of Doom" and even promise callbacks. You
-    # only need to add a 'wait to a promise, then the enclosing function will
-    # be an async function. Async will be as easy as sync, without any callback.
-
-    # Dash function `--` means parameterless. `do` means to call itself.
-
-    # Run the code and view the 2nd example, and you'll know how to assign and
-    # make judgements.
+    # Diamond function `<>` is parameterless. But ignore it at the moment. Run the code
+    # and view the 2nd example.
+    # The 2nd example will tell you what `:` and `=` mean.
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
     fus 1.3.0
 
-    # Forget about the annoying == and ===. Equals sign means equal.
-    a: 3
+    # Forget about the annoying == and ===. Equals sign `=` means equal.
+    a: 3 # Colon `:` outside braces `{}` means assignment.
     b: 3
     if a = b
         console.log "a is equal to b"
@@ -120,21 +110,25 @@
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
     fus 1.3.0
+    import "./manifest" all
 
-    u: import "underscore"
-    _: import "lodash"
+    # Asynchronous function
+    do <>
+        q: encodeURIComponent("select * from weather.forecast where woeid=2502265")
+        query: "?q=\(q)&format=json"
 
-    # Pipe operator |> makes using underscore and lodash easier than ever.
-    # Forget about `_()` and `.value()`.
-    console.log [2, 3, 4] |> _.max
+        console.log "Fetching weather for Sunnyvale, CA..."
 
-    # You can even use different libraries in one chain, or mix Array's
-    # native methods such as "map". Fat dot :: preserves the simplicity.
-    console.log [1, 1, 3, 3, 5, 7] |> u.shuffle :: map(x -> -x) |> _.uniq
+        response: web.jsonGet("https://query.yahooapis.com/v1/public/yql\(query)")'wait
+        forecast: response.body.query.results.channel.item.forecast.0
 
-    # Fus can import JS modules, and JS can also import Fus modules.
-    # The `import` in this code can be changed to the traditional `require`
-    # form (but please don't change `:` to `=`).
+        console.log "High: \(forecast.high), Low: \(forecast.low), \(forecast.text)"
+
+    # Forget about the "Triangle of Doom" and even promise callbacks. You
+    # only need to add a 'wait to a promise, then the enclosing function will
+    # be an async function. Async will be as easy as sync, without any callback.
+
+    # `do` means to call the function itself.
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
