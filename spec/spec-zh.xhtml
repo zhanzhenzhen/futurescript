@@ -779,8 +779,7 @@
 <p class="detail">编译后的代码是strict mode。</p>
 <h2>注释</h2>
 <p>使用<code>#</code>（内联）和<code>###</code>（格式），基本和CoffeeScript完全一样。但有一点不同，CoffeeScript的<code>###</code>是统统编译，我们的<code>###</code>是仅当起始的<code>###</code>紧接在版本行下面（或两者之间只有空白）并且结尾的<code>###</code>右边没有任何非空白时才编译，否则编译器自动忽略。为了和JS兼容，注释中的<code>*/</code>会编译成两个空格。</p>
-<h1>基本元素</h1>
-<h2 id="13c8cdd4-8926-4fb8-af19-54ecf57ace68">函数</h2>
+<h1 id="13c8cdd4-8926-4fb8-af19-54ecf57ace68">函数</h1>
 <p>函数的声明有3种方式：箭头<code>-&gt;</code>、钻石<code>&lt;&gt;</code>、线<code>--</code>。<code>&lt;&gt;</code>和<code>--</code>是无参数时的简便方法。参数为1个时括号可省略，这有别于CoffeeScript。</p>
 <pre><code class="fus-part"><![CDATA[
     # both are valid
@@ -927,7 +926,7 @@
     <li>类的方法和构造器内部（不包括嵌套的类的方法和构造器，但包括嵌套的类的方法和构造器内部）：CoffeeScript胖箭头</li>
     <li>其余地方：CoffeeScript瘦箭头</li>
 </ul>
-<h2>赋值</h2>
+<h1>赋值</h1>
 <p>用<code>:</code>、<code>as</code>。例如：</p>
 <pre><code class="fus-part"><![CDATA[
     a: "hello world" # var a = "hello world";
@@ -987,11 +986,12 @@
     a, b: 1 # both a and b are 1
 ]]></code></pre>
 <p>只要不是FutureScript关键字，就能作为变量名，哪怕是JS关键字如<code>function</code>也能作为变量名。但JS关键字不能作为全局变量名来赋值或使用。</p>
-<h2>模块</h2>
+<h1>模块</h1>
 <p>如果你想仍然使用Node的<code>require</code>、<code>exports</code>和<code>module.exports</code>，那么可以跳过本章，因为在FutureScript中你仍然可以像往常一样使用这些东西。</p>
 <p>我们知道，Node有它自己的模块机制，但问题是该机制并不属于ES6，ES6定义了一套JS原生模块语法。由于FutureScript是基于JS的，所以我们的原生语法是基于ES6的。</p>
 <p>一个文件即是一个模块。和模块有关的语法有<code>import</code>、<code>export</code>、<code>'export</code>。</p>
-<pre id="c88a5a59-72cf-4778-b414-a5da92a89ec4"><code class="fus-part"><![CDATA[
+<h2 id="c88a5a59-72cf-4778-b414-a5da92a89ec4">导入</h2>
+<pre><code class="fus-part"><![CDATA[
     main: import "lib"
 ]]></code></pre>
 <p>或</p>
@@ -1090,7 +1090,8 @@
     a: import "abc" + 1
 ]]></code></pre>
 <p>所以import表达式格式比较自由，但只能导入默认导出，并且如果使用到赋值，那就是普通的赋值，不是绑定的。</p>
-<p id="e652b57f-7914-464d-b58d-d34eef33ab97">导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些都是正确的语法：</p>
+<h2 id="e652b57f-7914-464d-b58d-d34eef33ab97">导出</h2>
+<p>导出时，我们可以使用4种语法：<code>export</code>、<code>'export</code>、<code>export as</code>、<code>export ... as</code>。这些都是正确的语法：</p>
 <pre><code class="fus-part"><![CDATA[
     multiply'export: <> @0 * @1
     mp: (<> @0 * @1) export as multiply

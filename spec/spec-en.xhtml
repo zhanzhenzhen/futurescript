@@ -791,8 +791,7 @@
 <p class="detail">The generated JS code is in strict mode。</p>
 <h2>Comment</h2>
 <p>Use <code>#</code> (inline) and <code>###</code> (formatted), similar to CoffeeScript. But one thing different is that CoffeeScript's <code>###</code> is compiled for all occurrences, while our <code>###</code> is compiled only when the opening <code>###</code> is immediately below the version line (or there are only whitespaces between them) and the right side of the closing <code>###</code> doesn't have any non-whitespace character, otherwise it will be ignored by the compiler. To comply with JS, the <code>*/</code> in the comment will be compiled into two spaces.</p>
-<h1>Fundamentals</h1>
-<h2 id="13c8cdd4-8926-4fb8-af19-54ecf57ace68">Function</h2>
+<h1 id="13c8cdd4-8926-4fb8-af19-54ecf57ace68">Function</h1>
 <p>There are 3 ways to create a function: arrow <code>-&gt;</code>, diamond <code>&lt;&gt;</code>, dash <code>--</code>. <code>&lt;&gt;</code> and <code>--</code> are shorthand for no parameter. Unlike CoffeeScript, when there's only 1 parameter the parenthesis pair can be omitted.</p>
 <pre><code class="fus-part"><![CDATA[
     # both are valid
@@ -939,7 +938,7 @@
     <li>Inside class method and constructor (excluding nested class's method or constructor, but including those inside nested class's method and constructor: CoffeeScript fat arrow</li>
     <li>The rest: CoffeeScript thin arrow</li>
 </ul>
-<h2>Assignment</h2>
+<h1>Assignment</h1>
 <p>Use <code>:</code> and <code>as</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     a: "hello world" # var a = "hello world";
@@ -999,11 +998,12 @@
     a, b: 1 # both a and b are 1
 ]]></code></pre>
 <p>If a name isn't a FutureScript keyword, it can be a variable name. Even JS keywords such as <code>function</code> can be variable names. But JS keywords can't be global variable names.</p>
-<h2>Module</h2>
+<h1>Module</h1>
 <p>If you want to continue using Node's <code>require</code>, <code>exports</code> and <code>module.exports</code>, you can simply skip this section. In FutureScript you can still use them as usual.</p>
 <p>We know that Node has its own module system, but the problem is that this system doesn't belong to ES6. ES6 defines a native JS module syntax. Because FutureScript is based on JS, our native module syntax is based on ES6.</p>
 <p>One file is to one module. Syntaxes related to module are <code>import</code>, <code>export</code> and <code>'export</code>.</p>
-<pre id="c88a5a59-72cf-4778-b414-a5da92a89ec4"><code class="fus-part"><![CDATA[
+<h2 id="c88a5a59-72cf-4778-b414-a5da92a89ec4">Import</h2>
+<pre><code class="fus-part"><![CDATA[
     main: import "lib"
 ]]></code></pre>
 <p>or</p>
@@ -1102,7 +1102,8 @@
     a: import "abc" + 1
 ]]></code></pre>
 <p>So the syntax of <code>import</code> expression gives you more freedom, but it can only import default exports. Also, if used together with assignment, then it's a normal assignment, not a binding.</p>
-<p id="e652b57f-7914-464d-b58d-d34eef33ab97">When export, we can use 4 syntaxes: <code>export</code>, <code>'export</code>, <code>export as</code>, <code>export ... as</code>. These are all correct:</p>
+<h2 id="e652b57f-7914-464d-b58d-d34eef33ab97">Export</h2>
+<p>When export, we can use 4 syntaxes: <code>export</code>, <code>'export</code>, <code>export as</code>, <code>export ... as</code>. These are all correct:</p>
 <pre><code class="fus-part"><![CDATA[
     multiply'export: <> @0 * @1
     mp: (<> @0 * @1) export as multiply
