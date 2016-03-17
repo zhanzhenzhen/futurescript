@@ -1906,6 +1906,43 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>So basically a fat dot is equal to a normal dot, except that it acts as an ending tag when it's on the right side of the pipe operator. Also, it is as "fat" as the pipe operator, so looks better.</p>
 <p>The code using pipe can be in either compatible mode or radical mode. But if an external library is also written in FutureScript, then this external library should better be written in comptatible mode, because the functions in it must take multiple arguments because pipe itself is to split arguments.</p>
+<h2>Dot-dot</h2>
+<p>点点<code>..</code>方法可以看成是虚拟的方法，它和管道的用途相似，但让使用underscore变得更为简单：</p>
+<pre><code class="fus-part"><![CDATA[
+    ..: <> _
+    console.log [3, 4, 5]..map(x -> x * 2)..max()
+]]></code></pre>
+<p>相当于JS的：</p>
+<pre><code class="js"><![CDATA[
+    console.log(_.max(_.map([3, 4, 5], function(x){return x * 2;})));
+]]></code></pre>
+<p>你也可以让点点方法和点号方法混合，点号方法即是对象的原生方法，例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    [3, 4, 5]..map(x -> x * 2).map(x -> x + 1)..max()
+]]></code></pre>
+<p>第二个<code>map</code>是<code>Array</code>的原生方法。</p>
+<p>对<code>..</code>赋值可以用冒号，也可以用<code>as</code>。</p>
+<p>支持导出和导入<code>..</code>。这样你就可以把它放进被批量导入的manifest模块，就不用在每个文件中都给<code>..</code>赋值了。例如你在manifest.fus中可以写：</p>
+<pre><code class="fus-part"><![CDATA[
+    _: import "underscore"
+    ..'export: <> _
+]]></code></pre>
+<p class="detail">导入和导出的不同形式也适用于<code>..</code>，例如：</p>
+<pre class="detail"><code class="fus-part"><![CDATA[
+    ..: import "foo"
+]]></code></pre>
+<p class="detail">或：</p>
+<pre class="detail"><code class="fus-part"><![CDATA[
+    import "foo" as ..
+]]></code></pre>
+<p>对<code>..</code>所赋的值必须是一个函数，这看似多余但却使它更为健全，因为你可以给不同的类型使用不同的类库。这样，某个类库就可以真正成为某个类专属的“虚拟方法”，即使两个类库的函数重名也不会引起冲突。例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    ..: x ->
+        if x is String
+            require("lodash")
+        else
+            require("underscore")
+]]></code></pre>
 <h1>Other Features</h1>
 <h2 id="7122051a-71aa-45e4-9af3-79271969be81">do</h2>
 <p><code>do</code> is a shorthand for <code>(...)()</code>. For example:</p>
@@ -2363,9 +2400,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         <td><code>a |&gt; b</code></td>
     </tr>
     <tr>
-        <td rowspan="8">15 right</td>
+        <td rowspan="9">15 right</td>
         <td>Member Access</td>
         <td><code>a.x<br/>a."x"<br/>a.(b)</code></td>
+    </tr>
+    <tr>
+        <td>Dot Dot Member Access</td>
+        <td><code>a..x</code></td>
     </tr>
     <tr>
         <td>Fat Dot Member Access</td>
