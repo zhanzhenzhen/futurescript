@@ -1907,35 +1907,35 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>So basically a fat dot is equal to a normal dot, except that it acts as an ending tag when it's on the right side of the pipe operator. Also, it is as "fat" as the pipe operator, so looks better.</p>
 <p>The code using pipe can be in either compatible mode or radical mode. But if an external library is also written in FutureScript, then this external library should better be written in comptatible mode, because the functions in it must take multiple arguments because pipe itself is to split arguments.</p>
 <h2>Dot-dot</h2>
-<p>点点<code>..</code>方法可以看成是虚拟的方法，它和管道的用途相似，但让使用underscore变得更为简单：</p>
+<p>The dot-dot <code>..</code> method can be treated as a virtual method. Its use case is similar to pipe, but makes it even easier to use underscore:</p>
 <pre><code class="fus-part"><![CDATA[
     ..: <> _
     console.log [3, 4, 5]..map(x -> x * 2)..max()
 ]]></code></pre>
-<p>相当于JS的：</p>
+<p>Equivalent to JS's:</p>
 <pre><code class="js"><![CDATA[
     console.log(_.max(_.map([3, 4, 5], function(x){return x * 2;})));
 ]]></code></pre>
-<p>你也可以让点点方法和点号方法混合，点号方法即是对象的原生方法，例如：</p>
+<p>You can mix dot-dot with dot, where dot is the object's native method. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     [3, 4, 5]..map(x -> x * 2).map(x -> x + 1)..max()
 ]]></code></pre>
-<p>第二个<code>map</code>是<code>Array</code>的原生方法。</p>
-<p>对<code>..</code>赋值可以用冒号，也可以用<code>as</code>。</p>
-<p>支持导出和导入<code>..</code>。这样你就可以把它放进被批量导入的manifest模块，就不用在每个文件中都给<code>..</code>赋值了。例如你在manifest.fus中可以写：</p>
+<p>The second <code>map</code> is <code>Array</code>'s native method.</p>
+<p>To assign to <code>..</code> you can use colon or <code>as</code>.</p>
+<p>It supports exporting or importing <code>..</code>, therefore you can put it into your manifest module for batch import, so that you don't need to assign to <code>..</code> in each file. For example you can write in your "manifest.fus":</p>
 <pre><code class="fus-part"><![CDATA[
     _: import "underscore"
     ..'export: <> _
 ]]></code></pre>
-<p class="detail">导入和导出的不同形式也适用于<code>..</code>，例如：</p>
+<p class="detail">All valid forms of import and export apply to <code>..</code> as well. For example:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     ..: import "foo"
 ]]></code></pre>
-<p class="detail">或：</p>
+<p class="detail">Or:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
     import "foo" as ..
 ]]></code></pre>
-<p>对<code>..</code>所赋的值必须是一个函数，这看似多余但却使它更为健全，因为你可以给不同的类型使用不同的类库。这样，某个类库就可以真正成为某个类专属的“虚拟方法”，即使两个类库的函数重名也不会引起冲突。例如：</p>
+<p>The value assigned to <code>..</code> must be a function. This seems redundant but makes it stronger, for you can set different libraries for different types. Therefore, a library can truly become a "virtual method" of a certain class. There won't be any conflict even if there're duplicate function names in two libraries. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     ..: x ->
         if x is String
