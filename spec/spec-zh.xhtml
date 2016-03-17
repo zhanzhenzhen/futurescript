@@ -1922,6 +1922,14 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <pre class="detail"><code class="fus-part"><![CDATA[
     import "foo" as ..
 ]]></code></pre>
+<p>对<code>..</code>所赋的值必须是一个函数，这看似多余但却使它更为健全，因为你可以给不同的类型使用不同的类库。这样，某个类库就可以真正成为某个类专属的“虚拟方法”，即使两个类库的函数重名也不会引起冲突。例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    ..: x ->
+        if x is String
+            require("lodash")
+        else
+            require("underscore")
+]]></code></pre>
 <h1>其他特色</h1>
 <h2 id="7122051a-71aa-45e4-9af3-79271969be81">do</h2>
 <p><code>do</code>是<code>(...)()</code>的简便方法，例如：</p>
