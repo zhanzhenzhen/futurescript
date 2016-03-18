@@ -65,7 +65,7 @@
 <pre class="try"><code class="fus"><![CDATA[
     fus 1.3.0
 
-    (..): <> require("lodash")
+    ..: <> require("lodash")
 
     # 点点符号..是虚拟方法，它让使用underscore和lodash变得前所未有地简单。
     # 忘掉_()和.value()吧。
@@ -1899,7 +1899,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2 id="fd221fe8-2827-4c16-8947-b35900b3b050">虚拟方法</h2>
 <p>点点<code>..</code>方法可以看成是虚拟的方法，它和管道的用途相似，但让使用underscore变得更为简单：</p>
 <pre><code class="fus-part"><![CDATA[
-    (..): <> _
+    ..: <> _
     console.log [3, 4, 5]..map(x -> x * 2)..max()
 ]]></code></pre>
 <p>相当于JS的：</p>
@@ -1915,19 +1915,19 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>支持导出和导入<code>..</code>。这样你就可以把它放进被批量导入的manifest模块，就不用在每个文件中都给<code>..</code>赋值了。例如你在manifest.fus中可以写：</p>
 <pre><code class="fus-part"><![CDATA[
     _: import "underscore"
-    (..)'export: <> _
+    ..'export: <> _
 ]]></code></pre>
 <p class="detail">导入和导出的不同形式也适用于<code>..</code>，例如：</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
-    (..): import "foo"
+    ..: import "foo"
 ]]></code></pre>
 <p class="detail">或：</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
-    import "foo" as (..)
+    import "foo" as ..
 ]]></code></pre>
 <p>对<code>..</code>所赋的值必须是一个函数，这看似多余但却使它更为健全，因为你可以给不同的类型使用不同的类库。这样，某个类库就可以真正成为某个类专属的“虚拟方法”，即使两个类库的函数重名也不会引起冲突。例如：</p>
 <pre><code class="fus-part"><![CDATA[
-    (..): x ->
+    ..: x ->
         if x is String
             require("lodash")
         else

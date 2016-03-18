@@ -64,7 +64,7 @@
 <pre class="try"><code class="fus"><![CDATA[
     fus 1.3.0
 
-    (..): <> require("lodash")
+    ..: <> require("lodash")
 
     # Dot-dot symbol `..` means virtual method. It lets you use underscore or lodash
     # much easier.
@@ -1911,7 +1911,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <h2 id="fd221fe8-2827-4c16-8947-b35900b3b050">Virtual Method</h2>
 <p>The dot-dot <code>..</code> method can be treated as a virtual method. Its use case is similar to pipe, but makes it even easier to use underscore:</p>
 <pre><code class="fus-part"><![CDATA[
-    (..): <> _
+    ..: <> _
     console.log [3, 4, 5]..map(x -> x * 2)..max()
 ]]></code></pre>
 <p>Equivalent to JS's:</p>
@@ -1927,19 +1927,19 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>It supports exporting or importing <code>..</code>, therefore you can put it into your manifest module for batch import, so that you don't need to assign to <code>..</code> in each file. For example you can write in your "manifest.fus":</p>
 <pre><code class="fus-part"><![CDATA[
     _: import "underscore"
-    (..)'export: <> _
+    ..'export: <> _
 ]]></code></pre>
 <p class="detail">All valid forms of import and export apply to <code>..</code> as well. For example:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
-    (..): import "foo"
+    ..: import "foo"
 ]]></code></pre>
 <p class="detail">Or:</p>
 <pre class="detail"><code class="fus-part"><![CDATA[
-    import "foo" as (..)
+    import "foo" as ..
 ]]></code></pre>
 <p>The value assigned to <code>..</code> must be a function. This seems redundant but makes it stronger, for you can set different libraries for different types. Therefore, a library can truly become a "virtual method" of a certain class. There won't be any conflict even if there're duplicate function names in two libraries. For example:</p>
 <pre><code class="fus-part"><![CDATA[
-    (..): x ->
+    ..: x ->
         if x is String
             require("lodash")
         else
