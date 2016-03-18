@@ -285,15 +285,15 @@
     fus 1.3.1
     import "./manifest" all
 
-    repeat{1 to 5 for i ->
+    loop{1 to 5 for i ->
         console.log(i * i)
     }
 
-    # Flexible object (type-2) can apply to `repeat` function. It makes you close
+    # Flexible object (type-2) can apply to `loop` function. It makes you close
     # to be able to customize grammars to write a beautiful loop, while in essence
     # it's still "an object is passed to a function".
 
-    # Don't believe? Replace `repeat` with `console.log` and see the output.
+    # Don't believe? Replace `loop` with `console.log` and see the output.
     # (Because the output is the converted JSON, you can't see the function.)
 
     # Using these 2 types of flexible objects together with "batch import",
@@ -1325,13 +1325,13 @@
 ]]></code></pre>
 <p id="4f86f72f-4e5f-4f17-89a1-fb5e48fd2eca">In type-2, colons and commas are omitted. For example:</p>
 <pre><code class="fus-part"><![CDATA[
-    repeat{1 to 5 for i ->
+    loop{1 to 5 for i ->
         console.log(i * i)
     }
 ]]></code></pre>
 <p>Equivalent to JS's:</p>
 <pre><code class="js"><![CDATA[
-    repeat({
+    loop({
         "": 1,
         to: 5,
         for: function(i) {
@@ -1352,9 +1352,9 @@
         blue: true
     });
 ]]></code></pre>
-<p>The above 2 examples use the <code>repeat</code> function (type-2) and <code>enum</code> function (type-1) in fus-ext package, respectively. The flexible object notation is so expressive and powerful that you are close to have the ability to customize grammars. We will never need the grammar of native loop or enum. Simply call a function and it will be as concise or even conciser than a language with native grammars.</p>
+<p>The above 2 examples use the <code>loop</code> function (type-2) and <code>enum</code> function (type-1) in fus-ext package, respectively. The flexible object notation is so expressive and powerful that you are close to have the ability to customize grammars. We will never need the grammar of native loop or enum. Simply call a function and it will be as concise or even conciser than a language with native grammars.</p>
 <p>Note, that you can't apply both type-1 and type-2 to an object. Additionally, in type-2 each line must have at least two items (key or value counts as one item respectively). So <code>{a b}</code> is of type-2 (equivalent to <code>{a: b}</code>), while <code>{a}</code> is of type-1 (equivalent to <code>{a: true}</code>).</p>
-<p>In type-2, if the number of items is odd, then the first item is parsed as a value rather than a key. Its key is an empty string. See <code>repeat</code> example.</p>
+<p>In type-2, if the number of items is odd, then the first item is parsed as a value rather than a key. Its key is an empty string. See <code>loop</code> example.</p>
 <p>In type-2, you can't use space to call a function. You should use parenthesis pair.</p>
 <p>Regardless of the type, if a key isn't followed by a colon, then the key itself can't be written as an expression. For example this is illegal:</p>
 <pre><code><![CDATA[
@@ -1628,7 +1628,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>We can find that even when simulating the traditional <code>switch</code>, it's shorter than <code>switch</code>.</p>
 <h2>Loop</h2>
-<p>In fact, loops violates the idea of functional programming. That's why I deliberately take away loops in FutureScript. But I'm confident that FutureScript can do anything that a loop can do, with the same or shorter length of syntax. (This chapter doesn't belong to the FutureScript specification. It just introduces the <code>repeat</code> function in the <code>fus-ext</code> package. This chapter may be outdated. The <code>fus-ext</code> tutorial governs the usage. For convenience, "loop" in this article usually means <code>repeat</code>.)</p>
+<p>In fact, loops violates the idea of functional programming. That's why I deliberately take away loops in FutureScript. But I'm confident that FutureScript can do anything that a loop can do, with the same or shorter length of syntax. (This chapter doesn't belong to the FutureScript specification. It just introduces the <code>loop</code> function in the <code>fus-ext</code> package. This chapter may be outdated. The <code>fus-ext</code> tutorial governs the usage. For convenience, "loop" in this article usually means <code>loop</code>.)</p>
 <p>We can use FutureScript's extension package <code>fus-ext</code> to implement loops.</p>
 <pre><code><![CDATA[
     npm install fus-ext
@@ -1640,23 +1640,23 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     fus 1.3.1
     import "./manifest" all
 
-    repeat[10, i ->
+    loop(10, i ->
         console.log "This is \(i) time"
-    ]
+    )
 ]]></code></pre>
 <p>Here we used the "batch import" feature (for details see the "Module" section above). Note that the export of <code>manifest.fus</code> should match the import of yours. If you want to use <code>node</code> instead of <code>es</code>, then you'll need to make corresponding changes in the version line of the two files.</p>
-<p>If the iterator returns <code>break</code> then it means to jump out of the loop, similar to JS's <code>break</code>, but different in essence. Here <code>break</code> is an expression, and only capable of cancelling the remaining cycles, not capable of cancelling the remaining part of the function. If <code>break</code> then the <code>repeat</code> function returns <code>break</code>。This example is a loop, from 0 to 9, but it will jump out on 5:</p>
+<p>If the iterator returns <code>break</code> then it means to jump out of the loop, similar to JS's <code>break</code>, but different in essence. Here <code>break</code> is an expression, and only capable of cancelling the remaining cycles, not capable of cancelling the remaining part of the function. If <code>break</code> then the <code>loop</code> function returns <code>break</code>。This example is a loop, from 0 to 9, but it will jump out on 5:</p>
 <pre><code class="fus-part"><![CDATA[
-    repeat[10, i ->
+    loop(10, i ->
         if i < 5
             console.log "This is \(i) time"
         else
             break
-    ]
+    )
 ]]></code></pre>
 <p>If no count is set, it means forever, equivalent to JS's <code>while (true)</code>:</p>
 <pre><code class="fus-part"><![CDATA[
-    repeat --
+    loop --
         if abc()
             break
         else
@@ -1664,13 +1664,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>This corresponds to JS's <code>for</code> loop, from 1 to 10:</p>
 <pre><code class="fus-part"><![CDATA[
-    repeat{1 to 10 for i ->
+    loop{1 to 10 for i ->
         console.log i
     }
 ]]></code></pre>
 <p>This corresponds to JS's <code>for</code> loop, from 10 to 1:</p>
 <pre><code class="fus-part"><![CDATA[
-    repeat{10 to 1 by -1 for i ->
+    loop{10 to 1 by -1 for i ->
         console.log i
     }
 ]]></code></pre>
