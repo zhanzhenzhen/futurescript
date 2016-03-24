@@ -2,7 +2,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!-- version -->
-    <title>FutureScript 1.3.1</title>
+    <title>FutureScript 1.3.2</title>
     <link rel="stylesheet" href="base.css" type="text/css" />
     <style type="text/css"><![CDATA[
         html {
@@ -62,7 +62,7 @@
 <body>
 <!-- version -->
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
 
     ..: <> require("lodash")
 
@@ -80,7 +80,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
 
     # Forget about the annoying == and ===. Equals sign `=` means equal.
     a: 3 # Colon `:` outside braces `{}` means assignment.
@@ -109,7 +109,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
     import "./manifest" all
 
     # Asynchronous function
@@ -132,7 +132,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
 
     # Pattern matching could be regarded as an enhanced "switch", except that
     # it's an expression rather than a command so it's functional.
@@ -149,7 +149,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
 
     a: {}
     console.log(a is Object) # a instanceof Object
@@ -162,7 +162,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
 
     # Array's index is actually a property. Don't believe? Type it in JS console:
     # a=[12,34]
@@ -191,7 +191,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
 
     # Now that the syntax is consistent, function call will be not limited to ().
 
@@ -203,7 +203,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
 
     # Feel JS's `arguments` is too long? Fus provides `@`. You can even omit
     # the dot. `@0` is the same as `@.0`.
@@ -220,7 +220,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
 
     distance: point ->
         x: point.x
@@ -241,7 +241,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
 
     Cat: class
         new: name ->
@@ -268,7 +268,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
     import "./manifest" all
 
     Color: enum{red, green, blue}
@@ -282,7 +282,7 @@
 
 ]]></code></pre>
 <pre class="try"><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
     import "./manifest" all
 
     loop{1 to 5 for i ->
@@ -743,7 +743,7 @@
 <p>The first line of each file must be version line. It's usually in one line so we call it "version line", but it can be in multiple lines. Version line's syntax:</p>
 <!-- version -->
 <pre><code><![CDATA[
-    [...][fus][...] [-]1.3.1[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node modules | es modules)]...
+    [...][fus][...] [-]1.3.2[, (radical | compatible) | (capitalized new | manual new) | (node import | node export | node modules | es modules)]...
 ]]></code></pre>
 <p>Default value is:</p>
 <pre><code><![CDATA[
@@ -752,13 +752,13 @@
 <p>The items separated by comma after the version number can't be duplicated. Examples of version line:</p>
 <!-- version -->
 <pre><code><![CDATA[
-    1.3.1
-    fus 1.3.1
-    fus -1.3.1
-    1.3.1, node modules
-    1.3.1, compatible, capitalized new
-    1.3.1, compatible, capitalized new, node import
-    1.3.1, radical, manual new
+    1.3.2
+    fus 1.3.2
+    fus -1.3.2
+    1.3.2, node modules
+    1.3.2, compatible, capitalized new
+    1.3.2, compatible, capitalized new, node import
+    1.3.2, radical, manual new
 ]]></code></pre>
 <p>Version number must be written. As long as the number is not greater than the FutureScript version you've installed, the code will be run according to the specification of the file's version. This is because any version you install contains all historical compilers (at least as much as possible). This is exactly the difference between FutureScript and other languages. You can even use different versions for different files in one project.</p>
 <p>Another benefit of writing version number is that when you hand your file to somebody else, he will know the version, so that he can better modify it.</p>
@@ -766,7 +766,7 @@
 <p>When you want to write the version line in multiple lines, a brace must be added. The left (opening) brace must be in the first line. A comma between the version number and the left brace is optional. For example:</p>
 <!-- version -->
 <pre><code><![CDATA[
-    1.3.1 {
+    1.3.2 {
         radical
         node modules
     }
@@ -1637,7 +1637,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>You code can be like this:</p>
 <!-- version -->
 <pre><code class="fus"><![CDATA[
-    fus 1.3.1
+    fus 1.3.2
     import "./manifest" all
 
     loop(10, i ->
