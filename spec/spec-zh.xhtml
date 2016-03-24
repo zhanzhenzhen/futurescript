@@ -112,18 +112,23 @@
 
     # 异步函数
     do <>
-        q: encodeURIComponent("select * from weather.forecast where woeid=2502265")
-        query: "?q=\(q)&format=json"
+        q: encodeURIComponent("
+            select * from yahoo.finance.quotes where symbol in ("AAPL")
+        ")
+        env: encodeURIComponent("store://datatables.org/alltableswithkeys")
+        query: "?q=\(q)&env=\(env)&format=json"
 
-        console.log "正在获取 Sunnyvale, CA 的天气..."
+        console.log "正在查询股价..."
 
         response: web.jsonGet("https://query.yahooapis.com/v1/public/yql\(query)")'wait
-        forecast: response.body.query.results.channel.item.forecast.0
+        quote: response.body.query.results.quote
 
-        console.log "最高: \(forecast.high), 最低: \(forecast.low), \(forecast.text)"
+        console.log "苹果公司 买入价: \(quote.Bid), 卖出价: \(quote.Ask)"
 
-    # 忘了“恐怖大三角”吧，甚至可以不使用promise回调。只要对一个promise加'wait，
-    # 所在的函数就会成为异步函数。异步，也可以像同步一样，不需要回调函数。
+    # 忘了“恐怖大三角”吧。
+    # 只要对一个promise加'wait，就会等待，直到取得结果，而'wait所在的函数就会自动
+    # 成为异步函数。
+    # 这里没有任何回调，就和同步一样。
 
     # do表示调用函数自身。
 

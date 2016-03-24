@@ -114,19 +114,23 @@
 
     # Asynchronous function
     do <>
-        q: encodeURIComponent("select * from weather.forecast where woeid=2502265")
-        query: "?q=\(q)&format=json"
+        q: encodeURIComponent("
+            select * from yahoo.finance.quotes where symbol in ("AAPL")
+        ")
+        env: encodeURIComponent("store://datatables.org/alltableswithkeys")
+        query: "?q=\(q)&env=\(env)&format=json"
 
-        console.log "Fetching weather for Sunnyvale, CA..."
+        console.log "Querying stock price..."
 
         response: web.jsonGet("https://query.yahooapis.com/v1/public/yql\(query)")'wait
-        forecast: response.body.query.results.channel.item.forecast.0
+        quote: response.body.query.results.quote
 
-        console.log "High: \(forecast.high), Low: \(forecast.low), \(forecast.text)"
+        console.log "Apple Inc. Bid: \(quote.Bid), Ask: \(quote.Ask)"
 
-    # Forget about the "Triangle of Doom" and even promise callbacks. You
-    # only need to add a 'wait to a promise, then the enclosing function will
-    # be an async function. Async will be as easy as sync, without any callback.
+    # Forget about the "Triangle of Doom".
+    # Just add a `'wait` to a promise. It will wait until a response is received.
+    # The function that contains `'wait` automatically becomes an async function.
+    # There's no callback, just like all synchronous things.
 
     # `do` means to call the function itself.
 
