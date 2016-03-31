@@ -1,5 +1,5 @@
 [
-    ["1.3.0", "block.js"],
+    ["1.3.4", "block.js"],
     ["1.3.4", "expression-base.js"],
     ["0.5.0", "expression-class.js"],
     ["0.5.0", "expression-condition.js"],
@@ -18,7 +18,7 @@
     ["1.3.2", "lex-massive-rounds.js"],
     ["1.2.0", "lex.js"],
     ["0.6.0", "main.js"],
-    ["0.7.0", "node-base.js"],
+    ["1.3.4", "node-base.js"],
     ["0.1.0", "node.js"],
     ["0.1.0", "pattern.js"],
     ["0.1.0", "print.js"],
