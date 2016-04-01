@@ -43,14 +43,14 @@
     ["0.1.0", "test-pattern.js"],
     ["1.0.0", "test-style.js"],
     ["0.6.0", "test-tools.js"],
-    ["1.3.4", "test-tree-assign.js"],
-    ["1.3.4", "test-tree-class.js"],
+    ["0.1.0", "test-tree-assign.js"],
+    ["1.2.0", "test-tree-class.js"],
     ["0.1.0", "test-tree-export.js"],
-    ["1.3.4", "test-tree-function.js"],
+    ["1.2.0", "test-tree-function.js"],
     ["1.2.0", "test-tree-if.js"],
     ["0.1.0", "test-tree-import.js"],
     ["1.2.0", "test-tree-match.js"],
     ["0.1.0", "test-tree-try.js"],
-    ["1.3.4", "test-tree.js"],
+    ["1.3.0", "test-tree.js"],
     ["0.6.0", "tools.js"]
 ]
