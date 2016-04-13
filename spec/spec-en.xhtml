@@ -2018,11 +2018,6 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     a'ok # a !== undefined && a !== null
 ]]></code></pre>
 <p><code>a'ok</code> means <code>a</code> isn't <code>void</code> or <code>null</code>.</p>
-<p><code>'ok</code> can be used in combination with dots. For example:</p>
-<pre><code class="fus-part"><![CDATA[
-    zip: lottery.winner'ok.address'ok.zipcode
-]]></code></pre>
-<p>If and only if <code>lottery.winner</code> isn't <code>void</code> or <code>null</code> and <code>lottery.winner.address</code> isn't <code>void</code> or <code>null</code>, <code>zip</code> will be <code>lottery.winner.address.zipcode</code>. If any part of the chain is broken, <code>zip</code> will be <code>void</code> without raising errors.</p>
 <p><code>ifnull</code> and <code>ifvoid</code> have two forms respectively. One is for expression and the other is for colon assignment. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     a ifnull: 8 # if (a === null || a === undefined) {a = 8;}
@@ -2529,5 +2524,13 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>答：很少有这种需求，因为加上引号就可以了。不过以后版本中可能会支持。</p>
 <p class="question">问：above关键字有啥用？</p>
 <p>答：above关键字本来是用来帮助你看清某些特殊形式的代码，但后来我决定在将来版本中再支持这种“特殊形式的代码”，所以above现在没有任何作用。</p>
+<p class="question">问：CoffeeScript的<code>?.</code>很好用，为啥Fus一开始支持，现在却取消与它相似的<code>'ok.</code>？</p>
+<p>答：如果支持，那么这样的代码：</p>
+<pre><code><![CDATA[
+    if a.b.c'ok.d.e ≠ 3
+        foo()
+]]></code></pre>
+<p>你的本意是让它在满足既<code>'ok</code>又整个链条的值不等于<code>3</code>时才执行<code>foo()</code>，但实际上当不<code>'ok</code>时链条值为<code>void</code>，也不等于<code>3</code>，所以也会执行<code>foo()</code>。所以我觉得这个功能会产生陷阱，并不完美。</p>
+<p>还有一个原因，就是一开始支持的功能并不完整，是有缺陷和bug的。若要使它完整，要极大改变编译器现有架构，工程量太大。所以干脆先删掉这个功能，若以后需要，再做。</p>
 </body>
 </html>
