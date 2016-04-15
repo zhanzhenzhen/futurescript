@@ -64,9 +64,24 @@
             <key>contentName</key>
             <string>string.quoted.double.fus.h1</string>
             <key>begin</key>
-            <string>^(\s*)[^"]*\b(v|r|js)"$</string>
+            <string>^(\s*)[^"]*\b(v|js)"$</string>
             <key>end</key>
             <string>^\1"\w*</string>
+        </dict>
+        <dict>
+            <key>contentName</key>
+            <string>string.quoted.double.fus.h1</string>
+            <key>begin</key>
+            <string>^(\s*)[^"]*\br"$</string>
+            <key>end</key>
+            <string>^\1"\w*</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#interpolated_r_fus</string>
+                </dict>
+            </array>
         </dict>
         <dict>
             <key>contentName</key>
@@ -93,9 +108,30 @@
             <key>contentName</key>
             <string>string.quoted.double.fus.h1</string>
             <key>begin</key>
-            <string>\b(v|r|js)"(?=.)</string>
+            <string>\b(v|js)"(?=.)</string>
             <key>end</key>
             <string>"\w*</string>
+        </dict>
+        <dict>
+            <key>contentName</key>
+            <string>string.quoted.double.fus.h1</string>
+            <key>begin</key>
+            <string>\br"(?=.)</string>
+            <key>end</key>
+            <string>"\w*</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>match</key>
+                    <string>\\"</string>
+                    <key>name</key>
+                    <string>constant.character.escape.fus.h1</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#interpolated_r_fus</string>
+                </dict>
+            </array>
         </dict>
         <dict>
             <key>name</key>
@@ -189,6 +225,35 @@
                     <string>source.fus.h1.embedded.source</string>
                     <key>begin</key>
                     <string>\\\(</string>
+                    <key>end</key>
+                    <string>\)</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>0</key>
+                        <dict>
+                            <key>name</key>
+                            <string>punctuation.section.embedded.fus.h1</string>
+                        </dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>$self</string>
+                        </dict>
+                    </array>
+                </dict>
+            </array>
+        </dict>
+        <key>interpolated_r_fus</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>name</key>
+                    <string>source.fus.h1.embedded.source</string>
+                    <key>begin</key>
+                    <string>#\(</string>
                     <key>end</key>
                     <string>\)</string>
                     <key>captures</key>
