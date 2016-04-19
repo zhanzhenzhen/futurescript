@@ -59,7 +59,7 @@ Build release (discard testing files):
 bin/fus build-release
 ```
 
-The following command is handy when you want to "find" something in compiler, for it creates a `"c-current"` directory to symlink all compiler files of the current version:
+The following command is handy when you want to "find" something in compiler, for it creates a `"c-current"` directory to symlink all compiler files of the current version (note: on Windows you may need to run as admin):
 
 ```bash
 bin/fus c-current
