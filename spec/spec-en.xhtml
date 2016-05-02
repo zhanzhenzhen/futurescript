@@ -1781,7 +1781,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>There's one limitation: Because an asynchronous function is compiled into a generator, and the ES6 generator can't contain <code>super</code>, so an asynchronous function can't contain <code>super</code>. It may be solved in later versions, but it requires a huge amount of code to simulate a generator. Surely, it will eventually be solved after ES7 is released, for we can compile it to the native ES7 asynchronous function.</p>
 <h1>Object-oriented</h1>
 <h2>Class</h2>
-<p class="detail">"Field", "member", and "property" are synonyms in this article. A field can be called a "method" if it's a function.</p>
+<p class="detail">"Field" and "property" of a class are synonyms. A field can be called a "method" if it's a function. Class fields (including static fields) and constructors (including static constructors) are called class members. Note: Class member is conceptually different from object member.</p>
 <p>Example:</p>
 <pre><code class="fus-part"><![CDATA[
     Cat: class
