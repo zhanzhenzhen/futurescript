@@ -110,7 +110,7 @@ It's highly recommended that large file be splitted into small files.
 Publish
 =======
 
-Make sure the newest version is reflected in the spec. (All "version" areas are already commented by `<!-- version -->`.)
+Make sure the newest version is reflected in the spec. Use the regular expression `\b\d+\.\d+\.\d+\b` to search, and replace them with the new version strings. Replace them one by one carefully, not all at once.
 
 Make sure all examples in `"examples"` directory is using the newest version.
 
