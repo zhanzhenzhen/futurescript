@@ -916,6 +916,12 @@
     a: (x, y...) -> y.length
     a(0, 0, 0) # returns 2
 ]]></code></pre>
+<p>Spread symbol <code>...</code> can also be in function call. For example:</p>
+<pre><code class="fus-part"><![CDATA[
+    a: [2, 3]
+    b(1, a...) # b(1, 2, 3)
+]]></code></pre>
+<p>For now, the limitation for the spread symbol <code>...</code> is: It must be the last argument / parameter, and can't be in an array. Future version may free this limitation.</p>
 <p>Note that these 2 functions are different:</p>
 <pre><code class="fus-part"><![CDATA[
     a{prop: true}.b # a({prop: true}).b

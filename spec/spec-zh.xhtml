@@ -905,6 +905,12 @@
     a: (x, y...) -> y.length
     a(0, 0, 0) # returns 2
 ]]></code></pre>
+<p>展开符号<code>...</code>也可以用在函数调用中，例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    a: [2, 3]
+    b(1, a...) # b(1, 2, 3)
+]]></code></pre>
+<p>目前，展开符号<code>...</code>的限制是：必须作为最后一个参数，并且不能在数组中使用。以后的版本中可能会取消这个限制。</p>
 <p>注意这两个函数调用是不同的：</p>
 <pre><code class="fus-part"><![CDATA[
     a{prop: true}.b # a({prop: true}).b
