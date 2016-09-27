@@ -32,7 +32,7 @@
     ["0.1.0", "test-compile-long.js"],
     ["2.0.5", "test-compile-module.js"],
     ["2.0.0", "test-compile-once.js"],
-    ["2.0.5", "test-compile.js"],
+    ["2.2.0", "test-compile.js"],
     ["0.1.0", "test-lex-comment.js"],
     ["2.1.0", "test-lex-connect.js"],
     ["1.1.0", "test-lex-flexible-object.js"],
