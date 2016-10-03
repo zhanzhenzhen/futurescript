@@ -40,6 +40,7 @@
     ["2.0.4", "test-lex-string.js"],
     ["2.2.0", "test-lex.js"],
     ["2.0.0", "test-main.js"],
+    ["2.2.1", "test-pattern-big.js"],
     ["0.1.0", "test-pattern.js"],
     ["1.0.0", "test-style.js"],
     ["0.6.0", "test-tools.js"],
