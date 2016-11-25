@@ -6,7 +6,7 @@
     ["0.5.0", "expression-exception.js"],
     ["1.3.0", "expression-external.js"],
     ["2.2.0", "expression-function.js"],
-    ["0.7.0", "expression-math.js"],
+    ["2.2.2", "expression-math.js"],
     ["2.2.2", "expression-misc.js"],
     ["0.1.0", "expression-module.js"],
     ["2.0.0", "expression-object.js"],
