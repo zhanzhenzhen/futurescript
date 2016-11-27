@@ -22,7 +22,7 @@
     ["0.1.0", "node.js"],
     ["0.1.0", "pattern.js"],
     ["0.1.0", "print.js"],
-    ["2.2.3", "readme.js"],
+    ["0.2.0", "readme.js"],
     ["2.0.0", "statement.js"],
     ["1.0.0", "style.js"],
     ["0.5.0", "test-base.js"],
