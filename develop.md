@@ -128,6 +128,11 @@ Then build release:
 bin/fus build-release
 ```
 
-Use `git` command to commit the change and tag the new version.
+Git commit the change and tag the new version.
 
-Then publish.
+Then publish to npm.
+
+Fork and Pull Request
+=====================
+
+You may wonder why there're thousands of Git tags in this repo. That's because the author uses GitLock. For details see [here](https://www.npmjs.com/package/gitlock). But for other developers, you don't need to have GitLock installed. Just use the normal Git commands to commit and push and create a pull request, then the author will lock it.
