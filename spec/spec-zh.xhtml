@@ -2520,11 +2520,11 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p class="question">问：为啥格式注释是用<code>###</code>？如果像格式字符串一样，不是更简洁吗？</p>
 <p>答：有时我们喜欢用注释把一段代码作废，就不可能弄得很整齐。</p>
 <p class="question">问：如果<code>export {abc}</code>表示命名导出，<code>export abc</code>表示默认导出不是很好嘛？</p>
-<p>答：原先是有这种考虑，但这在将来版本中可能会产生歧义（将来版本中<code>{abc}</code>可能是一个合法的对象）。</p>
-<p class="question">问：为啥不支持Unicode变量名（不用引号时）？</p>
-<p>答：很少有这种需求，因为加上引号就可以了。不过以后版本中可能会支持。</p>
-<p class="question">问：above关键字有啥用？</p>
-<p>答：above关键字本来是用来帮助你看清某些特殊形式的代码，但后来我决定在将来版本中再支持这种“特殊形式的代码”，所以above现在没有任何作用。</p>
+<p>答：原先是有这种考虑，但这会产生歧义，因为<code>{abc}</code>也可以被当作一个对象。</p>
+<p class="question">问：为啥不支持Unicode变量名？</p>
+<p>答：很少有这种需求。不过以后版本中可能会支持。</p>
+<p class="question">问：<code>above</code>关键字有啥用？</p>
+<p>答：<code>above</code>关键字本来是用来帮助你看清某些特殊形式的代码，但后来我决定在将来版本中再支持这种“特殊形式的代码”，所以<code>above</code>现在没有任何作用。</p>
 <p class="question">问：CoffeeScript的<code>?.</code>很好用，为啥Fus一开始支持，现在却取消与它相似的<code>'ok.</code>？</p>
 <p>答：如果支持，那么这样的代码：</p>
 <pre><code><![CDATA[

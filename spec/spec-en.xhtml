@@ -2524,25 +2524,25 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>A: If arguments have names, using <code>@</code> is unnecessary. This behavior is like the <code>=&gt;</code> function in ES6.</p>
 <p class="question">Q: In JS we can use <code>typeof a === "undefined"</code> to check whether a variable is declared without throwing exceptions, but why we can't here?</p>
 <p>A: This seems useless. FutureScript's variables are all declared at the top of the function body, so whether a variable is declared isn't dynamic, so this shouldn't be what the runtime should do.</p>
-<p class="question">问：为啥幂运算符<code>**</code>的优先级和CoffeeScript不一样？</p>
-<p>答：虽然和CoffeeScript不一样，但是和大多数有这个运算符的语言一样，比如F#，比如未来的ES7草案。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但这看上去非常别扭，除非你加个空格，成为<code>- 3 ** 2</code>，或者干脆都不用空格，成为<code>-3**2</code>，但很少有人会这么写，前者还和多行连接有冲突。另一个原因是，CoffeeScript这样做弄得不大协调，就<code>**</code>显得那么特殊，其实<code>*</code>的优先级理应只比<code>**</code>低一级，只不过<code>(-a) * b</code>恒等于<code>-(a * b)</code>，所以可能他们觉得无所谓就不调整了而已。</p>
-<p class="question">问：<code>not</code>优先级被大幅降低，这合理吗？</p>
-<p>答：这看上去更自然，更符合人类阅读方式。我承认，这个改变从来没有人做过，具有冒险性。为了看看有没有反例，支持<code>not</code>应该维持目前通用的优先级，我看了GitHub的Atom编辑器的源代码（它是用CoffeeScript编写的），还看了我自己的代码。我发现，几乎没有一处<code>not</code>在目前通用的优先级下更简单的，这给了我信心。因为我的想法是，算术运算符，像加法、乘法，对它们的算元使用<code>not</code>是非常不好的，也许有人会利用这种方式来取巧，但可读性非常差，所以好的代码中是不会出现<code>not a + not b</code>的，这种反例不应该使用。引申到<code>=</code>、<code>&lt;</code>、<code>&gt;</code>也是一样。</p>
-<p class="question">问：为啥格式注释是用<code>###</code>？如果像格式字符串一样，不是更简洁吗？</p>
-<p>答：有时我们喜欢用注释把一段代码作废，就不可能弄得很整齐。</p>
-<p class="question">问：如果<code>export {abc}</code>表示命名导出，<code>export abc</code>表示默认导出不是很好嘛？</p>
-<p>答：原先是有这种考虑，但这在将来版本中可能会产生歧义（将来版本中<code>{abc}</code>可能是一个合法的对象）。</p>
-<p class="question">问：为啥不支持Unicode变量名（不用引号时）？</p>
-<p>答：很少有这种需求，因为加上引号就可以了。不过以后版本中可能会支持。</p>
-<p class="question">问：above关键字有啥用？</p>
-<p>答：above关键字本来是用来帮助你看清某些特殊形式的代码，但后来我决定在将来版本中再支持这种“特殊形式的代码”，所以above现在没有任何作用。</p>
-<p class="question">问：CoffeeScript的<code>?.</code>很好用，为啥Fus一开始支持，现在却取消与它相似的<code>'ok.</code>？</p>
-<p>答：如果支持，那么这样的代码：</p>
+<p class="question">Q: Why the precedence of the exponentiation operator <code>**</code> differs from that in CoffeeScript?</p>
+<p>A: Although it's different with CoffeeScript, it's the same as other languages that have this operator, such as F# and the future ES7. CoffeeScript may have considered that if <code>-3 ** 2</code> means -3<sup>2</sup> then it's -9, but this looks strange, unless you add a space so that it's <code>- 3 ** 2</code>, or you use no space so that it's <code>-3**2</code>. But we rarely write this way, not to mention the former conflicts with multiline connection. Another reason is that CoffeeScript makes <code>**</code> special so that it's inconsistent. In fact the precedence of <code>*</code> should be lower by just one level than <code>**</code>, but luckily <code>(-a) * b</code> is always equivalent to <code>-(a * b)</code> so maybe they think it doesn't matter so they didn't adjust.</p>
+<p class="question">Q: The precedence of <code>not</code> is greatly lowered. Is it reasonable?</p>
+<p>A: This looks more natural and more in line with human reading. I admit that such change has never been done by anybody, so it takes risks. To see if there're counter-examples that supports maintaining the common precedence, I reviewed the source code of GitHub Atom (It's written in CoffeeScript) as well as my own code. I found that almost no <code>not</code> is simpler under the common precedence. This gave me confidence. I think it's very bad to use <code>not</code> in operands in an arithmetic operation such as addition and multiplication. Maybe some people wants to take advantage of this trick, but such code is very unreadable. Good code will not have <code>not a + not b</code>. We shouldn't use such counter-examples. The same goes for <code>=</code>, <code>&lt;</code> and <code>&gt;</code>.</p>
+<p class="question">Q: Why use <code>###</code> for comments? Shouldn't it be more concise if's like formatted string?</p>
+<p>A: Sometimes we want to suppress a code region by commenting it, in this case we don't want to adjust the indents.</p>
+<p class="question">Q: Shouldn't it be better if <code>export {abc}</code> means named export and <code>export abc</code> means default export?</p>
+<p>A: Originally I had this idea, but this can lead to ambiguity, for <code>{abc}</code> can also be treated as an object.</p>
+<p class="question">Q: Why not support Unicode variable names?</p>
+<p>A: We rarely need this. But later versions may support it.</p>
+<p class="question">Q: What's the use of <code>above</code> keyword?</p>
+<p>A: <code>above</code> was intended to help you read code in special forms, but later I decided to support this "special forms" in future versions, so now <code>above</code> has no effect.</p>
+<p class="question">Q: CoffeeScript's <code>?.</code> is very handy. Why Fus used to support the similar <code>'ok.</code> but later dropped it?</p>
+<p>A: If support, then consider the following code:</p>
 <pre><code><![CDATA[
     if a.b.c'ok.d.e ≠ 3
         foo()
 ]]></code></pre>
-<p>你的本意是让它在满足既<code>'ok</code>又整个链条的值不等于<code>3</code>时才执行<code>foo()</code>，但实际上当不<code>'ok</code>时链条值为<code>void</code>，也不等于<code>3</code>，所以也会执行<code>foo()</code>。所以我觉得这个功能会产生陷阱，并不完美。</p>
-<p>还有一个原因，就是一开始支持的功能并不完整，是有缺陷和bug的。若要使它完整，要极大改变编译器现有架构，工程量太大。所以干脆先删掉这个功能，若以后需要，再做。</p>
+<p>What you really want is to call <code>foo()</code> when <code>'ok</code> and the entire chain isn't <code>3</code>. But in fact, when not <code>'ok</code>, the entire chain is <code>void</code>, which is also not <code>3</code>, so it will also call <code>foo()</code>. So I think this feature can create traps, which isn't perfect.</p>
+<p>Another reason is that the original support isn't complete. It has flaws and bugs. To make it complete, the structure of the compiler should be greatly changed. That's a huge task. So it's better drop it for now and change it later if needed.</p>
 </body>
 </html>
