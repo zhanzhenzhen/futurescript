@@ -2518,12 +2518,12 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>A: We have included as many as possible. But if we discover a security hole in an older compiler version, then we will delete it. If there is no compiler equivalent to that of the code, during compilation there will be a warning, and it will automatically use a newer compiler.</p>
 <p class="question">Q: CoffeeScript's chaining method call doesn't need parentheses, why do we need parentheses here?</p>
 <p>A: CoffeeScript actually forcibly adds a rule, which breaks the unity of the langauge, and although for some needs the language becomes more concise, but for other needs it becomes more complex. So I decided not to use this method.</p>
-<p class="question">问：为啥一个模块既有“默认导出”又有“命名导出”不好？</p>
-<p>答：你完全可以分两个模块，或者给“默认导出”取个非default的名字（事实上“默认导出”的确是“命名导出”的一部分，名字是default）。</p>
-<p class="question">问：为啥<code>-&gt;</code>函数没有定义<code>@</code>？</p>
-<p>答：当你参数有名称时，再用<code>@</code>就显得多余。这时用<code>@</code>唯一的作用就是当函数的参数数量可变时。但是如果你的函数参数数量可变，更好的做法是不设任何形参。也有一种情况是希望后半部分参数数量可变，但是我不太喜欢这样做，我建议把这部分参数弄成一个数组。</p>
-<p class="question">问：JS中可以用<code>typeof a === "undefined"</code>检查变量是否已定义又不引发异常，这里为啥做不到？</p>
-<p>答：这好像并没有什么用。FutureScript的变量统统编译成在函数顶部声明，所以变量的定义与否不是动态的，所以检查这个不应该是程序运行时做的事情。</p>
+<p class="question">Q: Why it's not good for a module to have both default exports and named exports?</p>
+<p>A: You may well separate them to two modules, or give the "default export" a name other than <code>default</code> (Actually a default export is one of named exports, with the name <code>default</code>).</p>
+<p class="question">Q: Why <code>-&gt;</code> doesn't define <code>@</code>?</p>
+<p>A: If arguments have names, using <code>@</code> is unnecessary. This behavior is like the <code>=&gt;</code> function in ES6.</p>
+<p class="question">Q: In JS we can use <code>typeof a === "undefined"</code> to check whether a variable is declared without throwing exceptions, but why we can't here?</p>
+<p>A: This seems useless. FutureScript's variables are all declared at the top of the function body, so whether a variable is declared isn't dynamic, so this shouldn't be what the runtime should do.</p>
 <p class="question">问：为啥幂运算符<code>**</code>的优先级和CoffeeScript不一样？</p>
 <p>答：虽然和CoffeeScript不一样，但是和大多数有这个运算符的语言一样，比如F#，比如未来的ES7草案。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但这看上去非常别扭，除非你加个空格，成为<code>- 3 ** 2</code>，或者干脆都不用空格，成为<code>-3**2</code>，但很少有人会这么写，前者还和多行连接有冲突。另一个原因是，CoffeeScript这样做弄得不大协调，就<code>**</code>显得那么特殊，其实<code>*</code>的优先级理应只比<code>**</code>低一级，只不过<code>(-a) * b</code>恒等于<code>-(a * b)</code>，所以可能他们觉得无所谓就不调整了而已。</p>
 <p class="question">问：<code>not</code>优先级被大幅降低，这合理吗？</p>
