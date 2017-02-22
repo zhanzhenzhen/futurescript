@@ -17,6 +17,8 @@ The generated JS, after "Babeled", works on any JS environment that supports ECM
 fus (compile | c) [--map] <file-or-directory> [<target-file-or-directory>]
 
 fus (version | v | --version)
+
+fus --help
 ```
 
 To compile, use `compile` or `c`.
