@@ -37,7 +37,7 @@
         }
         .detail {
             font-family: STKaiti, KaiTi;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             color: rgb(144,144,144);
         }
         .question {
@@ -627,7 +627,7 @@
     <li>pause</li>
 </ul>
 <p class="detail">Given a statement, the maximum consecutive content of the level of the statement is called the block of the statement. Block doesn't include version line. Besides block, there is list. Either block or list is called a "container". Block's child can be statement or comment. List's child can't be statement. A child block (or child list) of a statement means the first-level descendant of the statement. A child statement of a block also means first-level descendant.</p>
-<p class="detail">These containers and blocks:</p>
+<p class="detail">These containers are blocks:</p>
 <ul class="detail">
     <li>Root block</li>
     <li>Function block</li>
@@ -1628,8 +1628,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         |                     "The array doesn't include any of the first 3 letters."
 ]]></code></pre>
 <p>From this we know, that the use of <code>or</code> and <code>and</code> as operators are limited within a pattern, for they must be enclosed in a parenthesis pair, otherwise they will be treated as a pattern. But it seems that logical operators are rarely used within patterns.</p>
-<p class="detail">作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
-<p class="detail">注意<code>or else</code>是一种特殊的合并写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>一起出现。</p>
+
 <p>Like <code>if</code>, in pattern matching <code>then</code> block can be indented. In this way we can omit <code>then</code>:</p>
 <pre><code class="fus-part"><![CDATA[
     day: 3
