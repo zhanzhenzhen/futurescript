@@ -1629,7 +1629,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p>From this we know, that the use of <code>or</code> and <code>and</code> as operators are limited within a pattern, for they must be enclosed in a parenthesis pair, otherwise they will be treated as a pattern. But it seems that logical operators are rarely used within patterns.</p>
 <p class="detail">When treated as patterns, it must be either "all <code>or</code>" or "all <code>and</code>". They can't coexist, otherwise the compiler can't determine. This rule doesn't apply to those in parentheses.</p>
-<p class="detail">Note that <code>or else</code>is a special syntax, which doesn't belong to <code>or</code> pattern, so <code>or else</code> can coexist with <code>and</code>.</p>
+<p class="detail">Note that <code>or else</code> is a special syntax, which doesn't belong to <code>or</code> pattern, so <code>or else</code> can coexist with <code>and</code>.</p>
 <p>Like <code>if</code>, in pattern matching <code>then</code> block can be indented. In this way we can omit <code>then</code>:</p>
 <pre><code class="fus-part"><![CDATA[
     day: 3
