@@ -36,7 +36,7 @@
             background-color: rgb(255,192,192);
         }
         .detail {
-            font-family: STKaiti, KaiTi;
+            font-family: Arial;
             font-size: 0.85rem;
             color: rgb(144,144,144);
         }
@@ -1628,8 +1628,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         |                     "The array doesn't include any of the first 3 letters."
 ]]></code></pre>
 <p>From this we know, that the use of <code>or</code> and <code>and</code> as operators are limited within a pattern, for they must be enclosed in a parenthesis pair, otherwise they will be treated as a pattern. But it seems that logical operators are rarely used within patterns.</p>
-<p class="detail">作为模式使用时要么全是<code>or</code>，要么全是<code>and</code>，两个不能在一个模式中一起出现，否则编译器会无法判断。括号内的无此限制。</p>
-<p class="detail">注意<code>or else</code>是一种特殊的合并写法，并不属于or模式，所以<code>or else</code>可以和<code>and</code>一起出现。</p>
+<p class="detail">When treated as patterns, it must be either "all <code>or</code>" or "all <code>and</code>". They can't coexist, otherwise the compiler can't determine. This rule doesn't apply to those in parentheses.</p>
+<p class="detail">Note that <code>or else</code>is a special syntax, which doesn't belong to <code>or</code> pattern, so <code>or else</code> can coexist with <code>and</code>.</p>
 <p>Like <code>if</code>, in pattern matching <code>then</code> block can be indented. In this way we can omit <code>then</code>:</p>
 <pre><code class="fus-part"><![CDATA[
     day: 3
