@@ -1,5 +1,5 @@
 [
-    ["2.2.3", "block.js"],
+    ["2.4.1", "block.js"],
     ["2.4.1", "expression-base.js"],
     ["2.0.6", "expression-class.js"],
     ["0.5.0", "expression-condition.js"],
