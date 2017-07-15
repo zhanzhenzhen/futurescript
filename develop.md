@@ -85,7 +85,7 @@ For each version, there may be a related `"readme.js"` file in one permanent dir
 Permanent compiler files conventions
 ------------------------------------
 
-Can't rely on anything outside the ECMAScript 6 specification. For now, we use Babel to simulate the ECMAScript 6 environment, but Babel can be removed finally (maybe in 2016).
+Can't rely on anything outside the ECMAScript 6 specification. For now, we use Babel to simulate the ECMAScript 6 environment, but Babel can be removed finally (maybe in 2018).
 
 Note that these are outside ECMAScript 6 spec:
 

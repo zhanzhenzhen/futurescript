@@ -27,11 +27,9 @@ At present, you may need Babel to downgrade the generated ES6 code to be compati
 
 In my opinion, Babel 5 is stable and easy to use. Babel 6 still has some bugs in some plug-ins. I recommend using Babel 5 if you want your generated JS to run on older Node.js or browser.
 
-If you want your generated JS to run on Node.js 5.x or higher, you can use Babel 6 because you only need to enable these 3 Babel plugins which has no bugs (through my test):
+If you want your generated JS to run on Node.js 6.x or higher, you can use Babel 6 because you only need to enable this plugin which has no bug (through my test):
 
 - transform-es2015-modules-commonjs
-- transform-es2015-destructuring
-- transform-es2015-parameters
 
 `--map` will add the line numbers of the source to the generated code. Useful for debugging. (Note: this is not "source map", which is another technology.)
 
