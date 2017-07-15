@@ -9,7 +9,7 @@ Command Usage
 npm install -g futurescript
 ```
 
-The `fus` command works on Node.js 4.0 or higher. (We recommend Node.js 5.0 or higher.)
+The `fus` command works on Node.js 6.0 or higher.
 
 The generated JS, after "Babeled", works on any JS environment that supports ECMAScript 5th, including browser and Node.js old versions.
 
