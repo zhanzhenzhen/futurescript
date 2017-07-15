@@ -85,9 +85,9 @@ For each version, there may be a related `"readme.js"` file in one permanent dir
 Permanent compiler files conventions
 ------------------------------------
 
-Can't rely on anything outside the ECMAScript 6 specification. For now, we use Babel to simulate the ECMAScript 6 environment, but Babel can be removed finally (maybe in 2018).
+Can't rely on anything outside the ECMAScript 2015 (ES6) specification. For now, we use Babel to simulate the ES6 environment, but Babel can be removed finally (maybe in 2018).
 
-Note that these are outside ECMAScript 6 spec:
+Note that these are outside ES6 spec:
 
 - `console.log`
 - `require` and other Node.js built-ins
@@ -99,7 +99,7 @@ Test files can import compiler files, but compiler files can't import test files
 
 Test files can import `"../locked-api.js"`, but compiler files can't import `"../test-locked-api.js"`.
 
-Except for `"ref.json"`, all files must be in pure JavaScript (i.e. extension: .js) and comply with ECMAScript 6.
+Except for `"ref.json"`, all files must be in pure JavaScript (i.e. extension: .js) and comply with ES6.
 
 Can't be modified or deleted after release (unless there are very serious problems).
 
