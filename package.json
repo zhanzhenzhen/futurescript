@@ -1,6 +1,6 @@
 {
     "name": "futurescript",
-    "version": "2.4.1",
+    "version": "2.4.2",
     "description": "A functional style, but highly readable language that compiles to JavaScript.",
     "keywords": ["fus", "js", "javascript", "language", "es6", "futurescript"],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
@@ -21,7 +21,7 @@
         "rimraf": "2.x"
     },
     "engines": {
-        "node": ">=4.0.0"
+        "node": ">=6.9.0"
     },
     "bin": {
         "fus": "./bin/fus"

@@ -9,7 +9,7 @@ Command Usage
 npm install -g futurescript
 ```
 
-The `fus` command works on Node.js 6.0 or higher.
+The `fus` command works on Node.js 6.9.0 LTS or higher.
 
 The generated JS, after "Babeled", works on any JS environment that supports ECMAScript 5th, including browser and Node.js old versions.
 
@@ -27,7 +27,7 @@ At present, you may need Babel to downgrade the generated ES6 code to be compati
 
 In my opinion, Babel 5 is stable and easy to use. Babel 6 still has some bugs in some plug-ins. I recommend using Babel 5 if you want your generated JS to run on older Node.js or browser.
 
-If you want your generated JS to run on Node.js 6.x or higher, you can use Babel 6 because you only need to enable this plugin which has no bug (through my test):
+If you want your generated JS to run on Node.js 6.9.0 LTS or higher, you can use Babel 6 because you only need to enable this plugin which has no bug (through my test):
 
 - transform-es2015-modules-commonjs
 
