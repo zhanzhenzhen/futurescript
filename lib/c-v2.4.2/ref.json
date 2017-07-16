@@ -29,6 +29,7 @@
     ["0.5.0", "test-compile-async.js"],
     ["2.4.0", "test-compile-class.js"],
     ["0.2.0", "test-compile-comment-map.js"],
+    ["2.4.2", "test-compile-exception.js"],
     ["2.3.0", "test-compile-long.js"],
     ["2.0.5", "test-compile-module.js"],
     ["2.0.0", "test-compile-once.js"],
