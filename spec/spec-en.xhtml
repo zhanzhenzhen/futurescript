@@ -787,7 +787,7 @@
 ]]></code></pre>
 <p><code>manual new</code> is just the traditional way. When creating instance of a class you should add <code>new</code>.</p>
 <p><code>node import</code> means all imports are compiled into Node.js imports (i.e. <code>require</code>). <code>node export</code> means all exports are compiled into Node.js exports (i.e. <code>exports</code> and <code>module.exports</code>). <code>node modules</code>means to do both. <code>es modules</code> means to do neither (i.e. comply with ES6). For details, see the "module" section.</p>
-<p class="detail">The generated JS code is in strict mode。</p>
+<p class="detail">The generated JS code is in strict mode.</p>
 <h2>Comment</h2>
 <p>Use <code>#</code> (inline) and <code>###</code> (formatted), similar to CoffeeScript. But one thing different is that CoffeeScript's <code>###</code> is compiled for all occurrences, while our <code>###</code> is compiled only when the opening <code>###</code> is immediately below the version line (or there are only whitespaces between them) and the right side of the closing <code>###</code> doesn't have any non-whitespace character, otherwise it will be ignored by the compiler. To comply with JS, the <code>*/</code> in the comment will be compiled into two spaces.</p>
 <h1 id="13c8cdd4-8926-4fb8-af19-54ecf57ace68">Function</h1>
@@ -1072,7 +1072,7 @@
     aaa: import "bbb" as ccc
 ]]></code></pre>
 <p>An <code>import</code> assignment is not a normal assignment. It is "binding", like in ES6. So it's limited to variables. It can't be assigned to object properties. There can't be <code>ifvoid</code>, <code>ifnull</code> or <code>'</code> before the colon.</p>
-<p id="28715698-580a-4a4d-b70c-91126bffa74b">When we use Node we often come into this situation：Each file has a large number of imports, most of which are duplicated, but can't be omitted. Of course you can create a new module and put everything into it, then export, so each module only needs to import this new module. For example:</p>
+<p id="28715698-580a-4a4d-b70c-91126bffa74b">When we use Node we often come into this situation: Each file has a large number of imports, most of which are duplicated, but can't be omitted. Of course you can create a new module and put everything into it, then export, so each module only needs to import this new module. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     aaa: import "aaa"
     bbb: import "bbb"
@@ -1199,7 +1199,7 @@
 <pre><code class="fus-part"><![CDATA[
     str.search(r"^\d{3}-\d{3}-\d{4}$")
 ]]></code></pre>
-<p>The inline regular expression suppresses most features of <code>\</code> except these 2：<code>\"</code> and the line-end connectable <code>\</code>. Note, that in JS <code>"</code> and <code>#</code> can be written directly in a regular expression, but here we must use <code>\"</code> and <code>\#</code>, for these 2 characters have special meanings.</p>
+<p>The inline regular expression suppresses most features of <code>\</code> except these 2: <code>\"</code> and the line-end connectable <code>\</code>. Note, that in JS <code>"</code> and <code>#</code> can be written directly in a regular expression, but here we must use <code>\"</code> and <code>\#</code>, for these 2 characters have special meanings.</p>
 <p>Regular expression can have interpolations. It interpolates strings:</p>
 <pre><code class="fus-part"><![CDATA[
     first: "hello"
@@ -1569,7 +1569,7 @@ Can be combined into one line:
         |     "unsupported"
     # message is "client error"
 ]]></code></pre>
-<p>If using radical mode, the above <code>@0</code> can be simplified to <code>@</code>。</p>
+<p>If using radical mode, the above <code>@0</code> can be simplified to <code>@</code>.</p>
 <p><code>else</code> can be combined with a preceding pattern by using <code>or else</code>, but this pattern can't contain <code>then</code>. This is called the combination of <code>else</code> pattern and other pattern, but in essence it's still two patterns. In addition, if <code>or</code> isn't treated as an operator, it can be simplified as <code>,</code>. So the above example can be written as:</p>
 <pre><code class="fus-part"><![CDATA[
     message: match <> statusCode >= @0
@@ -1660,7 +1660,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     )
 ]]></code></pre>
 <p>Here we used the "batch import" feature (for details see the "Module" section above). Note that the export of <code>manifest.fus</code> should match the import of yours. If you want to use <code>node</code> instead of <code>es</code>, then you'll need to make corresponding changes in the version line of the two files.</p>
-<p>If the iterator returns <code>break</code> then it means to jump out of the loop, similar to JS's <code>break</code>, but different in essence. Here <code>break</code> is an expression, and only capable of cancelling the remaining cycles, not capable of cancelling the remaining part of the function. If <code>break</code> then the <code>loop</code> function returns <code>break</code>。This example is a loop, from 0 to 9, but it will jump out on 5:</p>
+<p>If the iterator returns <code>break</code> then it means to jump out of the loop, similar to JS's <code>break</code>, but different in essence. Here <code>break</code> is an expression, and only capable of cancelling the remaining cycles, not capable of cancelling the remaining part of the function. If <code>break</code> then the <code>loop</code> function returns <code>break</code>. This example is a loop, from 0 to 9, but it will jump out on 5:</p>
 <pre><code class="fus-part"><![CDATA[
     loop(10, i ->
         if i < 5
@@ -1869,7 +1869,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
             super()
             console.log me.name + " roars."
 ]]></code></pre>
-<p><code>constructor</code> is simplified to <code>new</code>。</p>
+<p><code>constructor</code> is simplified to <code>new</code>.</p>
 <p id="1619f159-69e3-48ae-acb5-ff258e2c3c37">JS's <code>this</code> is replaced by <code>me</code>. We also have another keyword <code>Me</code>, where M is in uppercase, meaning the class of <code>me</code>. When a method is called statically, <code>Me</code> is identical to <code>me</code>, but it's recommended to use <code>Me</code> because it looks more like a class.</p>
 <p id="652ac57c-8042-442d-aaa3-8152fe86836f">A highlight of FutureScript's classes is the "anti-conflict field", which is similar to "private field". The benefit of an anti-conflict field is not that the external code can't access it (though can't access it directly by object property). The benefit is that derived classes can safely define a field with the same name, without worrying about the possible conflicts. This is especially important in projects with very complex class structures.</p>
 <p>First we look at a negative example. Assuming someone has written a library with an ES6 class in JS:</p>
@@ -2056,7 +2056,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     <li>Restrict the scope of a variable to avoid conflicts.</li>
     <li>Wrap code to increase readability.</li>
 </ul>
-<p>Which CoffeeScript feature is missing in FutureScript? See this CoffeeScript code：</p>
+<p>Which CoffeeScript feature is missing in FutureScript? See this CoffeeScript code:</p>
 <pre><code class="coffee"><![CDATA[
     for button in buttons
         do (button) ->
@@ -2561,7 +2561,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>A: In radical mode, under most conditions there is no need to give arguments names, but if you have multiple levels of functions, when the inner function is using outer arguments, you need to name the arguments.</p>
 <p class="question">Q: Why are there no reserved words?</p>
 <p>A: Many languages have many reserved words, but I think that if you try to predict future features when you design the language, then you might not predict them correctly. In FutureScript, the version number achieves the goal of "safety", because so long as you do not change the version number, there will not be any compatibility issues.</p>
-<p class="question">Q: Not supporting <code>var</code> is inspired by CoffeeScript, but why not support ES6's <code>let</code> and <code>const</code>？</p>
+<p class="question">Q: Not supporting <code>var</code> is inspired by CoffeeScript, but why not support ES6's <code>let</code> and <code>const</code>?</p>
 <p>A: My idea is, a programmer might not be familiar with the files outside the one he is currently developing, but he is usually familiar with other parts of the file. <code>let</code> provides block-level safety, but so long as you are familiar with the block, you can use a different variable name. Block-level safety is too small, function-level safety is already strong enough. Otherwise the language complexity will increase. <code>let</code> also conflicts with CoffeeScript's style. Furtheremore, that's because we currently compile variables to <code>var</code>. I thought of compiling all variables to <code>let</code>, but considering code like this:</p>
 <pre><code class="fus-part"><![CDATA[
     if x > 0
@@ -2574,7 +2574,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         c: 6
     console.log(a + b + c)
 ]]></code></pre>
-<p>If we compile to <code>let</code>, then this code will be incorrect, we must assign values to <code>a</code>、<code>b</code>、<code>c</code> at the top for it to work. So I think that it is better to compile to <code>var</code>.</p>
+<p>If we compile to <code>let</code>, then this code will be incorrect, we must assign values to <code>a</code>, <code>b</code> and <code>c</code> at the top for it to work. So I think that it is better to compile to <code>var</code>.</p>
 <p>As for<code>const</code>, I think that the idea has a problem, <code>const</code> just applies to constants, and making it such that some things cannot change is not to prevent us from modifying them, but rather to prevent others from modifying them. Normally you make a library, and when others use it, at runtime they might change the internal logic. Variables are visible to just yourself, and others cannot modify them, what need is there to make them constants? What you really want to protect are the attributes and methods of objects, and this cannot be accomplished by <code>const</code>. You can use <code>Object.defineProperty</code> to accomplish it. But to achieve this you must alter all objects including built-in objects to make these methods more rigid (i.e. become almost like static programming languages), and this work would take too much time, while the value is questionable, so at the moment it's not done.</p>
 <p class="question">Q: Why not support object destructuring assignment and complex array destructuring assignment?</p>
 <p>A: Object destructuring assignment is overly complex. They suit some part of human's intuition, but violate other part of human's intuition, causing them to be confused from the start. Complex array destructuring assignment is medium complexity, it may be supported in the future. As for object destructuring assignment, even if supported in the future, the grammar will be changed to be more natural.</p>
