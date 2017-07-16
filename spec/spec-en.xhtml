@@ -1724,7 +1724,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         catch
             void
 ]]></code></pre>
-<p>和CoffeeScript还有一点不同的是，如果只有<code>try</code>和<code>finally</code>，没有<code>catch</code>，那么编译成的JS仍然会有一个空的<code>catch</code>。例如：</p>
+<p>Another thing different from CoffeeScript: If it has <code>try</code> and <code>finally</code> but doesn't have <code>catch</code>, the compiled JS will have an empty <code>catch</code>. For example:</p>
 <pre><code class="fus-part"><![CDATA[
     a: 1
     try
@@ -1735,8 +1735,8 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     catch
         a: a * 3
 ]]></code></pre>
-<p>上述代码中，外层的<code>catch</code>并不会被触发，<code>a</code>的最终值为4而不是12。这是因为编译成的JS中，内层会有一个空的<code>catch</code>。</p>
-<p>所以，在编译成的JS中，<code>try</code>是永远带有<code>catch</code>的。那么如果要实现JS的不带<code>catch</code>的<code>try...finally</code>，该怎么办？也简单，加上<code>catch</code>，重新抛出：</p>
+<p>In the above code, the outer <code>catch</code>won't be triggered. The final result of <code>a</code> will be 4, not 12. That's because in the compiled JS, the inner level will have an empty <code>catch</code>.</p>
+<p>So, in compiled JS, <code>try</code> will always take a <code>catch</code>. Then what's the equivalent of JS's <code>try...finally</code> without <code>catch</code>? Simply add a <code>catch</code> and rethrow:</p>
 <pre><code class="fus-part"><![CDATA[
     a: 1
     try
@@ -1749,7 +1749,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     catch
         a: a * 3
 ]]></code></pre>
-<p>这样<code>a</code>就等于12了。它基本上等价于这段JS：</p>
+<p><code>a</code> will be 12 now. Basically it's equivalent to the following JS:</p>
 <pre><code class="js"><![CDATA[
     var a = 1;
     try {
@@ -1764,7 +1764,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         a = a * 3;
     }
 ]]></code></pre>
-<p>下面的表格可以帮助理解在哪些情况下捕获异常：</p>
+<p>The following table can help understand the mechanism of catching exceptions:</p>
 <table class="table">
     <tr>
         <th></th>
@@ -1774,30 +1774,30 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     </tr>
     <tr>
         <td><code>try...catch</code></td>
-        <td>捕获</td>
-        <td>捕获</td>
-        <td>捕获</td>
+        <td>catchable</td>
+        <td>catchable</td>
+        <td>catchable</td>
     </tr>
     <tr>
         <td><code>try</code></td>
-        <td>非法</td>
-        <td>捕获</td>
-        <td>捕获</td>
+        <td>illegal</td>
+        <td>catchable</td>
+        <td>catchable</td>
     </tr>
     <tr>
         <td><code>try...catch...finally</code></td>
-        <td>捕获</td>
-        <td>捕获</td>
-        <td>捕获</td>
+        <td>catchable</td>
+        <td>catchable</td>
+        <td>catchable</td>
     </tr>
     <tr>
         <td><code>try...finally</code></td>
-        <td>不捕获</td>
-        <td>不捕获</td>
-        <td>捕获</td>
+        <td>uncatchable</td>
+        <td>uncatchable</td>
+        <td>catchable</td>
     </tr>
 </table>
-<p>可以看出，JS和Fus都比较纯粹，因为JS是仅当有<code>catch</code>时捕获，而Fus则是全捕获。CoffeeScript则是存在<code>try...finally</code>的特例。</p>
+<p>We can find that the rules of JS or Fus are simple. JS catches only in <code>catch</code>. Fus always catches. But the rule of CoffeeScript is complex because of a special case <code>try...finally</code>.</p>
 <p class="detail">If <code>try</code> block or <code>finally</code> block is an inline block, then it must occupy the whole line.</p>
 <h2 id="358d4ea8-456b-473a-b2d2-8452aaaf4341">Asynchronous</h2>
 <p><code>'wait</code> makes an asynchronous function internally synchronous-style, without changing its asynchronous essence. Consider the following JS:</p>
