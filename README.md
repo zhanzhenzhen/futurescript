@@ -6,7 +6,7 @@ Command Usage
 =============
 
 ```bash
-npm install -g futurescript
+npm install futurescript -g --unsafe-perm
 ```
 
 The `fus` command works on Node.js 6.9.0 LTS or higher.
