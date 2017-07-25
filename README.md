@@ -9,6 +9,8 @@ Command Usage
 npm install futurescript -g --unsafe-perm
 ```
 
+IMPORTANT: If you're using npm v5 or higher, `--unsafe-perm` must be selected.
+
 The `fus` command works on Node.js 6.9.0 LTS or higher.
 
 The generated JS, after "Babeled", works on any JS environment that supports ECMAScript 5th, including browser and Node.js old versions.
@@ -23,7 +25,12 @@ fus --help
 
 To compile, use `compile` or `c`.
 
-At present, you may need Babel to downgrade the generated ES6 code to be compatible with your environment. For details, see [Babel website](https://babeljs.io/).
+Babel
+=====
+
+This section may finally become outdated.
+
+At present, you may need Babel to downgrade the generated ES6 code to make it compatible with your environment. For details, see [Babel website](https://babeljs.io/).
 
 In my opinion, Babel 5 is stable and easy to use. Babel 6 still has some bugs in some plug-ins. I recommend using Babel 5 if you want your generated JS to run on older Node.js or browser.
 
