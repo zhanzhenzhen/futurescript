@@ -25,6 +25,10 @@ fus --help
 
 To compile, use `compile` or `c`.
 
+`--map` will add the line numbers of the source to the generated code. Useful for debugging. (Note: this is not "source map", which is another technology.)
+
+Because we use a very sophisticated versioning model that all historical compilers are kept, there's really no need to install it to your project directory - conflicts are very unlikely. But if you really "hate global", to avoid waste of disk space, it should be stated in "devDependencies", not "dependencies" (particularly when you're writing a middleware).
+
 Babel
 =====
 
@@ -37,10 +41,6 @@ In my opinion, Babel 5 is stable and easy to use. Babel 6 still has some bugs in
 If you want your generated JS to run on Node.js 6.9.0 LTS or higher, you can use Babel 6 because you only need to enable this plugin which has no bug (through my test):
 
 - transform-es2015-modules-commonjs
-
-`--map` will add the line numbers of the source to the generated code. Useful for debugging. (Note: this is not "source map", which is another technology.)
-
-Because we use a very sophisticated versioning model that all historical compilers are kept, there's really no need to install it to your project directory - conflicts are very unlikely. But if you really "hate global", to avoid waste of disk space, it should be stated in "devDependencies", not "dependencies" (particularly when you're writing a middleware).
 
 Examples
 ========
