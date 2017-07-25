@@ -28,7 +28,7 @@ To compile, use `compile` or `c`.
 Babel
 =====
 
-This section may finally become outdated.
+This section may finally be outdated in the future.
 
 At present, you may need Babel to downgrade the generated ES6 code to make it compatible with your environment. For details, see [Babel website](https://babeljs.io/).
 
