@@ -12,10 +12,5 @@ if ($fs.existsSync(libDir)) {
     require("../lib/bin");
 }
 else {
-    if (process.versions.node.search(/^[0-4]\./) === -1) {
-        require("../target/bin");
-    }
-    else {
-        require("../es5-target/bin");
-    }
+    require("../target/bin");
 }

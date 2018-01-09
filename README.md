@@ -11,9 +11,9 @@ npm install futurescript -g --unsafe-perm
 
 IMPORTANT: If you're using npm v5 or higher, `--unsafe-perm` must be selected.
 
-The `fus` command works on Node.js 6.9.0 LTS or higher.
+The `fus` command works on Node.js 8.9.0 LTS or higher.
 
-The generated JS, after "Babeled", works on any JS environment that supports ECMAScript 5th, including browser and Node.js old versions.
+The generated JS works on any JS environment that supports ECMAScript 2015, including browser and Node.js.
 
 ```
 fus (compile | c) [--map] <file-or-directory> [<target-file-or-directory>]
@@ -28,19 +28,6 @@ To compile, use `compile` or `c`.
 `--map` will add the line numbers of the source to the generated code. Useful for debugging. (Note: this is not "source map", which is another technology.)
 
 Because we use a very sophisticated versioning model that all historical compilers are kept, there's really no need to install it to your project directory - conflicts are very unlikely. But if you really "hate global", to avoid waste of disk space, it should be stated in "devDependencies", not "dependencies" (particularly when you're writing a middleware).
-
-Babel
-=====
-
-This section may finally be outdated in the future.
-
-At present, you may need Babel to downgrade the generated ES6 code to make it compatible with your environment. For details, see [Babel website](https://babeljs.io/).
-
-In my opinion, Babel 5 is stable and easy to use. Babel 6 still has some bugs in some plug-ins. I recommend using Babel 5 if you want your generated JS to run on older Node.js or browser.
-
-If you want your generated JS to run on Node.js 6.9.0 LTS or higher, you can use Babel 6 because you only need to enable this plugin which has no bug (through my test):
-
-- transform-es2015-modules-commonjs
 
 Examples
 ========

@@ -26,13 +26,6 @@ bin/fus build-test
 bin/fus bt
 ```
 
-Build and fill and test, including "es5-target":
-
-```bash
-bin/fus build-test-including-es5
-bin/fus bt5
-```
-
 Build and fill:
 
 ```bash
@@ -78,14 +71,14 @@ Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under
 
 Each permanent directory must have a `"ref.json"` file.
 
-`"main.js"` is the entry of each permanent directory. `"test-main.js"` is the entry of testing files. `"ref.json"` lists all referenced permanent files. These referenced files will be copied to the directory (to that in "target" or "es5-target", not in "lib") when filling.
+`"main.js"` is the entry of each permanent directory. `"test-main.js"` is the entry of testing files. `"ref.json"` lists all referenced permanent files. These referenced files will be copied to the directory (to that in "target", not in "lib") when filling.
 
 For each version, there may be a related `"readme.js"` file in one permanent directory. So, for contributors, there are 2 important documents: This document and the permanent readme document.
 
 Permanent compiler files conventions
 ------------------------------------
 
-Can't rely on anything outside the ECMAScript 2015 (ES6) specification. For now, we use Babel to simulate the ES6 environment, but Babel can be removed finally (maybe in 2018).
+Can't rely on anything outside the ECMAScript 2015 (ES6) specification.
 
 Note that these are outside ES6 spec:
 
@@ -119,7 +112,7 @@ Make sure in `"lib/locked-api.js"` the `bundlerLookup` function includes version
 Then run test to make sure there's no false or error result:
 
 ```bash
-bin/fus bt5
+bin/fus bt
 ```
 
 Then build release:
