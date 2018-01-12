@@ -13,5 +13,8 @@ node_modules
 
 *.log
 
-/lib
 /c-current
+/target
+
+/lib/test-locked-api.js
+/lib/c-v*/test-*.js
