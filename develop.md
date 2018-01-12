@@ -13,17 +13,17 @@ npm update
 
 Now, we're ready to develop.
 
-Test:
+Make and test the current version (this is most commonly used):
 
 ```bash
 bin/fus test
 bin/fus t
 ```
 
-Fill:
+Make all versions:
 
 ```bash
-bin/fus fill
+bin/fus make-all
 ```
 
 The following command is handy when you want to "find" something in compiler, for it creates a `"c-current"` directory to symlink all compiler files of the current version (note: on Windows you may need to run as admin):
@@ -39,13 +39,11 @@ Then we can search by typing:
 grep -Rl your-search-string c-current
 ```
 
-We must build release (but must NOT fill it) before publishing. When a user installs it, referenced files will be automatically filled in the post-install period.
-
 Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent compiler files (including testing files). They can't have sub-directories.
 
 Each permanent directory must have a `"ref.json"` file.
 
-`"main.js"` is the entry of each permanent directory. `"test-main.js"` is the entry of testing files. `"ref.json"` lists all referenced permanent files. These referenced files will be copied to the directory (to that in "target", not in "lib") when filling.
+`"main.js"` is the entry of each permanent directory. `"test-main.js"` is the entry of testing files. `"ref.json"` lists all referenced permanent files. These referenced files will be mixed together in every version directory in "target" after the package is installed.
 
 For each version, there may be a related `"readme.js"` file in one permanent directory. So, for contributors, there are 2 important documents: This document and the permanent readme document.
 
