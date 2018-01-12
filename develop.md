@@ -13,43 +13,17 @@ npm update
 
 Now, we're ready to develop.
 
-Compile (build) all files in "lib" to "target":
-
-```bash
-bin/fus build
-```
-
-Build and fill and test (this is most commonly used):
-
-```bash
-bin/fus build-test
-bin/fus bt
-```
-
-Build and fill:
-
-```bash
-bin/fus build-fill
-bin/fus bf
-```
-
-Test only:
+Test:
 
 ```bash
 bin/fus test
 bin/fus t
 ```
 
-Fill only:
+Fill:
 
 ```bash
 bin/fus fill
-```
-
-Build release (discard testing files):
-
-```bash
-bin/fus build-release
 ```
 
 The following command is handy when you want to "find" something in compiler, for it creates a `"c-current"` directory to symlink all compiler files of the current version (note: on Windows you may need to run as admin):
@@ -112,13 +86,7 @@ Make sure in `"lib/locked-api.js"` the `bundlerLookup` function includes version
 Then run test to make sure there's no false or error result:
 
 ```bash
-bin/fus bt
-```
-
-Then build release:
-
-```bash
-bin/fus build-release
+bin/fus t
 ```
 
 Git commit the change and tag the new version.
