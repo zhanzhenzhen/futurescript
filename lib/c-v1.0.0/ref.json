@@ -23,7 +23,7 @@
     ["0.2.0", "readme.js"],
     ["1.0.0", "statement.js"],
     ["1.0.0", "style.js"],
-    ["0.5.0", "test-base.js"],
+    ["0.1.0", "test-base.js"],
     ["0.5.0", "test-compile-async.js"],
     ["0.1.0", "test-compile-class.js"],
     ["0.2.0", "test-compile-comment-map.js"],
