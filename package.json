@@ -19,10 +19,10 @@
         "node": ">=8.9.0"
     },
     "bin": {
-        "fus": "./bin/fus"
+        "fus": "./bin/fus.mjs"
     },
     "preferGlobal": true,
     "scripts": {
-        "postinstall": "node bin/fus postinstall"
+        "postinstall": "node --experimental-modules --no-warnings bin/fus.mjs postinstall"
     }
 }
