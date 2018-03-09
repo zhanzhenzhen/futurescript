@@ -16,5 +16,6 @@ node_modules
 /c-current
 /target
 
-/lib/test-locked-api.js
-/lib/c-v*/test-*.js
+/dev.mjs
+/lib/test-locked-api.mjs
+/lib/c-v*/test-*.mjs
