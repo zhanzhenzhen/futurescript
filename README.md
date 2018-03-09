@@ -32,7 +32,7 @@ Because we use a very sophisticated versioning model that all historical compile
 Examples
 ========
 
-Compile "a.fus" to "a.js":
+Compile "a.fus" to "a.mjs":
 
 ```bash
 fus compile a.fus
