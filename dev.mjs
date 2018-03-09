@@ -26,8 +26,8 @@ let cwdPackageInfo = JSON.parse($fs.readFileSync(
 assert(cwdPackageInfo.name === "futurescript");
 
 let packageDir = process.cwd();
-let libDir = $path.join(libDir, "lib");
-let defaultTargetRootDir = $path.join(libDir, "target");
+let libDir = $path.join(packageDir, "lib");
+let defaultTargetRootDir = $path.join(packageDir, "target");
 
 let mkdir = name => {
     if (!$fs.existsSync(name)) {
