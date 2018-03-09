@@ -43,9 +43,9 @@ Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under
 
 Each permanent directory must have a `"ref.json"` file.
 
-`"main.js"` is the entry of each permanent directory. `"test-main.js"` is the entry of testing files. `"ref.json"` lists all referenced permanent files. These referenced files will be mixed together in every version directory in "target" after the package is installed.
+`"main.mjs"` is the entry of each permanent directory. `"test-main.mjs"` is the entry of testing files. `"ref.json"` lists all referenced permanent files. These referenced files will be mixed together in every version directory in "target" after the package is installed.
 
-For each version, there may be a related `"readme.js"` file in one permanent directory. So, for contributors, there are 2 important documents: This document and the permanent readme document.
+For each version, there may be a related `"readme.mjs"` file in one permanent directory. So, for contributors, there are 2 important documents: This document and the permanent readme document.
 
 Permanent compiler files conventions
 ------------------------------------
@@ -58,13 +58,13 @@ Note that these are outside ES6 spec:
 - `require` and other Node.js built-ins
 - `global`, `window`, `setTimeout`, `setInterval`
 
-Can't import any path outside this file's directory except `"../locked-api.js"` and `"../test-locked-api.js"`.
+Can't import any path outside this file's directory except `"../locked-api.mjs"` and `"../test-locked-api.mjs"`.
 
 Test files can import compiler files, but compiler files can't import test files.
 
-Test files can import `"../locked-api.js"`, but compiler files can't import `"../test-locked-api.js"`.
+Test files can import `"../locked-api.mjs"`, but compiler files can't import `"../test-locked-api.mjs"`.
 
-Except for `"ref.json"`, all files must be in pure JavaScript (i.e. extension: .js) and comply with ES6.
+Except for `"ref.json"`, all files must be in pure JavaScript (i.e. extension: .mjs) and comply with ES6.
 
 Can't be modified or deleted after release (unless there are very serious problems).
 
