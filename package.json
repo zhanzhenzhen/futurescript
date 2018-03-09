@@ -16,7 +16,7 @@
         "rimraf": "2.x"
     },
     "engines": {
-        "node": ">=8.9.0"
+        "node": ">=9.6.0"
     },
     "bin": {
         "fus": "./bin/fus.mjs"

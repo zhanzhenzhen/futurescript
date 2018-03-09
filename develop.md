@@ -13,24 +13,26 @@ npm update
 
 Now, we're ready to develop.
 
+Presently, for any `node dev` in this article, change it to `./dev.mjs`, because Node.js 9.x doesn't turn on ES modules by default. Using command `./dev.mjs`, the shebang will tell Node.js to turn this feature on. Or you can use a long, ugly format `node --experimental-modules --no-warnings dev`. In future Node.js (maybe v10), `node dev` will work.
+
 Make and test the current version (this is most commonly used):
 
 ```bash
-bin/fus test
-bin/fus t
+node dev test
+node dev t
 ```
 
 Make all versions:
 
 ```bash
-bin/fus make-all
+node dev make-all
 ```
 
 The following command is handy when you want to "find" something in compiler, for it creates a `"c-current"` directory to symlink all compiler files of the current version (note: on Windows you may need to run as admin):
 
 ```bash
-bin/fus c-current
-bin/fus cc
+node dev c-current
+node dev cc
 ```
 
 Then we can search by typing:
@@ -82,7 +84,7 @@ Make sure all examples in `"examples"` directory is using the newest version.
 Then run test to make sure there's no false or error result:
 
 ```bash
-bin/fus t
+node dev t
 ```
 
 Git commit the change and tag the new version.

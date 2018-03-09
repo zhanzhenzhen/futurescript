@@ -11,7 +11,7 @@ npm install futurescript -g --unsafe-perm
 
 IMPORTANT: If you're using npm v5 or higher, `--unsafe-perm` must be selected.
 
-The `fus` command works on Node.js 8.9.0 LTS or higher.
+The `fus` command works on Node.js 9.6.0 or higher.
 
 The generated JS works on any JS environment that supports ECMAScript 2015, including browser and Node.js.
 
