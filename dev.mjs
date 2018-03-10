@@ -98,6 +98,8 @@ if (
         process.stdout.write($cp.execFileSync(
             process.execPath,
             [
+                "--experimental-modules",
+                "--no-warnings",
                 $path.join(targetVersionDir, "test-main.mjs")
             ]
         ));
