@@ -9,20 +9,7 @@ import $cp from "child_process";
 import $fs from "fs";
 import rm from "rimraf";
 
-// For Windows compatibility. Convert path to Unix style.
-let slashPath = function(path) {
-    if (typeof path === "string") {
-        return path.replace(/\\/g, "/");
-    }
-    else {
-        return path;
-    }
-};
-
-let cwdPackageInfo = JSON.parse($fs.readFileSync(
-    $path.join(slashPath(process.cwd()), "package.json"),
-    {encoding: "utf8"}
-));
+let cwdPackageInfo = JSON.parse($fs.readFileSync("package.json", {encoding: "utf8"}));
 assert(cwdPackageInfo.name === "futurescript");
 
 let packageDir = process.cwd();
