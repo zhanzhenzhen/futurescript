@@ -96,10 +96,6 @@ if (
     args[0] === "make-all" ||
     args[0] === "test" || args[0] === "t"
 ) {
-    // Make sure these development tools commands can't be used in an installed package.
-    // Installed package doesn't have "test-locked-api.mjs".
-    assert($fs.existsSync($path.join(libDir, "test-locked-api.mjs")));
-
     let version = cwdPackageInfo.version;
     if (args[0] === "c-current" || args[0] === "cc") {
         let cCurrentDir = $path.join(packageDir, "c-current");
