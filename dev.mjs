@@ -95,14 +95,15 @@ if (
         initTargetRootDir(defaultTargetRootDir);
         let targetVersionDir = $path.join(defaultTargetRootDir, "c-v" + version);
         makeSingleVersion(version, targetVersionDir);
-        process.stdout.write($cp.execFileSync(
+        $cp.execFileSync(
             process.execPath,
             [
                 "--experimental-modules",
                 "--no-warnings",
                 $path.join(targetVersionDir, "test-main.mjs")
-            ]
-        ));
+            ],
+            {stdio: ["pipe", process.stdout, process.stderr]}
+        );
     }
 }
 else if (args[0] === "version" || args[0] === "v" || args[0] === "--version") {
