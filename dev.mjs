@@ -63,7 +63,7 @@ let makeSingleVersion = (version, targetDir) => {
     rm.sync(targetDir);
     mkdir(targetDir);
     let sourceRefPath = $path.join(sourceDir, "ref.json");
-    let targetRefPath = $path.join(sourceDir, "ref.json");
+    let targetRefPath = $path.join(targetDir, "ref.json");
     copyFile(sourceRefPath, targetRefPath);
     let refList = readRefList(sourceRefPath);
     refList.forEach(item => {
