@@ -44,13 +44,14 @@ let distinct = arr => {
 };
 
 let makeSingleVersion = (version, targetDir, useSymlink = false) => {
-    let copyOrLinkFile = (sourcePath, destPath) =>
+    let copyOrLinkFile = (sourcePath, destPath) => {
         if (useSymlink) {
             $fs.symlinkSync(sourcePath, destPath);
         }
         else {
             copyFile(sourcePath, destPath);
         }
+    };
     let dirname = "c-v" + version;
     let sourceDir = $path.join(libDir, dirname);
     if (!$fs.statSync(sourceDir).isDirectory()) return;
