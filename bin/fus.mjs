@@ -2,4 +2,4 @@
 
 "use strict";
 
-import "../lib/bin";
+import "../target/bin";

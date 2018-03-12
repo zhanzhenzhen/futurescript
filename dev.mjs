@@ -78,9 +78,9 @@ let makeAllVersions = targetRootDir => {
 let initTargetRootDir = targetRootDir => {
     rm.sync(targetRootDir);
     mkdir(targetRootDir);
-    copyFile($path.join(libDir, "env.mjs"), $path.join(targetRootDir, "env.mjs"));
-    copyFile($path.join(libDir, "locked-api.mjs"), $path.join(targetRootDir, "locked-api.mjs"));
-    copyFile($path.join(libDir, "test-locked-api.mjs"), $path.join(targetRootDir, "test-locked-api.mjs"));
+    $fs.readdirSync(libDir).filter(m => m.endsWith(".mjs")).forEach(filename => {
+        copyFile($path.join(libDir, filename), $path.join(targetRootDir, filename));
+    });
 };
 
 let args = process.argv.slice();
