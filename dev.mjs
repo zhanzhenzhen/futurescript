@@ -43,7 +43,14 @@ let distinct = arr => {
     return r;
 };
 
-let makeSingleVersion = (version, targetDir) => {
+let makeSingleVersion = (version, targetDir, useSymlink = false) => {
+    let copyOrLinkFile = (sourcePath, destPath) =>
+        if (useSymlink) {
+            $fs.symlinkSync(sourcePath, destPath);
+        }
+        else {
+            copyFile(sourcePath, destPath);
+        }
     let dirname = "c-v" + version;
     let sourceDir = $path.join(libDir, dirname);
     if (!$fs.statSync(sourceDir).isDirectory()) return;
@@ -51,12 +58,12 @@ let makeSingleVersion = (version, targetDir) => {
     mkdir(targetDir);
     let sourceRefPath = $path.join(sourceDir, "ref.json");
     let targetRefPath = $path.join(targetDir, "ref.json");
-    copyFile(sourceRefPath, targetRefPath);
+    copyOrLinkFile(sourceRefPath, targetRefPath);
     let refList = readRefList(sourceRefPath);
     refList.forEach(item => {
         let sourcePath = $path.join(libDir, "c-v" + item[0], item[1]);
         let destPath = $path.join(targetDir, item[1]);
-        copyFile(sourcePath, destPath);
+        copyOrLinkFile(sourcePath, destPath);
     });
 };
 
@@ -86,7 +93,7 @@ if (
     let version = cwdPackageInfo.version;
     if (args[0] === "c-current" || args[0] === "cc") {
         let cCurrentDir = $path.join(packageDir, "c-current");
-        makeSingleVersion(version, cCurrentDir);
+        makeSingleVersion(version, cCurrentDir, true);
     }
     else if (args[0] === "make-all") {
         makeAllVersions(defaultTargetRootDir);
