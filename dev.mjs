@@ -46,7 +46,7 @@ let distinct = arr => {
 let makeSingleVersion = (version, targetDir, useSymlink = false) => {
     let copyOrLinkFile = (sourcePath, destPath) => {
         if (useSymlink) {
-            $fs.symlinkSync(sourcePath, destPath);
+            $fs.symlinkSync($path.relative($path.dirname(destPath), sourcePath), destPath);
         }
         else {
             copyFile(sourcePath, destPath);
