@@ -23,6 +23,6 @@
     },
     "preferGlobal": true,
     "scripts": {
-        "postinstall": "node --experimental-modules --no-warnings bin/fus.mjs postinstall"
+        "postinstall": "node --experimental-modules --no-warnings dev.mjs postinstall"
     }
 }
