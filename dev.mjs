@@ -56,10 +56,9 @@ let makeSingleVersion = (version, targetDir, useSymlink = false) => {
     rm.sync(targetDir);
     mkdir(targetDir);
     let sourceRefPath = $path.join(sourceDir, "ref.json");
-    let targetRefPath = $path.join(targetDir, "ref.json");
-    copyOrLinkFile(sourceRefPath, targetRefPath);
     let refList = readRefList(sourceRefPath);
     refList.forEach(item => {
+        if (isPostinstall && item[1].startsWith("test-")) return;
         let sourcePath = $path.join(libDir, "c-v" + item[0], item[1]);
         let destPath = $path.join(targetDir, item[1]);
         copyOrLinkFile(sourcePath, destPath);
@@ -83,6 +82,8 @@ let initTargetRootDir = targetRootDir => {
 
 let args = process.argv.slice();
 args.splice(0, 2); // strip "node" and the name of this file
+
+let isPostinstall = args[0] === "postinstall";
 
 if (
     args[0] === "c-current" || args[0] === "cc" ||
@@ -115,7 +116,7 @@ if (
 else if (args[0] === "version" || args[0] === "v" || args[0] === "--version") {
     console.log(cwdPackageInfo.version);
 }
-else if (args[0] === "postinstall") {
+else if (isPostinstall) {
     makeAllVersions(defaultTargetRootDir);
 }
 else {
