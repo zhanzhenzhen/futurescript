@@ -11,9 +11,9 @@
         "url": "https://github.com/zhanzhenzhen/futurescript.git"
     },
     "dependencies": {
+        "rimraf": "2.x"
     },
     "devDependencies": {
-        "rimraf": "2.x"
     },
     "engines": {
         "node": ">=9.6.0"
