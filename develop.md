@@ -11,7 +11,7 @@ Then:
 npm update
 ```
 
-(Note: we can't use `npm install` because it will mistakenly run the postinstall script.)
+(Note: You can also use `npm install` but it is not necessary because it will run the postinstall script that's useless for development.)
 
 Now, we're ready to develop.
 
