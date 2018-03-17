@@ -1,7 +1,9 @@
 Develop this project
 ====================
 
-First, Git clone the repository, and let the repository's root directory be your working directory.
+Make sure you have Node.js 9.8.0 or higher, and npm 5.6.0 or higher.
+
+Git clone the repository, and let the repository's root directory be your working directory.
 
 Then:
 
@@ -28,7 +30,7 @@ Make all versions:
 node dev make-all
 ```
 
-The following command is handy when you want to "find" something in compiler, for it creates a `"c-current"` directory to symlink all compiler files of the current version (note: on Windows you may need to run as admin):
+The following command is handy when you want to "find" something just inside the current version of compiler, for it creates a `"c-current"` directory to symlink all compiler files of the current version (note: on Windows you may need to run as admin):
 
 ```bash
 node dev c-current
@@ -52,9 +54,9 @@ For each version, there may be a related `"readme.mjs"` file in one permanent di
 Permanent compiler files conventions
 ------------------------------------
 
-Can't rely on anything outside the ECMAScript 2015 (ES6) specification.
+Can't rely on anything outside the ECMAScript 2017 specification.
 
-Note that these are outside ES6 spec:
+Note that these are outside ECMAScript 2017 spec:
 
 - `console.log`
 - `require` and other Node.js built-ins
@@ -66,7 +68,7 @@ Test files can import compiler files, but compiler files can't import test files
 
 Test files can import `"../locked-api.mjs"`, but compiler files can't import `"../test-locked-api.mjs"`.
 
-Except for `"ref.json"`, all files must be in pure JavaScript (i.e. extension: .mjs) and comply with ES6.
+Except for `"ref.json"`, all files must be ECMAScript modules (i.e. extension: .mjs) and comply with ECMAScript 2017.
 
 Can't be modified or deleted after release (unless there are very serious problems).
 
@@ -79,7 +81,7 @@ Publish
 
 Make sure the newest version is reflected in the spec. Use the regular expression `\b\d+\.\d+\.\d+\b` to search, and replace them with the new version strings. Replace them one by one carefully, not all at once.
 
-Make sure all examples in `"examples"` directory is using the newest version.
+Make sure all examples in `"examples"` directory are using the newest version.
 
 Then run test to make sure there's no false or error result:
 

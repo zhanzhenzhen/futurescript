@@ -2,6 +2,12 @@
 
 Please visit [https://futurescript.org/](https://futurescript.org/) to learn the language.
 
+Requirements
+============
+
+1. Node.js 9.8.0 or higher
+2. npm 5.6.0 or higher
+
 Command Usage
 =============
 
@@ -9,9 +15,7 @@ Command Usage
 npm install futurescript -g --unsafe-perm
 ```
 
-IMPORTANT: If you're using npm v5 or higher, `--unsafe-perm` must be selected.
-
-The `fus` command works on Node.js 9.6.0 or higher.
+IMPORTANT: If you're using `-g` or `--global`, then `--unsafe-perm` must be selected.
 
 The generated JS works on any JS environment that supports ECMAScript 2015, including browser and Node.js.
 
