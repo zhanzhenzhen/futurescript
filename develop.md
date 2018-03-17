@@ -47,40 +47,49 @@ Directory structure
 -------------------
 
 All files in `"lib"` directory (including its sub-directories, recursively) must be either `".mjs"` or `".json"` files.
-Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent compiler files (including testing files). They can't have sub-directories.
 
-Each permanent directory must have a `"ref.json"` file.
+Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent files. They can't have sub-directories.
 
-`"main.mjs"` is the entry of each permanent directory. `"test-main.mjs"` is the entry of testing files. `"ref.json"` lists all referenced permanent files. These referenced files will be mixed together in every version directory in "target" after the package is installed.
+Permanent files can be compiler files, test files and `"ref.json"`. Within each permanent directory: There must be a `"ref.json"` file; Files starting with `"test-"` are test files; All others are compiler files.
 
-For each version, there may be a related `"readme.mjs"` file in one permanent directory. So, for contributors, there are 2 important documents: This document and the permanent readme document.
+Within each permanent directory: `"main.mjs"` is the compiler entry; `"test-main.mjs"` is the test entry; `"ref.json"` lists all referenced permanent files. These referenced files will be mixed together in a directory with the same name in "target" after the package is installed.
 
-Permanent compiler files conventions
-------------------------------------
+For each version, there's a `"readme.mjs"` referenced by `"ref.json"`. This readme applies to permanent files only (more accurately, the files together referenced by `"ref.json"`). So, contributors please note that there are 2 important documents: This document and the permanent `"readme.mjs"`.
 
-Can't rely on anything outside the ECMAScript 2017 specification.
+Permanent files conventions
+---------------------------
 
-Note that these are outside ECMAScript 2017 spec:
+(For convenience, "test files" in this section are limited to permanent files, so this concept doesn't include `"test-locked-api.mjs"`.)
+
+Permanent files (except `"ref.json"`):
+
+Must be ECMAScript modules (i.e. extension: .mjs) and comply with ECMAScript 2017.
+
+Can't rely on anything outside the ECMAScript 2017 specification. Note that these are outside ECMAScript 2017 spec:
 
 - `console.log`
 - `require` and other Node.js built-ins
 - `global`, `window`, `setTimeout`, `setInterval`
 
-Can only import `".mjs"` files, and the file extension `".mjs"` must be included in the import string.
+Can only import `".mjs"` files. The import string must be in one of these formats:
 
-Can't import any path outside this file's directory except `"../locked-api.mjs"` and `"../test-locked-api.mjs"`.
+- `"./<base-name>.mjs"`, where `<base-name>` is the filename without the `".mjs"` extension. Obviously in this format the imported file can't be located outside the importer's directory.
+- `"../locked-api.mjs"`
+- `"../test-locked-api.mjs"`
 
-Test files can import compiler files, but compiler files can't import test files.
-
-Test files can import `"../locked-api.mjs"`, but compiler files can't import `"../test-locked-api.mjs"`.
-
-Except for `"ref.json"`, all files must be ECMAScript modules (i.e. extension: .mjs) and comply with ECMAScript 2017.
+Permanent files (including `"ref.json"`):
 
 Can't be modified or deleted after release (unless there are very serious problems).
 
 When you want to edit a file (that already exists in any old release) for next release, don't edit, but keep it unchanged and copy the file to the new version's directory (and until next release the new file is editable). When you want to rename a file that exists in old release, also do not rename, but use a new filename in the new version's directory.
 
 It's highly recommended that large file be splitted into small files.
+
+Other rules:
+
+Test files can import compiler files, but compiler files can't import test files.
+
+Test files can import `"../locked-api.mjs"`, but compiler files can't import `"../test-locked-api.mjs"`.
 
 Publish
 -------
