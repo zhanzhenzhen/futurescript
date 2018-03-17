@@ -1,7 +1,7 @@
 Develop this project
 ====================
 
-Make sure you have Node.js 9.8.0 or higher, and npm 5.6.0 or higher.
+Make sure you're on Node.js 9.8.0 or higher, and npm 5.6.0 or higher.
 
 Git clone the repository, and let the repository's root directory be your working directory.
 
@@ -43,6 +43,10 @@ Then we can search by typing:
 grep -Rl your-search-string c-current
 ```
 
+Directory structure
+-------------------
+
+All files in `"lib"` directory (including its sub-directories, recursively) must be either `".mjs"` or `".json"` files.
 Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent compiler files (including testing files). They can't have sub-directories.
 
 Each permanent directory must have a `"ref.json"` file.
@@ -62,6 +66,8 @@ Note that these are outside ECMAScript 2017 spec:
 - `require` and other Node.js built-ins
 - `global`, `window`, `setTimeout`, `setInterval`
 
+Can only import `".mjs"` files, and the file extension `".mjs"` must be included in the import string.
+
 Can't import any path outside this file's directory except `"../locked-api.mjs"` and `"../test-locked-api.mjs"`.
 
 Test files can import compiler files, but compiler files can't import test files.
@@ -77,7 +83,7 @@ When you want to edit a file (that already exists in any old release) for next r
 It's highly recommended that large file be splitted into small files.
 
 Publish
-=======
+-------
 
 Make sure the newest version is reflected in the spec. Use the regular expression `\b\d+\.\d+\.\d+\b` to search, and replace them with the new version strings. Replace them one by one carefully, not all at once.
 
@@ -94,6 +100,6 @@ Git commit the change and tag the new version.
 Then publish to npm.
 
 Fork and Pull Request
-=====================
+---------------------
 
 You may wonder why there're thousands of Git tags in this repo. That's because the author uses GitLock. For details see [here](https://www.npmjs.com/package/gitlock). But for other developers, you don't need to have GitLock installed. Just use the normal Git commands to commit and push and create a pull request, then the author will lock it.
