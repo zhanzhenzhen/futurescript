@@ -30,7 +30,7 @@ Make all versions:
 node dev make-all
 ```
 
-The following command is handy when you want to "find" something just inside the current version of compiler, for it creates a `"c-current"` directory to symlink all compiler files of the current version (note: on Windows you may need to run as admin):
+The following command is handy when you want to "find" something just inside the current version of permanent files, for it creates a `"c-current"` directory to symlink all permanent files of the current version (note: on Windows you may need to run as admin):
 
 ```bash
 node dev c-current
@@ -48,11 +48,16 @@ Directory structure
 
 All files in `"lib"` directory (including its sub-directories, recursively) must be either `".mjs"` or `".json"` files.
 
-Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent files. They can't have sub-directories.
+Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent files. They can't have sub-directories. Here `"c"` is from the word "compiler", but actually they can hold other permanent files.
 
-Permanent files can be compiler files, test files and `"ref.json"`. Within each permanent directory: There must be a `"ref.json"` file; Files starting with `"test-"` are test files; All others are compiler files.
+Permanent files can be compiler files, test files and `"ref.json"`. Within each permanent directory:
 
-Within each permanent directory: `"main.mjs"` is the compiler entry; `"test-main.mjs"` is the test entry; `"ref.json"` lists all referenced permanent files. These referenced files will be mixed together in a directory with the same name in "target" after the package is installed.
+- There must be a `"ref.json"` file.
+- Files starting with `"test-"` are test files.
+- All others are compiler files.
+- `"main.mjs"` is the compiler entry.
+- `"test-main.mjs"` is the test entry.
+- `"ref.json"` lists all referenced permanent files. These referenced files will be mixed together in a directory with the same name in the `"target"` directory of the package's root after the package is installed.
 
 For each version, there's a `"readme.mjs"` referenced by `"ref.json"`. This readme applies to permanent files only (more accurately, the files together referenced by `"ref.json"`). So, contributors please note that there are 2 important documents: This document and the permanent `"readme.mjs"`.
 
