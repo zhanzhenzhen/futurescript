@@ -99,9 +99,25 @@ if (
         makeAllVersions(defaultTargetRootDir);
     }
     else if (args[0] === "test" || args[0] === "t") {
+        console.log("Making...");
         initTargetRootDir(defaultTargetRootDir);
         let targetVersionDir = $path.join(defaultTargetRootDir, "c-v" + version);
         makeSingleVersion(version, targetVersionDir);
+        console.log("Linting...");
+        $cp.execFileSync(
+            $path.join(packageDir, "node_modules/.bin/eslint"),
+            [
+                /* TODO: Currently dynamic import isn't in ES spec, so we must comment out
+                those files, but in the future we should include them.
+
+                $path.join(packageDir, "*.mjs"),
+                $path.join(libDir, "*.mjs"),
+                $path.join(packageDir, "bin/*.mjs"),*/
+                $path.join(targetVersionDir, "*.mjs")
+            ],
+            {stdio: ["pipe", process.stdout, process.stderr]}
+        );
+        console.log("Testing...");
         $cp.execFileSync(
             process.execPath,
             [

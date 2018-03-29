@@ -1,0 +1,18 @@
+{
+    "root": true,
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "sourceType": "module",
+        "ecmaFeatures": {
+        }
+    },
+    "rules": {
+        "eqeqeq": ["error", "always"],
+        "func-style": ["error", "expression"],
+        "no-cond-assign": ["error", "always"],
+        "no-irregular-whitespace": "error",
+        "no-sparse-arrays": "error",
+        "no-var": "error",
+        "semi": ["error", "always"]
+    }
+}
