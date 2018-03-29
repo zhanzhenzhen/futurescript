@@ -17,12 +17,14 @@ Now, we're ready to develop.
 
 Presently, for any `node dev` in this article, change it to `./dev.mjs`, because Node.js 9.x doesn't turn on ES modules by default. Using command `./dev.mjs`, the shebang will tell Node.js to turn this feature on. Or you can use a long, ugly format `node --experimental-modules --no-warnings dev`. In future Node.js (maybe v10), `node dev` will work.
 
-Make and test the current version (this is most commonly used):
+Make, lint and test the current version (this is most commonly used):
 
 ```bash
 node dev test
 node dev t
 ```
+
+(Note: Lint error will be shown as if the file is in `"target"` directory. You will need to find the original file in `"lib"` directory.)
 
 Make all versions:
 
@@ -103,7 +105,7 @@ Make sure the newest version is reflected in the spec. Use the regular expressio
 
 Make sure all examples in `"examples"` directory are using the newest version.
 
-Then run test to make sure there's no false or error result:
+Then run this command to make sure there's no lint error, or any false or error test result:
 
 ```bash
 node dev t
