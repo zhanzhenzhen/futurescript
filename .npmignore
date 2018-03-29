@@ -16,5 +16,7 @@ node_modules
 /c-current
 /target
 
+/.eslintignore
+/.eslintrc.*
 /lib/test-locked-api.mjs
 /lib/c-v*/test-*.mjs
