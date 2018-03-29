@@ -17,7 +17,7 @@
         "eslint": "4.x"
     },
     "engines": {
-        "node": ">=9.6.0"
+        "node": ">=9.8.0"
     },
     "bin": {
         "fus": "./bin/fus.mjs"
