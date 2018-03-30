@@ -2,7 +2,9 @@
     "name": "futurescript",
     "version": "2.4.2",
     "description": "A functional style, but highly readable language that compiles to JavaScript.",
-    "keywords": ["fus", "js", "javascript", "language", "es6", "futurescript"],
+    "keywords": [
+        "fus", "js", "javascript", "language", "es6", "es2015", "es2017"
+    ],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
     "homepage": "https://futurescript.org/",
     "license": "SEE LICENSE IN LICENSE.txt",
