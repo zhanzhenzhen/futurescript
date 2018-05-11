@@ -5,7 +5,7 @@ Please visit [https://futurescript.org/](https://futurescript.org/) to learn the
 Requirements
 ============
 
-1. Node.js 9.8.0 or higher
+1. Node.js 10 or higher
 2. npm 5.6.0 or higher
 
 Command Usage

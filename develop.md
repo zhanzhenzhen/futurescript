@@ -1,7 +1,7 @@
 Develop this project
 ====================
 
-Make sure you're on Node.js 9.8.0 or higher, and npm 5.6.0 or higher.
+Make sure you're on Node.js 10 or higher, and npm 5.6.0 or higher.
 
 Git clone the repository, and let the repository's root directory be your working directory.
 
@@ -15,7 +15,7 @@ npm update
 
 Now, we're ready to develop.
 
-Presently, for any `node dev` in this article, change it to `./dev.mjs`, because Node.js 9.x doesn't turn on ES modules by default. Using command `./dev.mjs`, the shebang will tell Node.js to turn this feature on. Or you can use a long, ugly format `node --experimental-modules --no-warnings dev`. In future Node.js (maybe v10), `node dev` will work.
+Presently, for any `node dev` in this article, change it to `./dev.mjs`, because Node.js 10 doesn't turn on ES modules by default. Using command `./dev.mjs`, the shebang will tell Node.js to turn this feature on. Or you can use a long, ugly format `node --experimental-modules --no-warnings dev`. In future Node.js, `node dev` will work.
 
 Make, lint and test the current version (this is most commonly used):
 
