@@ -22,12 +22,18 @@ The generated JS works on any JS environment that supports ECMAScript 2015, incl
 ```
 fus (compile | c) [--map] <file-or-directory> [<target-file-or-directory>]
 
+fus (legacy-compile | lc) [--map] <file-or-directory> [<target-file-or-directory>]
+
 fus (version | v | --version)
 
 fus --help
 ```
 
-To compile, use `compile` or `c`.
+To compile (to `.mjs`), use `compile` or `c`.
+
+To compile (to `.js`), use `legacy-compile` or `lc`.
+
+Those two are exactly the same except for the file extension.
 
 `--map` will add the line numbers of the source to the generated code. Useful for debugging. (Note: this is not "source map", which is another technology.)
 
