@@ -9,6 +9,7 @@ import rm from "rimraf";
 
 let cwdPackageInfo = JSON.parse($fs.readFileSync("package.json", {encoding: "utf8"}));
 assert(cwdPackageInfo.name === "futurescript");
+assert(cwdPackageInfo.version.search(/^\d+\.\d+\.\d+$/) !== -1);
 
 let packageDir = process.cwd();
 let libDir = $path.join(packageDir, "lib");
@@ -129,12 +130,12 @@ if (
         );
     }
 }
-else if (args[0] === "new-version") {
-    assert(args.length === 3 && args[1].length > 0 && args[2].length > 0);
-    assert(!$fs.existsSync("lib/c-v" + args[1]));
-    assert($fs.existsSync("lib/c-v" + args[2]));
-    mkdir("lib/c-v" + args[1]);
-    copyFile("lib/c-v" + args[2] + "/ref.json", "lib/c-v" + args[1] + "/ref.json");
+else if (args[0] === "create-from") {
+    assert(args.length === 2 && args[1].length > 0);
+    assert(!$fs.existsSync("lib/c-v" + cwdPackageInfo.version));
+    assert($fs.existsSync("lib/c-v" + args[1]));
+    mkdir("lib/c-v" + cwdPackageInfo.version);
+    copyFile("lib/c-v" + args[1] + "/ref.json", "lib/c-v" + cwdPackageInfo.version + "/ref.json");
 }
 else if (args[0] === "version" || args[0] === "v" || args[0] === "--version") {
     console.log(cwdPackageInfo.version);
