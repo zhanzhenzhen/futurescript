@@ -129,6 +129,13 @@ if (
         );
     }
 }
+else if (args[0] === "new-version") {
+    assert(args.length === 3 && args[1].length > 0 && args[2].length > 0);
+    assert(!$fs.existsSync("lib/c-v" + args[1]));
+    assert($fs.existsSync("lib/c-v" + args[2]));
+    mkdir("lib/c-v" + args[1]);
+    copyFile("lib/c-v" + args[2] + "/ref.json", "lib/c-v" + args[1] + "/ref.json");
+}
 else if (args[0] === "version" || args[0] === "v" || args[0] === "--version") {
     console.log(cwdPackageInfo.version);
 }
