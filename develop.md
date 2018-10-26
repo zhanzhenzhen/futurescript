@@ -17,6 +17,16 @@ Now, we're ready to develop.
 
 Presently, for any `node dev` in this article, change it to `./dev.mjs`, because Node.js 10 doesn't turn on ES modules by default. Using command `./dev.mjs`, the shebang will tell Node.js to turn this feature on. Or you can use a long, ugly format `node --experimental-modules --no-warnings dev`. In future Node.js, `node dev` will work.
 
+Create a new version:
+
+First modify the version number in `"package.json"`. Then:
+
+```
+node dev create-from <old-version>
+```
+
+where `<old-version>` is the version to inherit. It will create a new version directory and copy `"ref.json"` from the old version's directory.
+
 Make, lint and test the current version (this is most commonly used):
 
 ```bash
