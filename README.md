@@ -60,7 +60,7 @@ Compile the whole "lib" directory to "target":
 fus compile lib target
 ```
 
-Develop this project
+Develop This Project
 ====================
 
 See "develop.md".
