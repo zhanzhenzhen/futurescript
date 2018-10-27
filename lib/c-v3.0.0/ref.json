@@ -5,7 +5,7 @@
     ["0.5.0", "expression-condition.mjs"],
     ["3.0.0", "expression-exception.mjs"],
     ["3.0.0", "expression-external.mjs"],
-    ["2.4.1", "expression-function.mjs"],
+    ["3.0.0", "expression-function.mjs"],
     ["2.2.3", "expression-math.mjs"],
     ["2.2.3", "expression-misc.mjs"],
     ["0.1.0", "expression-module.mjs"],
