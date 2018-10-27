@@ -9,7 +9,10 @@ import rm from "rimraf";
 
 let cwdPackageInfo = JSON.parse($fs.readFileSync("package.json", {encoding: "utf8"}));
 assert(cwdPackageInfo.name === "futurescript");
-assert(cwdPackageInfo.version.search(/^\d+\.\d+\.\d+$/) !== -1);
+
+let validateVersion = x => assert(x.length <= 10 && x.search(/^\d+\.\d+\.\d+$/) !== -1);
+
+validateVersion(cwdPackageInfo.version);
 
 let packageDir = process.cwd();
 let libDir = $path.join(packageDir, "lib");
@@ -27,10 +30,17 @@ let copyFile = (source, dest) => {
 
 let readRefList = path => {
     let r = JSON.parse($fs.readFileSync(path, {encoding: "utf8"}));
+    r.map(m => m[0]).forEach(m => validateVersion(m));
     let filenames = r.map(m => m[1]);
+    filenames.forEach(m => validateFilename(m));
     assert(filenames.length === distinct(filenames).length);
     return r;
 };
+
+let validateFilename = filename => assert(
+    filename.length <= 60 &&
+    filename.search(/^[A-Za-z0-9]([A-Za-z0-9\-]*[A-Za-z0-9])?(\.[A-Za-z0-9]+)?$/) !== -1
+);
 
 let distinct = arr => {
     let r = [];
@@ -132,10 +142,21 @@ if (
 }
 else if (args[0] === "create-from") {
     assert(args.length === 2 && args[1].length > 0);
+    validateVersion(args[1]);
     assert(!$fs.existsSync("lib/c-v" + cwdPackageInfo.version));
     assert($fs.existsSync("lib/c-v" + args[1]));
     mkdir("lib/c-v" + cwdPackageInfo.version);
     copyFile("lib/c-v" + args[1] + "/ref.json", "lib/c-v" + cwdPackageInfo.version + "/ref.json");
+}
+else if (args[0] === "copy") {
+    assert(args.length === 2 && args[1].length > 0);
+    validateFilename(args[1]);
+    let refList = readRefList("lib/c-v" + cwdPackageInfo.version + "/ref.json");
+    let sourceVersion = refList.find(m => m[1] === args[1])[0];
+    let sourcePath = "lib/c-v" + sourceVersion + "/" + args[1];
+    let destPath = "lib/c-v" + cwdPackageInfo.version + "/" + args[1];
+    assert(!$fs.existsSync(destPath));
+    copyFile(sourcePath, destPath);
 }
 else if (args[0] === "version" || args[0] === "v" || args[0] === "--version") {
     console.log(cwdPackageInfo.version);
