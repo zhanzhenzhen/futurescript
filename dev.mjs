@@ -158,6 +158,17 @@ else if (args[0] === "fork-file") {
     assert(!$fs.existsSync(destPath));
     copyFile(sourcePath, destPath);
 }
+else if (args[0] === "diff") {
+    assert(args.length === 3);
+    validateVersion(args[1]);
+    validateVersion(args[2]);
+    makeSingleVersion(args[1], "temp-diff-left");
+    makeSingleVersion(args[2], "temp-diff-right");
+    $cp.execSync(
+        "git diff --no-index -- temp-diff-left temp-diff-right",
+        {stdio: ["pipe", process.stdout, process.stderr]}
+    );
+}
 else if (args[0] === "version" || args[0] === "v" || args[0] === "--version") {
     console.log(cwdPackageInfo.version);
 }
