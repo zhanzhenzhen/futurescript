@@ -33,6 +33,15 @@ node dev create-from <old-version>
 
 where `<old-version>` is the version to inherit. It will create a new version directory and copy `"ref.json"` from the old version directory to the new.
 
+Copy a Permanent File
+---------------------
+
+```
+node dev copy <filename>
+```
+
+This will copy the file to the current version's directory. Note that after that, you should modify `"ref.json"` to reflect the file's version change.
+
 Make, Lint and Test
 -------------------
 
