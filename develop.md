@@ -44,6 +44,15 @@ node dev fork-file <filename>
 
 This will copy the file (which is currently referenced) to the current version's directory. Note that after that, you should modify `"ref.json"` to reflect the file's version change.
 
+Compare Two Versions
+--------------------
+
+```
+node dev diff <left-version> <right-version>
+```
+
+Note: Only the permanent `".mjs"` files will be compared.
+
 Make, Lint and Test
 -------------------
 
