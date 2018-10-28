@@ -164,10 +164,16 @@ else if (args[0] === "diff") {
     validateVersion(args[2]);
     makeSingleVersion(args[1], "temp-diff-left");
     makeSingleVersion(args[2], "temp-diff-right");
-    $cp.execSync(
-        "git diff --no-index -- temp-diff-left temp-diff-right",
-        {stdio: ["pipe", process.stdout, process.stderr]}
-    );
+
+    // Must use `try` because if the diff is more than one page it will give a non-zero exit code.
+    try {
+        $cp.execSync(
+            "git diff --no-index -- temp-diff-left temp-diff-right",
+            {stdio: [process.stdin, process.stdout, process.stderr]}
+        );
+    }
+    catch (ex) {
+    }
 }
 else if (args[0] === "version" || args[0] === "v" || args[0] === "--version") {
     console.log(cwdPackageInfo.version);
