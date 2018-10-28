@@ -81,7 +81,7 @@ grep -Rl your-search-string c-current
 Directory Structure
 ===================
 
-All files in `"lib"` directory (including its sub-directories, recursively) must be either `".mjs"` or `".json"` files.
+All files in `"lib"` directory (including its sub-directories, recursively) must be either `".mjs"` or `".json"` files. All filenames are lowercased.
 
 Permanent directories are in `"lib/c-v<number>.<number>.<number>"` format, under which there are permanent files. They can't have sub-directories. Here `"c"` is from the word "compiler", but actually they can hold other permanent files.
 

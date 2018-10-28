@@ -32,14 +32,14 @@ let readRefList = path => {
     let r = JSON.parse($fs.readFileSync(path, {encoding: "utf8"}));
     r.map(m => m[0]).forEach(m => validateVersion(m));
     let filenames = r.map(m => m[1]);
-    filenames.forEach(m => validateFilename(m));
+    filenames.forEach(m => validatePermanentMjsFilename(m));
     assert(filenames.length === distinct(filenames).length);
     return r;
 };
 
-let validateFilename = filename => assert(
+let validatePermanentMjsFilename = filename => assert(
     filename.length <= 60 &&
-    filename.search(/^[A-Za-z0-9]([A-Za-z0-9\-]*[A-Za-z0-9])?(\.[A-Za-z0-9]+)?$/) !== -1
+    filename.search(/^[a-z0-9]([a-z0-9\-]*[a-z0-9])?\.mjs$/) !== -1
 );
 
 let distinct = arr => {
@@ -150,7 +150,7 @@ else if (args[0] === "fork-version") {
 }
 else if (args[0] === "fork-file") {
     assert(args.length === 2 && args[1].length > 0);
-    validateFilename(args[1]);
+    validatePermanentMjsFilename(args[1]);
     let refList = readRefList("lib/c-v" + cwdPackageInfo.version + "/ref.json");
     let sourceVersion = refList.find(m => m[1] === args[1])[0];
     let sourcePath = "lib/c-v" + sourceVersion + "/" + args[1];
