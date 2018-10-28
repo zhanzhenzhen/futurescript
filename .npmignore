@@ -14,6 +14,8 @@ node_modules
 *.log
 
 /c-current
+/temp-diff-left
+/temp-diff-right
 /target
 
 /.eslintignore
