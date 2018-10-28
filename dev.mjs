@@ -140,7 +140,7 @@ if (
         );
     }
 }
-else if (args[0] === "create-from") {
+else if (args[0] === "fork-version") {
     assert(args.length === 2 && args[1].length > 0);
     validateVersion(args[1]);
     assert(!$fs.existsSync("lib/c-v" + cwdPackageInfo.version));
@@ -148,7 +148,7 @@ else if (args[0] === "create-from") {
     mkdir("lib/c-v" + cwdPackageInfo.version);
     copyFile("lib/c-v" + args[1] + "/ref.json", "lib/c-v" + cwdPackageInfo.version + "/ref.json");
 }
-else if (args[0] === "copy") {
+else if (args[0] === "fork-file") {
     assert(args.length === 2 && args[1].length > 0);
     validateFilename(args[1]);
     let refList = readRefList("lib/c-v" + cwdPackageInfo.version + "/ref.json");

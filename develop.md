@@ -28,19 +28,21 @@ Create a New Version
 First modify the version number in `"package.json"`. Then:
 
 ```
-node dev create-from <old-version>
+node dev fork-version <old-version>
 ```
 
 where `<old-version>` is the version to inherit. It will create a new version directory and copy `"ref.json"` from the old version directory to the new.
+
+For "fork", not to be confused with Git fork. They are different concepts.
 
 Copy a Permanent File
 ---------------------
 
 ```
-node dev copy <filename>
+node dev fork-file <filename>
 ```
 
-This will copy the file to the current version's directory. Note that after that, you should modify `"ref.json"` to reflect the file's version change.
+This will copy the file (which is currently referenced) to the current version's directory. Note that after that, you should modify `"ref.json"` to reflect the file's version change.
 
 Make, Lint and Test
 -------------------
@@ -146,7 +148,7 @@ Git commit the change and tag the new version.
 
 Then publish to npm.
 
-Fork and Pull Request
-=====================
+Git Fork and Pull Request
+=========================
 
 You may wonder why there're thousands of Git tags in this repo. That's because the author uses GitLock. For details see [here](https://www.npmjs.com/package/gitlock). But for other developers, you don't need to have GitLock installed. Just use the normal Git commands to commit and push and create a pull request, then the author will lock it.
