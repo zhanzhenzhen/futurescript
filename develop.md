@@ -51,7 +51,7 @@ Compare Two Versions
 node dev diff <left-version> <right-version>
 ```
 
-Note: Only the permanent `".mjs"` files will be compared.
+Note: Only the permanent `".mjs"` files will be compared. This command internally uses `git diff` command.
 
 Make, Lint and Test
 -------------------
