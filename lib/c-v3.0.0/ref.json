@@ -40,7 +40,7 @@
     ["1.1.0", "test-lex-flexible-object.mjs"],
     ["0.1.0", "test-lex-same-level.mjs"],
     ["2.0.4", "test-lex-string.mjs"],
-    ["2.2.1", "test-lex.mjs"],
+    ["3.0.0", "test-lex.mjs"],
     ["2.4.2", "test-main.mjs"],
     ["2.3.0", "test-pattern-big.mjs"],
     ["2.3.0", "test-pattern.mjs"],
