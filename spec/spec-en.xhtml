@@ -1620,7 +1620,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p><code>and</code> pattern is less common. But here is an example:</p>
 <pre><code class="fus-part"><![CDATA[
     array: ["a", "c", "b", "d"]
-    message: match <> array.includes(@0) # note: arr.includes is an ES7 feature
+    message: match <> array.includes(@0)
         "a" and "b" and "c" ? "The array includes all of the first 3 letters."
         "a"                 ? "The array includes a."
         "b"                 ? "The array includes b."
@@ -1812,47 +1812,20 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log(x);
     });
 ]]></code></pre>
-<p>Now we can write:</p>
+<p>ES2017 simplifies it into:</p>
+<pre><code class="js"><![CDATA[
+    (async () => {
+        console.log(await (await (await aaa()).bbb()).ccc());
+    })();
+]]></code></pre>
+<p>In Fus, we simplify it further:</p>
 <pre><code class="fus-part"><![CDATA[
     do --
         console.log aaa()'wait.bbb()'wait.ccc()'wait
 ]]></code></pre>
 <p>Once the code has <code>'wait</code>, the parent function will be compiled into asynchronous function. We don't need the <code>async</code> keyword, which is totally redundant.</p>
+<p>Another difference is that in JS we put <code>await</code> to the left, but in Fus we put <code>'wait</code> to the right. Ours is better because it eliminates many parentheses and improves readability.</p>
 <p><code>'wait</code> must be in a function.</p>
-<p><code>'wait</code> is to operate promises. The operand can be a normal promise, or another asynchronous function's return value. The return value of an asynchronous function is also a promise.</p>
-<p>Inside an asynchronous function, when executing <code>'wait</code> it will wait until the promise is resolved, then proceed.</p>
-<p>An asynchronous function can be called without <code>'wait</code>, if the caller doesn't want to wait for the promise to finish.</p>
-<p>An example for using <code>'wait</code> to call an asynchronous function:</p>
-<pre><code class="fus-part"><![CDATA[
-    do --
-        task: --
-            aaa()'wait
-            bbb()'wait
-        task()'wait
-        console.log "success"
-]]></code></pre>
-<p>Without using <code>'wait</code>, it can also be called for the same purpose:</p>
-<pre><code class="fus-part"><![CDATA[
-    do --
-        task: --
-            aaa()'wait
-            bbb()'wait
-            console.log "success"
-        task()
-]]></code></pre>
-<p>Note that if an asynchronous function is called without <code>'wait</code>, then it will return before reaching the first <code>'wait</code> inside the asynchronous function. The following example describes the order:</p>
-<pre><code class="fus-part"><![CDATA[
-    do --
-        task: --
-            console.log "stage 1"
-            aaa()'wait
-            console.log "stage 3"
-            bbb()'wait
-            console.log "stage 4"
-        task()
-        console.log "stage 2"
-]]></code></pre>
-<p>There's one limitation: Because an asynchronous function is compiled into a generator, and the ES6 generator can't contain <code>super</code>, so an asynchronous function can't contain <code>super</code>. It may be solved in later versions, but it requires a huge amount of code to simulate a generator. Surely, it will eventually be solved after ES7 is released, for we can compile it to the native ES7 asynchronous function.</p>
 <h1>Object-oriented</h1>
 <h2>Class</h2>
 <p class="detail">"Field" and "property" of a class are synonyms. A field can be called a "method" if it's a function. Class fields (including static fields) and constructors (including static constructors) are called class members. Note: Class member is conceptually different from object member.</p>
@@ -1998,6 +1971,28 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     (([3, 4, 5] |> _.map(x -> x * 2)).map(x -> x + 1)) |> _.max
 ]]></code></pre>
 <p>So basically a fat dot is equal to a normal dot, except that it acts as an ending tag when it's on the right side of the pipe operator. Also, it is as "fat" as the pipe operator, so looks better.</p>
+<p>Pipe can be used with asynchronous code. For example:</p>
+<pre><code class="fus-part"><![CDATA[
+    do --
+        x: data |> lib.process1'wait |> lib.process2'wait
+        y: data |> lib.remoteCombine(anotherData1)'wait |> lib.remoteCombine(anotherData2)'wait
+        console.log(x, y)
+]]></code></pre>
+<p>Equivalent to:</p>
+<pre><code class="fus-part"><![CDATA[
+    do --
+        x: lib.process2(lib.process1(data)'wait)'wait
+        y: lib.remoteCombine(lib.remoteCombine(data, anotherData1)'wait, anotherData2)'wait
+        console.log(x, y)
+]]></code></pre>
+<p>The equivalent JS code is:</p>
+<pre><code class="js"><![CDATA[
+    (async () => {
+        var x = await lib.process2(await lib.process1(data));
+        var y = await lib.remoteCombine(await lib.remoteCombine(data, anotherData1), anotherData2);
+        console.log(x, y);
+    })();
+]]></code></pre>
 <p>The code using pipe can be in either compatible mode or radical mode. But if an external library is also written in FutureScript, then this external library should better be written in comptatible mode, because the functions in it must take multiple arguments because pipe itself is to split arguments.</p>
 <h2 id="fd221fe8-2827-4c16-8947-b35900b3b050">Virtual Method</h2>
 <p>The dot-dot <code>..</code> method can be treated as a virtual method. Its use case is similar to pipe, but makes it even easier to use underscore:</p>
@@ -2599,7 +2594,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p class="question">Q: In JS we can use <code>typeof a === "undefined"</code> to check whether a variable is declared without throwing exceptions, but why we can't here?</p>
 <p>A: This seems useless. FutureScript's variables are all declared at the top of the function body, so whether a variable is declared isn't dynamic, so this shouldn't be what the runtime should do.</p>
 <p class="question">Q: Why the precedence of the exponentiation operator <code>**</code> differs from that in CoffeeScript?</p>
-<p>A: Although it's different with CoffeeScript, it's the same as other languages that have this operator, such as F# and the future ES7. CoffeeScript may have considered that if <code>-3 ** 2</code> means -3<sup>2</sup> then it's -9, but this looks strange, unless you add a space so that it's <code>- 3 ** 2</code>, or you use no space so that it's <code>-3**2</code>. But we rarely write this way, not to mention the former conflicts with multiline connection. Another reason is that CoffeeScript makes <code>**</code> special so that it's inconsistent. In fact the precedence of <code>*</code> should be lower by just one level than <code>**</code>, but luckily <code>(-a) * b</code> is always equivalent to <code>-(a * b)</code> so maybe they think it doesn't matter so they didn't adjust.</p>
+<p>A: Although it's different with CoffeeScript, it's the same as other languages that have this operator, such as F# and ES2017. CoffeeScript may have considered that if <code>-3 ** 2</code> means -3<sup>2</sup> then it's -9, but this looks strange, unless you add a space so that it's <code>- 3 ** 2</code>, or you use no space so that it's <code>-3**2</code>. But we rarely write this way, not to mention the former conflicts with multiline connection. Another reason is that CoffeeScript makes <code>**</code> special so that it's inconsistent. In fact the precedence of <code>*</code> should be lower by just one level than <code>**</code>, but luckily <code>(-a) * b</code> is always equivalent to <code>-(a * b)</code> so maybe they think it doesn't matter so they didn't adjust.</p>
 <p class="question">Q: The precedence of <code>not</code> is greatly lowered. Is it reasonable?</p>
 <p>A: This looks more natural and more in line with human reading. I admit that such change has never been done by anybody, so it takes risks. To see if there're counter-examples that supports maintaining the common precedence, I reviewed the source code of GitHub Atom (It's written in CoffeeScript) as well as my own code. I found that almost no <code>not</code> is simpler under the common precedence. This gave me confidence. I think it's very bad to use <code>not</code> in operands in an arithmetic operation such as addition and multiplication. Maybe some people wants to take advantage of this trick, but such code is very unreadable. Good code will not have <code>not a + not b</code>. We shouldn't use such counter-examples. The same goes for <code>=</code>, <code>&lt;</code> and <code>&gt;</code>.</p>
 <p class="question">Q: Why use <code>###</code> for comments? Shouldn't it be more concise if's like formatted string?</p>

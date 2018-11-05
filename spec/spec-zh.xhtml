@@ -1609,7 +1609,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p>and模式则不常用，但也有例子：</p>
 <pre><code class="fus-part"><![CDATA[
     array: ["a", "c", "b", "d"]
-    message: match <> array.includes(@0) # note: arr.includes is an ES7 feature
+    message: match <> array.includes(@0)
         "a" and "b" and "c" ? "The array includes all of the first 3 letters."
         "a"                 ? "The array includes a."
         "b"                 ? "The array includes b."
@@ -1801,47 +1801,20 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log(x);
     });
 ]]></code></pre>
-<p>我们现在可以写成：</p>
+<p>ES2017把它简化成：</p>
+<pre><code class="js"><![CDATA[
+    (async () => {
+        console.log(await (await (await aaa()).bbb()).ccc());
+    })();
+]]></code></pre>
+<p>在Fus中，我们进一步简化：</p>
 <pre><code class="fus-part"><![CDATA[
     do --
         console.log aaa()'wait.bbb()'wait.ccc()'wait
 ]]></code></pre>
 <p>一旦代码有<code>'wait</code>，那么代码所在的函数（直接所在，非嵌套）就被编译成异步函数。我们不用async关键字声明异步函数，这个关键字根本多余。</p>
+<p>还有一点不同，就是在JS中<code>await</code>放在左边，而Fus中<code>'wait</code>放在右边。我们的要好于JS，因为这就减少了很多括号，可读性也更强。</p>
 <p><code>'wait</code>必须出现在函数中。</p>
-<p><code>'wait</code>针对的是promise，它可以是一个普通的promise，也可以是别的异步函数的返回值。异步函数的返回值也是一个promise。</p>
-<p>在异步函数内部，每执行到<code>'wait</code>，会进入等待，直到该promise有了结果，才继续往下执行。</p>
-<p>调用异步函数可以不加<code>'wait</code>，当调用方不需要等待promise出结果的时候。</p>
-<p>用<code>'wait</code>调用异步函数的例子：</p>
-<pre><code class="fus-part"><![CDATA[
-    do --
-        task: --
-            aaa()'wait
-            bbb()'wait
-        task()'wait
-        console.log "success"
-]]></code></pre>
-<p>不用<code>'wait</code>，也可以调用异步函数并达到相同的目的：</p>
-<pre><code class="fus-part"><![CDATA[
-    do --
-        task: --
-            aaa()'wait
-            bbb()'wait
-            console.log "success"
-        task()
-]]></code></pre>
-<p>注意，不用<code>'wait</code>调用异步函数的时候，异步函数执行到第一个<code>'wait</code>的位置之前返回调用方。下面的例子说明了先后顺序：</p>
-<pre><code class="fus-part"><![CDATA[
-    do --
-        task: --
-            console.log "stage 1"
-            aaa()'wait
-            console.log "stage 3"
-            bbb()'wait
-            console.log "stage 4"
-        task()
-        console.log "stage 2"
-]]></code></pre>
-<p>目前的一个限制是：由于异步函数会编译成生成器函数，而ES6的生成器函数不能含有<code>super</code>，所以异步函数内不能含有<code>super</code>。这一点也许以后的版本中会得到解决，但需要加入大量的代码来模拟一个生成器函数。当然，最终总会得到解决，因为ES7发布后我们就可以编译成原生的ES7异步函数了。</p>
 <h1>面向对象</h1>
 <h2>类</h2>
 <p class="detail">类的“字段”、“属性”是同义词。当字段是函数时，才能称为“方法”。类的字段（包括静态字段）、构造函数（包括静态构造函数）统称为类的成员。注意：类的成员和对象的成员不是一个概念。</p>
@@ -1987,6 +1960,28 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     (([3, 4, 5] |> _.map(x -> x * 2)).map(x -> x + 1)) |> _.max
 ]]></code></pre>
 <p>所以胖点基本就是点号，只不过我们规定当它出现在管道右边时作为结束标记，而且看起来比较“胖”，和管道运算符比较接近，显得比较舒服。</p>
+<p>管道还可以和异步相结合，例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    do --
+        x: data |> lib.process1'wait |> lib.process2'wait
+        y: data |> lib.remoteCombine(anotherData1)'wait |> lib.remoteCombine(anotherData2)'wait
+        console.log(x, y)
+]]></code></pre>
+<p>相当于：</p>
+<pre><code class="fus-part"><![CDATA[
+    do --
+        x: lib.process2(lib.process1(data)'wait)'wait
+        y: lib.remoteCombine(lib.remoteCombine(data, anotherData1)'wait, anotherData2)'wait
+        console.log(x, y)
+]]></code></pre>
+<p>等价的JS代码是：</p>
+<pre><code class="js"><![CDATA[
+    (async () => {
+        var x = await lib.process2(await lib.process1(data));
+        var y = await lib.remoteCombine(await lib.remoteCombine(data, anotherData1), anotherData2);
+        console.log(x, y);
+    })();
+]]></code></pre>
 <p>用到管道的代码可以是兼容模式，也可以是激进模式。但如果管道使用的外部库也用FutureScript写的话，还是用兼容模式来写比较好，因为外部库中的函数必须是多参数的，因为管道本身就是分割参数的。</p>
 <h2 id="fd221fe8-2827-4c16-8947-b35900b3b050">虚拟方法</h2>
 <p>点点<code>..</code>方法可以看成是虚拟的方法，它和管道的用途相似，但让使用underscore变得更为简单：</p>
@@ -2588,7 +2583,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p class="question">问：JS中可以用<code>typeof a === "undefined"</code>检查变量是否已声明又不引发异常，这里为啥做不到？</p>
 <p>答：这好像并没有什么用。FutureScript的变量统统编译成在函数顶部声明，所以变量的声明与否不是动态的，所以检查这个不应该是程序运行时做的事情。</p>
 <p class="question">问：为啥幂运算符<code>**</code>的优先级和CoffeeScript不一样？</p>
-<p>答：虽然和CoffeeScript不一样，但是和大多数有这个运算符的语言一样，比如F#，比如未来的ES7草案。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但这看上去非常别扭，除非你加个空格，成为<code>- 3 ** 2</code>，或者干脆都不用空格，成为<code>-3**2</code>，但很少有人会这么写，前者还和多行连接有冲突。另一个原因是，CoffeeScript这样做弄得不大协调，就<code>**</code>显得那么特殊，其实<code>*</code>的优先级理应只比<code>**</code>低一级，只不过<code>(-a) * b</code>恒等于<code>-(a * b)</code>，所以可能他们觉得无所谓就不调整了而已。</p>
+<p>答：虽然和CoffeeScript不一样，但是和大多数有这个运算符的语言一样，比如F#，比如ES2017。CoffeeScript应该是考虑到<code>-3 ** 2</code>如果书写成-3<sup>2</sup>应该是-9，但这看上去非常别扭，除非你加个空格，成为<code>- 3 ** 2</code>，或者干脆都不用空格，成为<code>-3**2</code>，但很少有人会这么写，前者还和多行连接有冲突。另一个原因是，CoffeeScript这样做弄得不大协调，就<code>**</code>显得那么特殊，其实<code>*</code>的优先级理应只比<code>**</code>低一级，只不过<code>(-a) * b</code>恒等于<code>-(a * b)</code>，所以可能他们觉得无所谓就不调整了而已。</p>
 <p class="question">问：<code>not</code>优先级被大幅降低，这合理吗？</p>
 <p>答：这看上去更自然，更符合人类阅读方式。我承认，这个改变从来没有人做过，具有冒险性。为了看看有没有反例，支持<code>not</code>应该维持目前通用的优先级，我看了GitHub的Atom编辑器的源代码（它是用CoffeeScript编写的），还看了我自己的代码。我发现，几乎没有一处<code>not</code>在目前通用的优先级下更简单的，这给了我信心。因为我的想法是，算术运算符，像加法、乘法，对它们的算元使用<code>not</code>是非常不好的，也许有人会利用这种方式来取巧，但可读性非常差，所以好的代码中是不会出现<code>not a + not b</code>的，这种反例不应该使用。引申到<code>=</code>、<code>&lt;</code>、<code>&gt;</code>也是一样。</p>
 <p class="question">问：为啥格式注释是用<code>###</code>？如果像格式字符串一样，不是更简洁吗？</p>
