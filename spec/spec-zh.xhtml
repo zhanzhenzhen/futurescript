@@ -1924,6 +1924,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p class="detail"><code>fun</code>对应的函数不能是类成员。</p>
 <p>创建实例时无需使用new，因为其实JS的new是多余的，一个类作为一般函数也没有什么实用价值。所以在FutureScript中，只要这被识别为一个类，那么当被作为函数调用时，编译出来的就会自动加上new。反之，如果不是类，编译出来的就不会加上new。具体的识别方法由版本行指定。当然，罕见的情况下，某个库的函数名可能会不符合约定，造成被识别为类，这时可以用<code>nonew</code>关键字，语法上和<code>new</code>一样。</p>
+<p class="detail">JS支持<code>new a</code>（不加括号）的形式，但我们不支持，因为容易误解。</p>
 <p class="detail">JS支持<code>new new a(b)(c)</code>的形式，但我们不支持，这太没有可读性了，完全可以写成<code>new (new a(b))(c)</code>。</p>
 <p>只要类有实例化需求，就应该取大写字母开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>

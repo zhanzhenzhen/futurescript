@@ -1935,6 +1935,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 ]]></code></pre>
 <p class="detail">The function of <code>fun</code> can't be a class member.</p>
 <p>You don't need to use <code>new</code> when creating instances, because JS's <code>new</code> is redundant - a class isn't useful as a normal function. So, in FutureScript, if a function is recognized as a class, then the function call will automatically have <code>new</code> in generated JS. If not, then it won't have <code>new</code>. The detailed logic is specified by the version line. In rare occasions, a function name of a library may violate the good naming conventions, causing it to be recognized as a class. In this case you can use <code>nonew</code> keyword, which has a similar grammar as <code>new</code>.</p>
+<p class="detail">JS supports the form of <code>new a</code> (without parentheses), but we don't support because of the risk of misunderstanding.</p>
 <p class="detail">JS supports the form of <code>new new a(b)(c)</code>, but we don't support, because it's too unreadable. You can write as <code>new (new a(b))(c)</code>.</p>
 <p>As long as there's a use case for instantiating, you should use a capitalized name for a class, otherwise the compiler will be affected. But if all use cases are static, then you can use any name.</p>
 <p><code>Number</code>, <code>String</code>, <code>Boolean</code> and <code>Symbol</code> are always recognized as non-classes, regardless of the version line.</p>
