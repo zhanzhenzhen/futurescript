@@ -1997,6 +1997,20 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log(x, y);
     })();
 ]]></code></pre>
+<p>Pipe also supports automatically adding <code>new</code>. For example:</p>
+<pre><code class="fus-part"><![CDATA[
+    foo: 1 |> Foo
+    bar: 2 |> Bar()
+]]></code></pre>
+<p>Equivalent to JS's:</p>
+<pre><code class="js"><![CDATA[
+    foo = new Foo(1);
+    bar = new Bar(2);
+]]></code></pre>
+<p>But if you use <code>new</code> or <code>nonew</code>, then you must add parentheses. For example, this is illegal:</p>
+<pre><code><![CDATA[
+    foo: 1 |> nonew Foo
+]]></code></pre>
 <p>The code using pipe can be in either compatible mode or radical mode. But if an external library is also written in FutureScript, then this external library should better be written in comptatible mode, because the functions in it must take multiple arguments because pipe itself is to split arguments.</p>
 <h2 id="fd221fe8-2827-4c16-8947-b35900b3b050">Virtual Method</h2>
 <p>The dot-dot <code>..</code> method can be treated as a virtual method. Its use case is similar to pipe, but makes it even easier to use underscore:</p>

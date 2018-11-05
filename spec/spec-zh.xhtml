@@ -1986,6 +1986,20 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
         console.log(x, y);
     })();
 ]]></code></pre>
+<p>管道也支持自动加上<code>new</code>，例如：</p>
+<pre><code class="fus-part"><![CDATA[
+    foo: 1 |> Foo
+    bar: 2 |> Bar()
+]]></code></pre>
+<p>相当于JS的：</p>
+<pre><code class="js"><![CDATA[
+    foo = new Foo(1);
+    bar = new Bar(2);
+]]></code></pre>
+<p>不过，如果标出<code>new</code>或<code>nonew</code>，则必须加上括号。例如如下的代码是非法的：</p>
+<pre><code><![CDATA[
+    foo: 1 |> nonew Foo
+]]></code></pre>
 <p>用到管道的代码可以是兼容模式，也可以是激进模式。但如果管道使用的外部库也用FutureScript写的话，还是用兼容模式来写比较好，因为外部库中的函数必须是多参数的，因为管道本身就是分割参数的。</p>
 <h2 id="fd221fe8-2827-4c16-8947-b35900b3b050">虚拟方法</h2>
 <p>点点<code>..</code>方法可以看成是虚拟的方法，它和管道的用途相似，但让使用underscore变得更为简单：</p>
