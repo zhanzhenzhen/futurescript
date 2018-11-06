@@ -1,6 +1,6 @@
 {
     "name": "futurescript",
-    "version": "2.5.0",
+    "version": "2.5.1",
     "description": "A functional style, but highly readable language that compiles to JavaScript.",
     "keywords": [
         "fus", "js", "javascript", "language", "es6", "es2015", "es2017"
