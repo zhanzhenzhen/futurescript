@@ -3,7 +3,7 @@
     margin: 14mm 10mm;
 }
 html {
-    font-family: "Cambria Math", Times, "Times New Roman", serif;
+    font-family: "Cambria Math", Charter, Times, "Times New Roman", serif;
     font-size: 10pt;
     line-height: 1.35;
     word-wrap: break-word; /* `overflow-wrap` is a better equivalent but IE does't support it. */
