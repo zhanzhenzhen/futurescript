@@ -1928,8 +1928,7 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
 <p class="detail">JS支持<code>new new a(b)(c)</code>的形式，但我们不支持，这太没有可读性了，完全可以写成<code>new (new a(b))(c)</code>。</p>
 <p>只要类有实例化需求，就应该取大写字母开头的名称，否则会影响编译器判断。如果类的所有需求都是静态，那么就任意了。</p>
 <p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Symbol</code>始终被识别为不是类，无论编译选项如何。</p>
-<p>FutureScript的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，继承类的构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在FutureScript（或ES6）中，继承类的构造函数里面<code>me</code>或<code>Me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。（但问题是目前只有Microsoft Edge完全支持继承内置类，其余浏览器包括Node.js支持有限。所以目前，我们可以用类做任何事，除了继承<code>Array</code>、<code>Error</code>以外。但考虑到ES6在2015年6月才正式发布，形势有望在未来数月内改变，届时就会完美。）</p>
-<p class="detail">目前继承类的构造函数里面<code>Me</code>（大写的）不能出现在<code>super</code>之前，但当所有浏览器都支持<code>new.target</code>后我们应该就会支持，因为只要把它编译成<code>new.target</code>即可。</p>
+<p>FutureScript的类属于ES6的类，而不是CoffeeScript的类或ES5中用函数模拟的类。这有什么区别呢？在CoffeeScript中，继承类的构造函数里面<code>super</code>和<code>this</code>的位置可以任意；但在FutureScript（或ES6）中，继承类的构造函数里面<code>me</code>不能出现在<code>super</code>之前。这的确更严格，但其实和C#以及主流编程语言相同，并且使这成为可能：继承<code>Array</code>、<code>Error</code>等内置类，这在ES5时代是不可能的。</p>
 <p>但是FutureScript中<code>super</code>的语法比较像CoffeeScript，不用写<code>super.methodName()</code>，直接<code>super()</code>即可。当然，我们也支持<code>super.methodName()</code>，因为这可以用来调用不同名字的方法。我们不支持孤立的<code>super</code>，不过你可以写成<code>super'(@)</code>或<code>super(@...)</code>。</p>
 <p class="detail">我们知道一般构造函数是没有返回值的，但其实在JS（包括ES6）中，构造函数可以有返回值，可以返回任何对象，这样创造的就不是该类的实例。但这很怪异，没有什么实用价值（有这个用途的话，可以使用静态方法）。所以在FutureScript里，构造函数虽然也可以有返回值，但它几乎不起作用，创造的永远是该类的实例。</p>
 <p>不要在类的方法或构造器内部为另一个对象的原型方法赋值。例如这样不合理（虽然不会出错）：</p>
