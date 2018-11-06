@@ -47,7 +47,7 @@
     ["1.0.0", "test-style.mjs"],
     ["0.6.0", "test-tools.mjs"],
     ["0.1.0", "test-tree-assign.mjs"],
-    ["2.4.0", "test-tree-class.mjs"],
+    ["2.5.0", "test-tree-class.mjs"],
     ["0.1.0", "test-tree-export.mjs"],
     ["2.2.0", "test-tree-function.mjs"],
     ["1.2.0", "test-tree-if.mjs"],
