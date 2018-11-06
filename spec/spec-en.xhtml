@@ -1801,6 +1801,21 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     </tr>
 </table>
 <p>We can find that the rules of JS or Fus are simple. JS catches only in <code>catch</code>. Fus always catches. But the rule of CoffeeScript is complex because of a special case <code>try...finally</code>.</p>
+<p>There's one thing to note, that a <code>catch</code> variable is no different than a normal variable. Its scope is not restricted to the <code>catch</code> block. This is the same as CoffeeScript but different from JS. See the code below:</p>
+<pre><code class="fus-part"><![CDATA[
+    err1: null
+    err2: null
+    try
+        a()
+    catch ex
+        err1: ex
+        try
+            a()
+        catch ex
+            err2: ex
+        console.log(ex = err1)
+]]></code></pre>
+<p>The output is <code>false</code> not <code>true</code>. So, we should try to avoid using the same variable name in nested <code>catch</code>.</p>
 <p class="detail">If <code>try</code> block or <code>finally</code> block is an inline block, then it must occupy the whole line.</p>
 <h2 id="358d4ea8-456b-473a-b2d2-8452aaaf4341">Asynchronous</h2>
 <p><code>'wait</code> makes an asynchronous function internally synchronous-style, without changing its asynchronous essence. Consider the following JS:</p>

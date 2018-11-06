@@ -1790,6 +1790,21 @@ piece: chessBoard {x: 4, y: 5} # will be "queen"
     </tr>
 </table>
 <p>可以看出，JS和Fus都比较纯粹，因为JS是仅当有<code>catch</code>时捕获，而Fus则是全捕获。CoffeeScript则是存在<code>try...finally</code>的特例。</p>
+<p>有一点需要注意，<code>catch</code>变量和普通变量没有区别，它的作用域并不局限于<code>catch</code>块。这一点和CoffeeScript相同，但和JS不同。请看如下代码：</p>
+<pre><code class="fus-part"><![CDATA[
+    err1: null
+    err2: null
+    try
+        a()
+    catch ex
+        err1: ex
+        try
+            a()
+        catch ex
+            err2: ex
+        console.log(ex = err1)
+]]></code></pre>
+<p>其输出的是<code>false</code>而不是<code>true</code>。所以，要尽量避免内外层的<code>catch</code>变量名相同。</p>
 <p class="detail"><code>try</code>块和<code>finally</code>块若是内联块，则必须占满整行。</p>
 <h2 id="358d4ea8-456b-473a-b2d2-8452aaaf4341">异步</h2>
 <p><code>'wait</code>使异步函数从内部看上去像同步一样（然而不改变其异步的本质）。考虑这样一个JS：</p>
