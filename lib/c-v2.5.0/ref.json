@@ -27,7 +27,7 @@
     ["1.0.0", "style.mjs"],
     ["0.1.0", "test-base.mjs"],
     ["2.5.0", "test-compile-async.mjs"],
-    ["2.4.0", "test-compile-class.mjs"],
+    ["2.5.0", "test-compile-class.mjs"],
     ["0.2.0", "test-compile-comment-map.mjs"],
     ["2.5.0", "test-compile-exception.mjs"],
     ["2.4.2", "test-compile-long.mjs"],
