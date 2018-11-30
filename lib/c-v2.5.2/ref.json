@@ -1,7 +1,7 @@
 [
     ["2.5.0", "block.mjs"],
     ["2.5.0", "expression-base.mjs"],
-    ["2.0.6", "expression-class.mjs"],
+    ["2.5.2", "expression-class.mjs"],
     ["0.5.0", "expression-condition.mjs"],
     ["2.5.0", "expression-exception.mjs"],
     ["2.5.0", "expression-external.mjs"],
@@ -18,7 +18,7 @@
     ["2.3.0", "lex-massive-rounds.mjs"],
     ["1.2.0", "lex.mjs"],
     ["2.0.5", "main.mjs"],
-    ["2.5.0", "node-base.mjs"],
+    ["2.5.2", "node-base.mjs"],
     ["0.1.0", "node.mjs"],
     ["2.3.0", "pattern.mjs"],
     ["0.1.0", "print.mjs"],
