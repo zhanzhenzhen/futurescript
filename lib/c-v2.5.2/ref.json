@@ -1,6 +1,6 @@
 [
     ["2.5.2", "block.mjs"],
-    ["2.5.0", "expression-base.mjs"],
+    ["2.5.2", "expression-base.mjs"],
     ["2.5.2", "expression-class.mjs"],
     ["0.5.0", "expression-condition.mjs"],
     ["2.5.0", "expression-exception.mjs"],
