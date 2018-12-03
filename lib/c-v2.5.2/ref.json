@@ -2,7 +2,7 @@
     ["2.5.2", "block.mjs"],
     ["2.5.2", "expression-base.mjs"],
     ["2.5.2", "expression-class.mjs"],
-    ["0.5.0", "expression-condition.mjs"],
+    ["2.5.2", "expression-condition.mjs"],
     ["2.5.2", "expression-exception.mjs"],
     ["2.5.0", "expression-external.mjs"],
     ["2.5.2", "expression-function.mjs"],
