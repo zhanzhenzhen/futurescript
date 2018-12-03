@@ -23,7 +23,7 @@
     ["2.3.0", "pattern.mjs"],
     ["0.1.0", "print.mjs"],
     ["0.2.0", "readme.mjs"],
-    ["2.5.0", "statement.mjs"],
+    ["2.5.2", "statement.mjs"],
     ["1.0.0", "style.mjs"],
     ["0.1.0", "test-base.mjs"],
     ["2.5.2", "test-compile-async.mjs"],
