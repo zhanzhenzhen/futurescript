@@ -1,5 +1,5 @@
 [
-    ["2.5.2", "block.mjs"],
+    ["2.5.4", "block.mjs"],
     ["2.5.2", "expression-base.mjs"],
     ["2.5.2", "expression-class.mjs"],
     ["2.5.2", "expression-condition.mjs"],
@@ -51,7 +51,7 @@
     ["0.1.0", "test-tree-export.mjs"],
     ["2.2.0", "test-tree-function.mjs"],
     ["1.2.0", "test-tree-if.mjs"],
-    ["0.1.0", "test-tree-import.mjs"],
+    ["2.5.4", "test-tree-import.mjs"],
     ["1.2.0", "test-tree-match.mjs"],
     ["2.4.2", "test-tree-try.mjs"],
     ["2.5.2", "test-tree.mjs"],
