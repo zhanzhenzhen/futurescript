@@ -6,7 +6,9 @@ let $path = require("path").posix;
 let args = process.argv.slice();
 args.splice(0, 2); // strip "node" and the name of this file
 
-let moduleDir = $path.dirname(module.filename);
+let slashPath = p => typeof p === "string" ? p.replace(/\\/g, "/") : p;
+
+let moduleDir = $path.dirname(slashPath(module.filename));
 try {
     $cp.execFileSync(
         process.execPath,
