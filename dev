@@ -1,4 +1,0 @@
-#!/bin/bash
-
-BASEDIR=$(dirname "$0")
-/usr/bin/env node --experimental-modules --no-warnings "$BASEDIR/dev.mjs" "$@"

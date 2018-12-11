@@ -20,7 +20,7 @@ Now, we're ready to develop.
 Commands
 ========
 
-Because Node.js 10 doesn't turn on ES modules by default, and also because Shebang has a limit of supporting only 1 argument on Linux (unlike macOS), we are using a wrapper command `./dev` to run `./dev.mjs`.
+Because Node.js 10 doesn't turn on ES modules by default, and because Shebang has a limit of supporting only 1 argument on Linux (unlike macOS), and also because Windows cannot recognize Bash scripts, we are using a JS wrapper `dev.js` to run `dev.mjs`. In the future this wrapper can be removed.
 
 Create a New Version
 --------------------
@@ -28,7 +28,7 @@ Create a New Version
 First modify the version number in `"package.json"`. Then:
 
 ```
-./dev fork-version <old-version>
+node dev fork-version <old-version>
 ```
 
 where `<old-version>` is the version to inherit. It will create a new version directory and copy `"ref.json"` from the old version directory to the new.
@@ -39,7 +39,7 @@ Copy a Permanent File
 ---------------------
 
 ```
-./dev fork-file <filename>
+node dev fork-file <filename>
 ```
 
 This will copy the file (which is currently referenced) to the current version's directory. Note that after that, you should modify `"ref.json"` to reflect the file's version change.
@@ -48,7 +48,7 @@ Compare Two Versions
 --------------------
 
 ```
-./dev diff <left-version> <right-version>
+node dev diff <left-version> <right-version>
 ```
 
 Note: Only the permanent `".mjs"` files will be compared. This command internally uses `git diff` command.
@@ -59,8 +59,8 @@ Make, Lint and Test
 Make, lint and test the current version (this is most commonly used):
 
 ```bash
-./dev test
-./dev t
+node dev test
+node dev t
 ```
 
 (Note: Lint error will be shown as if the file is in `"target"` directory. You will need to find the original file in `"lib"` directory.)
@@ -68,7 +68,7 @@ Make, lint and test the current version (this is most commonly used):
 Make all versions:
 
 ```bash
-./dev make-all
+node dev make-all
 ```
 
 Search
@@ -77,8 +77,8 @@ Search
 The following command is handy when you want to "find" something just inside the current version of permanent files, for it creates a `"c-current"` directory to symlink all permanent files of the current version (note: on Windows you may need to run as admin):
 
 ```bash
-./dev c-current
-./dev cc
+node dev c-current
+node dev cc
 ```
 
 Then we can search by typing:
@@ -150,7 +150,7 @@ Make sure all examples in `"examples"` directory are using the newest version.
 Then run this command to make sure there's no lint error, or any false or error test result:
 
 ```bash
-./dev t
+node dev t
 ```
 
 Git commit the change and tag the new version.
