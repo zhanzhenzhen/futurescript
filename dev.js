@@ -8,13 +8,13 @@ let $path = require("path").posix;
 let args = process.argv.slice();
 args.splice(0, 2); // strip "node" and the name of this file
 
-let packageDir = process.cwd();
+let moduleDir = $path.dirname(module.filename);
 $cp.execFileSync(
     process.execPath,
     [
         "--experimental-modules",
         "--no-warnings",
-        $path.join(packageDir, "dev.mjs"),
+        $path.join(moduleDir, "dev.mjs"),
         ...args
     ],
     {stdio: "inherit"}
