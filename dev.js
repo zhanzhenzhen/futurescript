@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 "use strict";
 
 let $cp = require("child_process");
