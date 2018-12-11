@@ -1,5 +1,3 @@
-#!/usr/bin/env node --experimental-modules --no-warnings
-
 import assert from "assert";
 import pathMod from "path";
 let $path = pathMod.posix;
