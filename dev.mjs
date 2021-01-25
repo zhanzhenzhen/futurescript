@@ -116,12 +116,8 @@ if (
         $cp.execFileSync(
             $path.join(packageDir, "node_modules/.bin/eslint"),
             [
-                /* TODO: Currently dynamic import isn't in ES spec, so we must comment out
-                those files, but in the future we should include them.
-
                 $path.join(packageDir, "*.mjs"),
                 $path.join(libDir, "*.mjs"),
-                $path.join(packageDir, "bin/*.mjs"),*/
                 $path.join(targetVersionDir, "*.mjs")
             ],
             {stdio: ["pipe", process.stdout, process.stderr]}

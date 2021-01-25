@@ -16,10 +16,10 @@
         "rimraf": "2.x"
     },
     "devDependencies": {
-        "eslint": "4.x"
+        "eslint": "7.x"
     },
     "engines": {
-        "node": ">=10.0.0"
+        "node": ">=12.0.0"
     },
     "bin": {
         "fus": "./bin/fus"
