@@ -130,9 +130,7 @@ if (
         $cp.execFileSync(
             process.execPath,
             [
-                "--experimental-modules",
                 "--experimental-json-modules",
-                "--no-warnings",
                 $path.join(targetVersionDir, "test-main.mjs")
             ],
             {stdio: ["pipe", process.stdout, process.stderr]}

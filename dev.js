@@ -13,9 +13,7 @@ try {
     $cp.execFileSync(
         process.execPath,
         [
-            "--experimental-modules",
             "--experimental-json-modules",
-            "--no-warnings",
             $path.join(moduleDir, "dev.mjs"),
             ...args
         ],

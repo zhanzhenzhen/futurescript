@@ -26,6 +26,6 @@
     },
     "preferGlobal": true,
     "scripts": {
-        "postinstall": "node --experimental-modules --no-warnings dev.mjs postinstall"
+        "postinstall": "node --experimental-json-modules --no-warnings dev.mjs postinstall"
     }
 }
