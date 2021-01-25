@@ -3,7 +3,6 @@ import pathMod from "path";
 let $path = pathMod.posix;
 import $cp from "child_process";
 import $fs from "fs";
-import rm from "rimraf";
 
 let cwdPackageInfo = JSON.parse($fs.readFileSync("package.json", {encoding: "utf8"}));
 assert(cwdPackageInfo.name === "futurescript");
@@ -62,7 +61,7 @@ let makeSingleVersion = (version, targetDir, useSymlink = false) => {
     let dirname = "c-v" + version;
     let sourceDir = $path.join(libDir, dirname);
     if (!$fs.statSync(sourceDir).isDirectory()) return;
-    rm.sync(targetDir);
+    $fs.rm(targetDir, {recursive: true, force: true});
     mkdir(targetDir);
     let sourceRefPath = $path.join(sourceDir, "ref.json");
     let refList = readRefList(sourceRefPath);
@@ -82,7 +81,7 @@ let makeAllVersions = targetRootDir => {
 };
 
 let initTargetRootDir = targetRootDir => {
-    rm.sync(targetRootDir);
+    $fs.rm(targetRootDir, {recursive: true, force: true});
     mkdir(targetRootDir);
     $fs.readdirSync(libDir).filter(m => m.endsWith(".mjs")).forEach(filename => {
         copyFile($path.join(libDir, filename), $path.join(targetRootDir, filename));
