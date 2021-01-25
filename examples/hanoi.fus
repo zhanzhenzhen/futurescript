@@ -1,4 +1,4 @@
-fus 2.5.6, radical
+fus 2.5.7, radical
 
 move: <>
     console.log "\(@0) --> \(@1)"

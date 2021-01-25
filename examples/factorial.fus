@@ -1,4 +1,4 @@
-fus 2.5.6
+fus 2.5.7
 
 factorial: x ->
     if x is Number
