@@ -61,7 +61,7 @@ let makeSingleVersion = (version, targetDir, useSymlink = false) => {
     let dirname = "c-v" + version;
     let sourceDir = $path.join(libDir, dirname);
     if (!$fs.statSync(sourceDir).isDirectory()) return;
-    $fs.rm(targetDir, {recursive: true, force: true});
+    $fs.rmSync(targetDir, {recursive: true, force: true});
     mkdir(targetDir);
     let sourceRefPath = $path.join(sourceDir, "ref.json");
     let refList = readRefList(sourceRefPath);
@@ -81,7 +81,7 @@ let makeAllVersions = targetRootDir => {
 };
 
 let initTargetRootDir = targetRootDir => {
-    $fs.rm(targetRootDir, {recursive: true, force: true});
+    $fs.rmSync(targetRootDir, {recursive: true, force: true});
     mkdir(targetRootDir);
     $fs.readdirSync(libDir).filter(m => m.endsWith(".mjs")).forEach(filename => {
         copyFile($path.join(libDir, filename), $path.join(targetRootDir, filename));
