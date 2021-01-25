@@ -11,11 +11,19 @@ Requirements
 Command Usage
 =============
 
+npm 6:
+
 ```bash
 npm install futurescript -g --unsafe-perm
 ```
 
-IMPORTANT: If you're using `-g` or `--global`, then `--unsafe-perm` must be selected.
+IMPORTANT: On npm 6, if you're using `-g` or `--global`, then `--unsafe-perm` must be selected.
+
+npm 7+:
+
+```bash
+npm install futurescript -g
+```
 
 The generated JS works on any JS environment that supports ECMAScript 2017, including browser and Node.js.
 
