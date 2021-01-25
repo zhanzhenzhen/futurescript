@@ -19,7 +19,7 @@
         "eslint": "7.x"
     },
     "engines": {
-        "node": ">=12.0.0"
+        "node": ">=14.0.0"
     },
     "bin": {
         "fus": "./bin/fus"
