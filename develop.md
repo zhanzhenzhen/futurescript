@@ -20,7 +20,7 @@ Now, we're ready to develop.
 Commands
 ========
 
-Because Node.js 10 doesn't turn on ES modules by default, and because Shebang has a limit of supporting only 1 argument on Linux (unlike macOS), and also because Windows cannot recognize Bash scripts, we are using a JS wrapper `dev.js` to run `dev.mjs`. In the future this wrapper can be removed.
+Because Node.js doesn't turn on some experimental features by default, and because Shebang has a limit of supporting only 1 argument on Linux (unlike macOS), and also because Windows cannot recognize Bash scripts, we are using a JS wrapper `dev.js` to run `dev.mjs`. In the future this wrapper can be removed.
 
 Create a New Version
 --------------------
