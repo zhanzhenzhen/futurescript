@@ -131,6 +131,7 @@ if (
             process.execPath,
             [
                 "--experimental-modules",
+                "--experimental-json-modules",
                 "--no-warnings",
                 $path.join(targetVersionDir, "test-main.mjs")
             ],
