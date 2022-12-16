@@ -13,7 +13,6 @@ try {
     $cp.execFileSync(
         process.execPath,
         [
-            "--experimental-json-modules",
             $path.join(moduleDir, "dev.mjs"),
             ...args
         ],

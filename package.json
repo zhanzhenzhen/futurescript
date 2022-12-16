@@ -18,13 +18,13 @@
         "eslint": "7.x"
     },
     "engines": {
-        "node": ">=14.0.0"
+        "node": ">=18.0.0"
     },
     "bin": {
         "fus": "./bin/fus"
     },
     "preferGlobal": true,
     "scripts": {
-        "postinstall": "node --experimental-json-modules --no-warnings dev.mjs postinstall"
+        "postinstall": "node dev.mjs postinstall"
     }
 }
