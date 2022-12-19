@@ -3,7 +3,7 @@ This document describes how to develop this project.
 Prepare
 =======
 
-Make sure you're on Node.js 14 or higher, and npm 6 or higher.
+Make sure you're on Node.js 18 or higher, and npm 8 or higher.
 
 Git clone the repository, and let the repository's root directory be your working directory.
 
