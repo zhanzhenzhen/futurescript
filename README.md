@@ -5,21 +5,11 @@ Please visit [https://futurescript.org/](https://futurescript.org/) to learn the
 Requirements
 ============
 
-1. Node.js 14 or higher
-2. npm 6 or higher
+1. Node.js 18 or higher
+2. npm 8 or higher
 
 Command Usage
 =============
-
-npm 6:
-
-```bash
-npm install futurescript -g --unsafe-perm
-```
-
-IMPORTANT: On npm 6, if you're using `-g` or `--global`, then `--unsafe-perm` must be selected.
-
-npm 7+:
 
 ```bash
 npm install futurescript -g
