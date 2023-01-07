@@ -14,7 +14,7 @@
     ["2.5.0", "expression-variant.mjs"],
     ["0.1.0", "expression.mjs"],
     ["0.1.0", "js-builder.mjs"],
-    ["2.5.0", "lex-core.mjs"],
+    ["2.5.8", "lex-core.mjs"],
     ["2.3.0", "lex-massive-rounds.mjs"],
     ["1.2.0", "lex.mjs"],
     ["2.0.5", "main.mjs"],
