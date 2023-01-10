@@ -3,7 +3,7 @@
     "version": "2.6.0",
     "description": "A functional style, but highly readable language that compiles to JavaScript.",
     "keywords": [
-        "fus", "js", "javascript", "language", "es6", "es2015", "es2017"
+        "fus", "js", "javascript", "language", "es", "ecmascript"
     ],
     "author": "Zhenzhen Zhan <zhanzhenzhen@hotmail.com>",
     "homepage": "https://futurescript.org/",

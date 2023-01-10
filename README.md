@@ -1,5 +1,3 @@
-[![](https://futurescript.org/readme-splash.png)](https://futurescript.org/)
-
 Please visit [https://futurescript.org/](https://futurescript.org/) to learn the language.
 
 Requirements
